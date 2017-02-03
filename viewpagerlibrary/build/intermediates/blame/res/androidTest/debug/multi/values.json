@@ -1,0 +1,948 @@
+[
+    {
+        "outputFile": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 44,
+                    "endOffset": 95
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 44,
+                        "endOffset": 95
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 100,
+                    "endColumn": 47,
+                    "endOffset": 143
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 100,
+                        "endColumn": 47,
+                        "endOffset": 143
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 148,
+                    "endColumn": 49,
+                    "endOffset": 193
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 148,
+                        "endColumn": 49,
+                        "endOffset": 193
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 5,
+                    "startColumn": 4,
+                    "startOffset": 198,
+                    "endColumn": 49,
+                    "endOffset": 243
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 198,
+                        "endColumn": 49,
+                        "endOffset": 243
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 6,
+                    "startColumn": 4,
+                    "startOffset": 248,
+                    "endColumn": 62,
+                    "endOffset": 306
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 248,
+                        "endColumn": 62,
+                        "endOffset": 306
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 311,
+                    "endColumn": 59,
+                    "endOffset": 366
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 311,
+                        "endColumn": 59,
+                        "endOffset": 366
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 8,
+                    "startColumn": 4,
+                    "startOffset": 371,
+                    "endColumn": 60,
+                    "endOffset": 427
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 371,
+                        "endColumn": 60,
+                        "endOffset": 427
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 9,
+                    "startColumn": 4,
+                    "startOffset": 432,
+                    "endColumn": 66,
+                    "endOffset": 494
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 432,
+                        "endColumn": 66,
+                        "endOffset": 494
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 10,
+                    "startColumn": 4,
+                    "startOffset": 499,
+                    "endColumn": 62,
+                    "endOffset": 557
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 4,
+                        "startOffset": 499,
+                        "endColumn": 62,
+                        "endOffset": 557
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 11,
+                    "startColumn": 4,
+                    "startOffset": 562,
+                    "endColumn": 71,
+                    "endOffset": 629
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 11,
+                        "startColumn": 4,
+                        "startOffset": 562,
+                        "endColumn": 71,
+                        "endOffset": 629
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 12,
+                    "startColumn": 4,
+                    "startOffset": 634,
+                    "endColumn": 71,
+                    "endOffset": 701
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 4,
+                        "startOffset": 634,
+                        "endColumn": 71,
+                        "endOffset": 701
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 13,
+                    "startColumn": 4,
+                    "startOffset": 706,
+                    "endColumn": 73,
+                    "endOffset": 775
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 13,
+                        "startColumn": 4,
+                        "startOffset": 706,
+                        "endColumn": 73,
+                        "endOffset": 775
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 14,
+                    "startColumn": 4,
+                    "startOffset": 780,
+                    "endColumn": 73,
+                    "endOffset": 849
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 14,
+                        "startColumn": 4,
+                        "startOffset": 780,
+                        "endColumn": 73,
+                        "endOffset": 849
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 15,
+                    "startColumn": 4,
+                    "startOffset": 854,
+                    "endColumn": 75,
+                    "endOffset": 925
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 4,
+                        "startOffset": 854,
+                        "endColumn": 75,
+                        "endOffset": 925
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 16,
+                    "startColumn": 4,
+                    "startOffset": 930,
+                    "endColumn": 72,
+                    "endOffset": 998
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 16,
+                        "startColumn": 4,
+                        "startOffset": 930,
+                        "endColumn": 72,
+                        "endOffset": 998
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 17,
+                    "startColumn": 4,
+                    "startOffset": 1003,
+                    "endColumn": 74,
+                    "endOffset": 1073
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 4,
+                        "startOffset": 1003,
+                        "endColumn": 74,
+                        "endOffset": 1073
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 18,
+                    "startColumn": 4,
+                    "startOffset": 1078,
+                    "endColumn": 70,
+                    "endOffset": 1144
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 18,
+                        "startColumn": 4,
+                        "startOffset": 1078,
+                        "endColumn": 70,
+                        "endOffset": 1144
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 19,
+                    "startColumn": 4,
+                    "startOffset": 1149,
+                    "endColumn": 78,
+                    "endOffset": 1223
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 19,
+                        "startColumn": 4,
+                        "startOffset": 1149,
+                        "endColumn": 78,
+                        "endOffset": 1223
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 20,
+                    "startColumn": 4,
+                    "startOffset": 1228,
+                    "endColumn": 61,
+                    "endOffset": 1285
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 4,
+                        "startOffset": 1228,
+                        "endColumn": 61,
+                        "endOffset": 1285
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 21,
+                    "startColumn": 4,
+                    "startOffset": 1290,
+                    "endColumn": 62,
+                    "endOffset": 1348
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 21,
+                        "startColumn": 4,
+                        "startOffset": 1290,
+                        "endColumn": 62,
+                        "endOffset": 1348
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 22,
+                    "startColumn": 4,
+                    "startOffset": 1353,
+                    "endColumn": 77,
+                    "endOffset": 1426
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 22,
+                        "startColumn": 4,
+                        "startOffset": 1353,
+                        "endColumn": 77,
+                        "endOffset": 1426
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 23,
+                    "startColumn": 4,
+                    "startOffset": 1431,
+                    "endColumn": 78,
+                    "endOffset": 1505
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 23,
+                        "startColumn": 4,
+                        "startOffset": 1431,
+                        "endColumn": 78,
+                        "endOffset": 1505
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 24,
+                    "startColumn": 4,
+                    "startOffset": 1510,
+                    "endColumn": 92,
+                    "endOffset": 1598
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 24,
+                        "startColumn": 4,
+                        "startOffset": 1510,
+                        "endColumn": 92,
+                        "endOffset": 1598
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 25,
+                    "startColumn": 4,
+                    "startOffset": 1603,
+                    "endColumn": 92,
+                    "endOffset": 1691
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 25,
+                        "startColumn": 4,
+                        "startOffset": 1603,
+                        "endColumn": 92,
+                        "endOffset": 1691
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 26,
+                    "startColumn": 4,
+                    "startOffset": 1696,
+                    "endColumn": 107,
+                    "endOffset": 1799
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 26,
+                        "startColumn": 4,
+                        "startOffset": 1696,
+                        "endColumn": 107,
+                        "endOffset": 1799
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 27,
+                    "startColumn": 4,
+                    "startOffset": 1804,
+                    "endColumn": 107,
+                    "endOffset": 1907
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 27,
+                        "startColumn": 4,
+                        "startOffset": 1804,
+                        "endColumn": 107,
+                        "endOffset": 1907
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 40,
+                    "startColumn": 4,
+                    "startOffset": 4217,
+                    "endColumn": 61,
+                    "endOffset": 4274
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 40,
+                        "startColumn": 4,
+                        "startOffset": 4217,
+                        "endColumn": 61,
+                        "endOffset": 4274
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 41,
+                    "startColumn": 4,
+                    "startOffset": 4279,
+                    "endColumn": 67,
+                    "endOffset": 4342
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 41,
+                        "startColumn": 4,
+                        "startOffset": 4279,
+                        "endColumn": 67,
+                        "endOffset": 4342
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 42,
+                    "startColumn": 4,
+                    "startOffset": 4347,
+                    "endColumn": 62,
+                    "endOffset": 4405
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 42,
+                        "startColumn": 4,
+                        "startOffset": 4347,
+                        "endColumn": 62,
+                        "endOffset": 4405
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 43,
+                    "startColumn": 4,
+                    "startOffset": 4410,
+                    "endColumn": 64,
+                    "endOffset": 4470
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 43,
+                        "startColumn": 4,
+                        "startOffset": 4410,
+                        "endColumn": 64,
+                        "endOffset": 4470
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 44,
+                    "startColumn": 4,
+                    "startOffset": 4475,
+                    "endColumn": 65,
+                    "endOffset": 4536
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 44,
+                        "startColumn": 4,
+                        "startOffset": 4475,
+                        "endColumn": 65,
+                        "endOffset": 4536
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 45,
+                    "startColumn": 4,
+                    "startOffset": 4541,
+                    "endColumn": 66,
+                    "endOffset": 4603
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 45,
+                        "startColumn": 4,
+                        "startOffset": 4541,
+                        "endColumn": 66,
+                        "endOffset": 4603
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 46,
+                    "startColumn": 4,
+                    "startOffset": 4608,
+                    "endColumn": 77,
+                    "endOffset": 4681
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 46,
+                        "startColumn": 4,
+                        "startOffset": 4608,
+                        "endColumn": 77,
+                        "endOffset": 4681
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 47,
+                    "startColumn": 4,
+                    "startOffset": 4686,
+                    "endColumn": 89,
+                    "endOffset": 4771
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 47,
+                        "startColumn": 4,
+                        "startOffset": 4686,
+                        "endColumn": 89,
+                        "endOffset": 4771
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 48,
+                    "startColumn": 4,
+                    "startOffset": 4776,
+                    "endColumn": 72,
+                    "endOffset": 4844
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 48,
+                        "startColumn": 4,
+                        "startOffset": 4776,
+                        "endColumn": 72,
+                        "endOffset": 4844
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 49,
+                    "startColumn": 4,
+                    "startOffset": 4849,
+                    "endColumn": 68,
+                    "endOffset": 4913
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 49,
+                        "startColumn": 4,
+                        "startOffset": 4849,
+                        "endColumn": 68,
+                        "endOffset": 4913
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 50,
+                    "startColumn": 4,
+                    "startOffset": 4918,
+                    "endColumn": 64,
+                    "endOffset": 4978
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 50,
+                        "startColumn": 4,
+                        "startOffset": 4918,
+                        "endColumn": 64,
+                        "endOffset": 4978
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 51,
+                    "startColumn": 4,
+                    "startOffset": 4983,
+                    "endColumn": 67,
+                    "endOffset": 5046
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 51,
+                        "startColumn": 4,
+                        "startOffset": 4983,
+                        "endColumn": 67,
+                        "endOffset": 5046
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 52,
+                    "startColumn": 4,
+                    "startOffset": 5051,
+                    "endColumn": 65,
+                    "endOffset": 5112
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 52,
+                        "startColumn": 4,
+                        "startOffset": 5051,
+                        "endColumn": 65,
+                        "endOffset": 5112
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 53,
+                    "startColumn": 4,
+                    "startOffset": 5117,
+                    "endColumn": 68,
+                    "endOffset": 5181
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 53,
+                        "startColumn": 4,
+                        "startOffset": 5117,
+                        "endColumn": 68,
+                        "endOffset": 5181
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 54,
+                    "startColumn": 4,
+                    "startOffset": 5186,
+                    "endColumn": 78,
+                    "endOffset": 5260
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 54,
+                        "startColumn": 4,
+                        "startOffset": 5186,
+                        "endColumn": 78,
+                        "endOffset": 5260
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 55,
+                    "startColumn": 4,
+                    "startOffset": 5265,
+                    "endColumn": 69,
+                    "endOffset": 5330
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 55,
+                        "startColumn": 4,
+                        "startOffset": 5265,
+                        "endColumn": 69,
+                        "endOffset": 5330
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 56,
+                    "startColumn": 4,
+                    "startOffset": 5335,
+                    "endColumn": 72,
+                    "endOffset": 5403
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 56,
+                        "startColumn": 4,
+                        "startOffset": 5335,
+                        "endColumn": 72,
+                        "endOffset": 5403
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 57,
+                    "startColumn": 4,
+                    "startOffset": 5408,
+                    "endColumn": 73,
+                    "endOffset": 5477
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 57,
+                        "startColumn": 4,
+                        "startOffset": 5408,
+                        "endColumn": 73,
+                        "endOffset": 5477
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 58,
+                    "startColumn": 4,
+                    "startOffset": 5482,
+                    "endLine": 61,
+                    "endColumn": 12,
+                    "endOffset": 5677
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 58,
+                        "startColumn": 4,
+                        "startOffset": 5482,
+                        "endLine": 61,
+                        "endColumn": 12,
+                        "endOffset": 5677
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 62,
+                    "startColumn": 4,
+                    "startOffset": 5682,
+                    "endLine": 65,
+                    "endColumn": 12,
+                    "endOffset": 5930
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 62,
+                        "startColumn": 4,
+                        "startOffset": 5682,
+                        "endLine": 65,
+                        "endColumn": 12,
+                        "endOffset": 5930
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 66,
+                    "startColumn": 4,
+                    "startOffset": 5935,
+                    "endLine": 67,
+                    "endColumn": 12,
+                    "endOffset": 5969
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 66,
+                        "startColumn": 4,
+                        "startOffset": 5935,
+                        "endLine": 67,
+                        "endColumn": 12,
+                        "endOffset": 5969
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 68,
+                    "startColumn": 4,
+                    "startOffset": 5974,
+                    "endLine": 71,
+                    "endColumn": 12,
+                    "endOffset": 6159
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 68,
+                        "startColumn": 4,
+                        "startOffset": 5974,
+                        "endLine": 71,
+                        "endColumn": 12,
+                        "endOffset": 6159
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 72,
+                    "startColumn": 4,
+                    "startOffset": 6164,
+                    "endLine": 82,
+                    "endColumn": 12,
+                    "endOffset": 6761
+                },
+                "from": {
+                    "file": "E:\\ZOerp\\viewpagerlibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 72,
+                        "startColumn": 4,
+                        "startOffset": 6164,
+                        "endLine": 82,
+                        "endColumn": 12,
+                        "endOffset": 6761
+                    }
+                }
+            }
+        ]
+    }
+]

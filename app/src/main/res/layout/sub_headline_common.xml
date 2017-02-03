@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="28dp"
+    android:background="@color/subHeadLine_bgcolor"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/tv_subHeadline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="clip_vertical|center_vertical"
+        android:paddingLeft="@dimen/common_margin10"
+        android:text="次标题"/>
+</LinearLayout>

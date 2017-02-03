@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/snow"
+              android:orientation="vertical">
+
+    <include
+        android:id="@+id/topbar"
+        layout="@layout/topbar_common_itt"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/common_bg_examination">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/common_bg_examination_line"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginTop="10dp"
+                android:background="@color/common_bg_examination_line"/>
+
+            <LinearLayout
+                android:id="@+id/layout_startTime"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_topbar_height"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
+                    android:text="@string/carUsedStart"
+                    android:textColor="@color/cl_text_common"/>
+
+                <TextView
+                    android:id="@+id/tv_timeStart"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.66"
+                    android:gravity="center_vertical|right"
+                    android:hint="@string/hint_choose"
+                    android:paddingRight="10dp"
+                    android:textColor="@color/cl_text_common"
+                    android:textColorHint="@color/cl_hint_common"
+                    />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:src="@mipmap/et_forword"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/common_bg_examination_line"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginTop="10dp"
+                android:background="@color/common_bg_examination_line"/>
+
+            <LinearLayout
+                android:id="@+id/layout_endTime"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_topbar_height"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
+                    android:text="@string/carUsedEnd"
+                    android:textColor="@color/cl_text_common"/>
+
+                <TextView
+                    android:id="@+id/tv_timeEnd"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.66"
+                    android:gravity="center_vertical|right"
+                    android:hint="@string/hint_choose"
+                    android:paddingRight="10dp"
+                    android:textColor="@color/cl_text_common"
+                    android:textColorHint="@color/cl_hint_common"
+                    />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:src="@mipmap/et_forword"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/common_bg_examination_line"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginTop="10dp"
+                android:background="@color/common_bg_examination_line"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_topbar_height"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
+                    android:text="@string/carUsedDestination"
+                    android:textColor="@color/cl_text_common"/>
+
+                <EditText
+                    android:id="@+id/et_targetPlace"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.72"
+                    android:background="@drawable/et_white_stroke"
+                    android:gravity="center_vertical"
+                    android:hint="@string/hint_carUsedDestination"
+                    />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/common_bg_examination_line"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginTop="10dp"
+                android:background="@color/common_bg_examination_line"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/white"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
+                    android:text="@string/carUsedpurpose"
+                    android:textColor="@color/cl_text_common"/>
+
+                <EditText
+                    android:id="@+id/et_purpose"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="0.71"
+                    android:background="@drawable/et_white_stroke"
+                    android:hint="@string/hint_carUsedpurpose"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/common_bg_examination_line"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginTop="10dp"
+                android:background="@color/common_bg_examination_line"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/Requester"
+                    android:textColor="@color/cl_text_common"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:id="@+id/addRequster"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/img_addrequster"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@mipmap/imgadd"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/img_addrequster"
+                            android:text="@string/addRequster"
+                            />
+                    </RelativeLayout>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/common_bg_examination_line"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <include
+        android:id="@+id/topbar"
+        layout="@layout/topbar_common_itt"/>
+
+</LinearLayout>

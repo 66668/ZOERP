@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- LoadingDialog中调用 -->
+<!-- set标签必须设置，anim的要求 -->
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:interpolator="@android:anim/accelerate_interpolator" >
+     <!--旋转360角度用时1000ms,旋转中心距离view的左顶点为50%距离，距离view的上边缘为50%距离，即正中心  
+     如果1000ms运行完后，可以重复10000次，每次重复，都是重新开始（restart）匀速旋转-->
+    <rotate
+        android:duration="1000"
+        android:fromDegrees="0"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:repeatCount="10000"
+        android:repeatMode="restart"
+        android:toDegrees="360" />
+</set>

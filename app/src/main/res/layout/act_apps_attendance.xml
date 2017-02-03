@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include
+        android:id="@+id/topbar"
+        layout="@layout/topbar_common_itt"/>
+
+    <LinearLayout
+        android:id="@+id/layout_Mtop"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:background="@mipmap/bg_mapattend"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:id="@+id/layout_subTop"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true">
+
+            <!-- -->
+            <TextClock
+                android:id="@+id/tv_time"
+                style="@style/whitText.title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:format24Hour="H:mm"
+                />
+            <!-- -->
+
+            <TextView
+                android:id="@+id/tv_AttendRecord"
+                style="@style/whitText.topbar_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="15dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/et_style2"
+                android:padding="5dp"
+                android:text="@string/CheckRecordOfAttend"/>
+
+            <TextClock
+                android:id="@+id/tv_date"
+                style="@style/whitText.text14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/tv_time"
+                android:layout_below="@+id/tv_time"
+                android:format24Hour="MM月dd日 EEEE"
+                />
+
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:background="@color/white"
+            android:fontFamily="sans-serif-light"/>
+
+        <TextView
+            android:id="@+id/textView2"
+            style="@style/whitText.text12"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/layout_subTop"
+            android:gravity="center_vertical|left"
+            android:paddingLeft="10dp"
+            android:text="@string/forAttend_detail"/>
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/layoutNTop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/layout_Mtop"
+        android:background="@color/common_bg_examination"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/img_mapAttend"
+            android:layout_width="155dp"
+            android:layout_height="155dp"
+            android:background="@mipmap/maplocation"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
+        <TextView
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/img_mapAttend"
+            android:id="@+id/tv_forLoacation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/forAttend"
+            android:layout_alignEnd="@+id/img_mapAttend"
+            android:layout_alignStart="@+id/img_mapAttend"
+            android:textSize="@dimen/common_textSize_default16"
+            android:textColor="@color/common_color"/>
+    </RelativeLayout>
+
+</LinearLayout>

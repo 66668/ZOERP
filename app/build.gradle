@@ -1,0 +1,74 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        /**
+         * 高德地图配置
+         */
+        debug {
+            //keystore中key的别名
+            keyAlias 'debug.keystore'
+            //keystore中key的密码
+            keyPassword '778744'
+            //keystore的文件路径，可以是绝对路径也可以是相对路径
+            storeFile file('D:/Android_keystore/debug.keystore.jks')
+            //keystore的密码
+            storePassword '778744'
+        }
+
+        //发布版的keystore
+        release {
+            storeFile file("D:/Android_keystore/debug.keystore.jks")
+            //keystore的密码
+            storePassword "778744"
+            //keystore中key的别名
+            keyAlias "debug.keystore"
+            //keystore中key的密码
+            keyPassword "778744"
+        }
+    }
+    compileSdkVersion 24
+    buildToolsVersion "25.0.0"
+
+    aaptOptions {
+        cruncherEnabled = false
+        useNewCruncher = false
+
+    }
+
+    defaultConfig {
+        applicationId "com.zhongou"
+        minSdkVersion 17
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        ndk {
+            //设置支持的SO库架构
+            abiFilters 'armeabi', 'x86','armeabi - v7a','x86_64', 'arm64 - v8a'
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:design:24.2.1'
+    testCompile 'junit:junit:4.12'
+    compile files('libs/universal-image-loader-1.9.2.jar')
+    compile files('libs/gson-2.2.2.jar')
+    compile project(':viewpagerlibrary')
+    compile 'com.android.support:support-v4:24.0.1'
+    compile files('libs/AMap2DMap_2.9.2_AMapSearch_3.6.1_AMapLocation_3.1.0_20161122.jar')
+    compile 'com.jakewharton:butterknife:8.4.0'
+    compile project(':RecyclerViewlibrary')
+}

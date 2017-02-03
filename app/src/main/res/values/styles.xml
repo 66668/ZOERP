@@ -1,0 +1,173 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AnimFade" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/fade_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/hold</item>
+        <item name="android:activityCloseEnterAnimation">@anim/fade_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/fade_out</item>
+    </style>
+    <!-- 自定义登录弹窗提示形式:
+            无边框/无标题/背景透明#00000000/浮在activity上 /对话框是否有遮盖/弹窗位置
+            （1）ChooseItemDialog中调用：选择相机图片-->
+    <style name="LoadingDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:gravity">bottom</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <style name="Anim_style2" parent="android:Theme.NoTitleBar">
+        <item name="android:windowAnimationStyle">@style/AnimFade</item>
+    </style>
+
+    <!-- tab样式-->
+    <style name="bottom_menu">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@drawable/tab_text_indicator</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:button">@null</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:layout_weight">1.0</item>
+    </style>
+
+    <!-- 时间选择器对话框样式-->
+    <style name="dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@color/android:transparent</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <!-- 设置统一字体样式-->
+    <style name="whitText">
+        <item name="android:shadowColor">#FF000000</item>
+        <item name="android:shadowRadius">3.0</item>
+        <item name="android:textColor">#FFF</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="whitText.topbar_right">
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="whitText.title">
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">18sp</item>
+        <!--<item name="android:textStyle">bold</item>-->
+    </style>
+
+    <style name="whitText.text12">
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="whitText.text14">
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="whitText.text16">
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="whitText.text18">
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <!-- 设置统一字体样式-->
+    <style name="BlackText">
+        <item name="android:shadowColor">#FF000000</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="BlackText.Small">
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="BlackText.standard">
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="BlackText.Medium16">
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="BlackText.Medium17">
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="BlackText.Medium18">
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="BlackText.Medium19">
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">19sp</item>
+    </style>
+
+    <style name="BlackText.Large20">
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">20sp</item>
+        <!--<item name="android:textStyle">bold</item>-->
+    </style>
+
+    <style name="BlackText.Large21">
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">21sp</item>
+        <!--<item name="android:textStyle">bold</item>-->
+    </style>
+
+    <style name="BlackText.Large22">
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">22sp</item>
+        <!--<item name="android:textStyle">bold</item>-->
+    </style>
+
+    <style name="BlackText.Large24">
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">24sp</item>
+        <!--<item name="android:textStyle">bold</item>-->
+    </style>
+
+    <!--业绩管理tablayout 设置字体大小 -->
+    <style name="tabLayoutTextSize"
+           parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+</resources>

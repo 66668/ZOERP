@@ -1,0 +1,322 @@
+<resources>
+    <string name="app_name">中欧ERP</string>
+    <string name="action_settings">Settings</string>
+    <string name="network_invalid">网络不给力，请检查网络连接！</string>
+
+
+    <!-- 我的-->
+    <string name="person_info">个人信息</string>
+    <string name="person_changePSD">修改密码</string>
+    <string name="person_newsNotify">新消息通知</string>
+    <string name="person_feedback">意见反馈</string>
+    <string name="person_feedback_hint">您的宝贵意见是我们改进的方向</string>
+    <string name="person_quit">退出</string>
+
+    <!--个人信息-->
+    <string name="person_info_name">姓名</string>
+    <string name="person_info_phoneNum">电话</string>
+    <string name="person_info_co">公司</string>
+    <string name="person_info_number">工号</string>
+    <string name="person_info_department">部门</string>
+    <string name="person_info_work">职位</string>
+    <string name="person_info_timeIn">入职时间</string>
+
+    <!-- 修改密码-->
+    <string name="person_psd_oldpsd">原密码</string>
+    <string name="person_psd_oldpsd_error">输入原密码错误</string>
+    <string name="person_psd_oldpsd_in">请输入旧密码！</string>
+    <string name="person_psd_newpsd">新密码</string>
+    <string name="person_psd_newpsd_d">确认密码</string>
+    <string name="person_psd_newpsd_in">请输入新密码！</string>
+    <string name="person_psd_newpsd_errorin">两次输入的新密码不一样！</string>
+    <string name="person_psd_requestForPsd">密码由6-20位英文字母、数字或"_"组成</string>
+    <string name="person_psd_requestForPsd_error">密码不可以是 英文字母、数字 或 下划线 以外的字符！</string>
+    <string name="person_psd_error_lenght">请检查密码长度，6-20位密码！</string>
+
+    <!-- 登录界面-->
+    <string name="please_input_account">请输入公司账号</string>
+    <string name="please_input_uername">请输入登录账号</string>
+    <string name="please_input_ps">请输入密码</string>
+    <string name="login">登录</string>
+    <string name="LoginActivity_companyNum">请输入企业账号！</string>
+    <string name="LoginActivity_employeeNum">请输入登录账号！</string>
+    <string name="LoginActivity_psd">请输入密码！</string>
+
+    <!-- 00-主界面设置-->
+    <string name="txt_message">消息</string>
+    <string name="txt_app">应用</string>
+    <string name="open">打开</string>
+    <string name="close">关闭</string>
+
+    <!-- 通讯录-->
+    <string name="txt_contract">通讯录</string>
+    <string name="contacts_dept">部门</string>
+    <string name="epl_phone">手机号</string>
+    <string name="epl_email">邮箱</string>
+    <string name="epl_dept">部门</string>
+    <string name="epl_enterTime">入职</string>
+
+    <!-- 应用-->
+    <string name="attendance">外出考勤</string>
+    <string name="CheckRecordOfAttend">查看考勤记录</string>
+    <string name="app_perfermanceManger">业绩管理</string>
+    <string name="app_procueRecord">采购领用</string>
+    <string name="mg_performance01">业绩评定</string>
+    <string name="mg_performance02">绩效成绩</string>
+    <string name="mg_procuerecord01">采购记录</string>
+    <string name="mg_procuerecord02">领用记录</string>
+    <string name="app_notice">公告</string>
+    <string name="app_notification">通知</string>
+
+    <!-- 消息-->
+    <string name="msg_undoTitle">未办事项</string>
+    <string name="msg_noticeTitle">公告</string>
+    <string name="msg_msgTitle">通知</string>
+    <string name="msg_schedule">日程</string>
+
+    <!-- 00-02地图考勤-->
+    <string name="startLocation">开始定位</string>
+    <string name="stopLocation">停止定位</string>
+    <string name="mapAttendance">地图签到</string>
+    <string name="mapAttendance_today">本日</string>
+    <string name="mapAttendance_weekend">本周</string>
+    <string name="mapAttendance_month">本月</string>
+    <string name="forAttend">签到</string>
+    <string name="forAttend_detail">美好的一天开始了，快来考勤吧！</string>
+
+
+
+    <!-- 申请/审批-->
+    <string name="my_application">我的申请</string>
+    <string name="my_approval">我的审批</string>
+    <string name="examination">审批</string>
+
+    <string name="examination_yes">已审批</string>
+    <string name="examination_no">未审批</string>
+    <string name="examination_going">审批中</string>
+
+    <string name="examination_refulse">驳回</string>
+    <string name="refulse_sure">确认驳回</string>
+    <string name="hint_examination_refulse">请输入驳回的理由</string>
+
+    <string name="examination_commit">批准</string>
+    <string name="approve_sure">确认批准</string>
+    <string name="hint_examination_commit">请输入批准的理由</string>
+
+    <string name="examination_transfer">转交</string>
+    <string name="examination_copyto">抄送</string>
+    <string name="jobs">招聘</string>
+    <string name="jobsleave">离职</string>
+    <string name="forLeave">请假</string>
+    <string name="overtime">加班</string>
+    <string name="forRest">调休</string>
+    <string name="borrow">借阅</string>
+    <string name="salaryadjust">薪资调整</string>
+    <string name="carused">用车</string>
+    <string name="vehicleMaintenance">车辆维护</string>
+    <string name="loanReimbursement">借款报销</string>
+    <string name="myApplication">我的申请</string>
+    <string name="MyApproval">我的审批</string>
+    <string name="state">审批状况：</string>
+    <string name="state_result">审批结果：</string>
+    <string name="approval_person">申请人</string>
+    <string name="approval_dept">所属部门</string>
+    <string name="approval_co">所属公司</string>
+    <string name="approval_approvalTime">申请时间</string>
+
+    <!-- 01招聘-->
+
+    <string name="forjobs">招聘申请</string>
+    <string name="forjobs_d">招聘详情</string>
+    <string name="hint_choose">请选择</string>
+    <string name="PositionRequest">招聘职位</string>
+    <string name="hint_PositionRequest">请输入招聘职位</string>
+    <string name="RequestNumber">招聘人数</string>
+    <string name="hint_RequestNumber">请输入招聘人数</string>
+    <string name="jobstimein">期望入职时间</string>
+    <string name="Requestaskfor">职位职责</string>
+    <string name="hint_Requestaskfor">请输入职位职责</string>
+    <string name="Requester">审批人</string>
+    <string name="addRequster">添加对象</string>
+    <string name="commit">提交</string>
+
+    <!-- 02离职-->
+    <string name="jobsForLeave">离职申请</string>
+    <string name="jobsForLeave_d">离职详情</string>
+    <string name="jobsleavetype">离职类型</string>
+    <string name="jobsLeaveTimeIn">入职时间</string>
+    <string name="jobsLeaveTimeOut">离职时间</string>
+    <string name="jobsLeaveReason">离职说明</string>
+    <string name="hint_jobsLeaveReason">请输入离职说明</string>
+    <string-array name="spDimissionID">
+        <item>合同到期</item>
+        <item>辞职</item>
+        <item>其他</item>
+    </string-array>
+
+    <!-- 03请假-->
+    <string name="leave">请假申请</string>
+    <string name="leave_d">请假详情</string>
+    <string name="leaveTimeStart">开始时间</string>
+    <string name="leaveTimeEnd">结束时间</string>
+    <string name="leaveTimeLong">请假时长</string>
+    <string name="hint_leaveTimeLong">请输入请假时长</string>
+    <string name="leaveApplicationTitle">请假标题</string>
+    <string name="hint_ApplicationTitle">请输入请假标题</string>
+    <string name="leaveReason">请假原因</string>
+    <string name="hint_leaveReason">请输入请假原因</string>
+    <string name="picture">图片</string>
+    <string name="addPicture">添加图片</string>
+
+    <!-- 04加班-->
+
+    <string name="workOverTime">加班申请</string>
+    <string name="workOverTime_d">加班详情</string>
+    <string name="workOverTimeStart">加班开始</string>
+    <string name="workOverTimeEnd">加班结束</string>
+    <string name="workOverTimeLong">加班时长</string>
+    <string name="workOverTimeReason">加班说明</string>
+    <string name="workOverTimeReason_d">加班事由</string>
+    <string name="hint_workOverTimeReason">请输入加班说明</string>
+    <string name="tv_OverEmployee">加班人员</string>
+    <string name="hint_workOverTimeOverEmployee">请输入加班人员</string>
+
+    <!-- 05调休-->
+    <string name="workRest">调休申请</string>
+    <string name="workRest_d">调休详情</string>
+    <string name="workRestStartbefore">原工作开始</string>
+    <string name="workRestEndBefore">原工作结束</string>
+    <string name="workRestStart">调休开始</string>
+    <string name="workRestEnd">调休结束</string>
+    <string name="workRestLong">调休时长</string>
+    <string name="hint_workRestLong">请输入调休时长</string>
+    <string name="workRestReason">调休说明</string>
+    <string name="hint_workRestReason">请输入调休说明</string>
+
+    <!-- 06借阅-->
+    <string name="borrows">借阅申请</string>
+    <string name="borrows_d">借阅详情</string>
+    <string name="borrowsName">借阅名称</string>
+    <string name="hint_borrowsName">请输入借阅物品名称</string>
+    <string name="borrowsStart">使用时间</string>
+    <string name="borrowsEnd">归还时间</string>
+    <string name="borrowsType">借阅类型</string>
+    <string name="borrowsReason">借阅用途</string>
+    <string name="hint_borrowsReason">请输入借阅用途</string>
+    <string-array name="spBorrowType">
+        <item>印章</item>
+        <item>电子印章</item>
+        <item>文件</item>
+        <item>其他</item>
+    </string-array>
+
+
+    <!-- 07薪资调整-->
+    <string name="salaryAdjust">调薪申请</string>
+    <string name="salaryAdjust_d">调薪详情</string>
+    <string name="salaryAdjustEmployee">调薪人</string>
+    <string name="hint_salaryAdjustEmployee">请输入调薪人</string>
+    <string name="salaryAdjustNow">目前薪资</string>
+    <string name="hint_salaryAdjustNow">请输入目前薪资（元）</string>
+    <string name="salaryAdjustAfter">调后薪资</string>
+    <string name="hint_salaryAdjustAfter">请输入调后薪资（元）</string>
+    <string name="salaryAdjustReason">调薪理由</string>
+    <string name="hint_salaryAdjustReason">请输入调薪说明</string>
+
+    <!-- 08用车-->
+    <string name="carUsed">用车申请</string>
+    <string name="carUsed_d">用车详情</string>
+    <string name="carUser">驾驶人</string>
+    <string name="hint_carUser">请输入驾驶人</string>
+    <string name="carUsedStart">用车时间</string>
+    <string name="carUsedEnd">还车时间</string>
+    <string name="carUsedDestination">目的地</string>
+    <string name="hint_carUsedDestination">请输入目的地</string>
+    <string name="carUsedReason">用车说明</string>
+    <string name="hint_carUsedReason">请输入用车说明</string>
+    <string name="carUsedpurpose">用途</string>
+    <string name="hint_carUsedpurpose">请输入用途</string>
+
+    <!-- 09车辆维护-->
+    <string name="vehicleMainennance">车辆维护申请</string>
+    <string name="vehicleMainennance_d">车辆维护详情</string>
+    <string name="vehicleMainennanceType">维护类型</string>
+    <string name="vehicleMainennanceStatus">车辆状态</string>
+    <string name="vehicleMainennanceTimeStart">维修时间</string>
+    <string name="vehicleMainennanceNumber">车牌号</string>
+    <string name="hint_vehicleMainennanceNumber">请输入车牌号</string>
+    <string name="vehicleMainennanceContainer">维保项目</string>
+    <string name="hint_vehicleMainennanceContainer">请输入维保项目</string>
+    <string name="vehicleMainennanceMiles">行驶公里</string>
+    <string name="hint_vehicleMainennanceMiles">请输入行驶公里</string>
+    <string name="vehicleMainennanceAddress">维修地点</string>
+    <string name="hint_vehicleMainennanceAddress">请输入维修地点</string>
+    <string name="vehicleMainennanceMoney">预计费用</string>
+    <string name="hint_vehicleMainennanceMoney">请输入预计费用（/元）</string>
+    <string name="vehicleMainennanceReason">维保说明</string>
+    <string name="hint_vehicleMainennanceReason">请输入维保说明</string>
+    <array name="spMaintenanceType">
+        <item>维修</item>
+        <item>保养</item>
+    </array>
+    <array name="spMaintenanceState">
+        <item>正常</item>
+        <item>损坏</item>
+    </array>
+
+    <!-- 10报销-->
+    <string name="loanReimburse">报销申请</string>
+    <string name="loanReimburse_d">借款报销详情</string>
+    <string name="loanReimburseType">申请类型</string>
+    <string name="loanReimburseUseType">用途类型</string>
+    <string name="loanReimburseUsestyle">方式</string>
+    <string name="loanReimburseMoney">金额</string>
+    <string name="hint_loanReimburseMoney">请输入金额</string>
+    <string name="loanReimburseReason">说明</string>
+    <string name="hint_loanReimburseReason">请进行简要说明</string>
+    <array name="spLoanreimType">
+        <item>报销</item>
+        <item>借款</item>
+    </array>
+    <array name="spLoanreimWay">
+        <item>网银</item>
+        <item>支票</item>
+        <item>现金</item>
+    </array>
+    <array name="spLoanreimUseageType">
+        <item>通用</item>
+        <item>办公</item>
+        <item>住宿</item>
+        <item>交通</item>
+        <item>餐饮</item>
+        <item>采购</item>
+        <item>培训</item>
+    </array>
+
+    <!-- 11调动-->
+    <string name="positionReplace">调动详情</string>
+
+    <!-- 12采购-->
+    <string name="procurement">采购详情</string>
+
+    <!-- 13通知公告-->
+    <string name="notificaitonAndNotice">通知公告详情</string>
+
+    <!-- 14办公室-->
+    <string name="office">办公室申请详情</string>
+
+    <!-- 15领用-->
+    <string name="recevie">领用详情</string>
+
+    <!-- 16合同文件-->
+    <string name="contractfile">合同文件详情</string>
+
+    <!-- 17外出-->
+    <string name="outgoing">外出详情</string>
+
+    <!-- 18复试-->
+    <string name="retest">复试详情</string>
+
+    <!-- 19会议-->
+    <string name="conference">会议详情</string>
+</resources>

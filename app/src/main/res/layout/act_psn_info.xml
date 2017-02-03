@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include layout="@layout/topbar_common_itt"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/common_bg_examination">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/common_bg_examination_line"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginTop="15dp"
+                android:background="@color/common_bg_examination_line"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_topbar_height45"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
+                    android:text="@string/person_info_name"
+                    android:textColor="@color/cl_text_common"
+                    android:textSize="@dimen/common_textSize_default15"/>
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.72"
+                    android:gravity="center_vertical|right"
+                    android:paddingRight="10dp"
+                    android:text="用户姓名"
+                    android:textColor="@color/cl_text_common_result"
+                    android:textSize="@dimen/common_textSize_default12"
+                    />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/common_bg_examination_line"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginTop="15dp"
+                android:background="@color/common_bg_examination_line"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_topbar_height45"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
+                    android:text="@string/person_info_phoneNum"
+                    android:textColor="@color/cl_text_common"
+                    android:textSize="@dimen/common_textSize_default15"/>
+
+                <TextView
+                    android:id="@+id/tv_phone"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.72"
+                    android:gravity="center_vertical|right"
+                    android:paddingRight="10dp"
+                    android:text="11111111111111"
+                    android:textColor="@color/cl_text_common_result"
+                    android:textSize="@dimen/common_textSize_default12"
+                    />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/common_bg_examination_line"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginTop="15dp"
+                android:background="@color/common_bg_examination_line"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_topbar_height45"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
+                    android:text="@string/person_info_co"
+                    android:textColor="@color/cl_text_common"
+                    android:textSize="@dimen/common_textSize_default15"/>
+
+                <TextView
+                    android:id="@+id/tv_company"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.72"
+                    android:gravity="center_vertical|right"
+                    android:paddingRight="10dp"
+                    android:text="电话"
+                    android:textColor="@color/cl_text_common_result"
+                    android:textSize="@dimen/common_textSize_default12"
+                    />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/common_bg_examination_line"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginTop="15dp"
+                android:background="@color/common_bg_examination_line"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_topbar_height45"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
+                    android:text="@string/person_info_number"
+                    android:textColor="@color/cl_text_common"
+                    android:textSize="@dimen/common_textSize_default15"/>
+
+                <TextView
+                    android:id="@+id/tv_number"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.72"
+                    android:gravity="center_vertical|right"
+                    android:paddingRight="10dp"
+                    android:text="电话"
+                    android:textColor="@color/cl_text_common_result"
+                    android:textSize="@dimen/common_textSize_default12"
+                    />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/common_bg_examination_line"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginTop="15dp"
+                android:background="@color/common_bg_examination_line"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_topbar_height45"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
+                    android:text="@string/person_info_department"
+                    android:textColor="@color/cl_text_common"
+                    android:textSize="@dimen/common_textSize_default15"/>
+
+                <TextView
+                    android:id="@+id/tv_department"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.72"
+                    android:gravity="center_vertical|right"
+                    android:paddingRight="10dp"
+                    android:text="电话"
+                    android:textColor="@color/cl_text_common_result"
+                    android:textSize="@dimen/common_textSize_default12"
+                    />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/common_bg_examination_line"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginTop="15dp"
+                android:background="@color/common_bg_examination_line"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_topbar_height45"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
+                    android:text="@string/person_info_work"
+                    android:textColor="@color/cl_text_common"
+                    android:textSize="@dimen/common_textSize_default15"/>
+
+                <TextView
+                    android:id="@+id/tv_work"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.72"
+                    android:gravity="center_vertical|right"
+                    android:paddingRight="10dp"
+                    android:text="电话"
+                    android:textColor="@color/cl_text_common_result"
+                    android:textSize="@dimen/common_textSize_default12"
+                    />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/common_bg_examination_line"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginTop="15dp"
+                android:background="@color/common_bg_examination_line"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_topbar_height45"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
+                    android:text="@string/person_info_timeIn"
+                    android:textColor="@color/cl_text_common"
+                    android:textSize="@dimen/common_textSize_default15"/>
+
+                <TextView
+                    android:id="@+id/tv_timeIn"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.72"
+                    android:gravity="center_vertical|right"
+                    android:paddingRight="10dp"
+                    android:text="2011-01-01"
+                    android:textColor="@color/cl_text_common_result"
+                    android:textSize="@dimen/common_textSize_default12"
+                    />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/common_bg_examination_line"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

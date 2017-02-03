@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 修改密码按钮键调用 -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/rectangle_btn_disable" android:state_enabled="false"/>
+    <item android:drawable="@drawable/rectangle_btn_on" android:state_focused="true" android:state_pressed="true"/>
+    <item android:drawable="@drawable/rectangle_btn_on" android:state_focused="false" android:state_pressed="true"/>
+    <item android:drawable="@drawable/rectangle_btn_on" android:state_focused="true"/>
+    <item android:drawable="@drawable/rectangle_btn" android:state_focused="false"/>
+
+</selector>

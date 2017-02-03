@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 设置 tab 选中状态的颜色-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:state_selected="true" android:color="@color/common_topbar_bgcolor"/>
+    <item android:state_focused="true" android:color="@color/common_topbar_bgcolor"/>
+    <item android:state_pressed="true" android:color="@color/common_topbar_bgcolor"/>
+    <item android:state_checked="true" android:color="@color/common_topbar_bgcolor"/>
+    <item android:color="@color/gray"/>
+
+</selector>

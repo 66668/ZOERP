@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.zhongou">
+
+
+    <!-- 网络权限 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!--用于访问GPS定位-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!--用于提高GPS定位速度-->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+    <!--写入扩展存储，向扩展卡写入数据，用于写入缓存定位数据-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!--读取缓存数据-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <!--用于读取手机当前的状态-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+
+    <!-- 更改设置 -->
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+
+    <!-- 拨打电话权限 -->
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <!--<uses-permission android:name="android.permission.READ_PHONE_STATE"/> &lt;!&ndash; 否则不能监听每个状态 &ndash;&gt;-->
+
+    <!--  发送消息-->
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+
+    <application
+        android:name=".application.MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_main"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <!-- 高德设置key -->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="0c89cf507f40dbf5d6f075cc3556ae71"/>
+
+        <!-- 高德定位需要的服务 -->
+        <service android:name="com.amap.api.location.APSService"/>
+
+        <!--主界面 -->
+        <activity
+            android:name="com.zhongou.view.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+            <action android:name="android.intent.action.MAIN"/>
+
+            <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <!-- 登录-->
+        <activity
+            android:name="com.zhongou.view.LoginActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Anim_style2">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN"/>-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+            <!--</intent-filter>-->
+        </activity>
+
+        <!-- 01审批-->
+        <activity
+            android:name="com.zhongou.view.ExaminationAcitivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 我的审批-->
+        <activity
+            android:name="com.zhongou.view.examination.ZOApprovalActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 驳回-->
+        <activity
+            android:name="com.zhongou.view.examination.approvaldetail.CommonRefulseActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 批准-->
+        <activity
+            android:name="com.zhongou.view.examination.approvaldetail.CommonApproveActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 抄送-->
+        <activity
+            android:name="com.zhongou.view.examination.approvaldetail.CommonTransfertoActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 抄送-->
+        <activity
+            android:name="com.zhongou.view.examination.approvaldetail.CommonCopytoActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 我的申请-->
+        <activity
+            android:name="com.zhongou.view.examination.ZOApplicationActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 审批状态详情-->
+        <activity
+            android:name="com.zhongou.view.examination.applicationdetail.ExaminationStateActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 招聘01-->
+        <activity
+            android:name="com.zhongou.view.examination.RecruitmentActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Anim_style2">
+        </activity>
+        <activity
+            android:name="com.zhongou.view.examination.applicationdetail.RecruitmentDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.zhongou.view.examination.approvaldetail.RecruitmentDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 辞职02-->
+        <activity
+            android:name="com.zhongou.view.examination.DimissionActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.zhongou.view.examination.applicationdetail.DimissionDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.zhongou.view.examination.approvaldetail.DimissionDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 请假03-->
+        <activity
+            android:name="com.zhongou.view.examination.LeaveActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.zhongou.view.examination.applicationdetail.LeaveDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.zhongou.view.examination.approvaldetail.LeaveDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 加班04-->
+        <activity
+            android:name="com.zhongou.view.examination.WorkOverTimeActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.zhongou.view.examination.applicationdetail.WorkOverTimeDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.zhongou.view.examination.approvaldetail.WorkOverTimeDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 调休05-->
+        <activity
+            android:name="com.zhongou.view.examination.TakeDaysOffActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.zhongou.view.examination.applicationdetail.TakeDaysOffDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.zhongou.view.examination.approvaldetail.TakeDaysOffDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 借阅06-->
+        <activity
+            android:name="com.zhongou.view.examination.BorrowActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.zhongou.view.examination.applicationdetail.BorrowDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.zhongou.view.examination.approvaldetail.BorrowDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 调薪07-->
+        <activity
+            android:name="com.zhongou.view.examination.SalaryadjustActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.zhongou.view.examination.applicationdetail.SalaryadjustDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.zhongou.view.examination.approvaldetail.SalaryadjustDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 用车08-->
+        <activity
+            android:name="com.zhongou.view.examination.VehicleActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.zhongou.view.examination.applicationdetail.VehicleDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.zhongou.view.examination.approvaldetail.VehicleDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 维护09-->
+        <activity
+            android:name="com.zhongou.view.examination.VehicleMaintainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.zhongou.view.examination.applicationdetail.VehicleMaintainDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.zhongou.view.examination.approvaldetail.VehicleMaintainDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 借款10-->
+        <activity
+            android:name="com.zhongou.view.examination.LoanReimbursementActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.zhongou.view.examination.applicationdetail.LoanReimbursementDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.zhongou.view.examination.approvaldetail.LoanReimbursementDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 05-11 申请 调动详情-->
+        <activity
+            android:name="com.zhongou.view.examination.applicationdetail.PositionReplaceDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.zhongou.view.examination.approvaldetail.PositionReplaceDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 05-12  采购详情-->
+        <activity
+            android:name="com.zhongou.view.examination.applicationdetail.ProcurementDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.zhongou.view.examination.approvaldetail.ProcurementDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 05-13  通知公告详情-->
+        <activity
+            android:name="com.zhongou.view.examination.applicationdetail.NotificationAndNoticeDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.zhongou.view.examination.approvaldetail.NotificationAndNoticeDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 05-14  通知公告详情-->
+        <activity
+            android:name="com.zhongou.view.examination.applicationdetail.OfficeDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.zhongou.view.examination.approvaldetail.OfficeDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 05-15  领用详情-->
+        <activity
+            android:name="com.zhongou.view.examination.applicationdetail.ReceiveDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.zhongou.view.examination.approvaldetail.ReceiveDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 05-16  合同文件详情-->
+        <activity
+            android:name="com.zhongou.view.examination.applicationdetail.ContractFileDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.zhongou.view.examination.approvaldetail.ContractFileDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <!-- 05-17  外出详情-->
+        <activity
+            android:name="com.zhongou.view.examination.applicationdetail.OutGoingDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.zhongou.view.examination.approvaldetail.OutGoingDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 05-18  复试详情-->
+        <activity
+            android:name="com.zhongou.view.examination.applicationdetail.RetestDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.zhongou.view.examination.approvaldetail.RetestDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 05-19  会议详情-->
+        <activity
+            android:name="com.zhongou.view.examination.applicationdetail.ConferenceDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.zhongou.view.examination.approvaldetail.ConferenceDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 个人信息-->
+        <activity
+            android:name="com.zhongou.view.PersonalInfoActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 修改密码-->
+        <activity
+            android:name="com.zhongou.view.ChangePassWordActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 意见反馈-->
+        <activity
+            android:name="com.zhongou.view.FeedbackActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--02业绩管理 -->
+        <activity
+            android:name="com.zhongou.view.PerformanceManagerActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 03外出考勤-->
+        <activity
+            android:name="com.zhongou.view.MapAttendAcitivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Anim_style2">
+        </activity>
+
+        <!-- 03-01地图定位-->
+        <activity
+            android:name="com.zhongou.view.MapLocationActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Anim_style2">
+        </activity>
+
+        <!-- 03-01考勤记录-->
+        <activity
+            android:name="com.zhongou.view.MapAttendRecordActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 04公告界面-->
+        <activity
+            android:name="com.zhongou.view.NoticeAcitivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--05通知 -->
+        <activity
+            android:name="com.zhongou.view.NotificationAcitivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 06财务界面-->
+        <activity
+            android:name="com.zhongou.view.FinanceAcitivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 07日程界面-->
+        <activity
+            android:name="com.zhongou.view.ScheduleActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--08采购领用 -->
+        <activity
+            android:name="com.zhongou.view.ProcueRecordActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--子公司通讯录 -->
+        <activity
+            android:name="com.zhongou.view.ContactsDeptOfSonActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--部门通讯录 -->
+        <activity
+            android:name="com.zhongou.view.ContactsEplOfDeptActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <!--通讯录员工详情 -->
+        <activity
+            android:name="com.zhongou.view.ContactsEplDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+    </application>
+
+</manifest>

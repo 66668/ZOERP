@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_alignParentBottom="true"
+              android:background="@android:color/white"
+              android:orientation="vertical">
+
+    <RadioGroup
+        android:id="@+id/radiogroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="4dip"
+        tools:ignore="UselessParent">
+
+        <RadioButton
+            android:id="@+id/btn_message"
+            style="@style/bottom_menu"
+            android:checked="true"
+            android:drawablePadding="4dp"
+            android:drawableTop="@drawable/btn_menu_notify_select"
+            android:text="@string/txt_message"
+            />
+
+        <RadioButton
+            android:id="@+id/btn_app"
+            style="@style/bottom_menu"
+            android:drawablePadding="4dp"
+            android:drawableTop="@drawable/btn_menu_app_select"
+            android:text="@string/txt_app"/>
+
+        <RadioButton
+            android:id="@+id/btn_contract"
+            style="@style/bottom_menu"
+            android:drawablePadding="4dp"
+            android:drawableTop="@drawable/btn_menu_contracts_select"
+            android:text="@string/txt_contract"/>
+    </RadioGroup>
+
+</LinearLayout>

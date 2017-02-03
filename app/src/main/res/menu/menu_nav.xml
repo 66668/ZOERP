@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 侧滑菜单-->
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_menu_info"
+            android:icon="@mipmap/person_info"
+            android:title="@string/person_info"/>
+
+        <item
+            android:id="@+id/nav_menu_psd"
+            android:icon="@mipmap/person_psd"
+            android:title="@string/person_changePSD"
+            />
+
+        <item
+            android:id="@+id/nav_menu_notify"
+            android:icon="@mipmap/person_newsnotify"
+            android:title="@string/person_newsNotify"
+            />
+
+        <item
+            android:id="@+id/nav_menu_feedback"
+            android:icon="@mipmap/person_feedback"
+            android:title="@string/person_feedback"
+            />
+
+        <item
+            android:id="@+id/nav_menu_quit"
+            android:icon="@mipmap/person_quit"
+            android:title="@string/person_quit"/>
+
+    </group>
+</menu>

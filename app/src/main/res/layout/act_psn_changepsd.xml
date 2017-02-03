@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:theme="@android:style/Theme.NoTitleBar">
+
+    <!-- actionBar -->
+    <include layout="@layout/topbar_common_itt"/>
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- 旧密码 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/bg_edittext_style"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <EditText
+                    android:id="@+id/et_oldpsd"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_topbar_height40"
+                    android:layout_gravity="left"
+                    android:layout_margin="16dp"
+                    android:layout_weight="1"
+                    android:background="#FFF"
+                    android:ems="10"
+                    android:hint="@string/person_psd_oldpsd"
+                    android:inputType="textPassword"
+                    android:padding="5dp"
+                    android:paddingLeft="11dp"
+                    android:singleLine="true"
+                    android:textColorHint="@color/textHintColor"
+                    android:textSize="@dimen/common_textSize_default16"/>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="#d6d6d6"/>
+
+                <EditText
+                    android:id="@+id/et_newpsd"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_topbar_height40"
+                    android:layout_gravity="left"
+                    android:layout_margin="16dp"
+                    android:layout_weight="1"
+                    android:background="#FFF"
+                    android:ems="10"
+                    android:hint="@string/person_psd_newpsd"
+                    android:inputType="textPassword"
+                    android:padding="5dp"
+                    android:paddingLeft="11dp"
+                    android:singleLine="true"
+                    android:textColorHint="@color/textHintColor"
+                    android:textSize="@dimen/common_textSize_default16"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="#d6d6d6"/>
+
+                <EditText
+                    android:id="@+id/et_newpsd_again"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_topbar_height40"
+                    android:layout_gravity="left"
+                    android:layout_margin="16dp"
+                    android:layout_weight="1"
+                    android:background="#FFF"
+                    android:ems="10"
+                    android:hint="@string/person_psd_newpsd_d"
+                    android:inputType="textPassword"
+                    android:padding="5dp"
+                    android:paddingLeft="11dp"
+                    android:singleLine="true"
+                    android:textColorHint="@color/textHintColor"
+                    android:textSize="@dimen/common_textSize_default16"/>
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:text="@string/person_psd_requestForPsd"
+                android:textSize="@dimen/common_textSize_default14"
+                />
+            <!-- 修改按钮 -->
+
+            <Button
+                android:id="@+id/btn_commit"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="60dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="100dp"
+                android:background="@drawable/btn_style"
+                android:text="确认修改"
+                android:textColor="#FFF"
+                android:textSize="@dimen/common_textSize_default18"
+                android:textStyle="bold"/>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

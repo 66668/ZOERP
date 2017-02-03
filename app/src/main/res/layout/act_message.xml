@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/common_bg_examination"
+              android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="@color/common_bg_examination_line"/>
+
+    <!-- 公告-->
+    <RelativeLayout
+        android:id="@+id/layout_notice"
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+
+        <ImageView
+            android:id="@+id/img_notice"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:src="@mipmap/app_notice"/>
+        <!-- 标题-->
+        <TextView
+            android:id="@+id/tv_noticeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/img_notice"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/img_notice"
+            android:text="@string/msg_noticeTitle"
+            android:textColor="#000000"
+            android:textSize="@dimen/common_textSize_default17"/>
+
+        <!-- 内容-->
+        <TextView
+            android:id="@+id/tv_noticeContains"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/img_notice"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/img_notice"
+            android:text="没有消息和公告"
+            android:textSize="@dimen/common_textSize_default14"/>
+        <!-- 时间-->
+        <TextView
+            android:id="@+id/tv_noticeTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/tv_noticeTitle"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="2010-11-11"
+            android:textSize="@dimen/common_textSize_default11"/>
+
+        <ImageView
+            android:id="@+id/img_noticeNotify"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignBottom="@+id/img_notice"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:background="@mipmap/ic_main"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="@color/common_bg_examination_line"/>
+
+    <RelativeLayout
+        android:id="@+id/layout_notification"
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+
+        <ImageView
+            android:id="@+id/img_msg"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:src="@mipmap/app_notification"/>
+        <!-- 标题-->
+        <TextView
+            android:id="@+id/tv_msgTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/img_msg"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/img_msg"
+            android:text="@string/msg_msgTitle"
+            android:textColor="#000000"
+            android:textSize="@dimen/common_textSize_default17"/>
+
+        <!-- 内容-->
+        <TextView
+            android:id="@+id/tv_msgContains"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/img_msg"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/img_msg"
+            android:text="没有消息和公告"
+            android:textSize="@dimen/common_textSize_default14"/>
+        <!-- 时间-->
+        <TextView
+            android:id="@+id/tv_msgTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/tv_msgTitle"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="2010-11-11"
+            android:textSize="@dimen/common_textSize_default11"/>
+
+        <ImageView
+            android:id="@+id/img_msgNotify"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignBottom="@+id/img_msg"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:background="@mipmap/ic_main"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="@color/common_bg_examination_line"/>
+
+    <!-- 未办事项-->
+    <RelativeLayout
+        android:id="@+id/layout_undo"
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+
+        <ImageView
+            android:id="@+id/img_undo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@mipmap/menu_notify_undo"/>
+        <!-- 标题-->
+        <TextView
+            android:id="@+id/tv_undoTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/img_undo"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/img_undo"
+            android:text="@string/msg_undoTitle"
+            android:textColor="#000000"
+            android:textSize="@dimen/common_textSize_default17"/>
+        <!-- 内容-->
+        <TextView
+            android:id="@+id/tv_undoContains"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/img_undo"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/img_undo"
+            android:text="没有未办事项"
+            android:textSize="@dimen/common_textSize_default14"/>
+        <!-- 时间-->
+        <TextView
+            android:id="@+id/tv_undoTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/tv_undoTitle"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="2010-11-11"
+            android:textSize="@dimen/common_textSize_default11"/>
+
+        <ImageView
+            android:id="@+id/img_notifyNumber"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignBottom="@+id/img_undo"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:background="@mipmap/ic_main"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="@color/common_bg_examination_line"/>
+
+    <!-- 日程-->
+    <RelativeLayout
+        android:id="@+id/layout_schedule"
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+
+        <ImageView
+            android:id="@+id/img_schedule"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@mipmap/app_schedule"/>
+        <!-- 标题-->
+        <TextView
+            android:id="@+id/tv_scheduleTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/img_schedule"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/img_schedule"
+            android:text="@string/msg_schedule"
+            android:textColor="#000000"
+            android:textSize="@dimen/common_textSize_default17"/>
+        <!-- 内容-->
+        <TextView
+            android:id="@+id/tv_ScheduleContains"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/img_schedule"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/img_schedule"
+            android:text="没有日程安排"
+            android:textSize="@dimen/common_textSize_default14"/>
+        <!-- 时间-->
+        <TextView
+            android:id="@+id/tv_scheduleTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/tv_scheduleTitle"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="2010-11-11"
+            android:textSize="@dimen/common_textSize_default11"/>
+
+        <ImageView
+            android:id="@+id/img_ScheduleNotify"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignBottom="@+id/img_schedule"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:background="@mipmap/ic_main"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="@color/common_bg_examination_line"/>
+
+</LinearLayout>

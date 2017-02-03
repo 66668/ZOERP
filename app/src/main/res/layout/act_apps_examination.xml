@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:weightSum="1">
+
+    <LinearLayout
+        android:id="@+id/layout_Mtop"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.32"
+        android:background="@color/common_topbar_bgcolor"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/layout_topbar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            >
+            <RelativeLayout
+                android:id="@+id/imgBack"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:layout_marginLeft="10dp">
+                <ImageView
+
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@mipmap/topbar_back"/>
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="@string/examination"
+                android:textColor="#FFF"
+                android:textSize="@dimen/common_topbar_titleSize"/>
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:id="@+id/layout_subTop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/layout_topbar"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:id="@+id/btn_MyApplication"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.45"
+                android:clickable="true"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:weightSum="1">
+
+                <ImageView
+                    android:layout_width="54dp"
+                    android:layout_height="54dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+
+                    android:adjustViewBounds="true"
+                    android:src="@mipmap/myapplication"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/myApplication"
+                    android:textColor="#FFF"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="btnCreateUserClick"
+                android:orientation="vertical"
+                android:weightSum="1">
+
+                <ImageView
+                    android:layout_width="1dip"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/btn_MyApproval"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.45"
+                android:clickable="true"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:weightSum="1">
+
+                <ImageView
+                    android:layout_width="54dp"
+                    android:layout_height="54dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+
+                    android:adjustViewBounds="true"
+                    android:src="@mipmap/myapproval"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/MyApproval"
+                    android:textColor="#FFF"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.68">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.68"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:weightSum="1">
+
+                <LinearLayout
+                    android:id="@+id/btn_jobs"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="btnCreateUserClick"
+                    android:orientation="vertical"
+                    android:weightSum="1">
+
+                    <ImageView
+                        android:layout_width="54dp"
+                        android:layout_height="54dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+
+                        android:adjustViewBounds="true"
+                        android:src="@mipmap/jobs"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/jobs"
+                        android:textColor="#626262"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_jobsLeave"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="btnPathClick"
+                    android:orientation="vertical"
+                    android:weightSum="1">
+
+                    <ImageView
+                        android:layout_width="54dp"
+                        android:layout_height="54dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+
+                        android:adjustViewBounds="true"
+                        android:src="@mipmap/jobsleave"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/jobsleave"
+                        android:textColor="#626262"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_forLeave"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="btnManageUserClick"
+                    android:orientation="vertical"
+                    android:weightSum="1">
+
+                    <ImageView
+                        android:layout_width="54dp"
+                        android:layout_height="54dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+
+                        android:adjustViewBounds="true"
+                        android:src="@mipmap/forleave"/>
+                        android:src="@mipmap/forleave"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/forLeave"
+                        android:textColor="#626262"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_overTime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="btnManageUserClick"
+                    android:orientation="vertical"
+                    android:weightSum="1">
+
+                    <ImageView
+                        android:layout_width="54dp"
+                        android:layout_height="54dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+
+                        android:adjustViewBounds="true"
+                        android:src="@mipmap/workovertime"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/overtime"
+                        android:textColor="#626262"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:weightSum="1">
+
+                <LinearLayout
+                    android:id="@+id/btn_rest"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="btnCreateUserClick"
+                    android:orientation="vertical"
+                    android:weightSum="1">
+
+                    <ImageView
+                        android:layout_width="54dp"
+                        android:layout_height="54dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+
+                        android:adjustViewBounds="true"
+                        android:src="@mipmap/takedaysoff"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/forRest"
+                        android:textColor="#626262"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_borrow"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="btnPathClick"
+                    android:orientation="vertical"
+                    android:weightSum="1">
+
+                    <ImageView
+                        android:layout_width="54dp"
+                        android:layout_height="54dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+
+                        android:adjustViewBounds="true"
+                        android:src="@mipmap/borrow"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/borrow"
+                        android:textColor="#626262"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_Salaryadjust"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="btnManageUserClick"
+                    android:orientation="vertical"
+                    android:weightSum="1">
+
+                    <ImageView
+                        android:layout_width="54dp"
+                        android:layout_height="54dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:adjustViewBounds="true"
+                        android:src="@mipmap/salaryadjust"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/salaryadjust"
+                        android:textColor="#626262"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_carused"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="btnManageUserClick"
+                    android:orientation="vertical"
+                    android:weightSum="1">
+
+                    <ImageView
+                        android:layout_width="54dp"
+                        android:layout_height="54dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+
+                        android:adjustViewBounds="true"
+                        android:src="@mipmap/carused"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/carused"
+                        android:textColor="#626262"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:weightSum="1">
+
+                <LinearLayout
+                    android:id="@+id/btn_vehicleMaintenance"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="btnCreateUserClick"
+                    android:orientation="vertical"
+                    android:weightSum="1">
+
+                    <ImageView
+                        android:layout_width="54dp"
+                        android:layout_height="54dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:adjustViewBounds="true"
+                        android:src="@mipmap/vehiclem"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/vehicleMaintenance"
+                        android:textColor="#626262"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_LoanReimbursement"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="btnPathClick"
+                    android:orientation="vertical"
+                    android:weightSum="1">
+
+                    <ImageView
+                        android:layout_width="54dp"
+                        android:layout_height="54dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+
+                        android:adjustViewBounds="true"
+                        android:src="@mipmap/loanreimbursement"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/loanReimbursement"
+                        android:textColor="#626262"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnManageUser"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="btnManageUserClick"
+                    android:orientation="vertical"
+                    android:weightSum="1">
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>
