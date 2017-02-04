@@ -35,12 +35,9 @@ public class ColumnInfo {
 	// / </summary>
 	public int MaxLength;
 
-	public ColumnInfo(String columnName, String columnCaption,
-			boolean isPrimaryKey, String dataType, Object defaultValue) {
-		initColumn(columnName, columnCaption, isPrimaryKey, dataType,
-				defaultValue);
-	}
 
+
+	//
 	public ColumnInfo(String columnName, String columnCaption,boolean isPrimaryKey, String dataType) {
 		Object defaultValue = null; 
 		if (dataType.equals("int") || dataType.equals("Integer") ) {
@@ -56,8 +53,12 @@ public class ColumnInfo {
 		initColumn(columnName, columnCaption, isPrimaryKey, dataType, defaultValue);
 	}
 
-	void initColumn(String columnName, String columnCaption,
-			boolean isPrimaryKey, String dataType, Object defaultValue) {
+	//
+	public ColumnInfo(String columnName, String columnCaption, boolean isPrimaryKey, String dataType, Object defaultValue) {
+		initColumn(columnName, columnCaption, isPrimaryKey, dataType, defaultValue);
+	}
+
+	void initColumn(String columnName, String columnCaption, boolean isPrimaryKey, String dataType, Object defaultValue) {
 		ColumnName = columnName;
 		ColumnCaption = columnCaption;
 		IsPrimaryKey = isPrimaryKey;

@@ -3,6 +3,7 @@ package com.zhongou.db.entity;
 import com.zhongou.db.EntityBase;
 
 public class UserEntity extends EntityBase {
+
     public UserTable TableSchema() {
         return (UserTable) _tableSchema;
     }

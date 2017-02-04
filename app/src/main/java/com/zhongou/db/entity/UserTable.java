@@ -8,8 +8,9 @@ import com.zhongou.db.TableInfo;
  * 数据存储
  */
 public class UserTable extends TableInfo {
-    public static String C_TableName = "user";
+    protected static UserTable _current;
 
+    public static String C_TableName = "user";
 
     public static String C_EmployeeID = "employee_id";
     public static String C_storeId = "store_id";//登录的公司账号
@@ -32,8 +33,6 @@ public class UserTable extends TableInfo {
     public UserTable() {
         _tableName = "user";
     }
-
-    protected static UserTable _current;
 
     public static UserTable Current() {
         if (_current == null) {

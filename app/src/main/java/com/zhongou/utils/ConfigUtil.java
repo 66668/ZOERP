@@ -4,8 +4,9 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.google.gson.Gson;
 import com.zhongou.db.entity.UserEntity;
+
+import org.json.JSONObject;
 
 /**
  * 中断保存设置
@@ -23,7 +24,7 @@ public class ConfigUtil {
 	private static final String PSD = "password";//密码
 	
 	private static final String AUTO_LOGIN = "auto_login";
-	private static final String MEMBER_ENTITY = "user_entity";
+	private static final String USERENTITY = "user_entity";
 	private static final String PUSH_CLIENTID = "push_clientId";//个推clientID
 
 	private static final String WIFINAME = "WIFI_NAME";//wifi名称
@@ -78,11 +79,10 @@ public class ConfigUtil {
 	 * 获取所有当前用户的信息
 	 */
 	public UserEntity getUserEntity() {
-		//返回member_entity的信息，没有就返回null
-		String string = sp.getString(MEMBER_ENTITY, null);
-		if (string != null && string.length() > 0) {
+		String string = sp.getString(USERENTITY, null);
+		if(string!=null && string.length()>0){
 			try {
-				return new Gson().fromJson(string, UserEntity.class);
+				return (UserEntity)UserEntity.toEntityBase(new JSONObject(string), UserEntity.class);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -92,8 +92,8 @@ public class ConfigUtil {
 
 	//保存对象，转换成js格式保存，需要调用外部jar包
 	//CreateUserActivity--UserHelper--ConfigUtil该方法
-	public void setUserEntity(UserEntity userManagers) {
-		editor.putString(MEMBER_ENTITY, new Gson().toJson(userManagers));//"member_entity"
+	public void setUserEntity(UserEntity userEntity) {
+		editor.putString(USERENTITY, userEntity.toJSON().toString());//"USERENTITY"
 		editor.commit();
 	}
 
@@ -112,7 +112,6 @@ public class ConfigUtil {
 		return sp.getString(WORKID, null);//userid
 	}
 
-	//工号
 	public void setWorkId(String id) {
 		editor.putString(WORKID, id);
 		editor.commit();
@@ -123,7 +122,6 @@ public class ConfigUtil {
 		return sp.getString(STOREID, "");
 	}
 
-	//公司编号
 	public void setStoreId(String account) {
 		editor.putString(STOREID, account);
 		editor.commit();
@@ -134,8 +132,6 @@ public class ConfigUtil {
 		return sp.getBoolean(AUTO_LOGIN, true);
 	}
 
-	//保存登录状态
-	//MainVisitorActivity--UserHelper--ConfigUtil该方法：若是点击退出，就不再自动自动登录
 	public void setAutoLogin(boolean play) {
 		editor.putBoolean(AUTO_LOGIN, play);
 		editor.commit();

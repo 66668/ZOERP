@@ -96,7 +96,6 @@ public class UserHelper<T> {
             if (!"".equals(workId)) {
                 // 获取所有当前用户信息，保存到mCurrentUser对象中
                 mCurrentUser = config.getUserEntity();
-                Log.d("SJY", "获取当前存储getCurrentUser");
             }
         }
         return mCurrentUser;
