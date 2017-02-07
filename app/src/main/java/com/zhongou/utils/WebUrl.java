@@ -64,6 +64,11 @@ public class WebUrl {
          * 获取 我的审批 记录
          */
         public static final String GETMYAPPROVALRECORD = LOGIN_URL + LOGIN_FLODER_USER + "Approval/GetApprovalSearchResults";
+
+        /**
+         * 获取 我的抄送 记录
+         */
+        public static final String GETCOPYLIST = LOGIN_URL + LOGIN_FLODER_USER + "Mycopy/MycopyList";
         /**
          * 01 招聘申请
          */

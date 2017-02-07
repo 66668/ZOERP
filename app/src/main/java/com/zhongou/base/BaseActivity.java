@@ -89,6 +89,7 @@ public class BaseActivity extends FragmentActivity {
     // (1)页面跳转重载
     public void startActivity(Class<?> newClass) {
         Intent intent = new Intent(this, newClass);
+        //退出多个Activity的程序
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
@@ -97,10 +98,17 @@ public class BaseActivity extends FragmentActivity {
     public void startActivity(Class<?> newClass, Bundle extras) {
         Intent intent = new Intent(this, newClass);
         intent.putExtras(extras);
+        //退出多个Activity的程序
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
+    //带返回值跳转重载
+    public void myStartForResult(Class<?> newClass,final int flag){
+        Intent intent = new Intent(this,newClass);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivityForResult(intent,flag);
+    }
     /**
      * handler sendMessage的处理
      */

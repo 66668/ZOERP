@@ -66,8 +66,6 @@ public class ContactsFragment extends BaseFragment {
 
     //常量
     public static final int POST_SONCO_SUCCESS = 15;
-    public static final int POST_DEPT_SUCCESS = 15;
-    public static final int POST_EMPLE_SUCCESS = 15;
     public static final int POST_FAILED = 16;
 
 
@@ -93,8 +91,7 @@ public class ContactsFragment extends BaseFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.act_contacts, container, false);
         return view;
     }

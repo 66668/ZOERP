@@ -86,10 +86,7 @@
 
 
     <!-- 申请/审批-->
-    <string name="my_application">我的申请</string>
-    <string name="my_approval">我的审批</string>
     <string name="examination">审批</string>
-
     <string name="examination_yes">已审批</string>
     <string name="examination_no">未审批</string>
     <string name="examination_going">审批中</string>
@@ -104,6 +101,8 @@
 
     <string name="examination_transfer">转交</string>
     <string name="examination_copyto">抄送</string>
+    <string name="examination_copyto_from">抄送人</string>
+    <string name="examination_copyto_time">抄送时间</string>
     <string name="jobs">招聘</string>
     <string name="jobsleave">离职</string>
     <string name="forLeave">请假</string>
@@ -114,8 +113,12 @@
     <string name="carused">用车</string>
     <string name="vehicleMaintenance">车辆维护</string>
     <string name="loanReimbursement">借款报销</string>
+    <string name="returnCar">交车</string>
+    <string name="my_application">我的申请</string>
+    <string name="my_approval">我的审批</string>
     <string name="myApplication">我的申请</string>
     <string name="MyApproval">我的审批</string>
+    <string name="MyCopyto">我的抄送</string>
     <string name="state">审批状况：</string>
     <string name="state_result">审批结果：</string>
     <string name="approval_person">申请人</string>

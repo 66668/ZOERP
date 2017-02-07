@@ -10,33 +10,32 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhongou.R;
-import com.zhongou.adapter.MyApprovalListAdapter;
+import com.zhongou.adapter.MyCopyListAdapter;
 import com.zhongou.base.BaseActivity;
 import com.zhongou.base.BaseListAdapter;
 import com.zhongou.common.MyException;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
-import com.zhongou.model.MyApprovalModel;
-import com.zhongou.view.examination.approvaldetail.BorrowDetailApvlActivity;
-import com.zhongou.view.examination.approvaldetail.ConferenceDetailApvlActivity;
-import com.zhongou.view.examination.approvaldetail.ContractFileDetailApvlActivity;
-import com.zhongou.view.examination.approvaldetail.DimissionDetailApvlActivity;
-import com.zhongou.view.examination.approvaldetail.LeaveDetailApvlActivity;
-import com.zhongou.view.examination.approvaldetail.LoanReimbursementDetailApvlActivity;
-import com.zhongou.view.examination.approvaldetail.NotificationAndNoticeDetailApvlActivity;
-import com.zhongou.view.examination.approvaldetail.OfficeDetailApvlActivity;
-import com.zhongou.view.examination.approvaldetail.OutGoingDetailApvlActivity;
-import com.zhongou.view.examination.approvaldetail.PositionReplaceDetailApvlActivity;
-import com.zhongou.view.examination.approvaldetail.ProcurementDetailApvlActivity;
-import com.zhongou.view.examination.approvaldetail.ReceiveDetailApvlActivity;
-import com.zhongou.view.examination.approvaldetail.RecruitmentDetailApvlActivity;
-import com.zhongou.view.examination.approvaldetail.RetestDetailApvlActivity;
-import com.zhongou.view.examination.approvaldetail.SalaryadjustDetailApvlActivity;
-import com.zhongou.view.examination.approvaldetail.TakeDaysOffDetailApvlActivity;
-import com.zhongou.view.examination.approvaldetail.VehicleDetailApvlActivity;
-import com.zhongou.view.examination.approvaldetail.VehicleMaintainDetailApvlActivity;
-import com.zhongou.view.examination.approvaldetail.WorkOverTimeDetailApvlActivity;
+import com.zhongou.model.MyCopyModel;import com.zhongou.view.examination.copydetail.BorrowDetailCopyActivity;
+import com.zhongou.view.examination.copydetail.ConferenceDetailCopyActivity;
+import com.zhongou.view.examination.copydetail.ContractFileDetailCopyActivity;
+import com.zhongou.view.examination.copydetail.DimissionDetailCopyActivity;
+import com.zhongou.view.examination.copydetail.LeaveDetailCopyActivity;
+import com.zhongou.view.examination.copydetail.LoanReimbursementDetailCopyActivity;
+import com.zhongou.view.examination.copydetail.NotificationAndNoticeDetailCopyActivity;
+import com.zhongou.view.examination.copydetail.OfficeDetailCopyActivity;
+import com.zhongou.view.examination.copydetail.OutGoingDetailCopyActivity;
+import com.zhongou.view.examination.copydetail.PositionReplaceDetailCopyActivity;
+import com.zhongou.view.examination.copydetail.ProcurementDetailCopyActivity;
+import com.zhongou.view.examination.copydetail.ReceiveDetailCopyActivity;
+import com.zhongou.view.examination.copydetail.RecruitmentDetailCopyActivity;
+import com.zhongou.view.examination.copydetail.RetestDetailCopyActivity;
+import com.zhongou.view.examination.copydetail.SalaryadjustDetailCopyActivity;
+import com.zhongou.view.examination.copydetail.TakeDaysOffDetailCopyActivity;
+import com.zhongou.view.examination.copydetail.VehicleDetailCopyActivity;
+import com.zhongou.view.examination.copydetail.VehicleMaintainDetailCopyActivity;
+import com.zhongou.view.examination.copydetail.WorkOverTimeDetailCopyActivity;
 import com.zhongou.widget.RefreshListView;
 
 import java.util.ArrayList;
@@ -48,7 +47,7 @@ import java.util.List;
  * Created by sjy on 2016/12/2.
  */
 
-public class ZOApprovalActivity extends BaseActivity implements RefreshListView.IReflashListener {
+public class ZOCopyListActivity extends BaseActivity implements RefreshListView.IReflashListener {
     //back
     @ViewInject(id = R.id.layout_back, click = "forBack")
     RelativeLayout layout_back;
@@ -64,10 +63,10 @@ public class ZOApprovalActivity extends BaseActivity implements RefreshListView.
     @ViewInject(id = R.id.myapprovalList)
     RefreshListView myListView;
 
-    private MyApprovalListAdapter vAdapter;//记录适配
+    private MyCopyListAdapter vAdapter;//记录适配
     private boolean ifLoading = false;//标记
     private int pageSize = 20;
-    private ArrayList<MyApprovalModel> list = null;
+    private ArrayList<MyCopyModel> list = null;
     private String IMaxtime = null;
     private String IMinTime = null;
 
@@ -80,12 +79,12 @@ public class ZOApprovalActivity extends BaseActivity implements RefreshListView.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_apps_examination_myapproval);
+        setContentView(R.layout.act_apps_exa_mycopy);
         tv_right.setText("");
-        tv_title.setText(getResources().getString(R.string.my_approval));
+        tv_title.setText(getResources().getString(R.string.MyCopyto));
 
         myListView.setInterFace(this);//下拉刷新监听
-        vAdapter = new MyApprovalListAdapter(ZOApprovalActivity.this, adapterCallBack);// 上拉加载
+        vAdapter = new MyCopyListAdapter(ZOCopyListActivity.this, adapterCallBack);// 上拉加载
         myListView.setAdapter(vAdapter);
         initListener();
 
@@ -101,23 +100,25 @@ public class ZOApprovalActivity extends BaseActivity implements RefreshListView.
                 int headerViewsCount = myListView.getHeaderViewsCount();//得到header的总数量
                 int newPosition = position - headerViewsCount;//得到新的修正后的position
 
-                MyApprovalModel myApprovalModel = (MyApprovalModel) vAdapter.getItem(newPosition);//
+                MyCopyModel myApprovalModel = (MyCopyModel) vAdapter.getItem(newPosition);//
                 String type = myApprovalModel.getApplicationType();//申请类型
-                myApprovalTransfer(type, myApprovalModel);
+
+                //跳转调用
+//                myApprovalTransfer(type, myApprovalModel);
             }
         });
     }
 
     public void getNewData() {
-        Log.d("SJY", "MyApprovalActivity--getNewData");
-        Loading.run(ZOApprovalActivity.this, new Runnable() {
+        Log.d("SJY", "ZOCopyListActivity--getNewData");
+        Loading.run(ZOCopyListActivity.this, new Runnable() {
             @Override
             public void run() {
                 ifLoading = true;//
                 String storeID = UserHelper.getCurrentUser().getStoreID();
                 try {
-                    List<MyApprovalModel> visitorModelList = UserHelper.getApprovalSearchResults(
-                            ZOApprovalActivity.this,
+                    List<MyCopyModel> visitorModelList = UserHelper.getMyCopyList(
+                            ZOCopyListActivity.this,
                             "",//iMaxTime
                             "");
 
@@ -139,14 +140,14 @@ public class ZOApprovalActivity extends BaseActivity implements RefreshListView.
     //RefreshListView.IReflashListener接口 下拉刷新
     @Override
     public void onRefresh() {
-        Loading.run(ZOApprovalActivity.this, new Runnable() {
+        Loading.run(ZOCopyListActivity.this, new Runnable() {
 
             @Override
             public void run() {
                 ifLoading = true;//
                 try {
-                    List<MyApprovalModel> visitorModelList = UserHelper.getApprovalSearchResults(
-                            ZOApprovalActivity.this,
+                    List<MyCopyModel> visitorModelList = UserHelper.getMyCopyList(
+                            ZOCopyListActivity.this,
                             IMaxtime,//iMaxTime
                             "");
 
@@ -177,15 +178,15 @@ public class ZOApprovalActivity extends BaseActivity implements RefreshListView.
                 return;
             }
 
-            Loading.run(ZOApprovalActivity.this, new Runnable() {
+            Loading.run(ZOCopyListActivity.this, new Runnable() {
 
                 @Override
                 public void run() {
 
                     ifLoading = true;//
                     try {
-                        List<MyApprovalModel> visitorModelList = UserHelper.getApprovalSearchResults(
-                                ZOApprovalActivity.this,
+                        List<MyCopyModel> visitorModelList = UserHelper.getMyCopyList(
+                                ZOCopyListActivity.this,
                                 "",//iMaxTime
                                 IMinTime);
 
@@ -211,17 +212,16 @@ public class ZOApprovalActivity extends BaseActivity implements RefreshListView.
         switch (msg.what) {
             case GET_NEW_DATA://进入页面加载最新
                 // 数据显示
-                list = (ArrayList<MyApprovalModel>) msg.obj;
+                list = (ArrayList<MyCopyModel>) msg.obj;
                 vAdapter.setEntityList(list);
                 //数据处理，获取iLastUpdateTime参数方便后续上拉/下拉使用
                 setIMinTime(list);
                 setIMaxTime(list);
-                Log.d("SJY", "MineApplicationActivity--GET_NEW_DATA--> myListView.reflashComplete");
                 myListView.reflashComplete();
                 ifLoading = false;
                 break;
             case GET_REFRESH_DATA://刷新
-                list = (ArrayList<MyApprovalModel>) msg.obj;
+                list = (ArrayList<MyCopyModel>) msg.obj;
                 vAdapter.insertEntityList(list);
                 //数据处理/只存最大值,做刷新新数据使用
                 setIMaxTime(list);
@@ -229,7 +229,7 @@ public class ZOApprovalActivity extends BaseActivity implements RefreshListView.
                 break;
 
             case GET_MORE_DATA://加载
-                list = (ArrayList<MyApprovalModel>) msg.obj;
+                list = (ArrayList<MyCopyModel>) msg.obj;
                 vAdapter.addEntityList(list);
                 //数据处理，只存最小值
                 setIMinTime(list);
@@ -239,7 +239,6 @@ public class ZOApprovalActivity extends BaseActivity implements RefreshListView.
             case GET_NONE_NEWDATA://没有获取新数据
                 //                vAdapter.insertEntityList(null);
                 sendToastMessage((String) msg.obj);
-                Log.d("SJY", "MineApplicationActivity--GET_NONE_NEWDATA--> myListView.reflashComplete");
                 myListView.reflashComplete();
                 ifLoading = false;
                 break;
@@ -250,11 +249,11 @@ public class ZOApprovalActivity extends BaseActivity implements RefreshListView.
         super.handleMessage(msg);
     }
 
-    public void setIMaxTime(ArrayList<MyApprovalModel> list) {
+    public void setIMaxTime(ArrayList<MyCopyModel> list) {
         IMaxtime = list.get(0).getCreateTime();
     }
 
-    public void setIMinTime(ArrayList<MyApprovalModel> list) {
+    public void setIMinTime(ArrayList<MyCopyModel> list) {
         IMinTime = list.get(list.size() - 1).getCreateTime();
     }
 
@@ -262,85 +261,85 @@ public class ZOApprovalActivity extends BaseActivity implements RefreshListView.
      * 申请跳转详细
      */
 
-    private void myApprovalTransfer(String type, MyApprovalModel model) {
+    private void myApprovalTransfer(String type, MyCopyModel model) {
         Intent intent = new Intent();
         intent.putExtra("MyApprovalModel", model);
         switch (type) {
             case "招聘申请"://01
-                intent.setClass(this, RecruitmentDetailApvlActivity.class);
+                intent.setClass(this, RecruitmentDetailCopyActivity.class);
                 startActivity(intent);
                 break;
             case "离职申请"://02
-                intent.setClass(this, DimissionDetailApvlActivity.class);
+                intent.setClass(this, DimissionDetailCopyActivity.class);
                 startActivity(intent);
                 break;
             case "请假申请"://03
-                intent.setClass(this, LeaveDetailApvlActivity.class);
+                intent.setClass(this, LeaveDetailCopyActivity.class);
                 startActivity(intent);
                 break;
             case "加班申请"://04
-                intent.setClass(this, WorkOverTimeDetailApvlActivity.class);
+                intent.setClass(this, WorkOverTimeDetailCopyActivity.class);
                 startActivity(intent);
                 break;
             case "调休申请"://05
-                intent.setClass(this, TakeDaysOffDetailApvlActivity.class);
+                intent.setClass(this, TakeDaysOffDetailCopyActivity.class);
                 startActivity(intent);
                 break;
             case "借阅申请"://06
-                intent.setClass(this, BorrowDetailApvlActivity.class);
+                intent.setClass(this, BorrowDetailCopyActivity.class);
                 startActivity(intent);
                 break;
             case "调薪申请"://07
-                intent.setClass(this, SalaryadjustDetailApvlActivity.class);
+                intent.setClass(this, SalaryadjustDetailCopyActivity.class);
                 startActivity(intent);
                 break;
             case "用车申请"://08
-                intent.setClass(this, VehicleDetailApvlActivity.class);
+                intent.setClass(this, VehicleDetailCopyActivity.class);
                 startActivity(intent);
                 break;
             case "车辆维保"://09
-                intent.setClass(this, VehicleMaintainDetailApvlActivity.class);
+                intent.setClass(this, VehicleMaintainDetailCopyActivity.class);
                 startActivity(intent);
                 break;
             case "借款报销申请"://10
-                intent.setClass(this, LoanReimbursementDetailApvlActivity.class);
+                intent.setClass(this, LoanReimbursementDetailCopyActivity.class);
                 startActivity(intent);
                 break;
 
             case "调动申请"://11
-                intent.setClass(this, PositionReplaceDetailApvlActivity.class);
+                intent.setClass(this, PositionReplaceDetailCopyActivity.class);
                 startActivity(intent);
                 break;
             case "采购申请"://12
-                intent.setClass(this, ProcurementDetailApvlActivity.class);
+                intent.setClass(this, ProcurementDetailCopyActivity.class);
                 startActivity(intent);
                 break;
             case "通知公告申请"://13
-                intent.setClass(this, NotificationAndNoticeDetailApvlActivity.class);
+                intent.setClass(this, NotificationAndNoticeDetailCopyActivity.class);
                 startActivity(intent);
                 break;
             case "办公室申请"://14
-                intent.setClass(this, OfficeDetailApvlActivity.class);
+                intent.setClass(this, OfficeDetailCopyActivity.class);
                 startActivity(intent);
                 break;
             case "领用申请"://15
-                intent.setClass(this, ReceiveDetailApvlActivity.class);
+                intent.setClass(this, ReceiveDetailCopyActivity.class);
                 startActivity(intent);
                 break;
             case "合同文件申请"://16
-                intent.setClass(this, ContractFileDetailApvlActivity.class);
+                intent.setClass(this, ContractFileDetailCopyActivity.class);
                 startActivity(intent);
                 break;
             case "外出申请"://17
-                intent.setClass(this, OutGoingDetailApvlActivity.class);
+                intent.setClass(this, OutGoingDetailCopyActivity.class);
                 startActivity(intent);
                 break;
             case "复试申请"://18
-                intent.setClass(this, RetestDetailApvlActivity.class);
+                intent.setClass(this, RetestDetailCopyActivity.class);
                 startActivity(intent);
                 break;
             case "会议申请"://19
-                intent.setClass(this, ConferenceDetailApvlActivity.class);
+                intent.setClass(this, ConferenceDetailCopyActivity.class);
                 startActivity(intent);
                 break;
         }

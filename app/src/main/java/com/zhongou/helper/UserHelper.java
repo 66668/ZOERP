@@ -18,6 +18,7 @@ import com.zhongou.model.ContactsSonCOModel;
 import com.zhongou.model.MapAttendModel;
 import com.zhongou.model.MyApplicationModel;
 import com.zhongou.model.MyApprovalModel;
+import com.zhongou.model.MyCopyModel;
 import com.zhongou.model.applicationdetailmodel.BorrowModel;
 import com.zhongou.model.applicationdetailmodel.ConferenceModel;
 import com.zhongou.model.applicationdetailmodel.ContractFileModel;
@@ -162,7 +163,7 @@ public class UserHelper<T> {
     }
 
     /**
-     * 02添加地图考勤,（obj形式上传)
+     * 添加地图考勤,（obj形式上传)
      *
      * @param context
      * @param attendCapTime
@@ -196,7 +197,7 @@ public class UserHelper<T> {
 
 
     /**
-     * 03 获取地图考勤记录
+     *  获取地图考勤记录
      *
      * @param context
      * @param iMaxTime
@@ -226,7 +227,8 @@ public class UserHelper<T> {
     }
 
     /**
-     * 03 获取 我的申请
+     * 02
+     * 获取 我的申请
      * <p>
      *
      * @param context
@@ -256,7 +258,7 @@ public class UserHelper<T> {
     }
 
     /**
-     * 04 获取 我的审批
+     * 03 获取 我的审批
      * <p></p>
      *
      * @param context
@@ -283,6 +285,41 @@ public class UserHelper<T> {
                 throw hr.getError();
             }
             return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<MyApprovalModel>>() {
+            }.getType());
+        } catch (MyException e) {
+            throw new MyException(e.getMessage());
+        }
+    }
+
+    /**
+     * 04 获取 我的抄送
+     * <p></p>
+     *
+     * @param context
+     * @param iMaxTime
+     * @param iMinTime
+     * @return
+     * @throws MyException
+     */
+
+    public static List<MyCopyModel> getMyCopyList(Context context, String iMaxTime, String iMinTime) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+
+        try {
+            HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.GETCOPYLIST,
+                    HttpParameter.create()
+                            .add("iMaxTime", iMaxTime)
+                            .add("iMinTime", iMinTime)
+                            .add("storeID", mCurrentUser.getStoreID())
+                            .add("employeeId", mCurrentUser.getEmployeeID())
+                            .add("pageSize", 20));
+
+            if (hr.hasError()) {
+                throw hr.getError();
+            }
+            return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<MyCopyModel>>() {
             }.getType());
         } catch (MyException e) {
             throw new MyException(e.getMessage());

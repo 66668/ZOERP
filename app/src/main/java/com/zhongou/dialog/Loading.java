@@ -29,6 +29,7 @@ public class Loading {
 		}).start();
 		return loadingDialog;
 	}
+
 	//无弹窗的登录样式
 	public static LoadingNoDialog noDialogRun(Context context, final Runnable runnalbe){
 		return noDialogRun(context, true, runnalbe);

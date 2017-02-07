@@ -49,8 +49,6 @@ public class BorrowActivity extends BaseActivity {
     EditText et_reason;
 
     //类型
-    //    @ViewInject(id = R.id.sp_borrowType)
-    //    Spinner sp_borrowType;
     @ViewInject(id = R.id.layout_borrowType, click = "borrowType")
     LinearLayout layout_borrowType;
     @ViewInject(id = R.id.tv_borrowType)
@@ -72,6 +70,16 @@ public class BorrowActivity extends BaseActivity {
     LinearLayout layout_endTime;
     @ViewInject(id = R.id.tv_timeEnd)
     TextView tv_timeEnd;
+
+    //添加审批人
+    @ViewInject(id = R.id.AddApprover, click = "forAddApprover")
+    RelativeLayout AddApprover;
+
+    //审批人
+    @ViewInject(id = R.id.tv_Requester)
+    TextView tv_Requester;
+
+
     //变量
     public String BorrowThings;
     public String BorrowType;
@@ -226,6 +234,15 @@ public class BorrowActivity extends BaseActivity {
         endDateChooseDialog.setTimePickerGone(true);
         endDateChooseDialog.setDateDialogTitle("结束时间");
         endDateChooseDialog.showDateChooseDialog();
+    }
+
+    /**
+     * 添加审批人
+     *
+     * @param view
+     */
+    public void forAddApprover(View view) {
+//        myStartForResult(ContactsActivity.class,);
     }
 
     /**

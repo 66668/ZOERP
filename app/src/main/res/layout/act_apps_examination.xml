@@ -60,7 +60,7 @@
                 android:id="@+id/btn_MyApplication"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.45"
+                android:layout_weight="0.3"
                 android:clickable="true"
                 android:gravity="center"
                 android:orientation="vertical"
@@ -86,7 +86,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.1"
+                android:layout_weight="0.05"
                 android:clickable="true"
                 android:gravity="center"
                 android:onClick="btnCreateUserClick"
@@ -94,9 +94,9 @@
                 android:weightSum="1">
 
                 <ImageView
-                    android:layout_width="1dip"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:background="@color/gray"
+                    android:background="@mipmap/examinationline"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
                     />
@@ -106,7 +106,7 @@
                 android:id="@+id/btn_MyApproval"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.45"
+                android:layout_weight="0.3"
                 android:clickable="true"
                 android:gravity="center"
                 android:orientation="vertical"
@@ -126,6 +126,52 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="@string/MyApproval"
+                    android:textColor="#FFF"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.05"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="btnCreateUserClick"
+                android:orientation="vertical"
+                android:weightSum="1">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@mipmap/examinationline"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_copyReturn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:clickable="true"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:weightSum="1">
+
+                <ImageView
+                    android:layout_width="54dp"
+                    android:layout_height="54dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+
+                    android:adjustViewBounds="true"
+                    android:src="@mipmap/mycopyto"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/MyCopyto"
                     android:textColor="#FFF"/>
             </LinearLayout>
         </LinearLayout>
@@ -453,10 +499,37 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/btn_vehicleReturn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="btnPathClick"
+                    android:orientation="vertical"
+                    android:weightSum="1">
+
+                    <ImageView
+                        android:layout_width="54dp"
+                        android:layout_height="54dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:adjustViewBounds="true"
+                        android:src="@mipmap/vehiclereturn"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/returnCar"
+                        android:textColor="#626262"/>
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/btnManageUser"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.25"
                     android:clickable="true"
                     android:gravity="center"
                     android:onClick="btnManageUserClick"

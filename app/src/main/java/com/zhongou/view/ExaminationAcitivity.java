@@ -8,18 +8,20 @@ import android.widget.RelativeLayout;
 import com.zhongou.R;
 import com.zhongou.base.BaseActivity;
 import com.zhongou.inject.ViewInject;
+import com.zhongou.utils.PageUtil;
 import com.zhongou.view.examination.BorrowActivity;
 import com.zhongou.view.examination.DimissionActivity;
 import com.zhongou.view.examination.LeaveActivity;
 import com.zhongou.view.examination.LoanReimbursementActivity;
-import com.zhongou.view.examination.ZOApplicationActivity;
-import com.zhongou.view.examination.ZOApprovalActivity;
 import com.zhongou.view.examination.RecruitmentActivity;
 import com.zhongou.view.examination.SalaryadjustActivity;
 import com.zhongou.view.examination.TakeDaysOffActivity;
 import com.zhongou.view.examination.VehicleActivity;
 import com.zhongou.view.examination.VehicleMaintainActivity;
 import com.zhongou.view.examination.WorkOverTimeActivity;
+import com.zhongou.view.examination.ZOAplListActivity;
+import com.zhongou.view.examination.ZOApvlListActivity;
+import com.zhongou.view.examination.ZOCopyListActivity;
 
 /**
  * 审批
@@ -31,13 +33,17 @@ public class ExaminationAcitivity extends BaseActivity {
     @ViewInject(id = R.id.imgBack, click = "forBack")
     RelativeLayout imgBack;
 
-    //
+    //我的申请
     @ViewInject(id = R.id.btn_MyApplication, click = "myApplication")
     LinearLayout btn_MyApplication;
 
-    //
+    //我的审批
     @ViewInject(id = R.id.btn_MyApproval, click = "myApproval")
     LinearLayout btn_MyApproval;
+
+    //我的抄送
+    @ViewInject(id = R.id.btn_copyReturn, click = "myCopyReturn")
+    LinearLayout btn_copyReturn;
 
     //1招聘
     @ViewInject(id = R.id.btn_jobs, click = "forJobs")
@@ -75,9 +81,13 @@ public class ExaminationAcitivity extends BaseActivity {
     @ViewInject(id = R.id.btn_vehicleMaintenance, click = "forVehicleMaintenance")
     LinearLayout btn_vehicleMaintenance;
 
-    //10
+    //10借款报销
     @ViewInject(id = R.id.btn_LoanReimbursement, click = "forLoanReimbursement")
     LinearLayout btn_LoanReimbursement;
+
+    //11交车
+    @ViewInject(id = R.id.btn_vehicleReturn, click = "forVehicleReturn")
+    LinearLayout btn_vehicleReturn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +101,7 @@ public class ExaminationAcitivity extends BaseActivity {
      * @param view
      */
     public void myApplication(View view) {
-        startActivity(ZOApplicationActivity.class);
+        startActivity(ZOAplListActivity.class);
 
     }
 
@@ -101,8 +111,18 @@ public class ExaminationAcitivity extends BaseActivity {
      * @param view
      */
     public void myApproval(View view) {
-        startActivity(ZOApprovalActivity.class);
+        startActivity(ZOApvlListActivity.class);
     }
+
+    /**
+     * 我的抄送
+     *
+     * @param view
+     */
+    public void myCopyReturn(View view) {
+        startActivity(ZOCopyListActivity.class);
+    }
+
 
     /**
      * 01招聘
@@ -192,6 +212,16 @@ public class ExaminationAcitivity extends BaseActivity {
      */
     public void forLoanReimbursement(View view) {
         startActivity(LoanReimbursementActivity.class);
+    }
+
+    /**
+     * 11交车
+     *
+     * @param view
+     */
+    public void forVehicleReturn(View view) {
+        PageUtil.DisplayToast("没实现！");
+//        startActivity(LoanReimbursementActivity.class);
     }
 
 

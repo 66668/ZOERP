@@ -10,7 +10,7 @@ import com.zhongou.base.BaseActivity;
 import com.zhongou.inject.ViewInject;
 
 /**
- * 抄送
+ * 转交
  * Created by sjy on 2017/1/17.
  */
 

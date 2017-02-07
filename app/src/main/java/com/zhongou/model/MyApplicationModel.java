@@ -197,4 +197,24 @@ public class MyApplicationModel implements Serializable {
     public void setApplicationType(String applicationType) {
         ApplicationType = applicationType;
     }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public String getTemp() {
+        return Temp;
+    }
+
+    public void setTemp(String temp) {
+        Temp = temp;
+    }
+
+    public String getApprovalInfomodel() {
+        return ApprovalInfomodel;
+    }
+
+    public void setApprovalInfomodel(String approvalInfomodel) {
+        ApprovalInfomodel = approvalInfomodel;
+    }
 }

@@ -80,13 +80,13 @@
 
         <!-- 我的审批-->
         <activity
-            android:name="com.zhongou.view.examination.ZOApprovalActivity"
+            android:name="com.zhongou.view.examination.ZOApvlListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!-- 驳回-->
+        <!-- 审批-驳回01-->
         <activity
             android:name="com.zhongou.view.examination.approvaldetail.CommonRefulseActivity"
             android:label="@string/app_name"
@@ -94,7 +94,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!-- 批准-->
+        <!-- 审批-批准02-->
         <activity
             android:name="com.zhongou.view.examination.approvaldetail.CommonApproveActivity"
             android:label="@string/app_name"
@@ -102,7 +102,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!-- 抄送-->
+        <!-- 审批-转交03-->
         <activity
             android:name="com.zhongou.view.examination.approvaldetail.CommonTransfertoActivity"
             android:label="@string/app_name"
@@ -110,7 +110,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!-- 抄送-->
+        <!-- 审批-抄送04-->
         <activity
             android:name="com.zhongou.view.examination.approvaldetail.CommonCopytoActivity"
             android:label="@string/app_name"
@@ -120,19 +120,20 @@
 
         <!-- 我的申请-->
         <activity
-            android:name="com.zhongou.view.examination.ZOApplicationActivity"
+            android:name="com.zhongou.view.examination.ZOAplListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!-- 审批状态详情-->
+        <!-- 我的抄送-->
         <activity
-            android:name="com.zhongou.view.examination.applicationdetail.ExaminationStateActivity"
+            android:name="com.zhongou.view.examination.ZOCopyListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+
 
         <!-- 招聘01-->
         <activity
@@ -153,6 +154,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+        <activity
+            android:name="com.zhongou.view.examination.copydetail.RecruitmentDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
 
         <!-- 辞职02-->
         <activity
@@ -172,6 +180,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+        <activity
+            android:name="com.zhongou.view.examination.copydetail.DimissionDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
 
         <!-- 请假03-->
         <activity
@@ -192,6 +207,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+        <activity
+            android:name="com.zhongou.view.examination.copydetail.LeaveDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
 
         <!-- 加班04-->
         <activity
@@ -212,6 +234,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+        <activity
+            android:name="com.zhongou.view.examination.copydetail.WorkOverTimeDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
 
         <!-- 调休05-->
         <activity
@@ -232,6 +261,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+        <activity
+            android:name="com.zhongou.view.examination.copydetail.TakeDaysOffDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
 
         <!-- 借阅06-->
         <activity
@@ -252,6 +288,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+        <activity
+            android:name="com.zhongou.view.examination.copydetail.BorrowDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
 
         <!-- 调薪07-->
         <activity
@@ -272,6 +315,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+        <activity
+            android:name="com.zhongou.view.examination.copydetail.SalaryadjustDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
 
         <!-- 用车08-->
         <activity
@@ -292,6 +342,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+        <activity
+            android:name="com.zhongou.view.examination.copydetail.VehicleDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
 
         <!-- 维护09-->
         <activity
@@ -312,6 +369,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+        <activity
+            android:name="com.zhongou.view.examination.copydetail.VehicleMaintainDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
 
         <!-- 借款10-->
         <activity
@@ -332,6 +396,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+        <activity
+            android:name="com.zhongou.view.examination.copydetail.LoanReimbursementDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
 
         <!-- 05-11 申请 调动详情-->
         <activity
@@ -346,6 +416,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+        <activity
+            android:name="com.zhongou.view.examination.copydetail.PositionReplaceDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
 
         <!-- 05-12  采购详情-->
         <activity
@@ -360,6 +437,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+        <activity
+            android:name="com.zhongou.view.examination.copydetail.ProcurementDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
 
         <!-- 05-13  通知公告详情-->
         <activity
@@ -374,6 +458,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+        <activity
+            android:name="com.zhongou.view.examination.copydetail.NotificationAndNoticeDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
 
         <!-- 05-14  通知公告详情-->
         <activity
@@ -388,6 +479,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+        <activity
+            android:name="com.zhongou.view.examination.copydetail.OfficeDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
 
         <!-- 05-15  领用详情-->
         <activity
@@ -402,6 +500,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+        <activity
+            android:name="com.zhongou.view.examination.copydetail.ReceiveDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
 
         <!-- 05-16  合同文件详情-->
         <activity
@@ -416,6 +521,14 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+        <activity
+            android:name="com.zhongou.view.examination.copydetail.ContractFileDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+
         <!-- 05-17  外出详情-->
         <activity
             android:name="com.zhongou.view.examination.applicationdetail.OutGoingDetailActivity"
@@ -429,6 +542,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+        <activity
+            android:name="com.zhongou.view.examination.copydetail.OutGoingDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
 
         <!-- 05-18  复试详情-->
         <activity
@@ -443,6 +563,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+        <activity
+            android:name="com.zhongou.view.examination.copydetail.RetestDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
 
         <!-- 05-19  会议详情-->
         <activity
@@ -457,6 +584,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+        <activity
+            android:name="com.zhongou.view.examination.copydetail.ConferenceDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
 
         <!-- 个人信息-->
         <activity
