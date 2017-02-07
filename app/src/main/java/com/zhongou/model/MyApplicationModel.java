@@ -11,26 +11,30 @@ import java.io.Serializable;
 public class MyApplicationModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String YesOrNo;
-    private String DepartmentID;
-    private String DepartmentName;
-    private String ApprovalDepartmentID;
-    private String ApprovalDepartmentName;
-    private String ApprovalEmployeeID;
-    private String ApprovalEmployeeName;
-    private String ApprovalDate;
-    private String ApprovalStatus;
-    private String ActiveFlg;
-    private String CreateTimeForApp;
+    private String Temp;
+    private String ApprovalInfomodel;
     private String ApprovalID;
     private String ApplicationID;
     private String ApplicationTitle;
     private String ApplicationType;
-    private String Comment;
+    private String YesOrNo;
+
     private String EmployeeID;
     private String EmployeeName;
+    private String DepartmentID;
+    private String DepartmentName;
+
+    private String ApprovalDepartmentID;
+    private String ApprovalDepartmentName;
+    private String ApprovalEmployeeID;
+    private String ApprovalEmployeeName;
+
+    private String ApprovalDate;
+    private String ApprovalStatus;
+    private String Comment;
+    private String ActiveFlg;
+    private String CreateTimeForApp;
     private String CreateTime;
-    private String Remark;
     private String StoreID;
 
     public String getYesOrNo() {
@@ -153,13 +157,6 @@ public class MyApplicationModel implements Serializable {
         CreateTime = createTime;
     }
 
-    public String getRemark() {
-        return Remark;
-    }
-
-    public void setRemark(String remark) {
-        Remark = remark;
-    }
 
     public String getStoreID() {
         return StoreID;

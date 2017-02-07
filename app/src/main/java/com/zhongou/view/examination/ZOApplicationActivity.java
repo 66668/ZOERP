@@ -65,7 +65,6 @@ public class ZOApplicationActivity extends BaseActivity implements RefreshListVi
     @ViewInject(id = R.id.myList)
     RefreshListView myListView;
 
-
     private MyApplicationListAdapter vAdapter;//记录适配
     private boolean ifLoading = false;//标记
     private int pageSize = 20;

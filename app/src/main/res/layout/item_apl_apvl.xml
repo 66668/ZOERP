@@ -6,27 +6,29 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="57dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true">
 
-        <TextView
+        <com.zhongou.widget.CircleTextView
             android:id="@+id/tv_name"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="@color/gray"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
             android:gravity="center"
-            android:text="习近平"/>
+            android:textSize="@dimen/common_textSize_default10"/>
 
         <TextView
             android:id="@+id/tv_title"
-            style="@style/BlackText.Large20"
-            android:layout_width="wrap_content"
+            style="@style/BlackText.Medium17"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="14dp"
             android:layout_marginTop="5dp"
             android:layout_toEndOf="@+id/tv_name"
+            android:lines="1"
             android:text="标题"/>
 
         <TextView
@@ -37,7 +39,9 @@
             android:layout_alignParentBottom="true"
             android:layout_alignStart="@+id/tv_title"
             android:layout_marginBottom="5dp"
-            android:text="类型"/>
+            android:text="类型"
+            android:textColor="@color/textHintColor"
+            android:textSize="@dimen/common_textSize_default14"/>
 
         <TextView
             android:id="@+id/tv_Comment"
@@ -48,6 +52,7 @@
             android:layout_alignTop="@+id/tv_title"
             android:layout_marginRight="10dp"
             android:gravity="center"
+            android:textColor="@color/textHintColor"
             android:text="未批准"/>
 
         <TextView
@@ -58,6 +63,8 @@
             android:layout_alignParentRight="true"
             android:layout_marginBottom="5dp"
             android:layout_marginRight="10dp"
+            android:textColor="@color/textHintColor"
+            android:textSize="@dimen/common_textSize_default10"
             android:text="时间"/>
     </RelativeLayout>
 

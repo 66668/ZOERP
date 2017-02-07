@@ -70,18 +70,11 @@ public class ContactsFragment extends BaseFragment {
     public static final int POST_EMPLE_SUCCESS = 15;
     public static final int POST_FAILED = 16;
 
+
     //单例模式
-    private ContactsFragment() {
-
-    }
-
-    private static class ContactsFragmentContainer {
-        private static ContactsFragment instance = new ContactsFragment();
-    }
-
     public static ContactsFragment newInstance() {
-
-        return ContactsFragmentContainer.instance;
+        ContactsFragment appsFragment = new ContactsFragment();
+        return appsFragment;
     }
 
     @Override

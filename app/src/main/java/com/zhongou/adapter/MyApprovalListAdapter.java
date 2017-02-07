@@ -1,6 +1,7 @@
 package com.zhongou.adapter;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.TextView;
 
@@ -12,6 +13,9 @@ import com.zhongou.base.BaseListAdapter;
 import com.zhongou.common.ImageLoadingConfig;
 import com.zhongou.application.MyApplication;
 import com.zhongou.model.MyApprovalModel;
+import com.zhongou.widget.CircleTextView;
+
+import java.util.Random;
 
 
 /**
@@ -27,7 +31,7 @@ public class MyApprovalListAdapter extends BaseListAdapter {
 
     public class WidgetHolder {
         public TextView tvTitle;
-        public TextView tvName;
+        public CircleTextView tvName;
         public TextView tvTime;
         public TextView tvType;//类型
         public TextView tvComment;//审批状态
@@ -43,10 +47,10 @@ public class MyApprovalListAdapter extends BaseListAdapter {
     @Override
     protected View inflateConvertView() {
         //一条记录的布局
-        View view = inflater.inflate(R.layout.item_myapproval, null);
+        View view = inflater.inflate(R.layout.item_apl_apvl, null);
         //该布局上的控件
         WidgetHolder holder = new WidgetHolder();
-        holder.tvName = (TextView) view.findViewById(R.id.tv_name);
+        holder.tvName = (CircleTextView) view.findViewById(R.id.tv_name);
         holder.tvTitle = (TextView) view.findViewById(R.id.tv_title);
         holder.tvTime = (TextView) view.findViewById(R.id.tv_time);
         holder.tvType = (TextView) view.findViewById(R.id.tv_type);
@@ -62,22 +66,31 @@ public class MyApprovalListAdapter extends BaseListAdapter {
         //?java.lang.ClassCastException: java.util.ArrayList cannot be cast to com.yvision.model.VisitorBModel
         MyApprovalModel model = (MyApprovalModel) entityList.get(position);
         holder.tvName.setText(model.getEmployeeName());
+        holder.tvName.setBackgroundColor(ContextCompat.getColor(MyApplication.getInstance(),randomColor()));
         holder.tvTime.setText(model.getCreateTime());
+        holder.tvType.setText(model.getApplicationType());
+        holder.tvTitle.setText(model.getApplicationTitle());
 
         if (model.getApprovalStatus().contains("1")) {
             holder.tvComment.setText(MyApplication.getInstance().getResources().getString(R.string.examination_yes));
-            holder.tvComment.setTextColor(MyApplication.getInstance().getResources().getColor(R.color.green));
+            holder.tvComment.setTextColor(ContextCompat.getColor(MyApplication.getInstance(),R.color.common_color));
         } else if (model.getApprovalStatus().contains("0")){
             holder.tvComment.setText(MyApplication.getInstance().getResources().getString(R.string.examination_no));
-            holder.tvComment.setTextColor(MyApplication.getInstance().getResources().getColor(R.color.red));
+            holder.tvComment.setTextColor(ContextCompat.getColor(MyApplication.getInstance(),R.color.red));
         }else if(model.getApprovalStatus().contains("2")){
             holder.tvComment.setText(MyApplication.getInstance().getResources().getString(R.string.examination_going));
-            holder.tvComment.setTextColor(MyApplication.getInstance().getResources().getColor(R.color.blue));
+            holder.tvComment.setTextColor(ContextCompat.getColor(MyApplication.getInstance(),R.color.common_color));
+        }else{
+            holder.tvComment.setText("无法判断");
         }
-        holder.tvType.setText(model.getApplicationType());
-        holder.tvTitle.setText(model.getApplicationTitle());
-    }
 
+
+    }
+    //设置一条记录的随机颜色
+    private int randomColor(){
+        int [] colorArray = new int[]{R.color.pink,R.color.lightgreen,R.color.gray,R.color.yellow,R.color.common_color,R.color.aquamarine,R.color.brown};
+        return colorArray[new Random().nextInt(6)];
+    }
 
     public void destroy() {
         imgLoader.clearMemoryCache();

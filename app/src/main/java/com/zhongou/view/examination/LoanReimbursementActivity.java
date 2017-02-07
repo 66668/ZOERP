@@ -65,10 +65,13 @@ public class LoanReimbursementActivity extends BaseActivity {
     @ViewInject(id = R.id.et_Fee)
     EditText et_Fee;
 
-    //说明
+    //备注
     @ViewInject(id = R.id.et_Reason)
     EditText et_Reason;
 
+    //还款时间
+//    @ViewInject(id = R.id.et_Reason)
+//    EditText et_Reason;
 
     //常量
     public static final int POST_SUCCESS = 21;
@@ -80,7 +83,11 @@ public class LoanReimbursementActivity extends BaseActivity {
     private String Useage = "";
     private String way = "";
     private String fee = "";
-    private String reason = "";
+    private String remark = "";
+    private String planBackTime = "";//计划报销还款时间
+    private String adminName = "";//户名
+    private String bankAccount = "";//开户行
+    private String accountNumber = "";//账号
     private List<String> approvalIDList = new ArrayList<String>();
 
 
@@ -95,7 +102,7 @@ public class LoanReimbursementActivity extends BaseActivity {
     public void forCommit(View view) {
         approvalID = "0280c9c5-870c-46cf-aa95-cdededc7d86c,88dd7959-cb2f-40c6-947a-4d6801fc4765";
         fee = et_Fee.getText().toString().trim();
-        reason = et_Reason.getText().toString();
+        remark = et_Reason.getText().toString();
         Log.d("SJY", Type + "\n" + way + "\n" + Useage);
         if (TextUtils.isEmpty(Type)) {
             PageUtil.DisplayToast("申请类型不能为空");
@@ -110,10 +117,31 @@ public class LoanReimbursementActivity extends BaseActivity {
             PageUtil.DisplayToast("方式不能为空");
             return;
         }
+
         if (TextUtils.isEmpty(fee)) {
             PageUtil.DisplayToast("金额不能为空");
             return;
         }
+
+//        if (TextUtils.isEmpty(accountNumber)) {
+//            PageUtil.DisplayToast("账号不能为空");
+//            return;
+//        }
+
+//        if (TextUtils.isEmpty(bankAccount)) {
+//            PageUtil.DisplayToast("开户行不能为空");
+//            return;
+//        }
+
+//        if (TextUtils.isEmpty(adminName)) {
+//            PageUtil.DisplayToast("户名不能为空");
+//            return;
+//        }
+
+//        if (TextUtils.isEmpty(planBackTime)) {
+//            PageUtil.DisplayToast("还款时间不能为空");
+//            return;
+//        }
 
 
         Loading.run(LoanReimbursementActivity.this, new Runnable() {
@@ -125,8 +153,13 @@ public class LoanReimbursementActivity extends BaseActivity {
                     js.put("Way", way);
                     js.put("Fee", fee);
                     js.put("Useage", Useage);
-                    js.put("Reason", reason);
+                    js.put("Remark", remark);
                     js.put("ApprovalIDList", approvalID);//
+
+                    js.put("PlanbackTime", planBackTime);
+                    js.put("AdminName", adminName);
+                    js.put("BankAccount", bankAccount);
+                    js.put("AccountNumber", accountNumber);
 
                     UserHelper.LRApplicationPost(LoanReimbursementActivity.this, js);
                     sendMessage(POST_SUCCESS);

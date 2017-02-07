@@ -109,7 +109,12 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="BlackText.Small">
+    <style name="BlackText.Small10">
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="BlackText.Small12">
         <item name="android:singleLine">true</item>
         <item name="android:textSize">12sp</item>
     </style>

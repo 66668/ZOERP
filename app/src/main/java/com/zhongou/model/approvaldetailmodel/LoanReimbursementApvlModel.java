@@ -1,4 +1,4 @@
-package com.zhongou.model.applicationdetailmodel;
+package com.zhongou.model.approvaldetailmodel;
 
 import java.io.Serializable;
 import java.util.List;
@@ -7,12 +7,9 @@ import java.util.List;
  * Created by sjy on 2016/12/26.
  */
 
-public class LoanReimbursementModel implements Serializable {
+public class LoanReimbursementApvlModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
-
-    public String EmployeeID;
-    public String ApplicationID;
     public String Type;
     public String Way;
     public String Fee;
@@ -30,7 +27,7 @@ public class LoanReimbursementModel implements Serializable {
     public String EmployeeName;
     public String ApplicationCreateTime;
 
-    public List<LoanReimbursementModel.ApprovalInfoLists> ApprovalInfoLists;
+    public List<LoanReimbursementApvlModel.ApprovalInfoLists> ApprovalInfoLists;
 
 
     public static class ApprovalInfoLists {
@@ -72,29 +69,14 @@ public class LoanReimbursementModel implements Serializable {
         }
     }
 
-    public List<LoanReimbursementModel.ApprovalInfoLists> getApprovalInfoLists() {
+    public List<LoanReimbursementApvlModel.ApprovalInfoLists> getApprovalInfoLists() {
         return ApprovalInfoLists;
     }
 
-    public void setApprovalInfoLists(List<LoanReimbursementModel.ApprovalInfoLists> ApprovalInfoLists) {
+    public void setApprovalInfoLists(List<LoanReimbursementApvlModel.ApprovalInfoLists> ApprovalInfoLists) {
         this.ApprovalInfoLists = ApprovalInfoLists;
     }
 
-    public String getEmployeeID() {
-        return EmployeeID;
-    }
-
-    public void setEmployeeID(String employeeID) {
-        EmployeeID = employeeID;
-    }
-
-    public String getApplicationID() {
-        return ApplicationID;
-    }
-
-    public void setApplicationID(String applicationID) {
-        ApplicationID = applicationID;
-    }
 
     public String getType() {
         return Type;

@@ -3,9 +3,9 @@ package com.zhongou.view.examination.applicationdetail;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
-import android.text.TextUtils;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -19,7 +19,10 @@ import com.zhongou.model.MyApplicationModel;
 import com.zhongou.model.applicationdetailmodel.LoanReimbursementModel;
 import com.zhongou.utils.PageUtil;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static com.zhongou.R.id.tv_contains;
 
 /**
  * 借款详情
@@ -55,7 +58,23 @@ public class LoanReimbursementDetailActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_fee)
     TextView tv_fee;
 
-    //说明
+    //还款时间
+    @ViewInject(id = R.id.tv_PlanbackTime)
+    TextView tv_PlanbackTime;
+
+    //户名
+    @ViewInject(id = R.id.tv_AdminName)
+    TextView tv_AdminName;
+
+    //开户行
+    @ViewInject(id = R.id.tv_BankAccount)
+    TextView tv_BankAccount;
+
+    //账号
+    @ViewInject(id = R.id.tv_AccountNumber)
+    TextView tv_AccountNumber;
+
+    //备注
     @ViewInject(id = R.id.tv_reason)
     TextView tv_reason;
 
@@ -63,11 +82,24 @@ public class LoanReimbursementDetailActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_Requester)
     TextView tv_Requester;
 
+    //审批状况
+    @ViewInject(id = R.id.tv_state_result)
+    TextView tv_state_result;
+    @ViewInject(id = R.id.layout_state, click = "forState")
+    LinearLayout layout_state;
     //变量
     private Intent intent = null;
     private LoanReimbursementModel loanReimbursementModel;
     private MyApplicationModel model;
     private List<LoanReimbursementModel.ApprovalInfoLists> modelList;
+
+    //动态添加view 变量
+    private List<View> ls_childView;//用于保存动态添加进来的View
+    private View childView;
+    private LayoutInflater inflater;//ViewHolder对象用来保存实例化View的子控件
+    private List<ViewHolder> listViewHolder = new ArrayList<>();
+    private LinearLayout ll_main;
+    //    private int mark = 5;//0显示在顶部
 
     //常量
     public static final int POST_SUCCESS = 11;
@@ -90,54 +122,61 @@ public class LoanReimbursementDetailActivity extends BaseActivity {
         tv_Useages.setText(model.getUseage());
         tv_way.setText(model.getWay());
         tv_fee.setText(model.getFee());
-        tv_reason.setText(model.getReason());
+        tv_reason.setText(model.getRemark());
+
+        tv_PlanbackTime.setText(model.getPlanbackTime());
+        tv_AdminName.setText(model.getAdminName());
+        tv_BankAccount.setText(model.getBankAccount());
+        tv_AccountNumber.setText(model.getAccountNumber());
 
         modelList = model.getApprovalInfoLists();
-        tv_Requester.setText(
-                modelList.get(0).getApprovalDate() +
-                        modelList.get(0).getApprovalEmployeeName() +
-                        modelList.get(0).getComment() +
-                        modelList.get(0).getYesOrNo()
-        );
+        // 审批人
+        StringBuilder nameBuilder = new StringBuilder();
+        for (int i = 0; i < modelList.size(); i++) {
+            nameBuilder.append(modelList.get(i).getApprovalEmployeeName() + " ");
+        }
+        tv_Requester.setText(nameBuilder);
 
+        //审批状态
+        if (loanReimbursementModel.getApprovalStatus().contains("0")) {
+            tv_state_result.setText("未审批");
+            tv_state_result.setTextColor(getResources().getColor(R.color.red));
+        } else if (loanReimbursementModel.getApprovalStatus().contains("1")) {
+            tv_state_result.setText("已审批");
+            tv_state_result.setTextColor(getResources().getColor(R.color.green));
+        } else if (loanReimbursementModel.getApprovalStatus().contains("2")) {
+            tv_state_result.setText("审批中...");
+            tv_state_result.setTextColor(getResources().getColor(R.color.black));
+        } else {
+            tv_state_result.setText("你猜猜！");
+        }
+
+        for (int i = 0, mark = 11; i < modelList.size(); i++, mark++) {//mark是布局插入位置，放在mark位置的后边（从1开始计数）
+            ViewHolder vh = AddView(mark);//添加布局
+            vh.tv_name.setText(modelList.get(i).getApprovalEmployeeName());
+            vh.tv_time.setText(modelList.get(i).getApprovalDate());
+            vh.tv_contains.setText(modelList.get(i).getComment());
+            if (modelList.get(i).getYesOrNo().contains("1")) {
+                vh.tv_yesOrNo.setText("已审批");
+            } else {
+                vh.tv_yesOrNo.setText("未审批");
+                vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
+            }
+        }
     }
+
 
     /**
      * 获取详情数据
      */
     public void getDetailModel(final MyApplicationModel model) {
-        final String ApplicationID = model.getApplicationID();
-        final String ApplicationType = model.getApplicationType();
-        final String StoreID = model.getStoreID();
-        final String EmployeeID = model.getEmployeeID();
-
-        if (TextUtils.isEmpty(ApplicationID)) {
-            PageUtil.DisplayToast("intent没有传递数值ApplicationID");
-            return;
-
-        }
-        if (TextUtils.isEmpty(ApplicationType)) {
-            PageUtil.DisplayToast("intent没有传递数值ApplicationType");
-            return;
-        }
-        if (TextUtils.isEmpty(StoreID)) {
-            PageUtil.DisplayToast("intent没有传递数值StoreID");
-            return;
-        }
-        if (TextUtils.isEmpty(EmployeeID)) {
-            PageUtil.DisplayToast("intent没有传递数值EmployeeID");
-            return;
-        }
-        Log.d("SJY", ApplicationID + ApplicationType + StoreID + EmployeeID);
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
                 try {
-                    LoanReimbursementModel model1 =UserHelper.applicationDetailPostLoan(LoanReimbursementDetailActivity.this,
-                            ApplicationID,
-                            ApplicationType,
-                            StoreID,
-                            EmployeeID);
+                    LoanReimbursementModel model1 = UserHelper.applicationDetailPostLoan(LoanReimbursementDetailActivity.this,
+                            model.getApplicationID(),
+                            model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
                     e.printStackTrace();
@@ -162,6 +201,42 @@ public class LoanReimbursementDetailActivity extends BaseActivity {
                 break;
         }
     }
+
+    /**
+     * 动态插入view
+     */
+    public class ViewHolder {
+        private int id = -1;
+        private TextView tv_name;
+        private TextView tv_yesOrNo;
+        private TextView tv_time;
+        private TextView tv_contains;
+    }
+
+    //初始化参数
+    private ViewHolder AddView(int marks) {
+        ll_main = (LinearLayout) findViewById(R.id.layout_ll);
+        ls_childView = new ArrayList<View>();
+        inflater = LayoutInflater.from(getApplicationContext());
+        childView = inflater.inflate(R.layout.item_examination_status, null);
+        childView.setId(marks);
+        ll_main.addView(childView, marks);
+        return getViewInstance(childView);
+
+    }
+
+    private ViewHolder getViewInstance(View childView) {
+        ViewHolder vh = new ViewHolder();
+        vh.id = childView.getId();
+        vh.tv_name = (TextView) childView.findViewById(R.id.tv_name);
+        vh.tv_yesOrNo = (TextView) childView.findViewById(R.id.tv_yesOrNo);
+        vh.tv_time = (TextView) childView.findViewById(R.id.tv_time);
+        vh.tv_contains = (TextView) childView.findViewById(tv_contains);
+        listViewHolder.add(vh);
+        ls_childView.add(childView);
+        return vh;
+    }
+
     /**
      * back
      *

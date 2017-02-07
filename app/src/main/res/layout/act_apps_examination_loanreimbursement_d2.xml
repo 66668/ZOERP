@@ -241,6 +241,115 @@
                         android:text="@string/loanReimburseMoney"/>
 
                     <TextView
+                        android:id="@+id/tv_fee"
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.72"
+                        android:gravity="center_vertical"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_topbar_height40"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.28"
+                        android:gravity="center_vertical"
+                        android:text="@string/loanPlanbackTime"/>
+
+                    <TextView
+                        android:id="@+id/tv_PlanbackTime"
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.72"
+                        android:gravity="center_vertical"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_topbar_height40"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.28"
+                        android:gravity="center_vertical"
+                        android:text="@string/loanAdminName"/>
+
+                    <TextView
+                        android:id="@+id/tv_AdminName"
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.72"
+                        android:gravity="center_vertical"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_topbar_height40"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.28"
+                        android:gravity="center_vertical"
+                        android:text="@string/loanBankAccounts"/>
+
+                    <TextView
+                        android:id="@+id/tv_BankAccount"
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.72"
+                        android:gravity="center_vertical"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_topbar_height40"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.28"
+                        android:gravity="center_vertical"
+                        android:text="@string/loanAccountNumber"/>
+
+                    <TextView
+                        android:id="@+id/tv_AccountNumber"
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

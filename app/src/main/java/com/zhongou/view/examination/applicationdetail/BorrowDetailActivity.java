@@ -179,6 +179,7 @@ public class BorrowDetailActivity extends BaseActivity {
                 break;
         }
     }
+
     public class ViewHolder {
         private int id = -1;
         private TextView tv_name;

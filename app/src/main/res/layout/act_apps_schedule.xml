@@ -3,11 +3,47 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-
-    <TextView
+    <RelativeLayout
+        android:id="@+id/layout_calendar"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="日程界面"
-        android:layout_width="match_parent">
+        android:visibility="visible">
 
-    </TextView>
+        <TextView
+            android:id="@+id/calendarCenter"
+            style="@style/whitText.text16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="8dp" />
+
+        <ImageButton
+            android:id="@+id/calendarLeft"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentLeft="true"
+            android:background="@null"
+            android:contentDescription="@null"
+            android:padding="8dp"
+            android:src="@mipmap/ic_launcher" />
+
+        <ImageButton
+            android:id="@+id/calendarRight"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentRight="true"
+            android:background="@null"
+            android:contentDescription="@null"
+            android:padding="8dp"
+            android:src="@mipmap/ic_launcher" />
+
+        <com.zhongou.widget.CalendarView
+            android:id="@+id/calendar"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/calendarCenter" />
+
+    </RelativeLayout>
+
 </LinearLayout>

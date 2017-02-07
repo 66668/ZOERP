@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.igexin.sdk.PushManager;
 import com.zhongou.R;
@@ -174,10 +175,15 @@ public class MainActivity extends BaseActivity {
         //添加图片，可替换成图片缓存方式
         CircleImageView circleImageView = (CircleImageView) headerView.findViewById(R.id.circleImg);
         circleImageView.setImageResource(R.mipmap.info_photo);
+        //添加登陆人姓名
+        TextView tvName = (TextView) headerView.findViewById(R.id.tv_login_name);
+        tvName.setText(UserHelper.getCurrentUser().getName());
+
         //添加菜单内容
         mNavigationView.inflateMenu(R.menu.menu_nav);
         // 自己写的方法，设置NavigationView中menu的item被选中后要执行的操作
         onNavgationViewMenuItemSelected(mNavigationView);
+
     }
 
     private void initViewPaperAndFragment() {

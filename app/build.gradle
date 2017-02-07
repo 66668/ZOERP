@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     signingConfigs {
+
         /**
          * 高德地图配置
          */
@@ -27,6 +28,7 @@ android {
             keyPassword "778744"
         }
     }
+
     compileSdkVersion 24
     buildToolsVersion "25.0.0"
 

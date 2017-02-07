@@ -42,6 +42,7 @@ import com.zhongou.model.approvaldetailmodel.ConferenceApvlModel;
 import com.zhongou.model.approvaldetailmodel.ContractFileApvlModel;
 import com.zhongou.model.approvaldetailmodel.DismissionApvlModel;
 import com.zhongou.model.approvaldetailmodel.LeaveApvlModel;
+import com.zhongou.model.approvaldetailmodel.LoanReimbursementApvlModel;
 import com.zhongou.model.approvaldetailmodel.NotificationAndNoticeApvlModel;
 import com.zhongou.model.approvaldetailmodel.OUtGoingApvlModel;
 import com.zhongou.model.approvaldetailmodel.OfficeApvlModel;
@@ -1002,12 +1003,11 @@ public class UserHelper<T> {
      * @param context
      * @param ApplicationID
      * @param ApplicationType
-     * @param StoreID
-     * @param EmployeeID
      * @return
      * @throws MyException
      */
-    public static LoanReimbursementModel applicationDetailPostLoan(Context context, String ApplicationID, String ApplicationType, String StoreID, String EmployeeID) throws MyException {
+
+    public static LoanReimbursementModel applicationDetailPostLoan(Context context, String ApplicationID, String ApplicationType) throws MyException {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
@@ -1016,12 +1016,13 @@ public class UserHelper<T> {
                     HttpParameter.create()
                             .add("ApplicationID", ApplicationID)
                             .add("ApplicationType", ApplicationType)
-                            .add("StoreID", StoreID)
-                            .add("EmployeeID", EmployeeID));
+                            .add("StoreID", mCurrentUser.getStoreID())
+                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
 
             if (httpResult.hasError()) {
                 throw httpResult.getError();
             }
+
             Log.d("HTTP", httpResult.jsonObject.toString());
 
             return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<LoanReimbursementModel>() {
@@ -1634,9 +1635,9 @@ public class UserHelper<T> {
     /**
      * 审批 借款报销详情 07-10
      */
-    public static VehicleMaintainApvlModel approvalDetailPostVehicleloan(Context context,
-                                                                         String ApplicationID,
-                                                                         String ApplicationType) throws MyException {
+    public static LoanReimbursementApvlModel approvalDetailPostVehicleloan(Context context,
+                                                                           String ApplicationID,
+                                                                           String ApplicationType) throws MyException {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
@@ -1653,7 +1654,7 @@ public class UserHelper<T> {
             }
             Log.d("HTTP", httpResult.jsonObject.toString());
 
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<VehicleMaintainApvlModel>() {
+            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<LoanReimbursementApvlModel>() {
             }.getType());
         } catch (MyException e) {
             throw new MyException(e.getMessage());

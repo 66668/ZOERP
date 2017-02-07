@@ -135,6 +135,118 @@
                     android:gravity="center_vertical"
                     />
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_topbar_height40"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
+                    android:text="@string/loanPlanbackTime"
+                    android:textColor="@color/cl_text_common"/>
+
+                <TextView
+                    android:id="@+id/tv_PlanbackTime"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.72"
+                    android:gravity="center_vertical"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_topbar_height40"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
+                    android:text="@string/loanAdminName"
+                    android:textColor="@color/cl_text_common"/>
+
+                <TextView
+                    android:id="@+id/tv_AdminName"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.72"
+                    android:gravity="center_vertical"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_topbar_height40"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
+                    android:text="@string/loanBankAccounts"
+                    android:textColor="@color/cl_text_common"/>
+
+                <TextView
+                    android:id="@+id/tv_BankAccount"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.72"
+                    android:gravity="center_vertical"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_topbar_height40"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
+                    android:text="@string/loanAccountNumber"
+                    android:textColor="@color/cl_text_common"/>
+
+                <TextView
+                    android:id="@+id/tv_AccountNumber"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.72"
+                    android:gravity="center_vertical"
+                    />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -174,14 +286,14 @@
                 android:weightSum="1">
 
                 <TextView
+                    android:textColor="@color/cl_text_common"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
-                    android:text="@string/Requester"
-                    android:textColor="@color/cl_text_common"/>
+                    android:text="@string/Requester"/>
 
                 <TextView
                     android:id="@+id/tv_Requester"
@@ -193,8 +305,8 @@
                     android:gravity="center_vertical"
                     />
             </LinearLayout>
-
             <LinearLayout
+                android:id="@+id/layout_state"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/common_topbar_height40"
                 android:background="@color/white"
@@ -211,8 +323,22 @@
                     android:gravity="center_vertical"
                     android:text="@string/state"
                     android:textColor="@color/cl_text_common"/>
-            </LinearLayout>
 
+                <TextView
+                    android:id="@+id/tv_state_result"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.72"
+                    android:drawableRight="@mipmap/forword"
+                    android:gravity="center_vertical"
+                    android:paddingRight="10dp"
+                    android:textColor="@color/red"
+                    />
+
+
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
