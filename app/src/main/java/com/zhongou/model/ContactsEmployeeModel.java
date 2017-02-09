@@ -12,14 +12,13 @@ public class ContactsEmployeeModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String sEmployeeID;//员工ID
-    private String sPostLevelName;//级别
-
     private String sEmployeeName;//员工姓名
     private String sEmail;//
     private String sGender;//
     private String sTelephone;//
     private String sEntryDate;//
     private String sDepartmentName;//
+    private String sPostLevelName;//级别
 
 
     public String getsEmail() {

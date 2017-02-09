@@ -75,6 +75,7 @@ public class PositionReplaceDetailApvlActivity extends BaseActivity {
     Button btn_copytp;
 
     private MyApprovalModel myApprovalModel;
+
     //常量
     public static final int POST_SUCCESS = 21;
     public static final int POST_FAILED = 22;
@@ -124,19 +125,27 @@ public class PositionReplaceDetailApvlActivity extends BaseActivity {
 
     //驳回
     public void forRefulse(View view){
-        startActivity(CommonRefulseActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("MyApprovalModel", myApprovalModel);
+        startActivity(CommonDisagreeActivity.class,bundle);
     }
-    //批转
+    //同意
     public void toForCommit(View view){
-        startActivity(CommonApproveActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("MyApprovalModel", myApprovalModel);
+        startActivity(CommonAgreeActivity.class,bundle);
     }
     //转交
     public void forTransfer(View view){
-        startActivity(CommonTransfertoActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("MyApprovalModel", myApprovalModel);
+        startActivity(CommonTransfertoActivity.class,bundle);
     }
     // 抄送
     public void forCopyto(View view){
-        startActivity(CommonCopytoActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("MyApprovalModel", myApprovalModel);
+        startActivity(CommonCopytoActivity.class,bundle);
     }
     /**
      * back

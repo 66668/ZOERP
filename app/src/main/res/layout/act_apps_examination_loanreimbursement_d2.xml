@@ -434,47 +434,13 @@
 
             </LinearLayout>
         </ScrollView>
-        <LinearLayout
+        <include
             android:id="@+id/laytout_decide"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/common_topbar_height"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="0dp"
-            android:orientation="horizontal"
-            >
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="驳回"/>
+            layout="@layout/bottombar_common_decide"
+            android:visibility="gone"/>
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="批准"/>
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="转交"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:visibility="gone"
+        <include
             android:id="@+id/laytout_copy"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/common_topbar_height"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="0dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="抄送"/>
-        </LinearLayout>
+            layout="@layout/bottombar_common_copyto"/>
     </RelativeLayout>
 </LinearLayout>

@@ -1,5 +1,6 @@
-package com.zhongou.view.examination.approvaldetail;
+package com.zhongou.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.text.TextUtils;
@@ -19,32 +20,36 @@ import com.zhongou.common.PinyinComparator;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
-import com.zhongou.model.ApprovalSModel;
 import com.zhongou.model.ContactsEmployeeModel;
-import com.zhongou.model.MyApprovalModel;
 import com.zhongou.utils.ConfigUtil;
 import com.zhongou.utils.PageUtil;
 import com.zhongou.widget.SideBar;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 /**
- * 审批-转交(转交通讯录和审批-申请添加审批人的通讯录一样)
- * Created by sjy on 2017/1/17.
+ * 处理审批-所有申请时，获取审批通讯录界面
+ * <p>
+ * 功能：
+ * 第一次通讯录从服务端获取，数据保存到sp中，以后都走sp获取数据，退出后数据清空
+ * <p>
+ * Created by sjy on 2017/2/7.
  */
 
-public class CommonTransfertoActivity extends BaseActivity {
+public class ContactsSelectActivity extends BaseActivity {
     //back
     @ViewInject(id = R.id.layout_back, click = "forBack")
     RelativeLayout layout_back;
+
     //
     @ViewInject(id = R.id.tv_title)
     TextView tv_title;
 
     //
-    @ViewInject(id = R.id.tv_right, click = "forCopyto")
+    @ViewInject(id = R.id.tv_right, click = "forSure")
     TextView tv_right;
 
     //listView
@@ -52,34 +57,29 @@ public class CommonTransfertoActivity extends BaseActivity {
     ListView contactsListView;
 
     //变量
-    private MyApprovalModel myApprovalModel;//跳转对象
-    private ApprovalSModel approvalSModel;//传送对象
-    private String sApprovalemployeeinfos;//转发人ApprovalEmployeeID
+    private ContactsSelectAdapter adapter;//审批人通讯录适配
 
     private SideBar sideBar;
     private CharacterParser characterParser;// 汉字转换成拼音的类
     private PinyinComparator pinyinComparator;// 根据拼音来排列ListView里面的数据类
 
-    private static List<ContactsEmployeeModel> listContactApprover;//审批人通讯录 集合
+
     public static List<ContactsEmployeeModel> selectlist;//checkBox选中数据集合
-    private ContactsSelectAdapter adapter;//转交通讯录适配
+    private static List<ContactsEmployeeModel> listContactApprover;//审批人通讯录 集合
 
     //常量
     public static final int POST_SUCCESEE = 15;
     public static final int POST_FAILED = 16;
     public static final int CHASE_DATA = 17;
-    public static final int POSTDATA_SUCCESS = 18;//数据转交
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_apps_examination_myapproval_transferto);
-        tv_title.setText(getResources().getString(R.string.examination_transfer));
+        setContentView(R.layout.act_apps_examination_contacts);
+        tv_title.setText(getResources().getString(R.string.examination_requester));
         tv_right.setText(getResources().getString(R.string.examination_requester_sure));
-
-        //获取跳转对象
-        myApprovalModel = (MyApprovalModel) getIntent().getSerializableExtra("MyApprovalModel");
-
+        //布局详细操作（可添加多个方法）
         initViews();
         initListener();
 
@@ -143,6 +143,7 @@ public class CommonTransfertoActivity extends BaseActivity {
         }
     }
 
+
     public void getDataFromURL() {
         //
         Loading.run(this, new Runnable() {
@@ -171,8 +172,7 @@ public class CommonTransfertoActivity extends BaseActivity {
                 // 根据a-z进行排序源数据
                 Collections.sort(listContactApprover, pinyinComparator);
 
-                //界面展示
-                adapter = new ContactsSelectAdapter(CommonTransfertoActivity.this, listContactApprover);
+                adapter = new ContactsSelectAdapter(ContactsSelectActivity.this, listContactApprover);
                 contactsListView.setAdapter(adapter);
                 break;
             case POST_FAILED://
@@ -184,14 +184,8 @@ public class CommonTransfertoActivity extends BaseActivity {
                 // 根据a-z进行排序源数据
                 Collections.sort(listContactApprover, pinyinComparator);
 
-                //界面展示
-                adapter = new ContactsSelectAdapter(CommonTransfertoActivity.this, listContactApprover);
+                adapter = new ContactsSelectAdapter(ContactsSelectActivity.this, listContactApprover);
                 contactsListView.setAdapter(adapter);
-                break;
-
-            case POSTDATA_SUCCESS:
-                PageUtil.DisplayToast((String) msg.obj);
-                this.finish();
                 break;
             default:
                 break;
@@ -252,79 +246,26 @@ public class CommonTransfertoActivity extends BaseActivity {
         adapter.updateListView(filterDateList);
     }
 
+
     /**
-     * 转交
+     * 确定
      *
      * @param view
      */
-    public void forCopyto(View view) {
-        selectlist = getSelectList(listContactApprover);//获取转交人
-        sApprovalemployeeinfos = getList2String(selectlist);//获取
-        Log.d("SJY", "转发-确定sApprovalemployeeinfos=" + sApprovalemployeeinfos);
-
-        if (TextUtils.isEmpty(sApprovalemployeeinfos)) {
-            PageUtil.DisplayToast("转发人不能为空");
-
-        }
-
-        //对象赋值处理
-        approvalSModel = new ApprovalSModel();
-        approvalSModel.setsApplicationid(myApprovalModel.getApprovalID());
-        approvalSModel.setsComment(myApprovalModel.getComment());
-        approvalSModel.setsApplicationid(myApprovalModel.getApplicationID());
-        approvalSModel.setsApplicationtype(myApprovalModel.getApplicationType());
-        approvalSModel.setsEmployeeid(myApprovalModel.getEmployeeID());
-        approvalSModel.setsStoreid(myApprovalModel.getStoreID());
-        approvalSModel.setsApplicationtitle(myApprovalModel.getApplicationTitle());
-        approvalSModel.setsApprovalemployeeinfos(sApprovalemployeeinfos);
-
-        Loading.run(this, new Runnable() {
-            @Override
-            public void run() {
-
-                try {
-                    String message = UserHelper.transfortoMyApproval(CommonTransfertoActivity.this, approvalSModel);
-                    sendMessage(POSTDATA_SUCCESS, message);
-                } catch (MyException e) {
-                    sendMessage(POST_FAILED, e.getMessage());
-                }
-            }
-        });
-    }
-
-
-    /**
-     * 获取选择的转交人
-     *
-     * @param list
-     * @return
-     */
-    private List<ContactsEmployeeModel> getSelectList(List<ContactsEmployeeModel> list) {
-        List<ContactsEmployeeModel> checkBoxList = new ArrayList<>();
-        //遍历
-        for (int i = 0; i < list.size(); i++) {
+    public void forSure(View view) {
+        selectlist = new ArrayList<ContactsEmployeeModel>();
+        //遍历，查找为ture的该条记录，提取信息
+        for (int i = 0; i < listContactApprover.size(); i++) {
             if (ContactsSelectAdapter.getIsSelectedMap().get(i) == true) {
-                checkBoxList.add(list.get(i));
-                Log.d("SJY", "选中的checkbox位置=" + i + "checkbox选中数据长度=" + checkBoxList.size());
+                selectlist.add(listContactApprover.get(i));
+                Log.d("SJY", "选中的checkbox位置=" + i + "checkbox选中数据长度=" + selectlist.size());
             }
         }
-        return checkBoxList;
-    }
 
-    /**
-     * 对参数处理
-     *
-     * @param list
-     * @return
-     */
-    private String getList2String(List<ContactsEmployeeModel> list) {
-        StringBuilder orgString = new StringBuilder();
-        //遍历
-        for (int i = 0; i < list.size(); i++) {
-            orgString.append(list.get(i).getsEmployeeID() + ",");
-        }
-        //去除末尾逗号
-        return orgString.substring(0, orgString.length() - 1);
+        Intent data = new Intent();//只是回传数据就不用写跳转对象
+        data.putExtra("data", (Serializable) selectlist);//数据放到data里面去
+        setResult(0, data);//返回data，2为result，data为intent对象
+        finish();//页面销毁
     }
 
     /**

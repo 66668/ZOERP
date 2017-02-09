@@ -96,12 +96,15 @@
     <string name="hint_examination_refulse">请输入驳回的理由</string>
 
     <string name="examination_commit">批准</string>
-    <string name="approve_sure">确认批准</string>
+    <string name="approve_sure_all">终审</string>
+    <string name="approve_sure">同意</string>
     <string name="hint_examination_commit">请输入批准的理由</string>
 
     <string name="examination_transfer">转交</string>
     <string name="examination_copyto">抄送</string>
     <string name="examination_copyto_from">抄送人</string>
+    <string name="examination_requester">审批人</string>
+    <string name="examination_requester_sure">确定</string>
     <string name="examination_copyto_time">抄送时间</string>
     <string name="jobs">招聘</string>
     <string name="jobsleave">离职</string>
@@ -125,6 +128,7 @@
     <string name="approval_dept">所属部门</string>
     <string name="approval_co">所属公司</string>
     <string name="approval_approvalTime">申请时间</string>
+
     <!-- 01招聘-->
 
     <string name="forjobs">招聘申请</string>

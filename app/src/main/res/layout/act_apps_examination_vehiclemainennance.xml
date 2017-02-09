@@ -484,21 +484,19 @@
                     android:layout_marginLeft="10dp"
                     android:gravity="center_vertical"
                     android:text="@string/Requester"
-                    android:textColor="@color/cl_text_common"
-                    android:textColorHint="@color/cl_hint_common"/>
+                    android:textColor="@color/cl_text_common"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <RelativeLayout
-                        android:id="@+id/addRequster"
+                        android:id="@+id/AddApprover"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:gravity="center">
 
                         <ImageView
-
                             android:id="@+id/img_addrequster"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
@@ -511,6 +509,16 @@
                             android:text="@string/addRequster"
                             />
                     </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/tv_Requester"
+                        style="@style/BlackText.standard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toRightOf="@+id/AddApprover"/>
                 </RelativeLayout>
             </LinearLayout>
 
@@ -518,6 +526,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dip"
                 android:background="@color/common_bg_examination_line"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginTop="10dp"
+                android:background="@color/common_bg_examination_line"/>
+
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

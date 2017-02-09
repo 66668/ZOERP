@@ -294,14 +294,16 @@ public class MainActivity extends BaseActivity {
                         PushManager.getInstance().stopService(MainActivity.this.getApplicationContext());
                         GetuiReceiver.payloadData.delete(0, GetuiReceiver.payloadData.length());
 
-                        //存储自动登录修改
-                        ConfigUtil configUtil = new ConfigUtil(MainActivity.this);
-                        configUtil.setAutoLogin(false);
+
+                        ConfigUtil config = new ConfigUtil(MainActivity.this);
+                        config.setAutoLogin(false);//存储自动登录修改
+                        config.setContactApproverData(null);//清空审批人通讯录数据，以防登录人更换后数据每更换导致出错
 
                         //修改自动登录的判断
                         MyApplication.getInstance().setIsLogin(false);
                         MyApplication.getInstance().setClientID(null);
                         UserHelper.setmCurrentUser(null);
+
                           /*
                          *该按钮只是关闭了activity,自动登录的参数，service等未处理，注意修改
                          */

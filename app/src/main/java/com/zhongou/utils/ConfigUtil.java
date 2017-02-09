@@ -4,9 +4,15 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.zhongou.db.entity.UserEntity;
+import com.zhongou.model.ContactsEmployeeModel;
 
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 中断保存设置
@@ -29,6 +35,8 @@ public class ConfigUtil {
 
 	private static final String WIFINAME = "WIFI_NAME";//wifi名称
 	private static final String MACADRESS = "WIFI_MAXADRESS";//wifi的mac地址
+
+	private static final String CONTACT_APPROVER = "contactapprover";//保存审批人通讯录
 
 
 	//登录内容保存
@@ -164,6 +172,34 @@ public class ConfigUtil {
 	public void setMacAddress(String macAdress){
 		editor.putString(MACADRESS,macAdress);
 		editor.commit();
+	}
+
+
+	//保存通讯录数据 审批-申请 选择审批人调用
+	public void setContactApproverData(List<ContactsEmployeeModel> datalist){
+
+		if (null == datalist || datalist.size() <= 0){
+			//空值存储，退出登录时设置
+			editor.putString(CONTACT_APPROVER,null);
+			editor.commit();
+		}else{
+			String data = new Gson().toJson(datalist);
+			editor.putString(CONTACT_APPROVER,data);
+			editor.commit();
+		}
+
+	}
+
+	public List<ContactsEmployeeModel> getContactApproverData(){
+		List<ContactsEmployeeModel> list = new ArrayList<>();
+		String data = sp.getString(CONTACT_APPROVER, null);
+
+		if (data == null){
+			return list;
+		}
+
+		list = new Gson().fromJson(data, new TypeToken<List<ContactsEmployeeModel>>(){}.getType());
+		return  list;
 	}
 }
 

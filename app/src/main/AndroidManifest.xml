@@ -88,7 +88,7 @@
 
         <!-- 审批-驳回01-->
         <activity
-            android:name="com.zhongou.view.examination.approvaldetail.CommonRefulseActivity"
+            android:name="com.zhongou.view.examination.approvaldetail.CommonDisagreeActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -96,7 +96,7 @@
 
         <!-- 审批-批准02-->
         <activity
-            android:name="com.zhongou.view.examination.approvaldetail.CommonApproveActivity"
+            android:name="com.zhongou.view.examination.approvaldetail.CommonAgreeActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -688,7 +688,8 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!--子公司通讯录 -->
+
+        <!--通讯录-子公司01 -->
         <activity
             android:name="com.zhongou.view.ContactsDeptOfSonActivity"
             android:label="@string/app_name"
@@ -696,16 +697,24 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!--部门通讯录 -->
+        <!--通讯录-部门02 -->
         <activity
             android:name="com.zhongou.view.ContactsEplOfDeptActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
-        <!--通讯录员工详情 -->
+        <!--通讯录-员工详情03 -->
         <activity
             android:name="com.zhongou.view.ContactsEplDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--通讯录-申请-选择审批人 -->
+        <activity
+            android:name="com.zhongou.view.ContactsSelectActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">

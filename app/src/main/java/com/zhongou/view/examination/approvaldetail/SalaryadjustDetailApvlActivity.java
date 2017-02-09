@@ -38,7 +38,6 @@ public class SalaryadjustDetailApvlActivity extends BaseActivity {
     TextView tv_right;
 
 
-
     //调薪人
     @ViewInject(id = R.id.tv_targitPerson)
     TextView tv_targetPerson;
@@ -168,6 +167,7 @@ public class SalaryadjustDetailApvlActivity extends BaseActivity {
             }
         });
     }
+
     @Override
     protected void handleMessage(Message msg) {
         super.handleMessage(msg);
@@ -183,21 +183,32 @@ public class SalaryadjustDetailApvlActivity extends BaseActivity {
                 break;
         }
     }
+
     //驳回
     public void forRefulse(View view){
-        startActivity(CommonRefulseActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("MyApprovalModel", myApprovalModel);
+        startActivity(CommonDisagreeActivity.class,bundle);
     }
-    //批转
+
+    //同意
     public void toForCommit(View view){
-        startActivity(CommonApproveActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("MyApprovalModel", myApprovalModel);
+        startActivity(CommonAgreeActivity.class,bundle);
     }
+
     //转交
     public void forTransfer(View view){
-        startActivity(CommonTransfertoActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("MyApprovalModel", myApprovalModel);
+        startActivity(CommonTransfertoActivity.class,bundle);
     }
     // 抄送
     public void forCopyto(View view){
-        startActivity(CommonCopytoActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("MyApprovalModel", myApprovalModel);
+        startActivity(CommonCopytoActivity.class,bundle);
     }
     /**
      * back

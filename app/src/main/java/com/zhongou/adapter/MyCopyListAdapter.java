@@ -2,7 +2,6 @@ package com.zhongou.adapter;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -70,21 +69,7 @@ public class MyCopyListAdapter extends BaseListAdapter {
         holder.tvTime.setText(model.getCreateTime());
         holder.tvType.setText(model.getApplicationType());
         holder.tvTitle.setText(model.getApplicationTitle());
-        if (!TextUtils.isEmpty(model.getApprovalStatus())) {
-            if (model.getApprovalStatus().contains("1")) {
-                holder.tvComment.setText(MyApplication.getInstance().getResources().getString(R.string.examination_yes));
-                holder.tvComment.setTextColor(ContextCompat.getColor(MyApplication.getInstance(), R.color.common_color));
-            }  else if (model.getApprovalStatus().contains("2")) {
-                holder.tvComment.setText(MyApplication.getInstance().getResources().getString(R.string.examination_going));
-                holder.tvComment.setTextColor(ContextCompat.getColor(MyApplication.getInstance(), R.color.common_color));
-            } else {
-                holder.tvComment.setText(MyApplication.getInstance().getResources().getString(R.string.examination_no));
-                holder.tvComment.setTextColor(ContextCompat.getColor(MyApplication.getInstance(), R.color.red));
-            }
-
-        }else{
-            holder.tvComment.setText("该参数为空");
-        }
+      holder.tvComment.setText("");
     }
     //设置一条记录的随机颜色
     private int randomColor(){

@@ -22,13 +22,35 @@
             android:hint="@string/hint_examination_commit"
             />
 
-        <Button
-            android:id="@+id/btn_commit"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/common_topbar_height"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
-            android:text="@string/approve_sure"/>
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_commit_all"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/common_topbar_height"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_weight="1"
+                android:text="@string/approve_sure_all"/>
+
+            <Button
+                android:id="@+id/btn_commit"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/common_topbar_height"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_weight="1"
+                android:text="@string/approve_sure"/>
+
+
+        </LinearLayout>
+
+
     </RelativeLayout>
 
 </LinearLayout>

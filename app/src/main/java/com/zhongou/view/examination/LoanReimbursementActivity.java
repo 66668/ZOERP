@@ -2,6 +2,7 @@ package com.zhongou.view.examination;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.text.TextUtils;
@@ -18,7 +19,9 @@ import com.zhongou.common.MyException;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
+import com.zhongou.model.ContactsEmployeeModel;
 import com.zhongou.utils.PageUtil;
+import com.zhongou.view.ContactsSelectActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 借款报销
  * Created by sjy on 2016/12/2.
  */
 
@@ -69,9 +73,18 @@ public class LoanReimbursementActivity extends BaseActivity {
     @ViewInject(id = R.id.et_Reason)
     EditText et_Reason;
 
+    //添加审批人
+    @ViewInject(id = R.id.AddApprover, click = "forAddApprover")
+    RelativeLayout AddApprover;
+
+    //审批人
+    @ViewInject(id = R.id.tv_Requester)
+    TextView tv_Requester;
+
+
     //还款时间
-//    @ViewInject(id = R.id.et_Reason)
-//    EditText et_Reason;
+    //    @ViewInject(id = R.id.et_Reason)
+    //    EditText et_Reason;
 
     //常量
     public static final int POST_SUCCESS = 21;
@@ -100,7 +113,6 @@ public class LoanReimbursementActivity extends BaseActivity {
     }
 
     public void forCommit(View view) {
-        approvalID = "0280c9c5-870c-46cf-aa95-cdededc7d86c,88dd7959-cb2f-40c6-947a-4d6801fc4765";
         fee = et_Fee.getText().toString().trim();
         remark = et_Reason.getText().toString();
         Log.d("SJY", Type + "\n" + way + "\n" + Useage);
@@ -123,25 +135,10 @@ public class LoanReimbursementActivity extends BaseActivity {
             return;
         }
 
-//        if (TextUtils.isEmpty(accountNumber)) {
-//            PageUtil.DisplayToast("账号不能为空");
-//            return;
-//        }
-
-//        if (TextUtils.isEmpty(bankAccount)) {
-//            PageUtil.DisplayToast("开户行不能为空");
-//            return;
-//        }
-
-//        if (TextUtils.isEmpty(adminName)) {
-//            PageUtil.DisplayToast("户名不能为空");
-//            return;
-//        }
-
-//        if (TextUtils.isEmpty(planBackTime)) {
-//            PageUtil.DisplayToast("还款时间不能为空");
-//            return;
-//        }
+        if (TextUtils.isEmpty(approvalID)) {
+            PageUtil.DisplayToast("审批人不能为s空");
+            return;
+        }
 
 
         Loading.run(LoanReimbursementActivity.this, new Runnable() {
@@ -244,6 +241,48 @@ public class LoanReimbursementActivity extends BaseActivity {
             }
         });
         buidler.show();
+    }
+
+    /**
+     * 添加审批人
+     *
+     * @param view
+     */
+    public void forAddApprover(View view) {
+        myStartForResult(ContactsSelectActivity.class, 0);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0 && resultCode == 0)//通过请求码(去SActivity)和回传码（回传数据到第一个页面）判断回传的页面
+        {
+            data.getStringExtra("data");
+            List<ContactsEmployeeModel> list = (List<ContactsEmployeeModel>) data.getSerializableExtra("data");
+            Log.d("SJY", "返回数据=" + list.size());
+            StringBuilder name = new StringBuilder();
+            StringBuilder employeeId = new StringBuilder();
+            for (int i = 0; i < list.size(); i++) {
+                name.append(list.get(i).getsEmployeeName() + "  ");
+                employeeId.append(list.get(i).getsEmployeeID() + ",");
+            }
+            //            approvalID = "0280c9c5-870c-46cf-aa95-cdededc7d86c,88dd7959-cb2f-40c6-947a-4d6801fc4765";
+            approvalID = getApprovalID(employeeId.toString());
+            Log.d("SJY", "approvalID=" + approvalID);
+            tv_Requester.setText(name);
+        }
+
+    }
+
+    /*
+     *处理字符串，去除末尾逗号
+     */
+    private String getApprovalID(String str) {
+        if (str.length() > 1) {
+            return str.substring(0, str.length() - 1);
+        } else {
+            return "";
+        }
     }
 
     /**

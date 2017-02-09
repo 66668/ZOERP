@@ -2,9 +2,11 @@ package com.zhongou.view.examination;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -18,12 +20,13 @@ import com.zhongou.dialog.DateChooseWheelViewDialog;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
+import com.zhongou.model.ContactsEmployeeModel;
 import com.zhongou.utils.PageUtil;
+import com.zhongou.view.ContactsSelectActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -85,6 +88,15 @@ public class VehicleMaintainActivity extends BaseActivity {
     @ViewInject(id = R.id.et_reason)
     EditText et_reason;
 
+    //添加审批人
+    @ViewInject(id = R.id.AddApprover, click = "forAddApprover")
+    RelativeLayout AddApprover;
+
+    //审批人
+    @ViewInject(id = R.id.tv_Requester)
+    TextView tv_Requester;
+
+
     //常量
     public static final int POST_SUCCESS = 21;
     public static final int POST_FAILED = 22;
@@ -100,7 +112,6 @@ public class VehicleMaintainActivity extends BaseActivity {
     private String estimateFee = "";
     private String reason = "";
     private String maintenanceState = "";
-    private List<String> approvalIDList = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,7 +122,6 @@ public class VehicleMaintainActivity extends BaseActivity {
     }
 
     public void forCommit(View view) {
-        approvalID = "0280c9c5-870c-46cf-aa95-cdededc7d86c,88dd7959-cb2f-40c6-947a-4d6801fc4765";
         vehicleNumber = et_vihicleNumber.getText().toString().trim();
         maintenanceProject = et_MaintenanceProject.getText().toString();
         estimateFee = et_EstimateFee.getText().toString();
@@ -158,7 +168,10 @@ public class VehicleMaintainActivity extends BaseActivity {
             PageUtil.DisplayToast("维修费用不能为空");
             return;
         }
-
+        if (TextUtils.isEmpty(approvalID)) {
+            PageUtil.DisplayToast("审批人不能为空");
+            return;
+        }
         Loading.run(VehicleMaintainActivity.this, new Runnable() {
             @Override
             public void run() {
@@ -269,7 +282,47 @@ public class VehicleMaintainActivity extends BaseActivity {
         endDateChooseDialog.setDateDialogTitle("维修时间");
         endDateChooseDialog.showDateChooseDialog();
     }
+    /**
+     * 添加审批人
+     *
+     * @param view
+     */
+    public void forAddApprover(View view) {
+        myStartForResult(ContactsSelectActivity.class, 0);
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0 && resultCode == 0)//通过请求码(去SActivity)和回传码（回传数据到第一个页面）判断回传的页面
+        {
+            data.getStringExtra("data");
+            List<ContactsEmployeeModel> list = (List<ContactsEmployeeModel>) data.getSerializableExtra("data");
+            Log.d("SJY", "返回数据=" + list.size());
+            StringBuilder name = new StringBuilder();
+            StringBuilder employeeId = new StringBuilder();
+            for (int i = 0; i < list.size(); i++) {
+                name.append(list.get(i).getsEmployeeName() + "  ");
+                employeeId.append(list.get(i).getsEmployeeID() + ",");
+            }
+            //            approvalID = "0280c9c5-870c-46cf-aa95-cdededc7d86c,88dd7959-cb2f-40c6-947a-4d6801fc4765";
+            approvalID = getApprovalID(employeeId.toString());
+            Log.d("SJY", "approvalID=" + approvalID);
+            tv_Requester.setText(name);
+        }
+
+    }
+
+    /*
+     *处理字符串，去除末尾逗号
+     */
+    private String getApprovalID(String str) {
+        if (str.length() > 1) {
+            return str.substring(0, str.length() - 1);
+        } else {
+            return "";
+        }
+    }
     /**
      * back
      *

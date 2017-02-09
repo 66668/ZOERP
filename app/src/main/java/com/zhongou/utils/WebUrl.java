@@ -66,6 +66,21 @@ public class WebUrl {
         public static final String GETMYAPPROVALRECORD = LOGIN_URL + LOGIN_FLODER_USER + "Approval/GetApprovalSearchResults";
 
         /**
+         * 审批 同意/驳回
+         */
+        public static final String APPROVALE_AGREE_DISAGREE = LOGIN_URL + LOGIN_FLODER_USER + "Approval/ApprovalMyAppRecord";
+
+        /**
+         * 审批 转发
+         */
+        public static final String APPROVAL_TRANSFORTO = LOGIN_URL + LOGIN_FLODER_USER + "Approval/TurnMyApprovalRecord";
+
+        /**
+         * 审批 抄送
+         */
+        public static final String APPROVAL_COPYTO = LOGIN_URL + LOGIN_FLODER_USER + "Approval/CopyMyApprovalRecord";
+
+        /**
          * 获取 我的抄送 记录
          */
         public static final String GETCOPYLIST = LOGIN_URL + LOGIN_FLODER_USER + "Mycopy/MycopyList";
@@ -131,10 +146,16 @@ public class WebUrl {
           *  获取分公司所有部门员工信息接口
           */
         public static final String DEPTINFOBYSTOREID = LOGIN_URL + LOGIN_FLODER_USER + "Contacts/GetDeptInfoByStoreId";
+
         /*
           *  获取分公司所有部门员工信息接口
           */
         public static final String EMPLOYEEINFOBYDEPTID = LOGIN_URL + LOGIN_FLODER_USER + "Contacts/GetEmployeeInfoByDeptId";
+
+        /*
+          * 选择审批人
+          */
+        public static final String CONTACTSSELECTCO = LOGIN_URL + LOGIN_FLODER_USER + "GetApplication/GetApplicationByThisEmp";
 
     }
 

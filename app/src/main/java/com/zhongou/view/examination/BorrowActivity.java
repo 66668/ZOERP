@@ -2,9 +2,11 @@ package com.zhongou.view.examination;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -18,7 +20,9 @@ import com.zhongou.dialog.DateChooseWheelViewDialog;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
+import com.zhongou.model.ContactsEmployeeModel;
 import com.zhongou.utils.PageUtil;
+import com.zhongou.view.ContactsSelectActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -114,9 +118,10 @@ public class BorrowActivity extends BaseActivity {
     }
 
     public void forCommit(View view) {
-        approvalID = "0280c9c5-870c-46cf-aa95-cdededc7d86c,88dd7959-cb2f-40c6-947a-4d6801fc4765";
+//        approvalID = "0280c9c5-870c-46cf-aa95-cdededc7d86c,88dd7959-cb2f-40c6-947a-4d6801fc4765";
         BorrowThings = et_BorrowThings.getText().toString();
         reason = et_reason.getText().toString();
+
         if (TextUtils.isEmpty(BorrowThings)) {
             PageUtil.DisplayToast("借阅名称不能为空");
             return;
@@ -133,6 +138,11 @@ public class BorrowActivity extends BaseActivity {
             PageUtil.DisplayToast("借阅说明不能为空");
             return;
         }
+        if (TextUtils.isEmpty(approvalID)) {
+            PageUtil.DisplayToast("审批人不能为空");
+            return;
+        }
+
         Loading.run(BorrowActivity.this, new Runnable() {
             @Override
             public void run() {
@@ -236,15 +246,47 @@ public class BorrowActivity extends BaseActivity {
         endDateChooseDialog.showDateChooseDialog();
     }
 
-    /**
+     /**
      * 添加审批人
      *
      * @param view
      */
     public void forAddApprover(View view) {
-//        myStartForResult(ContactsActivity.class,);
+        myStartForResult(ContactsSelectActivity.class,0);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==0&&resultCode==0)//通过请求码(去SActivity)和回传码（回传数据到第一个页面）判断回传的页面
+        {
+            data.getStringExtra("data");
+            List<ContactsEmployeeModel> list = (List<ContactsEmployeeModel>) data.getSerializableExtra("data");
+            Log.d("SJY", "返回数据=" + list.size());
+            StringBuilder name = new StringBuilder();
+            StringBuilder employeeId = new StringBuilder();
+            for(int i = 0;i<list.size();i++){
+                name.append(list.get(i).getsEmployeeName()+"  ");
+                employeeId.append(list.get(i).getsEmployeeID()+",");
+            }
+//            approvalID = "0280c9c5-870c-46cf-aa95-cdededc7d86c,88dd7959-cb2f-40c6-947a-4d6801fc4765";
+            approvalID = getApprovalID(employeeId.toString());
+            Log.d("SJY", "approvalID=" + approvalID);
+            tv_Requester.setText(name);
+        }
+
+    }
+
+    /*
+     *处理字符串，去除末尾逗号
+     */
+    private String getApprovalID(String str){
+        if(str.length()>1){
+            return str.substring(0, str.length() - 1);
+        }else{
+            return "";
+        }
+    }
     /**
      * back
      *

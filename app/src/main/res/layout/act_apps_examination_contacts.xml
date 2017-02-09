@@ -4,18 +4,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 <!--选择审批人的通讯录 -->
-    <com.zhongou.widget.SearchEditText
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:id="@+id/filter_edit"
-        android:layout_marginTop="5dip"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/et_style"
-        android:drawableLeft="@mipmap/search_bar_icon_normal"
-        android:hint="请输入关键字"
-        android:maxLines="1"
-        android:textSize="15.0dip" />
+    <include layout="@layout/topbar_common_itt"/>
     <FrameLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >

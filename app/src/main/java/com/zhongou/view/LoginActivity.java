@@ -118,7 +118,8 @@ public class LoginActivity extends BaseActivity {
         storeId = et_storeId.getText().toString().trim();
         workId = et_workId.getText().toString().trim();
         password = et_password.getText().toString().trim();
-//        clientId = MyApplication.getInstance().getClientID();//个推设备号
+        clientId = MyApplication.getInstance().getClientID();//个推设备号
+        Log.d("SJY", "clientId="+clientId);
         Loading.run(this, new Runnable() {
 
             @Override

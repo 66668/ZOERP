@@ -12,6 +12,7 @@ import com.zhongou.common.HttpResult;
 import com.zhongou.common.MyException;
 import com.zhongou.common.NetworkManager;
 import com.zhongou.db.entity.UserEntity;
+import com.zhongou.model.ApprovalSModel;
 import com.zhongou.model.ContactsDeptModel;
 import com.zhongou.model.ContactsEmployeeModel;
 import com.zhongou.model.ContactsSonCOModel;
@@ -1813,6 +1814,7 @@ public class UserHelper<T> {
             throw new MyException(e.getMessage());
         }
     }
+
     /**
      * 审批 领用详情 07-15
      */
@@ -1954,6 +1956,99 @@ public class UserHelper<T> {
         }
     }
 
+
+    /**
+     * 审批--同意/驳回
+     * @param context
+     * @param sApprovalid
+     * @param sComment
+     * @param sIsend
+     * @param sApplicationid
+     * @param sYesorno
+     * @return
+     * @throws MyException
+     */
+
+    public static String agreeOrDisAgreeMyApproval(  Context context, String  sApprovalid, String  sComment, String  sIsend ,String sApplicationid,   String sYesorno ) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+        try {
+            Log.d("SJY", mCurrentUser.getEmployeeID());
+            HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.APPROVALE_AGREE_DISAGREE,
+                    HttpParameter.create()
+                            .add("sApprovalid", sApprovalid)
+                            .add("sComment", sComment)
+                            .add("sIsend", sIsend)
+                            .add("sApplicationid", sApplicationid)
+                            .add("sYesorno", sYesorno));
+
+            if (hr.hasError()) {
+                throw hr.getError();
+            }
+
+            return hr.Message;
+        } catch (MyException e) {
+            throw new MyException(e.getMessage());
+        }
+    }
+
+    /**
+     * 审批-转发
+     *
+     * @param context
+     * @return
+     * @throws MyException
+     */
+    public static String transfortoMyApproval(Context context, ApprovalSModel model) throws MyException {
+
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+        String toJsondata = new Gson().toJson(model);
+        try {
+            Log.d("SJY", mCurrentUser.getEmployeeID());
+            HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.APPROVAL_TRANSFORTO,
+                    HttpParameter.create().add("obj", toJsondata));
+
+            if (hr.hasError()) {
+                throw hr.getError();
+            }
+
+            return hr.Message;
+        } catch (MyException e) {
+            throw new MyException(e.getMessage());
+        }
+    }
+
+    /**
+     * 审批-抄送
+     *
+     * @param context
+     * @return
+     * @throws MyException
+     */
+    public static String CopyToMyApproval(Context context, ApprovalSModel model) throws MyException {
+
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+        String toJsondata = new Gson().toJson(model);
+        try {
+            Log.d("SJY", mCurrentUser.getEmployeeID());
+            HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.APPROVAL_COPYTO,
+                    HttpParameter.create().add("obj", toJsondata));
+
+            if (hr.hasError()) {
+                throw hr.getError();
+            }
+
+            return hr.Message;
+        } catch (MyException e) {
+            throw new MyException(e.getMessage());
+        }
+    }
+
     /**
      * 通讯录01
      * <p>
@@ -1981,6 +2076,8 @@ public class UserHelper<T> {
         }
 
     }
+
+
 
     /**
      * 通讯录02
@@ -2040,11 +2137,36 @@ public class UserHelper<T> {
             throw new MyException(e.getMessage());
         }
     }
+    /**
+     * 选择审批人01
+     * <p>
+     * 获取级别权限的所有联系人
+     */
+    public static List<ContactsEmployeeModel> getContactsSelectCo(Context context) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+
+        try {
+            HttpResult httpResult = APIUtils.postForObject(WebUrl.ContactsManager.CONTACTSSELECTCO,
+                    HttpParameter.create().
+                            add("sEmployeeID", getCurrentUser().getEmployeeID()));
+
+            if (httpResult.hasError()) {
+                throw httpResult.getError();
+            }
+            Log.d("HTTP", httpResult.jsonArray.toString());
+
+            return (new Gson()).fromJson(httpResult.jsonArray.toString(), new TypeToken<List<ContactsEmployeeModel>>() {
+            }.getType());
+        } catch (MyException e) {
+            throw new MyException(e.getMessage());
+        }
+
+    }
 
     /**
-     * 通讯录03
-     * <p>
-     * 获取部门 员工信息接口
+     * 修改密码
      * <p>
      * post
      */
