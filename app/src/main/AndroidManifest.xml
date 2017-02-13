@@ -11,9 +11,9 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <!--用于提高GPS定位速度-->
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
-    <!--写入扩展存储，向扩展卡写入数据，用于写入缓存定位数据-->
+
+    <!--读写权限-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <!--读取缓存数据-->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <!--用于读取手机当前的状态-->
@@ -24,7 +24,7 @@
 
     <!-- 拨打电话权限 -->
     <uses-permission android:name="android.permission.CALL_PHONE"/>
-    <!--<uses-permission android:name="android.permission.READ_PHONE_STATE"/> &lt;!&ndash; 否则不能监听每个状态 &ndash;&gt;-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/> <!-- 否则不能监听每个状态 -->
 
     <!--  发送消息-->
     <uses-permission android:name="android.permission.SEND_SMS"/>
@@ -110,9 +110,25 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!-- 审批-抄送04-->
+        <!-- 审批-抄送04 公司-子公司-->
         <activity
-            android:name="com.zhongou.view.examination.approvaldetail.CommonCopytoActivity"
+            android:name="com.zhongou.view.examination.approvaldetail.CommonCopytoCoActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 审批-抄送04 子公司-部门-->
+        <activity
+            android:name="com.zhongou.view.examination.approvaldetail.CommonCopytoDeptActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 审批-抄送04 部门-联系人-->
+        <activity
+            android:name="com.zhongou.view.examination.approvaldetail.CommonCopytoEplActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">

@@ -1,9 +1,6 @@
 package com.zhongou.db.entity;
 
 
-import com.zhongou.db.ColumnInfo;
-import com.zhongou.db.TableInfo;
-
 /**
  * 数据存储
  */

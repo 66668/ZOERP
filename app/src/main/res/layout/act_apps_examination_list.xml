@@ -4,11 +4,14 @@
               android:layout_height="match_parent"
               android:background="@color/common_bg_examination"
               android:orientation="vertical">
-    <include layout="@layout/topbar_common_itt"
-             android:id="@+id/topbar"/>
+
+    <include
+        android:id="@+id/topbar"
+        layout="@layout/topbar_common_itt"/>
+
     <com.zhongou.widget.RefreshListView
         android:id="@+id/myapprovalList"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

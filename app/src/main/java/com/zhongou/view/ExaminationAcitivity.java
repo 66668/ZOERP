@@ -4,11 +4,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.zhongou.R;
 import com.zhongou.base.BaseActivity;
 import com.zhongou.inject.ViewInject;
-import com.zhongou.utils.PageUtil;
 import com.zhongou.view.examination.BorrowActivity;
 import com.zhongou.view.examination.DimissionActivity;
 import com.zhongou.view.examination.LeaveActivity;
@@ -29,9 +29,17 @@ import com.zhongou.view.examination.ZOCopyListActivity;
  */
 
 public class ExaminationAcitivity extends BaseActivity {
+    //back
+    @ViewInject(id = R.id.layout_back, click = "forBack")
+    RelativeLayout layout_back;
+
     //
-    @ViewInject(id = R.id.imgBack, click = "forBack")
-    RelativeLayout imgBack;
+    @ViewInject(id = R.id.tv_title)
+    TextView tv_title;
+
+    //
+    @ViewInject(id = R.id.tv_right)
+    TextView tv_right;
 
     //我的申请
     @ViewInject(id = R.id.btn_MyApplication, click = "myApplication")
@@ -85,14 +93,14 @@ public class ExaminationAcitivity extends BaseActivity {
     @ViewInject(id = R.id.btn_LoanReimbursement, click = "forLoanReimbursement")
     LinearLayout btn_LoanReimbursement;
 
-    //11交车
-    @ViewInject(id = R.id.btn_vehicleReturn, click = "forVehicleReturn")
-    LinearLayout btn_vehicleReturn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_apps_examination);
+        tv_title.setText(getResources().getString(R.string.examination));
+        tv_right.setText("");
+
     }
 
     /**
@@ -214,15 +222,6 @@ public class ExaminationAcitivity extends BaseActivity {
         startActivity(LoanReimbursementActivity.class);
     }
 
-    /**
-     * 11交车
-     *
-     * @param view
-     */
-    public void forVehicleReturn(View view) {
-        PageUtil.DisplayToast("没实现！");
-//        startActivity(LoanReimbursementActivity.class);
-    }
 
 
     /**

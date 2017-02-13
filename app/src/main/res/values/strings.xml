@@ -106,6 +106,9 @@
     <string name="examination_requester">审批人</string>
     <string name="examination_requester_sure">确定</string>
     <string name="examination_copyto_time">抄送时间</string>
+    <string name="examination_copyto_SonOfCO">子公司</string>
+    <string name="examination_copyto_dept">部门</string>
+
     <string name="jobs">招聘</string>
     <string name="jobsleave">离职</string>
     <string name="forLeave">请假</string>

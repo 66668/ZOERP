@@ -13,29 +13,42 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingBottom="4dip"
+        android:weightSum="3"
         tools:ignore="UselessParent">
 
         <RadioButton
             android:id="@+id/btn_message"
             style="@style/bottom_menu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:checked="true"
             android:drawablePadding="4dp"
             android:drawableTop="@drawable/btn_menu_notify_select"
+            android:gravity="center"
             android:text="@string/txt_message"
             />
 
         <RadioButton
             android:id="@+id/btn_app"
             style="@style/bottom_menu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:drawablePadding="4dp"
             android:drawableTop="@drawable/btn_menu_app_select"
+            android:gravity="center"
             android:text="@string/txt_app"/>
 
         <RadioButton
             android:id="@+id/btn_contract"
             style="@style/bottom_menu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:drawablePadding="4dp"
             android:drawableTop="@drawable/btn_menu_contracts_select"
+            android:gravity="center"
             android:text="@string/txt_contract"/>
     </RadioGroup>
 

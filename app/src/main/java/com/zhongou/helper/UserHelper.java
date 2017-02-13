@@ -1958,7 +1958,7 @@ public class UserHelper<T> {
 
 
     /**
-     * 审批--同意/驳回
+     * 审批--同意/驳回接口
      * @param context
      * @param sApprovalid
      * @param sComment
@@ -1994,7 +1994,7 @@ public class UserHelper<T> {
     }
 
     /**
-     * 审批-转发
+     * 审批-转发接口
      *
      * @param context
      * @return
@@ -2022,7 +2022,7 @@ public class UserHelper<T> {
     }
 
     /**
-     * 审批-抄送
+     * 审批-抄送接口
      *
      * @param context
      * @return
@@ -2048,6 +2048,7 @@ public class UserHelper<T> {
             throw new MyException(e.getMessage());
         }
     }
+
 
     /**
      * 通讯录01
@@ -2137,8 +2138,9 @@ public class UserHelper<T> {
             throw new MyException(e.getMessage());
         }
     }
+
     /**
-     * 选择审批人01
+     *  通讯录 审批-选择审批人/转交
      * <p>
      * 获取级别权限的所有联系人
      */

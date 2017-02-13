@@ -73,7 +73,8 @@ public class CommonTransfertoActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_apps_examination_myapproval_transferto);
+        setContentView(R.layout.act_apps_examination_myapproval_common_contacts);
+
         tv_title.setText(getResources().getString(R.string.examination_transfer));
         tv_right.setText(getResources().getString(R.string.examination_requester_sure));
 

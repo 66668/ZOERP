@@ -53,7 +53,7 @@ public class ContactsSortAdapter extends BaseAdapter implements SectionIndexer{
 			viewHolder = new ViewHolder();
 			view = LayoutInflater.from(mContext).inflate(R.layout.item_contacts, null);
 			viewHolder.tvTitle = (TextView) view.findViewById(R.id.tv_name);
-			viewHolder.tvLetter = (TextView) view.findViewById(R.id.catalog);
+			viewHolder.tvLetter = (TextView) view.findViewById(R.id.tv_letter);
 			view.setTag(viewHolder);
 		} else {
 			viewHolder = (ViewHolder) view.getTag();

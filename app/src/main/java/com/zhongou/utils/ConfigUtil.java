@@ -15,7 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 中断保存设置
+ *
+ * SharedPreferences数据保存
+ *
+ * 程序所有存储类
+ *
  * gson包
  * @author JackSong
  *
@@ -101,7 +105,7 @@ public class ConfigUtil {
 	//保存对象，转换成js格式保存，需要调用外部jar包
 	//CreateUserActivity--UserHelper--ConfigUtil该方法
 	public void setUserEntity(UserEntity userEntity) {
-		editor.putString(USERENTITY, userEntity.toJSON().toString());//"USERENTITY"
+		editor.putString(USERENTITY, userEntity.toJSON().toString());//
 		editor.commit();
 	}
 
@@ -175,7 +179,7 @@ public class ConfigUtil {
 	}
 
 
-	//保存通讯录数据 审批-申请 选择审批人调用
+	//保存通讯录数据 审批-申请 选择审批人/转交 调用
 	public void setContactApproverData(List<ContactsEmployeeModel> datalist){
 
 		if (null == datalist || datalist.size() <= 0){

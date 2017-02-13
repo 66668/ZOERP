@@ -1,4 +1,4 @@
-package com.zhongou.db;
+package com.zhongou.db.entity;
 
 
 import java.io.Serializable;

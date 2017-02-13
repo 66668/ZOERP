@@ -37,7 +37,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * 子公司部门通讯录
+ * 子公司-部门通讯录
  * Created by sjy on 2017/1/14.
  */
 
@@ -59,7 +59,8 @@ public class ContactsDeptOfSonActivity extends BaseActivity {
     private ContactsSortAdapter adapter;
     private SearchEditText searchEditText;
 
-    private static List<ContactsDeptModel> listDeptData;
+    private static List<ContactsDeptModel> listDeptData;//部门集合
+
     private static List<ContactsEmployeeModel> ListEmployeeData;//最终解析数据list
 
     /**
@@ -79,13 +80,14 @@ public class ContactsDeptOfSonActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_contacts_dept);
+        setContentView(R.layout.act_contacts_2);
         tv_title.setText(getResources().getString(R.string.txt_contract));
         tv_right.setText("");
 
         Intent intent = getIntent();
         String sStoreID = intent.getStringExtra("sStoreID");
         Log.d("SJY", "sStoreID=" + sStoreID);
+
         initMyView();
         initListener();
 
@@ -131,8 +133,11 @@ public class ContactsDeptOfSonActivity extends BaseActivity {
 
                 //页面跳转
                 if (newPosition < 0) {
+
+                    int listDataPostion = newPosition + listDeptData.size();//listDeptData修正后的位置
+
                     Intent intent = new Intent(ContactsDeptOfSonActivity.this, ContactsEplOfDeptActivity.class);
-                    intent.putExtra("sDeptID", listDeptData.get(position).getsDeptID());
+                    intent.putExtra("sDeptID", listDeptData.get(listDataPostion).getsDeptID());//position
                     startActivity(intent);
                 } else {
                     Intent intent2 = new Intent(ContactsDeptOfSonActivity.this, ContactsEplDetailActivity.class);
@@ -188,14 +193,15 @@ public class ContactsDeptOfSonActivity extends BaseActivity {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-                case POST_SONCO_SUCCESS:// 1001
-                    //数据处理
+                case POST_SONCO_SUCCESS://服务端数据处理
+
                     listDeptData = (List<ContactsDeptModel>) msg.obj;
 
                     List<ContactsEmployeeModel> listEmpl = new ArrayList<ContactsEmployeeModel>();
                     for (int i = 0; i < listDeptData.size(); i++) {
                         listEmpl.addAll(listDeptData.get(i).getObj());
                     }
+
                     //为数据添加首字母
                     ListEmployeeData = filledData(listEmpl);
                     // 根据a-z进行排序源数据
@@ -203,20 +209,8 @@ public class ContactsDeptOfSonActivity extends BaseActivity {
                     adapter = new ContactsSortAdapter(ContactsDeptOfSonActivity.this, ListEmployeeData);
 
                     //为listView添加动态headerView
-                    LayoutInflater inflator = (LayoutInflater) ContactsDeptOfSonActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    for (int j = 0; j < listDeptData.size(); j++) {
-                        //实例化控件
-                        LinearLayout hearView = (LinearLayout) inflator.inflate(R.layout.item_contacts_header_dept, null);
-                        //消除hederView中 公司
-                        if (j > 0) {
-                            TextView tv_letter = (TextView) hearView.findViewById(R.id.tv_letter);
-                            tv_letter.setVisibility(View.GONE);
-                        }
-                        TextView tv_SonOfCo = (TextView) hearView.findViewById(R.id.tv_name);
-                        tv_SonOfCo.setText(listDeptData.get(j).getsDeptName());
+                    addHeadView(listDeptData);
 
-                        contactsListView.addHeaderView(hearView);
-                    }
                     contactsListView.setAdapter(adapter);
 
                     break;
@@ -226,6 +220,28 @@ public class ContactsDeptOfSonActivity extends BaseActivity {
             }
         }
     };
+
+    private void addHeadView(List<ContactsDeptModel> listData) {
+
+        LayoutInflater inflator = (LayoutInflater) ContactsDeptOfSonActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        for (int j = 0; j < listData.size(); j++) {
+            //实例化控件
+            LinearLayout headView = (LinearLayout) inflator.inflate(R.layout.item_contacts, null);
+            //消除hederView中 公司
+            if (j > 0) {
+                TextView tv_letter = (TextView) headView.findViewById(R.id.tv_letter);
+                tv_letter.setVisibility(View.GONE);
+            }
+            //展示界面
+            TextView tv_Letter = (TextView) headView.findViewById(R.id.tv_letter);
+            tv_Letter.setText(getResources().getString(R.string.examination_copyto_dept));
+
+            TextView tv_SonOfCo = (TextView) headView.findViewById(R.id.tv_name);
+            tv_SonOfCo.setText(listData.get(j).getsDeptName());
+
+            contactsListView.addHeaderView(headView);
+        }
+    }
 
     /**
      * 重新修改model,为ListView填充首字母数据

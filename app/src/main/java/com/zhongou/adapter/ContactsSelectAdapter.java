@@ -70,7 +70,7 @@ public class ContactsSelectAdapter extends BaseAdapter implements SectionIndexer
 			//导入布局
 			convertView = LayoutInflater.from(mContext).inflate(R.layout.item_contacts_select, null);
 			viewHolder.tvTitle = (TextView) convertView.findViewById(R.id.tv_name);
-			viewHolder.tvLetter = (TextView) convertView.findViewById(R.id.catalog);
+			viewHolder.tvLetter = (TextView) convertView.findViewById(R.id.tv_letter);
 			viewHolder.selectCheck = (CheckBox) convertView.findViewById(R.id.checkbox);
 			convertView.setTag(viewHolder);//设置view标签
 		} else {

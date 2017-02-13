@@ -73,7 +73,7 @@ public class ContactsEplOfDeptActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_contacts_dept);
+        setContentView(R.layout.act_contacts_2);
 
         tv_title.setText(getResources().getString(R.string.txt_contract));
         tv_right.setText("");

@@ -62,7 +62,7 @@ public class ZOAplListActivity extends BaseActivity implements RefreshListView.I
     TextView tv_right;
 
     //list
-    @ViewInject(id = R.id.myList)
+    @ViewInject(id = R.id.myapprovalList)
     RefreshListView myListView;
 
     private MyApplicationListAdapter vAdapter;//记录适配
@@ -81,7 +81,7 @@ public class ZOAplListActivity extends BaseActivity implements RefreshListView.I
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_apps_exa_myapplication);
+        setContentView(R.layout.act_apps_examination_list);
         tv_right.setText("");
         tv_title.setText(getResources().getString(R.string.my_application));
 

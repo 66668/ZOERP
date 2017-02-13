@@ -79,7 +79,7 @@ public class ZOCopyListActivity extends BaseActivity implements RefreshListView.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_apps_exa_mycopy);
+        setContentView(R.layout.act_apps_examination_list);
         tv_right.setText("");
         tv_title.setText(getResources().getString(R.string.MyCopyto));
 

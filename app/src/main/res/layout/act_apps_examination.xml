@@ -13,38 +13,7 @@
         android:background="@color/common_topbar_bgcolor"
         android:orientation="vertical">
 
-        <RelativeLayout
-            android:id="@+id/layout_topbar"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            >
-            <RelativeLayout
-                android:id="@+id/imgBack"
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:gravity="center"
-                android:layout_marginLeft="10dp">
-                <ImageView
-
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@mipmap/topbar_back"/>
-            </RelativeLayout>
-
-
-            <TextView
-                android:id="@+id/tv_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:text="@string/examination"
-                android:textColor="#FFF"
-                android:textSize="@dimen/common_topbar_titleSize"/>
-        </RelativeLayout>
-
+        <include layout="@layout/topbar_common_itt"/>
 
         <LinearLayout
             android:id="@+id/layout_subTop"
@@ -498,38 +467,12 @@
                         android:textColor="#626262"/>
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/btn_vehicleReturn"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.25"
-                    android:clickable="true"
-                    android:gravity="center"
-                    android:onClick="btnPathClick"
-                    android:orientation="vertical"
-                    android:weightSum="1">
-
-                    <ImageView
-                        android:layout_width="54dp"
-                        android:layout_height="54dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:adjustViewBounds="true"
-                        android:src="@mipmap/vehiclereturn"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="@string/returnCar"
-                        android:textColor="#626262"/>
-                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/btnManageUser"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.25"
+                    android:layout_weight="0.5"
                     android:clickable="true"
                     android:gravity="center"
                     android:onClick="btnManageUserClick"

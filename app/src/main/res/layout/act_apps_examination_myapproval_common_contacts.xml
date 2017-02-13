@@ -9,20 +9,23 @@
     <include
         android:id="@+id/topbar"
         layout="@layout/topbar_common_itt"/>
+
     <FrameLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="fill_parent">
+
         <ListView
             android:id="@+id/country_lvcountry"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_gravity="center"
-            android:divider="@null" />
+            android:divider="@null"/>
 
         <com.zhongou.widget.SideBar
             android:id="@+id/sidrbar"
             android:layout_width="30.0dip"
             android:layout_height="fill_parent"
-            android:layout_gravity="right|center" />
+            android:layout_gravity="right|center"
+            android:visibility="invisible"/>
     </FrameLayout>
 </LinearLayout>

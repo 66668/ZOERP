@@ -225,12 +225,14 @@ public class ContactsFragment extends BaseFragment {
             switch (msg.what) {
                 case POST_SONCO_SUCCESS:// 1001
                     //数据处理
+
                     listSonCoData = (List<ContactsSonCOModel>) msg.obj;
 
                     List<ContactsEmployeeModel> listEmpl = new ArrayList<ContactsEmployeeModel>();
                     for (int i = 0; i < listSonCoData.size(); i++) {
                         listEmpl.addAll(listSonCoData.get(i).getObj());
                     }
+
                     //为数据添加首字母
                     ListEmployeeData = filledData(listEmpl);
                     // 根据a-z进行排序源数据
@@ -238,20 +240,8 @@ public class ContactsFragment extends BaseFragment {
                     adapter = new ContactsSortAdapter(getActivity(), ListEmployeeData);
 
                     //为listView添加动态headerView
-                    LayoutInflater inflator = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    for (int j = 0; j < listSonCoData.size(); j++) {
-                        //实例化控件
-                        LinearLayout hearView = (LinearLayout) inflator.inflate(R.layout.item_contacts_header_son, null);
-                        //消除hederView中 公司
-                        if (j > 0) {
-                            TextView tv_letter = (TextView) hearView.findViewById(R.id.tv_letter);
-                            tv_letter.setVisibility(View.GONE);
-                        }
-                        TextView tv_SonOfCo = (TextView) hearView.findViewById(R.id.tv_name);
-                        tv_SonOfCo.setText(listSonCoData.get(j).getsStoreName());
-                        contactsListView.addHeaderView(hearView);
-                    }
-                    //                    contactsListView.addHeaderView();
+                    addHeadView(listSonCoData);
+
                     contactsListView.setAdapter(adapter);
 
                     break;
@@ -261,6 +251,28 @@ public class ContactsFragment extends BaseFragment {
             }
         }
     };
+
+    //
+    private void addHeadView(List<ContactsSonCOModel> listData) {
+        LayoutInflater inflator = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        for (int j = 0; j < listData.size(); j++) {
+            //实例化控件
+            LinearLayout hearView = (LinearLayout) inflator.inflate(R.layout.item_contacts, null);
+            //消除hederView中 公司
+            if (j > 0) {
+                TextView tv_letter = (TextView) hearView.findViewById(R.id.tv_letter);
+                tv_letter.setVisibility(View.GONE);
+            }
+
+            //界面展示
+            TextView tv_letter = (TextView) hearView.findViewById(R.id.tv_letter);
+            tv_letter.setText(getResources().getString(R.string.examination_copyto_SonOfCO));
+
+            TextView tv_SonOfCo = (TextView) hearView.findViewById(R.id.tv_name);
+            tv_SonOfCo.setText(listData.get(j).getsStoreName());
+            contactsListView.addHeaderView(hearView);
+        }
+    }
 
     /**
      * 重新修改model,为ListView填充首字母数据

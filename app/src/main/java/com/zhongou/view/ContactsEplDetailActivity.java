@@ -5,7 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zhongou.R;
@@ -21,16 +21,9 @@ import com.zhongou.model.ContactsEmployeeModel;
 public class ContactsEplDetailActivity extends BaseActivity {
 
     //back
-    @ViewInject(id = R.id.layout_back, click = "forBack")
-    RelativeLayout layout_back;
+    @ViewInject(id = R.id.imgBack, click = "forBack")
+    ImageView imgBack;
 
-    //
-    @ViewInject(id = R.id.tv_title)
-    TextView tv_title;
-
-    //
-    @ViewInject(id = R.id.tv_right)
-    TextView tv_right;
 
     //姓名
     @ViewInject(id = R.id.tv_name)
@@ -39,6 +32,9 @@ public class ContactsEplDetailActivity extends BaseActivity {
     //拨打手机
     @ViewInject(id = R.id.img_phone, click = "forPhone")
     ImageView img_phone;
+
+    @ViewInject(id = R.id.layout_phone, click = "forPhone")
+    LinearLayout layout_phone;
 
     //发短信
     @ViewInject(id = R.id.img_message, click = "forMessage")
@@ -67,8 +63,7 @@ public class ContactsEplDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_contacts_employee_d);
-        tv_title.setText("");
-        tv_right.setText("");
+
 
         //获取跳转值
         Intent intent = getIntent();

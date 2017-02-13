@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/common_bg_examination"
+              android:orientation="vertical">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/myviewpager"
         android:layout_width="match_parent"
-        android:paddingTop="15dip"
         android:layout_height="0dp"
-        android:layout_weight="0.68"
         android:layout_gravity="center"
-        android:background="@color/white"
+        android:layout_weight="0.68"
+        android:background="@color/common_bg_examination"
+        android:paddingTop="15dip"
         android:scaleType="fitXY"
         />
-    <com.viewpagerindicator.LinePageIndicator
-        android:id="@+id/indicator"
-        android:layout_width="fill_parent"
-        android:layout_height="10dp"
-        android:background="@color/white"
-        android:padding="5dip" />
+    <!--跟随顶部bar显示的选中横条-->
+    <!--<com.viewpagerindicator.LinePageIndicator-->
+    <!--android:id="@+id/indicator"-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="10dp"-->
+    <!--android:background="@color/white"-->
+    <!--android:padding="5dip" />-->
 </LinearLayout>

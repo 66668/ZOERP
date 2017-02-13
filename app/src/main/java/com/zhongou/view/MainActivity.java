@@ -284,7 +284,7 @@ public class MainActivity extends BaseActivity {
                     case R.id.nav_menu_feedback:
                         startActivity(FeedbackActivity.class);
                         break;
-                    case R.id.nav_menu_quit:
+                    case R.id.nav_menu_quit://程序退出
                         //                        Intent intent = new Intent();
                         //                        intent.setAction(EXIT_APP_ACTION);
                         //                        sendBroadcast(intent);//发送退出的广播
@@ -294,10 +294,11 @@ public class MainActivity extends BaseActivity {
                         PushManager.getInstance().stopService(MainActivity.this.getApplicationContext());
                         GetuiReceiver.payloadData.delete(0, GetuiReceiver.payloadData.length());
 
-
+                        //数据清除
                         ConfigUtil config = new ConfigUtil(MainActivity.this);
                         config.setAutoLogin(false);//存储自动登录修改
                         config.setContactApproverData(null);//清空审批人通讯录数据，以防登录人更换后数据每更换导致出错
+                        //sqlite数据清除处理
 
                         //修改自动登录的判断
                         MyApplication.getInstance().setIsLogin(false);

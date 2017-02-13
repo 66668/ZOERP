@@ -206,7 +206,7 @@ public class TakeDaysOffDetailApvlActivity extends BaseActivity {
     public void forCopyto(View view){
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonCopytoActivity.class, bundle);
+        startActivity(CommonCopytoCoActivity.class, bundle);
     }
     /**
      * back
