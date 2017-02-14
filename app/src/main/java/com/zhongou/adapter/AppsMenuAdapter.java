@@ -26,6 +26,7 @@ import com.zhongou.view.NotificationAcitivity;
 import com.zhongou.view.PerformanceManagerActivity;
 import com.zhongou.view.ProcueRecordActivity;
 import com.zhongou.view.ScheduleActivity;
+import com.zhongou.view.VehicleReturnActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -120,9 +121,8 @@ public class AppsMenuAdapter extends BaseAdapter {
                         mContext.startActivity(intent7);
                         break;
                     case 8://交车
-                        PageUtil.DisplayToast("未实现");
-//                        Intent intent8 = new Intent(mContext, ProcueRecordActivity.class);//
-//                        mContext.startActivity(intent8);
+                        Intent intent8 = new Intent(mContext, VehicleReturnActivity.class);//
+                        mContext.startActivity(intent8);
                         break;
                 }
 

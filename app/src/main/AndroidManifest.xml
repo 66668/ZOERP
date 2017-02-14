@@ -51,9 +51,9 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
-            <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN"/>
 
-            <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
@@ -64,9 +64,9 @@
             android:screenOrientation="portrait"
             android:theme="@style/Anim_style2">
             <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN"/>-->
+            <!--<action android:name="android.intent.action.MAIN"/>-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+            <!--<category android:name="android.intent.category.LAUNCHER"/>-->
             <!--</intent-filter>-->
         </activity>
 
@@ -78,7 +78,14 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!-- 我的审批-->
+        <!-- 01-01 我的申请-->
+        <activity
+            android:name="com.zhongou.view.examination.ZOAplListActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <!-- 01-02 我的审批-->
         <activity
             android:name="com.zhongou.view.examination.ZOApvlListActivity"
             android:label="@string/app_name"
@@ -86,7 +93,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!-- 审批-驳回01-->
+        <!-- 01-02 审批-驳回01-->
         <activity
             android:name="com.zhongou.view.examination.approvaldetail.CommonDisagreeActivity"
             android:label="@string/app_name"
@@ -94,7 +101,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!-- 审批-批准02-->
+        <!--01-02 审批-批准02-->
         <activity
             android:name="com.zhongou.view.examination.approvaldetail.CommonAgreeActivity"
             android:label="@string/app_name"
@@ -102,7 +109,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!-- 审批-转交03-->
+        <!--01-02 审批-转交03-->
         <activity
             android:name="com.zhongou.view.examination.approvaldetail.CommonTransfertoActivity"
             android:label="@string/app_name"
@@ -110,7 +117,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!-- 审批-抄送04 公司-子公司-->
+        <!--01-02 审批-抄送04 公司-子公司-->
         <activity
             android:name="com.zhongou.view.examination.approvaldetail.CommonCopytoCoActivity"
             android:label="@string/app_name"
@@ -118,7 +125,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!-- 审批-抄送04 子公司-部门-->
+        <!--01-02 审批-抄送04 子公司-部门-->
         <activity
             android:name="com.zhongou.view.examination.approvaldetail.CommonCopytoDeptActivity"
             android:label="@string/app_name"
@@ -126,7 +133,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!-- 审批-抄送04 部门-联系人-->
+        <!--01-02 审批-抄送04 部门-联系人-->
         <activity
             android:name="com.zhongou.view.examination.approvaldetail.CommonCopytoEplActivity"
             android:label="@string/app_name"
@@ -134,15 +141,9 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!-- 我的申请-->
-        <activity
-            android:name="com.zhongou.view.examination.ZOAplListActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
 
-        <!-- 我的抄送-->
+
+        <!-- 01-03我的抄送-->
         <activity
             android:name="com.zhongou.view.examination.ZOCopyListActivity"
             android:label="@string/app_name"
@@ -151,7 +152,7 @@
         </activity>
 
 
-        <!-- 招聘01-->
+        <!-- 01 招聘01-->
         <activity
             android:name="com.zhongou.view.examination.RecruitmentActivity"
             android:label="@string/app_name"
@@ -178,7 +179,7 @@
         </activity>
 
 
-        <!-- 辞职02-->
+        <!--01 辞职02-->
         <activity
             android:name="com.zhongou.view.examination.DimissionActivity"
             android:screenOrientation="portrait"
@@ -204,7 +205,7 @@
         </activity>
 
 
-        <!-- 请假03-->
+        <!-- 01 请假03-->
         <activity
             android:name="com.zhongou.view.examination.LeaveActivity"
             android:label="@string/app_name"
@@ -231,7 +232,7 @@
         </activity>
 
 
-        <!-- 加班04-->
+        <!--01 加班04-->
         <activity
             android:name="com.zhongou.view.examination.WorkOverTimeActivity"
             android:label="@string/app_name"
@@ -258,7 +259,7 @@
         </activity>
 
 
-        <!-- 调休05-->
+        <!--01 调休05-->
         <activity
             android:name="com.zhongou.view.examination.TakeDaysOffActivity"
             android:label="@string/app_name"
@@ -285,7 +286,7 @@
         </activity>
 
 
-        <!-- 借阅06-->
+        <!--01 借阅06-->
         <activity
             android:name="com.zhongou.view.examination.BorrowActivity"
             android:label="@string/app_name"
@@ -632,7 +633,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!--02业绩管理 -->
+        <!--02 业绩管理 -->
         <activity
             android:name="com.zhongou.view.PerformanceManagerActivity"
             android:label="@string/app_name"
@@ -640,7 +641,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!-- 03外出考勤-->
+        <!-- 03 外出考勤-->
         <activity
             android:name="com.zhongou.view.MapAttendAcitivity"
             android:label="@string/app_name"
@@ -664,7 +665,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!-- 04公告界面-->
+        <!-- 04 公告界面-->
         <activity
             android:name="com.zhongou.view.NoticeAcitivity"
             android:label="@string/app_name"
@@ -672,7 +673,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!--05通知 -->
+        <!--05 通知 -->
         <activity
             android:name="com.zhongou.view.NotificationAcitivity"
             android:label="@string/app_name"
@@ -680,7 +681,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!-- 06财务界面-->
+        <!-- 06 财务界面-->
         <activity
             android:name="com.zhongou.view.FinanceAcitivity"
             android:label="@string/app_name"
@@ -688,7 +689,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!-- 07日程界面-->
+        <!-- 07 日程界面-->
         <activity
             android:name="com.zhongou.view.ScheduleActivity"
             android:label="@string/app_name"
@@ -696,9 +697,17 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!--08采购领用 -->
+        <!--08 采购领用 -->
         <activity
             android:name="com.zhongou.view.ProcueRecordActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--09 交车 -->
+        <activity
+            android:name="com.zhongou.view.VehicleReturnActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -720,6 +729,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+
         <!--通讯录-员工详情03 -->
         <activity
             android:name="com.zhongou.view.ContactsEplDetailActivity"
@@ -735,6 +745,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+
+        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
 
     </application>
 

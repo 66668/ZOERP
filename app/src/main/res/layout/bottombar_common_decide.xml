@@ -11,19 +11,32 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:text="@string/examination_refulse"/>
+        android:background="@color/exa_disagree"
+        android:gravity="center"
+        android:text="@string/examination_refulse"
+        android:textColor="@color/white"
+        android:textSize="@dimen/common_textSize_default15"
+        />
 
     <Button
         android:id="@+id/btn_commit"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:text="@string/examination_commit"/>
+        android:background="@color/exa_agree"
+        android:gravity="center"
+        android:text="@string/examination_commit"
+        android:textColor="@color/white"
+        android:textSize="@dimen/common_textSize_default15"/>
 
     <Button
         android:id="@+id/btn_transfer"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:text="@string/examination_transfer"/>
+        android:background="@color/exa_transferto"
+        android:gravity="center"
+        android:text="@string/examination_transfer"
+        android:textColor="@color/white"
+        android:textSize="@dimen/common_textSize_default15"/>
 </LinearLayout>

@@ -317,7 +317,7 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
         public void onRefresh();
     }
 
-    public void setInterFace(IReflashListener iReflashListener) {
+    public void setInterFace(IReflashListener  iReflashListener) {//IReflashListener
         this.iReflashListener = iReflashListener;
     }
 }

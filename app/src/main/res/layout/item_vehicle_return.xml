@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="8dp">
+
+        <TextView
+            android:id="@+id/tv_type"
+            style="@style/BlackText.standard"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="10dp"
+            android:text="类型"
+            android:textColor="@color/textHintColor"
+            android:textSize="@dimen/common_textSize_default14"/>
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="10dp"
+            android:text="时间"
+            android:textColor="@color/textHintColor"
+            android:textSize="@dimen/common_textSize_default10"/>
+
+        <TextView
+            android:id="@+id/tv_Comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/tv_time"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="未批准"
+            android:textColor="@color/textHintColor"/>
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/BlackText.Medium17"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_type"
+            android:lines="1"
+            android:text="标题"/>
+    </RelativeLayout>
+
+
+</RelativeLayout>

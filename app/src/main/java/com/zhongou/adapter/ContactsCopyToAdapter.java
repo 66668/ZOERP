@@ -1,6 +1,7 @@
 package com.zhongou.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,6 +98,7 @@ public class ContactsCopyToAdapter extends BaseAdapter implements SectionIndexer
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				//保存状态
 				isSelectedMap.put(position,isChecked);
+				Log.d("SJY", "ContactsSelectAdatper--isChecked=" + isChecked + "--position=" + position);
 				setIsSelectedMap(isSelectedMap);
 			}
 		});

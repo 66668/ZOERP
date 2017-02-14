@@ -15,7 +15,6 @@
     <color name="cl_text_common_result">#aaaaaa</color>
 
     <!-- app应用的背景颜色-->
-
     <color name="common_topbar_bgcolor">#048ff0</color>
     <color name="common_color">#048ff0</color>
     <color name="item_contacts_bg_color">#f2f2f2</color>
@@ -34,6 +33,11 @@
     <color name="subHeadLine_bgcolor">#beb7b7</color>
     <color name="topbar_3">#339EFE</color><!-- 时间选择背景色-->
     <color name="textHintColor">#777777</color>
+
+    <!-- 审批按钮颜色-->
+    <color name="exa_disagree">#d23333</color>
+    <color name="exa_agree">#048ff0</color>
+    <color name="exa_transferto">#06c391</color>
 
 
     <!-- 通用颜色-->

@@ -11,5 +11,9 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:text="@string/examination_copyto"/>
+        android:text="@string/examination_copyto"
+        android:textSize="@dimen/common_textSize_default15"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:background="@color/exa_agree"/>
 </LinearLayout>

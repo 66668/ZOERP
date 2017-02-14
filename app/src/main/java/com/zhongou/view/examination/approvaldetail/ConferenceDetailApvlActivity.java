@@ -71,15 +71,17 @@ public class ConferenceDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.laytout_copy)
     LinearLayout laytout_copy;
 
+    //抄送
+    @ViewInject(id = R.id.btn_copytp, click = "forCopyto")
+    Button btn_copytp;
+
     private MyApprovalModel myApprovalModel;
     private ConferenceApvlModel model;
 
     //常量
     public static final int POST_SUCCESS = 21;
     public static final int POST_FAILED = 22;
-    //抄送
-    @ViewInject(id = R.id.btn_copytp, click = "forCopyto")
-    Button btn_copytp;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +97,7 @@ public class ConferenceDetailApvlActivity extends BaseActivity {
         //
         getDetailData();
     }
+
     private void setShow(ConferenceApvlModel model) {
         tv_ApprovalPerson.setText(model.getEmployeeName());
         tv_approvaldept.setText(model.getDepartmentName());
@@ -112,6 +115,7 @@ public class ConferenceDetailApvlActivity extends BaseActivity {
         //            tv_Requester.setText("未审批");
         //        }
     }
+
     private void bottomType() {
         //
         if (myApprovalModel.getApprovalStatus().contains("1")) {
@@ -156,32 +160,33 @@ public class ConferenceDetailApvlActivity extends BaseActivity {
                 break;
         }
     }
+
     //驳回
     public void forRefulse(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonDisagreeActivity.class,bundle);
+        startActivity(CommonDisagreeActivity.class, bundle);
     }
 
     //同意
     public void toForCommit(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonAgreeActivity.class,bundle);
+        startActivity(CommonAgreeActivity.class, bundle);
     }
 
     //转交
     public void forTransfer(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonTransfertoActivity.class,bundle);
+        startActivity(CommonTransfertoActivity.class, bundle);
     }
 
     // 抄送
     public void forCopyto(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonCopytoCoActivity.class,bundle);
+        startActivity(CommonCopytoCoActivity.class, bundle);
     }
 
     /**

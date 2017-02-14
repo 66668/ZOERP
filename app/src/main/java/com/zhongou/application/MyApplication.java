@@ -31,7 +31,9 @@ public class MyApplication extends Application {
 	private final static String sdcardDirName = "YUEVISION";
 	public String ClientID = null;//个推使用
 
-    private List<Activity> listAct = new ArrayList<Activity>();//关闭acitivity使用
+    private List<Activity> listAct = new ArrayList<Activity>();//退出app使用
+    private List<Activity> listCurrAct = new ArrayList<Activity>();//关闭多个使用
+
 
 	public MyApplication() {
 		super();
@@ -165,7 +167,7 @@ public class MyApplication extends Application {
 		ClientID = clientID;
 	}
 
-    //application管理activity,暂不用广播
+    //application管理所有activity,暂不用广播
     public void addActvity(Activity activity) {
         listAct.add(activity);
         Log.d("SJY", "Current Acitvity Size :" + getCurrentActivitySize());
@@ -173,8 +175,8 @@ public class MyApplication extends Application {
 
     public void removeActvity(Activity activity) {
         listAct.remove(activity);
+		activity.finish();
         Log.d("SJY", "Current Acitvity Size :" + getCurrentActivitySize());
-
     }
 
     public void exit() {
@@ -186,4 +188,15 @@ public class MyApplication extends Application {
     public int getCurrentActivitySize() {
         return listAct.size();
     }
+
+	//管理多个界面使用
+	public void addACT(Activity activity){
+		listCurrAct.add(activity);
+	}
+
+	public void closeACT(){
+		for (Activity activity : listCurrAct) {
+			activity.finish();
+		}
+	}
 }

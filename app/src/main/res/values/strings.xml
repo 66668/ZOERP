@@ -4,6 +4,22 @@
     <string name="network_invalid">网络不给力，请检查网络连接！</string>
 
 
+
+    <!-- 登录界面-->
+    <string name="please_input_account">请输入公司账号</string>
+    <string name="please_input_uername">请输入登录账号</string>
+    <string name="please_input_ps">请输入密码</string>
+    <string name="login">登录</string>
+    <string name="LoginActivity_companyNum">请输入企业账号！</string>
+    <string name="LoginActivity_employeeNum">请输入登录账号！</string>
+    <string name="LoginActivity_psd">请输入密码！</string>
+
+    <!-- 00-主界面设置-->
+    <string name="txt_message">消息</string>
+    <string name="txt_app">应用</string>
+    <string name="open">打开</string>
+    <string name="close">关闭</string>
+
     <!-- 我的-->
     <string name="person_info">个人信息</string>
     <string name="person_changePSD">修改密码</string>
@@ -33,20 +49,11 @@
     <string name="person_psd_requestForPsd_error">密码不可以是 英文字母、数字 或 下划线 以外的字符！</string>
     <string name="person_psd_error_lenght">请检查密码长度，6-20位密码！</string>
 
-    <!-- 登录界面-->
-    <string name="please_input_account">请输入公司账号</string>
-    <string name="please_input_uername">请输入登录账号</string>
-    <string name="please_input_ps">请输入密码</string>
-    <string name="login">登录</string>
-    <string name="LoginActivity_companyNum">请输入企业账号！</string>
-    <string name="LoginActivity_employeeNum">请输入登录账号！</string>
-    <string name="LoginActivity_psd">请输入密码！</string>
-
-    <!-- 00-主界面设置-->
-    <string name="txt_message">消息</string>
-    <string name="txt_app">应用</string>
-    <string name="open">打开</string>
-    <string name="close">关闭</string>
+    <!-- 消息-->
+    <string name="msg_undoTitle">未办事项</string>
+    <string name="msg_noticeTitle">公告</string>
+    <string name="msg_msgTitle">通知</string>
+    <string name="msg_schedule">日程</string>
 
     <!-- 通讯录-->
     <string name="txt_contract">通讯录</string>
@@ -56,7 +63,7 @@
     <string name="epl_dept">部门</string>
     <string name="epl_enterTime">入职</string>
 
-    <!-- 应用-->
+    <!-- 01 应用-->
     <string name="attendance">外出考勤</string>
     <string name="CheckRecordOfAttend">查看考勤记录</string>
     <string name="app_perfermanceManger">业绩管理</string>
@@ -68,13 +75,8 @@
     <string name="app_notice">公告</string>
     <string name="app_notification">通知</string>
 
-    <!-- 消息-->
-    <string name="msg_undoTitle">未办事项</string>
-    <string name="msg_noticeTitle">公告</string>
-    <string name="msg_msgTitle">通知</string>
-    <string name="msg_schedule">日程</string>
 
-    <!-- 00-02地图考勤-->
+    <!-- 01-03 地图考勤-->
     <string name="startLocation">开始定位</string>
     <string name="stopLocation">停止定位</string>
     <string name="mapAttendance">地图签到</string>
@@ -85,7 +87,7 @@
     <string name="forAttend_detail">美好的一天开始了，快来考勤吧！</string>
 
 
-    <!-- 申请/审批-->
+    <!-- 01-01 申请/审批-->
     <string name="examination">审批</string>
     <string name="examination_yes">已审批</string>
     <string name="examination_no">未审批</string>
@@ -132,7 +134,7 @@
     <string name="approval_co">所属公司</string>
     <string name="approval_approvalTime">申请时间</string>
 
-    <!-- 01招聘-->
+    <!-- 01-01 - 招聘01-->
 
     <string name="forjobs">招聘申请</string>
     <string name="forjobs_d">招聘详情</string>
@@ -148,7 +150,7 @@
     <string name="addRequster">添加对象</string>
     <string name="commit">提交</string>
 
-    <!-- 02离职-->
+    <!-- 01-01 - 离职02-->
     <string name="jobsForLeave">离职申请</string>
     <string name="jobsForLeave_d">离职详情</string>
     <string name="jobsleavetype">离职类型</string>
@@ -162,7 +164,7 @@
         <item>其他</item>
     </string-array>
 
-    <!-- 03请假-->
+    <!--01-01  请假03-->
     <string name="leave">请假申请</string>
     <string name="leave_d">请假详情</string>
     <string name="leaveTimeStart">开始时间</string>
@@ -176,7 +178,7 @@
     <string name="picture">图片</string>
     <string name="addPicture">添加图片</string>
 
-    <!-- 04加班-->
+    <!-- 01-01  加班04-->
 
     <string name="workOverTime">加班申请</string>
     <string name="workOverTime_d">加班详情</string>
@@ -189,7 +191,7 @@
     <string name="tv_OverEmployee">加班人员</string>
     <string name="hint_workOverTimeOverEmployee">请输入加班人员</string>
 
-    <!-- 05调休-->
+    <!-- 01-01  调休05-->
     <string name="workRest">调休申请</string>
     <string name="workRest_d">调休详情</string>
     <string name="workRestStartbefore">原工作开始</string>
@@ -201,7 +203,7 @@
     <string name="workRestReason">调休说明</string>
     <string name="hint_workRestReason">请输入调休说明</string>
 
-    <!-- 06借阅-->
+    <!-- 01-01  借阅06-->
     <string name="borrows">借阅申请</string>
     <string name="borrows_d">借阅详情</string>
     <string name="borrowsName">借阅名称</string>
@@ -219,7 +221,7 @@
     </string-array>
 
 
-    <!-- 07薪资调整-->
+    <!-- 01-01  薪资调整07-->
     <string name="salaryAdjust">调薪申请</string>
     <string name="salaryAdjust_d">调薪详情</string>
     <string name="salaryAdjustEmployee">调薪人</string>
@@ -231,7 +233,7 @@
     <string name="salaryAdjustReason">调薪理由</string>
     <string name="hint_salaryAdjustReason">请输入调薪说明</string>
 
-    <!-- 08用车-->
+    <!-- 01-01  用车08-->
     <string name="carUsed">用车申请</string>
     <string name="carUsed_d">用车详情</string>
     <string name="carUser">驾驶人</string>
@@ -245,7 +247,7 @@
     <string name="carUsedpurpose">用途</string>
     <string name="hint_carUsedpurpose">请输入用途</string>
 
-    <!-- 09车辆维护-->
+    <!-- 01-01  车辆维护09-->
     <string name="vehicleMainennance">车辆维护申请</string>
     <string name="vehicleMainennance_d">车辆维护详情</string>
     <string name="vehicleMainennanceType">维护类型</string>
@@ -272,7 +274,7 @@
         <item>损坏</item>
     </array>
 
-    <!-- 10报销-->
+    <!-- 01-01  报销10-->
     <string name="loanReimburse">报销申请</string>
     <string name="loanReimburse_d">借款报销详情</string>
     <string name="loanReimburseType">申请类型</string>
@@ -305,30 +307,33 @@
         <item>培训</item>
     </array>
 
-    <!-- 11调动-->
+    <!-- 01-01 调动 11-->
     <string name="positionReplace">调动详情</string>
 
-    <!-- 12采购-->
+    <!-- 01-01  采购 12-->
     <string name="procurement">采购详情</string>
 
-    <!-- 13通知公告-->
+    <!-- 01-01  通知公告13-->
     <string name="notificaitonAndNotice">通知公告详情</string>
 
-    <!-- 14办公室-->
+    <!-- 01-01  办公室14-->
     <string name="office">办公室申请详情</string>
 
-    <!-- 15领用-->
+    <!-- 01-01  领用15-->
     <string name="recevie">领用详情</string>
 
-    <!-- 16合同文件-->
+    <!-- 01-01  合同文件16-->
     <string name="contractfile">合同文件详情</string>
 
-    <!-- 17外出-->
+    <!-- 01-01  外出17-->
     <string name="outgoing">外出详情</string>
 
-    <!-- 18复试-->
+    <!-- 01-01  复试18-->
     <string name="retest">复试详情</string>
 
-    <!-- 19会议-->
+    <!-- 01-01 会议19-->
     <string name="conference">会议详情</string>
+
+    <!-- 01-09交车-->
+    <string name="vehicleRe">交车</string>
 </resources>

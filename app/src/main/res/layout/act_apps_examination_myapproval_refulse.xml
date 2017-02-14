@@ -17,9 +17,14 @@
         <EditText
             android:id="@+id/et_container"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/et_white_stroke"
             android:gravity="top|left"
             android:hint="@string/hint_examination_refulse"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:textSize="@dimen/common_textSize_default12"
             />
 
         <Button
@@ -28,7 +33,12 @@
             android:layout_height="@dimen/common_topbar_height"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
-            android:text="@string/refulse_sure"/>
+            android:background="@color/exa_agree"
+            android:gravity="center"
+            android:text="@string/refulse_sure"
+            android:textColor="@color/white"
+            android:textSize="@dimen/common_textSize_default15"/>
+
     </RelativeLayout>
 
 </LinearLayout>

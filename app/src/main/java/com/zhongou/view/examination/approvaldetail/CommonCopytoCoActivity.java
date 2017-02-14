@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.zhongou.R;
 import com.zhongou.adapter.ContactsCopyToAdapter;
-import com.zhongou.adapter.ContactsSelectAdapter;
 import com.zhongou.application.MyApplication;
 import com.zhongou.base.BaseActivity;
 import com.zhongou.common.CharacterParser;
@@ -40,6 +39,7 @@ import java.util.List;
 
 /**
  * 抄送 公司-子公司 通讯录
+ *
  * Created by sjy on 2017/1/17.
  */
 
@@ -86,8 +86,12 @@ public class CommonCopytoCoActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        MyApplication.getInstance().addACT(this);//多界面管理
+
         setContentView(R.layout.act_apps_examination_myapproval_common_contacts);
         tv_title.setText(getResources().getString(R.string.examination_copyto));
+
         //获取调转对象
         myApprovalModel = (MyApprovalModel) getIntent().getSerializableExtra("MyApprovalModel");
 
@@ -144,6 +148,7 @@ public class CommonCopytoCoActivity extends BaseActivity {
 
                     Intent intent1 = new Intent(CommonCopytoCoActivity.this, CommonCopytoDeptActivity.class);
                     intent1.putExtra("sStoreID", listSonCoData.get(currentPostion).getsStoreID());
+                    intent1.putExtra("myApprovalModel", myApprovalModel);
                     startActivity(intent1);
                 } else {
 
@@ -219,7 +224,7 @@ public class CommonCopytoCoActivity extends BaseActivity {
             case CHASE_DATA:
 
                 //由于有缓存数据，从这里获取子公司集合
-                listSonCoData = myDb.getSonCOList(SQLiteCoContactdb.SONCOFLAG);
+//                listSonCoData = myDb.getSonCOList(SQLiteCoContactdb.SONCOFLAG);
 
                 List<ContactsEmployeeModel> listData = (List<ContactsEmployeeModel>) msg.obj;
                 listContactApprover = filledData(listData);//为数据添加首字母
@@ -236,7 +241,8 @@ public class CommonCopytoCoActivity extends BaseActivity {
 
             case POSTDATA_SUCCESS:
                 PageUtil.DisplayToast((String) msg.obj);
-                this.finish();
+                //删除多个界面
+                MyApplication.getInstance().closeACT();//多界面管理
                 break;
 
             case POST_FAILED://
@@ -345,12 +351,12 @@ public class CommonCopytoCoActivity extends BaseActivity {
      */
 
     public void forCopyto(View view) {
-        selectlist = getSelectList(listContactApprover);//获取转交人
+        selectlist = getSelectList(listContactApprover);//获取转抄送人
         sApprovalemployeeinfos = getList2String(selectlist);//获取
         Log.d("SJY", "转发-确定sApprovalemployeeinfos=" + sApprovalemployeeinfos);
 
         if (TextUtils.isEmpty(sApprovalemployeeinfos)) {
-            PageUtil.DisplayToast("转发人不能为空");
+            PageUtil.DisplayToast("抄送人不能为空");
 
         }
 
@@ -389,7 +395,7 @@ public class CommonCopytoCoActivity extends BaseActivity {
         List<ContactsEmployeeModel> checkBoxList = new ArrayList<>();
         //遍历
         for (int i = 0; i < list.size(); i++) {
-            if (ContactsSelectAdapter.getIsSelectedMap().get(i) == true) {
+            if (ContactsCopyToAdapter.getIsSelectedMap().get(i) == true) {
                 checkBoxList.add(list.get(i));
                 Log.d("SJY", "选中的checkbox位置=" + i + "checkbox选中数据长度=" + checkBoxList.size());
             }

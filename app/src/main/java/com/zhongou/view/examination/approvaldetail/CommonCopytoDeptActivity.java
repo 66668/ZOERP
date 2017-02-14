@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.zhongou.R;
 import com.zhongou.adapter.ContactsCopyToAdapter;
-import com.zhongou.adapter.ContactsSelectAdapter;
+import com.zhongou.application.MyApplication;
 import com.zhongou.base.BaseActivity;
 import com.zhongou.common.CharacterParser;
 import com.zhongou.common.MyException;
@@ -85,6 +85,9 @@ public class CommonCopytoDeptActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        MyApplication.getInstance().addACT(this);//多界面管理
+
         setContentView(R.layout.act_apps_examination_myapproval_common_contacts);
         tv_title.setText(getResources().getString(R.string.examination_copyto));
 
@@ -92,6 +95,8 @@ public class CommonCopytoDeptActivity extends BaseActivity {
 
         Intent intent = getIntent();
         String sStoreID = intent.getStringExtra("sStoreID");
+        myApprovalModel = (MyApprovalModel) intent.getSerializableExtra("myApprovalModel");
+
         Log.d("SJY", "sStoreID=" + sStoreID);
 
         initViews();
@@ -146,6 +151,8 @@ public class CommonCopytoDeptActivity extends BaseActivity {
 
                     Intent intent = new Intent(CommonCopytoDeptActivity.this, CommonCopytoEplActivity.class);
                     intent.putExtra("sDeptID", listDeptData.get(listDataPostion).getsDeptID());//position
+                    intent.putExtra("myApprovalModel", myApprovalModel);
+
                     startActivity(intent);
                 } else {
                     //绑定CheckBox选择该联系人
@@ -242,8 +249,8 @@ public class CommonCopytoDeptActivity extends BaseActivity {
 
             case POSTDATA_SUCCESS://选择联系人后的处理
                 PageUtil.DisplayToast((String) msg.obj);
-                this.finish();
-                break;
+                //需要消除两个界面
+                MyApplication.getInstance().closeACT();//多界面管理
 
             case POST_FAILED://
                 PageUtil.DisplayToast((String) msg.obj);
@@ -363,7 +370,7 @@ public class CommonCopytoDeptActivity extends BaseActivity {
         Log.d("SJY", "转发-确定sApprovalemployeeinfos=" + sApprovalemployeeinfos);
 
         if (TextUtils.isEmpty(sApprovalemployeeinfos)) {
-            PageUtil.DisplayToast("转发人不能为空");
+            PageUtil.DisplayToast("抄送人不能为空");
 
         }
 
@@ -393,7 +400,7 @@ public class CommonCopytoDeptActivity extends BaseActivity {
     }
 
     /**
-     * 获取选择的转交人
+     * 获取选择的抄送人
      *
      * @param list
      * @return
@@ -402,7 +409,7 @@ public class CommonCopytoDeptActivity extends BaseActivity {
         List<ContactsEmployeeModel> checkBoxList = new ArrayList<>();
         //遍历
         for (int i = 0; i < list.size(); i++) {
-            if (ContactsSelectAdapter.getIsSelectedMap().get(i) == true) {
+            if (ContactsCopyToAdapter.getIsSelectedMap().get(i) == true) {
                 checkBoxList.add(list.get(i));
                 Log.d("SJY", "选中的checkbox位置=" + i + "checkbox选中数据长度=" + checkBoxList.size());
             }
