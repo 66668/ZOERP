@@ -8,13 +8,15 @@
     <include
         android:id="@+id/topbar"
         layout="@layout/topbar_common_itt"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <ScrollView
-            android:layout_marginBottom="@dimen/common_topbar_height"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/common_topbar_height">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -48,6 +50,7 @@
                         android:gravity="center_vertical"
                         />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/common_topbar_height40"
@@ -75,6 +78,7 @@
                         android:gravity="center_vertical"
                         />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/common_topbar_height40"
@@ -102,6 +106,7 @@
                         android:gravity="center_vertical"
                         />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/common_topbar_height40"
@@ -136,10 +141,11 @@
                     android:background="@color/common_bg_examination_line"/>
 
                 <View
-                    android:layout_marginTop="15dp"
                     android:layout_width="match_parent"
                     android:layout_height="1dip"
+                    android:layout_marginTop="15dp"
                     android:background="@color/common_bg_examination_line"/>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/common_topbar_height40"
@@ -155,10 +161,11 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="0.28"
                         android:gravity="center_vertical"
-                        android:text="@string/loanReimburseType"/>
+                        android:text="@string/financial_reimburse_fee1"
+                        android:textColor="@color/cl_text_common"/>
 
                     <TextView
-                        android:id="@+id/tv_loanreimType"
+                        android:id="@+id/tv_feeOne"
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -183,10 +190,11 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="0.28"
                         android:gravity="center_vertical"
-                        android:text="@string/loanReimburseUseType"/>
+                        android:text="@string/financial_reimburse_useage1"
+                        android:textColor="@color/cl_text_common"/>
 
                     <TextView
-                        android:id="@+id/tv_useType"
+                        android:id="@+id/tv_useageOne"
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -211,145 +219,11 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="0.28"
                         android:gravity="center_vertical"
-                        android:text="@string/loanReimburseUsestyle"/>
+                        android:text="@string/financial_reimburse_fee2"
+                        android:textColor="@color/cl_text_common"/>
 
                     <TextView
-                        android:id="@+id/tv_wayType"
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="0.72"
-                        android:gravity="center_vertical"
-                        />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/common_topbar_height40"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <TextView
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="0.28"
-                        android:gravity="center_vertical"
-                        android:text="@string/loanReimburseMoney"/>
-
-                    <TextView
-                        android:id="@+id/tv_fee"
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="0.72"
-                        android:gravity="center_vertical"
-                        />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/common_topbar_height40"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <TextView
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="0.28"
-                        android:gravity="center_vertical"
-                        android:text="@string/loanPlanbackTime"/>
-
-                    <TextView
-                        android:id="@+id/tv_PlanbackTime"
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="0.72"
-                        android:gravity="center_vertical"
-                        />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/common_topbar_height40"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <TextView
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="0.28"
-                        android:gravity="center_vertical"
-                        android:text="@string/loanAdminName"/>
-
-                    <TextView
-                        android:id="@+id/tv_AdminName"
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="0.72"
-                        android:gravity="center_vertical"
-                        />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/common_topbar_height40"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <TextView
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="0.28"
-                        android:gravity="center_vertical"
-                        android:text="@string/loanBankAccounts"/>
-
-                    <TextView
-                        android:id="@+id/tv_BankAccount"
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="0.72"
-                        android:gravity="center_vertical"
-                        />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/common_topbar_height40"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <TextView
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="0.28"
-                        android:gravity="center_vertical"
-                        android:text="@string/loanAccountNumber"/>
-
-                    <TextView
-                        android:id="@+id/tv_AccountNumber"
+                        android:id="@+id/tv_feeTwo"
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -374,7 +248,126 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="0.28"
                         android:gravity="center_vertical"
-                        android:text="@string/loanReimburseReason"/>
+                        android:text="@string/financial_reimburse_useage2"
+                        android:textColor="@color/cl_text_common"/>
+
+                    <TextView
+                        android:id="@+id/tv_useageTwo"
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.72"
+                        android:gravity="center_vertical"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_topbar_height40"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.28"
+                        android:gravity="center_vertical"
+                        android:text="@string/financial_reimburse_fee3"
+                        android:textColor="@color/cl_text_common"/>
+
+                    <TextView
+                        android:id="@+id/tv_feeThree"
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.72"
+                        android:gravity="center_vertical"
+                        />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_topbar_height40"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.28"
+                        android:gravity="center_vertical"
+                        android:text="@string/financial_reimburse_useage3"
+                        android:textColor="@color/cl_text_common"/>
+
+                    <TextView
+                        android:id="@+id/tv_useageThree"
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.72"
+                        android:gravity="center_vertical"
+                        />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_topbar_height40"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.28"
+                        android:gravity="center_vertical"
+                        android:text="@string/financial_fee_totle"
+                        android:textColor="@color/cl_text_common"/>
+
+                    <TextView
+                        android:id="@+id/tv_totle"
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.72"
+                        android:gravity="center_vertical"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_topbar_height40"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.28"
+                        android:gravity="center_vertical"
+                        android:text="@string/loanReimburseReason"
+                        android:textColor="@color/cl_text_common"/>
 
                     <TextView
                         android:id="@+id/tv_reason"
@@ -401,10 +394,11 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="0.28"
                         android:gravity="center_vertical"
-                        android:text="@string/Requester"/>
+                        android:text="@string/financial_reimburse_files"
+                        android:textColor="@color/cl_text_common"/>
 
                     <TextView
-                        android:id="@+id/tv_Requester"
+                        android:id="@+id/tv_files"
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -413,27 +407,11 @@
                         android:gravity="center_vertical"
                         />
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/common_topbar_height40"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <TextView
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="0.28"
-                        android:gravity="center_vertical"
-                        android:text="@string/state"/>
-                </LinearLayout>
 
 
             </LinearLayout>
         </ScrollView>
+
         <include
             android:id="@+id/laytout_decide"
             layout="@layout/bottombar_common_decide"

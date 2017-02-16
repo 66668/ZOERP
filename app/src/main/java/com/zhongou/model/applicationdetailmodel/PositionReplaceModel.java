@@ -10,15 +10,25 @@ import java.util.List;
 public class PositionReplaceModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public String ApplicationTitle;//
-    public String TransferDate;//
-    public String TransferReason;//
-    public String OriDepartmentName;//
-    public String OriPostName;//
-    public String NewDepartmentName;//
-    public String NewPostName;//
-    public String HandlerEmployeeName;//
+    public String ApplicationTitle;//标题
+    public String TransferEmployeeName;//调动人员
+    public String TransferEmployeeID;//调动人员
+    public String TransferDate;//调动日期
+    public String TransferReason;//调动原由
+
+    public String OriDepartmentName;//原部门
+    public String OriDepartmentID;//原部门
+    public String OriPostName;//原岗位
+    public String OriPostID;//原岗位
+
+    public String NewDepartmentName;//新部门
+    public String NewDepartmentID;//新部门
+    public String NewPostName;//新岗位
+    public String NewPostID;//新岗位
+
+    public String HandlerEmployeeName;//决定人
     public String Remark;//
+    public String CreateTime;//
 
 
     public String ApprovalStatus;
@@ -28,6 +38,62 @@ public class PositionReplaceModel implements Serializable {
     public String ApplicationCreateTime;
 
     public List<RecruitmentModel.ApprovalInfoLists> ApprovalInfoLists;
+
+    public String getTransferEmployeeName() {
+        return TransferEmployeeName;
+    }
+
+    public void setTransferEmployeeName(String transferEmployeeName) {
+        TransferEmployeeName = transferEmployeeName;
+    }
+
+    public String getTransferEmployeeID() {
+        return TransferEmployeeID;
+    }
+
+    public void setTransferEmployeeID(String transferEmployeeID) {
+        TransferEmployeeID = transferEmployeeID;
+    }
+
+    public String getOriDepartmentID() {
+        return OriDepartmentID;
+    }
+
+    public void setOriDepartmentID(String oriDepartmentID) {
+        OriDepartmentID = oriDepartmentID;
+    }
+
+    public String getOriPostID() {
+        return OriPostID;
+    }
+
+    public void setOriPostID(String oriPostID) {
+        OriPostID = oriPostID;
+    }
+
+    public String getNewDepartmentID() {
+        return NewDepartmentID;
+    }
+
+    public void setNewDepartmentID(String newDepartmentID) {
+        NewDepartmentID = newDepartmentID;
+    }
+
+    public String getNewPostID() {
+        return NewPostID;
+    }
+
+    public void setNewPostID(String newPostID) {
+        NewPostID = newPostID;
+    }
+
+    public String getCreateTime() {
+        return CreateTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        CreateTime = createTime;
+    }
 
     public static class ApprovalInfoLists{
         public String Comment;

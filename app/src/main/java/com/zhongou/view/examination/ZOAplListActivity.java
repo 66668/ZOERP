@@ -24,7 +24,6 @@ import com.zhongou.view.examination.applicationdetail.ConferenceDetailActivity;
 import com.zhongou.view.examination.applicationdetail.ContractFileDetailActivity;
 import com.zhongou.view.examination.applicationdetail.DimissionDetailActivity;
 import com.zhongou.view.examination.applicationdetail.LeaveDetailActivity;
-import com.zhongou.view.examination.applicationdetail.LoanReimbursementDetailActivity;
 import com.zhongou.view.examination.applicationdetail.NotificationAndNoticeDetailActivity;
 import com.zhongou.view.examination.applicationdetail.OfficeDetailActivity;
 import com.zhongou.view.examination.applicationdetail.OutGoingDetailActivity;
@@ -289,9 +288,11 @@ public class ZOAplListActivity extends BaseActivity implements RefreshListView.I
                 startActivity(intent);
                 break;
             case "借款报销申请"://10
-                intent.setClass(this, LoanReimbursementDetailActivity.class);
-                startActivity(intent);
+//                intent.setClass(this, .class);
+//                startActivity(intent);
                 break;
+
+
             case "调动申请"://11
                 intent.setClass(this, PositionReplaceDetailActivity.class);
                 startActivity(intent);

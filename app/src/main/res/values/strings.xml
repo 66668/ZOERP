@@ -4,7 +4,6 @@
     <string name="network_invalid">网络不给力，请检查网络连接！</string>
 
 
-
     <!-- 登录界面-->
     <string name="please_input_account">请输入公司账号</string>
     <string name="please_input_uername">请输入登录账号</string>
@@ -119,8 +118,8 @@
     <string name="borrow">借阅</string>
     <string name="salaryadjust">薪资调整</string>
     <string name="carused">用车</string>
-    <string name="vehicleMaintenance">车辆维护</string>
-    <string name="loanReimbursement">借款报销</string>
+    <string name="vehicleMaintenance">车辆维保</string>
+    <string name="loanReimbursement">财务申请</string>
     <string name="returnCar">交车</string>
     <string name="my_application">我的申请</string>
     <string name="my_approval">我的审批</string>
@@ -238,33 +237,34 @@
     <string name="carUsed_d">用车详情</string>
     <string name="carUser">驾驶人</string>
     <string name="hint_carUser">请输入驾驶人</string>
-    <string name="carUsedStart">用车时间</string>
-    <string name="carUsedEnd">还车时间</string>
+    <string name="carUsedStart">计划用车时间</string>
+    <string name="carUsedEnd">计划交车时间</string>
     <string name="carUsedDestination">目的地</string>
     <string name="hint_carUsedDestination">请输入目的地</string>
-    <string name="carUsedReason">用车说明</string>
+    <string name="carUsedReason">用车原因</string>
     <string name="hint_carUsedReason">请输入用车说明</string>
     <string name="carUsedpurpose">用途</string>
     <string name="hint_carUsedpurpose">请输入用途</string>
+    <string name="carUsedOther">申请备注</string>
 
     <!-- 01-01  车辆维护09-->
-    <string name="vehicleMainennance">车辆维护申请</string>
-    <string name="vehicleMainennance_d">车辆维护详情</string>
-    <string name="vehicleMainennanceType">维护类型</string>
+    <string name="vehicleMainennance">车辆维保申请</string>
+    <string name="vehicleMainennance_d">车辆维保详情</string>
+    <string name="vehicleMainennanceType">维保类型</string>
     <string name="vehicleMainennanceStatus">车辆状态</string>
-    <string name="vehicleMainennanceTimeStart">维修时间</string>
+    <string name="vehicleMainennanceTimeStart">维保时间</string>
     <string name="vehicleMainennanceNumber">车牌号</string>
     <string name="hint_vehicleMainennanceNumber">请输入车牌号</string>
     <string name="vehicleMainennanceContainer">维保项目</string>
     <string name="hint_vehicleMainennanceContainer">请输入维保项目</string>
     <string name="vehicleMainennanceMiles">行驶公里</string>
     <string name="hint_vehicleMainennanceMiles">请输入行驶公里</string>
-    <string name="vehicleMainennanceAddress">维修地点</string>
-    <string name="hint_vehicleMainennanceAddress">请输入维修地点</string>
-    <string name="vehicleMainennanceMoney">预计费用</string>
-    <string name="hint_vehicleMainennanceMoney">请输入预计费用（/元）</string>
-    <string name="vehicleMainennanceReason">维保说明</string>
-    <string name="hint_vehicleMainennanceReason">请输入维保说明</string>
+    <string name="vehicleMainennanceAddress">维保地点</string>
+    <string name="hint_vehicleMainennanceAddress">请输入维保地点</string>
+    <string name="vehicleMainennanceMoney">预计金额</string>
+    <string name="hint_vehicleMainennanceMoney">请输入预计金额（/元）</string>
+    <string name="vehicleMainennanceReason">申请备注</string>
+    <string name="hint_vehicleMainennanceReason">请输入维保申请备注</string>
     <array name="spMaintenanceType">
         <item>维修</item>
         <item>保养</item>
@@ -274,66 +274,150 @@
         <item>损坏</item>
     </array>
 
-    <!-- 01-01  报销10-->
-    <string name="loanReimburse">报销申请</string>
-    <string name="loanReimburse_d">借款报销详情</string>
-    <string name="loanReimburseType">申请类型</string>
-    <string name="loanReimburseUseType">用途类型</string>
-    <string name="loanReimburseUsestyle">方式</string>
-    <string name="loanPlanbackTime">还款时间</string>
-    <string name="loanAdminName">户名</string>
-    <string name="loanBankAccounts">开户行</string>
-    <string name="loanAccountNumber">账号</string>
+    <!-- 01-01  财务申请10-->
+    <string name="financial_loan">借款申请</string>
+    <string name="financial_reimburse">报销申请</string>
+    <string name="financial_pay">付款申请</string>
+    <string name="financial_fee">费用申请</string>
+
+    <string name="financial_loan_time">还款日期</string>
+    <string name="financial_loan_reason">借款事由</string>
     <string name="loanReimburseMoney">金额</string>
-    <string name="hint_loanReimburseMoney">请输入金额</string>
-    <string name="loanReimburseReason">备注</string>
-    <string name="hint_loanReimburseReason">请进行简要说明</string>
-    <array name="spLoanreimType">
-        <item>报销</item>
-        <item>借款</item>
-    </array>
-    <array name="spLoanreimWay">
-        <item>网银</item>
-        <item>支票</item>
+    <string name="hint_loanReimburseMoney">请输入金额(元)</string>
+    <string name="hint_loanReimburseReason">输入借款事由</string>
+
+    <string name="financial_reimburse_fee1">金额一</string>
+    <string name="financial_reimburse_fee2">金额二</string>
+    <string name="financial_reimburse_fee3">金额三</string>
+    <string name="financial_reimburse_useage1">用途一</string>
+    <string name="financial_reimburse_useage2">用途二</string>
+    <string name="financial_reimburse_useage3">用途三</string>
+    <string name="financial_reimburse_useage">请简要输入用途</string>
+    <string name="financial_reimburse_other">备注</string>
+    <string name="financial_reimburse_other_hint">请输入需要备注事项</string>
+    <string name="financial_reimburse_files">附件</string>
+    <string name="financial_reimburse_addfiles">添加附件</string>
+
+    <string name="financial_pay_style">付款方式</string>
+    <string name="financial_pay_title_d">付款审批详情</string>
+    <string name="financial_pay_offical">收款单位</string>
+    <string name="financial_pay_offical_hint">请输入收款单位</string>
+    <string name="financial_pay_account">账号</string>
+    <string name="financial_pay_account_hint">请输入收款单位银行账号</string>
+    <string name="financial_pay_bank">开户行</string>
+    <string name="financial_pay_bank_hint">请输入收款单位开户行</string>
+    <array name="financialPayWay">
         <item>现金</item>
+        <item>网银</item>
+        <item>电汇</item>
+        <item>支票</item>
+        <item>其他</item>
     </array>
-    <array name="spLoanreimUseageType">
-        <item>通用</item>
-        <item>办公</item>
-        <item>住宿</item>
-        <item>交通</item>
-        <item>餐饮</item>
-        <item>采购</item>
-        <item>培训</item>
-    </array>
+
+    <string name="financial_fee_totle">合计</string>
+    <string name="loanReimburseReason">备注</string>
 
     <!-- 01-01 调动 11-->
     <string name="positionReplace">调动详情</string>
+    <string name="positionReplace_title">标题</string>
+    <string name="positionReplace_date">调动日期</string>
+    <string name="positionReplace_decider">决定人</string>
+    <string name="positionReplace_orgDept">原部门</string>
+    <string name="positionReplace_orgPosition">原岗位</string>
+    <string name="positionReplace_newDept">调往部门</string>
+    <string name="positionReplace_newPosition">调往岗位</string>
+    <string name="positionReplace_reason">调动原因</string>
+    <string name="positionReplace_remark">备注</string>
 
     <!-- 01-01  采购 12-->
     <string name="procurement">采购详情</string>
+    <string name="procurement_ItemName">物品名称</string>
+    <string name="procurement_ItemType">物品类型</string>
+    <string name="procurement_ItemSpecifics">物品规格</string>
+    <string name="procurement_ItemSize">物品型号</string>
+    <string name="procurement_ItemNumber">所需数量</string>
+    <string name="procurement_ItemFees">预计金额</string>
+    <string name="procurement_buyFor">购买理由</string>
+    <string name="procurement_buyer">购买人</string>
+    <string name="procurement_aplTime">申请时间</string>
+    <string name="procurement_PlanBuyTime">计划购买时间</string>
 
     <!-- 01-01  通知公告13-->
     <string name="notificaitonAndNotice">通知公告详情</string>
+    <string name="notificaitonAndNotice_title">公告名称</string>
+    <string name="notificaitonAndNotice_type">类型</string>
+    <string name="notificaitonAndNotice_whom">接受范围</string>
+    <string name="notificaitonAndNotice_doTime">公告时间</string>
 
     <!-- 01-01  办公室14-->
     <string name="office">办公室申请详情</string>
+    <string name="office_title">标题</string>
+    <string name="office_time">时间</string>
+    <string name="office_number">会议人数</string>
+    <string name="office_useage">用途</string>
+    <string name="office_other">备注</string>
 
     <!-- 01-01  领用15-->
     <string name="recevie">领用详情</string>
+    <string name="recevie_itemName">物品名称</string>
+    <string name="recevie_spiceil">规格</string>
+    <string name="recevie_size">型号</string>
+    <string name="recevie_number">数量</string>
+    <string name="recevie_user">领用人</string>
+    <string name="recevie_userDept">领用部门</string>
+    <string name="recevie_useage">领用原由</string>
+    <string name="recevie_aplTime">申请时间</string>
+    <string name="recevie_other">备注</string>
 
     <!-- 01-01  合同文件16-->
     <string name="contractfile">合同文件详情</string>
+    <string name="contractfile_name">合同文件名称</string>
+    <string name="contractfile_other">备注</string>
+    <string name="contractfile_files">附件</string>
 
     <!-- 01-01  外出17-->
     <string name="outgoing">外出详情</string>
+    <string name="outgoing_time">外出时间</string>
+    <string name="outgoing_reason">外出事由</string>
+    <string name="outgoing_purpose">目的地</string>
+    <string name="outgoing_remark">备注</string>
 
     <!-- 01-01  复试18-->
     <string name="retest">复试详情</string>
+    <string name="retest_person">复试人</string>
+    <string name="retest_files">附件</string>
+    <string name="retest_other">备注</string>
 
     <!-- 01-01 会议19-->
     <string name="conference">会议详情</string>
+    <string name="conference_name">会议标题</string>
+    <string name="conference_title">会议主题</string>
+    <string name="conference_partiner">参与者</string>
+    <string name="conference_Device">会议准备</string>
+    <string name="conference_Abstract">会议说明</string>
+    <string name="conference_start">开始时间</string>
+    <string name="conference_end">结束时间</string>
+    <string name="conference_other">备注</string>
 
     <!-- 01-09交车-->
     <string name="vehicleRe">交车</string>
+    <string name="vehicleRe_save">提交</string>
+    <string name="vehicleRe_complete">已交车</string>
+    <string name="vehicleRe_uncomplete">未交车</string>
+
+    <string name="vehicleRe_startTime">实际用车时间</string>
+    <string name="vehicleRe_endTime">实际交车时间</string>
+    <string name="vehicleRe_startTime_m">实际维保时间</string>
+    <string name="vehicleRe_user">驾驶员</string>
+    <string name="vehicleRe_user_hint">请输入驾驶员姓名</string>
+    <string name="vehicleRe_inner">乘车人</string>
+    <string name="vehicleRe_inner_hint">请输入乘车人员</string>
+    <string name="vehicleRe_startMiles">开始里程数</string>
+    <string name="vehicleRe_startMiles_hint">请输入开始里程数</string>
+    <string name="vehicleRe_endMiles">交车里程数</string>
+    <string name="vehicleRe_endMiles_hint">请输入交车里程数</string>
+    <string name="vehicleRe_other">交车备注</string>
+    <string name="vehicleMt_other">申请备注</string>
+    <string name="vehicleRe_other_hint">请输入交车备注</string>
+
 </resources>

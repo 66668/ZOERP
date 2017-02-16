@@ -84,9 +84,9 @@ public class VehicleMaintainActivity extends BaseActivity {
     @ViewInject(id = R.id.et_EstimateFee)
     EditText et_EstimateFee;
 
-    //说明
-    @ViewInject(id = R.id.et_reason)
-    EditText et_reason;
+    //申请备注
+    @ViewInject(id = R.id.et_remark)
+    EditText et_remark;
 
     //添加审批人
     @ViewInject(id = R.id.AddApprover, click = "forAddApprover")
@@ -110,7 +110,7 @@ public class VehicleMaintainActivity extends BaseActivity {
     private String travelKilmetre = "";
     private String maintenancePlace = "";
     private String estimateFee = "";
-    private String reason = "";
+    private String remark = "";
     private String maintenanceState = "";
 
     @Override
@@ -127,13 +127,13 @@ public class VehicleMaintainActivity extends BaseActivity {
         estimateFee = et_EstimateFee.getText().toString();
         travelKilmetre = et_TravelKilmetre.getText().toString();
         maintenancePlace = et_maintenancePlace.getText().toString();
-        reason = et_reason.getText().toString();
+        remark = et_remark.getText().toString();
 
         if (TextUtils.isEmpty(maintenanceType)) {
             PageUtil.DisplayToast("维修类型不能为空");
             return;
         }
-        
+
         if (TextUtils.isEmpty(maintenanceState)) {
             PageUtil.DisplayToast("维修状态不能为空");
             return;
@@ -186,7 +186,7 @@ public class VehicleMaintainActivity extends BaseActivity {
                     js.put("TravelKilmetre", travelKilmetre);
                     js.put("VehicleState", maintenanceState);
                     js.put("MaintenancePlace", maintenancePlace);
-                    js.put("Purpose", reason);
+                    js.put("Remark", remark);
                     js.put("ApprovalIDList", approvalID);//
 
                     UserHelper.maintenancePost(VehicleMaintainActivity.this, js);
@@ -282,6 +282,7 @@ public class VehicleMaintainActivity extends BaseActivity {
         endDateChooseDialog.setDateDialogTitle("维修时间");
         endDateChooseDialog.showDateChooseDialog();
     }
+
     /**
      * 添加审批人
      *
@@ -323,6 +324,7 @@ public class VehicleMaintainActivity extends BaseActivity {
             return "";
         }
     }
+
     /**
      * back
      *

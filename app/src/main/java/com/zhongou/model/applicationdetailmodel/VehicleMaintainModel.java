@@ -18,17 +18,35 @@ public class VehicleMaintainModel implements Serializable {
     public String MaintenanceType;//
     public String PlanBorrowTime;//
     public String MaintenanceProject;//
-    public String VehicleState;//
+    public String VehicleState;//车辆状态
     public String Destination;//
 
 
-    public String ApprovalStatus;
+    public String ApprovalStatus;//状态
     public String StoreName;
     public String DepartmentName;
     public String EmployeeName;
     public String ApplicationCreateTime;
     public List<VehicleMaintainModel.ApprovalInfoLists> ApprovalInfoLists;
 
+    public String Remark;//申请备注
+    public String BackRemark;//交车备注
+
+    public String getRemark() {
+        return Remark;
+    }
+
+    public void setRemark(String remark) {
+        Remark = remark;
+    }
+
+    public String getBackRemark() {
+        return BackRemark;
+    }
+
+    public void setBackRemark(String backRemark) {
+        BackRemark = backRemark;
+    }
 
     public static class ApprovalInfoLists {
         public String Comment;

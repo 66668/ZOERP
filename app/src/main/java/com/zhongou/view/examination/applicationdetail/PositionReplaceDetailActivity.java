@@ -43,6 +43,7 @@ public class PositionReplaceDetailActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_right)
     TextView tv_right;
 
+
     //审批人
     @ViewInject(id = R.id.tv_Requester)
     TextView tv_Requester;
@@ -53,6 +54,48 @@ public class PositionReplaceDetailActivity extends BaseActivity {
     TextView tv_state_result;
     @ViewInject(id = R.id.layout_state, click = "forState")
     LinearLayout layout_state;
+
+    //标题
+    @ViewInject(id = R.id.tv_positionReplace_title)
+    TextView tv_positionReplace_title;
+
+    //调动日期
+    @ViewInject(id = R.id.tv_positionReplace_date)
+    TextView tv_positionReplace_date;
+
+    //决定人
+    @ViewInject(id = R.id.tv_positionReplace_decider)
+    TextView tv_positionReplace_decider;
+
+    //原部门
+    @ViewInject(id = R.id.tv_positionReplace_orgDept)
+    TextView tv_positionReplace_orgDept;
+
+    //原岗位
+    @ViewInject(id = R.id.tv_positionReplace_orgPosition)
+    TextView tv_positionReplace_orgPosition;
+
+    //新部门
+    @ViewInject(id = R.id.tv_positionReplace_newDept)
+    TextView tv_positionReplace_newDept;
+
+    //新岗位
+    @ViewInject(id = R.id.tv_positionReplace_newPosition)
+    TextView tv_positionReplace_newPosition;
+
+    //原因
+    @ViewInject(id = R.id.tv_positionReplace_reason)
+    TextView tv_positionReplace_reason;
+
+    //备注
+    @ViewInject(id = R.id.tv_positionReplace_remark)
+    TextView tv_positionReplace_remark;
+
+
+    //获取子控件个数的父控件
+    @ViewInject(id = R.id.layout_ll)
+    LinearLayout layout_ll;
+
     //变量
     private Intent intent = null;
     private PositionReplaceModel positionReplaceModel;
@@ -63,11 +106,10 @@ public class PositionReplaceDetailActivity extends BaseActivity {
     private View childView;
     private LayoutInflater inflater;//ViewHolder对象用来保存实例化View的子控件
     private List<ViewHolder> listViewHolder = new ArrayList<>();
-    private LinearLayout ll_main;
-    //    private int mark = 5;//0显示在顶部
     //常量
     public static final int POST_SUCCESS = 11;
     public static final int POST_FAILED = 12;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,10 +121,21 @@ public class PositionReplaceDetailActivity extends BaseActivity {
         model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
         getDetailModel(model);
     }
+
     private void setShow(PositionReplaceModel model) {
+        //
+        tv_positionReplace_title.setText(model.getApplicationTitle());
+        tv_positionReplace_date.setText(model.getTransferDate());
+        tv_positionReplace_decider.setText(model.getHandlerEmployeeName());
+        tv_positionReplace_orgDept.setText(model.getOriDepartmentName());
+        tv_positionReplace_orgPosition.setText(model.getOriPostName());
+        tv_positionReplace_newDept.setText(model.getNewDepartmentName());
+        tv_positionReplace_newPosition.setText(model.getNewPostName());
+        tv_positionReplace_reason.setText(model.getTransferReason());
+        tv_positionReplace_remark.setText(model.getRemark());
+
 
         modelList = model.getApprovalInfoLists();
-
         // 审批人
         StringBuilder nameBuilder = new StringBuilder();
         for (int i = 0; i < modelList.size(); i++) {
@@ -104,16 +157,19 @@ public class PositionReplaceDetailActivity extends BaseActivity {
             tv_state_result.setText("你猜猜！");
         }
 
-        for (int i = 0, mark = 5; i < modelList.size(); i++, mark++) {//mark是布局插入位置，放在mark位置的后边（从1开始计数）
-            ViewHolder vh = AddView(mark);//添加布局
-            vh.tv_name.setText(modelList.get(i).getApprovalEmployeeName());
-            vh.tv_time.setText(modelList.get(i).getApprovalDate());
-            vh.tv_contains.setText(modelList.get(i).getComment());
-            if (modelList.get(i).getYesOrNo().contains("1")) {
-                vh.tv_yesOrNo.setText("已审批");
-            } else {
-                vh.tv_yesOrNo.setText("未审批");
-                vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
+        if (positionReplaceModel.getApprovalStatus().contains("1") || positionReplaceModel.getApprovalStatus().contains("2")) {
+            //插入意见
+            for (int i = 0, mark = layout_ll.getChildCount(); i < modelList.size(); i++, mark++) {//mark是布局插入位置，放在mark位置的后边（从1开始计数）
+                ViewHolder vh = AddView(mark);//添加布局
+                vh.tv_name.setText(modelList.get(i).getApprovalEmployeeName());
+                vh.tv_time.setText(modelList.get(i).getApprovalDate());
+                vh.tv_contains.setText(modelList.get(i).getComment());
+                if (modelList.get(i).getYesOrNo().contains("1")) {
+                    vh.tv_yesOrNo.setText("已审批");
+                } else {
+                    vh.tv_yesOrNo.setText("未审批");
+                    vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
+                }
             }
         }
     }
@@ -165,12 +221,11 @@ public class PositionReplaceDetailActivity extends BaseActivity {
 
     //初始化参数
     private ViewHolder AddView(int marks) {
-        ll_main = (LinearLayout) findViewById(R.id.layout_ll);
         ls_childView = new ArrayList<View>();
         inflater = LayoutInflater.from(getApplicationContext());
         childView = inflater.inflate(R.layout.item_examination_status, null);
         childView.setId(marks);
-        ll_main.addView(childView, marks);
+        layout_ll.addView(childView, marks);
         return getViewInstance(childView);
 
     }

@@ -60,15 +60,15 @@ public class ProcurementDetailApvlActivity extends BaseActivity {
     LinearLayout laytout_decide;
 
     //驳回
-    @ViewInject(id = R.id.btn_refulse,click = "forRefulse")
+    @ViewInject(id = R.id.btn_refulse, click = "forRefulse")
     Button btn_refulse;
 
     //批准
-    @ViewInject(id = R.id.btn_commit,click = "toForCommit")
+    @ViewInject(id = R.id.btn_commit, click = "toForCommit")
     Button btn_commit;
 
     //转交
-    @ViewInject(id = R.id.btn_transfer,click = "forTransfer")
+    @ViewInject(id = R.id.btn_transfer, click = "forTransfer")
     Button btn_transfer;
 
     //审批bottom
@@ -76,8 +76,52 @@ public class ProcurementDetailApvlActivity extends BaseActivity {
     LinearLayout laytout_copy;
 
     //抄送
-    @ViewInject(id = R.id.btn_copytp,click = "forCopyto")
+    @ViewInject(id = R.id.btn_copytp, click = "forCopyto")
     Button btn_copytp;
+
+    //物品名称
+    @ViewInject(id = R.id.tv_procurement_thingsName)
+    TextView tv_procurement_thingsName;
+
+    //类型
+    @ViewInject(id = R.id.tv_procurement_thingsType)
+    TextView tv_procurement_thingsType;
+
+    //规格
+    @ViewInject(id = R.id.tv_procurement_ItemSpecifics)
+    TextView tv_procurement_ItemSpecifics;
+
+    //型号
+    @ViewInject(id = R.id.tv_procurement_ItemSize)
+    TextView tv_procurement_ItemVersion;
+
+    //数量
+    @ViewInject(id = R.id.tv_procurement_ItemNumber)
+    TextView tv_procurement_ItemNumber;
+
+    //金额
+    @ViewInject(id = R.id.tv_procurement_ItemFees)
+    TextView tv_ritv_procurement_ItemFees;
+
+    //理由
+    @ViewInject(id = R.id.tv_procurement_buyFor)
+    TextView tv_procurement_buyFor;
+
+    //购买人
+    @ViewInject(id = R.id.tv_procurement_buyer)
+    TextView tv_procurement_buyer;
+
+    //计划购买时间
+    @ViewInject(id = R.id.tv_procurement_PlanBuyTime)
+    TextView tv_procurement_PlanBuyTime;
+
+    //备注
+    @ViewInject(id = R.id.tv_procurement_Other)
+    TextView tv_procurement_Other;
+
+    //审批人
+    @ViewInject(id = R.id.tv_Requester)
+    TextView tv_Requester;
 
     private MyApprovalModel myApprovalModel;
     private ProcurementApvlModel model;
@@ -98,32 +142,42 @@ public class ProcurementDetailApvlActivity extends BaseActivity {
         //
         getDetailData();
     }
+
     private void setShow(ProcurementApvlModel model) {
+        //
         tv_ApprovalPerson.setText(model.getEmployeeName());
         tv_approvaldept.setText(model.getDepartmentName());
         tv_approvalCo.setText(model.getStoreName());
         tv_approvalTime.setText(model.getApplicationCreateTime());
 
-//        tv_borrowThings.setText(model.getBorrowThings());
-//        tv_borrowType.setText(model.getBorrowType());
-//        tv_StartTime.setText(model.getStartTime());
-//        tv_endTime.setText(model.getFinishTime());
-//        tv_reason.setText(model.getReason());
-//        if (model.getApprovalInfoLists().size() > 0) {
-//            tv_Requester.setText(model.getApplicationCreateTime());
-//        } else {
-//            tv_Requester.setText("未审批");
-//        }
+        //
+        tv_procurement_thingsName.setText(model.getItemName());
+        tv_procurement_thingsType.setText(model.getItemType());
+        tv_procurement_ItemSpecifics.setText(model.getSpecification());
+        tv_procurement_ItemVersion.setText(model.getVersions());
+        tv_procurement_ItemNumber.setText(model.getAmount());
+        tv_ritv_procurement_ItemFees.setText(model.getEstimateFee());
+        tv_procurement_buyer.setText(model.getBuyer());
+        tv_procurement_buyFor.setText(model.getReason());
+        tv_procurement_PlanBuyTime.setText(model.getPlanTime());
+        tv_procurement_Other.setText(model.getRemark());
+
+
+        if (model.getApprovalInfoLists().size() > 0) {
+            tv_Requester.setText(model.getApplicationCreateTime());
+        } else {
+            tv_Requester.setText("未审批");
+        }
     }
 
     private void bottomType() {
         //
-        if(myApprovalModel.getApprovalStatus().contains("1")){
+        if (myApprovalModel.getApprovalStatus().contains("1")) {
 
             laytout_decide.setVisibility(View.GONE);
             laytout_copy.setVisibility(View.VISIBLE);
 
-        }else {
+        } else {
             laytout_decide.setVisibility(View.VISIBLE);
             laytout_copy.setVisibility(View.GONE);
         }
@@ -137,7 +191,7 @@ public class ProcurementDetailApvlActivity extends BaseActivity {
                     ProcurementApvlModel model = UserHelper.approvalDetailPostProcurement(ProcurementDetailApvlActivity.this,
                             myApprovalModel.getApplicationID(),
                             myApprovalModel.getApplicationType());
-                    sendMessage(POST_SUCCESS,model);
+                    sendMessage(POST_SUCCESS, model);
                 } catch (MyException e) {
                     sendMessage(POST_FAILED, e.getMessage());
                 }
@@ -160,30 +214,35 @@ public class ProcurementDetailApvlActivity extends BaseActivity {
                 break;
         }
     }
+
     //驳回
-    public void forRefulse(View view){
+    public void forRefulse(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonDisagreeActivity.class,bundle);
+        startActivity(CommonDisagreeActivity.class, bundle);
     }
+
     //
-    public void toForCommit(View view){
+    public void toForCommit(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonAgreeActivity.class,bundle);
+        startActivity(CommonAgreeActivity.class, bundle);
     }
+
     //转交
-    public void forTransfer(View view){
+    public void forTransfer(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonTransfertoActivity.class,bundle);
+        startActivity(CommonTransfertoActivity.class, bundle);
     }
+
     // 抄送
-    public void forCopyto(View view){
+    public void forCopyto(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonCopytoCoActivity.class,bundle);
+        startActivity(CommonCopytoCoActivity.class, bundle);
     }
+
     /**
      * back
      *

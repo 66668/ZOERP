@@ -75,6 +75,25 @@ public class RetestDetailApvlActivity extends BaseActivity {
     //抄送
     @ViewInject(id = R.id.btn_copytp,click = "forCopyto")
     Button btn_copytp;
+
+
+    //复试人
+    @ViewInject(id = R.id.tv_retest_person)
+    TextView tv_retest_person;
+
+    //备注
+    @ViewInject(id = R.id.tv_retest_other)
+    TextView tv_retest_other;
+
+    //附件
+    @ViewInject(id = R.id.tv_retest_files)
+    TextView tv_retest_files;
+
+    //审批人
+    @ViewInject(id = R.id.tv_Requester)
+    TextView tv_Requester;
+
+
     private MyApprovalModel myApprovalModel;
     private RetestApvlModel model;
 
@@ -96,21 +115,22 @@ public class RetestDetailApvlActivity extends BaseActivity {
         getDetailData();
     }
     private void setShow(RetestApvlModel model) {
+        //
         tv_ApprovalPerson.setText(model.getEmployeeName());
         tv_approvaldept.setText(model.getDepartmentName());
         tv_approvalCo.setText(model.getStoreName());
         tv_approvalTime.setText(model.getApplicationCreateTime());
 
-        //        tv_borrowThings.setText(model.getBorrowThings());
-        //        tv_borrowType.setText(model.getBorrowType());
-        //        tv_StartTime.setText(model.getStartTime());
-        //        tv_endTime.setText(model.getFinishTime());
-        //        tv_reason.setText(model.getReason());
-        //        if (model.getApprovalInfoLists().size() > 0) {
-        //            tv_Requester.setText(model.getApplicationCreateTime());
-        //        } else {
-        //            tv_Requester.setText("未审批");
-        //        }
+        //
+        tv_retest_person.setText(model.getReexpeople());
+        tv_retest_other.setText(model.getRemark());
+
+
+        if (model.getApprovalInfoLists().size() > 0) {
+            tv_Requester.setText(model.getApplicationCreateTime());
+        } else {
+            tv_Requester.setText("未审批");
+        }
     }
     private void bottomType() {
         //

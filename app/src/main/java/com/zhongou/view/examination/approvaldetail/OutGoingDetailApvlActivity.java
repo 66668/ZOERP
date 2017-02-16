@@ -77,6 +77,28 @@ public class OutGoingDetailApvlActivity extends BaseActivity {
     private MyApprovalModel myApprovalModel;
     private OUtGoingApvlModel model;
 
+
+    //外出时间
+    @ViewInject(id = R.id.tv_outgoing_time)
+    TextView tv_outgoing_time;
+
+    //外出事由
+    @ViewInject(id = R.id.tv_outgoing_reason)
+    TextView tv_outgoing_reason;
+
+    //目的地
+    @ViewInject(id = R.id.tv_outgoing_purpose)
+    TextView tv_outgoing_purpose;
+
+    //备注
+    @ViewInject(id = R.id.tv_outgoing_remark)
+    TextView tv_outgoing_remark;
+
+    //审批人
+    @ViewInject(id = R.id.tv_Requester)
+    TextView tv_Requester;
+
+
     //常量
     public static final int POST_SUCCESS = 21;
     public static final int POST_FAILED = 22;
@@ -84,7 +106,7 @@ public class OutGoingDetailApvlActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_apps_examination_contractfile_d2);
+        setContentView(R.layout.act_apps_examination_outgoing_d2);
         tv_title.setText(getResources().getString(R.string.outgoing));
         tv_right.setText("");
 
@@ -101,16 +123,17 @@ public class OutGoingDetailApvlActivity extends BaseActivity {
         tv_approvalCo.setText(model.getStoreName());
         tv_approvalTime.setText(model.getApplicationCreateTime());
 
-        //        tv_borrowThings.setText(model.getBorrowThings());
-        //        tv_borrowType.setText(model.getBorrowType());
-        //        tv_StartTime.setText(model.getStartTime());
-        //        tv_endTime.setText(model.getFinishTime());
-        //        tv_reason.setText(model.getReason());
-        //        if (model.getApprovalInfoLists().size() > 0) {
-        //            tv_Requester.setText(model.getApplicationCreateTime());
-        //        } else {
-        //            tv_Requester.setText("未审批");
-        //        }
+        //
+        tv_outgoing_time.setText(model.getOutingTime());
+        tv_outgoing_reason.setText(model.getOutingReason());
+        tv_outgoing_purpose.setText(model.getDestination());
+        tv_outgoing_remark.setText(model.getRemark());
+
+        if (model.getApprovalInfoLists().size() > 0) {
+            tv_Requester.setText(model.getApplicationCreateTime());
+        } else {
+            tv_Requester.setText("未审批");
+        }
     }
     private void bottomType() {
         //

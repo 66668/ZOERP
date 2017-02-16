@@ -1,5 +1,6 @@
 package com.zhongou.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.util.Log;
@@ -16,8 +17,11 @@ import com.zhongou.common.MyException;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
-import com.zhongou.model.MyApplicationModel;
-import com.zhongou.utils.PageUtil;
+import com.zhongou.model.VehicleReturnModel;
+import com.zhongou.view.vehiclereturn.VehicleReturnMaintenanceCompleteActivity;
+import com.zhongou.view.vehiclereturn.VehicleReturnMaintenanceUncompleteActivity;
+import com.zhongou.view.vehiclereturn.VehicleReturnUseCompleteActivity;
+import com.zhongou.view.vehiclereturn.VehicleReturnUseUncompleteActivity;
 import com.zhongou.widget.RefreshListView;
 
 import java.util.ArrayList;
@@ -28,7 +32,7 @@ import java.util.List;
  * Created by sjy on 2017/2/14.
  */
 
-public class VehicleReturnActivity extends BaseActivity  implements RefreshListView.IReflashListener{
+public class VehicleReturnListActivity extends BaseActivity implements RefreshListView.IReflashListener {
     //back
     @ViewInject(id = R.id.layout_back, click = "forBack")
     RelativeLayout layout_back;
@@ -48,7 +52,7 @@ public class VehicleReturnActivity extends BaseActivity  implements RefreshListV
     private VehicleReturnListAdapter vAdapter;//记录适配
     private boolean ifLoading = false;//标记
     private int pageSize = 20;
-    private ArrayList<MyApplicationModel> list = null;
+    private ArrayList<VehicleReturnModel> list = null;
     private String IMaxtime = null;
     private String IMinTime = null;
 
@@ -65,9 +69,20 @@ public class VehicleReturnActivity extends BaseActivity  implements RefreshListV
         tv_title.setText(getResources().getString(R.string.vehicleRe));
         tv_right.setText("");
 
-        myListView.setInterFace(VehicleReturnActivity.this);//下拉刷新监听
+        initMyView();
+        initListener();
+        getData();
+    }
+
+    private void initMyView() {
+
+        myListView.setInterFace(VehicleReturnListActivity.this);//下拉刷新监听
         vAdapter = new VehicleReturnListAdapter(this, adapterCallBack);// 上拉加载
         myListView.setAdapter(vAdapter);
+
+    }
+
+    private void initListener() {
 
         //		 点击一条记录后，跳转到登记时详细的信息
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -77,24 +92,24 @@ public class VehicleReturnActivity extends BaseActivity  implements RefreshListV
                 int headerViewsCount = myListView.getHeaderViewsCount();//得到header的总数量
                 int newPosition = position - headerViewsCount;//得到新的修正后的position
 
-                MyApplicationModel myApplicationModel = (MyApplicationModel) vAdapter.getItem(newPosition);//
-                String type = myApplicationModel.getApplicationType();//申请类型
-                PageUtil.DisplayToast(type);
+                //所需参数
+                VehicleReturnModel model = (VehicleReturnModel) vAdapter.getItem(newPosition);//
+
+                //页面跳转
+                transferTo(model);
             }
         });
-
-        getData();
     }
 
     private void getData() {
-        Loading.run(VehicleReturnActivity.this, new Runnable() {
+        Loading.run(VehicleReturnListActivity.this, new Runnable() {
             @Override
             public void run() {
                 ifLoading = true;//
                 String storeID = UserHelper.getCurrentUser().getStoreID();
                 try {
-                    List<MyApplicationModel> visitorModelList = UserHelper.GetMyApplicationSearchResults(
-                            VehicleReturnActivity.this,
+                    List<VehicleReturnModel> visitorModelList = UserHelper.GetVehicleReturnResults(
+                            VehicleReturnListActivity.this,
                             "",//iMaxTime
                             "");
 
@@ -117,14 +132,15 @@ public class VehicleReturnActivity extends BaseActivity  implements RefreshListV
     //RefreshListView.IReflashListener接口 下拉刷新
     @Override
     public void onRefresh() {
-        Loading.noDialogRun(VehicleReturnActivity.this, new Runnable() {
+        Loading.noDialogRun(VehicleReturnListActivity.this, new Runnable() {
 
             @Override
             public void run() {
                 ifLoading = true;//
                 try {
-                    List<MyApplicationModel> visitorModelList = UserHelper.GetMyApplicationSearchResults(
-                            VehicleReturnActivity.this,
+
+                    List<VehicleReturnModel> visitorModelList = UserHelper.GetVehicleReturnResults(
+                            VehicleReturnListActivity.this,
                             IMaxtime,//iMaxTime
                             "");
 
@@ -144,6 +160,7 @@ public class VehicleReturnActivity extends BaseActivity  implements RefreshListV
 
         });
     }
+
     // 上拉加载
     BaseListAdapter.AdapterCallBack adapterCallBack = new BaseListAdapter.AdapterCallBack() {
         @Override
@@ -153,15 +170,15 @@ public class VehicleReturnActivity extends BaseActivity  implements RefreshListV
                 return;
             }
 
-            Loading.run(VehicleReturnActivity.this, new Runnable() {
+            Loading.run(VehicleReturnListActivity.this, new Runnable() {
 
                 @Override
                 public void run() {
 
                     ifLoading = true;//
                     try {
-                        List<MyApplicationModel> visitorModelList = UserHelper.GetMyApplicationSearchResults(
-                                VehicleReturnActivity.this,
+                        List<VehicleReturnModel> visitorModelList = UserHelper.GetVehicleReturnResults(
+                                VehicleReturnListActivity.this,
                                 "",//iMaxTime
                                 IMinTime);
 
@@ -187,7 +204,7 @@ public class VehicleReturnActivity extends BaseActivity  implements RefreshListV
         switch (msg.what) {
             case GET_NEW_DATA://进入页面加载最新
                 // 数据显示
-                list = (ArrayList<MyApplicationModel>) msg.obj;
+                list = (ArrayList<VehicleReturnModel>) msg.obj;
                 vAdapter.setEntityList(list);
                 //数据处理，获取iLastUpdateTime参数方便后续上拉/下拉使用
                 setIMinTime(list);
@@ -197,7 +214,7 @@ public class VehicleReturnActivity extends BaseActivity  implements RefreshListV
                 ifLoading = false;
                 break;
             case GET_REFRESH_DATA://刷新
-                list = (ArrayList<MyApplicationModel>) msg.obj;
+                list = (ArrayList<VehicleReturnModel>) msg.obj;
                 vAdapter.insertEntityList(list);
                 //数据处理/只存最大值,做刷新新数据使用
                 setIMaxTime(list);
@@ -205,7 +222,7 @@ public class VehicleReturnActivity extends BaseActivity  implements RefreshListV
                 break;
 
             case GET_MORE_DATA://加载
-                list = (ArrayList<MyApplicationModel>) msg.obj;
+                list = (ArrayList<VehicleReturnModel>) msg.obj;
                 vAdapter.addEntityList(list);
                 //数据处理，只存最小值
                 setIMinTime(list);
@@ -226,12 +243,44 @@ public class VehicleReturnActivity extends BaseActivity  implements RefreshListV
         super.handleMessage(msg);
     }
 
-    public void setIMaxTime(ArrayList<MyApplicationModel> list) {
-        IMaxtime = list.get(0).getCreateTime();
+    public void setIMaxTime(ArrayList<VehicleReturnModel> list) {
+        IMaxtime = list.get(0).getCopyTime();
     }
 
-    public void setIMinTime(ArrayList<MyApplicationModel> list) {
-        IMinTime = list.get(list.size() - 1).getCreateTime();
+    public void setIMinTime(ArrayList<VehicleReturnModel> list) {
+        IMinTime = list.get(list.size() - 1).getCopyTime();
+    }
+
+    private void transferTo(VehicleReturnModel model) {
+        Intent intent = new Intent();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("VehicleReturnModel", model);
+        intent.putExtras(bundle);
+        //用车
+        if (model.getApplicationType().contains("用车申请") || model.getApplicationType().contains("用车")) {
+
+            if (model.getIsBack().equals("1")) {
+                Log.d("SJY", "用车-已交车");
+                intent.setClass(this, VehicleReturnUseCompleteActivity.class);
+                startActivity(intent);//用车-已交车
+            } else {
+                Log.d("SJY", "用车-未交车");
+                intent.setClass(this, VehicleReturnUseUncompleteActivity.class);
+                startActivity(intent);//用车-未交车
+            }
+        }
+        //维保
+        if (model.getApplicationType().contains("车辆维保") || model.getApplicationType().contains("维保")) {
+            if (model.getIsBack().equals("1")) {
+                Log.d("SJY", "维保-已交车");
+                intent.setClass(this, VehicleReturnMaintenanceCompleteActivity.class);
+                startActivity(intent);//维保-已交车
+            } else {
+                Log.d("SJY", "维保-未交车");
+                intent.setClass(this, VehicleReturnMaintenanceUncompleteActivity.class);
+                startActivity(intent);//维保-未交车
+            }
+        }
     }
 
     /**

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
+ * 办公室申请
  * Created by sjy on 2017/1/21.
  */
 

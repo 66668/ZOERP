@@ -1,6 +1,7 @@
 package com.zhongou.adapter;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.TextView;
 
@@ -8,9 +9,10 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.zhongou.R;
+import com.zhongou.application.MyApplication;
 import com.zhongou.base.BaseListAdapter;
 import com.zhongou.common.ImageLoadingConfig;
-import com.zhongou.model.MyApplicationModel;
+import com.zhongou.model.VehicleReturnModel;
 
 
 /**
@@ -26,10 +28,9 @@ public class VehicleReturnListAdapter extends BaseListAdapter {
 
     public class WidgetHolder {
         public TextView tvTitle;
-        public TextView tvName;
         public TextView tvTime;
         public TextView tvType;
-        public TextView tvComment;
+        public TextView tv_status;
     }
 
     public VehicleReturnListAdapter(Context context, AdapterCallBack callBack) {
@@ -45,11 +46,10 @@ public class VehicleReturnListAdapter extends BaseListAdapter {
         View view = inflater.inflate(R.layout.item_vehicle_return, null);
         //该布局上的控件
         WidgetHolder holder = new WidgetHolder();
-        holder.tvName = (TextView) view.findViewById(R.id.tv_name);
         holder.tvTitle = (TextView) view.findViewById(R.id.tv_title);
         holder.tvTime = (TextView) view.findViewById(R.id.tv_time);
         holder.tvType = (TextView) view.findViewById(R.id.tv_type);
-        holder.tvComment = (TextView) view.findViewById(R.id.tv_Comment);
+        holder.tv_status = (TextView) view.findViewById(R.id.tv_status);
         view.setTag(holder);
         return view;
     }
@@ -59,12 +59,22 @@ public class VehicleReturnListAdapter extends BaseListAdapter {
         WidgetHolder holder = (WidgetHolder) convertView.getTag();//获取控件管理实例
         //获取一条信息
         //?java.lang.ClassCastException: java.util.ArrayList cannot be cast to com.yvision.model.VisitorBModel
-        MyApplicationModel model = (MyApplicationModel) entityList.get(position);
-        holder.tvName.setText(model.getEmployeeName());
-        holder.tvTime.setText(model.getCreateTime());
-        holder.tvComment.setText(model.getComment());
+        VehicleReturnModel model = (VehicleReturnModel) entityList.get(position);
+        holder.tvTime.setText(model.getCopyTime());
         holder.tvType.setText(model.getApplicationType());
         holder.tvTitle.setText(model.getApplicationTitle());
+
+        if (model.getIsBack().equals("0")) {
+            holder.tv_status.setTextColor(ContextCompat.getColor(MyApplication.getInstance(), R.color.red));
+            holder.tv_status.setText(MyApplication.getInstance().getResources().getString(R.string.vehicleRe_uncomplete));
+        } else if (model.getIsBack().equals("1")) {
+            holder.tv_status.setTextColor(ContextCompat.getColor(MyApplication.getInstance(), R.color.textHintColor));
+            holder.tv_status.setText(MyApplication.getInstance().getResources().getString(R.string.vehicleRe_complete));
+        } else {
+            holder.tv_status.setTextColor(ContextCompat.getColor(MyApplication.getInstance(), R.color.textHintColor));
+            holder.tv_status.setText(MyApplication.getInstance().getResources().getString(R.string.vehicleRe_complete));
+        }
+
     }
 
 

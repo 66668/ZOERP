@@ -57,15 +57,15 @@ public class OfficeDetailApvlActivity extends BaseActivity {
     LinearLayout laytout_decide;
 
     //驳回
-    @ViewInject(id = R.id.btn_refulse,click = "forRefulse")
+    @ViewInject(id = R.id.btn_refulse, click = "forRefulse")
     Button btn_refulse;
 
     //批准
-    @ViewInject(id = R.id.btn_commit,click = "toForCommit")
+    @ViewInject(id = R.id.btn_commit, click = "toForCommit")
     Button btn_commit;
 
     //转交
-    @ViewInject(id = R.id.btn_transfer,click = "forTransfer")
+    @ViewInject(id = R.id.btn_transfer, click = "forTransfer")
     Button btn_transfer;
 
     //审批bottom
@@ -73,8 +73,29 @@ public class OfficeDetailApvlActivity extends BaseActivity {
     LinearLayout laytout_copy;
 
     //抄送
-    @ViewInject(id = R.id.btn_copytp,click = "forCopyto")
+    @ViewInject(id = R.id.btn_copytp, click = "forCopyto")
     Button btn_copytp;
+
+    //标题
+    @ViewInject(id = R.id.tv_office_title)
+    TextView tv_office_title;
+
+    //时间
+    @ViewInject(id = R.id.tv_office_time)
+    TextView tv_office_time;
+
+    //人数
+    @ViewInject(id = R.id.tv_office_number)
+    TextView tv_office_number;
+
+    //用途
+    @ViewInject(id = R.id.tv_office_useage)
+    TextView tv_office_useage;
+
+    //审批人
+    @ViewInject(id = R.id.tv_Requester)
+    TextView tv_Requester;
+
 
     private MyApprovalModel myApprovalModel;
     private OfficeApvlModel model;
@@ -98,30 +119,33 @@ public class OfficeDetailApvlActivity extends BaseActivity {
     }
 
     private void setShow(OfficeApvlModel model) {
+        //
         tv_ApprovalPerson.setText(model.getEmployeeName());
         tv_approvaldept.setText(model.getDepartmentName());
         tv_approvalCo.setText(model.getStoreName());
         tv_approvalTime.setText(model.getApplicationCreateTime());
 
-//        tv_borrowThings.setText(model.getBorrowThings());
-//        tv_borrowType.setText(model.getBorrowType());
-//        tv_StartTime.setText(model.getStartTime());
-//        tv_endTime.setText(model.getFinishTime());
-//        tv_reason.setText(model.getReason());
-//        if (model.getApprovalInfoLists().size() > 0) {
-//            tv_Requester.setText(model.getApplicationCreateTime());
-//        } else {
-//            tv_Requester.setText("未审批");
-//        }
+        //
+        tv_office_title.setText(model.getApplicationTitle());
+        tv_office_time.setText(model.getTime());
+        tv_office_number.setText(model.getNumParticipant());
+        tv_office_useage.setText(model.getUseage());
+
+        if (model.getApprovalInfoLists().size() > 0) {
+            tv_Requester.setText(model.getApplicationCreateTime());
+        } else {
+            tv_Requester.setText("未审批");
+        }
     }
+
     private void bottomType() {
         //
-        if(myApprovalModel.getApprovalStatus().contains("1")){
+        if (myApprovalModel.getApprovalStatus().contains("1")) {
 
             laytout_decide.setVisibility(View.GONE);
             laytout_copy.setVisibility(View.VISIBLE);
 
-        }else {
+        } else {
             laytout_decide.setVisibility(View.VISIBLE);
             laytout_copy.setVisibility(View.GONE);
         }
@@ -142,6 +166,7 @@ public class OfficeDetailApvlActivity extends BaseActivity {
             }
         });
     }
+
     @Override
     protected void handleMessage(Message msg) {
         super.handleMessage(msg);
@@ -157,30 +182,35 @@ public class OfficeDetailApvlActivity extends BaseActivity {
                 break;
         }
     }
+
     //驳回
-    public void forRefulse(View view){
+    public void forRefulse(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonDisagreeActivity.class,bundle);
+        startActivity(CommonDisagreeActivity.class, bundle);
     }
+
     //同意
-    public void toForCommit(View view){
+    public void toForCommit(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonAgreeActivity.class,bundle);
+        startActivity(CommonAgreeActivity.class, bundle);
     }
+
     //转交
-    public void forTransfer(View view){
+    public void forTransfer(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonTransfertoActivity.class,bundle);
+        startActivity(CommonTransfertoActivity.class, bundle);
     }
+
     // 抄送
-    public void forCopyto(View view){
+    public void forCopyto(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonCopytoCoActivity.class,bundle);
+        startActivity(CommonCopytoCoActivity.class, bundle);
     }
+
     /**
      * back
      *

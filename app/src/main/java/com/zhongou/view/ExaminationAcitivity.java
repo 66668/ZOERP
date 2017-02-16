@@ -11,8 +11,8 @@ import com.zhongou.base.BaseActivity;
 import com.zhongou.inject.ViewInject;
 import com.zhongou.view.examination.BorrowActivity;
 import com.zhongou.view.examination.DimissionActivity;
+import com.zhongou.view.examination.FinancialAplActivity;
 import com.zhongou.view.examination.LeaveActivity;
-import com.zhongou.view.examination.LoanReimbursementActivity;
 import com.zhongou.view.examination.RecruitmentActivity;
 import com.zhongou.view.examination.SalaryadjustActivity;
 import com.zhongou.view.examination.TakeDaysOffActivity;
@@ -214,12 +214,12 @@ public class ExaminationAcitivity extends BaseActivity {
     }
 
     /**
-     * 10借款报销
+     * 10财务申请
      *
      * @param view
      */
     public void forLoanReimbursement(View view) {
-        startActivity(LoanReimbursementActivity.class);
+        startActivity(FinancialAplActivity.class);
     }
 
 

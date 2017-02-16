@@ -4,16 +4,17 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
+ * 领用
  * Created by sjy on 2017/1/21.
  */
 
 public class ReceiveModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public String Name;//
-    public String Specification;//
-    public String Versions;//
-    public String Amount;//
+    public String Name;//领用物品名称
+    public String Specification;//规格
+    public String Versions;//型号
+    public String Amount;//数量
     public String Remark;//
     public String Reason;//
 

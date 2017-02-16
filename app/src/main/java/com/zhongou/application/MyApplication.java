@@ -198,5 +198,7 @@ public class MyApplication extends Application {
 		for (Activity activity : listCurrAct) {
 			activity.finish();
 		}
+		//清空数据
+		listCurrAct.clear();
 	}
 }

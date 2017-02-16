@@ -10,11 +10,13 @@ import java.util.List;
 
 public class NotificationAndNoticeApvlModel implements Serializable {
     private static final long serialVersionUID = 1L;
+    public String Abstract;//描述 (接受范围)
+    public String ApplicationTitle;//公告名称
+    public String PublishType;//类型
+    public String PublishTime;//通知时间
+    public String Remark;//备注
 
-    public String Abstract;
-    public String ApplicationTitle;
-    public String PublishType;
-    public String Remark;
+    public String CreateTime;//创建时间
 
     public String ApprovalStatus;
     public String EmployeeName;
@@ -25,7 +27,6 @@ public class NotificationAndNoticeApvlModel implements Serializable {
 
     //未用
     public String EmployeeID;
-    public String CreateTime;
     public String StoreID;
 
     public static class ApprovalInfoLists{
@@ -176,5 +177,13 @@ public class NotificationAndNoticeApvlModel implements Serializable {
 
     public void setPublishType(String publishType) {
         PublishType = publishType;
+    }
+
+    public String getPublishTime() {
+        return PublishTime;
+    }
+
+    public void setPublishTime(String publishTime) {
+        PublishTime = publishTime;
     }
 }

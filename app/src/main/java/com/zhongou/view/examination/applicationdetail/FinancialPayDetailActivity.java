@@ -1,4 +1,4 @@
-package com.zhongou.view.examination.copydetail;
+package com.zhongou.view.examination.applicationdetail;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,7 +29,7 @@ import static com.zhongou.R.id.tv_contains;
  * Created by sjy on 2016/12/2.
  */
 
-public class LoanReimbursementDetailCopyActivity extends BaseActivity {
+public class FinancialPayDetailActivity extends BaseActivity {
     //back
     @ViewInject(id = R.id.layout_back, click = "forBack")
     RelativeLayout layout_back;
@@ -42,18 +42,6 @@ public class LoanReimbursementDetailCopyActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_right)
     TextView tv_right;
 
-    //申请类型
-    @ViewInject(id = R.id.tv_type)
-    TextView tv_type;
-
-    //用途
-    @ViewInject(id = R.id.tv_Useage)
-    TextView tv_Useages;
-
-    //方式
-    @ViewInject(id = R.id.tv_way)
-    TextView tv_way;
-
     //金额
     @ViewInject(id = R.id.tv_fee)
     TextView tv_fee;
@@ -62,19 +50,7 @@ public class LoanReimbursementDetailCopyActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_PlanbackTime)
     TextView tv_PlanbackTime;
 
-    //户名
-    @ViewInject(id = R.id.tv_AdminName)
-    TextView tv_AdminName;
-
-    //开户行
-    @ViewInject(id = R.id.tv_BankAccount)
-    TextView tv_BankAccount;
-
-    //账号
-    @ViewInject(id = R.id.tv_AccountNumber)
-    TextView tv_AccountNumber;
-
-    //备注
+    //原因
     @ViewInject(id = R.id.tv_reason)
     TextView tv_reason;
 
@@ -87,6 +63,11 @@ public class LoanReimbursementDetailCopyActivity extends BaseActivity {
     TextView tv_state_result;
     @ViewInject(id = R.id.layout_state, click = "forState")
     LinearLayout layout_state;
+
+    //获取子控件个数的父控件
+    @ViewInject(id = R.id.layout_ll)
+    LinearLayout layout_ll;
+
     //变量
     private Intent intent = null;
     private LoanReimbursementModel loanReimbursementModel;
@@ -98,8 +79,6 @@ public class LoanReimbursementDetailCopyActivity extends BaseActivity {
     private View childView;
     private LayoutInflater inflater;//ViewHolder对象用来保存实例化View的子控件
     private List<ViewHolder> listViewHolder = new ArrayList<>();
-    private LinearLayout ll_main;
-    //    private int mark = 5;//0显示在顶部
 
     //常量
     public static final int POST_SUCCESS = 11;
@@ -108,8 +87,8 @@ public class LoanReimbursementDetailCopyActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_apps_examination_loanreimbursement_d);
-        tv_title.setText(getResources().getString(R.string.loanReimburse_d));
+        setContentView(R.layout.act_apps_examination_financial_pay_d);
+        tv_title.setText(getResources().getString(R.string.financial_pay));
         tv_right.setText("");
 
         intent = getIntent();
@@ -118,16 +97,11 @@ public class LoanReimbursementDetailCopyActivity extends BaseActivity {
     }
 
     private void setShow(LoanReimbursementModel model) {
-        tv_type.setText(model.getType());
-        tv_Useages.setText(model.getUseage());
-        tv_way.setText(model.getWay());
+
         tv_fee.setText(model.getFee());
         tv_reason.setText(model.getRemark());
 
         tv_PlanbackTime.setText(model.getPlanbackTime());
-        tv_AdminName.setText(model.getAdminName());
-        tv_BankAccount.setText(model.getBankAccount());
-        tv_AccountNumber.setText(model.getAccountNumber());
 
         modelList = model.getApprovalInfoLists();
         // 审批人
@@ -151,18 +125,22 @@ public class LoanReimbursementDetailCopyActivity extends BaseActivity {
             tv_state_result.setText("你猜猜！");
         }
 
-        for (int i = 0, mark = 11; i < modelList.size(); i++, mark++) {//mark是布局插入位置，放在mark位置的后边（从1开始计数）
-            ViewHolder vh = AddView(mark);//添加布局
-            vh.tv_name.setText(modelList.get(i).getApprovalEmployeeName());
-            vh.tv_time.setText(modelList.get(i).getApprovalDate());
-            vh.tv_contains.setText(modelList.get(i).getComment());
-            if (modelList.get(i).getYesOrNo().contains("1")) {
-                vh.tv_yesOrNo.setText("已审批");
-            } else {
-                vh.tv_yesOrNo.setText("未审批");
-                vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
+        if (loanReimbursementModel.getApprovalStatus().contains("1") || loanReimbursementModel.getApprovalStatus().contains("2")) {
+            //插入意见
+            for (int i = 0, mark = layout_ll.getChildCount(); i < modelList.size(); i++, mark++) {//mark是布局插入位置，放在mark位置的后边（从1开始计数）
+                ViewHolder vh = AddView(mark);//添加布局
+                vh.tv_name.setText(modelList.get(i).getApprovalEmployeeName());
+                vh.tv_time.setText(modelList.get(i).getApprovalDate());
+                vh.tv_contains.setText(modelList.get(i).getComment());
+                if (modelList.get(i).getYesOrNo().contains("1")) {
+                    vh.tv_yesOrNo.setText("已审批");
+                } else {
+                    vh.tv_yesOrNo.setText("未审批");
+                    vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
+                }
             }
         }
+
     }
 
 
@@ -174,7 +152,7 @@ public class LoanReimbursementDetailCopyActivity extends BaseActivity {
             @Override
             public void run() {
                 try {
-                    LoanReimbursementModel model1 = UserHelper.applicationDetailPostLoan(LoanReimbursementDetailCopyActivity.this,
+                    LoanReimbursementModel model1 = UserHelper.applicationDetailPostLoan(FinancialPayDetailActivity.this,
                             model.getApplicationID(),
                             model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
@@ -215,12 +193,11 @@ public class LoanReimbursementDetailCopyActivity extends BaseActivity {
 
     //初始化参数
     private ViewHolder AddView(int marks) {
-        ll_main = (LinearLayout) findViewById(R.id.layout_ll);
         ls_childView = new ArrayList<View>();
         inflater = LayoutInflater.from(getApplicationContext());
         childView = inflater.inflate(R.layout.item_examination_status, null);
         childView.setId(marks);
-        ll_main.addView(childView, marks);
+        layout_ll.addView(childView, marks);
         return getViewInstance(childView);
 
     }

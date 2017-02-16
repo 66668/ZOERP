@@ -43,7 +43,6 @@ public class OfficeDetailActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_right)
     TextView tv_right;
 
-
     //审批人
     @ViewInject(id = R.id.tv_Requester)
     TextView tv_Requester;
@@ -54,6 +53,33 @@ public class OfficeDetailActivity extends BaseActivity {
     TextView tv_state_result;
     @ViewInject(id = R.id.layout_state, click = "forState")
     LinearLayout layout_state;
+
+    //标题
+    @ViewInject(id = R.id.tv_office_title)
+    TextView tv_office_title;
+
+    //时间
+    @ViewInject(id = R.id.tv_office_time)
+    TextView tv_office_time;
+
+    //人数
+    @ViewInject(id = R.id.tv_office_number)
+    TextView tv_office_number;
+
+    //用途
+    @ViewInject(id = R.id.tv_office_useage)
+    TextView tv_office_useage;
+
+    //备注
+    @ViewInject(id = R.id.tv_office_other)
+    TextView tv_office_other;
+
+
+    //获取子控件个数的父控件
+    @ViewInject(id = R.id.layout_ll)
+    LinearLayout layout_ll;
+
+
     //变量
     private Intent intent = null;
     private OfficeModel officeModel;
@@ -64,11 +90,10 @@ public class OfficeDetailActivity extends BaseActivity {
     private View childView;
     private LayoutInflater inflater;//ViewHolder对象用来保存实例化View的子控件
     private List<ViewHolder> listViewHolder = new ArrayList<>();
-    private LinearLayout ll_main;
-    //    private int mark = 5;//0显示在顶部
     //常量
     public static final int POST_SUCCESS = 11;
     public static final int POST_FAILED = 12;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,11 +105,17 @@ public class OfficeDetailActivity extends BaseActivity {
         model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
         getDetailModel(model);
     }
-    private void setShow(OfficeModel model) {
 
-        modelList = model.getApprovalInfoLists();
+    private void setShow(OfficeModel model) {
+        //
+        tv_office_title.setText(model.getApplicationTitle());
+        tv_office_time.setText(model.getTime());
+        tv_office_number.setText(model.getNumParticipant());
+        tv_office_useage.setText(model.getUseage());
+        tv_office_other.setText(model.getRemark());
 
         // 审批人
+        modelList = model.getApprovalInfoLists();
         StringBuilder nameBuilder = new StringBuilder();
         for (int i = 0; i < modelList.size(); i++) {
             nameBuilder.append(modelList.get(i).getApprovalEmployeeName() + " ");
@@ -105,18 +136,22 @@ public class OfficeDetailActivity extends BaseActivity {
             tv_state_result.setText("你猜猜！");
         }
 
-        for (int i = 0, mark = 5; i < modelList.size(); i++, mark++) {//mark是布局插入位置，放在mark位置的后边（从1开始计数）
-            ViewHolder vh = AddView(mark);//添加布局
-            vh.tv_name.setText(modelList.get(i).getApprovalEmployeeName());
-            vh.tv_time.setText(modelList.get(i).getApprovalDate());
-            vh.tv_contains.setText(modelList.get(i).getComment());
-            if (modelList.get(i).getYesOrNo().contains("1")) {
-                vh.tv_yesOrNo.setText("已审批");
-            } else {
-                vh.tv_yesOrNo.setText("未审批");
-                vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
+        if (officeModel.getApprovalStatus().contains("1") || officeModel.getApprovalStatus().contains("2")) {
+            //插入意见
+            for (int i = 0, mark = layout_ll.getChildCount(); i < modelList.size(); i++, mark++) {//mark是布局插入位置，放在mark位置的后边（从1开始计数）
+                ViewHolder vh = AddView(mark);//添加布局
+                vh.tv_name.setText(modelList.get(i).getApprovalEmployeeName());
+                vh.tv_time.setText(modelList.get(i).getApprovalDate());
+                vh.tv_contains.setText(modelList.get(i).getComment());
+                if (modelList.get(i).getYesOrNo().contains("1")) {
+                    vh.tv_yesOrNo.setText("已审批");
+                } else {
+                    vh.tv_yesOrNo.setText("未审批");
+                    vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
+                }
             }
         }
+
     }
 
     /**
@@ -166,12 +201,12 @@ public class OfficeDetailActivity extends BaseActivity {
 
     //初始化参数
     private ViewHolder AddView(int marks) {
-        ll_main = (LinearLayout) findViewById(R.id.layout_ll);
         ls_childView = new ArrayList<View>();
         inflater = LayoutInflater.from(getApplicationContext());
         childView = inflater.inflate(R.layout.item_examination_status, null);
         childView.setId(marks);
-        ll_main.addView(childView, marks);
+        layout_ll.addView(childView, marks);
+
         return getViewInstance(childView);
 
     }
@@ -187,6 +222,7 @@ public class OfficeDetailActivity extends BaseActivity {
         ls_childView.add(childView);
         return vh;
     }
+
     /**
      * back
      *

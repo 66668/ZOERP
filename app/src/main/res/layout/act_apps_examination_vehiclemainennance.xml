@@ -446,7 +446,7 @@
                     android:textColorHint="@color/cl_hint_common"/>
 
                 <EditText
-                    android:id="@+id/et_reason"
+                    android:id="@+id/et_remark"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"

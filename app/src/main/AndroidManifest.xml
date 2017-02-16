@@ -142,7 +142,6 @@
         </activity>
 
 
-
         <!-- 01-03我的抄送-->
         <activity
             android:name="com.zhongou.view.examination.ZOCopyListActivity"
@@ -394,13 +393,45 @@
         </activity>
 
 
-        <!-- 借款10-->
+        <!-- 财务申请10-->
         <activity
-            android:name="com.zhongou.view.examination.LoanReimbursementActivity"
+            android:name="com.zhongou.view.examination.FinancialAplActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+        <!-- 财务-借款申请10-01 -->
+        <activity
+            android:name="com.zhongou.view.examination.FinancialLoanActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 财务-报销申请10-02 -->
+        <activity
+            android:name="com.zhongou.view.examination.FinancialReimburseActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 财务-付款申请10-03 -->
+        <activity
+            android:name="com.zhongou.view.examination.FinancialPayActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 财务-费用申请10-04 -->
+        <activity
+            android:name="com.zhongou.view.examination.FinancialFeeActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
         <activity
             android:name="com.zhongou.view.examination.applicationdetail.LoanReimbursementDetailActivity"
             android:label="@string/app_name"
@@ -697,6 +728,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
+
         <!--08 采购领用 -->
         <activity
             android:name="com.zhongou.view.ProcueRecordActivity"
@@ -705,14 +737,62 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!--09 交车 -->
+
+        <!--09 交车 记录界面01 -->
         <activity
-            android:name="com.zhongou.view.VehicleReturnActivity"
+            android:name="com.zhongou.view.VehicleReturnListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
+        <!--09 交车 用车-未交车02 -->
+        <activity
+            android:name="com.zhongou.view.vehiclereturn.VehicleReturnUseUncompleteActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--09 交车 用车-交车提交03 -->
+        <activity
+            android:name="com.zhongou.view.vehiclereturn.VehicleReturnUseToCompleteActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--09 交车 用车-已交车详情04 -->
+        <activity
+            android:name="com.zhongou.view.vehiclereturn.VehicleReturnUseCompleteActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--09 交车 未维保-未交车05 -->
+        <activity
+            android:name="com.zhongou.view.vehiclereturn.VehicleReturnMaintenanceUncompleteActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--09 交车 维保-交车提交界面05 -->
+        <activity
+            android:name="com.zhongou.view.vehiclereturn.VehicleReturnMaintenanceToCompleteActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--09 交车 维保-已交车详情06 -->
+        <activity
+            android:name="com.zhongou.view.vehiclereturn.VehicleReturnMaintenanceCompleteActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
 
         <!--通讯录-子公司01 -->
         <activity

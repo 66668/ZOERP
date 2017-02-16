@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/snow"
-              android:orientation="vertical">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/common_bg_examination"
+                android:orientation="vertical">
 
     <include
-        android:id="@+id/topbar"
+        android:id="@+id/include"
         layout="@layout/topbar_common_itt"/>
 
     <ScrollView
+        android:id="@+id/layout_scrollview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btn_returnVehicle"
+        android:layout_below="@+id/include">
 
         <LinearLayout
             android:id="@+id/layout_ll"
@@ -47,6 +50,7 @@
                     android:gravity="center_vertical"
                     />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/common_topbar_height40"
@@ -75,6 +79,7 @@
                     android:gravity="center_vertical"
                     />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/common_topbar_height40"
@@ -90,11 +95,11 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
-                    android:text="@string/loanReimburseType"
+                    android:text="@string/vehicleMainennanceType"
                     android:textColor="@color/cl_text_common"/>
 
                 <TextView
-                    android:id="@+id/tv_type"
+                    android:id="@+id/tv_vehicleMainennanceType"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -119,18 +124,17 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
-                    android:text="@string/loanReimburseUseType"
+                    android:text="@string/vehicleMainennanceAddress"
                     android:textColor="@color/cl_text_common"/>
 
                 <TextView
-                    android:id="@+id/tv_Useage"
+                    android:id="@+id/tv_vehicleMainennanceAddress"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.72"
-                    android:gravity="center_vertical"
-                    />
+                    android:gravity="center_vertical"/>
             </LinearLayout>
 
             <LinearLayout
@@ -148,11 +152,11 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
-                    android:text="@string/loanReimburseUsestyle"
+                    android:text="@string/vehicleMainennanceContainer"
                     android:textColor="@color/cl_text_common"/>
 
                 <TextView
-                    android:id="@+id/tv_way"
+                    android:id="@+id/tv_vehicleMainennanceContainer"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -177,11 +181,11 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
-                    android:text="@string/loanReimburseMoney"
+                    android:text="@string/vehicleMainennanceTimeStart"
                     android:textColor="@color/cl_text_common"/>
 
                 <TextView
-                    android:id="@+id/tv_fee"
+                    android:id="@+id/tv_startTime"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -190,6 +194,7 @@
                     android:gravity="center_vertical"
                     />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/common_topbar_height40"
@@ -205,11 +210,11 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
-                    android:text="@string/loanPlanbackTime"
+                    android:text="@string/vehicleMainennanceNumber"
                     android:textColor="@color/cl_text_common"/>
 
                 <TextView
-                    android:id="@+id/tv_PlanbackTime"
+                    android:id="@+id/tv_carNumber"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -218,6 +223,7 @@
                     android:gravity="center_vertical"
                     />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/common_topbar_height40"
@@ -233,11 +239,11 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
-                    android:text="@string/loanAdminName"
+                    android:text="@string/vehicleRe_user"
                     android:textColor="@color/cl_text_common"/>
 
                 <TextView
-                    android:id="@+id/tv_AdminName"
+                    android:id="@+id/tv_driver"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -246,6 +252,7 @@
                     android:gravity="center_vertical"
                     />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/common_topbar_height40"
@@ -255,17 +262,18 @@
                 android:weightSum="1">
 
                 <TextView
+                    android:id="@+id/textView7"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
-                    android:text="@string/loanBankAccounts"
+                    android:text="@string/vehicleMainennanceMoney"
                     android:textColor="@color/cl_text_common"/>
 
                 <TextView
-                    android:id="@+id/tv_BankAccount"
+                    android:id="@+id/tv_EstimateFee"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -274,6 +282,7 @@
                     android:gravity="center_vertical"
                     />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/common_topbar_height40"
@@ -289,11 +298,11 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
-                    android:text="@string/loanAccountNumber"
+                    android:text="@string/vehicleRe_startTime_m"
                     android:textColor="@color/cl_text_common"/>
 
                 <TextView
-                    android:id="@+id/tv_AccountNumber"
+                    android:id="@+id/tv_ActStartTime"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -318,11 +327,11 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
-                    android:text="@string/loanReimburseReason"
+                    android:text="@string/vehicleRe_endTime"
                     android:textColor="@color/cl_text_common"/>
 
                 <TextView
-                    android:id="@+id/tv_reason"
+                    android:id="@+id/tv_actEndTime"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -341,60 +350,144 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:textColor="@color/cl_text_common"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
-                    android:text="@string/Requester"/>
-
-                <TextView
-                    android:id="@+id/tv_Requester"
-                    style="@style/BlackText.standard"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="0.72"
-                    android:gravity="center_vertical"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/layout_state"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/common_topbar_height40"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:weightSum="1">
-
-                <TextView
-                    style="@style/BlackText.standard"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="0.28"
-                    android:gravity="center_vertical"
-                    android:text="@string/state"
+                    android:text="@string/vehicleRe_inner"
                     android:textColor="@color/cl_text_common"/>
 
                 <TextView
-                    android:id="@+id/tv_state_result"
+                    android:id="@+id/tv_passenger"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.72"
-                    android:drawableRight="@mipmap/forword"
                     android:gravity="center_vertical"
-                    android:paddingRight="10dp"
-                    android:textColor="@color/red"
                     />
-
-
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_topbar_height40"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
+                    android:text="@string/vehicleRe_startMiles"
+                    android:textColor="@color/cl_text_common"/>
+
+                <TextView
+                    android:id="@+id/tv_startMiles"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.72"
+                    android:gravity="center_vertical"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_topbar_height40"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
+                    android:text="@string/vehicleRe_endMiles"
+                    android:textColor="@color/cl_text_common"/>
+
+                <TextView
+                    android:id="@+id/tv_endMiles"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.72"
+                    android:gravity="center_vertical"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_topbar_height40"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
+                    android:text="@string/vehicleRe_other"
+                    android:textColor="@color/cl_text_common"/>
+
+                <TextView
+                    android:id="@+id/tv_backRemark"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.72"
+                    android:gravity="center_vertical"
+                    />
+            </LinearLayout>
+
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/common_topbar_height40"-->
+                <!--android:background="@color/white"-->
+                <!--android:gravity="center_vertical"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:weightSum="1">-->
+
+                <!--<TextView-->
+                    <!--style="@style/BlackText.standard"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:layout_weight="0.28"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!--android:text="@string/carUsedOther"-->
+                    <!--android:textColor="@color/cl_text_common"/>-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/tv_other"-->
+                    <!--style="@style/BlackText.standard"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:layout_weight="0.72"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!--/>-->
+            <!--</LinearLayout>-->
 
         </LinearLayout>
     </ScrollView>
-</LinearLayout>
+
+</RelativeLayout>

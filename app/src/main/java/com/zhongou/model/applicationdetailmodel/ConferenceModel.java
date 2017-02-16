@@ -4,21 +4,21 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
+ * 会议
  * Created by sjy on 2017/1/21.
  */
 
 public class ConferenceModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public String ConferenceName;//
-    public String Title;//
-    public String Abstract;//
-    public String Participant;//
-    public String DeviceName;//
+    public String ConferenceName;//会议标题
+    public String Title;//会议主题
+    public String Abstract;//会议说明
+    public String Participant;//参与者
+    public String DeviceName;//准备设备
     public String StartTime;//
     public String FinishTime;//
-    public String Remark;//
-
+    public String Remark;//备注
 
 
     public String ApprovalStatus;

@@ -10,11 +10,13 @@ import java.util.List;
 public class NotificationAndNoticeModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public String PublishTime;//
-    public String Abstract;//
-    public String ApplicationTitle;//
-    public String PublishType;//
-    public String Remark;//
+    public String Abstract;//描述 (接受范围)
+    public String ApplicationTitle;//公告名称
+    public String PublishType;//类型
+    public String PublishTime;//通知时间
+    public String Remark;//备注
+
+    public String CreateTime;//创建时间
 
 
     public String ApprovalStatus;

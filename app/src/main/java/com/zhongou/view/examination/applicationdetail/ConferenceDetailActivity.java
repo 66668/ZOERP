@@ -42,6 +42,7 @@ public class ConferenceDetailActivity extends BaseActivity {
     //
     @ViewInject(id = R.id.tv_right)
     TextView tv_right;
+
     //审批人
     @ViewInject(id = R.id.tv_Requester)
     TextView tv_Requester;
@@ -51,6 +52,43 @@ public class ConferenceDetailActivity extends BaseActivity {
     TextView tv_state_result;
     @ViewInject(id = R.id.layout_state, click = "forState")
     LinearLayout layout_state;
+
+    //会议标题
+    @ViewInject(id = R.id.tv_conference_name)
+    TextView tv_conference_name;
+
+    //会议主题
+    @ViewInject(id = R.id.tv_conference_title)
+    TextView tv_conference_title;
+
+    //参与者
+    @ViewInject(id = R.id.tv_conference_partiner)
+    TextView tv_conference_partiner;
+
+    //准备
+    @ViewInject(id = R.id.tv_conference_Device)
+    TextView tv_conference_Device;
+
+    //说明描述
+    @ViewInject(id = R.id.tv_conference_Abstract)
+    TextView tv_conference_Abstract;
+
+    //开始
+    @ViewInject(id = R.id.tv_conference_start)
+    TextView tv_conference_start;
+
+    //结束
+    @ViewInject(id = R.id.tv_conference_end)
+    TextView tv_conference_end;
+
+    //备注
+    @ViewInject(id = R.id.tv_conference_other)
+    TextView tv_conference_other;
+
+    //获取子控件个数的父控件
+    @ViewInject(id = R.id.layout_ll)
+    LinearLayout layout_ll;
+
     //变量
     private Intent intent = null;
     private ConferenceModel conferenceModel;
@@ -61,7 +99,6 @@ public class ConferenceDetailActivity extends BaseActivity {
     private View childView;
     private LayoutInflater inflater;//ViewHolder对象用来保存实例化View的子控件
     private List<ViewHolder> listViewHolder = new ArrayList<>();
-    private LinearLayout ll_main;
     //    private int mark = 5;//0显示在顶部
     //常量
     public static final int POST_SUCCESS = 11;
@@ -78,10 +115,18 @@ public class ConferenceDetailActivity extends BaseActivity {
         getDetailModel(model);
     }
     private void setShow(ConferenceModel model) {
-
-        modelList = model.getApprovalInfoLists();
+        //
+        tv_conference_name.setText(model.getConferenceName());
+        tv_conference_title.setText(model.getTitle());
+        tv_conference_partiner.setText(model.getParticipant());
+        tv_conference_Device.setText(model.getDeviceName());
+        tv_conference_Abstract.setText(model.getAbstract());
+        tv_conference_start.setText(model.getStartTime());
+        tv_conference_end.setText(model.getFinishTime());
+        tv_conference_other.setText(model.getRemark());
 
         // 审批人
+        modelList = model.getApprovalInfoLists();
         StringBuilder nameBuilder = new StringBuilder();
         for (int i = 0; i < modelList.size(); i++) {
             nameBuilder.append(modelList.get(i).getApprovalEmployeeName() + " ");
@@ -102,18 +147,23 @@ public class ConferenceDetailActivity extends BaseActivity {
             tv_state_result.setText("你猜猜！");
         }
 
-        for (int i = 0, mark = 5; i < modelList.size(); i++, mark++) {//mark是布局插入位置，放在mark位置的后边（从1开始计数）
-            ViewHolder vh = AddView(mark);//添加布局
-            vh.tv_name.setText(modelList.get(i).getApprovalEmployeeName());
-            vh.tv_time.setText(modelList.get(i).getApprovalDate());
-            vh.tv_contains.setText(modelList.get(i).getComment());
-            if (modelList.get(i).getYesOrNo().contains("1")) {
-                vh.tv_yesOrNo.setText("已审批");
-            } else {
-                vh.tv_yesOrNo.setText("未审批");
-                vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
+
+        if (conferenceModel.getApprovalStatus().contains("1") || conferenceModel.getApprovalStatus().contains("2")) {
+            //插入意见
+            for (int i = 0, mark = layout_ll.getChildCount(); i < modelList.size(); i++, mark++) {//mark是布局插入位置，放在mark位置的后边（从1开始计数）
+                ViewHolder vh = AddView(mark);//添加布局
+                vh.tv_name.setText(modelList.get(i).getApprovalEmployeeName());
+                vh.tv_time.setText(modelList.get(i).getApprovalDate());
+                vh.tv_contains.setText(modelList.get(i).getComment());
+                if (modelList.get(i).getYesOrNo().contains("1")) {
+                    vh.tv_yesOrNo.setText("已审批");
+                } else {
+                    vh.tv_yesOrNo.setText("未审批");
+                    vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
+                }
             }
         }
+
     }
 
     /**
@@ -163,12 +213,11 @@ public class ConferenceDetailActivity extends BaseActivity {
 
     //初始化参数
     private ViewHolder AddView(int marks) {
-        ll_main = (LinearLayout) findViewById(R.id.layout_ll);
         ls_childView = new ArrayList<View>();
         inflater = LayoutInflater.from(getApplicationContext());
         childView = inflater.inflate(R.layout.item_examination_status, null);
         childView.setId(marks);
-        ll_main.addView(childView, marks);
+        layout_ll.addView(childView, marks);
         return getViewInstance(childView);
 
     }

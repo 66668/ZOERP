@@ -20,11 +20,11 @@ import com.zhongou.model.approvaldetailmodel.LoanReimbursementApvlModel;
 import com.zhongou.utils.PageUtil;
 
 /**
- * 借款报销
+ * 审批 付款申请
  * Created by sjy on 2016/12/2.
  */
 
-public class LoanReimbursementDetailApvlActivity extends BaseActivity {
+public class FinancialPayDetailApvlActivity extends BaseActivity {
     //back
     @ViewInject(id = R.id.layout_back, click = "forBack")
     RelativeLayout layout_back;
@@ -54,38 +54,6 @@ public class LoanReimbursementDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_approvalTime)
     TextView tv_approvalTime;
 
-
-    //申请类型
-    @ViewInject(id = R.id.tv_loanreimType)
-    TextView tv_loanreimType;
-
-    //用途类型
-    @ViewInject(id = R.id.tv_useType)
-    TextView tv_useType;
-
-    //方式
-    @ViewInject(id = R.id.tv_wayType)
-    TextView tv_wayType;
-
-    //金额
-    @ViewInject(id = R.id.tv_fee)
-    TextView tv_fee;
-
-    //还款时间
-    @ViewInject(id = R.id.tv_PlanbackTime)
-    TextView tv_PlanbackTime;
-
-    //户名
-    @ViewInject(id = R.id.tv_AdminName)
-    TextView tv_AdminName;
-
-    //开户行
-    @ViewInject(id = R.id.tv_BankAccount)
-    TextView tv_BankAccount;
-
-    //账户
-    @ViewInject(id = R.id.tv_AccountNumber)
-    TextView tv_AccountNumber;
 
     //备注
     @ViewInject(id = R.id.tv_reason)
@@ -129,8 +97,8 @@ public class LoanReimbursementDetailApvlActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_apps_examination_loanreimbursement_d2);
-        tv_title.setText(getResources().getString(R.string.loanReimburse_d));
+        setContentView(R.layout.act_apps_examination_financial_pay_d2);
+        tv_title.setText(getResources().getString(R.string.financial_pay_title_d));
         tv_right.setText("");
 
         Intent intent = getIntent();
@@ -146,17 +114,7 @@ public class LoanReimbursementDetailApvlActivity extends BaseActivity {
         tv_ApprovalPerson.setText(model.getEmployeeName());
         tv_approvaldept.setText(model.getDepartmentName());
         tv_approvalCo.setText(model.getStoreName());
-        tv_approvalTime.setText(model.getApplicationCreateTime());
 
-        tv_loanreimType.setText(model.getType());
-        tv_useType.setText(model.getUseage());
-        tv_wayType.setText(model.getWay());
-        tv_fee.setText(model.getFee());
-
-        tv_PlanbackTime.setText(model.getPlanbackTime());
-        tv_AdminName.setText(model.getAdminName());
-        tv_BankAccount.setText(model.getBankAccount());
-        tv_AccountNumber.setText(model.getAccountNumber());
         tv_remark.setText(model.getRemark());
         if (model.getApprovalInfoLists().size() > 0) {
             tv_Requester.setText(model.getApplicationCreateTime());
@@ -184,7 +142,7 @@ public class LoanReimbursementDetailApvlActivity extends BaseActivity {
             public void run() {
 
                 try {
-                    LoanReimbursementApvlModel model = UserHelper.approvalDetailPostVehicleloan(LoanReimbursementDetailApvlActivity.this,
+                    LoanReimbursementApvlModel model = UserHelper.approvalDetailPostVehicleloan(FinancialPayDetailApvlActivity.this,
                             myApprovalModel.getApplicationID(),
                             myApprovalModel.getApplicationType());
                     sendMessage(POST_SUCCESS, model);

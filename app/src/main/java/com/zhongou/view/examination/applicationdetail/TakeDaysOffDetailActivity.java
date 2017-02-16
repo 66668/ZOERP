@@ -73,6 +73,12 @@ public class TakeDaysOffDetailActivity extends BaseActivity {
     @ViewInject(id = R.id.layout_state, click = "forState")
     LinearLayout layout_state;
 
+
+    //获取子控件个数的父控件
+    @ViewInject(id = R.id.layout_ll)
+    LinearLayout layout_ll;
+
+
     //变量
     private Intent intent = null;
     private TakeDaysOffModel takeDaysOffModel;
@@ -83,8 +89,6 @@ public class TakeDaysOffDetailActivity extends BaseActivity {
     private View childView;
     private LayoutInflater inflater;//ViewHolder对象用来保存实例化View的子控件
     private List<ViewHolder> listViewHolder = new ArrayList<>();
-    private LinearLayout ll_main;
-    //    private int mark = 5;//0显示在顶部
     //常量
     public static final int POST_SUCCESS = 11;
     public static final int POST_FAILED = 12;
@@ -131,18 +135,22 @@ public class TakeDaysOffDetailActivity extends BaseActivity {
             tv_state_result.setText("你猜猜！");
         }
 
-        for (int i = 0, mark = 7; i < modelList.size(); i++, mark++) {//mark是布局插入位置，放在mark位置的后边（从1开始计数）
-            ViewHolder vh = AddView(mark);//添加布局
-            vh.tv_name.setText(modelList.get(i).getApprovalEmployeeName());
-            vh.tv_time.setText(modelList.get(i).getApprovalDate());
-            vh.tv_contains.setText(modelList.get(i).getComment());
-            if (modelList.get(i).getYesOrNo().contains("1")) {
-                vh.tv_yesOrNo.setText("已审批");
-            } else {
-                vh.tv_yesOrNo.setText("未审批");
-                vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
+        if (takeDaysOffModel.getApprovalStatus().contains("1") || takeDaysOffModel.getApprovalStatus().contains("2")) {
+            //插入意见
+            for (int i = 0, mark = layout_ll.getChildCount(); i < modelList.size(); i++, mark++) {//mark是布局插入位置，放在mark位置的后边（从1开始计数）
+                ViewHolder vh = AddView(mark);//添加布局
+                vh.tv_name.setText(modelList.get(i).getApprovalEmployeeName());
+                vh.tv_time.setText(modelList.get(i).getApprovalDate());
+                vh.tv_contains.setText(modelList.get(i).getComment());
+                if (modelList.get(i).getYesOrNo().contains("1")) {
+                    vh.tv_yesOrNo.setText("已审批");
+                } else {
+                    vh.tv_yesOrNo.setText("未审批");
+                    vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
+                }
             }
         }
+
     }
     /**
      * 获取详情数据
@@ -189,12 +197,11 @@ public class TakeDaysOffDetailActivity extends BaseActivity {
 
     //初始化参数
     private ViewHolder AddView(int marks) {
-        ll_main = (LinearLayout) findViewById(R.id.layout_ll);
         ls_childView = new ArrayList<View>();
         inflater = LayoutInflater.from(getApplicationContext());
         childView = inflater.inflate(R.layout.item_examination_status, null);
         childView.setId(marks);
-        ll_main.addView(childView, marks);
+        layout_ll.addView(childView, marks);
         return getViewInstance(childView);
 
     }

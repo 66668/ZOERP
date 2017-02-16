@@ -11,11 +11,11 @@ import java.io.Serializable;
 public class MyApplicationModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String Temp;
+    private String Temp;//
     private String ApprovalInfomodel;
     private String ApprovalID;
     private String ApplicationID;
-    private String ApplicationTitle;
+    private String ApplicationTitle;//标题
     private String ApplicationType;
     private String YesOrNo;
 

@@ -52,6 +52,39 @@ public class ReceiveDetailActivity extends BaseActivity {
     TextView tv_state_result;
     @ViewInject(id = R.id.layout_state, click = "forState")
     LinearLayout layout_state;
+
+    //物品名称
+    @ViewInject(id = R.id.tv_recevie_itemName)
+    TextView tv_recevie_itemName;
+
+    //规格
+    @ViewInject(id = R.id.tv_recevie_spiceil)
+    TextView tv_recevie_spiceil;
+
+    //型号
+    @ViewInject(id = R.id.tv_recevie_size)
+    TextView tv_recevie_size;
+
+    //数量
+    @ViewInject(id = R.id.tv_recevie_number)
+    TextView tv_recevie_number;
+    //用途
+    @ViewInject(id = R.id.tv_recevie_useage)
+    TextView tv_recevie_useage;
+
+    //备注
+    @ViewInject(id = R.id.tv_recevie_other)
+    TextView tv_recevie_other;
+
+    //申请时间
+    @ViewInject(id = R.id.tv_recevie_aplTime)
+    TextView tv_recevie_aplTime;
+
+    //获取子控件个数的父控件
+    @ViewInject(id = R.id.layout_ll)
+    LinearLayout layout_ll;
+
+
     //变量
     private Intent intent = null;
     private ReceiveModel receiveModel;
@@ -62,11 +95,10 @@ public class ReceiveDetailActivity extends BaseActivity {
     private View childView;
     private LayoutInflater inflater;//ViewHolder对象用来保存实例化View的子控件
     private List<ViewHolder> listViewHolder = new ArrayList<>();
-    private LinearLayout ll_main;
-    //    private int mark = 5;//0显示在顶部
     //常量
     public static final int POST_SUCCESS = 11;
     public static final int POST_FAILED = 12;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,11 +110,19 @@ public class ReceiveDetailActivity extends BaseActivity {
         model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
         getDetailModel(model);
     }
-    private void setShow(ReceiveModel model) {
 
-        modelList = model.getApprovalInfoLists();
+    private void setShow(ReceiveModel model) {
+        //
+        tv_recevie_itemName.setText(model.getName());
+        tv_recevie_spiceil.setText(model.getSpecification());
+        tv_recevie_size.setText(model.getVersions());
+        tv_recevie_number.setText(model.getAmount());
+        tv_recevie_other.setText(model.getRemark());
+        tv_recevie_useage.setText(model.getRemark());
+        tv_recevie_aplTime.setText(model.getApplicationCreateTime());//?
 
         // 审批人
+        modelList = model.getApprovalInfoLists();
         StringBuilder nameBuilder = new StringBuilder();
         for (int i = 0; i < modelList.size(); i++) {
             nameBuilder.append(modelList.get(i).getApprovalEmployeeName() + " ");
@@ -103,16 +143,19 @@ public class ReceiveDetailActivity extends BaseActivity {
             tv_state_result.setText("你猜猜！");
         }
 
-        for (int i = 0, mark = 5; i < modelList.size(); i++, mark++) {//mark是布局插入位置，放在mark位置的后边（从1开始计数）
-            ViewHolder vh = AddView(mark);//添加布局
-            vh.tv_name.setText(modelList.get(i).getApprovalEmployeeName());
-            vh.tv_time.setText(modelList.get(i).getApprovalDate());
-            vh.tv_contains.setText(modelList.get(i).getComment());
-            if (modelList.get(i).getYesOrNo().contains("1")) {
-                vh.tv_yesOrNo.setText("已审批");
-            } else {
-                vh.tv_yesOrNo.setText("未审批");
-                vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
+        if (receiveModel.getApprovalStatus().contains("1") || receiveModel.getApprovalStatus().contains("2")) {
+            //插入意见
+            for (int i = 0, mark = layout_ll.getChildCount(); i < modelList.size(); i++, mark++) {//mark是布局插入位置，放在mark位置的后边（从1开始计数）
+                ViewHolder vh = AddView(mark);//添加布局
+                vh.tv_name.setText(modelList.get(i).getApprovalEmployeeName());
+                vh.tv_time.setText(modelList.get(i).getApprovalDate());
+                vh.tv_contains.setText(modelList.get(i).getComment());
+                if (modelList.get(i).getYesOrNo().contains("1")) {
+                    vh.tv_yesOrNo.setText("已审批");
+                } else {
+                    vh.tv_yesOrNo.setText("未审批");
+                    vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
+                }
             }
         }
     }
@@ -164,12 +207,11 @@ public class ReceiveDetailActivity extends BaseActivity {
 
     //初始化参数
     private ViewHolder AddView(int marks) {
-        ll_main = (LinearLayout) findViewById(R.id.layout_ll);
         ls_childView = new ArrayList<View>();
         inflater = LayoutInflater.from(getApplicationContext());
         childView = inflater.inflate(R.layout.item_examination_status, null);
         childView.setId(marks);
-        ll_main.addView(childView, marks);
+        layout_ll.addView(childView, marks);
         return getViewInstance(childView);
 
     }
@@ -185,6 +227,7 @@ public class ReceiveDetailActivity extends BaseActivity {
         ls_childView.add(childView);
         return vh;
     }
+
     /**
      * back
      *

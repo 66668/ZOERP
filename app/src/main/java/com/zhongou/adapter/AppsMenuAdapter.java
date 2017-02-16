@@ -17,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zhongou.R;
-import com.zhongou.utils.PageUtil;
 import com.zhongou.view.ExaminationAcitivity;
 import com.zhongou.view.FinanceAcitivity;
 import com.zhongou.view.MapAttendAcitivity;
@@ -26,7 +25,7 @@ import com.zhongou.view.NotificationAcitivity;
 import com.zhongou.view.PerformanceManagerActivity;
 import com.zhongou.view.ProcueRecordActivity;
 import com.zhongou.view.ScheduleActivity;
-import com.zhongou.view.VehicleReturnActivity;
+import com.zhongou.view.VehicleReturnListActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -121,7 +120,7 @@ public class AppsMenuAdapter extends BaseAdapter {
                         mContext.startActivity(intent7);
                         break;
                     case 8://交车
-                        Intent intent8 = new Intent(mContext, VehicleReturnActivity.class);//
+                        Intent intent8 = new Intent(mContext, VehicleReturnListActivity.class);//
                         mContext.startActivity(intent8);
                         break;
                 }

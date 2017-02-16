@@ -4,14 +4,15 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
+ * 合同文件
  * Created by sjy on 2017/1/21.
  */
 
 public class ContractFileModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public String ContractName;//
-    public String Remark;//
+    public String ContractName;//文件名称
+    public String Remark;//备注
 
 
 

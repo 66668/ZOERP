@@ -36,6 +36,8 @@ public class ContractFileDetailApvlActivity extends BaseActivity {
     //
     @ViewInject(id = R.id.tv_right)
     TextView tv_right;
+
+
     //申请人
     @ViewInject(id = R.id.tv_ApprovalPerson)
     TextView tv_ApprovalPerson;
@@ -53,45 +55,20 @@ public class ContractFileDetailApvlActivity extends BaseActivity {
     TextView tv_approvalTime;
 
 
-    //借阅名称
-    @ViewInject(id = R.id.tv_borrowThings)
-    TextView tv_borrowThings;
-
-    //借阅类型
-    @ViewInject(id = R.id.tv_borrowType)
-    TextView tv_borrowType;
-
-    //使用时间
-    @ViewInject(id = R.id.tv_StartTime)
-    TextView tv_StartTime;
-
-    //归还时间
-    @ViewInject(id = R.id.tv_endTime)
-    TextView tv_endTime;
-
-    //借阅说明
-    @ViewInject(id = R.id.tv_reason)
-    TextView tv_reason;
-
-    //审批人
-    @ViewInject(id = R.id.tv_Requester)
-    TextView tv_Requester;
-
-
     //未审批bottom
     @ViewInject(id = R.id.laytout_decide)
     LinearLayout laytout_decide;
 
     //驳回
-    @ViewInject(id = R.id.btn_refulse,click = "forRefulse")
+    @ViewInject(id = R.id.btn_refulse, click = "forRefulse")
     Button btn_refulse;
 
     //批准
-    @ViewInject(id = R.id.btn_commit,click = "toForCommit")
+    @ViewInject(id = R.id.btn_commit, click = "toForCommit")
     Button btn_commit;
 
     //转交
-    @ViewInject(id = R.id.btn_transfer,click = "forTransfer")
+    @ViewInject(id = R.id.btn_transfer, click = "forTransfer")
     Button btn_transfer;
 
     //审批bottom
@@ -99,14 +76,33 @@ public class ContractFileDetailApvlActivity extends BaseActivity {
     LinearLayout laytout_copy;
 
     //抄送
-    @ViewInject(id = R.id.btn_copytp,click = "forCopyto")
+    @ViewInject(id = R.id.btn_copytp, click = "forCopyto")
     Button btn_copytp;
+
+
+    //文件名称
+    @ViewInject(id = R.id.tv_contractfile_name)
+    TextView tv_contractfile_name;
+
+    //备注
+    @ViewInject(id = R.id.tv_contractfile_other)
+    TextView tv_contractfile_other;
+
+    //附件
+    @ViewInject(id = R.id.contractfile_files)
+    TextView contractfile_files;
+
+
+    //审批人
+    @ViewInject(id = R.id.tv_Requester)
+    TextView tv_Requester;
 
     private MyApprovalModel myApprovalModel;
     private ContractFileApvlModel model;
     //常量
     public static final int POST_SUCCESS = 21;
     public static final int POST_FAILED = 22;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,31 +117,34 @@ public class ContractFileDetailApvlActivity extends BaseActivity {
         //
         getDetailData();
     }
+
     private void setShow(ContractFileApvlModel model) {
+        //
         tv_ApprovalPerson.setText(model.getEmployeeName());
         tv_approvaldept.setText(model.getDepartmentName());
         tv_approvalCo.setText(model.getStoreName());
         tv_approvalTime.setText(model.getApplicationCreateTime());
 
-        //        tv_borrowThings.setText(model.getBorrowThings());
-        //        tv_borrowType.setText(model.getBorrowType());
-        //        tv_StartTime.setText(model.getStartTime());
-        //        tv_endTime.setText(model.getFinishTime());
-        //        tv_reason.setText(model.getReason());
-        //        if (model.getApprovalInfoLists().size() > 0) {
-        //            tv_Requester.setText(model.getApplicationCreateTime());
-        //        } else {
-        //            tv_Requester.setText("未审批");
-        //        }
+        //
+        tv_contractfile_name.setText(model.getContractName());
+        tv_contractfile_other.setText(model.getRemark());
+
+
+        if (model.getApprovalInfoLists().size() > 0) {
+            tv_Requester.setText(model.getApplicationCreateTime());
+        } else {
+            tv_Requester.setText("未审批");
+        }
     }
+
     private void bottomType() {
         //
-        if(myApprovalModel.getApprovalStatus().contains("1")){
+        if (myApprovalModel.getApprovalStatus().contains("1")) {
 
             laytout_decide.setVisibility(View.GONE);
             laytout_copy.setVisibility(View.VISIBLE);
 
-        }else {
+        } else {
             laytout_decide.setVisibility(View.VISIBLE);
             laytout_copy.setVisibility(View.GONE);
         }
@@ -167,6 +166,7 @@ public class ContractFileDetailApvlActivity extends BaseActivity {
             }
         });
     }
+
     @Override
     protected void handleMessage(Message msg) {
         super.handleMessage(msg);
@@ -182,30 +182,35 @@ public class ContractFileDetailApvlActivity extends BaseActivity {
                 break;
         }
     }
+
     //驳回
-    public void forRefulse(View view){
+    public void forRefulse(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonDisagreeActivity.class,bundle);
+        startActivity(CommonDisagreeActivity.class, bundle);
     }
+
     //同意
-    public void toForCommit(View view){
+    public void toForCommit(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonAgreeActivity.class,bundle);
+        startActivity(CommonAgreeActivity.class, bundle);
     }
+
     //转交
-    public void forTransfer(View view){
+    public void forTransfer(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonTransfertoActivity.class,bundle);
+        startActivity(CommonTransfertoActivity.class, bundle);
     }
+
     // 抄送
-    public void forCopyto(View view){
+    public void forCopyto(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonCopytoCoActivity.class,bundle);
+        startActivity(CommonCopytoCoActivity.class, bundle);
     }
+
     /**
      * back
      *

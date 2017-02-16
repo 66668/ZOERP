@@ -17,12 +17,12 @@ import com.zhongou.common.MyException;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
-import com.zhongou.model.MyCopyModel;import com.zhongou.view.examination.copydetail.BorrowDetailCopyActivity;
+import com.zhongou.model.MyCopyModel;
+import com.zhongou.view.examination.copydetail.BorrowDetailCopyActivity;
 import com.zhongou.view.examination.copydetail.ConferenceDetailCopyActivity;
 import com.zhongou.view.examination.copydetail.ContractFileDetailCopyActivity;
 import com.zhongou.view.examination.copydetail.DimissionDetailCopyActivity;
 import com.zhongou.view.examination.copydetail.LeaveDetailCopyActivity;
-import com.zhongou.view.examination.copydetail.LoanReimbursementDetailCopyActivity;
 import com.zhongou.view.examination.copydetail.NotificationAndNoticeDetailCopyActivity;
 import com.zhongou.view.examination.copydetail.OfficeDetailCopyActivity;
 import com.zhongou.view.examination.copydetail.OutGoingDetailCopyActivity;
@@ -302,8 +302,7 @@ public class ZOCopyListActivity extends BaseActivity implements RefreshListView.
                 startActivity(intent);
                 break;
             case "借款报销申请"://10
-                intent.setClass(this, LoanReimbursementDetailCopyActivity.class);
-                startActivity(intent);
+
                 break;
 
             case "调动申请"://11

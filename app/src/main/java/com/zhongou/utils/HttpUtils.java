@@ -3,8 +3,8 @@ package com.zhongou.utils;
 import android.util.Log;
 
 import com.zhongou.R;
-import com.zhongou.common.HttpParameter;
 import com.zhongou.application.MyApplication;
+import com.zhongou.common.HttpParameter;
 import com.zhongou.common.MyException;
 import com.zhongou.common.NetworkManager;
 
@@ -18,7 +18,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -138,6 +141,7 @@ public class HttpUtils {
         if (!withLogin) {
             return null;
         }
+
         return postStringURL(urlPost, params);
     }
 
@@ -179,6 +183,7 @@ public class HttpUtils {
             conn.setRequestProperty("Charset", "UTF-8");// 设置编码
             conn.setRequestProperty("Content-Type", MULTIPART_FORM_DATA + ";boundary=" + BOUNDARY);
             conn.connect();
+
             /*
              * 首先组拼文本类型参数
 			 */
@@ -202,43 +207,71 @@ public class HttpUtils {
             outStream.write(end_data);
             outStream.flush();
 
+
             //(4)得到响应码:根据公司的js编写
             int res = conn.getResponseCode();
 
             if (res == 200) {
+
                 //(5)得到数据流
                 in = new InputStreamReader(conn.getInputStream(), "utf-8");
                 int ch;
                 StringBuilder sb3 = new StringBuilder();
+
                 while ((ch = in.read()) != -1) {
                     sb3.append((char) ch);
                 }
                 js = new JSONObject(sb3.toString());
                 return js;
+            } else {
             }
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+            throw new MyException(e.toString());
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            throw new MyException(e.toString());
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            throw new MyException(e.toString());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new MyException(e.toString());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            throw new MyException(e.toString());
+
         } catch (Exception e) {
-            throw new MyException(e.getMessage());
+            e.printStackTrace();
+            throw new MyException(e.toString());
         } finally {
             try {
                 if (outStream != null)
                     outStream.close();
             } catch (IOException e) {
+                throw new MyException("你竟然敢报IO异常");
             }
             try {
                 if (in != null)
                     in.close();
             } catch (IOException e) {
+                throw new MyException("你竟然敢报IO异常");
             }
             // 关闭连接
             conn.disconnect();
         }
-        return null;
+
+        return js;
     }
 
     /**
      * <p>
      * 上传 文本和文件
-     *
+     * <p>
      * (HttpURLConnection post )
      *
      * @param urlPost
@@ -273,8 +306,8 @@ public class HttpUtils {
             conn.setRequestProperty("Charset", "UTF-8");// 设置编码
             conn.setRequestProperty("Content-Type", MULTIPART_FORM_DATA + ";boundary=" + BOUNDARY);
             conn.connect();
-			/*
-			 * 首先组拼文本类型参数
+            /*
+             * 首先组拼文本类型参数
 			 */
             StringBuilder sb = new StringBuilder();
             for (Map.Entry<String, String> entry : params.entrySet()) {
@@ -293,7 +326,7 @@ public class HttpUtils {
             outStream.write(sb.toString().getBytes());
 
 			/*
-			 * 拼接文件数据
+             * 拼接文件数据
 			 */
             if (files != null) {
                 StringBuilder sb2 = new StringBuilder();
@@ -360,8 +393,8 @@ public class HttpUtils {
 
     /**
      * <p>
-     *  03 上传 文本 和 文件数组
-     *
+     * 03 上传 文本 和 文件数组
+     * <p>
      * (HttpURLConnection post )
      *
      * @param urlPost
@@ -396,8 +429,8 @@ public class HttpUtils {
             conn.setRequestProperty("Charset", "UTF-8");// 设置编码
             conn.setRequestProperty("Content-Type", MULTIPART_FORM_DATA + ";boundary=" + BOUNDARY);
             conn.connect();
-			/*
-			 * 首先组拼文本类型参数
+            /*
+             * 首先组拼文本类型参数
 			 */
             StringBuilder sb = new StringBuilder();
             for (Map.Entry<String, String> entry : params.entrySet()) {
@@ -417,10 +450,10 @@ public class HttpUtils {
 
 
 			/*
-			 * 拼接文件数据
+             * 拼接文件数据
 			 */
 
-            for (int i = 0;i < files.length; i++) {
+            for (int i = 0; i < files.length; i++) {
                 StringBuilder sb2 = new StringBuilder();
                 sb2.append(PREFIX);
                 sb2.append(BOUNDARY);

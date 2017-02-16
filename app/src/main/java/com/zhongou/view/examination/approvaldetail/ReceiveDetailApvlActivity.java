@@ -47,10 +47,6 @@ public class ReceiveDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_approvalCo)
     TextView tv_approvalCo;
 
-    //申请时间
-    @ViewInject(id = R.id.tv_approvalTime)
-    TextView tv_approvalTime;
-
     //未审批bottom
     @ViewInject(id = R.id.laytout_decide)
     LinearLayout laytout_decide;
@@ -75,6 +71,37 @@ public class ReceiveDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.btn_copytp,click = "forCopyto")
     Button btn_copytp;
 
+    //物品名称
+    @ViewInject(id = R.id.tv_recevie_itemName)
+    TextView tv_recevie_itemName;
+
+    //规格
+    @ViewInject(id = R.id.tv_recevie_spiceil)
+    TextView tv_recevie_spiceil;
+
+    //型号
+    @ViewInject(id = R.id.tv_recevie_size)
+    TextView tv_recevie_size;
+
+    //数量
+    @ViewInject(id = R.id.tv_recevie_number)
+    TextView tv_recevie_number;
+    //用途
+    @ViewInject(id = R.id.tv_recevie_useage)
+    TextView tv_recevie_useage;
+
+    //备注
+    @ViewInject(id = R.id.tv_recevie_other)
+    TextView tv_recevie_other;
+
+    //审批人
+    @ViewInject(id = R.id.tv_Requester)
+    TextView tv_Requester;
+
+    //申请时间
+    @ViewInject(id = R.id.tv_recevie_aplTime)
+    TextView tv_recevie_aplTime;
+
     private MyApprovalModel myApprovalModel;
     private ReceiveApvlModel model;
     //常量
@@ -96,21 +123,24 @@ public class ReceiveDetailApvlActivity extends BaseActivity {
     }
 
     private void setShow(ReceiveApvlModel model) {
+        //
         tv_ApprovalPerson.setText(model.getEmployeeName());
         tv_approvaldept.setText(model.getDepartmentName());
         tv_approvalCo.setText(model.getStoreName());
-        tv_approvalTime.setText(model.getApplicationCreateTime());
 
-        //        tv_borrowThings.setText(model.getBorrowThings());
-        //        tv_borrowType.setText(model.getBorrowType());
-        //        tv_StartTime.setText(model.getStartTime());
-        //        tv_endTime.setText(model.getFinishTime());
-        //        tv_reason.setText(model.getReason());
-        //        if (model.getApprovalInfoLists().size() > 0) {
-        //            tv_Requester.setText(model.getApplicationCreateTime());
-        //        } else {
-        //            tv_Requester.setText("未审批");
-        //        }
+        //
+        tv_recevie_itemName.setText(model.getName());
+        tv_recevie_spiceil.setText(model.getSpecification());
+        tv_recevie_size.setText(model.getVersions());
+        tv_recevie_number.setText(model.getAmount());
+        tv_recevie_other.setText(model.getRemark());
+        tv_recevie_useage.setText(model.getRemark());
+
+                if (model.getApprovalInfoLists().size() > 0) {
+                    tv_Requester.setText(model.getApplicationCreateTime());
+                } else {
+                    tv_Requester.setText("未审批");
+                }
     }
     private void bottomType() {
         //

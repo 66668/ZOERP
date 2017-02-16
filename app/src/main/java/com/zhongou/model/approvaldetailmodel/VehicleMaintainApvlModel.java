@@ -9,39 +9,58 @@ import java.util.List;
 
 public class VehicleMaintainApvlModel implements Serializable {
     private static final long serialVersionUID = 1L;
+    public String MaintenanceType = "";//维保类型
+    public String Purpose = "";//用途
+    public String PlanBorrowTime = "";//维保时间
+    public String MaintenanceProject = "";//维保项目
+    public String VehicleState = "";//车辆状态
+    public String Destination = "";
 
-    public String Purpose= "";
-    public String MaintenanceType= "";
-    public String PlanBorrowTime= "";
-    public String MaintenanceProject= "";
-    public String VehicleState= "";
-    public String Destination= "";
-
+    public String CopyTime;//抄送时间
     public String ApprovalStatus;
-    public String EmployeeName;
+    public String EmployeeName;//抄送人
     public String StoreName;
     public String DepartmentName;
     public String ApplicationCreateTime;
 
-    public List<VehicleMaintainApvlModel.ApprovalInfoLists> ApprovalInfoLists ;
+    public List<ApprovalInfoLists> ApprovalInfoLists;
 
 
-    public String EmployeeID;
-    public String EstimateFee;
-    public String Number;
-    public String Driver;
-    public String StartMileage;
-    public String FinishMileage;
-    public String ActualBorrowTime;
+    public String EmployeeID;//申请人ID
+    public String EstimateFee;//费用
+    public String Number;//车牌号
+    public String Driver;//驾驶人
+    public String StartMileage;//开始里程
+    public String FinishMileage;//结束里程
+    public String ActualBorrowTime;//实际维保时间
     public String ActualReturnTime;
-    public String Passenger;
-    public String CreateTime;
+    public String Passenger;//乘车人
+    public String CreateTime;//申请时间
 
-    public static class ApprovalInfoLists{
+    public String Remark;//申请备注
+    public String BackRemark;//交车备注
+
+    public String getRemark() {
+        return Remark;
+    }
+
+    public void setRemark(String remark) {
+        Remark = remark;
+    }
+
+    public String getBackRemark() {
+        return BackRemark;
+    }
+
+    public void setBackRemark(String backRemark) {
+        BackRemark = backRemark;
+    }
+
+    public static class ApprovalInfoLists {
         public String Comment = "";
         public String ApprovalDate = "";
-        public String YesOrNo= "";
-        public String ApprovalEmployeeName= "";
+        public String YesOrNo = "";
+        public String ApprovalEmployeeName = "";
 
         public String getComment() {
             return Comment;
@@ -76,11 +95,11 @@ public class VehicleMaintainApvlModel implements Serializable {
         }
     }
 
-    public List<VehicleMaintainApvlModel.ApprovalInfoLists> getApprovalInfoLists() {
+    public List<ApprovalInfoLists> getApprovalInfoLists() {
         return ApprovalInfoLists;
     }
 
-    public void setApprovalInfoLists(List<VehicleMaintainApvlModel.ApprovalInfoLists> approvalInfoLists) {
+    public void setApprovalInfoLists(List<ApprovalInfoLists> approvalInfoLists) {
         this.ApprovalInfoLists = approvalInfoLists;
     }
 
@@ -103,6 +122,14 @@ public class VehicleMaintainApvlModel implements Serializable {
 
     public void setEmployeeName(String employeeName) {
         EmployeeName = employeeName;
+    }
+
+    public String getCopyTime() {
+        return CopyTime;
+    }
+
+    public void setCopyTime(String copyTime) {
+        CopyTime = copyTime;
     }
 
     public String getStoreName() {

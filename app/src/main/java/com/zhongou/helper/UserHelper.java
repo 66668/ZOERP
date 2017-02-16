@@ -20,6 +20,9 @@ import com.zhongou.model.MapAttendModel;
 import com.zhongou.model.MyApplicationModel;
 import com.zhongou.model.MyApprovalModel;
 import com.zhongou.model.MyCopyModel;
+import com.zhongou.model.VehicleReturnModel;
+import com.zhongou.model.VehicleReturnPostMaintenanceModel;
+import com.zhongou.model.VehicleReturnPostUseModel;
 import com.zhongou.model.applicationdetailmodel.BorrowModel;
 import com.zhongou.model.applicationdetailmodel.ConferenceModel;
 import com.zhongou.model.applicationdetailmodel.ContractFileModel;
@@ -48,6 +51,7 @@ import com.zhongou.model.approvaldetailmodel.LoanReimbursementApvlModel;
 import com.zhongou.model.approvaldetailmodel.NotificationAndNoticeApvlModel;
 import com.zhongou.model.approvaldetailmodel.OUtGoingApvlModel;
 import com.zhongou.model.approvaldetailmodel.OfficeApvlModel;
+import com.zhongou.model.approvaldetailmodel.PositionReplaceApvlModel;
 import com.zhongou.model.approvaldetailmodel.ProcurementApvlModel;
 import com.zhongou.model.approvaldetailmodel.ReceiveApvlModel;
 import com.zhongou.model.approvaldetailmodel.RecruitmentApvlModel;
@@ -57,6 +61,8 @@ import com.zhongou.model.approvaldetailmodel.TakeDaysOffApvlModel;
 import com.zhongou.model.approvaldetailmodel.VehicleApvlModel;
 import com.zhongou.model.approvaldetailmodel.VehicleMaintainApvlModel;
 import com.zhongou.model.approvaldetailmodel.WorkOverTimeApvlModel;
+import com.zhongou.model.copydetailmodel.VehicleCopylModel;
+import com.zhongou.model.copydetailmodel.VehicleMaintainCopyModel;
 import com.zhongou.utils.APIUtils;
 import com.zhongou.utils.ConfigUtil;
 import com.zhongou.utils.JSONUtils;
@@ -198,7 +204,7 @@ public class UserHelper<T> {
 
 
     /**
-     *  获取地图考勤记录
+     * 获取地图考勤记录
      *
      * @param context
      * @param iMaxTime
@@ -400,6 +406,7 @@ public class UserHelper<T> {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
+
         try {
             Log.d("SJY", "UserHelper--离职申请--StoreID=" + UserHelper.getCurrentUser().getStoreID());
             /**
@@ -905,7 +912,6 @@ public class UserHelper<T> {
      * @param context
      * @param ApplicationID
      * @param ApplicationType
-
      * @return
      * @throws MyException
      */
@@ -1069,6 +1075,7 @@ public class UserHelper<T> {
             throw new MyException(e.getMessage());
         }
     }
+
     /**
      * 调动详情 06-11
      *
@@ -1170,6 +1177,7 @@ public class UserHelper<T> {
             throw new MyException(e.getMessage());
         }
     }
+
     /**
      * 办公室详情 06-14
      *
@@ -1237,6 +1245,7 @@ public class UserHelper<T> {
             throw new MyException(e.getMessage());
         }
     }
+
     /**
      * 文件合同详情 06-16
      *
@@ -1304,6 +1313,7 @@ public class UserHelper<T> {
             throw new MyException(e.getMessage());
         }
     }
+
     /**
      * 复试详情 06-18
      *
@@ -1371,6 +1381,7 @@ public class UserHelper<T> {
             throw new MyException(e.getMessage());
         }
     }
+
     /**
      * 07 审批详情
      * <p>
@@ -1702,9 +1713,9 @@ public class UserHelper<T> {
     /**
      * 审批 调动详情 07-11
      */
-    public static void approvalDetailPostPositionReplace(Context context,
-                                                         String ApplicationID,
-                                                         String ApplicationType) throws MyException {
+    public static PositionReplaceApvlModel approvalDetailPostPositionReplace(Context context,
+                                                                             String ApplicationID,
+                                                                             String ApplicationType) throws MyException {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
@@ -1721,8 +1732,8 @@ public class UserHelper<T> {
             }
             Log.d("HTTP", httpResult.jsonObject.toString());
 
-            //            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<VehicleMaintainApvlModel>() {
-            //            }.getType());
+            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<PositionReplaceApvlModel>() {
+            }.getType());
         } catch (MyException e) {
             throw new MyException(e.getMessage());
         }
@@ -1819,8 +1830,8 @@ public class UserHelper<T> {
      * 审批 领用详情 07-15
      */
     public static ReceiveApvlModel approvalDetailPostReceive(Context context,
-                                                            String ApplicationID,
-                                                            String ApplicationType) throws MyException {
+                                                             String ApplicationID,
+                                                             String ApplicationType) throws MyException {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
@@ -1843,6 +1854,7 @@ public class UserHelper<T> {
             throw new MyException(e.getMessage());
         }
     }
+
     /**
      * 审批 合同文件详情 07-16
      */
@@ -1871,6 +1883,7 @@ public class UserHelper<T> {
             throw new MyException(e.getMessage());
         }
     }
+
     /**
      * 审批 外出详情 07-17
      */
@@ -1899,6 +1912,7 @@ public class UserHelper<T> {
             throw new MyException(e.getMessage());
         }
     }
+
     /**
      * 审批 外出详情 07-18
      */
@@ -1927,7 +1941,8 @@ public class UserHelper<T> {
             throw new MyException(e.getMessage());
         }
     }
-  /**
+
+    /**
      * 审批 会议详情 07-19
      */
     public static ConferenceApvlModel approvalDetailPostConference(Context context,
@@ -1959,6 +1974,7 @@ public class UserHelper<T> {
 
     /**
      * 审批--同意/驳回接口
+     *
      * @param context
      * @param sApprovalid
      * @param sComment
@@ -1969,7 +1985,7 @@ public class UserHelper<T> {
      * @throws MyException
      */
 
-    public static String agreeOrDisAgreeMyApproval(  Context context, String  sApprovalid, String  sComment, String  sIsend ,String sApplicationid,   String sYesorno ) throws MyException {
+    public static String agreeOrDisAgreeMyApproval(Context context, String sApprovalid, String sComment, String sIsend, String sApplicationid, String sYesorno) throws MyException {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
@@ -2079,7 +2095,6 @@ public class UserHelper<T> {
     }
 
 
-
     /**
      * 通讯录02
      * <p>
@@ -2140,7 +2155,7 @@ public class UserHelper<T> {
     }
 
     /**
-     *  通讯录 审批-选择审批人/转交
+     * 通讯录 审批-选择审批人/转交
      * <p>
      * 获取级别权限的所有联系人
      */
@@ -2165,6 +2180,144 @@ public class UserHelper<T> {
             throw new MyException(e.getMessage());
         }
 
+    }
+
+    /**
+     * 09-01交车记录
+     */
+    public static List<VehicleReturnModel> GetVehicleReturnResults(Context context, String iMaxTime, String iMinTime) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+
+        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.VEHICLERETURNLIST,
+                HttpParameter.create()
+                        .add("iMaxTime", iMaxTime)
+                        .add("iMinTime", iMinTime)
+                        .add("storeID", mCurrentUser.getStoreID())
+                        .add("employeeId", mCurrentUser.getEmployeeID())
+                        .add("pageSize", 20));
+
+        if (hr.hasError()) {
+            throw hr.getError();
+        }
+        return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<VehicleReturnModel>>() {
+        }.getType());
+    }
+
+    /**
+     * 09-02交车详情 可用泛型解决
+     */
+
+
+    /**
+     * 09-02-01用车详情
+     */
+    public static VehicleCopylModel getVehicleReturnUseDetail(Context context, String ApplicationID, String ApplicationType) throws MyException {
+
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+
+        try {
+            Log.d("SJY", "getVehicleReturnUseDetail参数=" + ApplicationID + "--" + ApplicationType);
+
+            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.VEHICLERETURNDETAIL,
+                    HttpParameter.create()
+                            .add("ApplicationID", ApplicationID)
+                            .add("ApplicationType", ApplicationType)
+                            .add("StoreID", mCurrentUser.getStoreID())
+                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
+            if (httpResult.hasError()) {
+                throw httpResult.getError();
+            }
+
+            Log.d("HTTP", httpResult.jsonObject.toString());
+            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<VehicleCopylModel>() {
+            }.getType());
+        } catch (MyException e) {
+            Log.d("SJY", "getVehicleReturnUseDetail异常" + e.getMessage());
+            throw new MyException(e.getMessage());
+        }
+    }
+
+    /**
+     * 09-02-02车辆维保详情
+     */
+
+    public static VehicleMaintainCopyModel getVehicleReturnMaintenanceDetail(Context context,
+                                                                             String ApplicationID,
+                                                                             String ApplicationType) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+        try {
+            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.VEHICLERETURNDETAIL,
+                    HttpParameter.create()
+                            .add("ApplicationID", ApplicationID)
+                            .add("ApplicationType", ApplicationType));
+
+
+            if (httpResult.hasError()) {
+                throw httpResult.getError();
+            }
+            Log.d("HTTP", httpResult.jsonObject.toString());
+
+            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<VehicleMaintainCopyModel>() {
+            }.getType());
+        } catch (MyException e) {
+            throw new MyException(e.getMessage());
+        }
+    }
+
+    /**
+     * 09-03-01交车-用车提交(obj形式)
+     */
+    public static String postVehicleReturnUse(Context context, VehicleReturnPostUseModel model) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+
+        model.setEmployeeID(mCurrentUser.getEmployeeID());
+        String toJsondata = new Gson().toJson(model);
+        Log.d("SJY", "转换成js=" + toJsondata);
+        try {
+            HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.VEHICLERETURNDPOST,
+                    HttpParameter.create().add("obj", toJsondata));
+
+            if (hr.hasError()) {
+                throw hr.getError();
+            }
+
+            return hr.Message;
+        } catch (MyException e) {
+            throw new MyException(e.getMessage());
+        }
+    }
+
+
+    /**
+     * 09-03-02交车-维保提交(obj形式)
+     */
+    public static String postVehicleReturnMaintenance(Context context, VehicleReturnPostMaintenanceModel model) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+        model.setEmployeeID(mCurrentUser.getEmployeeID());
+        String toJsondata = new Gson().toJson(model);
+        Log.d("SJY", "转换成js=" + toJsondata);
+        try {
+            HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.VEHICLERETURNDPOST,
+                    HttpParameter.create().add("obj", toJsondata));
+
+            if (hr.hasError()) {
+                throw hr.getError();
+            }
+
+            return hr.Message;
+        } catch (MyException e) {
+            throw new MyException(e.getMessage());
+        }
     }
 
     /**

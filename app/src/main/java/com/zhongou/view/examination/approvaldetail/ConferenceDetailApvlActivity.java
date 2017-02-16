@@ -75,6 +75,44 @@ public class ConferenceDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.btn_copytp, click = "forCopyto")
     Button btn_copytp;
 
+    //会议标题
+    @ViewInject(id = R.id.tv_conference_name)
+    TextView tv_conference_name;
+
+    //会议主题
+    @ViewInject(id = R.id.tv_conference_title)
+    TextView tv_conference_title;
+
+    //参与者
+    @ViewInject(id = R.id.tv_conference_partiner)
+    TextView tv_conference_partiner;
+
+    //准备
+    @ViewInject(id = R.id.tv_conference_Device)
+    TextView tv_conference_Device;
+
+    //说明描述
+    @ViewInject(id = R.id.tv_conference_Abstract)
+    TextView tv_conference_Abstract;
+
+    //开始
+    @ViewInject(id = R.id.tv_conference_start)
+    TextView tv_conference_start;
+
+    //结束
+    @ViewInject(id = R.id.tv_conference_end)
+    TextView tv_conference_end;
+
+    //备注
+    @ViewInject(id = R.id.tv_conference_other)
+    TextView tv_conference_other;
+
+
+    //审批人
+    @ViewInject(id = R.id.tv_Requester)
+    TextView tv_Requester;
+
+    //
     private MyApprovalModel myApprovalModel;
     private ConferenceApvlModel model;
 
@@ -99,21 +137,27 @@ public class ConferenceDetailApvlActivity extends BaseActivity {
     }
 
     private void setShow(ConferenceApvlModel model) {
+        //
         tv_ApprovalPerson.setText(model.getEmployeeName());
         tv_approvaldept.setText(model.getDepartmentName());
         tv_approvalCo.setText(model.getStoreName());
         tv_approvalTime.setText(model.getApplicationCreateTime());
 
-        //        tv_borrowThings.setText(model.getBorrowThings());
-        //        tv_borrowType.setText(model.getBorrowType());
-        //        tv_StartTime.setText(model.getStartTime());
-        //        tv_endTime.setText(model.getFinishTime());
-        //        tv_reason.setText(model.getReason());
-        //        if (model.getApprovalInfoLists().size() > 0) {
-        //            tv_Requester.setText(model.getApplicationCreateTime());
-        //        } else {
-        //            tv_Requester.setText("未审批");
-        //        }
+        //
+        tv_conference_name.setText(model.getConferenceName());
+        tv_conference_title.setText(model.getTitle());
+        tv_conference_partiner.setText(model.getParticipant());
+        tv_conference_Device.setText(model.getDeviceName());
+        tv_conference_Abstract.setText(model.getAbstract());
+        tv_conference_start.setText(model.getStartTime());
+        tv_conference_end.setText(model.getFinishTime());
+        tv_conference_other.setText(model.getRemark());
+
+        if (model.getApprovalInfoLists().size() > 0) {
+            tv_Requester.setText(model.getApplicationCreateTime());
+        } else {
+            tv_Requester.setText("未审批");
+        }
     }
 
     private void bottomType() {

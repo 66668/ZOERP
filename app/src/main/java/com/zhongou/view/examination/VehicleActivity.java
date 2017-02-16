@@ -49,7 +49,7 @@ public class VehicleActivity extends BaseActivity {
 
 
     //目的地
-    @ViewInject(id= R.id.et_targetPlace)
+    @ViewInject(id = R.id.et_targetPlace)
     EditText et_targetPlace;
 
     //开始时间
@@ -66,8 +66,12 @@ public class VehicleActivity extends BaseActivity {
     TextView tv_timeEnd;
 
     //用途
-    @ViewInject(id= R.id.et_purpose)
+    @ViewInject(id = R.id.et_purpose)
     EditText et_purpose;
+
+    //申请备注
+    @ViewInject(id = R.id.et_remark)
+    EditText et_remark;
 
     //添加审批人
     @ViewInject(id = R.id.AddApprover, click = "forAddApprover")
@@ -82,11 +86,13 @@ public class VehicleActivity extends BaseActivity {
     private String purpose = "";
     public String startDate;
     public String endDates;
+    public String remark;
     public String Destination;//目的地
 
     //常量
     public static final int POST_SUCCESS = 21;
     public static final int POST_FAILED = 22;
+
     //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,9 +104,9 @@ public class VehicleActivity extends BaseActivity {
 
     public void forCommit(View view) {
         approvalID = "0280c9c5-870c-46cf-aa95-cdededc7d86c,88dd7959-cb2f-40c6-947a-4d6801fc4765";
-        purpose =et_purpose.getText().toString();
+        purpose = et_purpose.getText().toString();
         Destination = et_targetPlace.getText().toString();
-
+        remark = et_remark.getText().toString();
 
         if (TextUtils.isEmpty(startDate) || TextUtils.isEmpty(endDates)) {
             PageUtil.DisplayToast("时间不能为空");
@@ -118,6 +124,7 @@ public class VehicleActivity extends BaseActivity {
             PageUtil.DisplayToast("审批人不能为空");
             return;
         }
+
         Loading.run(VehicleActivity.this, new Runnable() {
             @Override
             public void run() {
@@ -128,13 +135,14 @@ public class VehicleActivity extends BaseActivity {
                     js.put("Destination", Destination);
                     js.put("Purpose", purpose);
                     js.put("ApprovalIDList", approvalID);//
+                    js.put("Remark", remark);//
 
                     UserHelper.vehiclePost(VehicleActivity.this, js);
                     sendMessage(POST_SUCCESS);
                 } catch (MyException e) {
                     sendMessage(POST_FAILED, e.getMessage());
 
-                }catch (JSONException e) {
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
@@ -192,6 +200,7 @@ public class VehicleActivity extends BaseActivity {
         endDateChooseDialog.setDateDialogTitle("结束时间");
         endDateChooseDialog.showDateChooseDialog();
     }
+
     /**
      * 添加审批人
      *

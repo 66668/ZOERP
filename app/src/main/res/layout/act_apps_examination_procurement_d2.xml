@@ -163,10 +163,11 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="0.28"
                         android:gravity="center_vertical"
-                        android:text="@string/borrowsName"/>
+                        android:text="@string/procurement_ItemName"
+                        android:textColor="@color/cl_text_common"/>
 
                     <TextView
-                        android:id="@+id/tv_borrowThings"
+                        android:id="@+id/tv_procurement_thingsName"
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -191,10 +192,11 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="0.28"
                         android:gravity="center_vertical"
-                        android:text="@string/borrowsType"/>
+                        android:text="@string/procurement_ItemType"
+                        android:textColor="@color/cl_text_common"/>
 
                     <TextView
-                        android:id="@+id/tv_borrowType"
+                        android:id="@+id/tv_procurement_thingsType"
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -219,10 +221,11 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="0.28"
                         android:gravity="center_vertical"
-                        android:text="@string/borrowsStart"/>
+                        android:text="@string/procurement_ItemSpecifics"
+                        android:textColor="@color/cl_text_common"/>
 
                     <TextView
-                        android:id="@+id/tv_StartTime"
+                        android:id="@+id/tv_procurement_ItemSpecifics"
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -247,10 +250,11 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="0.28"
                         android:gravity="center_vertical"
-                        android:text="@string/borrowsEnd"/>
+                        android:text="@string/procurement_ItemSize"
+                        android:textColor="@color/cl_text_common"/>
 
                     <TextView
-                        android:id="@+id/tv_endTime"
+                        android:id="@+id/tv_procurement_ItemSize"
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -275,10 +279,11 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="0.28"
                         android:gravity="center_vertical"
-                        android:text="@string/borrowsReason"/>
+                        android:text="@string/procurement_ItemNumber"
+                        android:textColor="@color/cl_text_common"/>
 
                     <TextView
-                        android:id="@+id/tv_reason"
+                        android:id="@+id/tv_procurement_ItemNumber"
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -287,7 +292,146 @@
                         android:gravity="center_vertical"
                         />
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_topbar_height40"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
 
+                    <TextView
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.28"
+                        android:gravity="center_vertical"
+                        android:text="@string/procurement_ItemFees"
+                        android:textColor="@color/cl_text_common"/>
+
+                    <TextView
+                        android:id="@+id/tv_procurement_ItemFees"
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.72"
+                        android:gravity="center_vertical"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_topbar_height40"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.28"
+                        android:gravity="center_vertical"
+                        android:text="@string/procurement_buyFor"
+                        android:textColor="@color/cl_text_common"/>
+
+                    <TextView
+                        android:id="@+id/tv_procurement_buyFor"
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.72"
+                        android:gravity="center_vertical"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_topbar_height40"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.28"
+                        android:gravity="center_vertical"
+                        android:text="@string/procurement_buyer"
+                        android:textColor="@color/cl_text_common"/>
+
+                    <TextView
+                        android:id="@+id/tv_procurement_buyer"
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.72"
+                        android:gravity="center_vertical"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_topbar_height40"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.28"
+                        android:gravity="center_vertical"
+                        android:text="@string/procurement_PlanBuyTime"
+                        android:textColor="@color/cl_text_common"/>
+
+                    <TextView
+                        android:id="@+id/tv_procurement_PlanBuyTime"
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.72"
+                        android:gravity="center_vertical"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_topbar_height40"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.28"
+                        android:gravity="center_vertical"
+                        android:text="@string/financial_reimburse_other"
+                        android:textColor="@color/cl_text_common"/>
+
+                    <TextView
+                        android:id="@+id/tv_procurement_Other"
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.72"
+                        android:gravity="center_vertical"
+                        />
+                </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/common_topbar_height40"

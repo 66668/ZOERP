@@ -79,21 +79,23 @@ public class APIUtils {
 	 * @return
 	 * @throws MyException
 	 */
-	public static HttpResult postForObject(String url, HttpParameter parameters, boolean withLogin) //HttpResult
-			throws MyException {
-		try {
-			// 登录服务器方法/httpURLConnection
-			JSONObject jsonObject = HttpUtils.getInstance().postStringURL(url, parameters, withLogin); //
-			Log.d("HTTP", "APIUtils--服务端返回="+jsonObject.toString());// 查看响应的信息
-			
-			// 调用本类方法，返回读取的信息，封装在HttpResult中返回给调用方法(登录/注册/验证码)
-			return toHttpResult(jsonObject); // 将JSONObject对象-->HttpResult
-		} catch (MyException e) {
-			throw new MyException(e.getMessage());
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
+	public static HttpResult postForObject(String url, HttpParameter parameters, boolean withLogin) throws MyException //HttpResult
+			 {
+			try{
+				// 登录服务器方法/httpURLConnection
+				JSONObject jsonObject = HttpUtils.getInstance().postStringURL(url, parameters, withLogin); //
+				if(jsonObject.toString() == null|| jsonObject.toString().equals("")){
+
+				}
+				Log.d("HTTP", "APIUtils--服务端返回="+jsonObject.toString());// 查看响应的信息
+
+				// 调用本类方法，返回读取的信息，封装在HttpResult中返回给调用方法(登录/注册/验证码)
+				return toHttpResult(jsonObject); // 将JSONObject对象-->HttpResult
+			} catch (Exception e){
+				throw new MyException(e.getMessage());
+			}
+
+
 	}
 
 	/**

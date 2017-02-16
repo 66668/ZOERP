@@ -74,6 +74,27 @@ public class NotificationAndNoticeDetailApvlActivity extends BaseActivity {
     //抄送
     @ViewInject(id = R.id.btn_copytp, click = "forCopyto")
     Button btn_copytp;
+
+    //公告类型
+    @ViewInject(id = R.id.tv_notificaitonAndNotice_type)
+    TextView tv_notificaitonAndNotice_type;
+
+    //接受范围
+    @ViewInject(id = R.id.tv_notificaitonAndNotice_whom)
+    TextView tv_notificaitonAndNotice_whom;
+
+    //公告名称
+    @ViewInject(id = R.id.tv_notificaitonAndNotice_title)
+    TextView tv_notificaitonAndNotice_title;
+
+    //公告时间
+    @ViewInject(id = R.id.tv_notificaitonAndNotice_doTime)
+    TextView tv_notificaitonAndNotice_doTime;
+
+    //审批人
+    @ViewInject(id = R.id.tv_Requester)
+    TextView tv_Requester;
+
     private MyApprovalModel myApprovalModel;
     private NotificationAndNoticeApvlModel model;
     //常量
@@ -95,21 +116,24 @@ public class NotificationAndNoticeDetailApvlActivity extends BaseActivity {
     }
 
     private void setShow(NotificationAndNoticeApvlModel model) {
+        //
         tv_ApprovalPerson.setText(model.getEmployeeName());
         tv_approvaldept.setText(model.getDepartmentName());
         tv_approvalCo.setText(model.getStoreName());
         tv_approvalTime.setText(model.getApplicationCreateTime());
 
-        //        tv_borrowThings.setText(model.getBorrowThings());
-        //        tv_borrowType.setText(model.getBorrowType());
-        //        tv_StartTime.setText(model.getStartTime());
-        //        tv_endTime.setText(model.getFinishTime());
-        //        tv_reason.setText(model.getReason());
-        //        if (model.getApprovalInfoLists().size() > 0) {
-        //            tv_Requester.setText(model.getApplicationCreateTime());
-        //        } else {
-        //            tv_Requester.setText("未审批");
-        //        }
+        //
+        tv_notificaitonAndNotice_type.setText(model.getPublishType());
+        tv_notificaitonAndNotice_type.setText(model.getPublishType());
+        tv_notificaitonAndNotice_whom.setText(model.getAbstract());
+        tv_notificaitonAndNotice_title.setText(model.getApplicationTitle());
+        tv_notificaitonAndNotice_doTime.setText(model.getPublishTime());
+
+        if (model.getApprovalInfoLists().size() > 0) {
+            tv_Requester.setText(model.getApplicationCreateTime());
+        } else {
+            tv_Requester.setText("未审批");
+        }
     }
 
     private void bottomType() {
@@ -163,28 +187,28 @@ public class NotificationAndNoticeDetailApvlActivity extends BaseActivity {
     public void forRefulse(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonDisagreeActivity.class,bundle);
+        startActivity(CommonDisagreeActivity.class, bundle);
     }
 
     //同意
     public void toForCommit(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonAgreeActivity.class,bundle);
+        startActivity(CommonAgreeActivity.class, bundle);
     }
 
     //转交
     public void forTransfer(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonTransfertoActivity.class,bundle);
+        startActivity(CommonTransfertoActivity.class, bundle);
     }
 
     // 抄送
     public void forCopyto(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonCopytoCoActivity.class,bundle);
+        startActivity(CommonCopytoCoActivity.class, bundle);
     }
 
     /**

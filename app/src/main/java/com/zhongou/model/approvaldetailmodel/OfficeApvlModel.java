@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 请假
+ * 办公室申请
  * Created by sjy on 2016/12/26.
  */
 
@@ -22,6 +22,7 @@ public class OfficeApvlModel implements Serializable {
     public String StoreName;
     public String DepartmentName;
     public String ApplicationCreateTime;
+
     public List<OfficeApvlModel.ApprovalInfoLists> ApprovalInfoLists;
 
     //未用
