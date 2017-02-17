@@ -1,8 +1,8 @@
 package com.zhongou.view.examination.approvaldetail;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -110,8 +110,9 @@ public class WorkOverTimeDetailApvlActivity extends BaseActivity {
         tv_right.setText("");
         tv_title.setText(getResources().getString(R.string.workOverTime_d));
 
-        Intent intent = getIntent();
-        myApprovalModel = (MyApprovalModel) intent.getSerializableExtra("MyApprovalModel");
+        Bundle bundle = this.getIntent().getExtras();
+        myApprovalModel = (MyApprovalModel) bundle.getSerializable("MyApprovalModel");
+        Log.d("SJY", "详情MyApprovalModel");
 
         bottomType();
         //
@@ -184,28 +185,28 @@ public class WorkOverTimeDetailApvlActivity extends BaseActivity {
     public void forRefulse(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonDisagreeActivity.class,bundle);
+        startActivity(CommonDisagreeActivity.class, bundle);
     }
 
     //同意
     public void toForCommit(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonAgreeActivity.class,bundle);
+        startActivity(CommonAgreeActivity.class, bundle);
     }
 
     //转交
     public void forTransfer(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonTransfertoActivity.class,bundle);
+        startActivity(CommonTransfertoActivity.class, bundle);
     }
 
     // 抄送
     public void forCopyto(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonCopytoCoActivity.class,bundle);
+        startActivity(CommonCopytoCoActivity.class, bundle);
     }
 
     /**

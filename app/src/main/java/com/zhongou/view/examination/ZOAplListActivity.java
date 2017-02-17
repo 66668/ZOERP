@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zhongou.R;
-import com.zhongou.adapter.MyApplicationListAdapter;
+import com.zhongou.adapter.ZOAplListAdapter;
 import com.zhongou.base.BaseActivity;
 import com.zhongou.base.BaseListAdapter.AdapterCallBack;
 import com.zhongou.common.MyException;
@@ -43,6 +43,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 我的申请 记录界面
  * Created by sjy on 2016/12/2.
  */
 
@@ -64,7 +65,7 @@ public class ZOAplListActivity extends BaseActivity implements RefreshListView.I
     @ViewInject(id = R.id.myapprovalList)
     RefreshListView myListView;
 
-    private MyApplicationListAdapter vAdapter;//记录适配
+    private ZOAplListAdapter vAdapter;//记录适配
     private boolean ifLoading = false;//标记
     private int pageSize = 20;
     private ArrayList<MyApplicationModel> list = null;
@@ -85,9 +86,14 @@ public class ZOAplListActivity extends BaseActivity implements RefreshListView.I
         tv_title.setText(getResources().getString(R.string.my_application));
 
         myListView.setInterFace(this);//下拉刷新监听
-        vAdapter = new MyApplicationListAdapter(this, adapterCallBack);// 上拉加载
+        vAdapter = new ZOAplListAdapter(this, adapterCallBack);// 上拉加载
         myListView.setAdapter(vAdapter);
 
+        initListener();
+        getNewData();
+    }
+
+    private void initListener() {
         //		 点击一条记录后，跳转到登记时详细的信息
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -101,10 +107,9 @@ public class ZOAplListActivity extends BaseActivity implements RefreshListView.I
                 myApplicationDetail(type, myApplicationModel);
             }
         });
-        getNewData();
     }
 
-    public void getNewData() {
+    private void getNewData() {
         Log.d("SJY", "MineApplicationActivity--getNewData");
         Loading.run(ZOAplListActivity.this, new Runnable() {
             @Override
@@ -152,7 +157,6 @@ public class ZOAplListActivity extends BaseActivity implements RefreshListView.I
                     } else if (visitorModelList.size() < pageSize) {
                         vAdapter.IsEnd = true;
                     }
-
 
                     sendMessage(GET_REFRESH_DATA, visitorModelList);
 
@@ -288,8 +292,8 @@ public class ZOAplListActivity extends BaseActivity implements RefreshListView.I
                 startActivity(intent);
                 break;
             case "借款报销申请"://10
-//                intent.setClass(this, .class);
-//                startActivity(intent);
+                //                intent.setClass(this, .class);
+                //                startActivity(intent);
                 break;
 
 

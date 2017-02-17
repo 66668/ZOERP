@@ -1,18 +1,15 @@
 package com.zhongou.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 import com.zhongou.R;
-import com.zhongou.model.ContactsEmployeeModel;
+import com.zhongou.model.ContactsDeptModel;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,17 +17,15 @@ import java.util.List;
 /**
  * 抄送 通讯录 适配
  */
-public class ContactsCopyToAdapter extends BaseAdapter implements SectionIndexer{
+public class ContactsCopyToDeptAdapter extends BaseAdapter implements SectionIndexer{
 
-	private List<ContactsEmployeeModel> list = null;
+	private List<ContactsDeptModel> list = null;
 	private Context mContext;
 	private static HashMap<Integer,Boolean> isSelectedMap;//用来控制CheckBox的选中状况
 
-	public ContactsCopyToAdapter(Context mContext, List<ContactsEmployeeModel> list) {
+	public ContactsCopyToDeptAdapter(Context mContext, List<ContactsDeptModel> list) {
 		this.mContext = mContext;
 		this.list = list;
-		isSelectedMap = new HashMap<Integer,Boolean>();
-		initSelectedData();
 	}
 
 	/**
@@ -46,7 +41,7 @@ public class ContactsCopyToAdapter extends BaseAdapter implements SectionIndexer
 	 * 当ListView数据发生变化时,调用此方法来更新ListView
 	 * @param list
 	 */
-	public void updateListView(List<ContactsEmployeeModel> list){
+	public void updateListView(List<ContactsDeptModel> list){
 		this.list = list;
 		notifyDataSetChanged();
 	}
@@ -65,20 +60,18 @@ public class ContactsCopyToAdapter extends BaseAdapter implements SectionIndexer
 
 	public View getView(final int position, View convertView, ViewGroup arg2) {
 		ViewHolder viewHolder = null;
-		final ContactsEmployeeModel mContent = list.get(position);
+		final ContactsDeptModel mContent = list.get(position);
 		if (convertView == null) {
 			viewHolder = new ViewHolder();
 			//导入布局
-			convertView = LayoutInflater.from(mContext).inflate(R.layout.item_contacts_select, null);
+			convertView = LayoutInflater.from(mContext).inflate(R.layout.item_contacts, null);
 			viewHolder.tvTitle = (TextView) convertView.findViewById(R.id.tv_name);
 			viewHolder.tvLetter = (TextView) convertView.findViewById(R.id.tv_letter);
-			viewHolder.selectCheck = (CheckBox) convertView.findViewById(R.id.checkbox);
 			convertView.setTag(viewHolder);//设置view标签
 		} else {
 			//获取viewHolder
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
-
 
 		// 设置list中TextView的显示
 		//根据position获取分类的首字母的Char ascii值
@@ -86,22 +79,10 @@ public class ContactsCopyToAdapter extends BaseAdapter implements SectionIndexer
 		//如果当前位置等于该分类首字母的Char的位置 ，则认为是第一次出现
 		if(position == getPositionForSection(section)){
 			viewHolder.tvLetter.setVisibility(View.VISIBLE);
-			viewHolder.tvLetter.setText(mContent.getFirstLetter());
 		}else{
 			viewHolder.tvLetter.setVisibility(View.GONE);
 		}
-		viewHolder.tvTitle.setText(this.list.get(position).getsEmployeeName());
-
-		// 根据isSelected来设置checkbox的选中状况
-		viewHolder.selectCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				//保存状态
-				isSelectedMap.put(position,isChecked);
-				Log.d("SJY", "ContactsSelectAdatper--isChecked=" + isChecked + "--position=" + position);
-				setIsSelectedMap(isSelectedMap);
-			}
-		});
+		viewHolder.tvTitle.setText(this.list.get(position).getsDeptName());
 
 		return convertView;
 
@@ -111,7 +92,6 @@ public class ContactsCopyToAdapter extends BaseAdapter implements SectionIndexer
 	class ViewHolder {
 		TextView tvLetter;
 		TextView tvTitle;
-		CheckBox selectCheck;
 	}
 
 
@@ -125,6 +105,7 @@ public class ContactsCopyToAdapter extends BaseAdapter implements SectionIndexer
 	/**
 	 * 根据分类的首字母的Char ascii值获取其第一次出现该首字母的位置
 	 */
+
 	public int getPositionForSection(int section) {
 		for (int i = 0; i < getCount(); i++) {
 			String sortStr = list.get(i).getFirstLetter();
@@ -133,7 +114,6 @@ public class ContactsCopyToAdapter extends BaseAdapter implements SectionIndexer
 				return i;
 			}
 		}
-
 		return -1;
 	}
 
@@ -158,12 +138,30 @@ public class ContactsCopyToAdapter extends BaseAdapter implements SectionIndexer
 		return null;
 	}
 
+//	/**
+//	 * 控件监听
+//	 * @param viewHolder
+//	 * @param position
+//     */
+//	private void initListener(ViewHolder viewHolder, final int position){
+//		// 根据isSelected来设置checkbox的选中状况
+//		viewHolder.selectCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//			@Override
+//			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//				//保存状态
+//				isSelectedMap.put(position,isChecked);
+//				Log.d("SJY", "ContactsSelectAdatper--isChecked=" + isChecked + "--position=" + position);
+//				setIsSelectedMap(isSelectedMap);
+//			}
+//		});
+//	}
+
 	//checkbox
 	public static HashMap<Integer, Boolean> getIsSelectedMap() {
 		return isSelectedMap;
 	}
 
 	public static void setIsSelectedMap(HashMap<Integer, Boolean> isSelected) {
-		ContactsCopyToAdapter.isSelectedMap = isSelected;
+		ContactsCopyToDeptAdapter.isSelectedMap = isSelected;
 	}
 }

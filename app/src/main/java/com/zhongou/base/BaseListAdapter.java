@@ -89,7 +89,7 @@ public abstract class BaseListAdapter extends BaseAdapter{
 		}
 		initViewData(position, convertView);
 		//加载数据
-		if(position == getCount() - 1  && !IsEnd){//19行加载
+		if(position == getCount() - 1  && !IsEnd){//当数据最后一条，加载
 			callBack.loadMore();
 		} 
 		return convertView;

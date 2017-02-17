@@ -12,7 +12,7 @@ import com.zhongou.R;
 import java.util.List;
 
 /**
- * 业绩管理适配
+ * 地图考勤记录 适配
  */
 public class MapAttendRecordListAdapter extends BaseAdapter {
     Context mContext;

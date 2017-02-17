@@ -281,9 +281,9 @@ public class MainActivity extends BaseActivity {
                     case R.id.nav_menu_notify:
 
                         break;
-                    case R.id.nav_menu_feedback:
-                        startActivity(FeedbackActivity.class);
-                        break;
+                    //                    case R.id.nav_menu_feedback:
+                    //                        startActivity(FeedbackActivity.class);//反馈意见
+                    //                        break;
                     case R.id.nav_menu_quit://程序退出
                         //                        Intent intent = new Intent();
                         //                        intent.setAction(EXIT_APP_ACTION);

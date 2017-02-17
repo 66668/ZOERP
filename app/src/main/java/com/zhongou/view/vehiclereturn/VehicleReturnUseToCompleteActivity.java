@@ -2,6 +2,7 @@ package com.zhongou.view.vehiclereturn;
 
 import android.os.Bundle;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -127,6 +128,31 @@ public class VehicleReturnUseToCompleteActivity extends BaseActivity {
         endMiles = et_endMiles.getText().toString().trim();
         other = et_other.getText().toString().trim();
 
+        //非空
+        if (TextUtils.isEmpty(ActualBorrowTime) && TextUtils.isEmpty(ActualReturnTime)) {
+            PageUtil.DisplayToast(this.getResources().getString(R.string.vehicleRe_time_null));
+            return;
+        }
+        if (TextUtils.isEmpty(driver)) {
+            PageUtil.DisplayToast(this.getResources().getString(R.string.vehicleRe_driver_null));
+            return;
+        }
+
+        if (TextUtils.isEmpty(passager)) {
+            PageUtil.DisplayToast(this.getResources().getString(R.string.vehicleRe_Passenger_null));
+            return;
+        }
+
+        if (TextUtils.isEmpty(CarNumber)) {
+            PageUtil.DisplayToast(this.getResources().getString(R.string.vehicleRe_Number_null));
+            return;
+        }
+
+        if (TextUtils.isEmpty(startMiles) && TextUtils.isEmpty(startMiles)) {
+            PageUtil.DisplayToast(this.getResources().getString(R.string.vehicleRe_Miles_null));
+            return;
+        }
+
         //对象存值
         final VehicleReturnPostUseModel model = new VehicleReturnPostUseModel();
 
@@ -188,7 +214,7 @@ public class VehicleReturnUseToCompleteActivity extends BaseActivity {
                         tv_vehicleMainennanceTimeStart.setText(time);
                     }
                 });
-        endDateChooseDialog.setTimePickerGone(true);
+        //        endDateChooseDialog.setTimePickerGone(true);
         endDateChooseDialog.setDateDialogTitle("实际用车时间");
         endDateChooseDialog.showDateChooseDialog();
     }
@@ -207,7 +233,7 @@ public class VehicleReturnUseToCompleteActivity extends BaseActivity {
                         tv_vehicleRe_endTime.setText(time);
                     }
                 });
-        endDateChooseDialog.setTimePickerGone(true);
+        //        endDateChooseDialog.setTimePickerGone(true);
         endDateChooseDialog.setDateDialogTitle("实际交车时间");
         endDateChooseDialog.showDateChooseDialog();
     }

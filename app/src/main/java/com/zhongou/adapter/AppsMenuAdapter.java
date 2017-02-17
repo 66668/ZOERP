@@ -1,6 +1,7 @@
 package com.zhongou.adapter;
 
 /**
+ * 应用 适配
  * Created by nick on 15/10/22.
  */
 
@@ -18,7 +19,7 @@ import android.widget.TextView;
 
 import com.zhongou.R;
 import com.zhongou.view.ExaminationAcitivity;
-import com.zhongou.view.FinanceAcitivity;
+import com.zhongou.view.FinanceListAcitivity;
 import com.zhongou.view.MapAttendAcitivity;
 import com.zhongou.view.NoticeAcitivity;
 import com.zhongou.view.NotificationAcitivity;
@@ -108,7 +109,7 @@ public class AppsMenuAdapter extends BaseAdapter {
                         mContext.startActivity(intent4);
                         break;
                     case 5://财务
-                        Intent intent5 = new Intent(mContext, FinanceAcitivity.class);
+                        Intent intent5 = new Intent(mContext, FinanceListAcitivity.class);
                         mContext.startActivity(intent5);
                         break;
                     case 6://日程

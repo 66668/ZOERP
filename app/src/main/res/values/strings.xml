@@ -85,6 +85,9 @@
     <string name="forAttend">签到</string>
     <string name="forAttend_detail">美好的一天开始了，快来考勤吧！</string>
 
+    <!-- 01-06 财务-->
+    <string name="financial">财务</string>
+
 
     <!-- 01-01 申请/审批-->
     <string name="examination">审批</string>
@@ -419,5 +422,13 @@
     <string name="vehicleRe_other">交车备注</string>
     <string name="vehicleMt_other">申请备注</string>
     <string name="vehicleRe_other_hint">请输入交车备注</string>
+
+    <string name="vehicleRe_time_null">时间不能为空</string>
+    <string name="vehicleRe_Miles_null">里程不能为空</string>
+    <string name="vehicleRe_driver_null">驾驶人不能为空</string>
+    <string name="vehicleRe_Number_null">车牌号不能为空</string>
+    <string name="vehicleRe_Passenger_null">乘车人不能为空</string>
+
+
 
 </resources>

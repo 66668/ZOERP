@@ -22,10 +22,10 @@ import static com.zhongou.R.id.arrow;
 
 
 /**
- * 自定义listView控件，下拉刷新功能(headView),以及上拉的加载功能（调用接口形式）
- * 2016-09-05
+ *自定义listView控件，下拉刷新功能(headView),以及上拉的加载功能（调用接口形式）
+ *
  */
-public class RefreshListView extends ListView implements AbsListView.OnScrollListener {
+public class MyRefreshListView extends ListView implements AbsListView.OnScrollListener {
     public View headerView;//顶部布局文件
     private int headerHeight;//顶部布局文件的高度
     private int firstVisibleItem;//当前第一个可见的item位置
@@ -40,17 +40,17 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
     final int RELEASE = 2;
     final int REFLASHING = 3;
 
-    public RefreshListView(Context context) {
+    public MyRefreshListView(Context context) {
         super(context);
         initView(context);
     }
 
-    public RefreshListView(Context context, AttributeSet attrs) {
+    public MyRefreshListView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initView(context);
     }
 
-    public RefreshListView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public MyRefreshListView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initView(context);
     }
@@ -61,6 +61,7 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
      * @param context
      */
     private void initView(Context context) {
+        //添加headView
         LayoutInflater inflater = LayoutInflater.from(context);
         headerView = inflater.inflate(R.layout.refreshlist_headerview, null);
         measureView(headerView);
@@ -69,7 +70,9 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
         topPadding(-headerHeight);
         Log.d("SJY", "03RefreshListView--topPadding--设置顶部布局文件的高度topPadding= -"+headerHeight);
         this.addHeaderView(headerView);
-        Log.d("SJY", "04RefreshListView--initView--将view添加到布局中去");
+
+        //添加footerView
+
         this.setOnScrollListener(this);//设置滚动监听
 
     }
@@ -83,7 +86,6 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
             params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT);
         }
-
         int width = ViewGroup.getChildMeasureSpec(0, 0, params.width);//定义子布局宽度（左边距，内边距，宽度）
         int height;
         int tempHeight = params.height;
@@ -145,8 +147,10 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
             case MotionEvent.ACTION_UP:
                 if (state == RELEASE) {
                     state = REFLASHING;
+                    //刷新数据
+                    Log.d("SJY", "05RefreshListView--onTouchEvent--ACTION_UP--RELEASE--onRefresh刷新数据");
                     iReflashListener.onRefresh();
-                    Log.d("SJY", "RefreshListView--onTouchEvent--ACTION_UP--RELEASE--onRefresh下拉刷新");
+                    Log.d("SJY", "05RefreshListView--onTouchEvent--ACTION_UP--RELEASE--onRefresh刷新数据-->reflashViewByState");
                     reflashViewByState();
                 } else if (state == PULL) {
                     Log.d("SJY", "05RefreshListView--onTouchEvent--ACTION_UP--PULL-->reflashViewByState");
@@ -310,7 +314,7 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
     }
 
     /**
-     * 上拉加载接口
+     * 刷新接口
      */
     public interface IReflashListener {
         public void onRefresh();

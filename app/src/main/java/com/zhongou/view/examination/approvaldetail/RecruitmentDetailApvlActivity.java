@@ -1,8 +1,8 @@
 package com.zhongou.view.examination.approvaldetail;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -110,8 +110,9 @@ public class RecruitmentDetailApvlActivity extends BaseActivity {
         tv_title.setText(getResources().getString(R.string.forjobs_d));
         tv_right.setText("");
 
-        Intent intent = getIntent();
-        myApprovalModel = (MyApprovalModel) intent.getSerializableExtra("MyApprovalModel");
+        Bundle bundle = this.getIntent().getExtras();
+        myApprovalModel = (MyApprovalModel) bundle.getSerializable("MyApprovalModel");
+        Log.d("SJY", "详情MyApprovalModel");
 
         bottomType();
         //
@@ -205,6 +206,12 @@ public class RecruitmentDetailApvlActivity extends BaseActivity {
     public void forCopyto(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
+
+        Log.d("SJY", myApprovalModel.getApprovalID() + "\n" + myApprovalModel.getComment() + "\n" +
+                myApprovalModel.getApplicationID() + "\n" + myApprovalModel.getApplicationType() + "\n" +
+                myApprovalModel.getEmployeeID() + "\n" + myApprovalModel.getStoreID() + "\n" +
+                myApprovalModel.getApplicationTitle());
+
         startActivity(CommonCopytoCoActivity.class,bundle);
     }
 

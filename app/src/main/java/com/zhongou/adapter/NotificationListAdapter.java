@@ -14,7 +14,7 @@ import com.zhongou.model.MyApplicationModel;
 
 
 /**
- * 公告适配
+ * 公告 适配
  *
  * @author
  */

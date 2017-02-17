@@ -16,6 +16,7 @@ import com.zhongou.model.ApprovalSModel;
 import com.zhongou.model.ContactsDeptModel;
 import com.zhongou.model.ContactsEmployeeModel;
 import com.zhongou.model.ContactsSonCOModel;
+import com.zhongou.model.FinanceModel;
 import com.zhongou.model.MapAttendModel;
 import com.zhongou.model.MyApplicationModel;
 import com.zhongou.model.MyApprovalModel;
@@ -2180,6 +2181,29 @@ public class UserHelper<T> {
             throw new MyException(e.getMessage());
         }
 
+    }
+
+    /**
+     * 06-01财务记录
+     */
+    public static List<FinanceModel> GetAppFinanceList(Context context, String iMaxTime, String iMinTime) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+
+        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.VEHICLERETURNLIST,
+                HttpParameter.create()
+                        .add("iMaxTime", iMaxTime)
+                        .add("iMinTime", iMinTime)
+                        .add("storeID", mCurrentUser.getStoreID())
+                        .add("employeeId", mCurrentUser.getEmployeeID())
+                        .add("pageSize", 20));
+
+        if (hr.hasError()) {
+            throw hr.getError();
+        }
+        return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<FinanceModel>>() {
+        }.getType());
     }
 
     /**

@@ -21,11 +21,11 @@
             android:title="@string/person_newsNotify"
             />
 
-        <item
-            android:id="@+id/nav_menu_feedback"
-            android:icon="@mipmap/person_feedback"
-            android:title="@string/person_feedback"
-            />
+        <!--<item-->
+            <!--android:id="@+id/nav_menu_feedback"-->
+            <!--android:icon="@mipmap/person_feedback"-->
+            <!--android:title="@string/person_feedback"-->
+            <!--/>-->
 
         <item
             android:id="@+id/nav_menu_quit"

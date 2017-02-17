@@ -5,7 +5,7 @@
               android:background="@color/common_bg_examination"
               android:orientation="vertical"
               android:weightSum="1">
-
+    <!-- 员工通讯录 使用-->
     <include
         android:id="@+id/topbar"
         layout="@layout/topbar_common_itt"/>

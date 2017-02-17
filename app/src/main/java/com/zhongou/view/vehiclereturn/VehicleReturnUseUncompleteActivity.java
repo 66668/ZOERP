@@ -1,6 +1,5 @@
 package com.zhongou.view.vehiclereturn;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.util.Log;
@@ -142,14 +141,12 @@ public class VehicleReturnUseUncompleteActivity extends BaseActivity {
         }
     }
 
+
     public void forVehicleReturn(View view) {
 
-        Intent intent = new Intent();
-        intent.setClass(this, VehicleReturnUseToCompleteActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("VehicleReturnModel", model);
-        intent.putExtras(bundle);
-        startActivity(intent);
+        startActivity(VehicleReturnUseToCompleteActivity.class,bundle);
 
     }
 

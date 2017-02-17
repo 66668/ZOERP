@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhongou.R;
-import com.zhongou.adapter.MyCopyListAdapter;
+import com.zhongou.adapter.ZOCopyListAdapter;
 import com.zhongou.base.BaseActivity;
 import com.zhongou.base.BaseListAdapter;
 import com.zhongou.common.MyException;
@@ -63,7 +63,7 @@ public class ZOCopyListActivity extends BaseActivity implements RefreshListView.
     @ViewInject(id = R.id.myapprovalList)
     RefreshListView myListView;
 
-    private MyCopyListAdapter vAdapter;//记录适配
+    private ZOCopyListAdapter vAdapter;//记录适配
     private boolean ifLoading = false;//标记
     private int pageSize = 20;
     private ArrayList<MyCopyModel> list = null;
@@ -84,7 +84,7 @@ public class ZOCopyListActivity extends BaseActivity implements RefreshListView.
         tv_title.setText(getResources().getString(R.string.MyCopyto));
 
         myListView.setInterFace(this);//下拉刷新监听
-        vAdapter = new MyCopyListAdapter(ZOCopyListActivity.this, adapterCallBack);// 上拉加载
+        vAdapter = new ZOCopyListAdapter(ZOCopyListActivity.this, adapterCallBack);// 上拉加载
         myListView.setAdapter(vAdapter);
         initListener();
 

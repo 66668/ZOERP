@@ -1,6 +1,5 @@
 package com.zhongou.view.examination;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.util.Log;
@@ -10,7 +9,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhongou.R;
-import com.zhongou.adapter.MyApprovalListAdapter;
+import com.zhongou.adapter.ZOApvlListAdapter;
 import com.zhongou.base.BaseActivity;
 import com.zhongou.base.BaseListAdapter;
 import com.zhongou.common.MyException;
@@ -63,7 +62,7 @@ public class ZOApvlListActivity extends BaseActivity implements RefreshListView.
     @ViewInject(id = R.id.myapprovalList)
     RefreshListView myListView;
 
-    private MyApprovalListAdapter vAdapter;//记录适配
+    private ZOApvlListAdapter vAdapter;//记录适配
     private boolean ifLoading = false;//标记
     private int pageSize = 20;
     private ArrayList<MyApprovalModel> list = null;
@@ -84,7 +83,7 @@ public class ZOApvlListActivity extends BaseActivity implements RefreshListView.
         tv_title.setText(getResources().getString(R.string.my_approval));
 
         myListView.setInterFace(this);//下拉刷新监听
-        vAdapter = new MyApprovalListAdapter(ZOApvlListActivity.this, adapterCallBack);// 上拉加载
+        vAdapter = new ZOApvlListAdapter(ZOApvlListActivity.this, adapterCallBack);// 上拉加载
         myListView.setAdapter(vAdapter);
         initListener();
 
@@ -261,84 +260,70 @@ public class ZOApvlListActivity extends BaseActivity implements RefreshListView.
      * 申请跳转详细
      */
 
-    private void myApprovalTransfer(String type, MyApprovalModel model) {
-        Intent intent = new Intent();
-        intent.putExtra("MyApprovalModel", model);
+    private void myApprovalTransfer(String type, MyApprovalModel myApprovalModel) {
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("MyApprovalModel",myApprovalModel);
+
         switch (type) {
             case "招聘申请"://01
-                intent.setClass(this, RecruitmentDetailApvlActivity.class);
-                startActivity(intent);
+
+                startActivity(RecruitmentDetailApvlActivity.class,bundle);
                 break;
             case "离职申请"://02
-                intent.setClass(this, DimissionDetailApvlActivity.class);
-                startActivity(intent);
+                startActivity(DimissionDetailApvlActivity.class,bundle);
                 break;
             case "请假申请"://03
-                intent.setClass(this, LeaveDetailApvlActivity.class);
-                startActivity(intent);
+
+                startActivity(LeaveDetailApvlActivity.class,bundle);
                 break;
             case "加班申请"://04
-                intent.setClass(this, WorkOverTimeDetailApvlActivity.class);
-                startActivity(intent);
+                startActivity(WorkOverTimeDetailApvlActivity.class,bundle);
                 break;
             case "调休申请"://05
-                intent.setClass(this, TakeDaysOffDetailApvlActivity.class);
-                startActivity(intent);
+                startActivity(TakeDaysOffDetailApvlActivity.class,bundle);
                 break;
             case "借阅申请"://06
-                intent.setClass(this, BorrowDetailApvlActivity.class);
-                startActivity(intent);
+                startActivity(BorrowDetailApvlActivity.class,bundle);
                 break;
             case "调薪申请"://07
-                intent.setClass(this, SalaryadjustDetailApvlActivity.class);
-                startActivity(intent);
+                startActivity(SalaryadjustDetailApvlActivity.class,bundle);
                 break;
             case "用车申请"://08
-                intent.setClass(this, VehicleDetailApvlActivity.class);
-                startActivity(intent);
+                startActivity(VehicleDetailApvlActivity.class,bundle);
                 break;
             case "车辆维保"://09
-                intent.setClass(this, VehicleMaintainDetailApvlActivity.class);
-                startActivity(intent);
+                startActivity(VehicleMaintainDetailApvlActivity.class,bundle);
                 break;
             case "借款报销申请"://10
                 break;
 
             case "调动申请"://11
-                intent.setClass(this, PositionReplaceDetailApvlActivity.class);
-                startActivity(intent);
+                startActivity(PositionReplaceDetailApvlActivity.class,bundle);
                 break;
             case "采购申请"://12
-                intent.setClass(this, ProcurementDetailApvlActivity.class);
-                startActivity(intent);
+                startActivity(ProcurementDetailApvlActivity.class,bundle);
                 break;
             case "通知公告申请"://13
-                intent.setClass(this, NotificationAndNoticeDetailApvlActivity.class);
-                startActivity(intent);
+                startActivity(NotificationAndNoticeDetailApvlActivity.class,bundle);
                 break;
             case "办公室申请"://14
-                intent.setClass(this, OfficeDetailApvlActivity.class);
-                startActivity(intent);
+                startActivity(OfficeDetailApvlActivity.class,bundle);
                 break;
             case "领用申请"://15
-                intent.setClass(this, ReceiveDetailApvlActivity.class);
-                startActivity(intent);
+                startActivity(ReceiveDetailApvlActivity.class,bundle);
                 break;
             case "合同文件申请"://16
-                intent.setClass(this, ContractFileDetailApvlActivity.class);
-                startActivity(intent);
+                startActivity(ContractFileDetailApvlActivity.class,bundle);
                 break;
             case "外出申请"://17
-                intent.setClass(this, OutGoingDetailApvlActivity.class);
-                startActivity(intent);
+                startActivity(OutGoingDetailApvlActivity.class,bundle);
                 break;
             case "复试申请"://18
-                intent.setClass(this, RetestDetailApvlActivity.class);
-                startActivity(intent);
+                startActivity(RetestDetailApvlActivity.class,bundle);
                 break;
             case "会议申请"://19
-                intent.setClass(this, ConferenceDetailApvlActivity.class);
-                startActivity(intent);
+                startActivity(ConferenceDetailApvlActivity.class,bundle);
                 break;
         }
     }

@@ -2,6 +2,7 @@ package com.zhongou.view.vehiclereturn;
 
 import android.os.Bundle;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -102,11 +103,24 @@ public class VehicleReturnMaintenanceToCompleteActivity extends BaseActivity {
      * @param view
      */
     public void forVehicleReturn(View view) {
-        ActualReturnTime = tv_endTime.getText().toString().trim();
         Passenger = tv_passenger.getText().toString().trim();
         StartMileage = tv_startMiles.getText().toString().trim();
         FinishMileage = tv_endMiles.getText().toString().trim();
         Remark = tv_remark.getText().toString().trim();
+
+        //非空
+        if (TextUtils.isEmpty(ActualBorrowTime) && TextUtils.isEmpty(ActualReturnTime))  {
+            PageUtil.DisplayToast(this.getResources().getString(R.string.vehicleRe_time_null));
+            return;
+        }
+        if (TextUtils.isEmpty(Passenger)) {
+            PageUtil.DisplayToast(this.getResources().getString(R.string.vehicleRe_Passenger_null));
+            return;
+        }
+        if (TextUtils.isEmpty(StartMileage) && TextUtils.isEmpty(FinishMileage)) {
+            PageUtil.DisplayToast(this.getResources().getString(R.string.vehicleRe_Miles_null));
+            return;
+        }
 
         //对象存值
         final VehicleReturnPostMaintenanceModel model = new VehicleReturnPostMaintenanceModel();
@@ -168,7 +182,7 @@ public class VehicleReturnMaintenanceToCompleteActivity extends BaseActivity {
                         tv_TimeStart.setText(time);
                     }
                 });
-        endDateChooseDialog.setTimePickerGone(true);
+//        endDateChooseDialog.setTimePickerGone(true);//分钟
         endDateChooseDialog.setDateDialogTitle("实际维保时间");
         endDateChooseDialog.showDateChooseDialog();
     }
@@ -183,11 +197,11 @@ public class VehicleReturnMaintenanceToCompleteActivity extends BaseActivity {
                 new DateChooseWheelViewDialog.DateChooseInterface() {
                     @Override
                     public void getDateTime(String time, boolean longTimeChecked) {
-                        ActualBorrowTime = time;
+                        ActualReturnTime = time;
                         tv_endTime.setText(time);
                     }
                 });
-        endDateChooseDialog.setTimePickerGone(true);
+//        endDateChooseDialog.setTimePickerGone(true);//分钟
         endDateChooseDialog.setDateDialogTitle("实际交车时间");
         endDateChooseDialog.showDateChooseDialog();
     }

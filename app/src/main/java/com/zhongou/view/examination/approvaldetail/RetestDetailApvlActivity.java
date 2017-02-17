@@ -1,8 +1,8 @@
 package com.zhongou.view.examination.approvaldetail;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -107,8 +107,9 @@ public class RetestDetailApvlActivity extends BaseActivity {
         tv_title.setText(getResources().getString(R.string.outgoing));
         tv_right.setText("");
 
-        Intent intent = getIntent();
-        myApprovalModel = (MyApprovalModel) intent.getSerializableExtra("MyApprovalModel");
+        Bundle bundle = this.getIntent().getExtras();
+        myApprovalModel = (MyApprovalModel) bundle.getSerializable("MyApprovalModel");
+        Log.d("SJY", "详情MyApprovalModel");
 
         bottomType();
         //

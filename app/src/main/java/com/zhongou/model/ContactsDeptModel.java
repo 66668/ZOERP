@@ -14,6 +14,15 @@ public class ContactsDeptModel implements Serializable {
     private String sDeptID;//部门ID
     private String sDeptName;//部门名称
     private List<ContactsEmployeeModel> obj;//员工信息
+    private String FirstLetter;
+
+    public String getFirstLetter() {
+        return FirstLetter;
+    }
+
+    public void setFirstLetter(String firstLetter) {
+        FirstLetter = firstLetter;
+    }
 
     public static long getSerialVersionUID() {
         return serialVersionUID;

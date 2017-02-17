@@ -714,7 +714,7 @@
 
         <!-- 06 财务界面-->
         <activity
-            android:name="com.zhongou.view.FinanceAcitivity"
+            android:name="com.zhongou.view.FinanceListAcitivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">

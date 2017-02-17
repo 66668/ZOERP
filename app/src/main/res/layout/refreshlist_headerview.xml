@@ -31,7 +31,7 @@
             android:layout_height="20dp"
             android:layout_marginRight="20dp"
             android:layout_toLeftOf="@+id/layout"
-            android:src="@mipmap/ic_launcher"/>
+            android:src="@mipmap/uparrow"/>
 
         <ProgressBar
             android:id="@+id/progressBar"

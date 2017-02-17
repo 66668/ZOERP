@@ -3,6 +3,8 @@ package com.zhongou.model;
 import java.io.Serializable;
 
 /**
+ * 我的审批-抄送-提交对象
+ *
  * Created by sjy on 2017/2/9.
  */
 

@@ -62,6 +62,7 @@ public class CommonTransfertoActivity extends BaseActivity {
 
     private static List<ContactsEmployeeModel> listContactApprover;//审批人通讯录 集合
     public static List<ContactsEmployeeModel> selectlist;//checkBox选中数据集合
+
     private ContactsSelectAdapter adapter;//转交通讯录适配
 
     //常量
@@ -73,7 +74,7 @@ public class CommonTransfertoActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_apps_examination_myapproval_common_contacts);
+        setContentView(R.layout.act_apps_examination_myapproval_common_contacts2);
 
         tv_title.setText(getResources().getString(R.string.examination_transfer));
         tv_right.setText(getResources().getString(R.string.examination_requester_sure));

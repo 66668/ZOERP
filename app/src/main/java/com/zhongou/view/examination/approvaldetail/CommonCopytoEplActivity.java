@@ -1,23 +1,19 @@
 package com.zhongou.view.examination.approvaldetail;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.zhongou.R;
-import com.zhongou.adapter.ContactsCopyToAdapter;
+import com.zhongou.adapter.ContactsCopyToEmplAdapter;
 import com.zhongou.application.MyApplication;
 import com.zhongou.base.BaseActivity;
 import com.zhongou.common.CharacterParser;
@@ -28,9 +24,7 @@ import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
 import com.zhongou.model.ApprovalSModel;
-import com.zhongou.model.ContactsDeptModel;
 import com.zhongou.model.ContactsEmployeeModel;
-import com.zhongou.model.ContactsSonCOModel;
 import com.zhongou.model.MyApprovalModel;
 import com.zhongou.utils.PageUtil;
 import com.zhongou.widget.SideBar;
@@ -64,7 +58,7 @@ public class CommonCopytoEplActivity extends BaseActivity {
 
     //变量
     private MyApprovalModel myApprovalModel;//跳转对象
-    private ApprovalSModel approvalSModel;//传送对象
+    private ApprovalSModel approvalSModel;//提交对象
     private String sApprovalemployeeinfos;//转发人ApprovalEmployeeID
 
     private SideBar sideBar;
@@ -74,7 +68,7 @@ public class CommonCopytoEplActivity extends BaseActivity {
     private static List<ContactsEmployeeModel> listData;//审批人通讯录 集合
     public static List<ContactsEmployeeModel> selectlist;//checkBox选中数据集合
 
-    private ContactsCopyToAdapter adapter;//通讯录排序适配
+    private ContactsCopyToEmplAdapter adapter;//通讯录排序适配
     private SQLiteCoContactdb myDb; //sql数据库雷
 
     //常量
@@ -94,7 +88,7 @@ public class CommonCopytoEplActivity extends BaseActivity {
 
         MyApplication.getInstance().addACT(this);//多界面管理
 
-        setContentView(R.layout.act_apps_examination_myapproval_common_contacts);
+        setContentView(R.layout.act_apps_examination_myapproval_common_contacts2);
         tv_title.setText(getResources().getString(R.string.examination_copyto));
 
         //获取调转对象
@@ -102,15 +96,11 @@ public class CommonCopytoEplActivity extends BaseActivity {
         Intent intent = getIntent();
         String sDeptID = intent.getStringExtra("sDeptID");
         myApprovalModel = (MyApprovalModel) intent.getSerializableExtra("myApprovalModel");
-        Log.d("SJY", "sDeptID=" + sDeptID);
-
+        Log.d("SJY","--"+ myApprovalModel.getApprovalID()+"--");
         initViews();
         initListener();
 
         getData(sDeptID);
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     /**
@@ -206,7 +196,7 @@ public class CommonCopytoEplActivity extends BaseActivity {
                 listData = filledData(listData);
                 // 根据a-z进行排序源数据
                 Collections.sort(listData, pinyinComparator);
-                adapter = new ContactsCopyToAdapter(this, listData);
+                adapter = new ContactsCopyToEmplAdapter(this, listData);
 
                 //数据展示
                 contactsListView.setAdapter(adapter);
@@ -214,18 +204,18 @@ public class CommonCopytoEplActivity extends BaseActivity {
 
             case CHASE_DATA://缓存数据处理
 
-                List<ContactsEmployeeModel> listData = (List<ContactsEmployeeModel>) msg.obj;
-                listData = filledData(listData);//为数据添加首字母
-
-                // 根据a-z进行排序源数据
-                Collections.sort(listData, pinyinComparator);
-
-                //界面展示
-                adapter = new ContactsCopyToAdapter(CommonCopytoEplActivity.this, listData);
-                contactsListView.setAdapter(adapter);
+                //                List<ContactsEmployeeModel> listData = (List<ContactsEmployeeModel>) msg.obj;
+                //                listData = filledData(listData);//为数据添加首字母
+                //
+                //                // 根据a-z进行排序源数据
+                //                Collections.sort(listData, pinyinComparator);
+                //
+                //                //界面展示
+                //                adapter = new ContactsCopyToEmplAdapter(CommonCopytoEplActivity.this, listData);
+                //                contactsListView.setAdapter(adapter);
                 break;
 
-            case POSTDATA_SUCCESS://选择联系人后的处理
+            case POSTDATA_SUCCESS://提交
                 PageUtil.DisplayToast((String) msg.obj);
 
                 //需要消除三个界面
@@ -242,13 +232,6 @@ public class CommonCopytoEplActivity extends BaseActivity {
         }
     }
 
-    /**
-     * 部门集合保存到sql
-     */
-    private void savetoCoContactSQL(List<ContactsSonCOModel> list) {
-        Log.d("SJY", "savetoCoContactSQL部门 数据存储");
-        //        myDb.addSonCoList(list, SQLiteCoContactdb.SONCOFLAG);
-    }
 
     /**
      * 联系人集合保存
@@ -258,34 +241,6 @@ public class CommonCopytoEplActivity extends BaseActivity {
         //        myDb.addEmplContactList(list, SQLiteCoContactdb.EMPLOYEEFLAG);
     }
 
-    /**
-     * 添加headView
-     *
-     * @param list
-     */
-    private void addListHeadView(List<ContactsDeptModel> list) {
-        Log.d("SJY", "添加headView");
-        //为listView添加动态headerView
-        LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        for (int j = 0; j < list.size(); j++) {
-            //实例化控件
-            LinearLayout hearView = (LinearLayout) inflator.inflate(R.layout.item_contacts, null);
-            //消除hederView中 部门
-            if (j > 0) {
-                TextView tv_letter = (TextView) hearView.findViewById(R.id.tv_letter);
-                tv_letter.setVisibility(View.GONE);
-            }
-
-            //控件展示
-            TextView tv_headViewTitle = (TextView) hearView.findViewById(R.id.tv_letter);
-            tv_headViewTitle.setText(getResources().getString(R.string.examination_copyto_dept));
-
-            TextView tv_deptOfSon = (TextView) hearView.findViewById(R.id.tv_name);
-            tv_deptOfSon.setText(list.get(j).getsDeptName());//部门名称
-
-            contactsListView.addHeaderView(hearView);
-        }
-    }
 
     /**
      * 重新修改model,为ListView填充首字母数据
@@ -314,31 +269,6 @@ public class CommonCopytoEplActivity extends BaseActivity {
 
     }
 
-    /**
-     * 根据搜索框中的值来过滤数据并更新ListView
-     *
-     * @param filterStr
-     */
-    private void filterData(String filterStr) {
-        List<ContactsEmployeeModel> filterDateList = new ArrayList<ContactsEmployeeModel>();
-
-        if (TextUtils.isEmpty(filterStr)) {
-            filterDateList = listData;
-        } else {
-            filterDateList.clear();
-            for (ContactsEmployeeModel sortModel : listData) {
-                String name = sortModel.getsEmployeeName();
-
-                if (name.indexOf(filterStr.toString()) != -1 || characterParser.getSelling(name).startsWith(filterStr.toString())) {
-                    filterDateList.add(sortModel);
-                }
-            }
-        }
-
-        // 根据a-z进行排序
-        Collections.sort(filterDateList, pinyinComparator);
-        adapter.updateListView(filterDateList);
-    }
 
     /**
      * 抄送
@@ -354,6 +284,7 @@ public class CommonCopytoEplActivity extends BaseActivity {
 
         if (TextUtils.isEmpty(sApprovalemployeeinfos)) {
             PageUtil.DisplayToast("抄送人不能为空");
+            return;
         }
 
         //对象赋值处理
@@ -372,14 +303,18 @@ public class CommonCopytoEplActivity extends BaseActivity {
             public void run() {
 
                 try {
+                    Log.d("SJY", "抄送接口");
                     String message = UserHelper.CopyToMyApproval(CommonCopytoEplActivity.this, approvalSModel);
+
                     sendMessage(POSTDATA_SUCCESS, message);
                 } catch (MyException e) {
+
                     sendMessage(POST_FAILED, e.getMessage());
                 }
             }
         });
     }
+
 
     /**
      * 获取选择的抄送人
@@ -391,7 +326,7 @@ public class CommonCopytoEplActivity extends BaseActivity {
         List<ContactsEmployeeModel> checkBoxList = new ArrayList<>();
         //遍历
         for (int i = 0; i < list.size(); i++) {
-            if (ContactsCopyToAdapter.getIsSelectedMap().get(i) == true) {
+            if (ContactsCopyToEmplAdapter.getIsSelectedMap().get(i) == true) {
                 checkBoxList.add(list.get(i));
                 Log.d("SJY", "选中的checkbox位置=" + i + "checkbox选中数据长度=" + checkBoxList.size());
             }
@@ -400,7 +335,7 @@ public class CommonCopytoEplActivity extends BaseActivity {
     }
 
     /**
-     * 对参数处理
+     * 对参数处理,将字符串变成：xxxxx,xxxxx,xxxxx
      *
      * @param list
      * @return

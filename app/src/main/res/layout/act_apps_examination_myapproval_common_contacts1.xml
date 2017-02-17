@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/common_bg_examination"
+              android:orientation="vertical"
+              android:weightSum="1">
+    <!-- 公司 部门 通讯录 使用-->
+    <include
+        android:id="@+id/topbar"
+        layout="@layout/topbar_common_itt"/>
+
+    <ListView
+        android:id="@+id/country_lvcountry"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:divider="@null"/>
+
+
+</LinearLayout>

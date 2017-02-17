@@ -1,8 +1,8 @@
 package com.zhongou.view.examination.approvaldetail;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -115,10 +115,10 @@ public class VehicleDetailApvlActivity extends BaseActivity {
         setContentView(R.layout.act_apps_examination_vehicle_d2);
         tv_title.setText(getResources().getString(R.string.carUsed_d));
         tv_right.setText("");
-        Intent intent = getIntent();
-        myApprovalModel = (MyApprovalModel) intent.getSerializableExtra("MyApprovalModel");
 
-        bottomType();
+        Bundle bundle = this.getIntent().getExtras();
+        myApprovalModel = (MyApprovalModel) bundle.getSerializable("MyApprovalModel");
+        Log.d("SJY", "详情MyApprovalModel");
         //
         getDetailData();
 
