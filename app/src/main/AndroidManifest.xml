@@ -501,7 +501,18 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
         <activity
+            android:name="com.zhongou.view.examination.applicationdetail.NotificationAndNoticeDetailActivity2"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
             android:name="com.zhongou.view.examination.approvaldetail.NotificationAndNoticeDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity> <activity
+            android:name="com.zhongou.view.examination.approvaldetail.NotificationAndNoticeDetailApvlActivity2"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">

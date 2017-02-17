@@ -83,10 +83,6 @@ public class ConferenceDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_conference_title)
     TextView tv_conference_title;
 
-    //参与者
-    @ViewInject(id = R.id.tv_conference_partiner)
-    TextView tv_conference_partiner;
-
     //准备
     @ViewInject(id = R.id.tv_conference_Device)
     TextView tv_conference_Device;
@@ -147,7 +143,6 @@ public class ConferenceDetailApvlActivity extends BaseActivity {
         //
         tv_conference_name.setText(model.getConferenceName());
         tv_conference_title.setText(model.getTitle());
-        tv_conference_partiner.setText(model.getParticipant());
         tv_conference_Device.setText(model.getDeviceName());
         tv_conference_Abstract.setText(model.getAbstract());
         tv_conference_start.setText(model.getStartTime());

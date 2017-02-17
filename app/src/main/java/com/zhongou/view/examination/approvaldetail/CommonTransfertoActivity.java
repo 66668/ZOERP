@@ -5,6 +5,7 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -32,6 +33,9 @@ import java.util.List;
 
 /**
  * 审批-转交(转交通讯录和审批-申请添加审批人的通讯录一样)
+ * <p>
+ * listView绑定checkBox
+ * <p>
  * Created by sjy on 2017/1/17.
  */
 
@@ -118,14 +122,21 @@ public class CommonTransfertoActivity extends BaseActivity {
             }
         });
 
-        //        //checkbox绑定列表监听
-        //        contactsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-        //
-        //            @Override
-        //            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        //
-        //            }
-        //        });
+        //checkbox绑定列表监听
+        contactsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                //判断view是否相等
+                if (view.getTag() instanceof ContactsSelectAdapter.MyViewHolder) {
+                    //如果是的话，重用
+                    ContactsSelectAdapter.MyViewHolder holder = (ContactsSelectAdapter.MyViewHolder) view.getTag();
+                    //自动触发
+                    holder.selectCheck.toggle();
+                }
+            }
+        });
 
     }
 

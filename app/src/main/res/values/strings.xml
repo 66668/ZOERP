@@ -347,10 +347,11 @@
 
     <!-- 01-01  通知公告13-->
     <string name="notificaitonAndNotice">通知公告详情</string>
-    <string name="notificaitonAndNotice_title">公告名称</string>
+    <string name="notificaitonAndNotice_title">标题</string>
     <string name="notificaitonAndNotice_type">类型</string>
-    <string name="notificaitonAndNotice_whom">接受范围</string>
-    <string name="notificaitonAndNotice_doTime">公告时间</string>
+    <string name="notificaitonAndNotice_whom">接收部门</string>
+    <string name="notificaitonAndNotice_content">内容</string>
+    <string name="notificaitonAndNotice_other">备注</string>
 
     <!-- 01-01  办公室14-->
     <string name="office">办公室申请详情</string>
@@ -393,13 +394,12 @@
 
     <!-- 01-01 会议19-->
     <string name="conference">会议详情</string>
-    <string name="conference_name">会议标题</string>
+    <string name="conference_name">会议名称</string>
     <string name="conference_title">会议主题</string>
-    <string name="conference_partiner">参与者</string>
-    <string name="conference_Device">会议准备</string>
-    <string name="conference_Abstract">会议说明</string>
-    <string name="conference_start">开始时间</string>
-    <string name="conference_end">结束时间</string>
+    <string name="conference_Device">所需设备名称及数量</string>
+    <string name="conference_Abstract">会议简介</string>
+    <string name="conference_start">会议开始时间</string>
+    <string name="conference_end">会议结束时间</string>
     <string name="conference_other">备注</string>
 
     <!-- 01-09交车-->

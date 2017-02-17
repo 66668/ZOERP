@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.zhongou.R;
-import com.zhongou.adapter.ContactsCopyToEmplAdapter;
+import com.zhongou.adapter.ContactsSelectAdapter;
 import com.zhongou.application.MyApplication;
 import com.zhongou.base.BaseActivity;
 import com.zhongou.common.CharacterParser;
@@ -35,6 +35,9 @@ import java.util.List;
 
 /**
  * 抄送 部门-联系人通讯录
+ * <p>
+ * listView绑定checkBox
+ * <p>
  * Created by sjy on 2017/1/17.
  */
 
@@ -68,7 +71,7 @@ public class CommonCopytoEplActivity extends BaseActivity {
     private static List<ContactsEmployeeModel> listData;//审批人通讯录 集合
     public static List<ContactsEmployeeModel> selectlist;//checkBox选中数据集合
 
-    private ContactsCopyToEmplAdapter adapter;//通讯录排序适配
+    private ContactsSelectAdapter adapter;//通讯录排序适配
     private SQLiteCoContactdb myDb; //sql数据库雷
 
     //常量
@@ -96,7 +99,7 @@ public class CommonCopytoEplActivity extends BaseActivity {
         Intent intent = getIntent();
         String sDeptID = intent.getStringExtra("sDeptID");
         myApprovalModel = (MyApprovalModel) intent.getSerializableExtra("myApprovalModel");
-        Log.d("SJY","--"+ myApprovalModel.getApprovalID()+"--");
+        Log.d("SJY", "--" + myApprovalModel.getApprovalID() + "--");
         initViews();
         initListener();
 
@@ -133,7 +136,7 @@ public class CommonCopytoEplActivity extends BaseActivity {
             }
         });
 
-        //checkbox绑定列表监听
+        //listView绑定checkbox监听
         contactsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -142,6 +145,13 @@ public class CommonCopytoEplActivity extends BaseActivity {
                 int headerViewsCount = contactsListView.getHeaderViewsCount();
                 int newPosition = position - headerViewsCount;
 
+                //判断view是否相等
+                if (view.getTag() instanceof ContactsSelectAdapter.MyViewHolder) {
+                    //如果是的话，重用
+                    ContactsSelectAdapter.MyViewHolder holder = (ContactsSelectAdapter.MyViewHolder) view.getTag();
+                    //自动触发
+                    holder.selectCheck.toggle();
+                }
             }
         });
 
@@ -196,7 +206,7 @@ public class CommonCopytoEplActivity extends BaseActivity {
                 listData = filledData(listData);
                 // 根据a-z进行排序源数据
                 Collections.sort(listData, pinyinComparator);
-                adapter = new ContactsCopyToEmplAdapter(this, listData);
+                adapter = new ContactsSelectAdapter(this, listData);
 
                 //数据展示
                 contactsListView.setAdapter(adapter);
@@ -211,7 +221,7 @@ public class CommonCopytoEplActivity extends BaseActivity {
                 //                Collections.sort(listData, pinyinComparator);
                 //
                 //                //界面展示
-                //                adapter = new ContactsCopyToEmplAdapter(CommonCopytoEplActivity.this, listData);
+                //                adapter = new ContactsSelectAdapter(CommonCopytoEplActivity.this, listData);
                 //                contactsListView.setAdapter(adapter);
                 break;
 
@@ -326,7 +336,7 @@ public class CommonCopytoEplActivity extends BaseActivity {
         List<ContactsEmployeeModel> checkBoxList = new ArrayList<>();
         //遍历
         for (int i = 0; i < list.size(); i++) {
-            if (ContactsCopyToEmplAdapter.getIsSelectedMap().get(i) == true) {
+            if (ContactsSelectAdapter.getIsSelectedMap().get(i) == true) {
                 checkBoxList.add(list.get(i));
                 Log.d("SJY", "选中的checkbox位置=" + i + "checkbox选中数据长度=" + checkBoxList.size());
             }

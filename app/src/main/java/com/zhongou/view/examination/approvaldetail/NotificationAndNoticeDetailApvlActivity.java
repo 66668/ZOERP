@@ -79,17 +79,23 @@ public class NotificationAndNoticeDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_notificaitonAndNotice_type)
     TextView tv_notificaitonAndNotice_type;
 
-    //接受范围
-    @ViewInject(id = R.id.tv_notificaitonAndNotice_whom)
-    TextView tv_notificaitonAndNotice_whom;
-
-    //公告名称
+    //标题
     @ViewInject(id = R.id.tv_notificaitonAndNotice_title)
     TextView tv_notificaitonAndNotice_title;
 
-    //公告时间
-    @ViewInject(id = R.id.tv_notificaitonAndNotice_doTime)
-    TextView tv_notificaitonAndNotice_doTime;
+    //接收部门
+    @ViewInject(id = R.id.tv_notificaitonAndNotice_whom)
+    TextView tv_notificaitonAndNotice_whom;
+
+    //内容
+    @ViewInject(id = R.id.layout_content, click = "forContent")
+    LinearLayout layout_content;
+    @ViewInject(id = R.id.tv_notificaitonAndNotice_content)
+    TextView tv_notificaitonAndNotice_content;
+
+    //备注
+    @ViewInject(id = R.id.tv_notificaitonAndNotice_other)
+    TextView tv_notificaitonAndNotice_other;
 
     //审批人
     @ViewInject(id = R.id.tv_Requester)
@@ -97,6 +103,7 @@ public class NotificationAndNoticeDetailApvlActivity extends BaseActivity {
 
     private MyApprovalModel myApprovalModel;
     private NotificationAndNoticeApvlModel model;
+
     //常量
     public static final int POST_SUCCESS = 21;
     public static final int POST_FAILED = 22;
@@ -129,13 +136,18 @@ public class NotificationAndNoticeDetailApvlActivity extends BaseActivity {
         tv_notificaitonAndNotice_type.setText(model.getPublishType());
         tv_notificaitonAndNotice_whom.setText(model.getAbstract());
         tv_notificaitonAndNotice_title.setText(model.getApplicationTitle());
-        tv_notificaitonAndNotice_doTime.setText(model.getPublishTime());
 
         if (model.getApprovalInfoLists().size() > 0) {
             tv_Requester.setText(model.getApplicationCreateTime());
         } else {
             tv_Requester.setText("未审批");
         }
+    }
+
+    public void forContent(View v) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("NotificationAndNoticeApvlModel", model);
+        startActivity(NotificationAndNoticeDetailApvlActivity2.class, bundle);
     }
 
     private void bottomType() {

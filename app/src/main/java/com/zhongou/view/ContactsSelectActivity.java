@@ -6,6 +6,7 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -31,7 +32,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * 处理审批-所有申请时，获取审批通讯录界面
+ * 处理审批-所有申请时-添加联系人，获取审批通讯录界面
  * <p>
  * 功能：
  * 第一次通讯录从服务端获取，数据保存到sp中，以后都走sp获取数据，退出后数据清空
@@ -116,14 +117,20 @@ public class ContactsSelectActivity extends BaseActivity {
             }
         });
 
-        //        //checkbox绑定列表监听
-        //        contactsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-        //
-        //            @Override
-        //            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        //
-        //            }
-        //        });
+        //checkbox绑定列表监听
+        contactsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //判断view是否相等
+                if (view.getTag() instanceof ContactsSelectAdapter.MyViewHolder) {
+                    //如果是的话，重用
+                    ContactsSelectAdapter.MyViewHolder holder = (ContactsSelectAdapter.MyViewHolder) view.getTag();
+                    //自动触发
+                    holder.selectCheck.toggle();
+                }
+            }
+        });
 
     }
 

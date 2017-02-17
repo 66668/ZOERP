@@ -53,21 +53,28 @@ public class NotificationAndNoticeDetailActivity extends BaseActivity {
     @ViewInject(id = R.id.layout_state, click = "forState")
     LinearLayout layout_state;
 
+
     //公告类型
     @ViewInject(id = R.id.tv_notificaitonAndNotice_type)
     TextView tv_notificaitonAndNotice_type;
 
-    //接受范围
-    @ViewInject(id = R.id.tv_notificaitonAndNotice_whom)
-    TextView tv_notificaitonAndNotice_whom;
-
-    //公告名称
+    //标题
     @ViewInject(id = R.id.tv_notificaitonAndNotice_title)
     TextView tv_notificaitonAndNotice_title;
 
-    //公告时间
-    @ViewInject(id = R.id.tv_notificaitonAndNotice_doTime)
-    TextView tv_notificaitonAndNotice_doTime;
+    //接收部门
+    @ViewInject(id = R.id.tv_notificaitonAndNotice_whom)
+    TextView tv_notificaitonAndNotice_whom;
+
+    //内容
+    @ViewInject(id = R.id.layout_content,click = "forContent")
+    LinearLayout layout_content;
+    @ViewInject(id = R.id.tv_notificaitonAndNotice_content)
+    TextView tv_notificaitonAndNotice_content;
+
+    //备注
+    @ViewInject(id = R.id.tv_notificaitonAndNotice_other)
+    TextView tv_notificaitonAndNotice_other;
 
 
     //获取子控件个数的父控件
@@ -108,8 +115,6 @@ public class NotificationAndNoticeDetailActivity extends BaseActivity {
         tv_notificaitonAndNotice_type.setText(model.getPublishType());
         tv_notificaitonAndNotice_whom.setText(model.getAbstract());
         tv_notificaitonAndNotice_title.setText(model.getApplicationTitle());
-        tv_notificaitonAndNotice_doTime.setText(model.getPublishTime());
-
 
         // 审批人
         modelList = model.getApprovalInfoLists();
@@ -151,6 +156,11 @@ public class NotificationAndNoticeDetailActivity extends BaseActivity {
         }
     }
 
+    public void forContent(View v){
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("notificationAndNoticeModel",notificationAndNoticeModel);
+        startActivity(NotificationAndNoticeDetailActivity2.class,bundle);
+    }
     /**
      * 获取详情数据
      */
