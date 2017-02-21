@@ -15,9 +15,8 @@ import com.zhongou.common.MyException;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
-import com.zhongou.model.MyApplicationModel;
-import com.zhongou.model.applicationdetailmodel.OutGoingModel;
-import com.zhongou.model.applicationdetailmodel.RecruitmentModel;
+import com.zhongou.model.MyCopyModel;
+import com.zhongou.model.copydetailmodel.OutGoingCopyModel;
 import com.zhongou.utils.PageUtil;
 
 import java.util.ArrayList;
@@ -51,11 +50,41 @@ public class OutGoingDetailCopyActivity extends BaseActivity {
     TextView tv_state_result;
     @ViewInject(id = R.id.layout_state, click = "forState")
     LinearLayout layout_state;
+
+    //外出时间
+    @ViewInject(id = R.id.tv_outgoing_time)
+    TextView tv_outgoing_time;
+
+    //外出事由
+    @ViewInject(id = R.id.tv_outgoing_reason)
+    TextView tv_outgoing_reason;
+
+    //目的地
+    @ViewInject(id = R.id.tv_outgoing_purpose)
+    TextView tv_outgoing_purpose;
+
+    //备注
+    @ViewInject(id = R.id.tv_outgoing_remark)
+    TextView tv_outgoing_remark;
+
+
+    //获取子控件个数的父控件
+    @ViewInject(id = R.id.layout_ll)
+    LinearLayout layout_ll;
+
+    //抄送人
+    @ViewInject(id = R.id.tv_copyer)
+    TextView tv_copyer;
+
+    //抄送时间
+    @ViewInject(id = R.id.tv_copyTime)
+    TextView tv_copyTime;
+
     //变量
     private Intent intent = null;
-    private OutGoingModel outGoingModel;
-    private MyApplicationModel model;
-    private List<RecruitmentModel.ApprovalInfoLists> modelList;
+    private OutGoingCopyModel outGoingModel;
+    private MyCopyModel model;
+    private List<OutGoingCopyModel.ApprovalInfoLists> modelList;
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
     private View childView;
@@ -69,20 +98,26 @@ public class OutGoingDetailCopyActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_apps_examination_outgoing_d);
+        setContentView(R.layout.act_apps_examination_outgoing_d3);
         tv_title.setText(getResources().getString(R.string.outgoing));
         tv_right.setText("");
-
-        intent = getIntent();
-        model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
+        Bundle bundle = this.getIntent().getExtras();
+        model = (MyCopyModel) bundle.getSerializable("MyCopyModel");
         getDetailModel(model);
 
     }
-    private void setShow(OutGoingModel model) {
+    private void setShow(OutGoingCopyModel model) {
+        tv_copyer.setText(model.getEmployeeName());
+        tv_copyTime.setText(model.getApplicationCreateTime());
 
-        modelList = model.getApprovalInfoLists();
+        //
+        tv_outgoing_time.setText(model.getOutingTime());
+        tv_outgoing_reason.setText(model.getOutingReason());
+        tv_outgoing_purpose.setText(model.getDestination());
+        tv_outgoing_remark.setText(model.getRemark());
 
         // 审批人
+        modelList = model.getApprovalInfoLists();
         StringBuilder nameBuilder = new StringBuilder();
         for (int i = 0; i < modelList.size(); i++) {
             nameBuilder.append(modelList.get(i).getApprovalEmployeeName() + " ");
@@ -120,13 +155,13 @@ public class OutGoingDetailCopyActivity extends BaseActivity {
     /**
      * 获取详情数据
      */
-    public void getDetailModel(final MyApplicationModel model) {
+    public void getDetailModel(final MyCopyModel model) {
 
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
                 try {
-                    OutGoingModel model1 = UserHelper.applicationDetailPostOutGoing(OutGoingDetailCopyActivity.this,
+                    OutGoingCopyModel model1 = UserHelper.copyDetailPostOutgoing(OutGoingDetailCopyActivity.this,
                             model.getApplicationID(),
                             model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
@@ -143,7 +178,7 @@ public class OutGoingDetailCopyActivity extends BaseActivity {
         super.handleMessage(msg);
         switch (msg.what) {
             case POST_SUCCESS:
-                outGoingModel = (OutGoingModel) msg.obj;
+                outGoingModel = (OutGoingCopyModel) msg.obj;
                 setShow(outGoingModel);
                 break;
             case POST_FAILED: // 1001

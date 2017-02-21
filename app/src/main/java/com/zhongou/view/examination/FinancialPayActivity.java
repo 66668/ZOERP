@@ -26,6 +26,7 @@ import com.zhongou.view.ContactsSelectActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -88,33 +89,51 @@ public class FinancialPayActivity extends BaseActivity {
     private String approvalID = "";
     private String reason = "";
     private String fee = "";
+    private String CollectionUnit = "";//收款单位
+    private String BankAccount = "";//银行
+    private String AccountNumber = "";//账号
+    private String Way = "";//
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_apps_examination_financial_pay);
-        tv_title.setText(getResources().getString(R.string.financial_loan));
+        tv_title.setText(getResources().getString(R.string.financial_pay));
 
     }
 
     public void forCommit(View view) {
         fee = et_Fee.getText().toString().trim();
         reason = et_Reason.getText().toString();
+        CollectionUnit = et_offical.getText().toString();
+        AccountNumber  =et_account.getText().toString();
+        BankAccount = et_bank.getText().toString();
 
+        if (TextUtils.isEmpty(Way)) {
+            PageUtil.DisplayToast(getResources().getString(R.string.financial_pay_wayNUll));
+            return;
+        }
+        if (TextUtils.isEmpty(CollectionUnit)) {
+            PageUtil.DisplayToast(getResources().getString(R.string.financial_pay_officeNUll));
+            return;
+        }
+        if (TextUtils.isEmpty(AccountNumber)) {
+            PageUtil.DisplayToast(getResources().getString(R.string.financial_pay_acountNull));
+            return;
+        }
+        if (TextUtils.isEmpty(BankAccount)) {
+            PageUtil.DisplayToast(getResources().getString(R.string.financial_pay_bankNull));
+            return;
+        }
         if (TextUtils.isEmpty(fee)) {
-            PageUtil.DisplayToast("金额不能为空");
+            PageUtil.DisplayToast(getResources().getString(R.string.financial_reimburse_feeNull));
             return;
         }
-        if (TextUtils.isEmpty(reason)) {
-            PageUtil.DisplayToast("借款事由不能为空");
-            return;
-        }
-
         if (TextUtils.isEmpty(approvalID)) {
-            PageUtil.DisplayToast("审批人不能为s空");
+            PageUtil.DisplayToast(getResources().getString(R.string.financial_reimburse_RequesterNull));
             return;
         }
-
 
         Loading.run(FinancialPayActivity.this, new Runnable() {
             @Override
@@ -123,8 +142,13 @@ public class FinancialPayActivity extends BaseActivity {
                     JSONObject js = new JSONObject();
 
                     //参数
-                    js.put("ApprovalIDList", approvalID);
-                    js.put("ApprovalIDList", approvalID);
+                    js.put("Type", getResources().getString(R.string.financial_pay_apl));
+                    js.put("Fee", fee);
+                    js.put("BankAccount", BankAccount);
+                    js.put("CollectionUnit", CollectionUnit);
+                    js.put("AccountNumber", AccountNumber);
+                    js.put("Way", Way);
+                    js.put("Remark", reason);
                     js.put("ApprovalIDList", approvalID);
 
                     UserHelper.LRApplicationPost(FinancialPayActivity.this, js);
@@ -144,7 +168,8 @@ public class FinancialPayActivity extends BaseActivity {
         super.handleMessage(msg);
         switch (msg.what) {
             case POST_SUCCESS:
-                PageUtil.DisplayToast("成功提交！");
+                PageUtil.DisplayToast(getResources().getString(R.string.approval_success));
+                clear();
                 break;
             case POST_FAILED:
                 PageUtil.DisplayToast((String) msg.obj);
@@ -152,6 +177,14 @@ public class FinancialPayActivity extends BaseActivity {
         }
     }
 
+    private void clear(){
+        tv_payStyle.setText("");
+        et_offical.setText("");
+        et_account.setText("");
+        et_bank.setText("");
+        et_Fee.setText("");
+        et_Reason.setText("");
+    }
     /**
      * 添加审批人
      *
@@ -166,9 +199,14 @@ public class FinancialPayActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 0 && resultCode == 0)//通过请求码(去SActivity)和回传码（回传数据到第一个页面）判断回传的页面
         {
-            data.getStringExtra("data");
-            List<ContactsEmployeeModel> list = (List<ContactsEmployeeModel>) data.getSerializableExtra("data");
-            Log.d("SJY", "返回数据=" + list.size());
+            //判断返回值是否为空
+            List<ContactsEmployeeModel> list = new ArrayList<>();
+            if (data != null && (List<ContactsEmployeeModel>) data.getSerializableExtra("data") != null) {
+                list = (List<ContactsEmployeeModel>) data.getSerializableExtra("data");
+            } else {
+
+            }
+
             StringBuilder name = new StringBuilder();
             StringBuilder employeeId = new StringBuilder();
             for (int i = 0; i < list.size(); i++) {
@@ -211,7 +249,7 @@ public class FinancialPayActivity extends BaseActivity {
         buidler.setSingleChoiceItems(data, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //                Useage = data[which];
+                Way = data[which];
                 tv_payStyle.setText(data[which].trim());
                 dialog.dismiss();
             }

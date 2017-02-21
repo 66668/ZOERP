@@ -17,7 +17,6 @@ import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
 import com.zhongou.model.MyApplicationModel;
 import com.zhongou.model.applicationdetailmodel.PositionReplaceModel;
-import com.zhongou.model.applicationdetailmodel.RecruitmentModel;
 import com.zhongou.utils.PageUtil;
 
 import java.util.ArrayList;
@@ -100,7 +99,7 @@ public class PositionReplaceDetailActivity extends BaseActivity {
     private Intent intent = null;
     private PositionReplaceModel positionReplaceModel;
     private MyApplicationModel model;
-    private List<RecruitmentModel.ApprovalInfoLists> modelList;
+    private List<PositionReplaceModel.ApprovalInfoLists> modelList;
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
     private View childView;
@@ -123,6 +122,7 @@ public class PositionReplaceDetailActivity extends BaseActivity {
     }
 
     private void setShow(PositionReplaceModel model) {
+
         //
         tv_positionReplace_title.setText(model.getApplicationTitle());
         tv_positionReplace_date.setText(model.getTransferDate());

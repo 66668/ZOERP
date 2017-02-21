@@ -17,10 +17,15 @@ import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
 import com.zhongou.model.MyApprovalModel;
+import com.zhongou.utils.PageUtil;
 import com.zhongou.view.examination.approvaldetail.BorrowDetailApvlActivity;
 import com.zhongou.view.examination.approvaldetail.ConferenceDetailApvlActivity;
 import com.zhongou.view.examination.approvaldetail.ContractFileDetailApvlActivity;
 import com.zhongou.view.examination.approvaldetail.DimissionDetailApvlActivity;
+import com.zhongou.view.examination.approvaldetail.FinancialFeeDetailApvlActivity;
+import com.zhongou.view.examination.approvaldetail.FinancialLoanDetailApvlActivity;
+import com.zhongou.view.examination.approvaldetail.FinancialPayDetailApvlActivity;
+import com.zhongou.view.examination.approvaldetail.FinancialReimburseDetailApvlActivity;
 import com.zhongou.view.examination.approvaldetail.LeaveDetailApvlActivity;
 import com.zhongou.view.examination.approvaldetail.NotificationAndNoticeDetailApvlActivity;
 import com.zhongou.view.examination.approvaldetail.OfficeDetailApvlActivity;
@@ -295,7 +300,27 @@ public class ZOApvlListActivity extends BaseActivity implements RefreshListView.
             case "车辆维保"://09
                 startActivity(VehicleMaintainDetailApvlActivity.class,bundle);
                 break;
-            case "借款报销申请"://10
+            case "财务申请"://10
+                //根据type决定跳转到具体界面
+                if (myApprovalModel.getApplicationTitle().contains("借款")) {
+
+                    startActivity(FinancialLoanDetailApvlActivity.class,bundle);
+
+                } else if (myApprovalModel.getApplicationTitle().contains("付款")) {
+
+                    startActivity(FinancialPayDetailApvlActivity.class,bundle);
+
+                } else if (myApprovalModel.getApplicationTitle().contains("费用申请")) {
+
+                    startActivity(FinancialFeeDetailApvlActivity.class,bundle);
+
+                } else if (myApprovalModel.getApplicationTitle().contains("报销")) {
+
+                    startActivity(FinancialReimburseDetailApvlActivity.class,bundle);
+
+                } else {
+                    PageUtil.DisplayToast("error!");
+                }
                 break;
 
             case "调动申请"://11

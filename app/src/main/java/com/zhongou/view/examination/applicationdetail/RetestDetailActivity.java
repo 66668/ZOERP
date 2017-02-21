@@ -16,7 +16,6 @@ import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
 import com.zhongou.model.MyApplicationModel;
-import com.zhongou.model.applicationdetailmodel.RecruitmentModel;
 import com.zhongou.model.applicationdetailmodel.RetestModel;
 import com.zhongou.utils.PageUtil;
 
@@ -75,7 +74,7 @@ public class RetestDetailActivity extends BaseActivity {
     private Intent intent = null;
     private RetestModel retestModel;
     private MyApplicationModel model;
-    private List<RecruitmentModel.ApprovalInfoLists> modelList;
+    private List<RetestModel.ApprovalInfoLists> modelList;
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
     private View childView;

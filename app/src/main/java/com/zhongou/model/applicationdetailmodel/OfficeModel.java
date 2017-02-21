@@ -24,7 +24,7 @@ public class OfficeModel implements Serializable {
     public String EmployeeName;
     public String ApplicationCreateTime;
 
-    public List<RecruitmentModel.ApprovalInfoLists> ApprovalInfoLists;
+    public List<OfficeModel.ApprovalInfoLists> ApprovalInfoLists;
 
     public static class ApprovalInfoLists{
         public String Comment;
@@ -65,11 +65,11 @@ public class OfficeModel implements Serializable {
         }
     }
 
-    public List<RecruitmentModel.ApprovalInfoLists> getApprovalInfoLists() {
+    public List<OfficeModel.ApprovalInfoLists> getApprovalInfoLists() {
         return ApprovalInfoLists;
     }
 
-    public void setApprovalInfoLists(List<RecruitmentModel.ApprovalInfoLists> ApprovalInfoLists) {
+    public void setApprovalInfoLists(List<OfficeModel.ApprovalInfoLists> ApprovalInfoLists) {
         this.ApprovalInfoLists = ApprovalInfoLists;
     }
 

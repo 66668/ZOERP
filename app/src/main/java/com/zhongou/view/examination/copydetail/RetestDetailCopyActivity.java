@@ -15,9 +15,8 @@ import com.zhongou.common.MyException;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
-import com.zhongou.model.MyApplicationModel;
-import com.zhongou.model.applicationdetailmodel.RecruitmentModel;
-import com.zhongou.model.applicationdetailmodel.RetestModel;
+import com.zhongou.model.MyCopyModel;
+import com.zhongou.model.copydetailmodel.RetestCopyModel;
 import com.zhongou.utils.PageUtil;
 
 import java.util.ArrayList;
@@ -42,6 +41,7 @@ public class RetestDetailCopyActivity extends BaseActivity {
     //
     @ViewInject(id = R.id.tv_right)
     TextView tv_right;
+
     //审批人
     @ViewInject(id = R.id.tv_Requester)
     TextView tv_Requester;
@@ -51,11 +51,37 @@ public class RetestDetailCopyActivity extends BaseActivity {
     TextView tv_state_result;
     @ViewInject(id = R.id.layout_state, click = "forState")
     LinearLayout layout_state;
+
+    //复试人
+    @ViewInject(id = R.id.tv_retest_person)
+    TextView tv_retest_person;
+
+    //备注
+    @ViewInject(id = R.id.tv_retest_other)
+    TextView tv_retest_other;
+
+    //附件
+    @ViewInject(id = R.id.tv_retest_files)
+    TextView tv_retest_files;
+
+
+    //获取子控件个数的父控件
+    @ViewInject(id = R.id.layout_ll)
+    LinearLayout layout_ll;
+
+    //抄送人
+    @ViewInject(id = R.id.tv_copyer)
+    TextView tv_copyer;
+
+    //抄送时间
+    @ViewInject(id = R.id.tv_copyTime)
+    TextView tv_copyTime;
+
     //变量
     private Intent intent = null;
-    private RetestModel retestModel;
-    private MyApplicationModel model;
-    private List<RecruitmentModel.ApprovalInfoLists> modelList;
+    private RetestCopyModel retestModel;
+    private MyCopyModel model;
+    private List<RetestCopyModel.ApprovalInfoLists> modelList;
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
     private View childView;
@@ -73,15 +99,19 @@ public class RetestDetailCopyActivity extends BaseActivity {
         tv_title.setText(getResources().getString(R.string.outgoing));
         tv_right.setText("");
 
-        intent = getIntent();
-        model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
+        Bundle bundle = this.getIntent().getExtras();
+        model = (MyCopyModel) bundle.getSerializable("MyCopyModel");
         getDetailModel(model);
     }
-    private void setShow(RetestModel model) {
-
-        modelList = model.getApprovalInfoLists();
+    private void setShow(RetestCopyModel model) {
+        tv_copyer.setText(model.getEmployeeName());
+        tv_copyTime.setText(model.getApplicationCreateTime());
+        //
+        tv_retest_person.setText(model.getReexpeople());
+        tv_retest_other.setText(model.getRemark());
 
         // 审批人
+        modelList = model.getApprovalInfoLists();
         StringBuilder nameBuilder = new StringBuilder();
         for (int i = 0; i < modelList.size(); i++) {
             nameBuilder.append(modelList.get(i).getApprovalEmployeeName() + " ");
@@ -119,13 +149,13 @@ public class RetestDetailCopyActivity extends BaseActivity {
     /**
      * 获取详情数据
      */
-    public void getDetailModel(final MyApplicationModel model) {
+    public void getDetailModel(final MyCopyModel model) {
 
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
                 try {
-                    RetestModel model1 = UserHelper.applicationDetailPostRetest(RetestDetailCopyActivity.this,
+                    RetestCopyModel model1 = UserHelper.copyDetailPostRetest(RetestDetailCopyActivity.this,
                             model.getApplicationID(),
                             model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
@@ -142,7 +172,7 @@ public class RetestDetailCopyActivity extends BaseActivity {
         super.handleMessage(msg);
         switch (msg.what) {
             case POST_SUCCESS:
-                retestModel = (RetestModel) msg.obj;
+                retestModel = (RetestCopyModel) msg.obj;
                 setShow(retestModel);
                 break;
             case POST_FAILED: // 1001

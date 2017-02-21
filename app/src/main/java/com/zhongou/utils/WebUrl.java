@@ -37,6 +37,7 @@ public class WebUrl {
 
     public class AppsManager {
 
+
         /**
          * 01-01获取 我的申请 记录
          */
@@ -45,6 +46,7 @@ public class WebUrl {
          * 01-01-获取 申请详情
          */
         public static final String APPLICATIONDETAIL = LOGIN_URL + LOGIN_FLODER_USER + "AllApplicationInfo/GetAllApplicationInfoByAppID";
+
 
         /**
          * 01-02获取 我的审批 记录
@@ -71,10 +73,17 @@ public class WebUrl {
          */
         public static final String APPROVAL_COPYTO = LOGIN_URL + LOGIN_FLODER_USER + "Approval/CopyMyApprovalRecord";
 
+
         /**
          * 01-03获取 我的抄送 记录
          */
         public static final String GETCOPYLIST = LOGIN_URL + LOGIN_FLODER_USER + "Mycopy/MycopyList";
+        /**
+         * 01-03获取 抄送详情
+         */
+        public static final String GETCOPYDETAIL = LOGIN_URL + LOGIN_FLODER_USER + "AllCopyListInfo/GetAllCopyListInfo";
+
+
         /**
          * 01-04-01 招聘申请
          */

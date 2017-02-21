@@ -1,6 +1,5 @@
 package com.zhongou.view.examination;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.util.Log;
@@ -18,6 +17,11 @@ import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
 import com.zhongou.model.MyCopyModel;
+import com.zhongou.utils.PageUtil;
+import com.zhongou.view.examination.applicationdetail.FinancialFeeDetailActivity;
+import com.zhongou.view.examination.applicationdetail.FinancialLoanDetailActivity;
+import com.zhongou.view.examination.applicationdetail.FinancialPayDetailActivity;
+import com.zhongou.view.examination.applicationdetail.FinancialReimburseDetailActivity;
 import com.zhongou.view.examination.copydetail.BorrowDetailCopyActivity;
 import com.zhongou.view.examination.copydetail.ConferenceDetailCopyActivity;
 import com.zhongou.view.examination.copydetail.ContractFileDetailCopyActivity;
@@ -43,7 +47,7 @@ import java.util.List;
 
 
 /**
- * 我的审批
+ * 我的抄送
  * Created by sjy on 2016/12/2.
  */
 
@@ -103,8 +107,8 @@ public class ZOCopyListActivity extends BaseActivity implements RefreshListView.
                 MyCopyModel myApprovalModel = (MyCopyModel) vAdapter.getItem(newPosition);//
                 String type = myApprovalModel.getApplicationType();//申请类型
 
-                //跳转调用
-//                myApprovalTransfer(type, myApprovalModel);
+                //                跳转调用
+                myApprovalTransfer(type, myApprovalModel);
             }
         });
     }
@@ -262,84 +266,78 @@ public class ZOCopyListActivity extends BaseActivity implements RefreshListView.
      */
 
     private void myApprovalTransfer(String type, MyCopyModel model) {
-        Intent intent = new Intent();
-        intent.putExtra("MyApprovalModel", model);
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("MyCopyModel", model);
         switch (type) {
             case "招聘申请"://01
-                intent.setClass(this, RecruitmentDetailCopyActivity.class);
-                startActivity(intent);
+                startActivity(RecruitmentDetailCopyActivity.class, bundle);
                 break;
             case "离职申请"://02
-                intent.setClass(this, DimissionDetailCopyActivity.class);
-                startActivity(intent);
+                startActivity(DimissionDetailCopyActivity.class, bundle);
                 break;
             case "请假申请"://03
-                intent.setClass(this, LeaveDetailCopyActivity.class);
-                startActivity(intent);
+                startActivity(LeaveDetailCopyActivity.class, bundle);
                 break;
             case "加班申请"://04
-                intent.setClass(this, WorkOverTimeDetailCopyActivity.class);
-                startActivity(intent);
+                startActivity(WorkOverTimeDetailCopyActivity.class, bundle);
                 break;
             case "调休申请"://05
-                intent.setClass(this, TakeDaysOffDetailCopyActivity.class);
-                startActivity(intent);
+                startActivity(TakeDaysOffDetailCopyActivity.class, bundle);
                 break;
             case "借阅申请"://06
-                intent.setClass(this, BorrowDetailCopyActivity.class);
-                startActivity(intent);
+                startActivity(BorrowDetailCopyActivity.class, bundle);
                 break;
             case "调薪申请"://07
-                intent.setClass(this, SalaryadjustDetailCopyActivity.class);
-                startActivity(intent);
+                startActivity(SalaryadjustDetailCopyActivity.class, bundle);
                 break;
             case "用车申请"://08
-                intent.setClass(this, VehicleDetailCopyActivity.class);
-                startActivity(intent);
+                startActivity(VehicleDetailCopyActivity.class, bundle);
                 break;
             case "车辆维保"://09
-                intent.setClass(this, VehicleMaintainDetailCopyActivity.class);
-                startActivity(intent);
+                startActivity(VehicleMaintainDetailCopyActivity.class, bundle);
                 break;
-            case "借款报销申请"://10
-
+            case "财务申请"://10
+                //根据type决定跳转到具体界面
+                if (model.getApplicationTitle().contains("借款")) {
+                    startActivity(FinancialLoanDetailActivity.class, bundle);
+                } else if (model.getApplicationTitle().contains("付款")) {
+                    startActivity(FinancialPayDetailActivity.class, bundle);
+                } else if (model.getApplicationTitle().contains("费用申请")) {
+                    startActivity(FinancialFeeDetailActivity.class, bundle);
+                } else if (model.getApplicationTitle().contains("报销")) {
+                    startActivity(FinancialReimburseDetailActivity.class, bundle);
+                } else {
+                    PageUtil.DisplayToast("error!");
+                }
                 break;
 
             case "调动申请"://11
-                intent.setClass(this, PositionReplaceDetailCopyActivity.class);
-                startActivity(intent);
+                startActivity(PositionReplaceDetailCopyActivity.class, bundle);
                 break;
             case "采购申请"://12
-                intent.setClass(this, ProcurementDetailCopyActivity.class);
-                startActivity(intent);
+                startActivity(ProcurementDetailCopyActivity.class, bundle);
                 break;
             case "通知公告申请"://13
-                intent.setClass(this, NotificationAndNoticeDetailCopyActivity.class);
-                startActivity(intent);
+                startActivity(NotificationAndNoticeDetailCopyActivity.class, bundle);
                 break;
             case "办公室申请"://14
-                intent.setClass(this, OfficeDetailCopyActivity.class);
-                startActivity(intent);
+                startActivity(OfficeDetailCopyActivity.class, bundle);
                 break;
             case "领用申请"://15
-                intent.setClass(this, ReceiveDetailCopyActivity.class);
-                startActivity(intent);
+                startActivity(ReceiveDetailCopyActivity.class, bundle);
                 break;
             case "合同文件申请"://16
-                intent.setClass(this, ContractFileDetailCopyActivity.class);
-                startActivity(intent);
+                startActivity(ContractFileDetailCopyActivity.class, bundle);
                 break;
             case "外出申请"://17
-                intent.setClass(this, OutGoingDetailCopyActivity.class);
-                startActivity(intent);
+                startActivity(OutGoingDetailCopyActivity.class, bundle);
                 break;
             case "复试申请"://18
-                intent.setClass(this, RetestDetailCopyActivity.class);
-                startActivity(intent);
+                startActivity(RetestDetailCopyActivity.class, bundle);
                 break;
             case "会议申请"://19
-                intent.setClass(this, ConferenceDetailCopyActivity.class);
-                startActivity(intent);
+                startActivity(ConferenceDetailCopyActivity.class, bundle);
                 break;
         }
     }

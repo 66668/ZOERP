@@ -16,7 +16,7 @@ import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
 import com.zhongou.model.MyApprovalModel;
-import com.zhongou.model.approvaldetailmodel.LoanReimbursementApvlModel;
+import com.zhongou.model.applicationdetailmodel.FinancialAllModel;
 import com.zhongou.utils.PageUtil;
 
 /**
@@ -55,13 +55,6 @@ public class FinancialPayDetailApvlActivity extends BaseActivity {
     TextView tv_approvalTime;
 
 
-    //备注
-    @ViewInject(id = R.id.tv_reason)
-    TextView tv_remark;
-
-    //审批人
-    @ViewInject(id = R.id.tv_Requester)
-    TextView tv_Requester;
 
     //未审批bottom
     @ViewInject(id = R.id.laytout_decide)
@@ -87,13 +80,37 @@ public class FinancialPayDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.btn_copytp, click = "forCopyto")
     Button btn_copytp;
 
+
+    //付款方式
+    @ViewInject(id = R.id.tv_feeType)
+    TextView tv_feeType;
+
+    //收款单位
+    @ViewInject(id = R.id.tv_payOfficial)
+    TextView tv_payOfficial;
+
+    //账号
+    @ViewInject(id = R.id.tv_Account)
+    TextView tv_Account;
+
+    //开户行
+    @ViewInject(id = R.id.tv_bank)
+    TextView tv_bank;
+    //金额
+    @ViewInject(id = R.id.tv_fee)
+    TextView tv_fee;
+
+    //备注
+    @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
+
     //常量
     public static final int POST_SUCCESS = 21;
     public static final int POST_FAILED = 22;
 
     //变量
     private MyApprovalModel myApprovalModel;
-    private LoanReimbursementApvlModel model;
+    private FinancialAllModel model;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,17 +128,20 @@ public class FinancialPayDetailApvlActivity extends BaseActivity {
 
     }
 
-    private void setShow(LoanReimbursementApvlModel model) {
+    private void setShow(FinancialAllModel model) {
+        //
         tv_ApprovalPerson.setText(model.getEmployeeName());
         tv_approvaldept.setText(model.getDepartmentName());
         tv_approvalCo.setText(model.getStoreName());
 
+        //
+        tv_feeType.setText(model.getWay());
+        tv_payOfficial.setText(model.getCollectionUnit());
+        tv_Account.setText(model.getAccountNumber());
+        tv_bank.setText(model.getBankAccount());
+        tv_fee.setText(model.getFee());
         tv_remark.setText(model.getRemark());
-        if (model.getApprovalInfoLists().size() > 0) {
-            tv_Requester.setText(model.getApplicationCreateTime());
-        } else {
-            tv_Requester.setText("未审批");
-        }
+
     }
 
     private void bottomType() {
@@ -143,7 +163,7 @@ public class FinancialPayDetailApvlActivity extends BaseActivity {
             public void run() {
 
                 try {
-                    LoanReimbursementApvlModel model = UserHelper.approvalDetailPostVehicleloan(FinancialPayDetailApvlActivity.this,
+                    FinancialAllModel model = UserHelper.approvalDetailPostVehicleloan(FinancialPayDetailApvlActivity.this,
                             myApprovalModel.getApplicationID(),
                             myApprovalModel.getApplicationType());
                     sendMessage(POST_SUCCESS, model);
@@ -159,7 +179,7 @@ public class FinancialPayDetailApvlActivity extends BaseActivity {
         super.handleMessage(msg);
         switch (msg.what) {
             case POST_SUCCESS:
-                model = (LoanReimbursementApvlModel) msg.obj;
+                model = (FinancialAllModel) msg.obj;
                 setShow(model);
                 break;
             case POST_FAILED:

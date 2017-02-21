@@ -136,6 +136,8 @@
     <string name="approval_co">所属公司</string>
     <string name="approval_approvalTime">申请时间</string>
 
+    <string name="approval_success">申请提交成功！</string>
+
     <!-- 01-01 - 招聘01-->
 
     <string name="forjobs">招聘申请</string>
@@ -258,6 +260,8 @@
     <string name="vehicleMainennanceTimeStart">维保时间</string>
     <string name="vehicleMainennanceNumber">车牌号</string>
     <string name="hint_vehicleMainennanceNumber">请输入车牌号</string>
+    <string name="vehicleMainennancedriver">驾驶人</string>
+    <string name="hint_vehicleMainennancedriver">请输入驾驶人</string>
     <string name="vehicleMainennanceContainer">维保项目</string>
     <string name="hint_vehicleMainennanceContainer">请输入维保项目</string>
     <string name="vehicleMainennanceMiles">行驶公里</string>
@@ -278,16 +282,24 @@
     </array>
 
     <!-- 01-01  财务申请10-->
+    <string name="financial_title">财务申请</string>
     <string name="financial_loan">借款申请</string>
     <string name="financial_reimburse">报销申请</string>
     <string name="financial_pay">付款申请</string>
     <string name="financial_fee">费用申请</string>
+    <string name="financial_start">开始申请</string>
+    <!--申请参数 -->
+    <string name="financial_loan_apl">借款</string>
+    <string name="financial_pay_apl">付款</string>
+    <string name="financial_fee_apl">费用申请</string>
+    <string name="financial_reimburse_apl">报销</string>
 
     <string name="financial_loan_time">还款日期</string>
     <string name="financial_loan_reason">借款事由</string>
     <string name="loanReimburseMoney">金额</string>
-    <string name="hint_loanReimburseMoney">请输入金额(元)</string>
+    <string name="hint_loanReimburseMoney">请输入金额 (元)</string>
     <string name="hint_loanReimburseReason">输入借款事由</string>
+
 
     <string name="financial_reimburse_fee1">金额一</string>
     <string name="financial_reimburse_fee2">金额二</string>
@@ -300,6 +312,9 @@
     <string name="financial_reimburse_other_hint">请输入需要备注事项</string>
     <string name="financial_reimburse_files">附件</string>
     <string name="financial_reimburse_addfiles">添加附件</string>
+    <string name="financial_reimburse_feeNull">金额不能为空</string>
+    <string name="financial_reimburse_useageNull">用途不能为空</string>
+    <string name="financial_reimburse_RequesterNull">审批人不能为空</string>
 
     <string name="financial_pay_style">付款方式</string>
     <string name="financial_pay_title_d">付款审批详情</string>
@@ -309,6 +324,11 @@
     <string name="financial_pay_account_hint">请输入收款单位银行账号</string>
     <string name="financial_pay_bank">开户行</string>
     <string name="financial_pay_bank_hint">请输入收款单位开户行</string>
+    <string name="financial_pay_wayNUll">付款方式不能为空</string>
+    <string name="financial_pay_officeNUll">收款单位不能为空</string>
+    <string name="financial_pay_bankNull">开户行不能为空</string>
+    <string name="financial_pay_acountNull">账户不能为空</string>
+
     <array name="financialPayWay">
         <item>现金</item>
         <item>网银</item>

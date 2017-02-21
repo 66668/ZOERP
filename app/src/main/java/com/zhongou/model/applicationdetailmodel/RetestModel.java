@@ -21,7 +21,7 @@ public class RetestModel implements Serializable {
     public String EmployeeName;
     public String ApplicationCreateTime;
 
-    public List<RecruitmentModel.ApprovalInfoLists> ApprovalInfoLists;
+    public List<RetestModel.ApprovalInfoLists> ApprovalInfoLists;
 
     public static class ApprovalInfoLists{
         public String Comment;
@@ -62,11 +62,11 @@ public class RetestModel implements Serializable {
         }
     }
 
-    public List<RecruitmentModel.ApprovalInfoLists> getApprovalInfoLists() {
+    public List<RetestModel.ApprovalInfoLists> getApprovalInfoLists() {
         return ApprovalInfoLists;
     }
 
-    public void setApprovalInfoLists(List<RecruitmentModel.ApprovalInfoLists> ApprovalInfoLists) {
+    public void setApprovalInfoLists(List<RetestModel.ApprovalInfoLists> ApprovalInfoLists) {
         this.ApprovalInfoLists = ApprovalInfoLists;
     }
 

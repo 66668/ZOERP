@@ -15,8 +15,8 @@ import com.zhongou.common.MyException;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
-import com.zhongou.model.MyApplicationModel;
-import com.zhongou.model.applicationdetailmodel.LeaveModel;
+import com.zhongou.model.MyCopyModel;
+import com.zhongou.model.copydetailmodel.LeaveCopyModel;
 import com.zhongou.utils.PageUtil;
 
 import java.util.ArrayList;
@@ -65,11 +65,21 @@ public class LeaveDetailCopyActivity extends BaseActivity {
     TextView tv_state_result;
     @ViewInject(id = R.id.layout_state, click = "forState")
     LinearLayout layout_state;
+
+
+    //抄送人
+    @ViewInject(id = R.id.tv_copyer)
+    TextView tv_copyer;
+
+    //抄送时间
+    @ViewInject(id = R.id.tv_copyTime)
+    TextView tv_copyTime;
+
     //变量
     private Intent intent = null;
-    private LeaveModel leaveModel;
-    private MyApplicationModel model;
-    private List<LeaveModel.ApprovalInfoLists> modelList;
+    private LeaveCopyModel leaveModel;
+    private MyCopyModel model;
+    private List<LeaveCopyModel.ApprovalInfoLists> modelList;
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
     private View childView;
@@ -84,17 +94,22 @@ public class LeaveDetailCopyActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_apps_examination_forleave_d);
+        setContentView(R.layout.act_apps_examination_forleave_d3);
         tv_title.setText(getResources().getString(R.string.leave_d));
         tv_right.setText("");
 
-        intent = getIntent();
-        model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
+        Bundle bundle = this.getIntent().getExtras();
+        model = (MyCopyModel) bundle.getSerializable("MyCopyModel");
+
         getDetailModel(model);
     }
 
-    private void setShow(LeaveModel model) {
-        tv_ApplicationTitle.setText("model无参数");
+    private void setShow(LeaveCopyModel model) {
+
+        tv_copyer.setText(model.getEmployeeName());
+        tv_copyTime.setText(model.getApplicationCreateTime());
+
+        tv_ApplicationTitle.setText("");
         tv_startTime.setText(model.getStartDate());
         tv_endTime.setText(model.getEndDate());
         tv_reason.setText(model.getContent());
@@ -139,12 +154,12 @@ public class LeaveDetailCopyActivity extends BaseActivity {
     /**
      * 获取详情数据
      */
-    public void getDetailModel(final MyApplicationModel model) {
+    public void getDetailModel(final MyCopyModel model) {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
                 try {
-                    LeaveModel model1 = (LeaveModel) UserHelper.applicationDetailPostLeave(LeaveDetailCopyActivity.this,
+                    LeaveCopyModel model1 = UserHelper.copyDetailPostLeave(LeaveDetailCopyActivity.this,
                             model.getApplicationID(),
                             model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
@@ -161,7 +176,7 @@ public class LeaveDetailCopyActivity extends BaseActivity {
         super.handleMessage(msg);
         switch (msg.what) {
             case POST_SUCCESS: // 1001
-                leaveModel = (LeaveModel) msg.obj;
+                leaveModel = (LeaveCopyModel) msg.obj;
                 setShow(leaveModel);
                 break;
             case POST_FAILED: // 1001

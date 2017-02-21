@@ -1,4 +1,4 @@
-package com.zhongou.model.applicationdetailmodel;
+package com.zhongou.model.copydetailmodel;
 
 import java.io.Serializable;
 import java.util.List;
@@ -7,33 +7,26 @@ import java.util.List;
  * Created by sjy on 2016/12/26.
  */
 
-public class LoanReimbursementModel implements Serializable {
+public class TakeDaysOffCopyModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    public String Reason;//
+    public String StartTakeDate;//
+    public String EndTakeDate;//
+    public String StartOffDate;//
+    public String EndOffDate;//
 
-    public String EmployeeID;
-    public String ApplicationID;
-    public String Type;
-    public String Way;
-    public String Fee;
-    public String Useage;
-
-    public String PlanbackTime;
-    public String Remark;
-    public String AdminName;
-    public String BankAccount;
-    public String AccountNumber;
 
     public String ApprovalStatus;
     public String StoreName;
     public String DepartmentName;
     public String EmployeeName;
     public String ApplicationCreateTime;
+    public List<TakeDaysOffCopyModel.ApprovalInfoLists> ApprovalInfoLists;
 
-    public List<LoanReimbursementModel.ApprovalInfoLists> ApprovalInfoLists;
 
 
-    public static class ApprovalInfoLists {
+    public static class ApprovalInfoLists{
         public String Comment;
         public String ApprovalDate;
         public String YesOrNo;
@@ -72,105 +65,56 @@ public class LoanReimbursementModel implements Serializable {
         }
     }
 
-    public List<LoanReimbursementModel.ApprovalInfoLists> getApprovalInfoLists() {
+    public List<TakeDaysOffCopyModel.ApprovalInfoLists> getApprovalInfoLists() {
         return ApprovalInfoLists;
     }
 
-    public void setApprovalInfoLists(List<LoanReimbursementModel.ApprovalInfoLists> ApprovalInfoLists) {
+    public void setApprovalInfoLists(List<TakeDaysOffCopyModel.ApprovalInfoLists> ApprovalInfoLists) {
         this.ApprovalInfoLists = ApprovalInfoLists;
     }
 
-    public String getEmployeeID() {
-        return EmployeeID;
+    public String getStartTakeDate() {
+        return StartTakeDate;
     }
 
-    public void setEmployeeID(String employeeID) {
-        EmployeeID = employeeID;
+    public void setStartTakeDate(String startTakeDate) {
+        StartTakeDate = startTakeDate;
     }
 
-    public String getApplicationID() {
-        return ApplicationID;
+    public String getEndTakeDate() {
+        return EndTakeDate;
     }
 
-    public void setApplicationID(String applicationID) {
-        ApplicationID = applicationID;
+    public void setEndTakeDate(String endTakeDate) {
+        EndTakeDate = endTakeDate;
     }
 
-    public String getType() {
-        return Type;
+    public String getStartOffDate() {
+        return StartOffDate;
     }
 
-    public void setType(String type) {
-        Type = type;
+    public void setStartOffDate(String startOffDate) {
+        StartOffDate = startOffDate;
     }
 
-    public String getWay() {
-        return Way;
+    public String getEndOffDate() {
+        return EndOffDate;
     }
 
-    public void setWay(String way) {
-        Way = way;
-    }
-
-    public String getFee() {
-        return Fee;
-    }
-
-    public void setFee(String fee) {
-        Fee = fee;
-    }
-
-
-    public String getUseage() {
-        return Useage;
-    }
-
-    public void setUseage(String useage) {
-        Useage = useage;
-    }
-
-    public String getRemark() {
-        return Remark;
-    }
-
-    public void setRemark(String remark) {
-        Remark = remark;
+    public void setEndOffDate(String endOffDate) {
+        EndOffDate = endOffDate;
     }
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
 
-    public String getPlanbackTime() {
-        return PlanbackTime;
+    public String getReason() {
+        return Reason;
     }
 
-    public void setPlanbackTime(String planbackTime) {
-        PlanbackTime = planbackTime;
-    }
-
-    public String getAdminName() {
-        return AdminName;
-    }
-
-    public void setAdminName(String adminName) {
-        AdminName = adminName;
-    }
-
-    public String getBankAccount() {
-        return BankAccount;
-    }
-
-    public void setBankAccount(String bankAccount) {
-        BankAccount = bankAccount;
-    }
-
-    public String getAccountNumber() {
-        return AccountNumber;
-    }
-
-    public void setAccountNumber(String accountNumber) {
-        AccountNumber = accountNumber;
+    public void setReason(String reason) {
+        Reason = reason;
     }
 
     public String getApprovalStatus() {

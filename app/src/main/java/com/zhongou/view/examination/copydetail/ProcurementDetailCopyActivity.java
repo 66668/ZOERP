@@ -15,9 +15,8 @@ import com.zhongou.common.MyException;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
-import com.zhongou.model.MyApplicationModel;
-import com.zhongou.model.applicationdetailmodel.ProcurementModel;
-import com.zhongou.model.applicationdetailmodel.RecruitmentModel;
+import com.zhongou.model.MyCopyModel;
+import com.zhongou.model.copydetailmodel.ProcurementCopyModel;
 import com.zhongou.utils.PageUtil;
 
 import java.util.ArrayList;
@@ -42,6 +41,52 @@ public class ProcurementDetailCopyActivity extends BaseActivity {
     //
     @ViewInject(id = R.id.tv_right)
     TextView tv_right;
+    //物品名称
+    @ViewInject(id = R.id.tv_procurement_thingsName)
+    TextView tv_procurement_thingsName;
+
+    //类型
+    @ViewInject(id = R.id.tv_procurement_thingsType)
+    TextView tv_procurement_thingsType;
+
+    //规格
+    @ViewInject(id = R.id.tv_procurement_ItemSpecifics)
+    TextView tv_procurement_ItemSpecifics;
+
+    //型号
+    @ViewInject(id = R.id.tv_procurement_ItemSize)
+    TextView tv_procurement_ItemVersion;
+
+    //数量
+    @ViewInject(id = R.id.tv_procurement_ItemNumber)
+    TextView tv_procurement_ItemNumber;
+
+    //金额
+    @ViewInject(id = R.id.tv_procurement_ItemFees)
+    TextView tv_ritv_procurement_ItemFees;
+
+    //理由
+    @ViewInject(id = R.id.tv_procurement_buyFor)
+    TextView tv_procurement_buyFor;
+
+    //购买人
+    @ViewInject(id = R.id.tv_procurement_buyer)
+    TextView tv_procurement_buyer;
+
+    //申请时间
+    @ViewInject(id = R.id.tv_procurement_aplTime)
+    TextView tv_procurement_aplTime;
+
+    //计划购买时间
+    @ViewInject(id = R.id.tv_procurement_PlanBuyTime)
+    TextView tv_procurement_PlanBuyTime;
+
+
+    //备注
+    @ViewInject(id = R.id.tv_procurement_Other)
+    TextView tv_procurement_Other;
+
+
     //审批人
     @ViewInject(id = R.id.tv_Requester)
     TextView tv_Requester;
@@ -52,11 +97,24 @@ public class ProcurementDetailCopyActivity extends BaseActivity {
     TextView tv_state_result;
     @ViewInject(id = R.id.layout_state, click = "forState")
     LinearLayout layout_state;
+
+
+    //获取子控件个数的父控件
+    @ViewInject(id = R.id.layout_ll)
+    LinearLayout layout_ll;
+
+    //抄送人
+    @ViewInject(id = R.id.tv_copyer)
+    TextView tv_copyer;
+
+    //抄送时间
+    @ViewInject(id = R.id.tv_copyTime)
+    TextView tv_copyTime;
     //变量
     private Intent intent = null;
-    private ProcurementModel procurementModel;
-    private MyApplicationModel model;
-    private List<RecruitmentModel.ApprovalInfoLists> modelList;
+    private ProcurementCopyModel procurementModel;
+    private MyCopyModel model;
+    private List<ProcurementCopyModel.ApprovalInfoLists> modelList;
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
     private View childView;
@@ -70,19 +128,33 @@ public class ProcurementDetailCopyActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_apps_examination_procurement_d);
+        setContentView(R.layout.act_apps_examination_procurement_d3);
         tv_title.setText(getResources().getString(R.string.procurement));
         tv_right.setText("");
 
-        intent = getIntent();
-        model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
+        Bundle bundle = this.getIntent().getExtras();
+        model = (MyCopyModel) bundle.getSerializable("MyCopyModel");
         getDetailModel(model);
     }
-    private void setShow(ProcurementModel model) {
+    private void setShow(ProcurementCopyModel model) {
+        tv_copyer.setText(model.getEmployeeName());
+        tv_copyTime.setText(model.getApplicationCreateTime());
 
-        modelList = model.getApprovalInfoLists();
+        //
+        tv_procurement_thingsName.setText(model.getItemName());
+        tv_procurement_thingsType.setText(model.getItemType());
+        tv_procurement_ItemSpecifics.setText(model.getSpecification());
+        tv_procurement_ItemVersion.setText(model.getVersions());
+        tv_procurement_ItemNumber.setText(model.getAmount());
+        tv_ritv_procurement_ItemFees.setText(model.getEstimateFee());
+        tv_procurement_buyer.setText(model.getBuyer());
+        tv_procurement_buyFor.setText(model.getReason());
+        tv_procurement_aplTime.setText(model.getCreateTime());
+        tv_procurement_PlanBuyTime.setText(model.getPlanTime());
+        tv_procurement_Other.setText(model.getRemark());
 
         // 审批人
+        modelList = model.getApprovalInfoLists();
         StringBuilder nameBuilder = new StringBuilder();
         for (int i = 0; i < modelList.size(); i++) {
             nameBuilder.append(modelList.get(i).getApprovalEmployeeName() + " ");
@@ -120,13 +192,13 @@ public class ProcurementDetailCopyActivity extends BaseActivity {
     /**
      * 获取详情数据
      */
-    public void getDetailModel(final MyApplicationModel model) {
+    public void getDetailModel(final MyCopyModel model) {
 
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
                 try {
-                    ProcurementModel model1 = UserHelper.applicationDetailPostProcurement(ProcurementDetailCopyActivity.this,
+                    ProcurementCopyModel model1 = UserHelper.copyDetailPostProcurement(ProcurementDetailCopyActivity.this,
                             model.getApplicationID(),
                             model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
@@ -143,7 +215,7 @@ public class ProcurementDetailCopyActivity extends BaseActivity {
         super.handleMessage(msg);
         switch (msg.what) {
             case POST_SUCCESS: // 1001
-                procurementModel = (ProcurementModel) msg.obj;
+                procurementModel = (ProcurementCopyModel) msg.obj;
                 setShow(procurementModel);
                 break;
             case POST_FAILED: // 1001

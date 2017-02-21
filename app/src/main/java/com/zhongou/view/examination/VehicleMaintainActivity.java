@@ -27,6 +27,7 @@ import com.zhongou.view.ContactsSelectActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -64,6 +65,10 @@ public class VehicleMaintainActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_vehicleMainennanceTimeStart)
     TextView tv_vehicleMainennanceTimeStart;
 
+    //驾驶人
+    @ViewInject(id = R.id.et_driver)
+    EditText et_driver;
+
     //车牌号
     @ViewInject(id = R.id.et_vihicleNumber)
     EditText et_vihicleNumber;
@@ -71,10 +76,6 @@ public class VehicleMaintainActivity extends BaseActivity {
     //维修项目
     @ViewInject(id = R.id.et_MaintenanceProject)
     EditText et_MaintenanceProject;
-
-    //行驶公里
-    @ViewInject(id = R.id.et_TravelKilmetre)
-    EditText et_TravelKilmetre;
 
     //维修地点
     @ViewInject(id = R.id.et_maintenancePlace)
@@ -107,10 +108,10 @@ public class VehicleMaintainActivity extends BaseActivity {
     private String maintenanceTime = "";
     private String vehicleNumber = "";
     private String maintenanceProject = "";
-    private String travelKilmetre = "";
     private String maintenancePlace = "";
     private String estimateFee = "";
     private String remark = "";
+    private String driver = "";
     private String maintenanceState = "";
 
     @Override
@@ -125,9 +126,9 @@ public class VehicleMaintainActivity extends BaseActivity {
         vehicleNumber = et_vihicleNumber.getText().toString().trim();
         maintenanceProject = et_MaintenanceProject.getText().toString();
         estimateFee = et_EstimateFee.getText().toString();
-        travelKilmetre = et_TravelKilmetre.getText().toString();
         maintenancePlace = et_maintenancePlace.getText().toString();
         remark = et_remark.getText().toString();
+        driver = et_driver.getText().toString();
 
         if (TextUtils.isEmpty(maintenanceType)) {
             PageUtil.DisplayToast("维修类型不能为空");
@@ -154,10 +155,6 @@ public class VehicleMaintainActivity extends BaseActivity {
             return;
         }
 
-        if (TextUtils.isEmpty(travelKilmetre)) {
-            PageUtil.DisplayToast("行驶公里不能为空");
-            return;
-        }
 
         if (TextUtils.isEmpty(maintenancePlace)) {
             PageUtil.DisplayToast("维修地点不能为空");
@@ -183,10 +180,10 @@ public class VehicleMaintainActivity extends BaseActivity {
                     js.put("MaintenanceTime", maintenanceTime);
                     js.put("MaintenanceProject", maintenanceProject);
                     js.put("Number", vehicleNumber);
-                    js.put("TravelKilmetre", travelKilmetre);
                     js.put("VehicleState", maintenanceState);
                     js.put("MaintenancePlace", maintenancePlace);
                     js.put("Remark", remark);
+                    js.put("Driver", driver);
                     js.put("ApprovalIDList", approvalID);//
 
                     UserHelper.maintenancePost(VehicleMaintainActivity.this, js);
@@ -208,7 +205,7 @@ public class VehicleMaintainActivity extends BaseActivity {
         super.handleMessage(msg);
         switch (msg.what) {
             case POST_SUCCESS:
-                PageUtil.DisplayToast("成功提交！");
+                PageUtil.DisplayToast(getResources().getString(R.string.approval_success));
                 break;
             case POST_FAILED:
                 PageUtil.DisplayToast((String) msg.obj);
@@ -297,9 +294,13 @@ public class VehicleMaintainActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 0 && resultCode == 0)//通过请求码(去SActivity)和回传码（回传数据到第一个页面）判断回传的页面
         {
-            data.getStringExtra("data");
-            List<ContactsEmployeeModel> list = (List<ContactsEmployeeModel>) data.getSerializableExtra("data");
-            Log.d("SJY", "返回数据=" + list.size());
+            //判断返回值是否为空
+            List<ContactsEmployeeModel> list = new ArrayList<>();
+            if (data != null && (List<ContactsEmployeeModel>) data.getSerializableExtra("data") != null) {
+                list = (List<ContactsEmployeeModel>) data.getSerializableExtra("data");
+            } else {
+
+            }
             StringBuilder name = new StringBuilder();
             StringBuilder employeeId = new StringBuilder();
             for (int i = 0; i < list.size(); i++) {

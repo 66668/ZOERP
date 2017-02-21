@@ -97,10 +97,6 @@ public class NotificationAndNoticeDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_notificaitonAndNotice_other)
     TextView tv_notificaitonAndNotice_other;
 
-    //审批人
-    @ViewInject(id = R.id.tv_Requester)
-    TextView tv_Requester;
-
     private MyApprovalModel myApprovalModel;
     private NotificationAndNoticeApvlModel model;
 
@@ -137,11 +133,6 @@ public class NotificationAndNoticeDetailApvlActivity extends BaseActivity {
         tv_notificaitonAndNotice_whom.setText(model.getAbstract());
         tv_notificaitonAndNotice_title.setText(model.getApplicationTitle());
 
-        if (model.getApprovalInfoLists().size() > 0) {
-            tv_Requester.setText(model.getApplicationCreateTime());
-        } else {
-            tv_Requester.setText("未审批");
-        }
     }
 
     public void forContent(View v) {

@@ -2,63 +2,222 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:background="@color/common_bg_examination"
               android:gravity="center_horizontal"
               android:orientation="vertical">
 
     <include layout="@layout/topbar_common_itt"/>
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/btn_loan"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
         android:layout_weight="1"
-        android:gravity="center">
+        android:background="@mipmap/bg_finance"
+        >
 
-        <Button
-            android:id="@+id/btn_loan"
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/financial_loan"/>
-    </LinearLayout>
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="28dp"
+            android:background="@mipmap/finance_loan"/>
 
-    <LinearLayout
+        <TextView
+            android:id="@+id/tv_typeName_loan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/view_position"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="28dp"
+            android:text="@string/financial_loan"
+            android:textColor="@color/white"
+            android:textSize="@dimen/common_textSize_default18"/>
+
+        <View
+            android:id="@+id/view_position"
+            android:layout_width="10dp"
+            android:layout_height="1dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/tv_go_loan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/tv_typeName_loan"
+            android:layout_below="@+id/tv_typeName_loan"
+            android:layout_marginRight="28dp"
+            android:drawablePadding="5dp"
+            android:drawableRight="@mipmap/finance_forword"
+            android:gravity="center_vertical"
+            android:text="@string/financial_start"
+            android:textColor="@color/white"
+            android:textSize="@dimen/common_textSize_default12"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/btn_reimburse"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
         android:layout_weight="1"
-        android:gravity="center">
+        android:background="@mipmap/bg_finance"
+        >
 
-        <Button
-            android:id="@+id/btn_reimburse"
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/financial_reimburse"/>
-    </LinearLayout>
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="28dp"
+            android:background="@mipmap/finance_reimburse"
+            />
 
-    <LinearLayout
+        <TextView
+            android:id="@+id/tv_typeName_remburse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/view_position2"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="28dp"
+            android:text="@string/financial_reimburse"
+            android:textColor="@color/white"
+            android:textSize="@dimen/common_textSize_default18"/>
+
+        <View
+            android:id="@+id/view_position2"
+            android:layout_width="10dp"
+            android:layout_height="1dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/tv_go_remburse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/tv_typeName_remburse"
+            android:layout_below="@+id/tv_typeName_remburse"
+            android:layout_marginRight="28dp"
+            android:drawablePadding="5dp"
+            android:drawableRight="@mipmap/finance_forword"
+            android:gravity="center_vertical"
+            android:text="@string/financial_start"
+            android:textColor="@color/white"
+            android:textSize="@dimen/common_textSize_default12"/>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/btn_fee"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
         android:layout_weight="1"
-        android:gravity="center">
+        android:background="@mipmap/bg_finance">
 
-        <Button
-            android:id="@+id/btn_pay"
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/financial_pay"/>
-    </LinearLayout>
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="28dp"
+            android:background="@mipmap/finance_fee"
+            />
 
-    <LinearLayout
+        <TextView
+            android:id="@+id/tv_typeName_fee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/view_position3"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="28dp"
+            android:text="@string/financial_fee"
+            android:textColor="@color/white"
+            android:textSize="@dimen/common_textSize_default18"/>
+
+        <View
+            android:id="@+id/view_position3"
+            android:layout_width="10dp"
+            android:layout_height="1dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/tv_go_fee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/tv_typeName_fee"
+            android:layout_below="@+id/tv_typeName_fee"
+            android:layout_marginRight="28dp"
+            android:drawablePadding="5dp"
+            android:drawableRight="@mipmap/finance_forword"
+            android:gravity="center_vertical"
+            android:text="@string/financial_start"
+            android:textColor="@color/white"
+            android:textSize="@dimen/common_textSize_default12"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/btn_pay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
         android:layout_weight="1"
-        android:gravity="center">
+        android:background="@mipmap/bg_finance">
 
-        <Button
-            android:id="@+id/btn_fee"
+        <TextView
+            android:id="@+id/tv_typeName_pay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/financial_fee"/>
-    </LinearLayout>
+            android:layout_above="@+id/view_position4"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="28dp"
+            android:text="@string/financial_pay"
+            android:textColor="@color/white"
+            android:textSize="@dimen/common_textSize_default18"/>
+
+        <View
+            android:id="@+id/view_position4"
+            android:layout_width="10dp"
+            android:layout_height="1dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/tv_go_pay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/tv_typeName_pay"
+            android:layout_below="@+id/tv_typeName_pay"
+            android:layout_marginRight="28dp"
+            android:drawablePadding="5dp"
+            android:drawableRight="@mipmap/finance_forword"
+            android:gravity="center_vertical"
+            android:text="@string/financial_start"
+            android:textColor="@color/white"
+            android:textSize="@dimen/common_textSize_default12"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="28dp"
+            android:background="@mipmap/finance_pay"
+            android:layout_alignTop="@+id/tv_typeName_pay"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="27dp"
+            android:id="@+id/imageView2"/>
+
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"

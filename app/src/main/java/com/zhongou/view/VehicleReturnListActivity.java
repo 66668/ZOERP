@@ -27,6 +27,8 @@ import java.util.List;
 
 /**
  * 交车详细界面
+ * <p>
+ * 多次跳转完成交车后，需要再次跳转到该界面，未交车 显示 变成已交车
  * Created by sjy on 2017/2/14.
  */
 
@@ -69,6 +71,7 @@ public class VehicleReturnListActivity extends BaseActivity implements RefreshLi
 
         initMyView();
         initListener();
+
         getData();
     }
 
@@ -256,24 +259,30 @@ public class VehicleReturnListActivity extends BaseActivity implements RefreshLi
         if (model.getApplicationType().contains("用车申请") || model.getApplicationType().contains("用车")) {
 
             if (model.getIsBack().equals("1")) {
-                startActivity(VehicleReturnUseCompleteActivity.class,bundle);//用车-已交车
+                startActivity(VehicleReturnUseCompleteActivity.class, bundle);//用车-已交车
 
             } else {
                 Log.d("SJY", "用车-未交车");
-                startActivity(VehicleReturnUseCompleteActivity.class,bundle);//用车-未交车
+                startActivity(VehicleReturnUseCompleteActivity.class, bundle);//用车-未交车
             }
         }
         //维保
         if (model.getApplicationType().contains("车辆维保") || model.getApplicationType().contains("维保")) {
             if (model.getIsBack().equals("1")) {
                 Log.d("SJY", "维保-已交车");
-                startActivity(VehicleReturnMaintenanceCompleteActivity.class,bundle);//维保-已交车
+                startActivity(VehicleReturnMaintenanceCompleteActivity.class, bundle);//维保-已交车
 
             } else {
                 Log.d("SJY", "维保-未交车");
-                startActivity(VehicleReturnMaintenanceUncompleteActivity.class,bundle);//维保-未交车
+                startActivity(VehicleReturnMaintenanceUncompleteActivity.class, bundle);//维保-未交车
             }
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getData();
     }
 
     /**

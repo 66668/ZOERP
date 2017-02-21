@@ -145,7 +145,6 @@
                     android:layout_height="1dip"
                     android:layout_marginTop="15dp"
                     android:background="@color/common_bg_examination_line"/>
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/common_topbar_height40"
@@ -165,7 +164,7 @@
                         android:textColor="@color/cl_text_common"/>
 
                     <TextView
-                        android:id="@+id/tv_fee"
+                        android:id="@+id/tv_feeType"
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -194,7 +193,7 @@
                         android:textColor="@color/cl_text_common"/>
 
                     <TextView
-                        android:id="@+id/tv_PlanbackTime"
+                        android:id="@+id/tv_payOfficial"
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -223,7 +222,7 @@
                         android:textColor="@color/cl_text_common"/>
 
                     <TextView
-                        android:id="@+id/tv_reason"
+                        android:id="@+id/tv_Account"
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -252,6 +251,7 @@
                         android:textColor="@color/cl_text_common"/>
 
                     <TextView
+                        android:id="@+id/tv_bank"
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -280,6 +280,7 @@
                         android:textColor="@color/cl_text_common"/>
 
                     <TextView
+                        android:id="@+id/tv_fee"
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -308,6 +309,7 @@
                         android:textColor="@color/cl_text_common"/>
 
                     <TextView
+                        android:id="@+id/tv_remark"
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -316,7 +318,6 @@
                         android:gravity="center_vertical"
                         />
                 </LinearLayout>
-
 
             </LinearLayout>
         </ScrollView>

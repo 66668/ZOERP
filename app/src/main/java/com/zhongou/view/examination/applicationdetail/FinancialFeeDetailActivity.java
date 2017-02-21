@@ -16,13 +16,14 @@ import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
 import com.zhongou.model.MyApplicationModel;
-import com.zhongou.model.applicationdetailmodel.LoanReimbursementModel;
+import com.zhongou.model.applicationdetailmodel.FinancialAllModel;
 import com.zhongou.utils.PageUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.zhongou.R.id.tv_contains;
+import static com.zhongou.R.id.tv_reason;
 
 /**
  * 费用详情(同报销详情界面)
@@ -42,18 +43,6 @@ public class FinancialFeeDetailActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_right)
     TextView tv_right;
 
-    //金额
-    @ViewInject(id = R.id.tv_fee)
-    TextView tv_fee;
-
-    //还款时间
-    @ViewInject(id = R.id.tv_PlanbackTime)
-    TextView tv_PlanbackTime;
-
-    //原因
-    @ViewInject(id = R.id.tv_reason)
-    TextView tv_reason;
-
     //审批人
     @ViewInject(id = R.id.tv_Requester)
     TextView tv_Requester;
@@ -68,11 +57,37 @@ public class FinancialFeeDetailActivity extends BaseActivity {
     @ViewInject(id = R.id.layout_ll)
     LinearLayout layout_ll;
 
+
+    //1
+    @ViewInject(id = R.id.tv_feeOne)
+    TextView tv_feeOne;
+    //1
+    @ViewInject(id = R.id.tv_useageOne)
+    TextView tv_useageOne;
+    //2
+    @ViewInject(id = R.id.tv_feeTwo)
+    TextView tv_feeTwo;
+    //2
+    @ViewInject(id = R.id.tv_useageTwo)
+    TextView tv_useageTwo;
+    //3
+    @ViewInject(id = R.id.tv_feeThree)
+    TextView tv_feeThree;
+    //3
+    @ViewInject(id = R.id.tv_useageThree)
+    TextView tv_useageThree;
+    //
+    @ViewInject(id = R.id.tv_totle)
+    TextView tv_totle;
+    //
+    @ViewInject(id = tv_reason)
+    TextView tv_remark;
+
     //变量
     private Intent intent = null;
-    private LoanReimbursementModel loanReimbursementModel;
+    private FinancialAllModel financialAllModel;
     private MyApplicationModel model;
-    private List<LoanReimbursementModel.ApprovalInfoLists> modelList;
+    private List<FinancialAllModel.ApprovalInfoLists> modelList;
 
     //动态添加view 变量
     private List<View> ls_childView;//用于保存动态添加进来的View
@@ -89,7 +104,7 @@ public class FinancialFeeDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_apps_examination_financial_reimburse_d);
-        tv_title.setText(getResources().getString(R.string.financial_reimburse));
+        tv_title.setText(getResources().getString(R.string.financial_fee));
         tv_right.setText("");
 
         intent = getIntent();
@@ -97,15 +112,21 @@ public class FinancialFeeDetailActivity extends BaseActivity {
         getDetailModel(model);
     }
 
-    private void setShow(LoanReimbursementModel model) {
+    private void setShow(FinancialAllModel model) {
 
-        tv_fee.setText(model.getFee());
-        tv_reason.setText(model.getRemark());
+        tv_feeOne.setText(model.getFeeone());
+        tv_feeTwo.setText(model.getFeetwo());
+        tv_feeThree.setText(model.getFeethree());
 
-        tv_PlanbackTime.setText(model.getPlanbackTime());
+        tv_useageOne.setText(model.getUseageone());
+        tv_useageTwo.setText(model.getUseagetwo());
+        tv_useageThree.setText(model.getFeethree());
 
-        modelList = model.getApprovalInfoLists();
+        tv_totle.setText(model.getTotal());
+        tv_remark.setText(model.getRemark());//?
+
         // 审批人
+        modelList = model.getApprovalInfoLists();
         StringBuilder nameBuilder = new StringBuilder();
         for (int i = 0; i < modelList.size(); i++) {
             nameBuilder.append(modelList.get(i).getApprovalEmployeeName() + " ");
@@ -113,20 +134,20 @@ public class FinancialFeeDetailActivity extends BaseActivity {
         tv_Requester.setText(nameBuilder);
 
         //审批状态
-        if (loanReimbursementModel.getApprovalStatus().contains("0")) {
+        if (financialAllModel.getApprovalStatus().contains("0")) {
             tv_state_result.setText("未审批");
             tv_state_result.setTextColor(getResources().getColor(R.color.red));
-        } else if (loanReimbursementModel.getApprovalStatus().contains("1")) {
+        } else if (financialAllModel.getApprovalStatus().contains("1")) {
             tv_state_result.setText("已审批");
             tv_state_result.setTextColor(getResources().getColor(R.color.green));
-        } else if (loanReimbursementModel.getApprovalStatus().contains("2")) {
+        } else if (financialAllModel.getApprovalStatus().contains("2")) {
             tv_state_result.setText("审批中...");
             tv_state_result.setTextColor(getResources().getColor(R.color.black));
         } else {
             tv_state_result.setText("你猜猜！");
         }
 
-        if (loanReimbursementModel.getApprovalStatus().contains("1") || loanReimbursementModel.getApprovalStatus().contains("2")) {
+        if (financialAllModel.getApprovalStatus().contains("1") || financialAllModel.getApprovalStatus().contains("2")) {
             //插入意见
             for (int i = 0, mark = layout_ll.getChildCount(); i < modelList.size(); i++, mark++) {//mark是布局插入位置，放在mark位置的后边（从1开始计数）
                 ViewHolder vh = AddView(mark);//添加布局
@@ -152,7 +173,7 @@ public class FinancialFeeDetailActivity extends BaseActivity {
             @Override
             public void run() {
                 try {
-                    LoanReimbursementModel model1 = UserHelper.applicationDetailPostLoan(FinancialFeeDetailActivity.this,
+                    FinancialAllModel model1 = UserHelper.applicationDetailPostLoan(FinancialFeeDetailActivity.this,
                             model.getApplicationID(),
                             model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
@@ -169,8 +190,8 @@ public class FinancialFeeDetailActivity extends BaseActivity {
         super.handleMessage(msg);
         switch (msg.what) {
             case POST_SUCCESS: // 1001
-                loanReimbursementModel = (LoanReimbursementModel) msg.obj;
-                setShow(loanReimbursementModel);
+                financialAllModel = (FinancialAllModel) msg.obj;
+                setShow(financialAllModel);
                 break;
             case POST_FAILED: // 1001
                 PageUtil.DisplayToast((String) msg.obj);

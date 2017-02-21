@@ -94,9 +94,6 @@ public class ReceiveDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_recevie_other)
     TextView tv_recevie_other;
 
-    //审批人
-    @ViewInject(id = R.id.tv_Requester)
-    TextView tv_Requester;
 
     //申请时间
     @ViewInject(id = R.id.tv_recevie_aplTime)
@@ -137,11 +134,6 @@ public class ReceiveDetailApvlActivity extends BaseActivity {
         tv_recevie_other.setText(model.getRemark());
         tv_recevie_useage.setText(model.getRemark());
 
-                if (model.getApprovalInfoLists().size() > 0) {
-                    tv_Requester.setText(model.getApplicationCreateTime());
-                } else {
-                    tv_Requester.setText("未审批");
-                }
     }
     private void bottomType() {
         //

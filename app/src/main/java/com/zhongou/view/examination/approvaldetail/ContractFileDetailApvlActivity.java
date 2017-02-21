@@ -2,7 +2,6 @@ package com.zhongou.view.examination.approvaldetail;
 
 import android.os.Bundle;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -92,11 +91,6 @@ public class ContractFileDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.contractfile_files)
     TextView contractfile_files;
 
-
-    //审批人
-    @ViewInject(id = R.id.tv_Requester)
-    TextView tv_Requester;
-
     private MyApprovalModel myApprovalModel;
     private ContractFileApvlModel model;
     //常量
@@ -112,7 +106,6 @@ public class ContractFileDetailApvlActivity extends BaseActivity {
 
         Bundle bundle = this.getIntent().getExtras();
         myApprovalModel = (MyApprovalModel) bundle.getSerializable("MyApprovalModel");
-        Log.d("SJY", "详情MyApprovalModel");
 
         bottomType();
         //
@@ -130,12 +123,6 @@ public class ContractFileDetailApvlActivity extends BaseActivity {
         tv_contractfile_name.setText(model.getContractName());
         tv_contractfile_other.setText(model.getRemark());
 
-
-        if (model.getApprovalInfoLists().size() > 0) {
-            tv_Requester.setText(model.getApplicationCreateTime());
-        } else {
-            tv_Requester.setText("未审批");
-        }
     }
 
     private void bottomType() {

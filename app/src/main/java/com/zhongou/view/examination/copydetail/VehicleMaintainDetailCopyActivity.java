@@ -16,8 +16,8 @@ import com.zhongou.common.MyException;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
-import com.zhongou.model.MyApplicationModel;
-import com.zhongou.model.applicationdetailmodel.VehicleMaintainModel;
+import com.zhongou.model.MyCopyModel;
+import com.zhongou.model.copydetailmodel.VehicleMaintainCopyModel;
 import com.zhongou.utils.PageUtil;
 
 import java.util.ArrayList;
@@ -93,11 +93,18 @@ public class VehicleMaintainDetailCopyActivity extends BaseActivity {
     @ViewInject(id = R.id.layout_state, click = "forState")
     LinearLayout layout_state;
 
+    //抄送人
+    @ViewInject(id = R.id.tv_copyer)
+    TextView tv_copyer;
+
+    //抄送时间
+    @ViewInject(id = R.id.tv_copyTime)
+    TextView tv_copyTime;
     //变量
     private Intent intent = null;
-    private VehicleMaintainModel vehicleMaintenanceModel;
-    private MyApplicationModel model;
-    private List<VehicleMaintainModel.ApprovalInfoLists> modelList;
+    private VehicleMaintainCopyModel vehicleMaintenanceModel;
+    private MyCopyModel model;
+    private List<VehicleMaintainCopyModel.ApprovalInfoLists> modelList;
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
     private View childView;
@@ -112,16 +119,19 @@ public class VehicleMaintainDetailCopyActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_apps_examination_vehiclemainennance_d);
+        setContentView(R.layout.act_apps_examination_vehiclemainennance_d3);
         tv_title.setText(getResources().getString(R.string.vehicleMainennance_d));
         tv_right.setText("");
 
-        intent = getIntent();
-        model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
+        Bundle bundle = this.getIntent().getExtras();
+        model = (MyCopyModel) bundle.getSerializable("MyCopyModel");
         getDetailModel(model);
     }
 
-    private void setShow(VehicleMaintainModel model) {
+    private void setShow(VehicleMaintainCopyModel model) {
+        tv_copyer.setText(model.getEmployeeName());
+        tv_copyTime.setText(model.getApplicationCreateTime());
+        //
         tv_MaintenanceType.setText(model.getMaintenanceType());
         tv_VehicleState.setText(model.getVehicleState());
         tv_PlanmantainTime.setText(model.getPlanBorrowTime());
@@ -173,12 +183,12 @@ public class VehicleMaintainDetailCopyActivity extends BaseActivity {
     /**
      * 获取详情数据
      */
-    public void getDetailModel(final MyApplicationModel model) {
+    public void getDetailModel(final MyCopyModel model) {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
                 try {
-                    VehicleMaintainModel model1 = UserHelper.applicationDetailPostVehicleMaintenance(VehicleMaintainDetailCopyActivity.this,
+                    VehicleMaintainCopyModel model1 = UserHelper.copyDetailPostVehicleMaintain(VehicleMaintainDetailCopyActivity.this,
                             model.getApplicationID(),
                             model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
@@ -195,7 +205,7 @@ public class VehicleMaintainDetailCopyActivity extends BaseActivity {
         super.handleMessage(msg);
         switch (msg.what) {
             case POST_SUCCESS: // 1001
-                vehicleMaintenanceModel = (VehicleMaintainModel) msg.obj;
+                vehicleMaintenanceModel = (VehicleMaintainCopyModel) msg.obj;
                 setShow(vehicleMaintenanceModel);
                 break;
             case POST_FAILED: // 1001

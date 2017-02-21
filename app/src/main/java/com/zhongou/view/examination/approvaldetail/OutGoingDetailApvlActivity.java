@@ -74,8 +74,7 @@ public class OutGoingDetailApvlActivity extends BaseActivity {
     //抄送
     @ViewInject(id = R.id.btn_copytp,click = "forCopyto")
     Button btn_copytp;
-    private MyApprovalModel myApprovalModel;
-    private OUtGoingApvlModel model;
+
 
 
     //外出时间
@@ -94,11 +93,9 @@ public class OutGoingDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_outgoing_remark)
     TextView tv_outgoing_remark;
 
-    //审批人
-    @ViewInject(id = R.id.tv_Requester)
-    TextView tv_Requester;
-
-
+    //
+    private MyApprovalModel myApprovalModel;
+    private OUtGoingApvlModel model;
     //常量
     public static final int POST_SUCCESS = 21;
     public static final int POST_FAILED = 22;
@@ -129,11 +126,6 @@ public class OutGoingDetailApvlActivity extends BaseActivity {
         tv_outgoing_purpose.setText(model.getDestination());
         tv_outgoing_remark.setText(model.getRemark());
 
-        if (model.getApprovalInfoLists().size() > 0) {
-            tv_Requester.setText(model.getApplicationCreateTime());
-        } else {
-            tv_Requester.setText("未审批");
-        }
     }
     private void bottomType() {
         //

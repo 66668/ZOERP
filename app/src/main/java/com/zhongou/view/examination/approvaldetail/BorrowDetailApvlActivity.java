@@ -73,11 +73,6 @@ public class BorrowDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_reason)
     TextView tv_reason;
 
-    //审批人
-    @ViewInject(id = R.id.tv_Requester)
-    TextView tv_Requester;
-
-
     //未审批bottom
     @ViewInject(id = R.id.laytout_decide)
     LinearLayout laytout_decide;
@@ -136,11 +131,7 @@ public class BorrowDetailApvlActivity extends BaseActivity {
         tv_StartTime.setText(model.getStartTime());
         tv_endTime.setText(model.getFinishTime());
         tv_reason.setText(model.getReason());
-        if (model.getApprovalInfoLists().size() > 0) {
-            tv_Requester.setText(model.getApplicationCreateTime());
-        } else {
-            tv_Requester.setText("未审批");
-        }
+
     }
 
     private void bottomType() {

@@ -103,11 +103,6 @@ public class ConferenceDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_conference_other)
     TextView tv_conference_other;
 
-
-    //审批人
-    @ViewInject(id = R.id.tv_Requester)
-    TextView tv_Requester;
-
     //
     private MyApprovalModel myApprovalModel;
     private ConferenceApvlModel model;
@@ -149,11 +144,6 @@ public class ConferenceDetailApvlActivity extends BaseActivity {
         tv_conference_end.setText(model.getFinishTime());
         tv_conference_other.setText(model.getRemark());
 
-        if (model.getApprovalInfoLists().size() > 0) {
-            tv_Requester.setText(model.getApplicationCreateTime());
-        } else {
-            tv_Requester.setText("未审批");
-        }
     }
 
     private void bottomType() {

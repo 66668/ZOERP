@@ -3,7 +3,7 @@ package com.zhongou.model;
 import java.io.Serializable;
 
 /**
- * 财务记录model
+ * 应用-财务记录model
  * Created by sjy on 2017/2/15.
  */
 

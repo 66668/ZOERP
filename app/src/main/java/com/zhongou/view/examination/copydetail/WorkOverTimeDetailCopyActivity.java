@@ -15,8 +15,8 @@ import com.zhongou.common.MyException;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
-import com.zhongou.model.MyApplicationModel;
-import com.zhongou.model.applicationdetailmodel.WorkOverTimeModel;
+import com.zhongou.model.MyCopyModel;
+import com.zhongou.model.copydetailmodel.WorkOverTimeCopyModel;
 import com.zhongou.utils.PageUtil;
 
 import java.util.ArrayList;
@@ -68,11 +68,18 @@ public class WorkOverTimeDetailCopyActivity extends BaseActivity {
     @ViewInject(id = R.id.layout_state, click = "forState")
     LinearLayout layout_state;
 
+    //抄送人
+    @ViewInject(id = R.id.tv_copyer)
+    TextView tv_copyer;
+
+    //抄送时间
+    @ViewInject(id = R.id.tv_copyTime)
+    TextView tv_copyTime;
     //变量
     private Intent intent = null;
-    private WorkOverTimeModel workOverTimeModel;
-    private MyApplicationModel model;
-    private List<WorkOverTimeModel.ApprovalInfoLists> modelList;
+    private WorkOverTimeCopyModel workOverTimeModel;
+    private MyCopyModel model;
+    private List<WorkOverTimeCopyModel.ApprovalInfoLists> modelList;
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
     private View childView;
@@ -87,16 +94,19 @@ public class WorkOverTimeDetailCopyActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_apps_examination_workovertime_d);
+        setContentView(R.layout.act_apps_examination_workovertime_d3);
         tv_title.setText(getResources().getString(R.string.workOverTime_d));
         tv_right.setText("");
 
-        intent = getIntent();
-        model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
+        Bundle bundle = this.getIntent().getExtras();
+        model = (MyCopyModel) bundle.getSerializable("MyCopyModel");
         getDetailModel(model);
     }
 
-    private void setShow(WorkOverTimeModel model) {
+    private void setShow(WorkOverTimeCopyModel model) {
+        tv_copyer.setText(model.getEmployeeName());
+        tv_copyTime.setText(model.getApplicationCreateTime());
+//        /
         tv_OverEmployee.setText(model.getOverEmployee());
         tv_startTime.setText(model.getStratOverTime());
         tv_endTime.setText(model.getEndOverTime());
@@ -142,12 +152,12 @@ public class WorkOverTimeDetailCopyActivity extends BaseActivity {
     /**
      * 获取详情数据
      */
-    public void getDetailModel(final MyApplicationModel model) {
+    public void getDetailModel(final MyCopyModel model) {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
                 try {
-                    WorkOverTimeModel model1 = UserHelper.applicationDetailPostWorkOverTime(WorkOverTimeDetailCopyActivity.this,
+                    WorkOverTimeCopyModel model1 = UserHelper.copyDetailPostWorkOverTime(WorkOverTimeDetailCopyActivity.this,
                             model.getApplicationID(),
                             model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
@@ -164,7 +174,7 @@ public class WorkOverTimeDetailCopyActivity extends BaseActivity {
         super.handleMessage(msg);
         switch (msg.what) {
             case POST_SUCCESS: // 1001
-                workOverTimeModel = (WorkOverTimeModel) msg.obj;
+                workOverTimeModel = (WorkOverTimeCopyModel) msg.obj;
                 setShow(workOverTimeModel);
                 break;
             case POST_FAILED: // 1001

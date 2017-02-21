@@ -92,10 +92,6 @@ public class OfficeDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_office_useage)
     TextView tv_office_useage;
 
-    //审批人
-    @ViewInject(id = R.id.tv_Requester)
-    TextView tv_Requester;
-
 
     private MyApprovalModel myApprovalModel;
     private OfficeApvlModel model;
@@ -132,11 +128,6 @@ public class OfficeDetailApvlActivity extends BaseActivity {
         tv_office_number.setText(model.getNumParticipant());
         tv_office_useage.setText(model.getUseage());
 
-        if (model.getApprovalInfoLists().size() > 0) {
-            tv_Requester.setText(model.getApplicationCreateTime());
-        } else {
-            tv_Requester.setText("未审批");
-        }
     }
 
     private void bottomType() {

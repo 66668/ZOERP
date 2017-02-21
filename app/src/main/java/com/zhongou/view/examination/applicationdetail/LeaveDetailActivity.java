@@ -3,6 +3,7 @@ package com.zhongou.view.examination.applicationdetail;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -99,6 +100,7 @@ public class LeaveDetailActivity extends BaseActivity {
     }
 
     private void setShow(LeaveModel model) {
+        Log.d("SJY", "审批状态--ApprovalStatus=" + leaveModel.getApprovalStatus());
         tv_ApplicationTitle.setText("model无参数");
         tv_startTime.setText(model.getStartDate());
         tv_endTime.setText(model.getEndDate());

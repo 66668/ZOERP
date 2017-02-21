@@ -19,10 +19,15 @@ import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
 import com.zhongou.model.MyApplicationModel;
+import com.zhongou.utils.PageUtil;
 import com.zhongou.view.examination.applicationdetail.BorrowDetailActivity;
 import com.zhongou.view.examination.applicationdetail.ConferenceDetailActivity;
 import com.zhongou.view.examination.applicationdetail.ContractFileDetailActivity;
 import com.zhongou.view.examination.applicationdetail.DimissionDetailActivity;
+import com.zhongou.view.examination.applicationdetail.FinancialFeeDetailActivity;
+import com.zhongou.view.examination.applicationdetail.FinancialLoanDetailActivity;
+import com.zhongou.view.examination.applicationdetail.FinancialPayDetailActivity;
+import com.zhongou.view.examination.applicationdetail.FinancialReimburseDetailActivity;
 import com.zhongou.view.examination.applicationdetail.LeaveDetailActivity;
 import com.zhongou.view.examination.applicationdetail.NotificationAndNoticeDetailActivity;
 import com.zhongou.view.examination.applicationdetail.OfficeDetailActivity;
@@ -291,12 +296,28 @@ public class ZOAplListActivity extends BaseActivity implements RefreshListView.I
                 intent.setClass(this, VehicleMaintainDetailActivity.class);
                 startActivity(intent);
                 break;
-            case "借款报销申请"://10
-                //                intent.setClass(this, .class);
-                //                startActivity(intent);
+            case "财务申请"://10
+
+                /**
+                 * 该接口不同于其他接口，数据需要再本activiy中获取后才做跳转
+                 */
+                if (model.getApplicationTitle().contains("借款")) {
+                    intent.setClass(this, FinancialLoanDetailActivity.class);
+                    startActivity(intent);
+                } else if (model.getApplicationTitle().contains("付款")) {
+                    intent.setClass(this, FinancialPayDetailActivity.class);
+                    startActivity(intent);
+                } else if (model.getApplicationTitle().contains("费用申请")) {
+                    intent.setClass(this, FinancialFeeDetailActivity.class);
+                    startActivity(intent);
+                } else if (model.getApplicationTitle().contains("报销")) {
+                    intent.setClass(this, FinancialReimburseDetailActivity.class);
+                    startActivity(intent);
+                } else {
+                    PageUtil.DisplayToast("error!");
+                }
+
                 break;
-
-
             case "调动申请"://11
                 intent.setClass(this, PositionReplaceDetailActivity.class);
                 startActivity(intent);

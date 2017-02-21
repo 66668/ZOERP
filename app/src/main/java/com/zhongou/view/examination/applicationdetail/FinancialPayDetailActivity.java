@@ -16,7 +16,7 @@ import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
 import com.zhongou.model.MyApplicationModel;
-import com.zhongou.model.applicationdetailmodel.LoanReimbursementModel;
+import com.zhongou.model.applicationdetailmodel.FinancialAllModel;
 import com.zhongou.utils.PageUtil;
 
 import java.util.ArrayList;
@@ -42,17 +42,28 @@ public class FinancialPayDetailActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_right)
     TextView tv_right;
 
+    //付款方式
+    @ViewInject(id = R.id.tv_feeType)
+    TextView tv_feeType;
+
+    //收款单位
+    @ViewInject(id = R.id.tv_payOfficial)
+    TextView tv_payOfficial;
+
+    //账号
+    @ViewInject(id = R.id.tv_Account)
+    TextView tv_Account;
+
+    //开户行
+    @ViewInject(id = R.id.tv_bank)
+    TextView tv_bank;
     //金额
     @ViewInject(id = R.id.tv_fee)
     TextView tv_fee;
 
-    //还款时间
-    @ViewInject(id = R.id.tv_PlanbackTime)
-    TextView tv_PlanbackTime;
-
-    //原因
-    @ViewInject(id = R.id.tv_reason)
-    TextView tv_reason;
+    //备注
+    @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
 
     //审批人
     @ViewInject(id = R.id.tv_Requester)
@@ -70,9 +81,9 @@ public class FinancialPayDetailActivity extends BaseActivity {
 
     //变量
     private Intent intent = null;
-    private LoanReimbursementModel loanReimbursementModel;
+    private FinancialAllModel financialAllModel;
     private MyApplicationModel model;
-    private List<LoanReimbursementModel.ApprovalInfoLists> modelList;
+    private List<FinancialAllModel.ApprovalInfoLists> modelList;
 
     //动态添加view 变量
     private List<View> ls_childView;//用于保存动态添加进来的View
@@ -93,15 +104,18 @@ public class FinancialPayDetailActivity extends BaseActivity {
 
         intent = getIntent();
         model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
+
         getDetailModel(model);
     }
 
-    private void setShow(LoanReimbursementModel model) {
+    private void setShow(FinancialAllModel model) {
 
+        tv_feeType.setText(model.getWay());
+        tv_payOfficial.setText(model.getCollectionUnit());
+        tv_Account.setText(model.getAccountNumber());
+        tv_bank.setText(model.getBankAccount());
         tv_fee.setText(model.getFee());
-        tv_reason.setText(model.getRemark());
-
-        tv_PlanbackTime.setText(model.getPlanbackTime());
+        tv_remark.setText(model.getRemark());
 
         modelList = model.getApprovalInfoLists();
         // 审批人
@@ -112,20 +126,20 @@ public class FinancialPayDetailActivity extends BaseActivity {
         tv_Requester.setText(nameBuilder);
 
         //审批状态
-        if (loanReimbursementModel.getApprovalStatus().contains("0")) {
+        if (financialAllModel.getApprovalStatus().contains("0")) {
             tv_state_result.setText("未审批");
             tv_state_result.setTextColor(getResources().getColor(R.color.red));
-        } else if (loanReimbursementModel.getApprovalStatus().contains("1")) {
+        } else if (financialAllModel.getApprovalStatus().contains("1")) {
             tv_state_result.setText("已审批");
             tv_state_result.setTextColor(getResources().getColor(R.color.green));
-        } else if (loanReimbursementModel.getApprovalStatus().contains("2")) {
+        } else if (financialAllModel.getApprovalStatus().contains("2")) {
             tv_state_result.setText("审批中...");
             tv_state_result.setTextColor(getResources().getColor(R.color.black));
         } else {
             tv_state_result.setText("你猜猜！");
         }
 
-        if (loanReimbursementModel.getApprovalStatus().contains("1") || loanReimbursementModel.getApprovalStatus().contains("2")) {
+        if (financialAllModel.getApprovalStatus().contains("1") || financialAllModel.getApprovalStatus().contains("2")) {
             //插入意见
             for (int i = 0, mark = layout_ll.getChildCount(); i < modelList.size(); i++, mark++) {//mark是布局插入位置，放在mark位置的后边（从1开始计数）
                 ViewHolder vh = AddView(mark);//添加布局
@@ -152,7 +166,7 @@ public class FinancialPayDetailActivity extends BaseActivity {
             @Override
             public void run() {
                 try {
-                    LoanReimbursementModel model1 = UserHelper.applicationDetailPostLoan(FinancialPayDetailActivity.this,
+                    FinancialAllModel model1 = UserHelper.applicationDetailPostLoan(FinancialPayDetailActivity.this,
                             model.getApplicationID(),
                             model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
@@ -169,8 +183,8 @@ public class FinancialPayDetailActivity extends BaseActivity {
         super.handleMessage(msg);
         switch (msg.what) {
             case POST_SUCCESS: // 1001
-                loanReimbursementModel = (LoanReimbursementModel) msg.obj;
-                setShow(loanReimbursementModel);
+                financialAllModel = (FinancialAllModel) msg.obj;
+                setShow(financialAllModel);
                 break;
             case POST_FAILED: // 1001
                 PageUtil.DisplayToast((String) msg.obj);

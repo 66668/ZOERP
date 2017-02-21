@@ -15,9 +15,8 @@ import com.zhongou.common.MyException;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
-import com.zhongou.model.MyApplicationModel;
-import com.zhongou.model.applicationdetailmodel.NotificationAndNoticeModel;
-import com.zhongou.model.applicationdetailmodel.RecruitmentModel;
+import com.zhongou.model.MyCopyModel;
+import com.zhongou.model.copydetailmodel.NotificationAndNoticeCopyModel;
 import com.zhongou.utils.PageUtil;
 
 import java.util.ArrayList;
@@ -42,21 +41,57 @@ public class NotificationAndNoticeDetailCopyActivity extends BaseActivity {
     //
     @ViewInject(id = R.id.tv_right)
     TextView tv_right;
+
+    //公告类型
+    @ViewInject(id = R.id.tv_notificaitonAndNotice_type)
+    TextView tv_notificaitonAndNotice_type;
+
+    //标题
+    @ViewInject(id = R.id.tv_notificaitonAndNotice_title)
+    TextView tv_notificaitonAndNotice_title;
+
+    //接收部门
+    @ViewInject(id = R.id.tv_notificaitonAndNotice_whom)
+    TextView tv_notificaitonAndNotice_whom;
+
+    //内容
+    @ViewInject(id = R.id.layout_content,click = "forContent")
+    LinearLayout layout_content;
+    @ViewInject(id = R.id.tv_notificaitonAndNotice_content)
+    TextView tv_notificaitonAndNotice_content;
+
+    //备注
+    @ViewInject(id = R.id.tv_notificaitonAndNotice_other)
+    TextView tv_notificaitonAndNotice_other;
+
+
     //审批人
     @ViewInject(id = R.id.tv_Requester)
     TextView tv_Requester;
-
 
     //审批状况
     @ViewInject(id = R.id.tv_state_result)
     TextView tv_state_result;
     @ViewInject(id = R.id.layout_state, click = "forState")
     LinearLayout layout_state;
+
+    //获取子控件个数的父控件
+    @ViewInject(id = R.id.layout_ll)
+    LinearLayout layout_ll;
+
+    //抄送人
+    @ViewInject(id = R.id.tv_copyer)
+    TextView tv_copyer;
+
+    //抄送时间
+    @ViewInject(id = R.id.tv_copyTime)
+    TextView tv_copyTime;
+
     //变量
     private Intent intent = null;
-    private NotificationAndNoticeModel notificationAndNoticeModel;
-    private MyApplicationModel model;
-    private List<RecruitmentModel.ApprovalInfoLists> modelList;
+    private NotificationAndNoticeCopyModel notificationAndNoticeModel;
+    private MyCopyModel model;
+    private List<NotificationAndNoticeCopyModel.ApprovalInfoLists> modelList;
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
     private View childView;
@@ -70,16 +105,22 @@ public class NotificationAndNoticeDetailCopyActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_apps_examination_notificationandnotice_d);
+        setContentView(R.layout.act_apps_examination_notificationandnotice_d3);
         tv_title.setText(getResources().getString(R.string.notificaitonAndNotice));
         tv_right.setText("");
 
-        intent = getIntent();
-        model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
+        Bundle bundle = this.getIntent().getExtras();
+        model = (MyCopyModel) bundle.getSerializable("MyCopyModel");
         getDetailModel(model);
 
     }
-    private void setShow(NotificationAndNoticeModel model) {
+    private void setShow(NotificationAndNoticeCopyModel model) {
+
+        //
+        tv_notificaitonAndNotice_type.setText(model.getPublishType());
+        tv_notificaitonAndNotice_type.setText(model.getPublishType());
+        tv_notificaitonAndNotice_whom.setText(model.getAbstract());
+        tv_notificaitonAndNotice_title.setText(model.getApplicationTitle());
 
         modelList = model.getApprovalInfoLists();
 
@@ -121,13 +162,13 @@ public class NotificationAndNoticeDetailCopyActivity extends BaseActivity {
     /**
      * 获取详情数据
      */
-    public void getDetailModel(final MyApplicationModel model) {
+    public void getDetailModel(final MyCopyModel model) {
 
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
                 try {
-                    NotificationAndNoticeModel model1 = UserHelper.applicationDetailPostNotificationAndNotice(NotificationAndNoticeDetailCopyActivity.this,
+                    NotificationAndNoticeCopyModel model1 = UserHelper.copyDetailPostNotificationAndNotice(NotificationAndNoticeDetailCopyActivity.this,
                             model.getApplicationID(),
                             model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
@@ -144,7 +185,7 @@ public class NotificationAndNoticeDetailCopyActivity extends BaseActivity {
         super.handleMessage(msg);
         switch (msg.what) {
             case POST_SUCCESS: // 1001
-                notificationAndNoticeModel = (NotificationAndNoticeModel) msg.obj;
+                notificationAndNoticeModel = (NotificationAndNoticeCopyModel) msg.obj;
                 setShow(notificationAndNoticeModel);
                 break;
             case POST_FAILED: // 1001

@@ -25,7 +25,7 @@ public class NotificationAndNoticeModel implements Serializable {
     public String EmployeeName;
     public String ApplicationCreateTime;
 
-    public List<RecruitmentModel.ApprovalInfoLists> ApprovalInfoLists;
+    public List<NotificationAndNoticeModel.ApprovalInfoLists> ApprovalInfoLists;
 
     public static class ApprovalInfoLists{
         public String Comment;
@@ -66,11 +66,11 @@ public class NotificationAndNoticeModel implements Serializable {
         }
     }
 
-    public List<RecruitmentModel.ApprovalInfoLists> getApprovalInfoLists() {
+    public List<NotificationAndNoticeModel.ApprovalInfoLists> getApprovalInfoLists() {
         return ApprovalInfoLists;
     }
 
-    public void setApprovalInfoLists(List<RecruitmentModel.ApprovalInfoLists> ApprovalInfoLists) {
+    public void setApprovalInfoLists(List<NotificationAndNoticeModel.ApprovalInfoLists> ApprovalInfoLists) {
         this.ApprovalInfoLists = ApprovalInfoLists;
     }
 

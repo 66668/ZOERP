@@ -170,7 +170,7 @@ public class ContactsSelectActivity extends BaseActivity {
     protected void handleMessage(Message msg) {
         super.handleMessage(msg);
         switch (msg.what) {
-            case POST_SUCCESEE://
+            case POST_SUCCESEE://服务端获取数据
                 List<ContactsEmployeeModel> listHandler = (List<ContactsEmployeeModel>) msg.obj;
                 listContactApprover = filledData(listHandler);//为数据添加首字母
                 //数据保存
@@ -185,14 +185,17 @@ public class ContactsSelectActivity extends BaseActivity {
             case POST_FAILED://
                 PageUtil.DisplayToast((String) msg.obj);
                 break;
-            case CHASE_DATA:
+            case CHASE_DATA://缓存的审批人通讯录
+
                 List<ContactsEmployeeModel> listData = (List<ContactsEmployeeModel>) msg.obj;
+
                 listContactApprover = filledData(listData);//为数据添加首字母
                 // 根据a-z进行排序源数据
                 Collections.sort(listContactApprover, pinyinComparator);
 
                 adapter = new ContactsSelectAdapter(ContactsSelectActivity.this, listContactApprover);
                 contactsListView.setAdapter(adapter);
+
                 break;
             default:
                 break;
@@ -270,9 +273,13 @@ public class ContactsSelectActivity extends BaseActivity {
         }
 
         Intent data = new Intent();//只是回传数据就不用写跳转对象
-        data.putExtra("data", (Serializable) selectlist);//数据放到data里面去
+
+        if(selectlist.size()>0){//选中数据长度
+            data.putExtra("data", (Serializable) selectlist);//数据放到data里面去 注意传空的异常处理
+        }
         setResult(0, data);//返回data，2为result，data为intent对象
         finish();//页面销毁
+
     }
 
     /**

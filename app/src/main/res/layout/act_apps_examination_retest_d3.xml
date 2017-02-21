@@ -36,7 +36,7 @@
                     android:textColor="@color/cl_text_common"/>
 
                 <TextView
-                    android:id="@+id/tv_copyPerson"
+                    android:id="@+id/tv_copyer"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -88,12 +88,11 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
-                    android:text="@string/PositionRequest"
+                    android:text="@string/retest_person"
                     android:textColor="@color/cl_text_common"/>
 
                 <TextView
-                    android:text="无数据20170116"
-                    android:id="@+id/tv_position"
+                    android:id="@+id/tv_retest_person"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -118,11 +117,11 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
-                    android:text="@string/RequestNumber"
+                    android:text="@string/retest_other"
                     android:textColor="@color/cl_text_common"/>
 
                 <TextView
-                    android:id="@+id/tv_numberPeople"
+                    android:id="@+id/tv_retest_other"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -146,10 +145,11 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
-                    android:text="@string/RequestNumber"
+                    android:text="@string/retest_files"
                     android:textColor="@color/cl_text_common"/>
 
                 <TextView
+                    android:id="@+id/tv_retest_files"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -158,62 +158,6 @@
                     android:gravity="center_vertical"
                     />
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/common_topbar_height40"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:weightSum="1">
-
-                <TextView
-                    style="@style/BlackText.standard"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="0.28"
-                    android:gravity="center_vertical"
-                    android:text="@string/RequestNumber"
-                    android:textColor="@color/cl_text_common"/>
-
-                <TextView
-                    style="@style/BlackText.standard"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="0.72"
-                    android:gravity="center_vertical"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/common_topbar_height40"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:weightSum="1">
-
-                <TextView
-                    style="@style/BlackText.standard"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="0.28"
-                    android:gravity="center_vertical"
-                    android:text="@string/RequestNumber"
-                    android:textColor="@color/cl_text_common"/>
-
-                <TextView
-                    style="@style/BlackText.standard"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="0.72"
-                    android:gravity="center_vertical"
-                    />
-            </LinearLayout>
-
-
 
             <LinearLayout
                 android:layout_width="match_parent"

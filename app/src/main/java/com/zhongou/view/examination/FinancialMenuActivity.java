@@ -2,7 +2,6 @@ package com.zhongou.view.examination;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -15,7 +14,8 @@ import com.zhongou.inject.ViewInject;
  * Created by sjy on 2016/12/2.
  */
 
-public class FinancialAplActivity extends BaseActivity {
+public class FinancialMenuActivity extends BaseActivity {
+
     //back
     @ViewInject(id = R.id.layout_back, click = "forBack")
     RelativeLayout layout_back;
@@ -30,26 +30,26 @@ public class FinancialAplActivity extends BaseActivity {
 
     // 借款申请
     @ViewInject(id = R.id.btn_loan, click = "forLoan")
-    Button btn_loan;
+    RelativeLayout btn_loan;
 
     //报销申请
     @ViewInject(id = R.id.btn_reimburse, click = "forReimburse")
-    Button btn_reimburse;
+    RelativeLayout btn_reimburse;
 
     //付款申请
     @ViewInject(id = R.id.btn_pay, click = "forPay")
-    Button btn_pay;
+    RelativeLayout btn_pay;
 
     //费用申请
     @ViewInject(id = R.id.btn_fee, click = "forFee")
-    Button btn_fee;
-
+    RelativeLayout btn_fee;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_apps_examination_financial);
-        tv_title.setText(getResources().getString(R.string.financial_loan));
+        tv_title.setText(getResources().getString(R.string.financial_title));
+        tv_right.setText("");
     }
 
     /**
@@ -57,7 +57,6 @@ public class FinancialAplActivity extends BaseActivity {
      */
     public void forLoan(View view) {
         startActivity(FinancialLoanActivity.class);
-
     }
 
     /**
@@ -67,18 +66,19 @@ public class FinancialAplActivity extends BaseActivity {
         startActivity(FinancialReimburseActivity.class);
     }
 
-    /**
-     * 付款申请
-     */
-    public void forPay(View view) {
-        startActivity(FinancialPayActivity.class);
-    }
 
     /**
      * 费用申请
      */
     public void forFee(View view) {
         startActivity(FinancialFeeActivity.class);
+    }
+
+    /**
+     * 付款申请
+     */
+    public void forPay(View view) {
+        startActivity(FinancialPayActivity.class);
     }
 
     /**

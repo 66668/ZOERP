@@ -45,10 +45,6 @@ public class RecruitmentDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_number)
     TextView tv_number;
 
-    //审批人
-    @ViewInject(id = R.id.tv_Requester)
-    TextView tv_Requester;
-
     //Responsibility
     @ViewInject(id = R.id.tv_responsibility)
     TextView tv_responsibility;
@@ -128,11 +124,7 @@ public class RecruitmentDetailApvlActivity extends BaseActivity {
         tv_position.setText(model.getPosition());
         tv_number.setText(model.getNumberOfPeople());
         tv_responsibility.setText(model.getResponsibility());
-        if (model.getApprovalInfoLists().size() > 0) {
-            tv_Requester.setText(model.getApplicationCreateTime());
-        } else {
-            tv_Requester.setText("未审批");
-        }
+
     }
 
     private void bottomType() {

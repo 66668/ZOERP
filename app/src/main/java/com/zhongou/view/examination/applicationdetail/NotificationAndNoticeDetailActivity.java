@@ -17,7 +17,6 @@ import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
 import com.zhongou.model.MyApplicationModel;
 import com.zhongou.model.applicationdetailmodel.NotificationAndNoticeModel;
-import com.zhongou.model.applicationdetailmodel.RecruitmentModel;
 import com.zhongou.utils.PageUtil;
 
 import java.util.ArrayList;
@@ -85,7 +84,7 @@ public class NotificationAndNoticeDetailActivity extends BaseActivity {
     private Intent intent = null;
     private NotificationAndNoticeModel notificationAndNoticeModel;
     private MyApplicationModel model;
-    private List<RecruitmentModel.ApprovalInfoLists> modelList;
+    private List<NotificationAndNoticeModel.ApprovalInfoLists> modelList;
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
     private View childView;

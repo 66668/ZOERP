@@ -15,9 +15,8 @@ import com.zhongou.common.MyException;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
-import com.zhongou.model.MyApplicationModel;
-import com.zhongou.model.applicationdetailmodel.ConferenceModel;
-import com.zhongou.model.applicationdetailmodel.RecruitmentModel;
+import com.zhongou.model.MyCopyModel;
+import com.zhongou.model.copydetailmodel.ConferenceCopyModel;
 import com.zhongou.utils.PageUtil;
 
 import java.util.ArrayList;
@@ -51,11 +50,53 @@ public class ConferenceDetailCopyActivity extends BaseActivity {
     TextView tv_state_result;
     @ViewInject(id = R.id.layout_state, click = "forState")
     LinearLayout layout_state;
+
+
+    //抄送人
+    @ViewInject(id = R.id.tv_copyer)
+    TextView tv_copyer;
+
+    //抄送时间
+    @ViewInject(id = R.id.tv_copyTime)
+    TextView tv_copyTime;
+
+    //会议标题
+    @ViewInject(id = R.id.tv_conference_name)
+    TextView tv_conference_name;
+
+    //会议主题
+    @ViewInject(id = R.id.tv_conference_title)
+    TextView tv_conference_title;
+
+    //准备
+    @ViewInject(id = R.id.tv_conference_Device)
+    TextView tv_conference_Device;
+
+    //说明描述
+    @ViewInject(id = R.id.tv_conference_Abstract)
+    TextView tv_conference_Abstract;
+
+    //开始
+    @ViewInject(id = R.id.tv_conference_start)
+    TextView tv_conference_start;
+
+    //结束
+    @ViewInject(id = R.id.tv_conference_end)
+    TextView tv_conference_end;
+
+    //备注
+    @ViewInject(id = R.id.tv_conference_other)
+    TextView tv_conference_other;
+
+    //获取子控件个数的父控件
+    @ViewInject(id = R.id.layout_ll)
+    LinearLayout layout_ll;
+
     //变量
     private Intent intent = null;
-    private ConferenceModel conferenceModel;
-    private MyApplicationModel model;
-    private List<RecruitmentModel.ApprovalInfoLists> modelList;
+    private ConferenceCopyModel conferenceModel;
+    private MyCopyModel model;
+    private List<ConferenceCopyModel.ApprovalInfoLists> modelList;
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
     private View childView;
@@ -69,19 +110,27 @@ public class ConferenceDetailCopyActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_apps_examination_conference_d);
+        setContentView(R.layout.act_apps_examination_conference_d3);
         tv_title.setText(getResources().getString(R.string.conference));
         tv_right.setText("");
 
-        intent = getIntent();
-        model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
+        Bundle bundle = this.getIntent().getExtras();
+        model = (MyCopyModel) bundle.getSerializable("MyCopyModel");
         getDetailModel(model);
     }
-    private void setShow(ConferenceModel model) {
-
-        modelList = model.getApprovalInfoLists();
-
+    private void setShow(ConferenceCopyModel model) {
+        tv_copyer.setText(model.getEmployeeName());
+        tv_copyTime.setText(model.getApplicationCreateTime());
+        //
+        tv_conference_name.setText(model.getConferenceName());
+        tv_conference_title.setText(model.getTitle());
+        tv_conference_Device.setText(model.getDeviceName());
+        tv_conference_Abstract.setText(model.getAbstract());
+        tv_conference_start.setText(model.getStartTime());
+        tv_conference_end.setText(model.getFinishTime());
+        tv_conference_other.setText(model.getRemark());
         // 审批人
+        modelList = model.getApprovalInfoLists();
         StringBuilder nameBuilder = new StringBuilder();
         for (int i = 0; i < modelList.size(); i++) {
             nameBuilder.append(modelList.get(i).getApprovalEmployeeName() + " ");
@@ -119,13 +168,13 @@ public class ConferenceDetailCopyActivity extends BaseActivity {
     /**
      * 获取详情数据
      */
-    public void getDetailModel(final MyApplicationModel model) {
+    public void getDetailModel(final MyCopyModel model) {
 
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
                 try {
-                    ConferenceModel model1 = UserHelper.applicationDetailPostConference(ConferenceDetailCopyActivity.this,
+                    ConferenceCopyModel model1 = UserHelper.copyDetailPostConference(ConferenceDetailCopyActivity.this,
                             model.getApplicationID(),
                             model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
@@ -142,7 +191,7 @@ public class ConferenceDetailCopyActivity extends BaseActivity {
         super.handleMessage(msg);
         switch (msg.what) {
             case POST_SUCCESS:
-                conferenceModel = (ConferenceModel) msg.obj;
+                conferenceModel = (ConferenceCopyModel) msg.obj;
                 setShow(conferenceModel);
                 break;
             case POST_FAILED: // 1001

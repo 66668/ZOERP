@@ -137,7 +137,7 @@ public class SalaryadjustActivity extends BaseActivity {
         super.handleMessage(msg);
         switch (msg.what) {
             case POST_SUCCESS:
-                PageUtil.DisplayToast("成功提交！");
+                PageUtil.DisplayToast(getResources().getString(R.string.approval_success));
                 break;
             case POST_FAILED:
                 PageUtil.DisplayToast((String) msg.obj);
@@ -159,9 +159,13 @@ public class SalaryadjustActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 0 && resultCode == 0)//通过请求码(去SActivity)和回传码（回传数据到第一个页面）判断回传的页面
         {
-            data.getStringExtra("data");
-            List<ContactsEmployeeModel> list = (List<ContactsEmployeeModel>) data.getSerializableExtra("data");
-            Log.d("SJY", "返回数据=" + list.size());
+            //判断返回值是否为空
+            List<ContactsEmployeeModel> list = new ArrayList<>();
+            if (data != null && (List<ContactsEmployeeModel>) data.getSerializableExtra("data") != null) {
+                list = (List<ContactsEmployeeModel>) data.getSerializableExtra("data");
+            } else {
+
+            }
             StringBuilder name = new StringBuilder();
             StringBuilder employeeId = new StringBuilder();
             for (int i = 0; i < list.size(); i++) {

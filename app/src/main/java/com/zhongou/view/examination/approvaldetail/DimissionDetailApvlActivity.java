@@ -2,7 +2,6 @@ package com.zhongou.view.examination.approvaldetail;
 
 import android.os.Bundle;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -94,10 +93,6 @@ public class DimissionDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_dismissiontype)
     TextView tv_dismissiontype;
 
-    //审批人
-    @ViewInject(id = R.id.tv_Requester)
-    TextView tv_Requester;
-
     //变量
     private MyApprovalModel myApprovalModel;
     private DismissionApvlModel model;
@@ -115,7 +110,6 @@ public class DimissionDetailApvlActivity extends BaseActivity {
 
         Bundle bundle = this.getIntent().getExtras();
         myApprovalModel = (MyApprovalModel) bundle.getSerializable("MyApprovalModel");
-        Log.d("SJY", "详情MyApprovalModel");
 
         bottomType();
         //
@@ -131,11 +125,6 @@ public class DimissionDetailApvlActivity extends BaseActivity {
         tv_startTime.setText(model.getEntryDate());
         tv_endTime.setText(model.getDimissionID());
         tv_reason.setText(model.getContent());
-        if (model.getApprovalInfoLists().size() > 0) {
-            tv_Requester.setText(model.getApplicationCreateTime());
-        } else {
-            tv_Requester.setText("未审批");
-        }
     }
 
     private void bottomType() {

@@ -17,8 +17,8 @@ import com.zhongou.common.MyException;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
-import com.zhongou.model.MyApplicationModel;
-import com.zhongou.model.applicationdetailmodel.SalaryAjustModel;
+import com.zhongou.model.MyCopyModel;
+import com.zhongou.model.copydetailmodel.SalaryAjusCopyModel;
 import com.zhongou.utils.PageUtil;
 
 import java.util.ArrayList;
@@ -70,11 +70,19 @@ public class SalaryadjustDetailCopyActivity extends BaseActivity {
     @ViewInject(id = R.id.layout_state, click = "forState")
     LinearLayout layout_state;
 
+    //抄送人
+    @ViewInject(id = R.id.tv_copyer)
+    TextView tv_copyer;
+
+    //抄送时间
+    @ViewInject(id = R.id.tv_copyTime)
+    TextView tv_copyTime;
+
     //变量
     private Intent intent = null;
-    private SalaryAjustModel salaryAjustModel;
-    private MyApplicationModel model;
-    private List<SalaryAjustModel.ApprovalInfoLists> modelList;
+    private SalaryAjusCopyModel salaryAjustModel;
+    private MyCopyModel model;
+    private List<SalaryAjusCopyModel.ApprovalInfoLists> modelList;
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
     private View childView;
@@ -88,16 +96,19 @@ public class SalaryadjustDetailCopyActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_apps_examination_salaryadjust_d);
+        setContentView(R.layout.act_apps_examination_salaryadjust_d3);
         tv_title.setText(getResources().getString(R.string.salaryAdjust_d));
         tv_right.setText("");
 
-        intent = getIntent();
-        model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
+        Bundle bundle = this.getIntent().getExtras();
+        model = (MyCopyModel) bundle.getSerializable("MyCopyModel");
         getDetailModel(model);
     }
 
-    private void setShow(SalaryAjustModel model) {
+    private void setShow(SalaryAjusCopyModel model) {
+        tv_copyer.setText(model.getEmployeeName());
+        tv_copyTime.setText(model.getApplicationCreateTime());
+        //
         tv_TargetEmployee.setText(model.getTargetEmployee());
         tv_salaryAdjustNow.setText(model.getOriSalary());
         tv_SrcSalary.setText(model.getSrcSalary());
@@ -142,7 +153,7 @@ public class SalaryadjustDetailCopyActivity extends BaseActivity {
     /**
      * 获取详情数据
      */
-    public void getDetailModel(final MyApplicationModel model) {
+    public void getDetailModel(final MyCopyModel model) {
         final String ApplicationID = model.getApplicationID();
         final String ApplicationType = model.getApplicationType();
         final String StoreID = model.getStoreID();
@@ -170,7 +181,7 @@ public class SalaryadjustDetailCopyActivity extends BaseActivity {
             @Override
             public void run() {
                 try {
-                    SalaryAjustModel model1 =UserHelper.applicationDetailPostSalaryAdjust(SalaryadjustDetailCopyActivity.this,
+                    SalaryAjusCopyModel model1 =UserHelper.copyDetailPostSalaryAjust(SalaryadjustDetailCopyActivity.this,
                             model.getApplicationID(),
                             model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
@@ -187,7 +198,7 @@ public class SalaryadjustDetailCopyActivity extends BaseActivity {
         super.handleMessage(msg);
         switch (msg.what) {
             case POST_SUCCESS: // 1001
-                salaryAjustModel = (SalaryAjustModel) msg.obj;
+                salaryAjustModel = (SalaryAjusCopyModel) msg.obj;
                 setShow(salaryAjustModel);
                 break;
             case POST_FAILED: // 1001

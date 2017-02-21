@@ -16,8 +16,10 @@ import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
 import com.zhongou.model.MyApprovalModel;
-import com.zhongou.model.approvaldetailmodel.LoanReimbursementApvlModel;
+import com.zhongou.model.applicationdetailmodel.FinancialAllModel;
 import com.zhongou.utils.PageUtil;
+
+import static com.zhongou.R.id.tv_reason;
 
 /**
  * 审批 付款申请
@@ -55,13 +57,6 @@ public class FinancialReimburseDetailApvlActivity extends BaseActivity {
     TextView tv_approvalTime;
 
 
-    //备注
-    @ViewInject(id = R.id.tv_reason)
-    TextView tv_remark;
-
-    //审批人
-    @ViewInject(id = R.id.tv_Requester)
-    TextView tv_Requester;
 
     //未审批bottom
     @ViewInject(id = R.id.laytout_decide)
@@ -87,18 +82,44 @@ public class FinancialReimburseDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.btn_copytp, click = "forCopyto")
     Button btn_copytp;
 
+    //1
+    @ViewInject(id = R.id.tv_feeOne)
+    TextView tv_feeOne;
+    //1
+    @ViewInject(id = R.id.tv_useageOne)
+    TextView tv_useageOne;
+    //2
+    @ViewInject(id = R.id.tv_feeTwo)
+    TextView tv_feeTwo;
+    //2
+    @ViewInject(id = R.id.tv_useageTwo)
+    TextView tv_useageTwo;
+    //3
+    @ViewInject(id = R.id.tv_feeThree)
+    TextView tv_feeThree;
+    //3
+    @ViewInject(id = R.id.tv_useageThree)
+    TextView tv_useageThree;
+    //
+    @ViewInject(id = R.id.tv_totle)
+    TextView tv_totle;
+    //
+    @ViewInject(id = tv_reason)
+    TextView tv_remark;
+
+
     //常量
     public static final int POST_SUCCESS = 21;
     public static final int POST_FAILED = 22;
 
     //变量
     private MyApprovalModel myApprovalModel;
-    private LoanReimbursementApvlModel model;
+    private FinancialAllModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_apps_examination_financial_fee_d2);
+        setContentView(R.layout.act_apps_examination_financial_reimburse_d2);
         tv_title.setText(getResources().getString(R.string.financial_pay_title_d));
         tv_right.setText("");
 
@@ -111,17 +132,23 @@ public class FinancialReimburseDetailApvlActivity extends BaseActivity {
 
     }
 
-    private void setShow(LoanReimbursementApvlModel model) {
+    private void setShow(FinancialAllModel model) {
+        //
         tv_ApprovalPerson.setText(model.getEmployeeName());
         tv_approvaldept.setText(model.getDepartmentName());
         tv_approvalCo.setText(model.getStoreName());
 
+        //
+        tv_feeOne.setText(model.getFeeone());
+        tv_feeTwo.setText(model.getFeetwo());
+        tv_feeThree.setText(model.getFeethree());
+
+        tv_useageOne.setText(model.getUseageone());
+        tv_useageTwo.setText(model.getUseagetwo());
+        tv_useageThree.setText(model.getUseagethree());
+
+        tv_totle.setText(model.getTotal());
         tv_remark.setText(model.getRemark());
-        if (model.getApprovalInfoLists().size() > 0) {
-            tv_Requester.setText(model.getApplicationCreateTime());
-        } else {
-            tv_Requester.setText("未审批");
-        }
     }
 
     private void bottomType() {
@@ -143,7 +170,7 @@ public class FinancialReimburseDetailApvlActivity extends BaseActivity {
             public void run() {
 
                 try {
-                    LoanReimbursementApvlModel model = UserHelper.approvalDetailPostVehicleloan(FinancialReimburseDetailApvlActivity.this,
+                    FinancialAllModel model = UserHelper.approvalDetailPostVehicleloan(FinancialReimburseDetailApvlActivity.this,
                             myApprovalModel.getApplicationID(),
                             myApprovalModel.getApplicationType());
                     sendMessage(POST_SUCCESS, model);
@@ -159,7 +186,7 @@ public class FinancialReimburseDetailApvlActivity extends BaseActivity {
         super.handleMessage(msg);
         switch (msg.what) {
             case POST_SUCCESS:
-                model = (LoanReimbursementApvlModel) msg.obj;
+                model = (FinancialAllModel) msg.obj;
                 setShow(model);
                 break;
             case POST_FAILED:

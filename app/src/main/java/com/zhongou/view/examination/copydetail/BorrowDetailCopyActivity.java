@@ -15,8 +15,8 @@ import com.zhongou.common.MyException;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
-import com.zhongou.model.MyApplicationModel;
-import com.zhongou.model.applicationdetailmodel.BorrowModel;
+import com.zhongou.model.MyCopyModel;
+import com.zhongou.model.copydetailmodel.BorrowCopyModel;
 import com.zhongou.utils.PageUtil;
 
 import java.util.ArrayList;
@@ -72,10 +72,19 @@ public class BorrowDetailCopyActivity extends BaseActivity {
     @ViewInject(id = R.id.layout_state, click = "forState")
     LinearLayout layout_state;
 
+
+    //抄送人
+    @ViewInject(id = R.id.tv_copyer)
+    TextView tv_copyer;
+
+    //抄送时间
+    @ViewInject(id = R.id.tv_copyTime)
+    TextView tv_copyTime;
+
     private Intent intent = null;
-    private BorrowModel borrowModel;
-    private MyApplicationModel model;
-    private List<BorrowModel.ApprovalInfoLists> modelList;
+    private BorrowCopyModel borrowModel;
+    private MyCopyModel model;
+    private List<BorrowCopyModel.ApprovalInfoLists> modelList;
 
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
@@ -92,16 +101,19 @@ public class BorrowDetailCopyActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_apps_examination_borrow_d);
+        setContentView(R.layout.act_apps_examination_borrow_d3);
         tv_title.setText(getResources().getString(R.string.borrows_d));
         tv_right.setText("");
 
-        intent = getIntent();
-        model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
+        Bundle bundle = this.getIntent().getExtras();
+        model = (MyCopyModel) bundle.getSerializable("MyCopyModel");
         getDetailModel(model);
     }
 
-    private void setShow(BorrowModel model) {
+    private void setShow(BorrowCopyModel model) {
+        tv_copyer.setText(model.getEmployeeName());
+        tv_copyTime.setText(model.getApplicationCreateTime());
+
         tv_BorrowThings.setText(model.getBorrowThings());
         tv_startTime.setText(model.getStartTime());
         tv_endTime.setText(model.getFinishTime());
@@ -147,12 +159,12 @@ public class BorrowDetailCopyActivity extends BaseActivity {
     /**
      * 获取详情数据
      */
-    public void getDetailModel(final MyApplicationModel model) {
+    public void getDetailModel(final MyCopyModel model) {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
                 try {
-                    BorrowModel model1 = UserHelper.applicationDetailPostBorrow(BorrowDetailCopyActivity.this,
+                    BorrowCopyModel model1 = UserHelper.copyDetailPostBorrow(BorrowDetailCopyActivity.this,
                             model.getApplicationID(),
                             model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
@@ -169,7 +181,7 @@ public class BorrowDetailCopyActivity extends BaseActivity {
         super.handleMessage(msg);
         switch (msg.what) {
             case POST_SUCCESS: // 1001
-                borrowModel = (BorrowModel) msg.obj;
+                borrowModel = (BorrowCopyModel) msg.obj;
                 setShow(borrowModel);
                 break;
             case POST_FAILED: // 1001

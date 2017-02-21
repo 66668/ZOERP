@@ -119,10 +119,6 @@ public class ProcurementDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_procurement_Other)
     TextView tv_procurement_Other;
 
-    //审批人
-    @ViewInject(id = R.id.tv_Requester)
-    TextView tv_Requester;
-
     private MyApprovalModel myApprovalModel;
     private ProcurementApvlModel model;
     //常量
@@ -164,12 +160,6 @@ public class ProcurementDetailApvlActivity extends BaseActivity {
         tv_procurement_PlanBuyTime.setText(model.getPlanTime());
         tv_procurement_Other.setText(model.getRemark());
 
-
-        if (model.getApprovalInfoLists().size() > 0) {
-            tv_Requester.setText(model.getApplicationCreateTime());
-        } else {
-            tv_Requester.setText("未审批");
-        }
     }
 
     private void bottomType() {

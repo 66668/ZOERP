@@ -15,9 +15,8 @@ import com.zhongou.common.MyException;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
-import com.zhongou.model.MyApplicationModel;
-import com.zhongou.model.applicationdetailmodel.OfficeModel;
-import com.zhongou.model.applicationdetailmodel.RecruitmentModel;
+import com.zhongou.model.MyCopyModel;
+import com.zhongou.model.copydetailmodel.OfficeCopyModel;
 import com.zhongou.utils.PageUtil;
 
 import java.util.ArrayList;
@@ -54,11 +53,44 @@ public class OfficeDetailCopyActivity extends BaseActivity {
     TextView tv_state_result;
     @ViewInject(id = R.id.layout_state, click = "forState")
     LinearLayout layout_state;
+
+    //标题
+    @ViewInject(id = R.id.tv_office_title)
+    TextView tv_office_title;
+
+    //时间
+    @ViewInject(id = R.id.tv_office_time)
+    TextView tv_office_time;
+
+    //人数
+    @ViewInject(id = R.id.tv_office_number)
+    TextView tv_office_number;
+
+    //用途
+    @ViewInject(id = R.id.tv_office_useage)
+    TextView tv_office_useage;
+
+    //备注
+    @ViewInject(id = R.id.tv_office_other)
+    TextView tv_office_other;
+
+
+    //获取子控件个数的父控件
+    @ViewInject(id = R.id.layout_ll)
+    LinearLayout layout_ll;
+
+    //抄送人
+    @ViewInject(id = R.id.tv_copyer)
+    TextView tv_copyer;
+
+    //抄送时间
+    @ViewInject(id = R.id.tv_copyTime)
+    TextView tv_copyTime;
     //变量
     private Intent intent = null;
-    private OfficeModel officeModel;
-    private MyApplicationModel model;
-    private List<RecruitmentModel.ApprovalInfoLists> modelList;
+    private OfficeCopyModel officeModel;
+    private MyCopyModel model;
+    private List<OfficeCopyModel.ApprovalInfoLists> modelList;
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
     private View childView;
@@ -72,19 +104,27 @@ public class OfficeDetailCopyActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_apps_examination_office_d);
+        setContentView(R.layout.act_apps_examination_office_d3);
         tv_title.setText(getResources().getString(R.string.office));
         tv_right.setText("");
 
-        intent = getIntent();
-        model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
+        Bundle bundle = this.getIntent().getExtras();
+        model = (MyCopyModel) bundle.getSerializable("MyCopyModel");
         getDetailModel(model);
     }
-    private void setShow(OfficeModel model) {
+    private void setShow(OfficeCopyModel model) {
+        tv_copyer.setText(model.getEmployeeName());
+        tv_copyTime.setText(model.getApplicationCreateTime());
+        //
+        tv_office_title.setText(model.getApplicationTitle());
+        tv_office_time.setText(model.getTime());
+        tv_office_number.setText(model.getNumParticipant());
+        tv_office_useage.setText(model.getUseage());
+        tv_office_other.setText(model.getRemark());
 
-        modelList = model.getApprovalInfoLists();
 
         // 审批人
+        modelList = model.getApprovalInfoLists();
         StringBuilder nameBuilder = new StringBuilder();
         for (int i = 0; i < modelList.size(); i++) {
             nameBuilder.append(modelList.get(i).getApprovalEmployeeName() + " ");
@@ -122,13 +162,13 @@ public class OfficeDetailCopyActivity extends BaseActivity {
     /**
      * 获取详情数据
      */
-    public void getDetailModel(final MyApplicationModel model) {
+    public void getDetailModel(final MyCopyModel model) {
 
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
                 try {
-                    OfficeModel model1 = UserHelper.applicationDetailPostOffice(OfficeDetailCopyActivity.this,
+                    OfficeCopyModel model1 = UserHelper.copyDetailPostOffice(OfficeDetailCopyActivity.this,
                             model.getApplicationID(),
                             model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
@@ -145,7 +185,7 @@ public class OfficeDetailCopyActivity extends BaseActivity {
         super.handleMessage(msg);
         switch (msg.what) {
             case POST_SUCCESS: // 1001
-                officeModel = (OfficeModel) msg.obj;
+                officeModel = (OfficeCopyModel) msg.obj;
                 setShow(officeModel);
                 break;
             case POST_FAILED: // 1001

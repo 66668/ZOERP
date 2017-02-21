@@ -89,11 +89,6 @@ public class RetestDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_retest_files)
     TextView tv_retest_files;
 
-    //审批人
-    @ViewInject(id = R.id.tv_Requester)
-    TextView tv_Requester;
-
-
     private MyApprovalModel myApprovalModel;
     private RetestApvlModel model;
 
@@ -126,12 +121,6 @@ public class RetestDetailApvlActivity extends BaseActivity {
         tv_retest_person.setText(model.getReexpeople());
         tv_retest_other.setText(model.getRemark());
 
-
-        if (model.getApprovalInfoLists().size() > 0) {
-            tv_Requester.setText(model.getApplicationCreateTime());
-        } else {
-            tv_Requester.setText("未审批");
-        }
     }
     private void bottomType() {
         //

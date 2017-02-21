@@ -15,9 +15,8 @@ import com.zhongou.common.MyException;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
-import com.zhongou.model.MyApplicationModel;
-import com.zhongou.model.applicationdetailmodel.PositionReplaceModel;
-import com.zhongou.model.applicationdetailmodel.RecruitmentModel;
+import com.zhongou.model.MyCopyModel;
+import com.zhongou.model.copydetailmodel.PositionReplaceCopyModel;
 import com.zhongou.utils.PageUtil;
 
 import java.util.ArrayList;
@@ -42,7 +41,6 @@ public class PositionReplaceDetailCopyActivity extends BaseActivity {
     //
     @ViewInject(id = R.id.tv_right)
     TextView tv_right;
-
     //审批人
     @ViewInject(id = R.id.tv_Requester)
     TextView tv_Requester;
@@ -53,11 +51,61 @@ public class PositionReplaceDetailCopyActivity extends BaseActivity {
     TextView tv_state_result;
     @ViewInject(id = R.id.layout_state, click = "forState")
     LinearLayout layout_state;
+
+    //标题
+    @ViewInject(id = R.id.tv_positionReplace_title)
+    TextView tv_positionReplace_title;
+
+    //调动日期
+    @ViewInject(id = R.id.tv_positionReplace_date)
+    TextView tv_positionReplace_date;
+
+    //决定人
+    @ViewInject(id = R.id.tv_positionReplace_decider)
+    TextView tv_positionReplace_decider;
+
+    //原部门
+    @ViewInject(id = R.id.tv_positionReplace_orgDept)
+    TextView tv_positionReplace_orgDept;
+
+    //原岗位
+    @ViewInject(id = R.id.tv_positionReplace_orgPosition)
+    TextView tv_positionReplace_orgPosition;
+
+    //新部门
+    @ViewInject(id = R.id.tv_positionReplace_newDept)
+    TextView tv_positionReplace_newDept;
+
+    //新岗位
+    @ViewInject(id = R.id.tv_positionReplace_newPosition)
+    TextView tv_positionReplace_newPosition;
+
+    //原因
+    @ViewInject(id = R.id.tv_positionReplace_reason)
+    TextView tv_positionReplace_reason;
+
+    //备注
+    @ViewInject(id = R.id.tv_positionReplace_remark)
+    TextView tv_positionReplace_remark;
+
+
+    //获取子控件个数的父控件
+    @ViewInject(id = R.id.layout_ll)
+    LinearLayout layout_ll;
+
+    //抄送人
+    @ViewInject(id = R.id.tv_copyer)
+    TextView tv_copyer;
+
+    //抄送时间
+    @ViewInject(id = R.id.tv_copyTime)
+    TextView tv_copyTime;
+
     //变量
     private Intent intent = null;
-    private PositionReplaceModel positionReplaceModel;
-    private MyApplicationModel model;
-    private List<RecruitmentModel.ApprovalInfoLists> modelList;
+    private PositionReplaceCopyModel positionReplaceModel;
+    private MyCopyModel model;
+    private List<PositionReplaceCopyModel.ApprovalInfoLists> modelList;
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
     private View childView;
@@ -71,15 +119,27 @@ public class PositionReplaceDetailCopyActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_apps_examination_positionreplace_d);
+        setContentView(R.layout.act_apps_examination_positionreplace_d3);
         tv_title.setText(getResources().getString(R.string.positionReplace));
         tv_right.setText("");
 
-        intent = getIntent();
-        model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
+        Bundle bundle = this.getIntent().getExtras();
+        model = (MyCopyModel) bundle.getSerializable("MyCopyModel");
         getDetailModel(model);
     }
-    private void setShow(PositionReplaceModel model) {
+    private void setShow(PositionReplaceCopyModel model) {
+        tv_copyer.setText(model.getEmployeeName());
+        tv_copyTime.setText(model.getApplicationCreateTime());
+        //
+        tv_positionReplace_title.setText(model.getApplicationTitle());
+        tv_positionReplace_date.setText(model.getTransferDate());
+        tv_positionReplace_decider.setText(model.getHandlerEmployeeName());
+        tv_positionReplace_orgDept.setText(model.getOriDepartmentName());
+        tv_positionReplace_orgPosition.setText(model.getOriPostName());
+        tv_positionReplace_newDept.setText(model.getNewDepartmentName());
+        tv_positionReplace_newPosition.setText(model.getNewPostName());
+        tv_positionReplace_reason.setText(model.getTransferReason());
+        tv_positionReplace_remark.setText(model.getRemark());
 
         modelList = model.getApprovalInfoLists();
 
@@ -121,13 +181,13 @@ public class PositionReplaceDetailCopyActivity extends BaseActivity {
     /**
      * 获取详情数据
      */
-    public void getDetailModel(final MyApplicationModel model) {
+    public void getDetailModel(final MyCopyModel model) {
 
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
                 try {
-                    PositionReplaceModel model1 = UserHelper.applicationDetailPostPositionReplace(PositionReplaceDetailCopyActivity.this,
+                    PositionReplaceCopyModel model1 = UserHelper.copyDetailPostPositionReplace(PositionReplaceDetailCopyActivity.this,
                             model.getApplicationID(),
                             model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
@@ -144,7 +204,7 @@ public class PositionReplaceDetailCopyActivity extends BaseActivity {
         super.handleMessage(msg);
         switch (msg.what) {
             case POST_SUCCESS: // 1001
-                positionReplaceModel = (PositionReplaceModel) msg.obj;
+                positionReplaceModel = (PositionReplaceCopyModel) msg.obj;
                 setShow(positionReplaceModel);
                 break;
             case POST_FAILED: // 1001

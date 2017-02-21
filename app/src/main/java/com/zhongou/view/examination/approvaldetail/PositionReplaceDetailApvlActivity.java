@@ -112,10 +112,6 @@ public class PositionReplaceDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_positionReplace_remark)
     TextView tv_positionReplace_remark;
 
-    //审批人
-    @ViewInject(id = R.id.tv_Requester)
-    TextView tv_Requester;
-
     private MyApprovalModel myApprovalModel;
     private PositionReplaceApvlModel model;
 
@@ -156,12 +152,6 @@ public class PositionReplaceDetailApvlActivity extends BaseActivity {
         tv_positionReplace_reason.setText(model.getTransferReason());
         tv_positionReplace_remark.setText(model.getRemark());
 
-
-        if (model.getApprovalInfoLists().size() > 0) {
-            tv_Requester.setText(model.getApplicationCreateTime());
-        } else {
-            tv_Requester.setText("未审批");
-        }
     }
 
     private void bottomType() {
