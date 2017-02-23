@@ -52,6 +52,10 @@ public class BorrowActivity extends BaseActivity {
     @ViewInject(id = R.id.et_reason)
     EditText et_reason;
 
+    //备注
+    @ViewInject(id = R.id.et_remark)
+    EditText et_remark;
+
     //类型
     @ViewInject(id = R.id.layout_borrowType, click = "borrowType")
     LinearLayout layout_borrowType;
@@ -90,7 +94,7 @@ public class BorrowActivity extends BaseActivity {
     public String startDate;
     public String endDates;
     public String reason;
-    public String remark = "null";
+    public String remark = "";
     public String applicationTitle = "";
     private String approvalID = "";
     private List<String> approvalIDList = new ArrayList<String>();
@@ -121,7 +125,7 @@ public class BorrowActivity extends BaseActivity {
         //        approvalID = "0280c9c5-870c-46cf-aa95-cdededc7d86c,88dd7959-cb2f-40c6-947a-4d6801fc4765";
         BorrowThings = et_BorrowThings.getText().toString();
         reason = et_reason.getText().toString();
-
+        remark = et_remark.getText().toString();
         if (TextUtils.isEmpty(BorrowThings)) {
             PageUtil.DisplayToast("借阅名称不能为空");
             return;
@@ -184,6 +188,16 @@ public class BorrowActivity extends BaseActivity {
     }
 
     private void clear() {
+        et_BorrowThings.setText("");
+        tv_borrowType.setText("");
+        et_reason.setText("");
+        et_remark.setText("");
+        tv_timeStart.setText("");
+        startDate = null;
+        tv_timeEnd.setText("");
+        endDates = null;
+        tv_Requester.setText("");
+        approvalID = null;
 
     }
 
@@ -227,7 +241,7 @@ public class BorrowActivity extends BaseActivity {
                         tv_timeStart.setText(time);
                     }
                 });
-        endDateChooseDialog.setTimePickerGone(true);
+        //        endDateChooseDialog.setTimePickerGone(true);
         endDateChooseDialog.setDateDialogTitle("开始时间");
         endDateChooseDialog.showDateChooseDialog();
     }
@@ -246,7 +260,7 @@ public class BorrowActivity extends BaseActivity {
                         tv_timeEnd.setText(time);
                     }
                 });
-        endDateChooseDialog.setTimePickerGone(true);
+        //        endDateChooseDialog.setTimePickerGone(true);
         endDateChooseDialog.setDateDialogTitle("结束时间");
         endDateChooseDialog.showDateChooseDialog();
     }

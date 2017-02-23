@@ -60,6 +60,10 @@ public class FinancialLoanActivity extends BaseActivity {
     @ViewInject(id = R.id.et_Reason)
     EditText et_Reason;
 
+    //备注
+    @ViewInject(id = R.id.et_remark)
+    EditText et_remark;
+
     //添加审批人
     @ViewInject(id = R.id.AddApprover, click = "forAddApprover")
     RelativeLayout AddApprover;
@@ -76,6 +80,7 @@ public class FinancialLoanActivity extends BaseActivity {
     private String returnLoanTime = "";//还款时间
     private String approvalID = "";
     private String reason = "";
+    private String remark = "";
     private String fee = "";
 
     @Override
@@ -94,7 +99,7 @@ public class FinancialLoanActivity extends BaseActivity {
     public void forCommit(View view) {
         fee = et_Fee.getText().toString().trim();
         reason = et_Reason.getText().toString();
-
+        remark = et_remark.getText().toString();
         if (TextUtils.isEmpty(returnLoanTime)) {
             PageUtil.DisplayToast("时间不能为空");
             return;
@@ -127,6 +132,7 @@ public class FinancialLoanActivity extends BaseActivity {
                     js.put("Type", getResources().getString(R.string.financial_loan_apl));//借款
                     js.put("Fee", fee);
                     js.put("Reason", reason);
+                    js.put("Remark", remark);
                     js.put("ApprovalIDList", approvalID);
 
                     String resultMessage = UserHelper.LRApplicationPost(FinancialLoanActivity.this, js);

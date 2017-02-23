@@ -396,8 +396,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
-                    android:gravity="center_vertical"
-                    android:text="@string/vehicleMainennanceReason"
+                    android:text="@string/remark_all_apl"
                     android:textColor="@color/cl_text_common"
                     android:textColorHint="@color/cl_hint_common"/>
 
@@ -408,8 +407,10 @@
                     android:layout_height="match_parent"
                     android:layout_marginRight="10dp"
                     android:layout_weight="0.73"
+                    android:gravity="top|left"
+                    android:padding="10dp"
                     android:background="@drawable/et_white_stroke"
-                    android:hint="@string/hint_vehicleMainennanceReason"
+                    android:hint="@string/hint_remark_all_apl"
                     android:textColor="@color/cl_text_common"
                     android:textColorHint="@color/cl_hint_common"/>
             </LinearLayout>

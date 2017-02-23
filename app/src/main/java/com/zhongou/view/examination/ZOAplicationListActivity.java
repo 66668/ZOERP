@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zhongou.R;
-import com.zhongou.adapter.ZOAplListAdapter;
+import com.zhongou.adapter.ZOAplicationListAdapter;
 import com.zhongou.base.BaseActivity;
 import com.zhongou.common.MyException;
 import com.zhongou.dialog.Loading;
@@ -57,7 +57,7 @@ import static com.zhongou.R.id.tv_title;
  * Created by sjy on 2016/12/2.
  */
 
-public class ZOAplListActivity extends BaseActivity implements RefreshAndLoadListView.IReflashListener, RefreshAndLoadListView.ILoadMoreListener {
+public class ZOAplicationListActivity extends BaseActivity implements RefreshAndLoadListView.IReflashListener, RefreshAndLoadListView.ILoadMoreListener {
 
     //back
     @ViewInject(id = R.id.layout_back, click = "forBack")
@@ -75,7 +75,7 @@ public class ZOAplListActivity extends BaseActivity implements RefreshAndLoadLis
     @ViewInject(id = R.id.myapprovalList)
     RefreshAndLoadListView myListView;
 
-    private ZOAplListAdapter vAdapter;//记录适配
+    private ZOAplicationListAdapter vAdapter;//记录适配
     private boolean ifLoading = false;//标记
     private int pageSize = 20;
 
@@ -118,7 +118,7 @@ public class ZOAplListActivity extends BaseActivity implements RefreshAndLoadLis
         tv_right.setText("");
         myListView.setIRefreshListener(this);//下拉刷新监听
         myListView.setILoadMoreListener(this);//加载监听
-        vAdapter = new ZOAplListAdapter(this);// 上拉加载
+        vAdapter = new ZOAplicationListAdapter(this);// 上拉加载
         myListView.setAdapter(vAdapter);
 
         //spinner数据
@@ -153,7 +153,7 @@ public class ZOAplListActivity extends BaseActivity implements RefreshAndLoadLis
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(ZOAplListActivity.this, "position=" + position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ZOAplicationListActivity.this, "position=" + position, Toast.LENGTH_SHORT).show();
 
                 int headerViewsCount = myListView.getHeaderViewsCount();//得到header的总数量
                 int newPosition = position - headerViewsCount;//得到新的修正后的position
@@ -166,13 +166,13 @@ public class ZOAplListActivity extends BaseActivity implements RefreshAndLoadLis
 
     //
     private void getData() {
-        Loading.run(ZOAplListActivity.this, new Runnable() {
+        Loading.run(ZOAplicationListActivity.this, new Runnable() {
             @Override
             public void run() {
                 ifLoading = true;//
                 try {
                     List<MyApplicationModel> visitorModelList = UserHelper.GetMyApplicationSearchResults(
-                            ZOAplListActivity.this,
+                            ZOAplicationListActivity.this,
                             "",//iMaxTime
                             "");
 
@@ -191,21 +191,19 @@ public class ZOAplListActivity extends BaseActivity implements RefreshAndLoadLis
     //RefreshListView.IReflashListener接口 下拉刷新
     @Override
     public void onRefresh() {
-        Loading.noDialogRun(ZOAplListActivity.this, new Runnable() {
+        Loading.noDialogRun(ZOAplicationListActivity.this, new Runnable() {
 
             @Override
             public void run() {
                 ifLoading = true;//
                 try {
                     List<MyApplicationModel> visitorModelList = UserHelper.GetMyApplicationSearchResults(
-                            ZOAplListActivity.this,
+                            ZOAplicationListActivity.this,
                             IMaxtime,//iMaxTime
                             "");
 
                     Log.d("SJY", "onRefresh--IMaxtime=" + IMaxtime);
-                    if (visitorModelList == null) {
-                        vAdapter.IsEnd = true;
-                    } else if (visitorModelList.size() < pageSize) {
+                    if (visitorModelList == null || visitorModelList.size() < pageSize) {
                         vAdapter.IsEnd = true;
                     }
 
@@ -222,11 +220,7 @@ public class ZOAplListActivity extends BaseActivity implements RefreshAndLoadLis
     // 上拉加载
     @Override
     public void onLoadMore() {
-        if (ifLoading) {
-            return;
-        }
-
-        Loading.run(ZOAplListActivity.this, new Runnable() {
+        Loading.noDialogRun(ZOAplicationListActivity.this, new Runnable() {
 
             @Override
             public void run() {
@@ -234,16 +228,15 @@ public class ZOAplListActivity extends BaseActivity implements RefreshAndLoadLis
                 ifLoading = true;//
                 try {
                     List<MyApplicationModel> visitorModelList = UserHelper.GetMyApplicationSearchResults(
-                            ZOAplListActivity.this,
+                            ZOAplicationListActivity.this,
                             "",//iMaxTime
                             IMinTime);
 
                     Log.d("SJY", "loadMore--min=" + IMaxtime);
-                    if (visitorModelList == null) {
-                        vAdapter.IsEnd = true;
-                    } else if (visitorModelList.size() < pageSize) {
+                    if (visitorModelList == null || visitorModelList.size() < pageSize) {
                         vAdapter.IsEnd = true;
                     }
+
                     sendMessage(GET_MORE_DATA, visitorModelList);
 
                 } catch (MyException e) {
@@ -296,7 +289,8 @@ public class ZOAplListActivity extends BaseActivity implements RefreshAndLoadLis
                 Log.d("SJY", "无最新数据");
                 sendToastMessage((String) msg.obj);
                 ifLoading = false;
-                myListView.loadAndFreshComplete();
+
+                myListView.loadAndFreshComplete();//停止footerView动作
                 break;
 
             default:

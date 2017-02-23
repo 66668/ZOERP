@@ -28,7 +28,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * 用车申请
  * Created by sjy on 2016/12/2.
@@ -94,7 +93,9 @@ public class VehicleActivity extends BaseActivity {
     public static final int POST_SUCCESS = 21;
     public static final int POST_FAILED = 22;
 
-    //
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -157,13 +158,24 @@ public class VehicleActivity extends BaseActivity {
         switch (msg.what) {
             case POST_SUCCESS:
                 PageUtil.DisplayToast(getResources().getString(R.string.approval_success));
+                clear();
                 break;
             case POST_FAILED:
                 PageUtil.DisplayToast((String) msg.obj);
                 break;
         }
     }
-
+    private void clear(){
+        et_targetPlace.setText("");
+        tv_timeStart.setText("");
+        tv_timeEnd.setText("");
+        et_purpose.setText("");
+        et_remark.setText("");
+        tv_Requester.setText("");
+        approvalID = null;
+        startDate = null;
+        endDates = null;
+    }
     /**
      * 开始时间
      *
@@ -178,8 +190,8 @@ public class VehicleActivity extends BaseActivity {
                         tv_timeStart.setText(time);
                     }
                 });
-        endDateChooseDialog.setTimePickerGone(true);
-        endDateChooseDialog.setDateDialogTitle("开始时间");
+//        endDateChooseDialog.setTimePickerGone(true);
+        endDateChooseDialog.setDateDialogTitle("出发时间");
         endDateChooseDialog.showDateChooseDialog();
     }
 
@@ -197,8 +209,8 @@ public class VehicleActivity extends BaseActivity {
                         tv_timeEnd.setText(time);
                     }
                 });
-        endDateChooseDialog.setTimePickerGone(true);
-        endDateChooseDialog.setDateDialogTitle("结束时间");
+//        endDateChooseDialog.setTimePickerGone(true);
+        endDateChooseDialog.setDateDialogTitle("返回时间");
         endDateChooseDialog.showDateChooseDialog();
     }
 

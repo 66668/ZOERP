@@ -59,6 +59,10 @@ public class SalaryadjustActivity extends BaseActivity {
     @ViewInject(id = R.id.et_reason)
     EditText et_reason;
 
+    //备注
+    @ViewInject(id = R.id.et_remark)
+    EditText et_remark;
+
     //添加审批人
     @ViewInject(id = R.id.AddApprover, click = "forAddApprover")
     RelativeLayout AddApprover;
@@ -70,13 +74,14 @@ public class SalaryadjustActivity extends BaseActivity {
     private String approvalID = "";
     private String TargetEmployee;
     private String reason;
+    private String remark;
     private String OriSalary;//调前工资
     private String SrcSalary;//调后工资
-    private List<String> approvalIDList = new ArrayList<String>();
 
     //常量
     public static final int POST_SUCCESS = 21;
     public static final int POST_FAILED = 22;
+
 
     //
     @Override
@@ -89,6 +94,7 @@ public class SalaryadjustActivity extends BaseActivity {
     public void forCommit(View view) {
         TargetEmployee = et_person.getText().toString().trim();
         reason = et_reason.getText().toString();
+        remark = et_remark.getText().toString();
         OriSalary = et_salary_now.getText().toString();
         SrcSalary = et_salary_after.getText().toString();
 
@@ -117,6 +123,7 @@ public class SalaryadjustActivity extends BaseActivity {
                     js.put("OriSalary", OriSalary);
                     js.put("SrcSalary", SrcSalary);
                     js.put("Reason", reason);
+                    js.put("Remark", remark);
                     js.put("ApprovalIDList", approvalID);//
 
                     UserHelper.changeSalary(SalaryadjustActivity.this, js);
@@ -138,13 +145,22 @@ public class SalaryadjustActivity extends BaseActivity {
         switch (msg.what) {
             case POST_SUCCESS:
                 PageUtil.DisplayToast(getResources().getString(R.string.approval_success));
+                clear();
                 break;
             case POST_FAILED:
                 PageUtil.DisplayToast((String) msg.obj);
                 break;
         }
     }
-
+    private void clear(){
+        et_person.setText("");
+        et_salary_now.setText("");
+        et_salary_after.setText("");
+        et_reason.setText("");
+        et_remark.setText("");
+        tv_Requester.setText("");
+        approvalID = null;
+    }
     /**
      * 添加审批人
      *

@@ -19,8 +19,8 @@ import com.zhongou.view.examination.TakeDaysOffActivity;
 import com.zhongou.view.examination.VehicleActivity;
 import com.zhongou.view.examination.VehicleMaintainActivity;
 import com.zhongou.view.examination.WorkOverTimeActivity;
-import com.zhongou.view.examination.ZOAplListActivity;
-import com.zhongou.view.examination.ZOApvlListActivity;
+import com.zhongou.view.examination.ZOAplicationListActivity;
+import com.zhongou.view.examination.ZOApprovelListActivity;
 import com.zhongou.view.examination.ZOCopyListActivity;
 
 /**
@@ -109,7 +109,7 @@ public class ExaminationAcitivity extends BaseActivity {
      * @param view
      */
     public void myApplication(View view) {
-        startActivity(ZOAplListActivity.class);
+        startActivity(ZOAplicationListActivity.class);
 
     }
 
@@ -119,7 +119,7 @@ public class ExaminationAcitivity extends BaseActivity {
      * @param view
      */
     public void myApproval(View view) {
-        startActivity(ZOApvlListActivity.class);
+        startActivity(ZOApprovelListActivity.class);
     }
 
     /**

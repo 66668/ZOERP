@@ -57,13 +57,16 @@ public class RecruitmentActivity extends BaseActivity {
     //时间
     @ViewInject(id = R.id.layout_time, click = "chooseTime")
     LinearLayout layout_time;
-
     @ViewInject(id = R.id.tv_timeIn)
     TextView sp_timeIn;
 
     //Responsibility
     @ViewInject(id = R.id.et_responsibility)
     EditText et_responsibility;
+
+    //备注
+    @ViewInject(id = R.id.et_remark)
+    EditText et_remark;
 
     //添加审批人
     @ViewInject(id = R.id.AddApprover, click = "forAddApprover")
@@ -85,6 +88,8 @@ public class RecruitmentActivity extends BaseActivity {
     //常量
     public static final int POST_SUCCESS = 11;
     public static final int POST_FAILED = 12;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +127,7 @@ public class RecruitmentActivity extends BaseActivity {
         position = et_positionRequest.getText().toString().trim();
         numberOfPeople = et_numberOfPeople.getText().toString().trim();
         responsibility = et_responsibility.getText().toString().trim();
+        remark = et_remark.getText().toString();
         if (TextUtils.isEmpty(position)) {
             PageUtil.DisplayToast("招聘职位不能为空");
             return;
@@ -169,11 +175,23 @@ public class RecruitmentActivity extends BaseActivity {
         switch (msg.what) {
             case POST_SUCCESS:
                 PageUtil.DisplayToast(getResources().getString(R.string.approval_success));
+                clear();
                 break;
             case POST_FAILED:
                 PageUtil.DisplayToast((String) msg.obj);
                 break;
         }
+    }
+    private void clear() {
+        et_positionRequest.setText("");
+        et_numberOfPeople.setText("");
+        sp_timeIn.setText("");
+        et_responsibility.setText("");
+        tv_Requester.setText("");
+        et_remark.setText("");
+        ExpectedEntryDate = null;
+        approvalID = null;
+
     }
     /**
      * 添加审批人

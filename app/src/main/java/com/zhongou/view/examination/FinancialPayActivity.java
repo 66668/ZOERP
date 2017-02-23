@@ -70,8 +70,8 @@ public class FinancialPayActivity extends BaseActivity {
     EditText et_Fee;
 
     //备注
-    @ViewInject(id = R.id.et_Reason)
-    EditText et_Reason;
+    @ViewInject(id = R.id.et_Remark)
+    EditText et_remark;
 
     //添加审批人
     @ViewInject(id = R.id.AddApprover, click = "forAddApprover")
@@ -87,7 +87,7 @@ public class FinancialPayActivity extends BaseActivity {
 
     //变量
     private String approvalID = "";
-    private String reason = "";
+    private String remark = "";
     private String fee = "";
     private String CollectionUnit = "";//收款单位
     private String BankAccount = "";//银行
@@ -105,7 +105,7 @@ public class FinancialPayActivity extends BaseActivity {
 
     public void forCommit(View view) {
         fee = et_Fee.getText().toString().trim();
-        reason = et_Reason.getText().toString();
+        remark = et_remark.getText().toString();
         CollectionUnit = et_offical.getText().toString();
         AccountNumber  =et_account.getText().toString();
         BankAccount = et_bank.getText().toString();
@@ -148,7 +148,7 @@ public class FinancialPayActivity extends BaseActivity {
                     js.put("CollectionUnit", CollectionUnit);
                     js.put("AccountNumber", AccountNumber);
                     js.put("Way", Way);
-                    js.put("Remark", reason);
+                    js.put("Remark", remark);
                     js.put("ApprovalIDList", approvalID);
 
                     UserHelper.LRApplicationPost(FinancialPayActivity.this, js);
@@ -183,7 +183,7 @@ public class FinancialPayActivity extends BaseActivity {
         et_account.setText("");
         et_bank.setText("");
         et_Fee.setText("");
-        et_Reason.setText("");
+        et_remark.setText("");
     }
     /**
      * 添加审批人

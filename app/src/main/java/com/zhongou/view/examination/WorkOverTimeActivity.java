@@ -63,6 +63,10 @@ public class WorkOverTimeActivity extends BaseActivity {
     @ViewInject(id = R.id.et_reason)
     EditText et_reason;
 
+    //备注
+    @ViewInject(id = R.id.et_remark)
+    EditText et_remark;
+
     //人员
     @ViewInject(id = R.id.et_OverEmployee)
     EditText et_OverEmployee;
@@ -100,6 +104,7 @@ public class WorkOverTimeActivity extends BaseActivity {
      */
     public void forCommit(View view) {
         reason = et_reason.getText().toString();
+        remark = et_remark.getText().toString();
         overEmployee = et_OverEmployee.getText().toString().trim();
         if (TextUtils.isEmpty(startDate) || TextUtils.isEmpty(endDates)) {
             PageUtil.DisplayToast("请假时间不能为空");
@@ -127,6 +132,7 @@ public class WorkOverTimeActivity extends BaseActivity {
                     js.put("StratOverTime", startDate);
                     js.put("EndOverTime", endDates);
                     js.put("Remark", remark);
+                    js.put("Reason", reason);
                     js.put("ApprovalIDList", approvalID);
 
                     UserHelper.overApprovalPost(WorkOverTimeActivity.this, js);
@@ -167,7 +173,7 @@ public class WorkOverTimeActivity extends BaseActivity {
                         tv_timeStart.setText(time);
                     }
                 });
-        endDateChooseDialog.setTimePickerGone(true);
+//        endDateChooseDialog.setTimePickerGone(true);
         endDateChooseDialog.setDateDialogTitle("开始时间");
         endDateChooseDialog.showDateChooseDialog();
     }
@@ -186,7 +192,7 @@ public class WorkOverTimeActivity extends BaseActivity {
                         tv_timeEnd.setText(time);
                     }
                 });
-        endDateChooseDialog.setTimePickerGone(true);
+//        endDateChooseDialog.setTimePickerGone(true);
         endDateChooseDialog.setDateDialogTitle("结束时间");
         endDateChooseDialog.showDateChooseDialog();
     }

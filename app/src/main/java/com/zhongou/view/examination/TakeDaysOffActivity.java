@@ -76,6 +76,10 @@ public class TakeDaysOffActivity extends BaseActivity {
     @ViewInject(id = R.id.et_reason)
     EditText et_reason;
 
+    //备注
+    @ViewInject(id = R.id.et_remark)
+    EditText et_remark;
+
     //添加审批人
     @ViewInject(id = R.id.AddApprover, click = "forAddApprover")
     RelativeLayout AddApprover;
@@ -98,6 +102,7 @@ public class TakeDaysOffActivity extends BaseActivity {
     public static final int POST_SUCCESS = 19;
     public static final int POST_FAILED = 20;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,6 +116,7 @@ public class TakeDaysOffActivity extends BaseActivity {
      */
     public void forCommit(View view) {
         reason  = et_reason.getText().toString();
+        remark = et_remark.getText().toString();
         if (TextUtils.isEmpty(StartOffDate) || TextUtils.isEmpty(EndOffDate)
                 || TextUtils.isEmpty(StartTakeDate) ||TextUtils.isEmpty(EndTakeDate)) {
             PageUtil.DisplayToast("时间不能为空");
@@ -155,11 +161,28 @@ public class TakeDaysOffActivity extends BaseActivity {
         switch (msg.what) {
             case POST_SUCCESS:
                 PageUtil.DisplayToast(getResources().getString(R.string.approval_success));
+                clear();
                 break;
             case POST_FAILED:
                 PageUtil.DisplayToast((String) msg.obj);
                 break;
         }
+    }
+
+    private void clear(){
+        tv_timeStart.setText("");
+        tv_timeEnd.setText("");
+        tv_timeStartbefore.setText("");
+        tv_timeEndBefore.setText("");
+        tv_timeEndBefore.setText("");
+        et_reason.setText("");
+        et_remark.setText("");
+        tv_Requester.setText("");
+        approvalID = null;
+        StartOffDate = null;
+        EndOffDate = null;
+        StartTakeDate = null;
+        EndTakeDate = null;
     }
     /**
      * 调休开始时间

@@ -205,7 +205,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
-                    android:gravity="center_vertical"
                     android:text="@string/jobsLeaveReason"
                     android:textColor="@color/cl_text_common"/>
 
@@ -217,8 +216,51 @@
                     android:layout_marginRight="10dp"
                     android:layout_weight="0.72"
                     android:background="@drawable/et_white_stroke"
+                    android:gravity="top|left"
                     android:hint="@string/hint_jobsLeaveReason"
+                    android:padding="10dp"
                     />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/common_bg_examination_line"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginTop="10dp"
+                android:background="@color/common_bg_examination_line"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.28"
+                    android:text="@string/remark_all_apl"
+                    android:textColor="@color/cl_text_common"/>
+
+                <EditText
+                    android:id="@+id/et_remark"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="0.71"
+                    android:background="@drawable/et_white_stroke"
+                    android:gravity="top|left"
+                    android:hint="@string/hint_remark_all_apl"
+                    android:padding="10dp"
+                    android:textColorHint="@color/cl_hint_common"/>
             </LinearLayout>
 
             <View

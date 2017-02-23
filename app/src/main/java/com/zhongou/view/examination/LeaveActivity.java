@@ -50,7 +50,11 @@ public class LeaveActivity extends BaseActivity {
 
     //请假原因
     @ViewInject(id = R.id.et_reason)
-    TextView et_reason;
+    EditText et_reason;
+
+    //备注
+    @ViewInject(id = R.id.et_remark)
+    EditText et_remark;
 
     //开始时间
     @ViewInject(id = R.id.layout_startTime, click = "startTime")
@@ -80,7 +84,7 @@ public class LeaveActivity extends BaseActivity {
     //变量
     private String startDate;
     private String endDates;
-    private String content;
+    private String reason;
     private String remark = "";
     private String applicationTitle = "";//标题
     private String approvalID = "";
@@ -90,6 +94,8 @@ public class LeaveActivity extends BaseActivity {
     //常量
     public static final int POST_SUCCESS = 15;
     public static final int POST_FAILED = 16;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,14 +104,15 @@ public class LeaveActivity extends BaseActivity {
     }
 
     public void forCommit(View view) {
-        content = et_reason.getText().toString();
+        reason = et_reason.getText().toString();
+        remark = et_remark.getText().toString();
         applicationTitle = et_ApplicationTitle.getText().toString().trim();
 
         if (TextUtils.isEmpty(startDate) || TextUtils.isEmpty(endDates)) {
             PageUtil.DisplayToast("请假时间不能为空");
             return;
         }
-        if (TextUtils.isEmpty(content)) {
+        if (TextUtils.isEmpty(reason)) {
             PageUtil.DisplayToast("请假原因不能为空");
             return;
         }
@@ -120,10 +127,11 @@ public class LeaveActivity extends BaseActivity {
 
                     JSONObject js = new JSONObject();
                     js.put("ApplicationTitle", applicationTitle);
-                    js.put("Content", content);
+                    js.put("Content", reason);
                     js.put("StartDate", startDate);
                     js.put("EndDate", endDates);
                     js.put("Remark", remark);
+                    js.put("Reason", remark);
                     js.put("ApprovalIDList", approvalID);
 
                     UserHelper.leavePost(LeaveActivity.this, js);
@@ -131,19 +139,21 @@ public class LeaveActivity extends BaseActivity {
                 } catch (MyException e) {
                     sendMessage(POST_FAILED, e.getMessage());
 
-                } catch (JSONException e){
+                } catch (JSONException e) {
                     Log.d("SJY", e.getMessage());
                 }
             }
         });
 
     }
+
     @Override
     protected void handleMessage(Message msg) {
         super.handleMessage(msg);
         switch (msg.what) {
             case POST_SUCCESS:
                 PageUtil.DisplayToast(getResources().getString(R.string.approval_success));
+                clear();
                 break;
             case POST_FAILED:
                 PageUtil.DisplayToast((String) msg.obj);
@@ -151,6 +161,17 @@ public class LeaveActivity extends BaseActivity {
         }
     }
 
+    private void clear() {
+        et_reason.setText("");
+        et_remark.setText("");
+        tv_timeStart.setText("");
+        tv_timeEnd.setText("");
+        et_ApplicationTitle.setText("");
+        tv_Requester.setText("");
+        startDate = null;
+        endDates = null;
+        approvalID = null;
+    }
 
     /**
      * 开始时间
@@ -166,7 +187,7 @@ public class LeaveActivity extends BaseActivity {
                         tv_timeStart.setText(time);
                     }
                 });
-//        endDateChooseDialog.setTimePickerGone(true);
+        //        endDateChooseDialog.setTimePickerGone(true);
         endDateChooseDialog.setDateDialogTitle("开始时间");
         endDateChooseDialog.showDateChooseDialog();
     }
@@ -185,23 +206,24 @@ public class LeaveActivity extends BaseActivity {
                         tv_timeEnd.setText(time);
                     }
                 });
-//        endDateChooseDialog.setTimePickerGone(true);
+        //        endDateChooseDialog.setTimePickerGone(true);
         endDateChooseDialog.setDateDialogTitle("结束时间");
         endDateChooseDialog.showDateChooseDialog();
     }
+
     /**
      * 添加审批人
      *
      * @param view
      */
     public void forAddApprover(View view) {
-        myStartForResult(ContactsSelectActivity.class,0);
+        myStartForResult(ContactsSelectActivity.class, 0);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==0&&resultCode==0)//通过请求码(去SActivity)和回传码（回传数据到第一个页面）判断回传的页面
+        if (requestCode == 0 && resultCode == 0)//通过请求码(去SActivity)和回传码（回传数据到第一个页面）判断回传的页面
         {
             //判断返回值是否为空
             List<ContactsEmployeeModel> list = new ArrayList<>();
@@ -212,9 +234,9 @@ public class LeaveActivity extends BaseActivity {
             }
             StringBuilder name = new StringBuilder();
             StringBuilder employeeId = new StringBuilder();
-            for(int i = 0;i<list.size();i++){
-                name.append(list.get(i).getsEmployeeName()+"  ");
-                employeeId.append(list.get(i).getsEmployeeID()+",");
+            for (int i = 0; i < list.size(); i++) {
+                name.append(list.get(i).getsEmployeeName() + "  ");
+                employeeId.append(list.get(i).getsEmployeeID() + ",");
             }
             //            approvalID = "0280c9c5-870c-46cf-aa95-cdededc7d86c,88dd7959-cb2f-40c6-947a-4d6801fc4765";
             approvalID = getApprovalID(employeeId.toString());
@@ -227,19 +249,20 @@ public class LeaveActivity extends BaseActivity {
     /*
      *处理字符串，去除末尾逗号
      */
-    private String getApprovalID(String str){
-        if(str.length()>1){
+    private String getApprovalID(String str) {
+        if (str.length() > 1) {
             return str.substring(0, str.length() - 1);
-        }else{
+        } else {
             return "";
         }
     }
 
     /**
      * back
+     *
      * @param view
      */
-    public void forBack(View view){
+    public void forBack(View view) {
         this.finish();
     }
 

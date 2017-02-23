@@ -313,7 +313,6 @@
                     android:layout_weight="0.72"
                     android:background="@drawable/et_white_stroke"
                     android:gravity="center_vertical"
-                    android:hint="@string/financial_reimburse_useage"
                     android:textColorHint="@color/cl_hint_common"
                     />
             </LinearLayout>
@@ -347,14 +346,14 @@
                     android:textColor="@color/cl_text_common"/>
 
                 <EditText
-                    android:id="@+id/et_Reason"
+                    android:id="@+id/et_remark"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.72"
                     android:background="@drawable/et_white_stroke"
                     android:gravity="left|top"
-                    android:hint="@string/hint_loanReimburseReason"
+                    android:hint="@string/financial_fee_remark"
                     android:padding="10dp"
                     android:textColorHint="@color/cl_hint_common"/>
             </LinearLayout>

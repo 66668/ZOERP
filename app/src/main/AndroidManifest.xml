@@ -80,14 +80,14 @@
 
         <!-- 01-01 我的申请-->
         <activity
-            android:name="com.zhongou.view.examination.ZOAplListActivity"
+            android:name="com.zhongou.view.examination.ZOAplicationListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
         <!-- 01-02 我的审批-->
         <activity
-            android:name="com.zhongou.view.examination.ZOApvlListActivity"
+            android:name="com.zhongou.view.examination.ZOApprovelListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">

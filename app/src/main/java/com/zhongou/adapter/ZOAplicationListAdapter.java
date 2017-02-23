@@ -25,7 +25,7 @@ import java.util.Random;
  * @author
  */
 
-public class ZOAplListAdapter extends BaseListAdapter {
+public class ZOAplicationListAdapter extends BaseListAdapter {
     private ImageLoader imgLoader;
     private DisplayImageOptions imgOptions;
 
@@ -37,7 +37,7 @@ public class ZOAplListAdapter extends BaseListAdapter {
         public TextView tvComment;
     }
 
-    public ZOAplListAdapter(Context context) {
+    public ZOAplicationListAdapter(Context context) {
         super(context);
         imgLoader = ImageLoader.getInstance();
         imgLoader.init(ImageLoaderConfiguration.createDefault(context));

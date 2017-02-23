@@ -9,9 +9,9 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.zhongou.R;
-import com.zhongou.base.BaseLoadMoreListAdapter;
-import com.zhongou.common.ImageLoadingConfig;
 import com.zhongou.application.MyApplication;
+import com.zhongou.base.BaseListAdapter;
+import com.zhongou.common.ImageLoadingConfig;
 import com.zhongou.model.MyApprovalModel;
 import com.zhongou.widget.CircleTextView;
 
@@ -24,7 +24,7 @@ import java.util.Random;
  * @author
  */
 
-public class ZOApvlLoadMoreListAdapter extends BaseLoadMoreListAdapter {
+public class ZOApprovelListAdapter extends BaseListAdapter {
     private ImageLoader imgLoader;
     private DisplayImageOptions imgOptions;
 
@@ -37,8 +37,8 @@ public class ZOApvlLoadMoreListAdapter extends BaseLoadMoreListAdapter {
         public TextView tvComment;//审批状态
     }
 
-    public ZOApvlLoadMoreListAdapter(Context context, AdapterCallBack callBack) {
-        super(context, callBack);
+    public ZOApprovelListAdapter(Context context) {
+        super(context);
         imgLoader = ImageLoader.getInstance();
         imgLoader.init(ImageLoaderConfiguration.createDefault(context));
         imgOptions = ImageLoadingConfig.generateDisplayImageOptions(R.mipmap.ic_launcher);

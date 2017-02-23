@@ -138,6 +138,9 @@
 
     <string name="approval_success">申请提交成功！</string>
 
+    <string name="remark_all_apl">备注</string>
+    <string name="hint_remark_all_apl">请输入备注信息</string>
+
     <!-- 01-01 - 招聘01-->
 
     <string name="forjobs">招聘申请</string>
@@ -198,8 +201,8 @@
     <!-- 01-01  调休05-->
     <string name="workRest">调休申请</string>
     <string name="workRest_d">调休详情</string>
-    <string name="workRestStartbefore">原工作开始</string>
-    <string name="workRestEndBefore">原工作结束</string>
+    <string name="workRestStartbefore">正常开始</string>
+    <string name="workRestEndBefore">正常结束</string>
     <string name="workRestStart">调休开始</string>
     <string name="workRestEnd">调休结束</string>
     <string name="workRestLong">调休时长</string>
@@ -212,7 +215,7 @@
     <string name="borrows_d">借阅详情</string>
     <string name="borrowsName">借阅名称</string>
     <string name="hint_borrowsName">请输入借阅物品名称</string>
-    <string name="borrowsStart">使用时间</string>
+    <string name="borrowsStart">借用时间</string>
     <string name="borrowsEnd">归还时间</string>
     <string name="borrowsType">借阅类型</string>
     <string name="borrowsReason">借阅用途</string>
@@ -242,14 +245,14 @@
     <string name="carUsed_d">用车详情</string>
     <string name="carUser">驾驶人</string>
     <string name="hint_carUser">请输入驾驶人</string>
-    <string name="carUsedStart">计划用车时间</string>
-    <string name="carUsedEnd">计划交车时间</string>
+    <string name="carUsedStart">出发时间</string>
+    <string name="carUsedEnd">返回时间</string>
     <string name="carUsedDestination">目的地</string>
     <string name="hint_carUsedDestination">请输入目的地</string>
     <string name="carUsedReason">用车原因</string>
     <string name="hint_carUsedReason">请输入用车说明</string>
-    <string name="carUsedpurpose">用途</string>
-    <string name="hint_carUsedpurpose">请输入用途</string>
+    <string name="carUsedpurpose">用车说明</string>
+    <string name="hint_carUsedpurpose">请输入用车说明</string>
     <string name="carUsedOther">申请备注</string>
 
     <!-- 01-01  车辆维护09-->
@@ -287,6 +290,7 @@
     <string name="financial_reimburse">报销申请</string>
     <string name="financial_pay">付款申请</string>
     <string name="financial_fee">费用申请</string>
+    <string name="financial_fee_remark">请输入费用申请备注</string>
     <string name="financial_start">开始申请</string>
     <!--申请参数 -->
     <string name="financial_loan_apl">借款</string>

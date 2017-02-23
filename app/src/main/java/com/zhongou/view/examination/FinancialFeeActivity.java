@@ -79,7 +79,7 @@ public class FinancialFeeActivity extends BaseActivity {
     TextView et_totle;
 
     //备注
-    @ViewInject(id = R.id.et_Reason)
+    @ViewInject(id = R.id.et_remark)
     EditText et_remark;
 
     //添加审批人

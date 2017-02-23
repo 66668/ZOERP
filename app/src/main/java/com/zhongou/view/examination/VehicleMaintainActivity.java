@@ -109,6 +109,21 @@ public class VehicleMaintainActivity extends BaseActivity {
     private String remark = "";
     private String maintenanceState = "";
 
+    private void clear(){
+        tv_MainennanceType.setText("");
+        tv_MainennanceState.setText("");
+        tv_vehicleMainennanceTimeStart.setText("");
+        et_vihicleNumber.setText("");
+        et_MaintenanceProject.setText("");
+        et_maintenancePlace.setText("");
+        et_EstimateFee.setText("");
+        et_remark.setText("");
+        tv_Requester.setText("");
+        approvalID = null;
+        maintenanceType = null;
+        maintenanceTime = null;
+        maintenanceState = null;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -199,6 +214,7 @@ public class VehicleMaintainActivity extends BaseActivity {
         switch (msg.what) {
             case POST_SUCCESS:
                 PageUtil.DisplayToast(getResources().getString(R.string.approval_success));
+                clear();
                 break;
             case POST_FAILED:
                 PageUtil.DisplayToast((String) msg.obj);
@@ -268,8 +284,8 @@ public class VehicleMaintainActivity extends BaseActivity {
                         tv_vehicleMainennanceTimeStart.setText(time);
                     }
                 });
-        endDateChooseDialog.setTimePickerGone(true);
-        endDateChooseDialog.setDateDialogTitle("维修时间");
+//        endDateChooseDialog.setTimePickerGone(true);
+        endDateChooseDialog.setDateDialogTitle("维保时间");
         endDateChooseDialog.showDateChooseDialog();
     }
 

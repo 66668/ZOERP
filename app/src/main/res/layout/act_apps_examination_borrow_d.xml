@@ -4,6 +4,7 @@
               android:layout_height="match_parent"
               android:background="@color/snow"
               android:orientation="vertical">
+
     <include
         android:id="@+id/topbar"
         layout="@layout/topbar_common_itt"/>
@@ -28,14 +29,14 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:textColor="@color/cl_text_common"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
-                    android:text="@string/borrowsName"/>
+                    android:text="@string/borrowsName"
+                    android:textColor="@color/cl_text_common"/>
 
                 <TextView
                     android:id="@+id/tv_BorrowThings"
@@ -57,14 +58,14 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:textColor="@color/cl_text_common"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
-                    android:text="@string/borrowsType"/>
+                    android:text="@string/borrowsType"
+                    android:textColor="@color/cl_text_common"/>
 
                 <TextView
                     android:id="@+id/tv_borrowType"
@@ -86,14 +87,14 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:textColor="@color/cl_text_common"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
-                    android:text="@string/borrowsStart"/>
+                    android:text="@string/borrowsStart"
+                    android:textColor="@color/cl_text_common"/>
 
                 <TextView
                     android:id="@+id/tv_startTime"
@@ -105,6 +106,7 @@
                     android:gravity="center_vertical"
                     />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/common_topbar_height40"
@@ -114,14 +116,14 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:textColor="@color/cl_text_common"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
-                    android:text="@string/borrowsEnd"/>
+                    android:text="@string/borrowsEnd"
+                    android:textColor="@color/cl_text_common"/>
 
                 <TextView
                     android:id="@+id/tv_endTime"
@@ -136,32 +138,60 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 android:background="@color/white"
-                android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:weightSum="1">
 
                 <TextView
-                    android:textColor="@color/cl_text_common"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
-                    android:gravity="center_vertical"
-                    android:text="@string/borrowsReason"/>
+                    android:text="@string/borrowsReason"
+                    android:textColor="@color/cl_text_common"/>
 
                 <TextView
                     android:id="@+id/tv_reason"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.72"
-                    android:gravity="center_vertical"
+                    android:gravity="top|left"
+                    android:padding="10dp"
                     />
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.28"
+                    android:text="@string/remark_all_apl"
+                    android:textColor="@color/cl_text_common"/>
+
+                <TextView
+                    android:id="@+id/tv_remark"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.72"
+                    android:gravity="top|left"
+                    android:padding="10dp"
+                    />
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/common_topbar_height40"
@@ -171,14 +201,14 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:textColor="@color/cl_text_common"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
-                    android:text="@string/Requester"/>
+                    android:text="@string/Requester"
+                    android:textColor="@color/cl_text_common"/>
 
                 <TextView
                     android:id="@+id/tv_Requester"
@@ -190,6 +220,7 @@
                     android:gravity="center_vertical"
                     />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/layout_state"
                 android:layout_width="match_parent"
