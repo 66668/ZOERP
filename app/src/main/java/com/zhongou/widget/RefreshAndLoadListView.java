@@ -2,6 +2,7 @@ package com.zhongou.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -258,6 +259,7 @@ public class RefreshAndLoadListView extends ListView implements AbsListView.OnSc
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem,
                          int visibleItemCount, int totalItemCount) {
+
         this.firstVisibleItem = firstVisibleItem;
         this.lastVisisibleItem = firstVisibleItem + visibleItemCount - 1;
 
@@ -300,6 +302,7 @@ public class RefreshAndLoadListView extends ListView implements AbsListView.OnSc
                         state = REFRESHING;
                         onHeaderRefreshByState();
                         if (iReflashListener != null) {
+                            Log.d("SJY", "onRefresh");
                             iReflashListener.onRefresh();//刷新接口
                         }
                     }
@@ -307,6 +310,7 @@ public class RefreshAndLoadListView extends ListView implements AbsListView.OnSc
                         state = REFRESHING;
                         onFooterLoadMoreByState();
                         if (iLoadMoreListener != null) {
+                            Log.d("SJY", "loadMore");
                             iLoadMoreListener.onLoadMore();//加载接口
                         }
                     }

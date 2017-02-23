@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.RelativeLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,10 +41,15 @@ import com.zhongou.view.examination.applicationdetail.TakeDaysOffDetailActivity;
 import com.zhongou.view.examination.applicationdetail.VehicleDetailActivity;
 import com.zhongou.view.examination.applicationdetail.VehicleMaintainDetailActivity;
 import com.zhongou.view.examination.applicationdetail.WorkOverTimeDetailActivity;
+import com.zhongou.widget.NiceSpinner;
 import com.zhongou.widget.RefreshAndLoadListView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
+
+import static com.zhongou.R.id.tv_title;
 
 
 /**
@@ -60,8 +64,8 @@ public class ZOAplListActivity extends BaseActivity implements RefreshAndLoadLis
     RelativeLayout layout_back;
 
     //
-    @ViewInject(id = R.id.tv_title)
-    Spinner tv_title;
+    @ViewInject(id = tv_title)
+    NiceSpinner niceSpinner;
 
     //
     @ViewInject(id = R.id.tv_right)
@@ -74,32 +78,77 @@ public class ZOAplListActivity extends BaseActivity implements RefreshAndLoadLis
     private ZOAplListAdapter vAdapter;//记录适配
     private boolean ifLoading = false;//标记
     private int pageSize = 20;
-    private ArrayList<MyApplicationModel> list = null;
+
     private String IMaxtime = null;
     private String IMinTime = null;
-
     //常量
     private static final int GET_MORE_DATA = -38;//上拉加载
     private static final int GET_NEW_DATA = -37;//
     private static final int GET_REFRESH_DATA = -36;//
     private static final int GET_NONE_NEWDATA = -35;//没有新数据
 
+    //spinner
+    private List<String> spinnerData;
+    private String myLastSelectState;//记录spinner上次选中的值
+    private boolean isHanging = true;//
+    private ArrayList<MyApplicationModel> list = null;//获取数据 每次20条
+    private ArrayList<MyApplicationModel> listAll = new ArrayList<>();//记录所有数据
+
+    private ArrayList<MyApplicationModel> listDONEALL = new ArrayList<>();//记录已审批的总数据
+    private ArrayList<MyApplicationModel> listUNDOALL = new ArrayList<>();//记录未审批的总数据
+    private ArrayList<MyApplicationModel> listDOINGALL = new ArrayList<>();//记录审批中的总数据
+
+    private ArrayList<MyApplicationModel> listDONE;//每次获取的已审批的数据段
+    private ArrayList<MyApplicationModel> listUNDO;//每次获取的未审批的数据段
+    private ArrayList<MyApplicationModel> listDOING;//每次获取的审批中的数据段
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_apps_examination_list_common);
-        tv_right.setText("");
 
+        initMyView();
+        initListener();
+        getData();
+    }
+
+    //初始化
+    private void initMyView() {
+        tv_right.setText("");
         myListView.setIRefreshListener(this);//下拉刷新监听
         myListView.setILoadMoreListener(this);//加载监听
         vAdapter = new ZOAplListAdapter(this);// 上拉加载
         myListView.setAdapter(vAdapter);
 
-        initListener();
-        getNewData();
+        //spinner数据
+        spinnerData = new LinkedList<>(Arrays.asList("我的申请", "已审批", "未审批", "审批中"));
+        myLastSelectState = spinnerData.get(0);//默认为 我的申请
+        niceSpinner.attachDataSource(spinnerData);//绑定数据
     }
 
+    //监听
     private void initListener() {
+
+        //spinner监听，筛选数据
+        niceSpinner.addOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("SJY", "spinner监听--" + spinnerData.get(position));
+
+                //清空adapter的list长度 isHanging状态改变
+
+                //如果选择状态没变，就不做处理
+                if (!spinnerData.get(position).equals(myLastSelectState)) {
+                    showSelectData(spinnerData.get(position).trim(), GET_NEW_DATA);//参数2必填GET_NEW_DATA
+                } else {
+                    return;
+                }
+
+            }
+        });
+
+
         //		 点击一条记录后，跳转到登记时详细的信息
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -115,25 +164,21 @@ public class ZOAplListActivity extends BaseActivity implements RefreshAndLoadLis
         });
     }
 
-    private void getNewData() {
-        Log.d("SJY", "MineApplicationActivity--getNewData");
+    //
+    private void getData() {
         Loading.run(ZOAplListActivity.this, new Runnable() {
             @Override
             public void run() {
                 ifLoading = true;//
-                String storeID = UserHelper.getCurrentUser().getStoreID();
                 try {
                     List<MyApplicationModel> visitorModelList = UserHelper.GetMyApplicationSearchResults(
                             ZOAplListActivity.this,
                             "",//iMaxTime
                             "");
 
-                    if (visitorModelList == null) {
-                        vAdapter.IsEnd = true;
-                    } else if (visitorModelList.size() < pageSize) {
+                    if (visitorModelList == null || visitorModelList.size() < pageSize) {
                         vAdapter.IsEnd = true;
                     }
-
 
                     sendMessage(GET_NEW_DATA, visitorModelList);
                 } catch (MyException e) {
@@ -157,7 +202,7 @@ public class ZOAplListActivity extends BaseActivity implements RefreshAndLoadLis
                             IMaxtime,//iMaxTime
                             "");
 
-                    Log.d("SJY", "loadMore--min=" + IMaxtime);
+                    Log.d("SJY", "onRefresh--IMaxtime=" + IMaxtime);
                     if (visitorModelList == null) {
                         vAdapter.IsEnd = true;
                     } else if (visitorModelList.size() < pageSize) {
@@ -212,45 +257,241 @@ public class ZOAplListActivity extends BaseActivity implements RefreshAndLoadLis
     @Override
     protected void handleMessage(Message msg) {
         switch (msg.what) {
-            case GET_NEW_DATA://进入页面加载最新
-                // 数据显示
-                list = (ArrayList<MyApplicationModel>) msg.obj;
-                vAdapter.setEntityList(list);
-                //数据处理，获取iLastUpdateTime参数方便后续上拉/下拉使用
+            case GET_NEW_DATA:
+                list = (ArrayList<MyApplicationModel>) msg.obj;//获取数据
+                Log.d("SJY", "第一次获取数据长度=" + list.size());
+                SplitListState(list, GET_NEW_DATA);//筛选数据状态
+                showSelectData(myLastSelectState, GET_NEW_DATA);//根据spinner值和数据状态 确定显示数据
+
                 setIMinTime(list);
                 setIMaxTime(list);
-                Log.d("SJY", "MineApplicationActivity--GET_NEW_DATA--> myListView.reflashComplete");
-                myListView.loadAndFreshComplete();
+                Log.d("SJY", "获取数据");
                 ifLoading = false;
                 break;
+
+
             case GET_REFRESH_DATA://刷新
+                Log.d("SJY", "刷新数据");
                 list = (ArrayList<MyApplicationModel>) msg.obj;
-                vAdapter.insertEntityList(list);
-                //数据处理/只存最大值,做刷新新数据使用
+                SplitListState(list, GET_REFRESH_DATA);//筛选数据状态
+                showSelectData(myLastSelectState, GET_REFRESH_DATA);//根据spinner值和数据状态 确定显示数据
+
                 setIMaxTime(list);
                 ifLoading = false;
                 break;
+
 
             case GET_MORE_DATA://加载
+                Log.d("SJY", "加载数据");
                 list = (ArrayList<MyApplicationModel>) msg.obj;
-                vAdapter.addEntityList(list);
-                //数据处理，只存最小值
+                SplitListState(list, GET_MORE_DATA);//筛选数据状态
+                showSelectData(myLastSelectState, GET_MORE_DATA);//根据spinner值和数据状态 确定显示数据
+
                 setIMinTime(list);
                 ifLoading = false;
                 break;
 
+
             case GET_NONE_NEWDATA://没有获取新数据
-                //                vAdapter.insertEntityList(null);
+                Log.d("SJY", "无最新数据");
                 sendToastMessage((String) msg.obj);
-                Log.d("SJY", "MineApplicationActivity--GET_NONE_NEWDATA--> myListView.reflashComplete");
-                myListView.loadAndFreshComplete();
                 ifLoading = false;
+                myListView.loadAndFreshComplete();
                 break;
 
             default:
                 break;
         }
         super.handleMessage(msg);
+    }
+
+    public void setIMaxTime(ArrayList<MyApplicationModel> list) {
+        IMaxtime = list.get(0).getCreateTime();
+    }
+
+    public void setIMinTime(ArrayList<MyApplicationModel> list) {
+        IMinTime = list.get(list.size() - 1).getCreateTime();
+    }
+
+
+    /**
+     * 筛选spinner状态下数据，并记录
+     *
+     * @param list  上拉下拉获取的数据记录 20条
+     * @param STATE 具体上拉 下拉 获取 三个状态
+     */
+    private void SplitListState(List<MyApplicationModel> list, final int STATE) {
+        if (list.size() <= 0) {
+            return;
+        }
+        //每次来新数据，重新赋值spinner子状态
+        listUNDO = new ArrayList<>();
+        listDONE = new ArrayList<>();
+        listDOING = new ArrayList<>();
+
+        switch (STATE) {
+            case GET_NEW_DATA:
+                Log.d("SJY", "GET_NEW_DATA筛选");
+                //数据正常拼接
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).getApprovalStatus().contains("0")) {//未审批
+                        listUNDO.add(list.get(i));
+                    } else if (list.get(i).getApprovalStatus().contains("1")) {//已审批
+                        listDONE.add(list.get(i));
+                    } else {
+                        listDOING.add(list.get(i));
+                    }
+                }
+                //总数据拼接
+                listAll.addAll(list);// 总记录数据
+                listDOINGALL.addAll(listDOING);
+                listUNDOALL.addAll(listUNDO);
+                listDONEALL.addAll(listDONE);
+                break;
+
+
+            case GET_REFRESH_DATA:
+                Log.d("SJY", "GET_REFRESH_DATA筛选");
+                //数据插入
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).getApprovalStatus().contains("0")) {//未审批
+                        listUNDO.add(list.get(i));
+                    } else if (list.get(i).getApprovalStatus().contains("1")) {//已审批
+                        listDONE.add(list.get(i));
+                    } else {
+                        listDOING.add(list.get(i));
+                    }
+                }
+
+                //数据插入 (已做拼接处理),使用：当切换spinner时，刷新了n个长度的数据可以直接显示
+                //但是 spinner子状态下如何拼接数据？还有一种方式：每次刷新 清空子状态数据重新赋值？
+
+                listAll.addAll(0, list);
+
+                if (listDONE.size() > 0) {
+                    listDONEALL.addAll(0, listDONE);
+                }
+                if (listDOING.size() > 0) {
+                    listDOINGALL.addAll(0, listDOING);
+                }
+                if (listUNDO.size() > 0) {
+                    listUNDOALL.addAll(0, listUNDO);
+                }
+
+                break;
+
+
+            case GET_MORE_DATA:
+                Log.d("SJY", "GET_MORE_DATA筛选");
+                //数据正常拼接
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).getApprovalStatus().contains("0")) {//未审批
+                        listUNDO.add(list.get(i));
+                    } else if (list.get(i).getApprovalStatus().contains("1")) {//已审批
+                        listDONE.add(list.get(i));
+                    } else {
+                        listDOING.add(list.get(i));
+                    }
+                }
+                //总数据拼接
+                listAll.addAll(list);// 总记录数据
+                listDOINGALL.addAll(listDOING);
+                listUNDOALL.addAll(listUNDO);
+                listDONEALL.addAll(listDONE);
+                break;
+
+            default:
+                break;
+        }
+
+    }
+
+    /**
+     * 数据展示
+     *
+     * @param spinnerState spinner状态 很重要
+     * @param STATE        上拉下拉状态
+     */
+
+    private void showSelectData(String spinnerState, final int STATE) {
+
+        myLastSelectState = spinnerState;//记录spinner修改状态
+        switch (spinnerState) {
+            case "我的申请":
+
+                if (STATE == GET_NEW_DATA) {
+                    vAdapter.setEntityList(listAll);//代替list，spinner切换时 listAll包含所有数据不会丢失
+
+                } else if (STATE == GET_REFRESH_DATA) {
+                    vAdapter.insertEntityList(list);
+                    myListView.loadAndFreshComplete();
+                } else if (STATE == GET_MORE_DATA) {
+                    vAdapter.addEntity(list);
+                    myListView.loadAndFreshComplete();
+                } else if (STATE == GET_NONE_NEWDATA) {
+
+                }
+
+                break;
+            case "已审批":
+
+                if (STATE == GET_NEW_DATA) {
+                    vAdapter.setEntityList(listDONEALL);
+
+                } else if (STATE == GET_REFRESH_DATA) {
+                    vAdapter.insertEntityList(listDONE);
+                    myListView.loadAndFreshComplete();
+
+                } else if (STATE == GET_MORE_DATA) {
+                    vAdapter.addEntity(listDONE);
+                    myListView.loadAndFreshComplete();
+
+                } else if (STATE == GET_NONE_NEWDATA) {
+
+                }
+
+                break;
+            case "未审批":
+
+                if (STATE == GET_NEW_DATA) {
+                    vAdapter.setEntityList(listUNDOALL);
+
+                } else if (STATE == GET_REFRESH_DATA) {
+                    vAdapter.insertEntityList(listUNDO);
+                    myListView.loadAndFreshComplete();
+
+                } else if (STATE == GET_MORE_DATA) {
+                    vAdapter.addEntity(listUNDO);
+                    myListView.loadAndFreshComplete();
+
+                } else if (STATE == GET_NONE_NEWDATA) {
+
+                }
+                break;
+
+            case "审批中":
+
+
+                if (STATE == GET_NEW_DATA) {
+                    vAdapter.setEntityList(listDOINGALL);
+
+                } else if (STATE == GET_REFRESH_DATA) {
+                    vAdapter.insertEntityList(listDOING);
+                    myListView.loadAndFreshComplete();
+
+                } else if (STATE == GET_MORE_DATA) {
+                    vAdapter.addEntity(listDOING);
+                    myListView.loadAndFreshComplete();
+
+                } else if (STATE == GET_NONE_NEWDATA) {
+
+                }
+                break;
+            default:
+                PageUtil.DisplayToast("数组出错了！");
+                break;
+
+        }
     }
 
     //申请跳转详细
@@ -355,13 +596,6 @@ public class ZOAplListActivity extends BaseActivity implements RefreshAndLoadLis
         }
     }
 
-    public void setIMaxTime(ArrayList<MyApplicationModel> list) {
-        IMaxtime = list.get(0).getCreateTime();
-    }
-
-    public void setIMinTime(ArrayList<MyApplicationModel> list) {
-        IMinTime = list.get(list.size() - 1).getCreateTime();
-    }
 
     /**
      * back

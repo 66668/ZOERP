@@ -19,13 +19,15 @@
             android:src="@mipmap/topbar_back"/>
     </RelativeLayout>
 
-    <Spinner
-        android:id="@+id/txtTitle"
-        style="@style/whitText.title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+    <com.zhongou.widget.NiceSpinner
+        android:background="@color/common_topbar_bgcolor"
         android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/tv_title"
+        style="@style/whitText.title"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="title"
         android:textColor="#FFF"/>
 

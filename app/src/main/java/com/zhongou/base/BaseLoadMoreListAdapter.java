@@ -1,7 +1,6 @@
 package com.zhongou.base;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,28 +54,29 @@ public abstract class BaseLoadMoreListAdapter extends BaseAdapter{
 		return entityList;
 	}
 
+	//listView赋值
 	public void setEntityList(ArrayList entityList) {
 //		this.entityList = entityList;//
-		Log.d("SJY", "父类--BaseListAdapter--setentityList="+entityList.size());
 		this.entityList.clear();
 		this.entityList.addAll(entityList);
 		notifyDataSetChanged();
-		Log.d("SJY", "父类--BaseListAdapter--setentityList--notifyDataSetChanged");
 	}
-	
+
+	//listView拼接
 	public void addEntityList(ArrayList entityList) { 
-		Log.d("SJY", "父类--BaseListAdapter--addentityList="+entityList.size());
 		this.entityList.addAll(entityList);
 		notifyDataSetChanged();
 	}
+
+	//lisetView插入
 	public void insertEntityList(ArrayList entityList){
-		Log.d("SJY","父类--BaseListAdapter--insertentityList="+entityList.size());
 		if(entityList != null){
 			this.entityList.addAll(0,entityList);
 		}
 		notifyDataSetChanged();
 
 	}
+
     public void addEntity(Object entity){
         this.entityList.add(entity);
         notifyDataSetChanged();

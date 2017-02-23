@@ -216,7 +216,6 @@ public class NoticeAcitivity extends BaseActivity implements RefreshAndLoadListV
 
             case FRESH_NONE_NEWDATA://没有获取新数据
                 sendToastMessage((String) msg.obj);
-
                 myListView.loadAndFreshComplete();
                 ifLoading = false;
 

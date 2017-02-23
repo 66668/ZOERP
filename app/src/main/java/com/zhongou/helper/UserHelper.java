@@ -269,9 +269,10 @@ public class UserHelper<T> {
                 HttpParameter.create()
                         .add("iMaxTime", iMaxTime)
                         .add("iMinTime", iMinTime)
+                        .add("pageSize", "20")
                         .add("storeID", mCurrentUser.getStoreID())
                         .add("employeeId", mCurrentUser.getEmployeeID())
-                        .add("pageSize", 20));
+        );
 
         if (hr.hasError()) {
             throw hr.getError();
@@ -302,7 +303,7 @@ public class UserHelper<T> {
                             .add("iMinTime", iMinTime)
                             .add("storeID", mCurrentUser.getStoreID())
                             .add("employeeId", mCurrentUser.getEmployeeID())
-                            .add("pageSize", 20));
+                            .add("pageSize", "20"));
 
             if (hr.hasError()) {
                 throw hr.getError();
@@ -337,7 +338,7 @@ public class UserHelper<T> {
                             .add("iMinTime", iMinTime)
                             .add("storeID", mCurrentUser.getStoreID())
                             .add("employeeId", mCurrentUser.getEmployeeID())
-                            .add("pageSize", 20));
+                            .add("pageSize", "20"));
 
             if (hr.hasError()) {
                 throw hr.getError();
@@ -2648,7 +2649,9 @@ public class UserHelper<T> {
         } catch (MyException e) {
             throw new MyException(e.getMessage());
         }
-    }/**
+    }
+
+    /**
      * 抄送 复试详情 08-018
      *
      * @param context

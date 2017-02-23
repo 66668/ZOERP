@@ -33,4 +33,8 @@
     <dimen name="banner_viewpager_height_margin">-35dp</dimen>
     <dimen name="banner_recycler_padding_top">40dp</dimen>
     <dimen name="textandiconmargin">10dp</dimen>
+
+    <!-- NiceSpinner-->
+    <dimen name="three_grid_unit">24dp</dimen>
+    <dimen name="one_and_a_half_grid_unit">12dp</dimen>
 </resources>
