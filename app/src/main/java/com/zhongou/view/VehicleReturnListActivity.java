@@ -9,9 +9,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhongou.R;
-import com.zhongou.adapter.VehicleReturnListAdapter;
+import com.zhongou.adapter.VehicleReturnLoadMoreListAdapter;
 import com.zhongou.base.BaseActivity;
-import com.zhongou.base.BaseListAdapter;
+import com.zhongou.base.BaseLoadMoreListAdapter;
 import com.zhongou.common.MyException;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
@@ -49,10 +49,10 @@ public class VehicleReturnListActivity extends BaseActivity implements RefreshLi
     @ViewInject(id = R.id.listview_vehicleReturn)
     RefreshListView myListView;
 
-    private VehicleReturnListAdapter vAdapter;//记录适配
+    private VehicleReturnLoadMoreListAdapter vAdapter;//记录适配
     private boolean ifLoading = false;//标记
     private int pageSize = 20;
-    private ArrayList<VehicleReturnModel> list = null;
+    private ArrayList<VehicleReturnModel> listData = null;//改集合只存储20条记录，拼接的所有数据在adapter的entryList中获取
     private String IMaxtime = null;
     private String IMinTime = null;
 
@@ -78,7 +78,7 @@ public class VehicleReturnListActivity extends BaseActivity implements RefreshLi
     private void initMyView() {
 
         myListView.setInterFace(VehicleReturnListActivity.this);//下拉刷新监听
-        vAdapter = new VehicleReturnListAdapter(this, adapterCallBack);// 上拉加载
+        vAdapter = new VehicleReturnLoadMoreListAdapter(this, adapterCallBack);// 上拉加载
         myListView.setAdapter(vAdapter);
 
     }
@@ -95,7 +95,7 @@ public class VehicleReturnListActivity extends BaseActivity implements RefreshLi
 
                 //所需参数
                 VehicleReturnModel model = (VehicleReturnModel) vAdapter.getItem(newPosition);//
-
+                Log.d("SJY", "交车--newPosition"+newPosition);
                 //页面跳转
                 transferTo(model);
             }
@@ -163,7 +163,7 @@ public class VehicleReturnListActivity extends BaseActivity implements RefreshLi
     }
 
     // 上拉加载
-    BaseListAdapter.AdapterCallBack adapterCallBack = new BaseListAdapter.AdapterCallBack() {
+    BaseLoadMoreListAdapter.AdapterCallBack adapterCallBack = new BaseLoadMoreListAdapter.AdapterCallBack() {
         @Override
         public void loadMore() {
 
@@ -205,28 +205,28 @@ public class VehicleReturnListActivity extends BaseActivity implements RefreshLi
         switch (msg.what) {
             case GET_NEW_DATA://进入页面加载最新
                 // 数据显示
-                list = (ArrayList<VehicleReturnModel>) msg.obj;
-                vAdapter.setEntityList(list);
+                listData = (ArrayList<VehicleReturnModel>) msg.obj;
+                vAdapter.setEntityList(listData);
                 //数据处理，获取iLastUpdateTime参数方便后续上拉/下拉使用
-                setIMinTime(list);
-                setIMaxTime(list);
+                setIMinTime(listData);
+                setIMaxTime(listData);
                 Log.d("SJY", "MineApplicationActivity--GET_NEW_DATA--> myListView.reflashComplete");
                 myListView.reflashComplete();
                 ifLoading = false;
                 break;
             case GET_REFRESH_DATA://刷新
-                list = (ArrayList<VehicleReturnModel>) msg.obj;
-                vAdapter.insertEntityList(list);
+                listData = (ArrayList<VehicleReturnModel>) msg.obj;
+                vAdapter.insertEntityList(listData);
                 //数据处理/只存最大值,做刷新新数据使用
-                setIMaxTime(list);
+                setIMaxTime(listData);
                 ifLoading = false;
                 break;
 
             case GET_MORE_DATA://加载
-                list = (ArrayList<VehicleReturnModel>) msg.obj;
-                vAdapter.addEntityList(list);
+                listData = (ArrayList<VehicleReturnModel>) msg.obj;
+                vAdapter.addEntityList(listData);
                 //数据处理，只存最小值
-                setIMinTime(list);
+                setIMinTime(listData);
                 ifLoading = false;
                 break;
 

@@ -2,14 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:background="@color/common_bg_examination"
               android:orientation="vertical">
 
     <include
         android:id="@+id/topbar"
-        layout="@layout/topbar_common_itt"/>
+        layout="@layout/topbar_common_ist"/>
 
     <com.zhongou.widget.RefreshAndLoadListView
-        android:id="@+id/noticeList"
+        android:id="@+id/myapprovalList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
 </LinearLayout>

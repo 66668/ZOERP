@@ -65,10 +65,6 @@ public class VehicleMaintainActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_vehicleMainennanceTimeStart)
     TextView tv_vehicleMainennanceTimeStart;
 
-    //驾驶人
-    @ViewInject(id = R.id.et_driver)
-    EditText et_driver;
-
     //车牌号
     @ViewInject(id = R.id.et_vihicleNumber)
     EditText et_vihicleNumber;
@@ -111,7 +107,6 @@ public class VehicleMaintainActivity extends BaseActivity {
     private String maintenancePlace = "";
     private String estimateFee = "";
     private String remark = "";
-    private String driver = "";
     private String maintenanceState = "";
 
     @Override
@@ -128,7 +123,6 @@ public class VehicleMaintainActivity extends BaseActivity {
         estimateFee = et_EstimateFee.getText().toString();
         maintenancePlace = et_maintenancePlace.getText().toString();
         remark = et_remark.getText().toString();
-        driver = et_driver.getText().toString();
 
         if (TextUtils.isEmpty(maintenanceType)) {
             PageUtil.DisplayToast("维修类型不能为空");
@@ -183,7 +177,6 @@ public class VehicleMaintainActivity extends BaseActivity {
                     js.put("VehicleState", maintenanceState);
                     js.put("MaintenancePlace", maintenancePlace);
                     js.put("Remark", remark);
-                    js.put("Driver", driver);
                     js.put("ApprovalIDList", approvalID);//
 
                     UserHelper.maintenancePost(VehicleMaintainActivity.this, js);

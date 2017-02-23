@@ -9,16 +9,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhongou.R;
-import com.zhongou.adapter.NoticeListAdapter;
+import com.zhongou.adapter.NoticeLoadMoreListAdapter;
 import com.zhongou.base.BaseActivity;
-import com.zhongou.base.BaseListAdapter;
 import com.zhongou.common.MyException;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
 import com.zhongou.model.MyApplicationModel;
 import com.zhongou.utils.PageUtil;
-import com.zhongou.widget.RefreshListView;
+import com.zhongou.widget.RefreshAndLoadListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +27,7 @@ import java.util.List;
  * Created by JackSong on 2016/10/25.
  */
 
-public class NoticeAcitivity extends BaseActivity implements RefreshListView.IReflashListener {
+public class NoticeAcitivity extends BaseActivity implements RefreshAndLoadListView.IReflashListener, RefreshAndLoadListView.ILoadMoreListener {
     //back
     @ViewInject(id = R.id.layout_back, click = "forBack")
     RelativeLayout layout_back;
@@ -43,9 +42,9 @@ public class NoticeAcitivity extends BaseActivity implements RefreshListView.IRe
 
     //list
     @ViewInject(id = R.id.noticeList)
-    RefreshListView myListView;
+    RefreshAndLoadListView myListView;
 
-    private NoticeListAdapter vAdapter;//记录适配
+    private NoticeLoadMoreListAdapter vAdapter;//记录适配
     private boolean ifLoading = false;//标记
     private int pageSize = 20;
     private ArrayList<MyApplicationModel> list = null;
@@ -53,10 +52,12 @@ public class NoticeAcitivity extends BaseActivity implements RefreshListView.IRe
     private String IMinTime = null;
 
     //常量
-    private static final int GET_MORE_DATA = -38;//上拉加载
-    private static final int GET_NEW_DATA = -37;//
-    private static final int GET_REFRESH_DATA = -36;//
-    private static final int GET_NONE_NEWDATA = -35;//没有新数据
+    private static final int GET_MORE_DATA = -32;//上拉加载
+    private static final int GET_NEW_DATA = -33;//
+    private static final int GET_REFRESH_DATA = -34;//
+    private static final int FRESH_NONE_NEWDATA = -35;//没有新数据
+    private static final int LOAD_NONE_NEWDATA = -36;//没有新数据
+    private static final int GET_NONE_NEWDATA = -37;//没有新数据
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +66,10 @@ public class NoticeAcitivity extends BaseActivity implements RefreshListView.IRe
         tv_right.setText("");
         tv_title.setText(getResources().getString(R.string.app_notice));
 
-        myListView.setInterFace(this);//下拉刷新监听
-        vAdapter = new NoticeListAdapter(this, adapterCallBack);// 上拉加载
+        myListView.setIRefreshListener(this);//下拉刷新监听
+        myListView.setILoadMoreListener(this);//上拉加载监听
+
+        vAdapter = new NoticeLoadMoreListAdapter(this);// 上拉加载
         myListView.setAdapter(vAdapter);
 
         //		 点击一条记录后，跳转到登记时详细的信息
@@ -136,7 +139,7 @@ public class NoticeAcitivity extends BaseActivity implements RefreshListView.IRe
                     sendMessage(GET_REFRESH_DATA, visitorModelList);
 
                 } catch (MyException e) {
-                    sendMessage(GET_NONE_NEWDATA, e.getMessage());
+                    sendMessage(FRESH_NONE_NEWDATA, e.getMessage());
                 }
             }
 
@@ -144,42 +147,38 @@ public class NoticeAcitivity extends BaseActivity implements RefreshListView.IRe
     }
 
     // 上拉加载
-    BaseListAdapter.AdapterCallBack adapterCallBack = new BaseListAdapter.AdapterCallBack() {
-        @Override
-        public void loadMore() {
-
-            if (ifLoading) {
-                return;
-            }
-
-            Loading.run(NoticeAcitivity.this, new Runnable() {
-
-                @Override
-                public void run() {
-
-                    ifLoading = true;//
-                    try {
-                        List<MyApplicationModel> visitorModelList = UserHelper.GetMyApplicationSearchResults(
-                                NoticeAcitivity.this,
-                                "",//iMaxTime
-                                IMinTime);
-
-                        Log.d("SJY", "loadMore--min=" + IMaxtime);
-                        if (visitorModelList == null) {
-                            vAdapter.IsEnd = true;
-                        } else if (visitorModelList.size() < pageSize) {
-                            vAdapter.IsEnd = true;
-                        }
-                        sendMessage(GET_MORE_DATA, visitorModelList);
-
-                    } catch (MyException e) {
-                        sendMessage(GET_NONE_NEWDATA, e.getMessage());
-                    }
-                }
-            });
-
+    @Override
+    public void onLoadMore() {
+        if (ifLoading) {
+            return;
         }
-    };
+
+        Loading.run(NoticeAcitivity.this, new Runnable() {
+
+            @Override
+            public void run() {
+
+                ifLoading = true;//
+                try {
+                    List<MyApplicationModel> visitorModelList = UserHelper.GetMyApplicationSearchResults(
+                            NoticeAcitivity.this,
+                            "",//iMaxTime
+                            IMinTime);
+
+                    Log.d("SJY", "loadMore--min=" + IMaxtime);
+                    if (visitorModelList == null) {
+                        vAdapter.IsEnd = true;
+                    } else if (visitorModelList.size() < pageSize) {
+                        vAdapter.IsEnd = true;
+                    }
+                    sendMessage(GET_MORE_DATA, visitorModelList);
+
+                } catch (MyException e) {
+                    sendMessage(LOAD_NONE_NEWDATA, e.getMessage());
+                }
+            }
+        });
+    }
 
     @Override
     protected void handleMessage(Message msg) {
@@ -191,9 +190,10 @@ public class NoticeAcitivity extends BaseActivity implements RefreshListView.IRe
                 //数据处理，获取iLastUpdateTime参数方便后续上拉/下拉使用
                 setIMinTime(list);
                 setIMaxTime(list);
-                Log.d("SJY", "MineApplicationActivity--GET_NEW_DATA--> myListView.reflashComplete");
-                myListView.reflashComplete();
+
+                myListView.loadAndFreshComplete();//刷新完成回调
                 ifLoading = false;
+
                 break;
             case GET_REFRESH_DATA://刷新
                 list = (ArrayList<MyApplicationModel>) msg.obj;
@@ -201,6 +201,7 @@ public class NoticeAcitivity extends BaseActivity implements RefreshListView.IRe
                 //数据处理/只存最大值,做刷新新数据使用
                 setIMaxTime(list);
                 ifLoading = false;
+                myListView.loadAndFreshComplete();
                 break;
 
             case GET_MORE_DATA://加载
@@ -208,15 +209,30 @@ public class NoticeAcitivity extends BaseActivity implements RefreshListView.IRe
                 vAdapter.addEntityList(list);
                 //数据处理，只存最小值
                 setIMinTime(list);
+
+                myListView.loadAndFreshComplete();
                 ifLoading = false;
                 break;
 
-            case GET_NONE_NEWDATA://没有获取新数据
-                //                vAdapter.insertEntityList(null);
+            case FRESH_NONE_NEWDATA://没有获取新数据
                 sendToastMessage((String) msg.obj);
-                Log.d("SJY", "MineApplicationActivity--GET_NONE_NEWDATA--> myListView.reflashComplete");
-                myListView.reflashComplete();
+
+                myListView.loadAndFreshComplete();
                 ifLoading = false;
+
+                break;
+            case LOAD_NONE_NEWDATA://没有获取新数据
+                sendToastMessage((String) msg.obj);
+
+                myListView.loadAndFreshComplete();
+                ifLoading = false;
+
+                break;
+            case GET_NONE_NEWDATA://没有获取新数据
+                sendToastMessage((String) msg.obj);
+
+                ifLoading = false;
+
                 break;
 
             default:
@@ -241,4 +257,6 @@ public class NoticeAcitivity extends BaseActivity implements RefreshListView.IRe
     public void forBack(View view) {
         this.finish();
     }
+
+
 }

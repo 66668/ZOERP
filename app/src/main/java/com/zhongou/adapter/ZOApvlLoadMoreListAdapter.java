@@ -9,7 +9,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.zhongou.R;
-import com.zhongou.base.BaseListAdapter;
+import com.zhongou.base.BaseLoadMoreListAdapter;
 import com.zhongou.common.ImageLoadingConfig;
 import com.zhongou.application.MyApplication;
 import com.zhongou.model.MyApprovalModel;
@@ -24,7 +24,7 @@ import java.util.Random;
  * @author
  */
 
-public class ZOApvlListAdapter extends BaseListAdapter {
+public class ZOApvlLoadMoreListAdapter extends BaseLoadMoreListAdapter {
     private ImageLoader imgLoader;
     private DisplayImageOptions imgOptions;
 
@@ -37,7 +37,7 @@ public class ZOApvlListAdapter extends BaseListAdapter {
         public TextView tvComment;//审批状态
     }
 
-    public ZOApvlListAdapter(Context context, AdapterCallBack callBack) {
+    public ZOApvlLoadMoreListAdapter(Context context, AdapterCallBack callBack) {
         super(context, callBack);
         imgLoader = ImageLoader.getInstance();
         imgLoader.init(ImageLoaderConfiguration.createDefault(context));

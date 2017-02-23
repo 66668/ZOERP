@@ -52,6 +52,10 @@ public class VehicleReturnMaintenanceToCompleteActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_endTime)
     TextView tv_endTime;
 
+    //驾驶员
+    @ViewInject(id = R.id.tv_driver)
+    EditText tv_driver;
+
     //乘车人
     @ViewInject(id = R.id.tv_passenger)
     EditText tv_passenger;
@@ -74,6 +78,7 @@ public class VehicleReturnMaintenanceToCompleteActivity extends BaseActivity {
     private String ActualBorrowTime;//实际用车时间
     private String ActualReturnTime;//实际交车时间
     private String Passenger;
+    private String Driver;
     private String StartMileage;
     private String FinishMileage;
     private String Remark;
@@ -104,13 +109,18 @@ public class VehicleReturnMaintenanceToCompleteActivity extends BaseActivity {
      */
     public void forVehicleReturn(View view) {
         Passenger = tv_passenger.getText().toString().trim();
+        Driver = tv_driver.getText().toString().trim();
         StartMileage = tv_startMiles.getText().toString().trim();
         FinishMileage = tv_endMiles.getText().toString().trim();
         Remark = tv_remark.getText().toString().trim();
 
         //非空
-        if (TextUtils.isEmpty(ActualBorrowTime) && TextUtils.isEmpty(ActualReturnTime))  {
+        if (TextUtils.isEmpty(ActualBorrowTime) && TextUtils.isEmpty(ActualReturnTime)) {
             PageUtil.DisplayToast(this.getResources().getString(R.string.vehicleRe_time_null));
+            return;
+        }
+        if (TextUtils.isEmpty(Driver)) {
+            PageUtil.DisplayToast(this.getResources().getString(R.string.vehicleRe_driver_null));
             return;
         }
         if (TextUtils.isEmpty(Passenger)) {
@@ -182,7 +192,7 @@ public class VehicleReturnMaintenanceToCompleteActivity extends BaseActivity {
                         tv_TimeStart.setText(time);
                     }
                 });
-//        endDateChooseDialog.setTimePickerGone(true);//分钟
+        //        endDateChooseDialog.setTimePickerGone(true);//分钟
         endDateChooseDialog.setDateDialogTitle("实际维保时间");
         endDateChooseDialog.showDateChooseDialog();
     }
@@ -201,7 +211,7 @@ public class VehicleReturnMaintenanceToCompleteActivity extends BaseActivity {
                         tv_endTime.setText(time);
                     }
                 });
-//        endDateChooseDialog.setTimePickerGone(true);//分钟
+        //        endDateChooseDialog.setTimePickerGone(true);//分钟
         endDateChooseDialog.setDateDialogTitle("实际交车时间");
         endDateChooseDialog.showDateChooseDialog();
     }

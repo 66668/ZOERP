@@ -10,21 +10,28 @@ import android.widget.BaseAdapter;
 import java.util.ArrayList;
 
 /**
- * MyRefreshListView,自动触发上拉下拉，BaseListAdapter只处理数据，见详情
+ *该adapter设置了loadMore加载接口，和自定义widget 的RefreshListView onRefresh刷新接口， 完成了 上拉下拉效果
+ *
+ * 但本app设计了另一种MyRefreshListView,自动触发上拉下拉，BaseListAdapter只处理数据，见详情
  */
-public abstract class BaseListAdapter extends BaseAdapter{
+public abstract class BaseLoadMoreListAdapter extends BaseAdapter{
 
 	public Context context;
 	public LayoutInflater inflater;
+	public AdapterCallBack callBack;
 	public ArrayList entityList = new ArrayList();
 	public boolean IsEnd=false;//翻页设置
 	public static ArrayList<Boolean> isCheckedList = null;//用于标记checkBox值
 
-	public BaseListAdapter(Context context){
+	public BaseLoadMoreListAdapter(Context context, AdapterCallBack callBack){
 		this.context = context;
+		this.callBack = callBack;
 		inflater = LayoutInflater.from(context);
 	}
-
+	
+	public interface AdapterCallBack{
+		void loadMore();
+	}
 	
 	@Override
 	public int getCount() {
@@ -86,6 +93,10 @@ public abstract class BaseListAdapter extends BaseAdapter{
 			convertView = inflateConvertView();
 		}
 		initViewData(position, convertView);
+		//加载数据
+		if(position == getCount() - 1  && !IsEnd){//当数据最后一条，加载
+			callBack.loadMore();
+		} 
 		return convertView;
 	}
 

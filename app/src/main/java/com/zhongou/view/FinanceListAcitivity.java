@@ -9,9 +9,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhongou.R;
-import com.zhongou.adapter.FinanceListAdapter;
+import com.zhongou.adapter.FinanceLoadMoreListAdapter;
 import com.zhongou.base.BaseActivity;
-import com.zhongou.base.BaseListAdapter;
+import com.zhongou.base.BaseLoadMoreListAdapter;
 import com.zhongou.common.MyException;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
@@ -43,7 +43,7 @@ public class FinanceListAcitivity extends BaseActivity implements RefreshListVie
     @ViewInject(id = R.id.listview_finance)
     RefreshListView myListView;
 
-    private FinanceListAdapter vAdapter;//记录适配
+    private FinanceLoadMoreListAdapter vAdapter;//记录适配
     private boolean ifLoading = false;//标记
     private int pageSize = 20;
     private ArrayList<FinanceModel> list = null;
@@ -72,7 +72,7 @@ public class FinanceListAcitivity extends BaseActivity implements RefreshListVie
     private void initMyView() {
 
         myListView.setInterFace(FinanceListAcitivity.this);//下拉刷新监听
-        vAdapter = new FinanceListAdapter(this, adapterCallBack);// 上拉加载
+        vAdapter = new FinanceLoadMoreListAdapter(this, adapterCallBack);// 上拉加载
         myListView.setAdapter(vAdapter);
 
     }
@@ -156,7 +156,7 @@ public class FinanceListAcitivity extends BaseActivity implements RefreshListVie
     }
 
     // 上拉加载
-    BaseListAdapter.AdapterCallBack adapterCallBack = new BaseListAdapter.AdapterCallBack() {
+    BaseLoadMoreListAdapter.AdapterCallBack adapterCallBack = new BaseLoadMoreListAdapter.AdapterCallBack() {
         @Override
         public void loadMore() {
 

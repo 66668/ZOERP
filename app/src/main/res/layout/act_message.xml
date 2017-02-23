@@ -64,7 +64,7 @@
             android:layout_alignBottom="@+id/img_notice"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
-            android:background="@mipmap/ic_main"/>
+            android:background="@mipmap/zologo"/>
     </RelativeLayout>
 
     <View
@@ -125,7 +125,7 @@
             android:layout_alignBottom="@+id/img_msg"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
-            android:background="@mipmap/ic_main"/>
+            android:background="@mipmap/zologo"/>
     </RelativeLayout>
 
     <View
@@ -186,7 +186,7 @@
             android:layout_alignBottom="@+id/img_undo"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
-            android:background="@mipmap/ic_main"/>
+            android:background="@mipmap/zologo"/>
     </RelativeLayout>
 
     <View
@@ -247,7 +247,7 @@
             android:layout_alignBottom="@+id/img_schedule"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
-            android:background="@mipmap/ic_main"/>
+            android:background="@mipmap/zologo"/>
     </RelativeLayout>
 
     <View

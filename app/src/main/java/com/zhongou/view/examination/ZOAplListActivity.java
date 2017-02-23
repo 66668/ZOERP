@@ -7,13 +7,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zhongou.R;
 import com.zhongou.adapter.ZOAplListAdapter;
 import com.zhongou.base.BaseActivity;
-import com.zhongou.base.BaseListAdapter.AdapterCallBack;
 import com.zhongou.common.MyException;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
@@ -42,17 +42,18 @@ import com.zhongou.view.examination.applicationdetail.TakeDaysOffDetailActivity;
 import com.zhongou.view.examination.applicationdetail.VehicleDetailActivity;
 import com.zhongou.view.examination.applicationdetail.VehicleMaintainDetailActivity;
 import com.zhongou.view.examination.applicationdetail.WorkOverTimeDetailActivity;
-import com.zhongou.widget.RefreshListView;
+import com.zhongou.widget.RefreshAndLoadListView;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * 我的申请 记录界面
  * Created by sjy on 2016/12/2.
  */
 
-public class ZOAplListActivity extends BaseActivity implements RefreshListView.IReflashListener {
+public class ZOAplListActivity extends BaseActivity implements RefreshAndLoadListView.IReflashListener, RefreshAndLoadListView.ILoadMoreListener {
 
     //back
     @ViewInject(id = R.id.layout_back, click = "forBack")
@@ -60,7 +61,7 @@ public class ZOAplListActivity extends BaseActivity implements RefreshListView.I
 
     //
     @ViewInject(id = R.id.tv_title)
-    TextView tv_title;
+    Spinner tv_title;
 
     //
     @ViewInject(id = R.id.tv_right)
@@ -68,7 +69,7 @@ public class ZOAplListActivity extends BaseActivity implements RefreshListView.I
 
     //list
     @ViewInject(id = R.id.myapprovalList)
-    RefreshListView myListView;
+    RefreshAndLoadListView myListView;
 
     private ZOAplListAdapter vAdapter;//记录适配
     private boolean ifLoading = false;//标记
@@ -86,12 +87,12 @@ public class ZOAplListActivity extends BaseActivity implements RefreshListView.I
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_apps_examination_list);
+        setContentView(R.layout.act_apps_examination_list_common);
         tv_right.setText("");
-        tv_title.setText(getResources().getString(R.string.my_application));
 
-        myListView.setInterFace(this);//下拉刷新监听
-        vAdapter = new ZOAplListAdapter(this, adapterCallBack);// 上拉加载
+        myListView.setIRefreshListener(this);//下拉刷新监听
+        myListView.setILoadMoreListener(this);//加载监听
+        vAdapter = new ZOAplListAdapter(this);// 上拉加载
         myListView.setAdapter(vAdapter);
 
         initListener();
@@ -174,42 +175,39 @@ public class ZOAplListActivity extends BaseActivity implements RefreshListView.I
     }
 
     // 上拉加载
-    AdapterCallBack adapterCallBack = new AdapterCallBack() {
-        @Override
-        public void loadMore() {
-
-            if (ifLoading) {
-                return;
-            }
-
-            Loading.run(ZOAplListActivity.this, new Runnable() {
-
-                @Override
-                public void run() {
-
-                    ifLoading = true;//
-                    try {
-                        List<MyApplicationModel> visitorModelList = UserHelper.GetMyApplicationSearchResults(
-                                ZOAplListActivity.this,
-                                "",//iMaxTime
-                                IMinTime);
-
-                        Log.d("SJY", "loadMore--min=" + IMaxtime);
-                        if (visitorModelList == null) {
-                            vAdapter.IsEnd = true;
-                        } else if (visitorModelList.size() < pageSize) {
-                            vAdapter.IsEnd = true;
-                        }
-                        sendMessage(GET_MORE_DATA, visitorModelList);
-
-                    } catch (MyException e) {
-                        sendMessage(GET_NONE_NEWDATA, e.getMessage());
-                    }
-                }
-            });
-
+    @Override
+    public void onLoadMore() {
+        if (ifLoading) {
+            return;
         }
-    };
+
+        Loading.run(ZOAplListActivity.this, new Runnable() {
+
+            @Override
+            public void run() {
+
+                ifLoading = true;//
+                try {
+                    List<MyApplicationModel> visitorModelList = UserHelper.GetMyApplicationSearchResults(
+                            ZOAplListActivity.this,
+                            "",//iMaxTime
+                            IMinTime);
+
+                    Log.d("SJY", "loadMore--min=" + IMaxtime);
+                    if (visitorModelList == null) {
+                        vAdapter.IsEnd = true;
+                    } else if (visitorModelList.size() < pageSize) {
+                        vAdapter.IsEnd = true;
+                    }
+                    sendMessage(GET_MORE_DATA, visitorModelList);
+
+                } catch (MyException e) {
+                    sendMessage(GET_NONE_NEWDATA, e.getMessage());
+                }
+            }
+        });
+
+    }
 
     @Override
     protected void handleMessage(Message msg) {
@@ -222,7 +220,7 @@ public class ZOAplListActivity extends BaseActivity implements RefreshListView.I
                 setIMinTime(list);
                 setIMaxTime(list);
                 Log.d("SJY", "MineApplicationActivity--GET_NEW_DATA--> myListView.reflashComplete");
-                myListView.reflashComplete();
+                myListView.loadAndFreshComplete();
                 ifLoading = false;
                 break;
             case GET_REFRESH_DATA://刷新
@@ -245,7 +243,7 @@ public class ZOAplListActivity extends BaseActivity implements RefreshListView.I
                 //                vAdapter.insertEntityList(null);
                 sendToastMessage((String) msg.obj);
                 Log.d("SJY", "MineApplicationActivity--GET_NONE_NEWDATA--> myListView.reflashComplete");
-                myListView.reflashComplete();
+                myListView.loadAndFreshComplete();
                 ifLoading = false;
                 break;
 
@@ -373,5 +371,6 @@ public class ZOAplListActivity extends BaseActivity implements RefreshListView.I
     public void forBack(View view) {
         this.finish();
     }
+
 
 }

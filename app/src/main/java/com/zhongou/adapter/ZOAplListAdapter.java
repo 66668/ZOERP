@@ -37,8 +37,8 @@ public class ZOAplListAdapter extends BaseListAdapter {
         public TextView tvComment;
     }
 
-    public ZOAplListAdapter(Context context, AdapterCallBack callBack) {
-        super(context, callBack);
+    public ZOAplListAdapter(Context context) {
+        super(context);
         imgLoader = ImageLoader.getInstance();
         imgLoader.init(ImageLoaderConfiguration.createDefault(context));
         imgOptions = ImageLoadingConfig.generateDisplayImageOptions(R.mipmap.ic_launcher);

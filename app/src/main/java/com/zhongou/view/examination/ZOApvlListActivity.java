@@ -9,9 +9,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhongou.R;
-import com.zhongou.adapter.ZOApvlListAdapter;
+import com.zhongou.adapter.ZOApvlLoadMoreListAdapter;
 import com.zhongou.base.BaseActivity;
-import com.zhongou.base.BaseListAdapter;
+import com.zhongou.base.BaseLoadMoreListAdapter;
 import com.zhongou.common.MyException;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
@@ -67,7 +67,7 @@ public class ZOApvlListActivity extends BaseActivity implements RefreshListView.
     @ViewInject(id = R.id.myapprovalList)
     RefreshListView myListView;
 
-    private ZOApvlListAdapter vAdapter;//记录适配
+    private ZOApvlLoadMoreListAdapter vAdapter;//记录适配
     private boolean ifLoading = false;//标记
     private int pageSize = 20;
     private ArrayList<MyApprovalModel> list = null;
@@ -88,7 +88,7 @@ public class ZOApvlListActivity extends BaseActivity implements RefreshListView.
         tv_title.setText(getResources().getString(R.string.my_approval));
 
         myListView.setInterFace(this);//下拉刷新监听
-        vAdapter = new ZOApvlListAdapter(ZOApvlListActivity.this, adapterCallBack);// 上拉加载
+        vAdapter = new ZOApvlLoadMoreListAdapter(ZOApvlListActivity.this, adapterCallBack);// 上拉加载
         myListView.setAdapter(vAdapter);
         initListener();
 
@@ -172,7 +172,7 @@ public class ZOApvlListActivity extends BaseActivity implements RefreshListView.
     }
 
     // 上拉加载
-    BaseListAdapter.AdapterCallBack adapterCallBack = new BaseListAdapter.AdapterCallBack() {
+    BaseLoadMoreListAdapter.AdapterCallBack adapterCallBack = new BaseLoadMoreListAdapter.AdapterCallBack() {
         @Override
         public void loadMore() {
 

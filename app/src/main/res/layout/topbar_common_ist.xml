@@ -1,35 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/relativeLayout1"
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:background="@color/common_topbar_bgcolor">
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/common_topbar_bgcolor">
 
-    <ImageView
-        android:id="@+id/imgBack"
-        android:layout_width="20dp"
-        android:layout_height="30dp"
+    <RelativeLayout
+        android:id="@+id/layout_back"
+        android:layout_width="45dp"
+        android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="10dp"
-        android:src="@mipmap/back" />
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@mipmap/topbar_back"/>
+    </RelativeLayout>
 
     <Spinner
         android:id="@+id/txtTitle"
+        style="@style/whitText.title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="人脸登记 "
-        android:textColor="#FFF"
-        android:textSize="@dimen/common_topbar_titleSize" />
+        android:text="title"
+        android:textColor="#FFF"/>
+
     <TextView
         android:id="@+id/tv_right"
+        style="@style/whitText.topbar_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:textSize="@dimen/common_topbar_titleSize"
+        android:layout_marginRight="10dp"
+        android:text="@string/commit"
         android:textColor="#FFF"
-        android:text="添加"/>
+        />
 </RelativeLayout>

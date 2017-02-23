@@ -128,7 +128,7 @@
     <string name="my_approval">我的审批</string>
     <string name="myApplication">我的申请</string>
     <string name="MyApproval">我的审批</string>
-    <string name="MyCopyto">我的抄送</string>
+    <string name="MyCopyto">抄送给我</string>
     <string name="state">审批状况：</string>
     <string name="state_result">审批结果：</string>
     <string name="approval_person">申请人</string>

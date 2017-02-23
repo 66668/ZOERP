@@ -1,6 +1,7 @@
 package com.zhongou.adapter;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.TextView;
 
@@ -8,31 +9,34 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.zhongou.R;
-import com.zhongou.base.BaseListAdapter;
+import com.zhongou.application.MyApplication;
+import com.zhongou.base.BaseLoadMoreListAdapter;
 import com.zhongou.common.ImageLoadingConfig;
-import com.zhongou.model.MyApplicationModel;
+import com.zhongou.model.MyCopyModel;
+import com.zhongou.widget.CircleTextView;
+
+import java.util.Random;
 
 
 /**
- * 公告 适配
+ * 我的抄送记录 适配
  *
  * @author
  */
 
-public class NoticeListAdapter extends BaseListAdapter {
+public class ZOCopyLoadMoreListAdapter extends BaseLoadMoreListAdapter {
     private ImageLoader imgLoader;
     private DisplayImageOptions imgOptions;
 
-
     public class WidgetHolder {
         public TextView tvTitle;
-        public TextView tvName;
+        public CircleTextView tvName;
         public TextView tvTime;
-        public TextView tvType;
-        public TextView tvComment;
+        public TextView tvType;//类型
+        public TextView tvComment;//审批状态
     }
 
-    public NoticeListAdapter(Context context, AdapterCallBack callBack) {
+    public ZOCopyLoadMoreListAdapter(Context context, AdapterCallBack callBack) {
         super(context, callBack);
         imgLoader = ImageLoader.getInstance();
         imgLoader.init(ImageLoaderConfiguration.createDefault(context));
@@ -45,7 +49,7 @@ public class NoticeListAdapter extends BaseListAdapter {
         View view = inflater.inflate(R.layout.item_examination_common, null);
         //该布局上的控件
         WidgetHolder holder = new WidgetHolder();
-        holder.tvName = (TextView) view.findViewById(R.id.tv_name);
+        holder.tvName = (CircleTextView) view.findViewById(R.id.tv_name);
         holder.tvTitle = (TextView) view.findViewById(R.id.tv_title);
         holder.tvTime = (TextView) view.findViewById(R.id.tv_time);
         holder.tvType = (TextView) view.findViewById(R.id.tv_type);
@@ -59,15 +63,19 @@ public class NoticeListAdapter extends BaseListAdapter {
         WidgetHolder holder = (WidgetHolder) convertView.getTag();//获取控件管理实例
         //获取一条信息
         //?java.lang.ClassCastException: java.util.ArrayList cannot be cast to com.yvision.model.VisitorBModel
-        MyApplicationModel model = (MyApplicationModel) entityList.get(position);
+        MyCopyModel model = (MyCopyModel) entityList.get(position);
         holder.tvName.setText(model.getEmployeeName());
+        holder.tvName.setBackgroundColor(ContextCompat.getColor(MyApplication.getInstance(),randomColor()));
         holder.tvTime.setText(model.getCreateTime());
-        holder.tvComment.setText(model.getComment());
         holder.tvType.setText(model.getApplicationType());
         holder.tvTitle.setText(model.getApplicationTitle());
+      holder.tvComment.setText("");
     }
-
-
+    //设置一条记录的随机颜色
+    private int randomColor(){
+        int [] colorArray = new int[]{R.color.pink,R.color.lightgreen,R.color.gray,R.color.yellow,R.color.common_color,R.color.aquamarine,R.color.brown};
+        return colorArray[new Random().nextInt(6)];
+    }
 
     public void destroy() {
         imgLoader.clearMemoryCache();
