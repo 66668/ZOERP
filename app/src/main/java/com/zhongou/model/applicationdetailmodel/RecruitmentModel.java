@@ -19,11 +19,29 @@ public class RecruitmentModel implements Serializable {
 
     public String ApprovalStatus;
     public String StoreName;
+    public String Remark;
+    public String Reason;
     public String DepartmentName;
     public String EmployeeName;
     public String ApplicationCreateTime;
 
     public List<RecruitmentModel.ApprovalInfoLists> ApprovalInfoLists;
+
+    public String getRemark() {
+        return Remark;
+    }
+
+    public void setRemark(String remark) {
+        Remark = remark;
+    }
+
+    public String getReason() {
+        return Reason;
+    }
+
+    public void setReason(String reason) {
+        Reason = reason;
+    }
 
     public static class ApprovalInfoLists{
         public String Comment;

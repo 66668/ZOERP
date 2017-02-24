@@ -193,7 +193,6 @@
     <string name="workOverTimeEnd">加班结束</string>
     <string name="workOverTimeLong">加班时长</string>
     <string name="workOverTimeReason">加班说明</string>
-    <string name="workOverTimeReason_d">加班事由</string>
     <string name="hint_workOverTimeReason">请输入加班说明</string>
     <string name="tv_OverEmployee">加班人员</string>
     <string name="hint_workOverTimeOverEmployee">请输入加班人员</string>

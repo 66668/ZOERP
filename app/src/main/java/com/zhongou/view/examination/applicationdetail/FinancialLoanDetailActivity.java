@@ -54,6 +54,10 @@ public class FinancialLoanDetailActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_reason)
     TextView tv_reason;
 
+    //备注
+    @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
+
     //审批人
     @ViewInject(id = R.id.tv_Requester)
     TextView tv_Requester;
@@ -102,6 +106,7 @@ public class FinancialLoanDetailActivity extends BaseActivity {
 
         tv_fee.setText(model.getFee());
         tv_reason.setText(model.getReason());
+        tv_remark.setText(model.getRemark());
         tv_PlanbackTime.setText(model.getPlanbackTime());
         modelList = model.getApprovalInfoLists();
 

@@ -61,8 +61,8 @@ public class NotificationAndNoticeDetailCopyActivity extends BaseActivity {
     TextView tv_notificaitonAndNotice_content;
 
     //备注
-    @ViewInject(id = R.id.tv_notificaitonAndNotice_other)
-    TextView tv_notificaitonAndNotice_other;
+    @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
 
 
     //审批人
@@ -121,6 +121,7 @@ public class NotificationAndNoticeDetailCopyActivity extends BaseActivity {
         tv_notificaitonAndNotice_type.setText(model.getPublishType());
         tv_notificaitonAndNotice_whom.setText(model.getAbstract());
         tv_notificaitonAndNotice_title.setText(model.getApplicationTitle());
+        tv_remark.setText(model.getRemark());
 
         modelList = model.getApprovalInfoLists();
 

@@ -236,6 +236,7 @@
                     android:background="@drawable/et_white_stroke"
                     android:gravity="center_vertical"
                     android:hint="@string/hint_loanReimburseMoney"
+                    android:inputType="numberDecimal"
                     android:textColorHint="@color/cl_hint_common"
                     />
             </LinearLayout>

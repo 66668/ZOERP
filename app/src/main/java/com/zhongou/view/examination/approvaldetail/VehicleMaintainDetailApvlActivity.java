@@ -57,15 +57,15 @@ public class VehicleMaintainDetailApvlActivity extends BaseActivity {
     LinearLayout laytout_decide;
 
     //驳回
-    @ViewInject(id = R.id.btn_refulse,click = "forRefulse")
+    @ViewInject(id = R.id.btn_refulse, click = "forRefulse")
     Button btn_refulse;
 
     //批准
-    @ViewInject(id = R.id.btn_commit,click = "toForCommit")
+    @ViewInject(id = R.id.btn_commit, click = "toForCommit")
     Button btn_commit;
 
     //转交
-    @ViewInject(id = R.id.btn_transfer,click = "forTransfer")
+    @ViewInject(id = R.id.btn_transfer, click = "forTransfer")
     Button btn_transfer;
 
     //审批bottom
@@ -73,7 +73,7 @@ public class VehicleMaintainDetailApvlActivity extends BaseActivity {
     LinearLayout laytout_copy;
 
     //抄送
-    @ViewInject(id = R.id.btn_copytp,click = "forCopyto")
+    @ViewInject(id = R.id.btn_copytp, click = "forCopyto")
     Button btn_copytp;
 
 
@@ -109,9 +109,9 @@ public class VehicleMaintainDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_fee)
     TextView tv_fee;
 
-    //说明
-    @ViewInject(id = R.id.tv_reason)
-    TextView tv_reason;
+    //备注
+    @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
 
 
     //变量
@@ -149,7 +149,7 @@ public class VehicleMaintainDetailApvlActivity extends BaseActivity {
         tv_startTime.setText(model.getPlanBorrowTime());
         tv_project.setText(model.getMaintenanceProject());
         tv_address.setText(model.getDestination());
-        tv_reason.setText(model.getPurpose());
+        tv_remark.setText(model.getRemark());
 
     }
 
@@ -173,8 +173,8 @@ public class VehicleMaintainDetailApvlActivity extends BaseActivity {
                 try {
                     VehicleMaintainApvlModel model =
                             UserHelper.approvalDetailPostVehicleMaintain(VehicleMaintainDetailApvlActivity.this,
-                            myApprovalModel.getApplicationID(),
-                            myApprovalModel.getApplicationType());
+                                    myApprovalModel.getApplicationID(),
+                                    myApprovalModel.getApplicationType());
                     sendMessage(POST_SUCCESS, model);
                 } catch (MyException e) {
                     sendMessage(POST_FAILED, e.getMessage());
@@ -182,6 +182,7 @@ public class VehicleMaintainDetailApvlActivity extends BaseActivity {
             }
         });
     }
+
     @Override
     protected void handleMessage(Message msg) {
         super.handleMessage(msg);
@@ -199,29 +200,33 @@ public class VehicleMaintainDetailApvlActivity extends BaseActivity {
     }
 
     //驳回
-    public void forRefulse(View view){
+    public void forRefulse(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonDisagreeActivity.class,bundle);
+        startActivity(CommonDisagreeActivity.class, bundle);
     }
+
     //同意
-    public void toForCommit(View view){
+    public void toForCommit(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonAgreeActivity.class,bundle);
+        startActivity(CommonAgreeActivity.class, bundle);
     }
+
     //转交
-    public void forTransfer(View view){
+    public void forTransfer(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonTransfertoActivity.class,bundle);
+        startActivity(CommonTransfertoActivity.class, bundle);
     }
+
     // 抄送
-    public void forCopyto(View view){
+    public void forCopyto(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonCopytoCoActivity.class,bundle);
+        startActivity(CommonCopytoCoActivity.class, bundle);
     }
+
     /**
      * back
      *

@@ -85,8 +85,8 @@ public class ConferenceDetailCopyActivity extends BaseActivity {
     TextView tv_conference_end;
 
     //备注
-    @ViewInject(id = R.id.tv_conference_other)
-    TextView tv_conference_other;
+    @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
 
     //获取子控件个数的父控件
     @ViewInject(id = R.id.layout_ll)
@@ -128,7 +128,7 @@ public class ConferenceDetailCopyActivity extends BaseActivity {
         tv_conference_Abstract.setText(model.getAbstract());
         tv_conference_start.setText(model.getStartTime());
         tv_conference_end.setText(model.getFinishTime());
-        tv_conference_other.setText(model.getRemark());
+        tv_remark.setText(model.getRemark());
         // 审批人
         modelList = model.getApprovalInfoLists();
         StringBuilder nameBuilder = new StringBuilder();

@@ -51,6 +51,10 @@ public class RecruitmentDetailCopyActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_numberPeople)
     TextView tv_numberPeople;
 
+    //备注
+    @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
+
     @ViewInject(id = R.id.tv_timeIn)
     TextView sp_timeIn;
 
@@ -115,6 +119,7 @@ public class RecruitmentDetailCopyActivity extends BaseActivity {
         tv_copyTime.setText(model.getApplicationCreateTime());
         //
         tv_position.setText(model.getPosition());
+        tv_remark.setText(model.getRemark());
         tv_numberPeople.setText(model.getNumberOfPeople());
         tv_responsibility.setText(model.getResponsibility());
 

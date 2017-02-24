@@ -15,6 +15,8 @@ public class LeaveApvlModel implements Serializable {
     public String EndDate;
     public String StartDate;
     public String Content;
+    public String Reason;
+    public String Remark;
 
     public String ApprovalStatus;
     public String EmployeeName;
@@ -27,8 +29,47 @@ public class LeaveApvlModel implements Serializable {
     public String ApplicationTitle;
     public String EmployeeID;
     public String CreateTime;
-    public String Remark;
     public String StoreID;
+
+    public String getReason() {
+        return Reason;
+    }
+
+    public void setReason(String reason) {
+        Reason = reason;
+    }
+
+    public String getRemark() {
+        return Remark;
+    }
+
+    public void setRemark(String remark) {
+        Remark = remark;
+    }
+
+    public String getStoreID() {
+        return StoreID;
+    }
+
+    public void setStoreID(String storeID) {
+        StoreID = storeID;
+    }
+
+    public String getEmployeeID() {
+        return EmployeeID;
+    }
+
+    public void setEmployeeID(String employeeID) {
+        EmployeeID = employeeID;
+    }
+
+    public String getCreateTime() {
+        return CreateTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        CreateTime = createTime;
+    }
 
     public static class ApprovalInfoLists{
         public String Comment;

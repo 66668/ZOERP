@@ -20,10 +20,28 @@ public class RecruitmentApvlModel implements Serializable {
     public String ApplicationCreateTime;
 
     public String Position;
+    public String Reason;
+    public String Remark;
     public String NumberOfPeople;
     public String ExpectedEntryDate;
     public String Responsibility;
     public List<RecruitmentApvlModel.ApprovalInfoLists> ApprovalInfoLists;
+
+    public String getReason() {
+        return Reason;
+    }
+
+    public void setReason(String reason) {
+        Reason = reason;
+    }
+
+    public String getRemark() {
+        return Remark;
+    }
+
+    public void setRemark(String remark) {
+        Remark = remark;
+    }
 
     public static class ApprovalInfoLists {
         public String Comment;

@@ -301,6 +301,7 @@
                     android:background="@drawable/et_white_stroke"
                     android:gravity="center_vertical"
                     android:hint="@string/vehicleRe_startMiles_hint"
+                    android:inputType="numberDecimal"
                     android:textColor="@color/cl_text_common"
                     android:textColorHint="@color/cl_hint_common"
                     />
@@ -345,6 +346,7 @@
                     android:background="@drawable/et_white_stroke"
                     android:gravity="center_vertical"
                     android:hint="@string/vehicleRe_endMiles_hint"
+                    android:inputType="numberDecimal"
                     android:textColor="@color/cl_text_common"
                     android:textColorHint="@color/cl_hint_common"
                     />

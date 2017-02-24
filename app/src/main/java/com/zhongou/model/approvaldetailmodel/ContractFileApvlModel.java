@@ -13,6 +13,7 @@ public class ContractFileApvlModel implements Serializable {
 
     public String ContractName;
     public String Remark;
+    public String Reason;
 
     public String ApprovalStatus;
     public String EmployeeName;
@@ -25,6 +26,14 @@ public class ContractFileApvlModel implements Serializable {
     public String EmployeeID;
     public String CreateTime;
     public String StoreID;
+
+    public String getReason() {
+        return Reason;
+    }
+
+    public void setReason(String reason) {
+        Reason = reason;
+    }
 
     public static class ApprovalInfoLists{
         public String Comment;

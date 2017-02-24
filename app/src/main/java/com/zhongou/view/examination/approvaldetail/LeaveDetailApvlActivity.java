@@ -97,6 +97,10 @@ public class LeaveDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_reason)
     TextView tv_reason;
 
+    //原因
+    @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
+
 
     private MyApprovalModel myApprovalModel;
     private LeaveApvlModel model;
@@ -130,6 +134,7 @@ public class LeaveDetailApvlActivity extends BaseActivity {
         tv_startTime.setText(model.getStartDate());
         tv_endTime.setText(model.getEndDate());
         tv_reason.setText(model.getContent());
+        tv_remark.setText(model.getRemark());
 
     }
 

@@ -56,6 +56,10 @@ public class TakeDaysOffDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_reason)
     TextView tv_reason;
 
+ //备注
+    @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
+
     //申请人
     @ViewInject(id =R.id.tv_ApprovalPerson)
     TextView tv_ApprovalPerson;
@@ -131,6 +135,7 @@ public class TakeDaysOffDetailApvlActivity extends BaseActivity {
         tv_orgStartTime.setText(model.getStartTakeDate());
         tv_orgEndTime.setText(model.getEndTakeDate());
         tv_reason.setText(model.getReason());
+        tv_remark.setText(model.getRemark());
 
     }
 

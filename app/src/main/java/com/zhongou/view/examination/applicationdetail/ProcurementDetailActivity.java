@@ -85,8 +85,8 @@ public class ProcurementDetailActivity extends BaseActivity {
 
 
     //备注
-    @ViewInject(id = R.id.tv_procurement_Other)
-    TextView tv_procurement_Other;
+    @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
 
 
     //审批人
@@ -143,7 +143,7 @@ public class ProcurementDetailActivity extends BaseActivity {
         tv_procurement_buyFor.setText(model.getReason());
         tv_procurement_aplTime.setText(model.getCreateTime());
         tv_procurement_PlanBuyTime.setText(model.getPlanTime());
-        tv_procurement_Other.setText(model.getRemark());
+        tv_remark.setText(model.getRemark());
         // 审批人
         modelList = model.getApprovalInfoLists();
         StringBuilder nameBuilder = new StringBuilder();

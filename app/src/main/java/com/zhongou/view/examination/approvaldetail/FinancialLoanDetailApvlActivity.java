@@ -92,6 +92,11 @@ public class FinancialLoanDetailApvlActivity extends BaseActivity {
     TextView tv_reason;
 
 
+    //原因
+    @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
+
+
     //常量
     public static final int POST_SUCCESS = 21;
     public static final int POST_FAILED = 22;
@@ -122,7 +127,8 @@ public class FinancialLoanDetailApvlActivity extends BaseActivity {
         tv_approvalCo.setText(model.getStoreName());
 
         //
-        tv_reason.setText(model.getRemark());//借款事由
+        tv_reason.setText(model.getReason());
+        tv_remark.setText(model.getRemark());
         tv_fee.setText(model.getFee());
         tv_PlanbackTime.setText(model.getPlanbackTime());
 

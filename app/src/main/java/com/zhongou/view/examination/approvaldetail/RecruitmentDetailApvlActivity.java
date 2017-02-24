@@ -37,6 +37,10 @@ public class RecruitmentDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_right)
     TextView tv_right;
 
+    //备注
+    @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
+
     //职位名称
     @ViewInject(id = R.id.tv_position)
     TextView tv_position;
@@ -122,6 +126,7 @@ public class RecruitmentDetailApvlActivity extends BaseActivity {
         tv_approvalTime.setText(model.getApplicationCreateTime());
 
         tv_position.setText(model.getPosition());
+        tv_remark.setText(model.getRemark());
         tv_number.setText(model.getNumberOfPeople());
         tv_responsibility.setText(model.getResponsibility());
 
@@ -177,21 +182,21 @@ public class RecruitmentDetailApvlActivity extends BaseActivity {
     public void forRefulse(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonDisagreeActivity.class,bundle);
+        startActivity(CommonDisagreeActivity.class, bundle);
     }
 
     //同意
     public void toForCommit(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonAgreeActivity.class,bundle);
+        startActivity(CommonAgreeActivity.class, bundle);
     }
 
     //转交
     public void forTransfer(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonTransfertoActivity.class,bundle);
+        startActivity(CommonTransfertoActivity.class, bundle);
     }
 
     // 抄送
@@ -204,7 +209,7 @@ public class RecruitmentDetailApvlActivity extends BaseActivity {
                 myApprovalModel.getEmployeeID() + "\n" + myApprovalModel.getStoreID() + "\n" +
                 myApprovalModel.getApplicationTitle());
 
-        startActivity(CommonCopytoCoActivity.class,bundle);
+        startActivity(CommonCopytoCoActivity.class, bundle);
     }
 
     /**

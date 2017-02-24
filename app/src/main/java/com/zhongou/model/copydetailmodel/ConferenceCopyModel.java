@@ -19,6 +19,7 @@ public class ConferenceCopyModel implements Serializable {
     public String StartTime;//
     public String FinishTime;//
     public String Remark;//备注
+    public String Reason;//
 
 
     public String ApprovalStatus;
@@ -28,6 +29,15 @@ public class ConferenceCopyModel implements Serializable {
     public String ApplicationCreateTime;
 
     public List<ConferenceCopyModel.ApprovalInfoLists> ApprovalInfoLists;
+
+
+    public String getReason() {
+        return Reason;
+    }
+
+    public void setReason(String reason) {
+        Reason = reason;
+    }
 
     public static class ApprovalInfoLists{
         public String Comment;

@@ -10,34 +10,43 @@ import java.util.List;
 public class PositionReplaceCopyModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public String ApplicationTitle;//标题
-    public String TransferEmployeeName;//调动人员
-    public String TransferEmployeeID;//调动人员
-    public String TransferDate;//调动日期
-    public String TransferReason;//调动原由
+    private String ApplicationTitle;//标题
+    private String TransferEmployeeName;//调动人员
+    private String TransferEmployeeID;//调动人员
+    private String TransferDate;//调动日期
+    private String TransferReason;//调动原由
 
-    public String OriDepartmentName;//原部门
-    public String OriDepartmentID;//原部门
-    public String OriPostName;//原岗位
-    public String OriPostID;//原岗位
+    private String OriDepartmentName;//原部门
+    private String OriDepartmentID;//原部门
+    private String OriPostName;//原岗位
+    private String OriPostID;//原岗位
 
-    public String NewDepartmentName;//新部门
-    public String NewDepartmentID;//新部门
-    public String NewPostName;//新岗位
-    public String NewPostID;//新岗位
+    private String NewDepartmentName;//新部门
+    private String NewDepartmentID;//新部门
+    private String NewPostName;//新岗位
+    private String NewPostID;//新岗位
 
-    public String HandlerEmployeeName;//决定人
-    public String Remark;//
-    public String CreateTime;//
+    private String HandlerEmployeeName;//决定人
+    private String Remark;//
+    private String Reason;//
+    private String CreateTime;//
 
 
-    public String ApprovalStatus;
-    public String StoreName;
-    public String DepartmentName;
-    public String EmployeeName;
-    public String ApplicationCreateTime;
+    private String ApprovalStatus;
+    private String StoreName;
+    private String DepartmentName;
+    private String EmployeeName;
+    private String ApplicationCreateTime;
 
-    public List<PositionReplaceCopyModel.ApprovalInfoLists> ApprovalInfoLists;
+    private List<PositionReplaceCopyModel.ApprovalInfoLists> ApprovalInfoLists;
+
+    public String getReason() {
+        return Reason;
+    }
+
+    public void setReason(String reason) {
+        Reason = reason;
+    }
 
     public String getTransferEmployeeName() {
         return TransferEmployeeName;
@@ -95,7 +104,7 @@ public class PositionReplaceCopyModel implements Serializable {
         CreateTime = createTime;
     }
 
-    public static class ApprovalInfoLists{
+    public static class ApprovalInfoLists {
         public String Comment;
         public String ApprovalDate;
         public String YesOrNo;

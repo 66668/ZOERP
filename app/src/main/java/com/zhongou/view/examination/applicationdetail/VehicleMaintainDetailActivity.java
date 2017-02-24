@@ -67,10 +67,6 @@ public class VehicleMaintainDetailActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_StartMileage)
     TextView tv_StartMileage;
 
-    //维修地点
-    @ViewInject(id = R.id.et_maintenancePlace)
-    TextView et_maintenancePlace;
-
     //费用
     @ViewInject(id = R.id.tv_EstimateFee)
     TextView tv_EstimateFee;
@@ -79,9 +75,9 @@ public class VehicleMaintainDetailActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_number)
     TextView tv_number;
 
-    //说明
-    @ViewInject(id = R.id.tv_reason)
-    TextView tv_reason;
+    //备注
+    @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
 
     //审批人
     @ViewInject(id = R.id.tv_Requester)
@@ -134,7 +130,7 @@ public class VehicleMaintainDetailActivity extends BaseActivity {
         tv_StartMileage.setText(model.getStartMileage());
         tv_Destination.setText(model.getDestination());
         tv_EstimateFee.setText(model.getEstimateFee());
-        tv_reason.setText(model.getPurpose());
+        tv_remark.setText(model.getRemark());
 
         modelList = model.getApprovalInfoLists();
 

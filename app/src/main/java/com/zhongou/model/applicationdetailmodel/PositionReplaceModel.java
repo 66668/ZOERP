@@ -28,6 +28,7 @@ public class PositionReplaceModel implements Serializable {
 
     public String HandlerEmployeeName;//决定人
     public String Remark;//
+    public String Reason;//
     public String CreateTime;//
 
 
@@ -38,6 +39,15 @@ public class PositionReplaceModel implements Serializable {
     public String ApplicationCreateTime;
 
     public List<PositionReplaceModel.ApprovalInfoLists> ApprovalInfoLists;
+
+
+    public String getReason() {
+        return Reason;
+    }
+
+    public void setReason(String reason) {
+        Reason = reason;
+    }
 
     public String getTransferEmployeeName() {
         return TransferEmployeeName;

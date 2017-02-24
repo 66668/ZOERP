@@ -60,6 +60,10 @@ public class SalaryadjustDetailCopyActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_reason)
     TextView tv_reason;
 
+    //备注
+    @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
+
     //审批人
     @ViewInject(id = R.id.tv_Requester)
     TextView tv_Requester;
@@ -93,6 +97,7 @@ public class SalaryadjustDetailCopyActivity extends BaseActivity {
     //常量
     public static final int POST_SUCCESS = 11;
     public static final int POST_FAILED = 12;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,6 +118,7 @@ public class SalaryadjustDetailCopyActivity extends BaseActivity {
         tv_salaryAdjustNow.setText(model.getOriSalary());
         tv_SrcSalary.setText(model.getSrcSalary());
         tv_reason.setText(model.getReason());
+        tv_remark.setText(model.getRemark());
 
         modelList = model.getApprovalInfoLists();
         // 审批人
@@ -181,7 +187,7 @@ public class SalaryadjustDetailCopyActivity extends BaseActivity {
             @Override
             public void run() {
                 try {
-                    SalaryAjusCopyModel model1 =UserHelper.copyDetailPostSalaryAjust(SalaryadjustDetailCopyActivity.this,
+                    SalaryAjusCopyModel model1 = UserHelper.copyDetailPostSalaryAjust(SalaryadjustDetailCopyActivity.this,
                             model.getApplicationID(),
                             model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
@@ -208,6 +214,7 @@ public class SalaryadjustDetailCopyActivity extends BaseActivity {
                 break;
         }
     }
+
     public class ViewHolder {
         private int id = -1;
         private TextView tv_name;

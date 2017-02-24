@@ -15,6 +15,7 @@ public class OUtGoingApvlModel implements Serializable {
     public String OutingTime;
     public String OutingReason;
     public String Remark;
+    public String Reason;
 
     public String ApprovalStatus;
     public String EmployeeName;
@@ -27,6 +28,14 @@ public class OUtGoingApvlModel implements Serializable {
     public String EmployeeID;
     public String CreateTime;
     public String StoreID;
+
+    public String getReason() {
+        return Reason;
+    }
+
+    public void setReason(String reason) {
+        Reason = reason;
+    }
 
     public static class ApprovalInfoLists{
         public String Comment;

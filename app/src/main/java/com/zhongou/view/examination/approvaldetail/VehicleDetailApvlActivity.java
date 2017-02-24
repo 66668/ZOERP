@@ -41,8 +41,8 @@ public class VehicleDetailApvlActivity extends BaseActivity {
 
 
     //目的地
-    @ViewInject(id = R.id.tv_purpose)
-    TextView tv_purpose;
+    @ViewInject(id = R.id.tv_destination)
+    TextView tv_destination;
 
     //开始时间
     @ViewInject(id = R.id.tv_startTime)
@@ -52,9 +52,13 @@ public class VehicleDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_endTime)
     TextView tv_endTime;
 
-    //原因
-    @ViewInject(id = R.id.tv_reason)
-    TextView tv_reason;
+    //说明
+    @ViewInject(id = R.id.tv_purpose)
+    TextView tv_purpose;
+
+    //备注
+    @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
 
     //申请人
     @ViewInject(id = R.id.tv_ApprovalPerson)
@@ -128,9 +132,12 @@ public class VehicleDetailApvlActivity extends BaseActivity {
         tv_purpose.setText(model.getDestination());
         tv_startTime.setText(model.getPlanBorrowTime());
         tv_endTime.setText(model.getPlanReturnTime());
-        tv_reason.setText(model.getPurpose());
+        tv_destination.setText(model.getDestination());
+        tv_purpose.setText(model.getPurpose());
+        tv_remark.setText(model.getRemark());
 
     }
+
     private void bottomType() {
         //
         if (myApprovalModel.getApprovalStatus().contains("1")) {
@@ -177,28 +184,31 @@ public class VehicleDetailApvlActivity extends BaseActivity {
     }
 
     //驳回
-    public void forRefulse(View view){
+    public void forRefulse(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonDisagreeActivity.class,bundle);
+        startActivity(CommonDisagreeActivity.class, bundle);
     }
+
     //同意
-    public void toForCommit(View view){
+    public void toForCommit(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonAgreeActivity.class,bundle);
+        startActivity(CommonAgreeActivity.class, bundle);
     }
+
     //转交
-    public void forTransfer(View view){
+    public void forTransfer(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonTransfertoActivity.class,bundle);
+        startActivity(CommonTransfertoActivity.class, bundle);
     }
+
     // 抄送
-    public void forCopyto(View view){
+    public void forCopyto(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonCopytoCoActivity.class,bundle);
+        startActivity(CommonCopytoCoActivity.class, bundle);
     }
 
     /**

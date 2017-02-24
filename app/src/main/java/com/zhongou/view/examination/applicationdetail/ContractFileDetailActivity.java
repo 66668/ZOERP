@@ -57,8 +57,8 @@ public class ContractFileDetailActivity extends BaseActivity {
     TextView tv_contractfile_name;
 
     //备注
-    @ViewInject(id = R.id.tv_contractfile_other)
-    TextView tv_contractfile_other;
+    @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
 
     //附件
     @ViewInject(id = R.id.contractfile_files)
@@ -99,7 +99,7 @@ public class ContractFileDetailActivity extends BaseActivity {
     private void setShow(ContractFileModel model) {
         //
         tv_contractfile_name.setText(model.getContractName());
-        tv_contractfile_other.setText(model.getRemark());
+        tv_remark.setText(model.getRemark());
 
         // 审批人
         modelList = model.getApprovalInfoLists();

@@ -53,6 +53,9 @@ public class RecruitmentDetailActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_timeIn)
     TextView sp_timeIn;
 
+   @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
+
     //Responsibility
     @ViewInject(id = R.id.tv_responsibilitys)
     TextView tv_responsibility;
@@ -102,6 +105,7 @@ public class RecruitmentDetailActivity extends BaseActivity {
         tv_position.setText(model.getPosition());
         tv_numberPeople.setText(model.getNumberOfPeople());
         tv_responsibility.setText(model.getResponsibility());
+        tv_remark.setText(model.getRemark());
 
         modelList = model.getApprovalInfoLists();
 

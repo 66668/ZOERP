@@ -18,6 +18,7 @@ public class ConferenceModel implements Serializable {
     public String DeviceName;//准备设备
     public String StartTime;//
     public String FinishTime;//
+    public String Reason;//原因
     public String Remark;//备注
 
 
@@ -28,6 +29,14 @@ public class ConferenceModel implements Serializable {
     public String ApplicationCreateTime;
 
     public List<ConferenceModel.ApprovalInfoLists> ApprovalInfoLists;
+
+    public String getReason() {
+        return Reason;
+    }
+
+    public void setReason(String reason) {
+        Reason = reason;
+    }
 
     public static class ApprovalInfoLists{
         public String Comment;

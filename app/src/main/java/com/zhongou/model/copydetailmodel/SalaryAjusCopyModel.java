@@ -16,6 +16,7 @@ public class SalaryAjusCopyModel implements Serializable {
     public String OriSalary;//
     public String SrcSalary;//
     public String Reason;//
+    public String Remark;//
 
 
     public String ApprovalStatus;
@@ -26,6 +27,13 @@ public class SalaryAjusCopyModel implements Serializable {
 
     public List<SalaryAjusCopyModel.ApprovalInfoLists> ApprovalInfoLists;
 
+    public String getRemark() {
+        return Remark;
+    }
+
+    public void setRemark(String remark) {
+        Remark = remark;
+    }
 
     public static class ApprovalInfoLists {
         public String Comment;

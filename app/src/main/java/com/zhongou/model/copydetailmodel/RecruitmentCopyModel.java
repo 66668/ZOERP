@@ -19,11 +19,29 @@ public class RecruitmentCopyModel implements Serializable {
 
     public String ApprovalStatus;
     public String StoreName;
+    public String Reason;
+    public String Remark;
     public String DepartmentName;
     public String EmployeeName;//抄送人
     public String ApplicationCreateTime;//抄送时间
 
     public List<ApprovalInfoLists> ApprovalInfoLists;
+
+    public String getReason() {
+        return Reason;
+    }
+
+    public void setReason(String reason) {
+        Reason = reason;
+    }
+
+    public String getRemark() {
+        return Remark;
+    }
+
+    public void setRemark(String remark) {
+        Remark = remark;
+    }
 
     public static class ApprovalInfoLists{
         public String Comment;

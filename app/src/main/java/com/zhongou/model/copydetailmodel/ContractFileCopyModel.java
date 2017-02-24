@@ -13,6 +13,7 @@ public class ContractFileCopyModel implements Serializable {
 
     public String ContractName;//文件名称
     public String Remark;//备注
+    public String Reason;//
 
 
 
@@ -23,6 +24,14 @@ public class ContractFileCopyModel implements Serializable {
     public String ApplicationCreateTime;
 
     public List<ContractFileCopyModel.ApprovalInfoLists> ApprovalInfoLists;
+
+    public String getReason() {
+        return Reason;
+    }
+
+    public void setReason(String reason) {
+        Reason = reason;
+    }
 
     public static class ApprovalInfoLists{
         public String Comment;

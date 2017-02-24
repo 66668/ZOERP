@@ -367,6 +367,7 @@
                     android:background="@drawable/et_white_stroke"
                     android:gravity="center_vertical"
                     android:hint="@string/hint_vehicleMainennanceMoney"
+                    android:inputType="numberDecimal"
                     android:textColor="@color/cl_text_common"
                     android:textColorHint="@color/cl_hint_common"
                     />
@@ -405,12 +406,11 @@
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="0.73"
-                    android:gravity="top|left"
-                    android:padding="10dp"
+                    android:layout_weight="0.72"
                     android:background="@drawable/et_white_stroke"
+                    android:gravity="top|left"
                     android:hint="@string/hint_remark_all_apl"
+                    android:paddingTop="10dp"
                     android:textColor="@color/cl_text_common"
                     android:textColorHint="@color/cl_hint_common"/>
             </LinearLayout>

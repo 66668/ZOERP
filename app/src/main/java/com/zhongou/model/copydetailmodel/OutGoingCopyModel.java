@@ -13,6 +13,7 @@ public class OutGoingCopyModel implements Serializable {
     public String Destination;//
     public String OutingTime;//
     public String OutingReason;//
+    public String Reason;//
     public String Remark;//
 
 
@@ -24,6 +25,14 @@ public class OutGoingCopyModel implements Serializable {
     public String ApplicationCreateTime;
 
     public List<OutGoingCopyModel.ApprovalInfoLists> ApprovalInfoLists;
+
+    public String getReason() {
+        return Reason;
+    }
+
+    public void setReason(String reason) {
+        Reason = reason;
+    }
 
     public static class ApprovalInfoLists{
         public String Comment;

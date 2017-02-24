@@ -16,6 +16,7 @@ public class BorrowModel implements Serializable {
     public String BorrowType;//
     public String FinishTime;//
     public String Reason;//
+    public String Remark;//
 
 
     public String ApprovalStatus;
@@ -158,5 +159,13 @@ public class BorrowModel implements Serializable {
 
     public void setApplicationCreateTime(String applicationCreateTime) {
         ApplicationCreateTime = applicationCreateTime;
+    }
+
+    public String getRemark() {
+        return Remark;
+    }
+
+    public void setRemark(String remark) {
+        Remark = remark;
     }
 }

@@ -51,6 +51,10 @@ public class WorkOverTimeDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_reason)
     TextView tv_reason;
 
+    //备注
+    @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
+
     //申请人
     @ViewInject(id = R.id.tv_ApprovalPerson)
     TextView tv_ApprovalPerson;
@@ -124,6 +128,7 @@ public class WorkOverTimeDetailApvlActivity extends BaseActivity {
         tv_startTime.setText(model.getStratOverTime());
         tv_endTime.setText(model.getEndOverTime());
         tv_reason.setText(model.getOverCause());
+        tv_remark.setText(model.getRemark());
 
     }
 

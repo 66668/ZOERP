@@ -57,9 +57,12 @@ public class VehicleDetailActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_PlanReturnTime)
     TextView tv_PlanReturnTime;
 
-    //原因
+    //说明
     @ViewInject(id = R.id.tv_purpose)
     TextView tv_purpose;
+    //备注
+    @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
 
     //审批人
     @ViewInject(id = R.id.tv_Requester)
@@ -108,6 +111,7 @@ public class VehicleDetailActivity extends BaseActivity {
         tv_PlanBorrowTime.setText(model.getPlanBorrowTime());
         tv_PlanReturnTime.setText(model.getPlanReturnTime());
         tv_purpose.setText(model.getPurpose());
+        tv_remark.setText(model.getRemark());
         tv_Destination.setText(model.getDestination());
 
         modelList = model.getApprovalInfoLists();

@@ -15,6 +15,8 @@ public class LeaveCopyModel implements Serializable {
     public String EndDate;
     public String StartDate;
     public String Content;
+    public String Reason;
+    public String Remark;
 
     public String ApprovalStatus;
     public String StoreName;
@@ -25,6 +27,21 @@ public class LeaveCopyModel implements Serializable {
 
     public List<LeaveCopyModel.ApprovalInfoLists> ApprovalInfoLists;
 
+    public String getReason() {
+        return Reason;
+    }
+
+    public void setReason(String reason) {
+        Reason = reason;
+    }
+
+    public String getRemark() {
+        return Remark;
+    }
+
+    public void setRemark(String remark) {
+        Remark = remark;
+    }
 
     public static class ApprovalInfoLists {
         public String Comment;

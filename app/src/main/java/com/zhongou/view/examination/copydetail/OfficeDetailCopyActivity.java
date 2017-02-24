@@ -71,8 +71,8 @@ public class OfficeDetailCopyActivity extends BaseActivity {
     TextView tv_office_useage;
 
     //备注
-    @ViewInject(id = R.id.tv_office_other)
-    TextView tv_office_other;
+    @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
 
 
     //获取子控件个数的父控件
@@ -120,7 +120,7 @@ public class OfficeDetailCopyActivity extends BaseActivity {
         tv_office_time.setText(model.getTime());
         tv_office_number.setText(model.getNumParticipant());
         tv_office_useage.setText(model.getUseage());
-        tv_office_other.setText(model.getRemark());
+        tv_remark.setText(model.getRemark());
 
 
         // 审批人

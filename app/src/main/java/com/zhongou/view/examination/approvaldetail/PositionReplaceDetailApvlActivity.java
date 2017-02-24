@@ -109,8 +109,8 @@ public class PositionReplaceDetailApvlActivity extends BaseActivity {
     TextView tv_positionReplace_reason;
 
     //备注
-    @ViewInject(id = R.id.tv_positionReplace_remark)
-    TextView tv_positionReplace_remark;
+    @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
 
     private MyApprovalModel myApprovalModel;
     private PositionReplaceApvlModel model;
@@ -150,7 +150,7 @@ public class PositionReplaceDetailApvlActivity extends BaseActivity {
         tv_positionReplace_newDept.setText(model.getNewDepartmentName());
         tv_positionReplace_newPosition.setText(model.getNewPostName());
         tv_positionReplace_reason.setText(model.getTransferReason());
-        tv_positionReplace_remark.setText(model.getRemark());
+        tv_remark.setText(model.getRemark());
 
     }
 

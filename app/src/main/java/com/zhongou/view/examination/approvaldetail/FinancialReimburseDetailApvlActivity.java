@@ -19,8 +19,6 @@ import com.zhongou.model.MyApprovalModel;
 import com.zhongou.model.applicationdetailmodel.FinancialAllModel;
 import com.zhongou.utils.PageUtil;
 
-import static com.zhongou.R.id.tv_reason;
-
 /**
  * 审批 付款申请
  * Created by sjy on 2016/12/2.
@@ -104,7 +102,7 @@ public class FinancialReimburseDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_totle)
     TextView tv_totle;
     //
-    @ViewInject(id = tv_reason)
+    @ViewInject(id = R.id.tv_remark)
     TextView tv_remark;
 
 

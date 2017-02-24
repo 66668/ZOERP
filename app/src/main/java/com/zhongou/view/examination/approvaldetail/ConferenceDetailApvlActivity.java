@@ -100,8 +100,8 @@ public class ConferenceDetailApvlActivity extends BaseActivity {
     TextView tv_conference_end;
 
     //备注
-    @ViewInject(id = R.id.tv_conference_other)
-    TextView tv_conference_other;
+    @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
 
     //
     private MyApprovalModel myApprovalModel;
@@ -142,7 +142,7 @@ public class ConferenceDetailApvlActivity extends BaseActivity {
         tv_conference_Abstract.setText(model.getAbstract());
         tv_conference_start.setText(model.getStartTime());
         tv_conference_end.setText(model.getFinishTime());
-        tv_conference_other.setText(model.getRemark());
+        tv_remark.setText(model.getRemark());
 
     }
 

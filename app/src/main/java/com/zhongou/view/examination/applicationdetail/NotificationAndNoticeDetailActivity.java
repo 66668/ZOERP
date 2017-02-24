@@ -72,8 +72,8 @@ public class NotificationAndNoticeDetailActivity extends BaseActivity {
     TextView tv_notificaitonAndNotice_content;
 
     //备注
-    @ViewInject(id = R.id.tv_notificaitonAndNotice_other)
-    TextView tv_notificaitonAndNotice_other;
+    @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
 
 
     //获取子控件个数的父控件
@@ -114,6 +114,7 @@ public class NotificationAndNoticeDetailActivity extends BaseActivity {
         tv_notificaitonAndNotice_type.setText(model.getPublishType());
         tv_notificaitonAndNotice_whom.setText(model.getAbstract());
         tv_notificaitonAndNotice_title.setText(model.getApplicationTitle());
+        tv_remark.setText(model.getRemark());
 
         // 审批人
         modelList = model.getApprovalInfoLists();

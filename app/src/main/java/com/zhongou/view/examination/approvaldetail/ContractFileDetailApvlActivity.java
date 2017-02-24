@@ -84,8 +84,8 @@ public class ContractFileDetailApvlActivity extends BaseActivity {
     TextView tv_contractfile_name;
 
     //备注
-    @ViewInject(id = R.id.tv_contractfile_other)
-    TextView tv_contractfile_other;
+    @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
 
     //附件
     @ViewInject(id = R.id.contractfile_files)
@@ -121,7 +121,7 @@ public class ContractFileDetailApvlActivity extends BaseActivity {
 
         //
         tv_contractfile_name.setText(model.getContractName());
-        tv_contractfile_other.setText(model.getRemark());
+        tv_remark.setText(model.getRemark());
 
     }
 

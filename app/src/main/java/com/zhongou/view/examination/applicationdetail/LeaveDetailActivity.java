@@ -45,6 +45,10 @@ public class LeaveDetailActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_reason)
     TextView tv_reason;
 
+    //备注
+    @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
+
     //开始时间
     @ViewInject(id = R.id.tv_startTime)
     TextView tv_startTime;
@@ -105,6 +109,7 @@ public class LeaveDetailActivity extends BaseActivity {
         tv_startTime.setText(model.getStartDate());
         tv_endTime.setText(model.getEndDate());
         tv_reason.setText(model.getContent());
+        tv_remark.setText(model.getRemark());
 
         modelList = model.getApprovalInfoLists();
         // 审批人

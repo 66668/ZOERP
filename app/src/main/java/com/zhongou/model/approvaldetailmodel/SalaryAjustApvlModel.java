@@ -12,6 +12,7 @@ public class SalaryAjustApvlModel implements Serializable {
 
     public String TargetEmployee= "";
     public String Reason= "";
+    public String Remark= "";
     public String OriSalary= "";
     public String SrcSalary= "";
 
@@ -22,6 +23,14 @@ public class SalaryAjustApvlModel implements Serializable {
     public String ApplicationCreateTime;
 
     public List<SalaryAjustApvlModel.ApprovalInfoLists> ApprovalInfoLists ;
+
+    public String getRemark() {
+        return Remark;
+    }
+
+    public void setRemark(String remark) {
+        Remark = remark;
+    }
 
     public static class ApprovalInfoLists{
         public String Comment = "";

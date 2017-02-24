@@ -91,8 +91,8 @@ public class ReceiveDetailApvlActivity extends BaseActivity {
     TextView tv_recevie_useage;
 
     //备注
-    @ViewInject(id = R.id.tv_recevie_other)
-    TextView tv_recevie_other;
+    @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
 
 
     //申请时间
@@ -131,7 +131,7 @@ public class ReceiveDetailApvlActivity extends BaseActivity {
         tv_recevie_spiceil.setText(model.getSpecification());
         tv_recevie_size.setText(model.getVersions());
         tv_recevie_number.setText(model.getAmount());
-        tv_recevie_other.setText(model.getRemark());
+        tv_remark.setText(model.getRemark());
         tv_recevie_useage.setText(model.getRemark());
 
     }

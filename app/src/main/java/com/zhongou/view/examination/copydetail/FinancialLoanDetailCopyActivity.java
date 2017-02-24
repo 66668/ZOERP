@@ -53,6 +53,9 @@ public class FinancialLoanDetailCopyActivity extends BaseActivity {
     //原因
     @ViewInject(id = R.id.tv_reason)
     TextView tv_reason;
+    //原因
+    @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
 
     //审批人
     @ViewInject(id = R.id.tv_Requester)
@@ -109,7 +112,8 @@ public class FinancialLoanDetailCopyActivity extends BaseActivity {
         tv_copyTime.setText(model.getApplicationCreateTime());
 
         tv_fee.setText(model.getFee());
-        tv_reason.setText(model.getRemark());
+        tv_reason.setText(model.getReason());
+        tv_remark.setText(model.getRemark());
 
         tv_PlanbackTime.setText(model.getPlanbackTime());
 

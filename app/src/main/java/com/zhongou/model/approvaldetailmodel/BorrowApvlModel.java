@@ -12,6 +12,7 @@ public class BorrowApvlModel implements Serializable {
 
     public String StartTime= "";
     public String Reason= "";
+    public String Remark= "";
     public String BorrowThings= "";
     public String FinishTime= "";
     public String BorrowType= "";//
@@ -23,6 +24,14 @@ public class BorrowApvlModel implements Serializable {
     public String ApplicationCreateTime;
 
     public List<BorrowApvlModel.ApprovalInfoLists> ApprovalInfoLists ;
+
+    public String getRemark() {
+        return Remark;
+    }
+
+    public void setRemark(String remark) {
+        Remark = remark;
+    }
 
     public static class ApprovalInfoLists{
         public String Comment = "";

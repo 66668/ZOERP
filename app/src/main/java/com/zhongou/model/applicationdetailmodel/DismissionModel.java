@@ -15,6 +15,8 @@ public class DismissionModel implements Serializable {
     public String DimissionDate;//离职时间
     public String DimissionID;//离职类型
     public String Content;//离职原因
+    public String Reason;//
+    public String Remark;//
 
     public String ApprovalStatus;
     public String StoreName;
@@ -24,7 +26,22 @@ public class DismissionModel implements Serializable {
 
     public List<DismissionModel.ApprovalInfoLists> ApprovalInfoLists;
 
+    public String getRemark() {
+        return Remark;
+    }
 
+    public void setRemark(String remark) {
+        Remark = remark;
+    }
+
+    public String getReason() {
+
+        return Reason;
+    }
+
+    public void setReason(String reason) {
+        Reason = reason;
+    }
 
     public static class ApprovalInfoLists{
         public String Comment;

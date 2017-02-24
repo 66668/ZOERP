@@ -63,6 +63,10 @@ public class TakeDaysOffDetailCopyActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_reason)
     TextView tv_reason;
 
+    //备注
+    @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
+
     //审批人
     @ViewInject(id = R.id.tv_Requester)
     TextView tv_Requester;
@@ -108,7 +112,8 @@ public class TakeDaysOffDetailCopyActivity extends BaseActivity {
         model = (MyCopyModel) bundle.getSerializable("MyCopyModel");
         getDetailModel(model);
     }
-    private void setShow(TakeDaysOffCopyModel model){
+
+    private void setShow(TakeDaysOffCopyModel model) {
         tv_copyer.setText(model.getEmployeeName());
         tv_copyTime.setText(model.getApplicationCreateTime());
         //
@@ -117,6 +122,7 @@ public class TakeDaysOffDetailCopyActivity extends BaseActivity {
         tv_startNarmalTime.setText(model.getStartTakeDate());
         tv_endNarmalTime.setText(model.getEndTakeDate());
         tv_reason.setText(model.getReason());
+        tv_remark.setText(model.getRemark());
 
         modelList = model.getApprovalInfoLists();
 
@@ -154,10 +160,11 @@ public class TakeDaysOffDetailCopyActivity extends BaseActivity {
             }
         }
     }
+
     /**
      * 获取详情数据
      */
-    public void getDetailModel(final MyCopyModel model){
+    public void getDetailModel(final MyCopyModel model) {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
@@ -165,7 +172,7 @@ public class TakeDaysOffDetailCopyActivity extends BaseActivity {
                     TakeDaysOffCopyModel model1 = UserHelper.copyDetailPostRecruitTakeDayOff(TakeDaysOffDetailCopyActivity.this,
                             model.getApplicationID(),
                             model.getApplicationType());
-                    sendMessage(POST_SUCCESS,model1);
+                    sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
                     e.printStackTrace();
                     sendMessage(POST_FAILED, e.getMessage());
@@ -183,12 +190,13 @@ public class TakeDaysOffDetailCopyActivity extends BaseActivity {
                 setShow(takeDaysOffModel);
                 break;
             case POST_FAILED: // 1001
-                PageUtil.DisplayToast((String)msg.obj);
+                PageUtil.DisplayToast((String) msg.obj);
                 break;
             default:
                 break;
         }
     }
+
     public class ViewHolder {
         private int id = -1;
         private TextView tv_name;

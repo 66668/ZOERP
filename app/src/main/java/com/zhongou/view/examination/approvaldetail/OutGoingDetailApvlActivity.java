@@ -90,8 +90,8 @@ public class OutGoingDetailApvlActivity extends BaseActivity {
     TextView tv_outgoing_purpose;
 
     //备注
-    @ViewInject(id = R.id.tv_outgoing_remark)
-    TextView tv_outgoing_remark;
+    @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
 
     //
     private MyApprovalModel myApprovalModel;
@@ -124,7 +124,7 @@ public class OutGoingDetailApvlActivity extends BaseActivity {
         tv_outgoing_time.setText(model.getOutingTime());
         tv_outgoing_reason.setText(model.getOutingReason());
         tv_outgoing_purpose.setText(model.getDestination());
-        tv_outgoing_remark.setText(model.getRemark());
+        tv_remark.setText(model.getRemark());
 
     }
     private void bottomType() {

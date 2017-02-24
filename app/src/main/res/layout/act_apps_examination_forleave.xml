@@ -240,7 +240,7 @@
                     android:layout_weight="0.71"
                     android:background="@drawable/et_white_stroke"
                     android:gravity="top|left"
-                    android:padding="10dp"
+                    android:paddingTop="10dp"
                     android:hint="@string/hint_remark_all_apl"
                     android:textColorHint="@color/cl_hint_common"/>
             </LinearLayout>

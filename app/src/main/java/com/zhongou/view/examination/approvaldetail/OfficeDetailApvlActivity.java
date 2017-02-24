@@ -92,6 +92,10 @@ public class OfficeDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_office_useage)
     TextView tv_office_useage;
 
+    //备注
+    @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
+
 
     private MyApprovalModel myApprovalModel;
     private OfficeApvlModel model;
@@ -127,6 +131,7 @@ public class OfficeDetailApvlActivity extends BaseActivity {
         tv_office_time.setText(model.getTime());
         tv_office_number.setText(model.getNumParticipant());
         tv_office_useage.setText(model.getUseage());
+        tv_remark.setText(model.getRemark());
 
     }
 

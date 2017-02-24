@@ -101,7 +101,7 @@ public class FinancialFeeDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_totle)
     TextView tv_totle;
     //备注
-    @ViewInject(id = R.id.tv_reason)
+    @ViewInject(id = R.id.tv_remark)
     TextView tv_remark;
 
     //常量

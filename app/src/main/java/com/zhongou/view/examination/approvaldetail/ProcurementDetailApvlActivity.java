@@ -116,8 +116,8 @@ public class ProcurementDetailApvlActivity extends BaseActivity {
     TextView tv_procurement_PlanBuyTime;
 
     //备注
-    @ViewInject(id = R.id.tv_procurement_Other)
-    TextView tv_procurement_Other;
+    @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
 
     private MyApprovalModel myApprovalModel;
     private ProcurementApvlModel model;
@@ -158,7 +158,7 @@ public class ProcurementDetailApvlActivity extends BaseActivity {
         tv_procurement_buyer.setText(model.getBuyer());
         tv_procurement_buyFor.setText(model.getReason());
         tv_procurement_PlanBuyTime.setText(model.getPlanTime());
-        tv_procurement_Other.setText(model.getRemark());
+        tv_remark.setText(model.getRemark());
 
     }
 

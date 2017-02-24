@@ -298,7 +298,7 @@
                     android:background="@drawable/et_white_stroke"
                     android:gravity="top|left"
                     android:hint="@string/hint_remark_all_apl"
-                    android:padding="10dp"
+                    android:paddingTop="10dp"
                     android:textColorHint="@color/cl_hint_common"/>
             </LinearLayout>
 

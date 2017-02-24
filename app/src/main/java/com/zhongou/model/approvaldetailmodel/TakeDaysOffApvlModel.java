@@ -15,6 +15,7 @@ public class TakeDaysOffApvlModel implements Serializable {
     public String EndTakeDate;
     public String StartTakeDate;
     public String Reason;
+    public String Remark;
 
     public String ApprovalStatus;
     public String EmployeeName;
@@ -25,6 +26,13 @@ public class TakeDaysOffApvlModel implements Serializable {
     public List<TakeDaysOffApvlModel.ApprovalInfoLists> ApprovalInfoLists;
 
 
+    public String getRemark() {
+        return Remark;
+    }
+
+    public void setRemark(String remark) {
+        Remark = remark;
+    }
 
     public static class ApprovalInfoLists{
         public String Comment;

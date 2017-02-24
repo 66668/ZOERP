@@ -54,6 +54,10 @@ public class DimissionDetailActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_reason)
     TextView tv_reason;
 
+    //备注
+    @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
+
     //离职类型
     @ViewInject(id = R.id.tv_dimissionType)
     TextView tv_dimissionType;
@@ -107,6 +111,7 @@ public class DimissionDetailActivity extends BaseActivity {
         tv_dimissionType.setText(model.getDimissionID());
         tv_endTime.setText(model.getDimissionDate());
         tv_reason.setText(model.getContent());
+        tv_remark.setText(model.getRemark());
 
         modelList = model.getApprovalInfoLists();
         // 审批人

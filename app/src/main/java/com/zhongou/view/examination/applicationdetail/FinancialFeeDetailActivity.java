@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.zhongou.R.id.tv_contains;
-import static com.zhongou.R.id.tv_reason;
 
 /**
  * 费用详情(同报销详情界面)
@@ -80,7 +79,7 @@ public class FinancialFeeDetailActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_totle)
     TextView tv_totle;
     //
-    @ViewInject(id = tv_reason)
+    @ViewInject(id = R.id.tv_remark)
     TextView tv_remark;
 
     //变量

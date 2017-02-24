@@ -46,6 +46,10 @@ public class BorrowDetailActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_reason)
     TextView tv_reason;
 
+    //备注
+    @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
+
     //类型
     @ViewInject(id = R.id.tv_borrowType)
     TextView tv_borrowType;
@@ -110,6 +114,7 @@ public class BorrowDetailActivity extends BaseActivity {
         tv_startTime.setText(model.getStartTime());
         tv_endTime.setText(model.getFinishTime());
         tv_reason.setText(model.getReason());
+        tv_remark.setText(model.getRemark());
         tv_borrowType.setText(model.getBorrowType());
 
         modelList = model.getApprovalInfoLists();

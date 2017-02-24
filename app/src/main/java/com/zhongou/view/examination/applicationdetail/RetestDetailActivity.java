@@ -58,8 +58,8 @@ public class RetestDetailActivity extends BaseActivity {
     TextView tv_retest_person;
 
     //备注
-    @ViewInject(id = R.id.tv_retest_other)
-    TextView tv_retest_other;
+    @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
 
     //附件
     @ViewInject(id = R.id.tv_retest_files)
@@ -100,7 +100,7 @@ public class RetestDetailActivity extends BaseActivity {
     private void setShow(RetestModel model) {
         //
         tv_retest_person.setText(model.getReexpeople());
-        tv_retest_other.setText(model.getRemark());
+        tv_remark.setText(model.getRemark());
 
         // 审批人
         modelList = model.getApprovalInfoLists();

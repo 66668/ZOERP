@@ -14,6 +14,7 @@ public class OutGoingModel implements Serializable {
     public String OutingTime;//
     public String OutingReason;//
     public String Remark;//
+    public String Reason;//
 
 
 
@@ -24,6 +25,14 @@ public class OutGoingModel implements Serializable {
     public String ApplicationCreateTime;
 
     public List<OutGoingModel.ApprovalInfoLists> ApprovalInfoLists;
+
+    public String getReason() {
+        return Reason;
+    }
+
+    public void setReason(String reason) {
+        Reason = reason;
+    }
 
     public static class ApprovalInfoLists{
         public String Comment;

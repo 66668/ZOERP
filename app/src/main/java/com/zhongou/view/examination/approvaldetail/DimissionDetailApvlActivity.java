@@ -88,6 +88,9 @@ public class DimissionDetailApvlActivity extends BaseActivity {
     //原因
     @ViewInject(id = R.id.tv_reason)
     TextView tv_reason;
+  //原因
+    @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
 
     //离职类型
     @ViewInject(id = R.id.tv_dismissiontype)
@@ -125,6 +128,7 @@ public class DimissionDetailApvlActivity extends BaseActivity {
         tv_startTime.setText(model.getEntryDate());
         tv_endTime.setText(model.getDimissionID());
         tv_reason.setText(model.getContent());
+        tv_remark.setText(model.getRemark());
     }
 
     private void bottomType() {

@@ -16,7 +16,9 @@ public class VehicleModel implements Serializable {
     public String PlanReturnTime= "";//计划交车时间
     public String ActualBorrowTime= "";//实际用车时间
     public String ActualReturnTime= "";//实际交车时间
-    public String Purpose= "";//用途
+    public String Purpose= "";//用车说明
+    public String Remark;//申请备注
+    public String Reason;//
     public String Destination= "";//目的地
 
     public String Driver;//驾驶人
@@ -33,9 +35,17 @@ public class VehicleModel implements Serializable {
     public String DepartmentName;
     public String EmployeeName;
     public String ApplicationCreateTime;
-    public String Remark;//申请备注
+
 
     public List<VehicleModel.ApprovalInfoLists> ApprovalInfoLists;
+
+    public String getReason() {
+        return Reason;
+    }
+
+    public void setReason(String reason) {
+        Reason = reason;
+    }
 
     public String getRemark() {
         return Remark;

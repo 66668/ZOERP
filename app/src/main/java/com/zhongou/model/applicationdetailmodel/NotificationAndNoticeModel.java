@@ -14,6 +14,7 @@ public class NotificationAndNoticeModel implements Serializable {
     public String ApplicationTitle;//公告名称
     public String PublishType;//类型
     public String PublishTime;//通知时间
+    public String Reason;//备注
     public String Remark;//备注
 
     public String CreateTime;//创建时间
@@ -26,6 +27,22 @@ public class NotificationAndNoticeModel implements Serializable {
     public String ApplicationCreateTime;
 
     public List<NotificationAndNoticeModel.ApprovalInfoLists> ApprovalInfoLists;
+
+    public String getReason() {
+        return Reason;
+    }
+
+    public void setReason(String reason) {
+        Reason = reason;
+    }
+
+    public String getCreateTime() {
+        return CreateTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        CreateTime = createTime;
+    }
 
     public static class ApprovalInfoLists{
         public String Comment;

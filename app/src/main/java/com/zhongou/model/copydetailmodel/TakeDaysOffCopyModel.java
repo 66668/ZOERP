@@ -11,6 +11,7 @@ public class TakeDaysOffCopyModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
     public String Reason;//
+    public String Remark;//
     public String StartTakeDate;//
     public String EndTakeDate;//
     public String StartOffDate;//
@@ -24,7 +25,13 @@ public class TakeDaysOffCopyModel implements Serializable {
     public String ApplicationCreateTime;
     public List<TakeDaysOffCopyModel.ApprovalInfoLists> ApprovalInfoLists;
 
+    public String getRemark() {
+        return Remark;
+    }
 
+    public void setRemark(String remark) {
+        Remark = remark;
+    }
 
     public static class ApprovalInfoLists{
         public String Comment;

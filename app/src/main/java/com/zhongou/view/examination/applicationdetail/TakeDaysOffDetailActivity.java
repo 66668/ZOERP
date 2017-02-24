@@ -63,6 +63,10 @@ public class TakeDaysOffDetailActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_reason)
     TextView tv_reason;
 
+    //备注
+    @ViewInject(id = R.id.tv_remark)
+    TextView tv_remark;
+
     //审批人
     @ViewInject(id = R.id.tv_Requester)
     TextView tv_Requester;
@@ -105,12 +109,14 @@ public class TakeDaysOffDetailActivity extends BaseActivity {
         model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
         getDetailModel(model);
     }
-    private void setShow(TakeDaysOffModel model){
+
+    private void setShow(TakeDaysOffModel model) {
         tv_startOffTime.setText(model.getStartOffDate());
         tv_endOffTime.setText(model.getEndOffDate());
         tv_startNarmalTime.setText(model.getStartTakeDate());
         tv_endNarmalTime.setText(model.getEndTakeDate());
         tv_reason.setText(model.getReason());
+        tv_remark.setText(model.getRemark());
 
         modelList = model.getApprovalInfoLists();
 
@@ -152,10 +158,11 @@ public class TakeDaysOffDetailActivity extends BaseActivity {
         }
 
     }
+
     /**
      * 获取详情数据
      */
-    public void getDetailModel(final MyApplicationModel model){
+    public void getDetailModel(final MyApplicationModel model) {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
@@ -163,7 +170,7 @@ public class TakeDaysOffDetailActivity extends BaseActivity {
                     TakeDaysOffModel model1 = UserHelper.applicationDetailPostTakeDaysOff(TakeDaysOffDetailActivity.this,
                             model.getApplicationID(),
                             model.getApplicationType());
-                    sendMessage(POST_SUCCESS,model1);
+                    sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
                     e.printStackTrace();
                     sendMessage(POST_FAILED, e.getMessage());
@@ -181,12 +188,13 @@ public class TakeDaysOffDetailActivity extends BaseActivity {
                 setShow(takeDaysOffModel);
                 break;
             case POST_FAILED: // 1001
-                PageUtil.DisplayToast((String)msg.obj);
+                PageUtil.DisplayToast((String) msg.obj);
                 break;
             default:
                 break;
         }
     }
+
     public class ViewHolder {
         private int id = -1;
         private TextView tv_name;

@@ -15,6 +15,8 @@ public class WorkOverTimeApvlModel implements Serializable {
     public String StratOverTime;
     public String EndOverTime;
     public String OverCause;
+    public String Remark;
+    public String Reason;
 
     public String ApprovalStatus;
     public String EmployeeName;
@@ -27,8 +29,16 @@ public class WorkOverTimeApvlModel implements Serializable {
     public String ApplicationTitle;
     public String EmployeeID;
     public String CreateTime;
-    public String Remark;
+
     public String StoreID;
+
+    public String getReason() {
+        return Reason;
+    }
+
+    public void setReason(String reason) {
+        Reason = reason;
+    }
 
     public static class ApprovalInfoLists{
         public String Comment;

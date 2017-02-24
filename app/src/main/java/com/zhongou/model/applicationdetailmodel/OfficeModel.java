@@ -13,6 +13,7 @@ public class OfficeModel implements Serializable {
 
     public String Time;//
     public String Remark;//
+    public String Reason;//
     public String Useage;//
     public String ApplicationTitle;//
     public String NumParticipant;//
@@ -25,6 +26,14 @@ public class OfficeModel implements Serializable {
     public String ApplicationCreateTime;
 
     public List<OfficeModel.ApprovalInfoLists> ApprovalInfoLists;
+
+    public String getReason() {
+        return Reason;
+    }
+
+    public void setReason(String reason) {
+        Reason = reason;
+    }
 
     public static class ApprovalInfoLists{
         public String Comment;
