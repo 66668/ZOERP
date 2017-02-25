@@ -16,11 +16,12 @@ import com.zhongou.model.ApprovalSModel;
 import com.zhongou.model.ContactsDeptModel;
 import com.zhongou.model.ContactsEmployeeModel;
 import com.zhongou.model.ContactsSonCOModel;
-import com.zhongou.model.FinanceModel;
 import com.zhongou.model.MapAttendModel;
 import com.zhongou.model.MyApplicationModel;
 import com.zhongou.model.MyApprovalModel;
 import com.zhongou.model.MyCopyModel;
+import com.zhongou.model.NoticeListModel;
+import com.zhongou.model.NotificationListModel;
 import com.zhongou.model.VehicleReturnModel;
 import com.zhongou.model.VehicleReturnPostMaintenanceModel;
 import com.zhongou.model.VehicleReturnPostUseModel;
@@ -225,11 +226,10 @@ public class UserHelper<T> {
      * @param context
      * @param iMaxTime
      * @param iMinTime
-     * @param pageSize
      * @return
      * @throws MyException
      */
-    public static List<MapAttendModel> getAttendRecord(Context context, String iMaxTime, String iMinTime, String pageSize) throws MyException {
+    public static List<MapAttendModel> getMapAttendRecord(Context context, String iMaxTime, String iMinTime) throws MyException {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
@@ -240,7 +240,7 @@ public class UserHelper<T> {
                         .add("iMinTime", iMinTime)
                         .add("storeID", mCurrentUser.getStoreID())
                         .add("employeeId", mCurrentUser.getEmployeeID())
-                        .add("pageSize", pageSize));
+                        .add("pageSize", "20"));
 
         if (hr.hasError()) {
             throw hr.getError();
@@ -2718,6 +2718,59 @@ public class UserHelper<T> {
     }
 
     /**
+     * 04 应用 公告
+     * 列表
+     */
+    public static List<NoticeListModel> GetAppNoticeList(Context context, String iMaxTime, String iMinTime) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+
+        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.GETNOTICELIST,
+                HttpParameter.create()
+                        .add("iMaxTime", iMaxTime)
+                        .add("iMinTime", iMinTime)
+                        .add("pageSize", "20")
+                        .add("storeID", mCurrentUser.getStoreID())
+                        .add("employeeId", mCurrentUser.getEmployeeID())
+        );
+
+        if (hr.hasError()) {
+            throw hr.getError();
+        }
+
+        return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<NoticeListModel>>() {
+        }.getType());
+    }
+    /**
+     * 05 应用 通知
+     * 通知列表
+     */
+    public static List<NotificationListModel> GetAppNotificationList(Context context, String iMaxTime, String iMinTime) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+
+        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.GETNOTIFICATIONLIST,
+                HttpParameter.create()
+                        .add("iMaxTime", iMaxTime)
+                        .add("iMinTime", iMinTime)
+                        .add("pageSize", "20")
+                        .add("storeID", mCurrentUser.getStoreID())
+                        .add("employeeId", mCurrentUser.getEmployeeID())
+        );
+
+        if (hr.hasError()) {
+            throw hr.getError();
+        }
+        return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<NotificationListModel>>() {
+        }.getType());
+    }
+
+
+
+
+    /**
      * 通讯录01
      * <p>
      * 获取 公司-分公司 员工信息
@@ -2834,25 +2887,25 @@ public class UserHelper<T> {
     }
 
     /**
-     * 06-01财务记录
+     * 06-01应用-财务记录
      */
-    public static List<FinanceModel> GetAppFinanceList(Context context, String iMaxTime, String iMinTime) throws MyException {
+    public static List<FinancialAllModel> GetAppFinanceList(Context context, String iMaxTime, String iMinTime) throws MyException {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
 
-        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.VEHICLERETURNLIST,
+        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.FINACELIST,
                 HttpParameter.create()
                         .add("iMaxTime", iMaxTime)
                         .add("iMinTime", iMinTime)
                         .add("storeID", mCurrentUser.getStoreID())
                         .add("employeeId", mCurrentUser.getEmployeeID())
-                        .add("pageSize", 20));
+                        .add("pageSize", "20"));
 
         if (hr.hasError()) {
             throw hr.getError();
         }
-        return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<FinanceModel>>() {
+        return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<FinancialAllModel>>() {
         }.getType());
     }
 
@@ -2870,7 +2923,7 @@ public class UserHelper<T> {
                         .add("iMinTime", iMinTime)
                         .add("storeID", mCurrentUser.getStoreID())
                         .add("employeeId", mCurrentUser.getEmployeeID())
-                        .add("pageSize", 20));
+                        .add("pageSize", "20"));
 
         if (hr.hasError()) {
             throw hr.getError();

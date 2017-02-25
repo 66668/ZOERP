@@ -159,7 +159,7 @@
             android:theme="@style/Anim_style2">
         </activity>
         <activity
-            android:name="com.zhongou.view.examination.applicationdetail.RecruitmentDetailActivity"
+            android:name="com.zhongou.view.examination.applicationdetail.RecruitmentDetailAplActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -185,7 +185,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
         <activity
-            android:name="com.zhongou.view.examination.applicationdetail.DimissionDetailActivity"
+            android:name="com.zhongou.view.examination.applicationdetail.DimissionDetailAplActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -212,7 +212,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
         <activity
-            android:name="com.zhongou.view.examination.applicationdetail.LeaveDetailActivity"
+            android:name="com.zhongou.view.examination.applicationdetail.LeaveDetailAplActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -239,7 +239,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
         <activity
-            android:name="com.zhongou.view.examination.applicationdetail.WorkOverTimeDetailActivity"
+            android:name="com.zhongou.view.examination.applicationdetail.WorkOverTimeDetailAplActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -266,7 +266,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
         <activity
-            android:name="com.zhongou.view.examination.applicationdetail.TakeDaysOffDetailActivity"
+            android:name="com.zhongou.view.examination.applicationdetail.TakeDaysOffDetailAplActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -293,7 +293,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
         <activity
-            android:name="com.zhongou.view.examination.applicationdetail.BorrowDetailActivity"
+            android:name="com.zhongou.view.examination.applicationdetail.BorrowDetailAplActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -320,7 +320,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
         <activity
-            android:name="com.zhongou.view.examination.applicationdetail.SalaryadjustDetailActivity"
+            android:name="com.zhongou.view.examination.applicationdetail.SalaryadjustDetailAplActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -347,7 +347,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
         <activity
-            android:name="com.zhongou.view.examination.applicationdetail.VehicleDetailActivity"
+            android:name="com.zhongou.view.examination.applicationdetail.VehicleDetailAplActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -374,7 +374,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
         <activity
-            android:name="com.zhongou.view.examination.applicationdetail.VehicleMaintainDetailActivity"
+            android:name="com.zhongou.view.examination.applicationdetail.VehicleMaintainDetailAplActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -409,7 +409,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
         <activity
-            android:name="com.zhongou.view.examination.applicationdetail.FinancialLoanDetailActivity"
+            android:name="com.zhongou.view.examination.applicationdetail.FinancialLoanDetailAplActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -434,7 +434,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
         <activity
-            android:name="com.zhongou.view.examination.applicationdetail.FinancialReimburseDetailActivity"
+            android:name="com.zhongou.view.examination.applicationdetail.FinancialReimburseDetailAplActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -459,7 +459,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
         <activity
-            android:name="com.zhongou.view.examination.applicationdetail.FinancialPayDetailActivity"
+            android:name="com.zhongou.view.examination.applicationdetail.FinancialPayDetailAplActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -484,7 +484,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
         <activity
-            android:name="com.zhongou.view.examination.applicationdetail.FinancialFeeDetailActivity"
+            android:name="com.zhongou.view.examination.applicationdetail.FinancialFeeDetailAplActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -504,7 +504,7 @@
 
         <!-- 05-11 申请 调动详情-->
         <activity
-            android:name="com.zhongou.view.examination.applicationdetail.PositionReplaceDetailActivity"
+            android:name="com.zhongou.view.examination.applicationdetail.PositionReplaceDetailAplActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -525,7 +525,7 @@
 
         <!-- 05-12  采购详情-->
         <activity
-            android:name="com.zhongou.view.examination.applicationdetail.ProcurementDetailActivity"
+            android:name="com.zhongou.view.examination.applicationdetail.ProcurementDetailAplActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -546,13 +546,13 @@
 
         <!-- 05-13  通知公告详情-->
         <activity
-            android:name="com.zhongou.view.examination.applicationdetail.NotificationAndNoticeDetailActivity"
+            android:name="com.zhongou.view.examination.applicationdetail.NotificationAndNoticeDetailAplActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
         <activity
-            android:name="com.zhongou.view.examination.applicationdetail.NotificationAndNoticeDetailActivity2"
+            android:name="com.zhongou.view.examination.applicationdetail.NotificationAndNoticeDetailAplActivity2"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -579,7 +579,7 @@
 
         <!-- 05-14  通知公告详情-->
         <activity
-            android:name="com.zhongou.view.examination.applicationdetail.OfficeDetailActivity"
+            android:name="com.zhongou.view.examination.applicationdetail.OfficeDetailAplActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -600,7 +600,7 @@
 
         <!-- 05-15  领用详情-->
         <activity
-            android:name="com.zhongou.view.examination.applicationdetail.ReceiveDetailActivity"
+            android:name="com.zhongou.view.examination.applicationdetail.ReceiveDetailAplActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -621,7 +621,7 @@
 
         <!-- 05-16  合同文件详情-->
         <activity
-            android:name="com.zhongou.view.examination.applicationdetail.ContractFileDetailActivity"
+            android:name="com.zhongou.view.examination.applicationdetail.ContractFileDetailAplActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -642,7 +642,7 @@
 
         <!-- 05-17  外出详情-->
         <activity
-            android:name="com.zhongou.view.examination.applicationdetail.OutGoingDetailActivity"
+            android:name="com.zhongou.view.examination.applicationdetail.OutGoingDetailAplActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -663,7 +663,7 @@
 
         <!-- 05-18  复试详情-->
         <activity
-            android:name="com.zhongou.view.examination.applicationdetail.RetestDetailActivity"
+            android:name="com.zhongou.view.examination.applicationdetail.RetestDetailAplActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -684,7 +684,7 @@
 
         <!-- 05-19  会议详情-->
         <activity
-            android:name="com.zhongou.view.examination.applicationdetail.ConferenceDetailActivity"
+            android:name="com.zhongou.view.examination.applicationdetail.ConferenceDetailAplActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -751,7 +751,7 @@
             android:theme="@style/Anim_style2">
         </activity>
 
-        <!-- 03-01考勤记录-->
+        <!-- 03-01考勤记录 分页刷新-->
         <activity
             android:name="com.zhongou.view.MapAttendRecordActivity"
             android:label="@string/app_name"
@@ -759,25 +759,82 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!-- 04 公告界面-->
+        <!-- 03-01考勤记录 spinner样式-->
         <activity
-            android:name="com.zhongou.view.NoticeAcitivity"
+            android:name="com.zhongou.view.MapAttendRecordListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!--05 通知 -->
+        <!-- 04 公告列表界面-->
         <activity
-            android:name="com.zhongou.view.NotificationAcitivity"
+            android:name="com.zhongou.view.NoticeListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!-- 06 财务界面-->
+        <!-- 04 公告详情界面-->
+        <activity
+            android:name="com.zhongou.view.NoticeDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--05 通知列表界面 -->
+        <activity
+            android:name="com.zhongou.view.NotificationListActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+
+        <!--05 通知详情界面 -->
+        <activity
+            android:name="com.zhongou.view.NotificationDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 06 财务列表界面-->
         <activity
             android:name="com.zhongou.view.FinanceListAcitivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 06-01 财务列表界面-借款详情  -->
+        <activity
+            android:name="com.zhongou.view.FinancialLoanDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 06-02 财务列表界面-报销详情  -->
+        <activity
+            android:name="com.zhongou.view.FinancialRemburseDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 06-03 财务列表界面-费用详情  -->
+        <activity
+            android:name="com.zhongou.view.FinancialFeeDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 06-04 财务列表界面-付款详情  -->
+        <activity
+            android:name="com.zhongou.view.FinancialPayDetailActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">

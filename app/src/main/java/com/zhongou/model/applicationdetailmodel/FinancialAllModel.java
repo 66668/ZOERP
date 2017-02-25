@@ -36,6 +36,14 @@ public class FinancialAllModel implements Serializable {
     public String Remark;
     public String Reason;//借款事由
 
+    public String LastComment;//LastComment
+    public String ActiveFlg;//ActiveFlg
+    public String LastUpdateTime;//LastUpdateTime
+    public String OperatorName;//OperatorName
+    public String CreateTime;//CreateTime
+    public String StoreID;//StoreID
+
+
     public String ApprovalStatus;
     public String StoreName;
     public String DepartmentName;
@@ -44,6 +52,54 @@ public class FinancialAllModel implements Serializable {
 
     public List<FinancialAllModel.ApprovalInfoLists> ApprovalInfoLists;
 
+
+    public String getLastComment() {
+        return LastComment;
+    }
+
+    public void setLastComment(String lastComment) {
+        LastComment = lastComment;
+    }
+
+    public String getActiveFlg() {
+        return ActiveFlg;
+    }
+
+    public void setActiveFlg(String activeFlg) {
+        ActiveFlg = activeFlg;
+    }
+
+    public String getLastUpdateTime() {
+        return LastUpdateTime;
+    }
+
+    public void setLastUpdateTime(String lastUpdateTime) {
+        LastUpdateTime = lastUpdateTime;
+    }
+
+    public String getOperatorName() {
+        return OperatorName;
+    }
+
+    public void setOperatorName(String operatorName) {
+        OperatorName = operatorName;
+    }
+
+    public String getCreateTime() {
+        return CreateTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        CreateTime = createTime;
+    }
+
+    public String getStoreID() {
+        return StoreID;
+    }
+
+    public void setStoreID(String storeID) {
+        StoreID = storeID;
+    }
 
     public static class ApprovalInfoLists {
         public String Comment;

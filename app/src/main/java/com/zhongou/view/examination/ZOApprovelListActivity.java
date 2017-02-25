@@ -183,7 +183,11 @@ public class ZOApprovelListActivity extends BaseActivity implements RefreshAndLo
 
     //RefreshListView.IReflashListener接口 下拉刷新
     @Override
-    public void onRefresh() {
+   public void onRefresh() {
+        if(IMaxtime == ""){
+            sendMessage(GET_NONE_NEWDATA, "无最新数据");
+            return;
+        }
         Loading.noDialogRun(ZOApprovelListActivity.this, new Runnable() {
 
             @Override
@@ -214,6 +218,10 @@ public class ZOApprovelListActivity extends BaseActivity implements RefreshAndLo
     // 上拉加载
     @Override
     public void onLoadMore() {
+        if(IMinTime == ""){
+            sendMessage(GET_NONE_NEWDATA, "无最新数据");
+            return;
+        }
         Loading.noDialogRun(ZOApprovelListActivity.this, new Runnable() {
 
             @Override

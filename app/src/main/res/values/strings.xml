@@ -79,6 +79,7 @@
     <string name="startLocation">开始定位</string>
     <string name="stopLocation">停止定位</string>
     <string name="mapAttendance">地图签到</string>
+    <string name="mapAttendance_recordTitle">考勤记录</string>
     <string name="mapAttendance_today">本日</string>
     <string name="mapAttendance_weekend">本周</string>
     <string name="mapAttendance_month">本月</string>

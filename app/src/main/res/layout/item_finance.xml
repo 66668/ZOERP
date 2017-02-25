@@ -10,43 +10,52 @@
         android:background="@color/common_bg_examination">
 
         <TextView
+            android:id="@+id/tv_finace_title"
+            style="@style/BlackText.standard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tv_time"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toStartOf="@+id/tv_time"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:text="标题"
+            android:textColor="@color/black"
+            android:textSize="@dimen/common_textSize_default17"/>
+
+        <TextView
             android:id="@+id/tv_type"
             style="@style/BlackText.standard"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/tv_finace_title"
+            android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
             android:text="类型"
             android:textColor="@color/textHintColor"
             android:textSize="@dimen/common_textSize_default14"/>
 
         <TextView
-            android:id="@+id/tv_storeName"
-            style="@style/BlackText.standard"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:text="公司"
-            android:textColor="@color/textHintColor"
-            android:textSize="@dimen/common_textSize_default14"/>
-
-        <TextView
             android:id="@+id/tv_time"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tv_finace_title"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
-            android:text="时间"
+            android:lines="1"
+            android:text="2017-02-03 11:12:13"
             android:textColor="@color/textHintColor"
             android:textSize="@dimen/common_textSize_default10"/>
 
         <View
             android:layout_width="match_parent"
-            android:layout_alignParentBottom="true"
             android:layout_height="1dip"
+            android:layout_alignParentBottom="true"
             android:background="@color/common_bg_examination_line"/>
     </RelativeLayout>
 

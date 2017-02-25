@@ -155,6 +155,21 @@ public class WebUrl {
          * 03-02获取地图考勤记录
          */
         public static final String GETATTENDRECORD = LOGIN_URL + LOGIN_FLODER_USER + "AttenceRecord/GetAttenceRecord";
+
+        /**
+         * 04 应用 公告 获取列表
+         */
+        public static final String GETNOTICELIST = LOGIN_URL + LOGIN_FLODER_USER + "NoticeList/MyNoticeList";
+
+        /**
+         * 05 应用 通知 列表
+         */
+        public static final String GETNOTIFICATIONLIST = LOGIN_URL + LOGIN_FLODER_USER + "NoticeList/MyNoticeList";
+
+        /**
+         * 05 应用 通知 列表
+         */
+        public static final String FINACELIST = LOGIN_URL + LOGIN_FLODER_USER + "FinanceRecord/GetFinanceRecord";
     }
 
     /**

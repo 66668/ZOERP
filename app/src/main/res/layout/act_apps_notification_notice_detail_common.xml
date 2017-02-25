@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/common_bg_examination"
+              android:orientation="vertical">
+
+    <include
+        android:id="@+id/topbar"
+        layout="@layout/topbar_common_itt"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/notice_detail_bg_common">
+
+        <TextView
+            android:id="@+id/tv_notice_title"
+            style="@style/BlackText.Large20"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:text="agdjg;"
+            />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_below="@+id/tv_notice_title"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"
+            android:text="shijian"
+            android:textColor="@color/textHintColor"
+            android:textSize="@dimen/common_textSize_default12"/>
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/tv_time"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"
+            android:text="发件人"
+            android:textColor="@color/textHintColor"
+            android:textSize="@dimen/common_textSize_default12"/>
+
+        <TextView
+            android:id="@+id/tv_to"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_below="@+id/tv_time"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/tv_name"
+            android:gravity="center_vertical"
+            android:text="至"
+            android:textColor="@color/textHintColor"
+            android:textSize="@dimen/common_textSize_default12"/>
+
+        <TextView
+            android:id="@+id/tv_name2"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/tv_time"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/tv_to"
+            android:gravity="center_vertical"
+            android:text="收件人"
+            android:textColor="@color/textHintColor"
+            android:textSize="@dimen/common_textSize_default12"/>
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">\
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/notice_detail_bg_common"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="15dp"
+                android:text="goijdhjasgknsdaogkj"
+                android:textColor="@color/black"
+                android:textSize="@dimen/common_textSize_default14"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

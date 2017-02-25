@@ -119,6 +119,11 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="BlackText.Small13">
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
     <style name="BlackText.standard">
         <item name="android:ellipsize">end</item>
         <item name="android:textSize">14sp</item>

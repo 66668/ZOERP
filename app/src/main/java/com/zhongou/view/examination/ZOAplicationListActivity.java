@@ -19,28 +19,28 @@ import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
 import com.zhongou.model.MyApplicationModel;
 import com.zhongou.utils.PageUtil;
-import com.zhongou.view.examination.applicationdetail.BorrowDetailActivity;
-import com.zhongou.view.examination.applicationdetail.ConferenceDetailActivity;
-import com.zhongou.view.examination.applicationdetail.ContractFileDetailActivity;
-import com.zhongou.view.examination.applicationdetail.DimissionDetailActivity;
-import com.zhongou.view.examination.applicationdetail.FinancialFeeDetailActivity;
-import com.zhongou.view.examination.applicationdetail.FinancialLoanDetailActivity;
-import com.zhongou.view.examination.applicationdetail.FinancialPayDetailActivity;
-import com.zhongou.view.examination.applicationdetail.FinancialReimburseDetailActivity;
-import com.zhongou.view.examination.applicationdetail.LeaveDetailActivity;
-import com.zhongou.view.examination.applicationdetail.NotificationAndNoticeDetailActivity;
-import com.zhongou.view.examination.applicationdetail.OfficeDetailActivity;
-import com.zhongou.view.examination.applicationdetail.OutGoingDetailActivity;
-import com.zhongou.view.examination.applicationdetail.PositionReplaceDetailActivity;
-import com.zhongou.view.examination.applicationdetail.ProcurementDetailActivity;
-import com.zhongou.view.examination.applicationdetail.ReceiveDetailActivity;
-import com.zhongou.view.examination.applicationdetail.RecruitmentDetailActivity;
-import com.zhongou.view.examination.applicationdetail.RetestDetailActivity;
-import com.zhongou.view.examination.applicationdetail.SalaryadjustDetailActivity;
-import com.zhongou.view.examination.applicationdetail.TakeDaysOffDetailActivity;
-import com.zhongou.view.examination.applicationdetail.VehicleDetailActivity;
-import com.zhongou.view.examination.applicationdetail.VehicleMaintainDetailActivity;
-import com.zhongou.view.examination.applicationdetail.WorkOverTimeDetailActivity;
+import com.zhongou.view.examination.applicationdetail.BorrowDetailAplActivity;
+import com.zhongou.view.examination.applicationdetail.ConferenceDetailAplActivity;
+import com.zhongou.view.examination.applicationdetail.ContractFileDetailAplActivity;
+import com.zhongou.view.examination.applicationdetail.DimissionDetailAplActivity;
+import com.zhongou.view.examination.applicationdetail.FinancialFeeDetailAplActivity;
+import com.zhongou.view.examination.applicationdetail.FinancialLoanDetailAplActivity;
+import com.zhongou.view.examination.applicationdetail.FinancialPayDetailAplActivity;
+import com.zhongou.view.examination.applicationdetail.FinancialReimburseDetailAplActivity;
+import com.zhongou.view.examination.applicationdetail.LeaveDetailAplActivity;
+import com.zhongou.view.examination.applicationdetail.NotificationAndNoticeDetailAplActivity;
+import com.zhongou.view.examination.applicationdetail.OfficeDetailAplActivity;
+import com.zhongou.view.examination.applicationdetail.OutGoingDetailAplActivity;
+import com.zhongou.view.examination.applicationdetail.PositionReplaceDetailAplActivity;
+import com.zhongou.view.examination.applicationdetail.ProcurementDetailAplActivity;
+import com.zhongou.view.examination.applicationdetail.ReceiveDetailAplActivity;
+import com.zhongou.view.examination.applicationdetail.RecruitmentDetailAplActivity;
+import com.zhongou.view.examination.applicationdetail.RetestDetailAplActivity;
+import com.zhongou.view.examination.applicationdetail.SalaryadjustDetailAplActivity;
+import com.zhongou.view.examination.applicationdetail.TakeDaysOffDetailAplActivity;
+import com.zhongou.view.examination.applicationdetail.VehicleDetailAplActivity;
+import com.zhongou.view.examination.applicationdetail.VehicleMaintainDetailAplActivity;
+import com.zhongou.view.examination.applicationdetail.WorkOverTimeDetailAplActivity;
 import com.zhongou.widget.NiceSpinner;
 import com.zhongou.widget.RefreshAndLoadListView;
 
@@ -191,6 +191,10 @@ public class ZOAplicationListActivity extends BaseActivity implements RefreshAnd
     //RefreshListView.IReflashListener接口 下拉刷新
     @Override
     public void onRefresh() {
+        if (IMaxtime == "") {
+            sendMessage(GET_NONE_NEWDATA, "无最新数据");
+            return;
+        }
         Loading.noDialogRun(ZOAplicationListActivity.this, new Runnable() {
 
             @Override
@@ -220,6 +224,10 @@ public class ZOAplicationListActivity extends BaseActivity implements RefreshAnd
     // 上拉加载
     @Override
     public void onLoadMore() {
+        if (IMinTime == "") {
+            sendMessage(GET_NONE_NEWDATA, "无最新数据");
+            return;
+        }
         Loading.noDialogRun(ZOAplicationListActivity.this, new Runnable() {
 
             @Override
@@ -252,7 +260,6 @@ public class ZOAplicationListActivity extends BaseActivity implements RefreshAnd
         switch (msg.what) {
             case GET_NEW_DATA:
                 list = (ArrayList<MyApplicationModel>) msg.obj;//获取数据
-                Log.d("SJY", "第一次获取数据长度=" + list.size());
                 SplitListState(list, GET_NEW_DATA);//筛选数据状态
                 showSelectData(myLastSelectState, GET_NEW_DATA);//根据spinner值和数据状态 确定显示数据
 
@@ -322,20 +329,19 @@ public class ZOAplicationListActivity extends BaseActivity implements RefreshAnd
         listUNDO = new ArrayList<>();
         listDONE = new ArrayList<>();
         listDOING = new ArrayList<>();
-
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getApprovalStatus().contains("0")) {//未审批
+                listUNDO.add(list.get(i));
+            } else if (list.get(i).getApprovalStatus().contains("1")) {//已审批
+                listDONE.add(list.get(i));
+            } else {
+                listDOING.add(list.get(i));
+            }
+        }
         switch (STATE) {
             case GET_NEW_DATA:
                 Log.d("SJY", "GET_NEW_DATA筛选");
                 //数据正常拼接
-                for (int i = 0; i < list.size(); i++) {
-                    if (list.get(i).getApprovalStatus().contains("0")) {//未审批
-                        listUNDO.add(list.get(i));
-                    } else if (list.get(i).getApprovalStatus().contains("1")) {//已审批
-                        listDONE.add(list.get(i));
-                    } else {
-                        listDOING.add(list.get(i));
-                    }
-                }
                 //总数据拼接
                 listAll.addAll(list);// 总记录数据
                 listDOINGALL.addAll(listDOING);
@@ -346,16 +352,6 @@ public class ZOAplicationListActivity extends BaseActivity implements RefreshAnd
 
             case GET_REFRESH_DATA:
                 Log.d("SJY", "GET_REFRESH_DATA筛选");
-                //数据插入
-                for (int i = 0; i < list.size(); i++) {
-                    if (list.get(i).getApprovalStatus().contains("0")) {//未审批
-                        listUNDO.add(list.get(i));
-                    } else if (list.get(i).getApprovalStatus().contains("1")) {//已审批
-                        listDONE.add(list.get(i));
-                    } else {
-                        listDOING.add(list.get(i));
-                    }
-                }
 
                 //数据插入 (已做拼接处理),使用：当切换spinner时，刷新了n个长度的数据可以直接显示
                 //但是 spinner子状态下如何拼接数据？还有一种方式：每次刷新 清空子状态数据重新赋值？
@@ -377,16 +373,6 @@ public class ZOAplicationListActivity extends BaseActivity implements RefreshAnd
 
             case GET_MORE_DATA:
                 Log.d("SJY", "GET_MORE_DATA筛选");
-                //数据正常拼接
-                for (int i = 0; i < list.size(); i++) {
-                    if (list.get(i).getApprovalStatus().contains("0")) {//未审批
-                        listUNDO.add(list.get(i));
-                    } else if (list.get(i).getApprovalStatus().contains("1")) {//已审批
-                        listDONE.add(list.get(i));
-                    } else {
-                        listDOING.add(list.get(i));
-                    }
-                }
                 //总数据拼接
                 listAll.addAll(list);// 总记录数据
                 listDOINGALL.addAll(listDOING);
@@ -494,39 +480,39 @@ public class ZOAplicationListActivity extends BaseActivity implements RefreshAnd
         intent.putExtra("MyApplicationModel", model);
         switch (type) {
             case "招聘申请"://01
-                intent.setClass(this, RecruitmentDetailActivity.class);
+                intent.setClass(this, RecruitmentDetailAplActivity.class);
                 startActivity(intent);
                 break;
             case "离职申请"://02
-                intent.setClass(this, DimissionDetailActivity.class);
+                intent.setClass(this, DimissionDetailAplActivity.class);
                 startActivity(intent);
                 break;
             case "请假申请"://03
-                intent.setClass(this, LeaveDetailActivity.class);
+                intent.setClass(this, LeaveDetailAplActivity.class);
                 startActivity(intent);
                 break;
             case "加班申请"://04
-                intent.setClass(this, WorkOverTimeDetailActivity.class);
+                intent.setClass(this, WorkOverTimeDetailAplActivity.class);
                 startActivity(intent);
                 break;
             case "调休申请"://05
-                intent.setClass(this, TakeDaysOffDetailActivity.class);
+                intent.setClass(this, TakeDaysOffDetailAplActivity.class);
                 startActivity(intent);
                 break;
             case "借阅申请"://06
-                intent.setClass(this, BorrowDetailActivity.class);
+                intent.setClass(this, BorrowDetailAplActivity.class);
                 startActivity(intent);
                 break;
             case "调薪申请"://07
-                intent.setClass(this, SalaryadjustDetailActivity.class);
+                intent.setClass(this, SalaryadjustDetailAplActivity.class);
                 startActivity(intent);
                 break;
             case "用车申请"://08
-                intent.setClass(this, VehicleDetailActivity.class);
+                intent.setClass(this, VehicleDetailAplActivity.class);
                 startActivity(intent);
                 break;
             case "车辆维保"://09
-                intent.setClass(this, VehicleMaintainDetailActivity.class);
+                intent.setClass(this, VehicleMaintainDetailAplActivity.class);
                 startActivity(intent);
                 break;
             case "财务申请"://10
@@ -535,16 +521,16 @@ public class ZOAplicationListActivity extends BaseActivity implements RefreshAnd
                  * 该接口不同于其他接口，数据需要再本activiy中获取后才做跳转
                  */
                 if (model.getApplicationTitle().contains("借款")) {
-                    intent.setClass(this, FinancialLoanDetailActivity.class);
+                    intent.setClass(this, FinancialLoanDetailAplActivity.class);
                     startActivity(intent);
                 } else if (model.getApplicationTitle().contains("付款")) {
-                    intent.setClass(this, FinancialPayDetailActivity.class);
+                    intent.setClass(this, FinancialPayDetailAplActivity.class);
                     startActivity(intent);
                 } else if (model.getApplicationTitle().contains("费用申请")) {
-                    intent.setClass(this, FinancialFeeDetailActivity.class);
+                    intent.setClass(this, FinancialFeeDetailAplActivity.class);
                     startActivity(intent);
                 } else if (model.getApplicationTitle().contains("报销")) {
-                    intent.setClass(this, FinancialReimburseDetailActivity.class);
+                    intent.setClass(this, FinancialReimburseDetailAplActivity.class);
                     startActivity(intent);
                 } else {
                     PageUtil.DisplayToast("error!");
@@ -552,39 +538,39 @@ public class ZOAplicationListActivity extends BaseActivity implements RefreshAnd
 
                 break;
             case "调动申请"://11
-                intent.setClass(this, PositionReplaceDetailActivity.class);
+                intent.setClass(this, PositionReplaceDetailAplActivity.class);
                 startActivity(intent);
                 break;
             case "采购申请"://12
-                intent.setClass(this, ProcurementDetailActivity.class);
+                intent.setClass(this, ProcurementDetailAplActivity.class);
                 startActivity(intent);
                 break;
             case "通知公告申请"://13
-                intent.setClass(this, NotificationAndNoticeDetailActivity.class);
+                intent.setClass(this, NotificationAndNoticeDetailAplActivity.class);
                 startActivity(intent);
                 break;
             case "办公室申请"://14
-                intent.setClass(this, OfficeDetailActivity.class);
+                intent.setClass(this, OfficeDetailAplActivity.class);
                 startActivity(intent);
                 break;
             case "领用申请"://15
-                intent.setClass(this, ReceiveDetailActivity.class);
+                intent.setClass(this, ReceiveDetailAplActivity.class);
                 startActivity(intent);
                 break;
             case "合同文件申请"://16
-                intent.setClass(this, ContractFileDetailActivity.class);
+                intent.setClass(this, ContractFileDetailAplActivity.class);
                 startActivity(intent);
                 break;
             case "外出申请"://17
-                intent.setClass(this, OutGoingDetailActivity.class);
+                intent.setClass(this, OutGoingDetailAplActivity.class);
                 startActivity(intent);
                 break;
             case "复试申请"://18
-                intent.setClass(this, RetestDetailActivity.class);
+                intent.setClass(this, RetestDetailAplActivity.class);
                 startActivity(intent);
                 break;
             case "会议申请"://19
-                intent.setClass(this, ConferenceDetailActivity.class);
+                intent.setClass(this, ConferenceDetailAplActivity.class);
                 startActivity(intent);
                 break;
         }

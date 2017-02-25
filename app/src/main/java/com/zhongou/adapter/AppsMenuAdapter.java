@@ -21,8 +21,8 @@ import com.zhongou.R;
 import com.zhongou.view.ExaminationAcitivity;
 import com.zhongou.view.FinanceListAcitivity;
 import com.zhongou.view.MapAttendAcitivity;
-import com.zhongou.view.NoticeAcitivity;
-import com.zhongou.view.NotificationAcitivity;
+import com.zhongou.view.NoticeListActivity;
+import com.zhongou.view.NotificationListActivity;
 import com.zhongou.view.PerformanceManagerActivity;
 import com.zhongou.view.ProcueRecordActivity;
 import com.zhongou.view.ScheduleActivity;
@@ -101,11 +101,11 @@ public class AppsMenuAdapter extends BaseAdapter {
                         mContext.startActivity(intent2);
                         break;
                     case 3://公告
-                        Intent intent3 = new Intent(mContext, NoticeAcitivity.class);
+                        Intent intent3 = new Intent(mContext, NoticeListActivity.class);
                         mContext.startActivity(intent3);
                         break;
                     case 4://通知
-                        Intent intent4 = new Intent(mContext, NotificationAcitivity.class);
+                        Intent intent4 = new Intent(mContext, NotificationListActivity.class);
                         mContext.startActivity(intent4);
                         break;
                     case 5://财务

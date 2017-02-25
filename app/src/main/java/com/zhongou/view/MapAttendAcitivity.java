@@ -82,7 +82,7 @@ public class MapAttendAcitivity extends BaseActivity {
     }
 
     public void forRecord(View view) {
-        startActivity(MapAttendRecordActivity.class);
+        startActivity(MapAttendRecordListActivity.class);
     }
 
 }

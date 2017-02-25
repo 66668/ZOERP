@@ -12,8 +12,8 @@ import android.widget.TextView;
 import com.zhongou.R;
 import com.zhongou.base.BaseFragment;
 import com.zhongou.view.FinanceListAcitivity;
-import com.zhongou.view.NoticeAcitivity;
-import com.zhongou.view.NotificationAcitivity;
+import com.zhongou.view.NoticeListActivity;
+import com.zhongou.view.NotificationListActivity;
 import com.zhongou.view.ScheduleActivity;
 
 
@@ -124,7 +124,7 @@ public class MessageFragment extends BaseFragment {
         layout_notification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), NotificationAcitivity.class);
+                Intent intent = new Intent(getActivity(), NotificationListActivity.class);
                 startActivity(intent);
             }
         });
@@ -133,7 +133,7 @@ public class MessageFragment extends BaseFragment {
         layout_notice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), NoticeAcitivity.class);
+                Intent intent = new Intent(getActivity(), NoticeListActivity.class);
                 startActivity(intent);
             }
         });

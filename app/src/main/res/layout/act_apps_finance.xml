@@ -4,9 +4,9 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <include layout="@layout/topbar_common_itt"/>
+    <include layout="@layout/topbar_common_ist"/>
 
-    <com.zhongou.widget.RefreshListView
+    <com.zhongou.widget.RefreshAndLoadListView
         android:id="@+id/listview_finance"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

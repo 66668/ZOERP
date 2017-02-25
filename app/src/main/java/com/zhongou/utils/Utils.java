@@ -611,7 +611,6 @@ public class Utils {
             is = new FileInputStream(filePath);
             return BitmapFactory.decodeStream(is, null, opt);
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             return null;
         } finally {
@@ -619,7 +618,6 @@ public class Utils {
                 try {
                     is.close();
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }

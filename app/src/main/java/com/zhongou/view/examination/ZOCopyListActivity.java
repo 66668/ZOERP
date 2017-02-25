@@ -18,10 +18,10 @@ import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
 import com.zhongou.model.MyCopyModel;
 import com.zhongou.utils.PageUtil;
-import com.zhongou.view.examination.applicationdetail.FinancialFeeDetailActivity;
-import com.zhongou.view.examination.applicationdetail.FinancialLoanDetailActivity;
-import com.zhongou.view.examination.applicationdetail.FinancialPayDetailActivity;
-import com.zhongou.view.examination.applicationdetail.FinancialReimburseDetailActivity;
+import com.zhongou.view.examination.applicationdetail.FinancialFeeDetailAplActivity;
+import com.zhongou.view.examination.applicationdetail.FinancialLoanDetailAplActivity;
+import com.zhongou.view.examination.applicationdetail.FinancialPayDetailAplActivity;
+import com.zhongou.view.examination.applicationdetail.FinancialReimburseDetailAplActivity;
 import com.zhongou.view.examination.copydetail.BorrowDetailCopyActivity;
 import com.zhongou.view.examination.copydetail.ConferenceDetailCopyActivity;
 import com.zhongou.view.examination.copydetail.ContractFileDetailCopyActivity;
@@ -300,13 +300,13 @@ public class ZOCopyListActivity extends BaseActivity implements RefreshListView.
             case "财务申请"://10
                 //根据type决定跳转到具体界面
                 if (model.getApplicationTitle().contains("借款")) {
-                    startActivity(FinancialLoanDetailActivity.class, bundle);
+                    startActivity(FinancialLoanDetailAplActivity.class, bundle);
                 } else if (model.getApplicationTitle().contains("付款")) {
-                    startActivity(FinancialPayDetailActivity.class, bundle);
+                    startActivity(FinancialPayDetailAplActivity.class, bundle);
                 } else if (model.getApplicationTitle().contains("费用申请")) {
-                    startActivity(FinancialFeeDetailActivity.class, bundle);
+                    startActivity(FinancialFeeDetailAplActivity.class, bundle);
                 } else if (model.getApplicationTitle().contains("报销")) {
-                    startActivity(FinancialReimburseDetailActivity.class, bundle);
+                    startActivity(FinancialReimburseDetailAplActivity.class, bundle);
                 } else {
                     PageUtil.DisplayToast("error!");
                 }

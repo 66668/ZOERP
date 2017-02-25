@@ -18,6 +18,8 @@
     <color name="common_topbar_bgcolor">#048ff0</color>
     <color name="common_color">#048ff0</color>
     <color name="item_contacts_bg_color">#f2f2f2</color>
+    <color name="item_notification_stroke_color">#cacaca</color>
+    <color name="notice_detail_bg_common">#ffffff</color>
 
     <!-- 登录按钮变色-->
     <color name="btn_bg">#0da9f1</color> <!-- 按钮背景色 -->

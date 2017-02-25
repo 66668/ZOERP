@@ -8,9 +8,9 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.zhongou.R;
-import com.zhongou.base.BaseListAdapter;
+import com.zhongou.base.BaseLoadMoreListAdapter;
 import com.zhongou.common.ImageLoadingConfig;
-import com.zhongou.model.MyApplicationModel;
+import com.zhongou.model.NoticeListModel;
 
 
 /**
@@ -19,21 +19,19 @@ import com.zhongou.model.MyApplicationModel;
  * @author
  */
 
-public class NoticeLoadMoreListAdapter extends BaseListAdapter {
+public class NoticeLoadMoreListAdapter extends BaseLoadMoreListAdapter {
     private ImageLoader imgLoader;
     private DisplayImageOptions imgOptions;
 
 
     public class WidgetHolder {
-        public TextView tvTitle;
-        public TextView tvName;
         public TextView tvTime;
         public TextView tvType;
-        public TextView tvComment;
+        public TextView tvContent;
     }
 
-    public NoticeLoadMoreListAdapter(Context context) {
-        super(context);
+    public NoticeLoadMoreListAdapter(Context context, AdapterCallBack callBack) {
+        super(context, callBack);
         imgLoader = ImageLoader.getInstance();
         imgLoader.init(ImageLoaderConfiguration.createDefault(context));
         imgOptions = ImageLoadingConfig.generateDisplayImageOptions(R.mipmap.ic_launcher);
@@ -42,14 +40,13 @@ public class NoticeLoadMoreListAdapter extends BaseListAdapter {
     @Override
     protected View inflateConvertView() {
         //一条记录的布局
-        View view = inflater.inflate(R.layout.item_examination_common, null);
+        View view = inflater.inflate(R.layout.item_app_notification_notice_common, null);
         //该布局上的控件
         WidgetHolder holder = new WidgetHolder();
-        holder.tvName = (TextView) view.findViewById(R.id.tv_name);
-        holder.tvTitle = (TextView) view.findViewById(R.id.tv_title);
         holder.tvTime = (TextView) view.findViewById(R.id.tv_time);
         holder.tvType = (TextView) view.findViewById(R.id.tv_type);
-        holder.tvComment = (TextView) view.findViewById(R.id.tv_Comment);
+        holder.tvContent = (TextView) view.findViewById(R.id.tv_content);
+
         view.setTag(holder);
         return view;
     }
@@ -58,15 +55,12 @@ public class NoticeLoadMoreListAdapter extends BaseListAdapter {
     protected void initViewData(final int position, View convertView) {
         WidgetHolder holder = (WidgetHolder) convertView.getTag();//获取控件管理实例
         //获取一条信息
-        //?java.lang.ClassCastException: java.util.ArrayList cannot be cast to com.yvision.model.VisitorBModel
-        MyApplicationModel model = (MyApplicationModel) entityList.get(position);
-        holder.tvName.setText(model.getEmployeeName());
-        holder.tvTime.setText(model.getCreateTime());
-        holder.tvComment.setText(model.getComment());
-        holder.tvType.setText(model.getApplicationType());
-        holder.tvTitle.setText(model.getApplicationTitle());
-    }
+        NoticeListModel model = (NoticeListModel) entityList.get(position);
+        holder.tvTime.setText(model.getPublishTime());
+        holder.tvType.setText(model.getApplicationTitle());
+        holder.tvContent.setText(model.getAbstract());
 
+    }
 
 
     public void destroy() {
