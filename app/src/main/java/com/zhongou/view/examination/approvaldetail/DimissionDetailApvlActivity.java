@@ -85,11 +85,12 @@ public class DimissionDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_endTime)
     TextView tv_endTime;
 
-    //原因
-    @ViewInject(id = R.id.tv_reason)
+    //说明
+    @ViewInject(id = R.id.tv_reason, click = "ReasonExpended")
     TextView tv_reason;
-  //原因
-    @ViewInject(id = R.id.tv_remark)
+
+    //备注
+    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
     TextView tv_remark;
 
     //离职类型
@@ -119,7 +120,7 @@ public class DimissionDetailApvlActivity extends BaseActivity {
         getDetailData();
     }
 
-    private void setShow(DismissionApvlModel model){
+    private void setShow(DismissionApvlModel model) {
         tv_ApprovalPerson.setText(model.getEmployeeName());
         tv_approvaldept.setText(model.getDepartmentName());
         tv_approvalCo.setText(model.getStoreName());
@@ -159,6 +160,7 @@ public class DimissionDetailApvlActivity extends BaseActivity {
             }
         });
     }
+
     @Override
     protected void handleMessage(Message msg) {
         super.handleMessage(msg);
@@ -174,32 +176,34 @@ public class DimissionDetailApvlActivity extends BaseActivity {
                 break;
         }
     }
+
     //驳回
     public void forRefulse(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonDisagreeActivity.class,bundle);
+        startActivity(CommonDisagreeActivity.class, bundle);
     }
 
     //同意
     public void toForCommit(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonAgreeActivity.class,bundle);
+        startActivity(CommonAgreeActivity.class, bundle);
     }
 
     //转交
-    public void forTransfer(View view){
+    public void forTransfer(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonTransfertoActivity.class,bundle);
+        startActivity(CommonTransfertoActivity.class, bundle);
 
     }
+
     // 抄送
-    public void forCopyto(View view){
+    public void forCopyto(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonCopytoCoActivity.class,bundle);
+        startActivity(CommonCopytoCoActivity.class, bundle);
     }
 
     /**
@@ -210,4 +214,33 @@ public class DimissionDetailApvlActivity extends BaseActivity {
     public void forBack(View view) {
         this.finish();
     }
+
+    private boolean isExpend = false;
+
+    public void ReasonExpended(View view) {
+        if (!isExpend) {
+            tv_reason.setMinLines(0);
+            tv_reason.setMaxLines(Integer.MAX_VALUE);
+            isExpend = true;
+        } else {
+            tv_reason.setLines(3);
+            isExpend = false;
+        }
+
+    }
+
+    private boolean isRemarkExpend = false;
+
+    public void RemarkExpended(View view) {
+        if (!isRemarkExpend) {
+            tv_remark.setMinLines(0);
+            tv_remark.setMaxLines(Integer.MAX_VALUE);
+            isRemarkExpend = true;
+        } else {
+            tv_remark.setLines(3);
+            isRemarkExpend = false;
+        }
+
+    }
+
 }

@@ -38,16 +38,17 @@ public class MainActivity extends BaseActivity {
     private NavigationView mNavigationView;
     //    private FrameLayout mHomeContent;
     private ViewPager viewPaper;
-    private RadioGroup mRadioGroup;
     private Toolbar toolbar;
     private DrawerLayout mDrawerLayout;
+    private RadioGroup mRadioGroup;
     private RadioButton mMessageRb;
     private RadioButton mAppsRb;
     private RadioButton mContractsRb;
 
-    private MessageFragment messageFragment;
-    private AppsFragment appsFragment;
-    private ContactsFragment contactsFragment;
+    private MessageFragment messageFragment;//消息
+    private AppsFragment appsFragment;//应用
+    private ContactsFragment contactsFragment;//联系人
+
     private List<BaseFragment> listFragment;
     private int currentFragment;
 
@@ -65,6 +66,66 @@ public class MainActivity extends BaseActivity {
         initMyView();
         initViewPaperAndFragment();
         initListener();
+    }
+
+    /**
+     * 控件初始化
+     */
+    protected void initMyView() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout_home);
+
+        //低于5.0版本的无法实现该功能
+        if (Build.VERSION.SDK_INT >= 21) {
+            // 设置Drawerlayout开关指示器，即Toolbar最左边的那个icon
+            ActionBarDrawerToggle mActionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.open, R.string.close);
+            mActionBarDrawerToggle.syncState();
+            mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
+        }
+
+        //底部控件实例化
+        viewPaper = (ViewPager) findViewById(R.id.viewpager); //tab上方的区域
+        mRadioGroup = (RadioGroup) findViewById(R.id.radiogroup);  //底部的3个tab
+        mMessageRb = (RadioButton) findViewById(R.id.btn_message);
+        mAppsRb = (RadioButton) findViewById(R.id.btn_app);
+        mContractsRb = (RadioButton) findViewById(R.id.btn_contract);
+
+        //侧滑菜单实例化
+        //给NavigationView填充顶部区域，也可在xml中使用app:headerLayout="@layout/header_nav"来设置
+        mNavigationView = (NavigationView) findViewById(R.id.id_navigationview);
+        mNavigationView.inflateHeaderView(R.layout.navigaitonview_header);
+        View headerView = mNavigationView.getHeaderView(0);
+
+        //添加图片，可替换成图片缓存方式
+        CircleImageView circleImageView = (CircleImageView) headerView.findViewById(R.id.circleImg);
+        circleImageView.setImageResource(R.mipmap.info_photo);
+        //添加登陆人姓名
+        TextView tvName = (TextView) headerView.findViewById(R.id.tv_login_name);
+
+        if (!(UserHelper.getCurrentUser() == null) && !(UserHelper.getCurrentUser().getName() ==null)) {
+            tvName.setText(UserHelper.getCurrentUser().getName());
+        }
+
+
+        //添加菜单内容
+        mNavigationView.inflateMenu(R.menu.menu_nav);
+        // 自己写的方法，设置NavigationView中menu的item被选中后要执行的操作
+        onNavgationViewMenuItemSelected(mNavigationView);
+
+    }
+
+    private void initViewPaperAndFragment() {
+
+        messageFragment = MessageFragment.newInstance();
+        appsFragment = AppsFragment.newInstance();
+        contactsFragment = ContactsFragment.newInstance();
+        listFragment = new ArrayList<>();
+        listFragment.add(messageFragment);
+        listFragment.add(appsFragment);
+        listFragment.add(contactsFragment);
+        viewPaper.setOffscreenPageLimit(3);
+        viewPaper.setOnPageChangeListener(onPageChangeListener);
+
     }
 
     /**
@@ -90,6 +151,12 @@ public class MainActivity extends BaseActivity {
                         break;
 
                 }
+
+                //通过fragments这个adapter还有index来替换帧布局中的内容
+                //                Fragment fragment = (Fragment) fragmentStatePagerAdapter.instantiateItem(mHomeContent, index);
+                //                //一开始将帧布局中 的内容设置为第一个
+                //                fragmentStatePagerAdapter.setPrimaryItem(mHomeContent, 0, fragment);
+                //                fragmentStatePagerAdapter.finishUpdate(mHomeContent);
 
                 viewPaper.setCurrentItem(currentFragment, false);
 
@@ -144,61 +211,6 @@ public class MainActivity extends BaseActivity {
     //        });
     //    }
 
-    /**
-     * 控件初始化
-     */
-    protected void initMyView() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout_home);
-
-        //低于5.0版本的无法实现该功能
-        if (Build.VERSION.SDK_INT >= 21) {
-            // 设置Drawerlayout开关指示器，即Toolbar最左边的那个icon
-            ActionBarDrawerToggle mActionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.open, R.string.close);
-            mActionBarDrawerToggle.syncState();
-            mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
-        }
-
-        //底部控件实例化
-        viewPaper = (ViewPager) findViewById(R.id.viewpager); //tab上方的区域
-        mRadioGroup = (RadioGroup) findViewById(R.id.radiogroup);  //底部的3个tab
-        mMessageRb = (RadioButton) findViewById(R.id.btn_message);
-        mAppsRb = (RadioButton) findViewById(R.id.btn_app);
-        mContractsRb = (RadioButton) findViewById(R.id.btn_contract);
-
-        //侧滑菜单实例化
-        //给NavigationView填充顶部区域，也可在xml中使用app:headerLayout="@layout/header_nav"来设置
-        mNavigationView = (NavigationView) findViewById(R.id.id_navigationview);
-        mNavigationView.inflateHeaderView(R.layout.navigaitonview_header);
-        View headerView = mNavigationView.getHeaderView(0);
-
-        //添加图片，可替换成图片缓存方式
-        CircleImageView circleImageView = (CircleImageView) headerView.findViewById(R.id.circleImg);
-        circleImageView.setImageResource(R.mipmap.info_photo);
-        //添加登陆人姓名
-        TextView tvName = (TextView) headerView.findViewById(R.id.tv_login_name);
-        tvName.setText(UserHelper.getCurrentUser().getName());
-
-        //添加菜单内容
-        mNavigationView.inflateMenu(R.menu.menu_nav);
-        // 自己写的方法，设置NavigationView中menu的item被选中后要执行的操作
-        onNavgationViewMenuItemSelected(mNavigationView);
-
-    }
-
-    private void initViewPaperAndFragment() {
-
-        messageFragment = MessageFragment.newInstance();
-        appsFragment = AppsFragment.newInstance();
-        contactsFragment = ContactsFragment.newInstance();
-        listFragment = new ArrayList<>();
-        listFragment.add(messageFragment);
-        listFragment.add(appsFragment);
-        listFragment.add(contactsFragment);
-        viewPaper.setOffscreenPageLimit(3);
-        viewPaper.setOnPageChangeListener(onPageChangeListener);
-
-    }
 
     private ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
         @Override

@@ -63,7 +63,6 @@ public class ZOApprovelListAdapter extends BaseListAdapter {
     protected void initViewData(final int position, View convertView) {
         WidgetHolder holder = (WidgetHolder) convertView.getTag();//获取控件管理实例
         //获取一条信息
-        //?java.lang.ClassCastException: java.util.ArrayList cannot be cast to com.yvision.model.VisitorBModel
         MyApprovalModel model = (MyApprovalModel) entityList.get(position);
         holder.tvName.setText(model.getEmployeeName());
         holder.tvName.setBackgroundColor(ContextCompat.getColor(MyApplication.getInstance(),randomColor()));

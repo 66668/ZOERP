@@ -93,7 +93,7 @@ public class OfficeDetailApvlActivity extends BaseActivity {
     TextView tv_office_useage;
 
     //备注
-    @ViewInject(id = R.id.tv_remark)
+    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
     TextView tv_remark;
 
 
@@ -215,5 +215,19 @@ public class OfficeDetailApvlActivity extends BaseActivity {
      */
     public void forBack(View view) {
         this.finish();
+    }
+
+    private boolean isRemarkExpend = false;
+
+    public void RemarkExpended(View view) {
+        if (!isRemarkExpend) {
+            tv_remark.setMinLines(0);
+            tv_remark.setMaxLines(Integer.MAX_VALUE);
+            isRemarkExpend = true;
+        } else {
+            tv_remark.setLines(3);
+            isRemarkExpend = false;
+        }
+
     }
 }

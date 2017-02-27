@@ -63,11 +63,6 @@ public class VehicleMaintainDetailCopyActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_project)
     TextView tv_project;
 
-    //行驶公里
-    @ViewInject(id = R.id.tv_StartMileage)
-    TextView tv_StartMileage;
-
-
     //费用
     @ViewInject(id = R.id.tv_EstimateFee)
     TextView tv_EstimateFee;
@@ -77,7 +72,7 @@ public class VehicleMaintainDetailCopyActivity extends BaseActivity {
     TextView tv_number;
 
     //备注
-    @ViewInject(id = R.id.tv_remark)
+    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
     TextView tv_remark;
 
     //审批人
@@ -134,7 +129,6 @@ public class VehicleMaintainDetailCopyActivity extends BaseActivity {
         tv_PlanmantainTime.setText(model.getPlanBorrowTime());
         tv_number.setText(model.getNumber());
         tv_project.setText(model.getMaintenanceProject());
-        tv_StartMileage.setText(model.getStartMileage());
         tv_Destination.setText(model.getDestination());
         tv_EstimateFee.setText(model.getEstimateFee());
         tv_remark.setText(model.getRemark());
@@ -212,6 +206,7 @@ public class VehicleMaintainDetailCopyActivity extends BaseActivity {
                 break;
         }
     }
+
     public class ViewHolder {
         private int id = -1;
         private TextView tv_name;
@@ -243,6 +238,7 @@ public class VehicleMaintainDetailCopyActivity extends BaseActivity {
         ls_childView.add(childView);
         return vh;
     }
+
     /**
      * back
      *
@@ -251,5 +247,19 @@ public class VehicleMaintainDetailCopyActivity extends BaseActivity {
 
     public void forBack(View view) {
         this.finish();
+    }
+
+    private boolean isRemarkExpend = false;
+
+    public void RemarkExpended(View view) {
+        if (!isRemarkExpend) {
+            tv_remark.setMinLines(0);
+            tv_remark.setMaxLines(Integer.MAX_VALUE);
+            isRemarkExpend = true;
+        } else {
+            tv_remark.setLines(3);
+            isRemarkExpend = false;
+        }
+
     }
 }

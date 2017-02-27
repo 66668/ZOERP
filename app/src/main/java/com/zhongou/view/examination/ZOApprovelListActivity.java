@@ -87,7 +87,6 @@ public class ZOApprovelListActivity extends BaseActivity implements RefreshAndLo
     //spinner
     private List<String> spinnerData;
     private String myLastSelectState;//记录spinner上次选中的值
-    private boolean isHanging = true;//
     private ArrayList<MyApprovalModel> list = null;//获取数据 每次20条
     private ArrayList<MyApprovalModel> listAll = new ArrayList<>();//记录所有数据
 
@@ -183,9 +182,10 @@ public class ZOApprovelListActivity extends BaseActivity implements RefreshAndLo
 
     //RefreshListView.IReflashListener接口 下拉刷新
     @Override
-   public void onRefresh() {
-        if(IMaxtime == ""){
-            sendMessage(GET_NONE_NEWDATA, "无最新数据");
+    public void onRefresh() {
+        if (IMaxtime == "" || IMaxtime == null) {
+            Log.d("SJY", "IMaxtime == kong");
+            sendMessage(GET_NONE_NEWDATA, "参数为空");
             return;
         }
         Loading.noDialogRun(ZOApprovelListActivity.this, new Runnable() {
@@ -199,7 +199,7 @@ public class ZOApprovelListActivity extends BaseActivity implements RefreshAndLo
                             IMaxtime,//iMaxTime
                             "");
 
-                    Log.d("SJY", "loadMore--min=" + IMaxtime);
+                    Log.d("SJY", "loadMore--max=" + IMaxtime);
                     if (visitorModelList == null || visitorModelList.size() < pageSize) {
                         vAdapter.IsEnd = true;
                     }
@@ -218,8 +218,9 @@ public class ZOApprovelListActivity extends BaseActivity implements RefreshAndLo
     // 上拉加载
     @Override
     public void onLoadMore() {
-        if(IMinTime == ""){
-            sendMessage(GET_NONE_NEWDATA, "无最新数据");
+        if (IMinTime == "" || IMinTime == null) {
+            Log.d("SJY", "IMinTime == kong");
+            sendMessage(GET_NONE_NEWDATA, "参数为空");
             return;
         }
         Loading.noDialogRun(ZOApprovelListActivity.this, new Runnable() {
@@ -234,7 +235,7 @@ public class ZOApprovelListActivity extends BaseActivity implements RefreshAndLo
                             "",//iMaxTime
                             IMinTime);
 
-                    Log.d("SJY", "loadMore--min=" + IMaxtime);
+                    Log.d("SJY", "loadMore--min=" + IMinTime);
                     if (visitorModelList == null || visitorModelList.size() < pageSize) {
                         vAdapter.IsEnd = true;
                     }
@@ -320,20 +321,20 @@ public class ZOApprovelListActivity extends BaseActivity implements RefreshAndLo
         listUNDO = new ArrayList<>();
         listDONE = new ArrayList<>();
         listDOING = new ArrayList<>();
-
+        //数据正常拼接
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getApprovalStatus().contains("0")) {//未审批
+                listUNDO.add(list.get(i));
+            } else if (list.get(i).getApprovalStatus().contains("1")) {//已审批
+                listDONE.add(list.get(i));
+            } else {
+                listDOING.add(list.get(i));
+            }
+        }
         switch (STATE) {
             case GET_NEW_DATA:
                 Log.d("SJY", "GET_NEW_DATA筛选");
-                //数据正常拼接
-                for (int i = 0; i < list.size(); i++) {
-                    if (list.get(i).getApprovalStatus().contains("0")) {//未审批
-                        listUNDO.add(list.get(i));
-                    } else if (list.get(i).getApprovalStatus().contains("1")) {//已审批
-                        listDONE.add(list.get(i));
-                    } else {
-                        listDOING.add(list.get(i));
-                    }
-                }
+
                 //总数据拼接
                 listAll.addAll(list);// 总记录数据
                 listDOINGALL.addAll(listDOING);
@@ -344,16 +345,6 @@ public class ZOApprovelListActivity extends BaseActivity implements RefreshAndLo
 
             case GET_REFRESH_DATA:
                 Log.d("SJY", "GET_REFRESH_DATA筛选");
-                //数据插入
-                for (int i = 0; i < list.size(); i++) {
-                    if (list.get(i).getApprovalStatus().contains("0")) {//未审批
-                        listUNDO.add(list.get(i));
-                    } else if (list.get(i).getApprovalStatus().contains("1")) {//已审批
-                        listDONE.add(list.get(i));
-                    } else {
-                        listDOING.add(list.get(i));
-                    }
-                }
 
                 //数据插入 (已做拼接处理),使用：当切换spinner时，刷新了n个长度的数据可以直接显示
                 //但是 spinner子状态下如何拼接数据？还有一种方式：每次刷新 清空子状态数据重新赋值？
@@ -375,16 +366,6 @@ public class ZOApprovelListActivity extends BaseActivity implements RefreshAndLo
 
             case GET_MORE_DATA:
                 Log.d("SJY", "GET_MORE_DATA筛选");
-                //数据正常拼接
-                for (int i = 0; i < list.size(); i++) {
-                    if (list.get(i).getApprovalStatus().contains("0")) {//未审批
-                        listUNDO.add(list.get(i));
-                    } else if (list.get(i).getApprovalStatus().contains("1")) {//已审批
-                        listDONE.add(list.get(i));
-                    } else {
-                        listDOING.add(list.get(i));
-                    }
-                }
                 //总数据拼接
                 listAll.addAll(list);// 总记录数据
                 listDOINGALL.addAll(listDOING);
@@ -418,7 +399,7 @@ public class ZOApprovelListActivity extends BaseActivity implements RefreshAndLo
                     vAdapter.insertEntityList(list);
                     myListView.loadAndFreshComplete();
                 } else if (STATE == GET_MORE_DATA) {
-                    vAdapter.addEntity(list);
+                    vAdapter.addEntityList(list);
                     myListView.loadAndFreshComplete();
                 } else if (STATE == GET_NONE_NEWDATA) {
 
@@ -435,7 +416,7 @@ public class ZOApprovelListActivity extends BaseActivity implements RefreshAndLo
                     myListView.loadAndFreshComplete();
 
                 } else if (STATE == GET_MORE_DATA) {
-                    vAdapter.addEntity(listDONE);
+                    vAdapter.addEntityList(listDONE);
                     myListView.loadAndFreshComplete();
 
                 } else if (STATE == GET_NONE_NEWDATA) {
@@ -453,7 +434,7 @@ public class ZOApprovelListActivity extends BaseActivity implements RefreshAndLo
                     myListView.loadAndFreshComplete();
 
                 } else if (STATE == GET_MORE_DATA) {
-                    vAdapter.addEntity(listUNDO);
+                    vAdapter.addEntityList(listUNDO);
                     myListView.loadAndFreshComplete();
 
                 } else if (STATE == GET_NONE_NEWDATA) {
@@ -472,7 +453,7 @@ public class ZOApprovelListActivity extends BaseActivity implements RefreshAndLo
                     myListView.loadAndFreshComplete();
 
                 } else if (STATE == GET_MORE_DATA) {
-                    vAdapter.addEntity(listDOING);
+                    vAdapter.addEntityList(listDOING);
                     myListView.loadAndFreshComplete();
 
                 } else if (STATE == GET_NONE_NEWDATA) {

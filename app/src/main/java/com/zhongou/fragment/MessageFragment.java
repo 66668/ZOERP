@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.zhongou.R;
 import com.zhongou.base.BaseFragment;
-import com.zhongou.view.FinanceListAcitivity;
+import com.zhongou.view.FinancialListAcitivity;
 import com.zhongou.view.NoticeListActivity;
 import com.zhongou.view.NotificationListActivity;
 import com.zhongou.view.ScheduleActivity;
@@ -142,7 +142,7 @@ public class MessageFragment extends BaseFragment {
         layout_undo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), FinanceListAcitivity.class);
+                Intent intent = new Intent(getActivity(), FinancialListAcitivity.class);
                 startActivity(intent);
             }
         });

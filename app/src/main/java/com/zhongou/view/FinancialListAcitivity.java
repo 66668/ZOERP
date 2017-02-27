@@ -28,12 +28,12 @@ import java.util.List;
 import static com.zhongou.R.id.tv_title;
 
 /**
- * 应用-财务(不同于审批-财务申请)
+ * 应用-财务列表界面(不同于审批-财务申请)
  * spinner+listView上拉下拉
  * Created by JackSong on 2016/10/25.
  */
 
-public class FinanceListAcitivity extends BaseActivity implements RefreshAndLoadListView.IReflashListener, RefreshAndLoadListView.ILoadMoreListener {
+public class FinancialListAcitivity extends BaseActivity implements RefreshAndLoadListView.IReflashListener, RefreshAndLoadListView.ILoadMoreListener {
     //back
     @ViewInject(id = R.id.layout_back, click = "forBack")
     RelativeLayout layout_back;
@@ -64,7 +64,7 @@ public class FinanceListAcitivity extends BaseActivity implements RefreshAndLoad
     //spinner
     private List<String> spinnerData;
     private String myLastSelectState;//记录spinner上次选中的值
-    private boolean isHanging = true;//
+
     private ArrayList<FinancialAllModel> list = null;//获取数据 每次20条
     private ArrayList<FinancialAllModel> listAll = new ArrayList<>();//记录所有数据
 
@@ -92,7 +92,7 @@ public class FinanceListAcitivity extends BaseActivity implements RefreshAndLoad
     private void initMyView() {
 
         vAdapter = new FinanceListAdapter(this);
-        myListView.setIRefreshListener(FinanceListAcitivity.this);//下拉刷新监听
+        myListView.setIRefreshListener(FinancialListAcitivity.this);//下拉刷新监听
         myListView.setILoadMoreListener(this);
         myListView.setAdapter(vAdapter);
 
@@ -131,7 +131,7 @@ public class FinanceListAcitivity extends BaseActivity implements RefreshAndLoad
 
                 //所需参数
                 FinancialAllModel model = (FinancialAllModel) vAdapter.getItem(newPosition);//
-                String type = model.getType();
+                String type = model.getTypes();
 
                 //页面跳转
                 transferTo(type, model);
@@ -140,13 +140,13 @@ public class FinanceListAcitivity extends BaseActivity implements RefreshAndLoad
     }
 
     private void getData() {
-        Loading.run(FinanceListAcitivity.this, new Runnable() {
+        Loading.run(FinancialListAcitivity.this, new Runnable() {
             @Override
             public void run() {
                 ifLoading = true;//
                 try {
                     List<FinancialAllModel> visitorModelList = UserHelper.GetAppFinanceList(
-                            FinanceListAcitivity.this,
+                            FinancialListAcitivity.this,
                             "",//iMaxTime
                             "");
 
@@ -170,7 +170,7 @@ public class FinanceListAcitivity extends BaseActivity implements RefreshAndLoad
             sendMessage(GET_NONE_NEWDATA, "无最新数据");
             return;
         }
-        Loading.noDialogRun(FinanceListAcitivity.this, new Runnable() {
+        Loading.noDialogRun(FinancialListAcitivity.this, new Runnable() {
 
             @Override
             public void run() {
@@ -178,7 +178,7 @@ public class FinanceListAcitivity extends BaseActivity implements RefreshAndLoad
                 try {
 
                     List<FinancialAllModel> visitorModelList = UserHelper.GetAppFinanceList(
-                            FinanceListAcitivity.this,
+                            FinancialListAcitivity.this,
                             IMaxtime,//iMaxTime
                             "");
 
@@ -209,7 +209,7 @@ public class FinanceListAcitivity extends BaseActivity implements RefreshAndLoad
             sendMessage(GET_NONE_NEWDATA, "无最新数据");
             return;
         }
-        Loading.run(FinanceListAcitivity.this, new Runnable() {
+        Loading.run(FinancialListAcitivity.this, new Runnable() {
 
             @Override
             public void run() {
@@ -217,7 +217,7 @@ public class FinanceListAcitivity extends BaseActivity implements RefreshAndLoad
                 ifLoading = true;//
                 try {
                     List<FinancialAllModel> visitorModelList = UserHelper.GetAppFinanceList(
-                            FinanceListAcitivity.this,
+                            FinancialListAcitivity.this,
                             "",//iMaxTime
                             IMinTime);
 
@@ -308,13 +308,13 @@ public class FinanceListAcitivity extends BaseActivity implements RefreshAndLoad
         listPay = new ArrayList<>();
 
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getType().contains("借款")) {//未审批
+            if (list.get(i).getTypes().contains("借款")) {//未审批
                 listLoan.add(list.get(i));
-            } else if (list.get(i).getType().contains("报销")) {//已审批
+            } else if (list.get(i).getTypes().contains("报销")) {//已审批
                 listRemburse.add(list.get(i));
-            } else if (list.get(i).getType().contains("费用申请")) {
+            } else if (list.get(i).getTypes().contains("费用申请")) {
                 listFee.add(list.get(i));
-            } else if (list.get(i).getType().contains("付款")) {
+            } else if (list.get(i).getTypes().contains("付款")) {
                 listPay.add(list.get(i));
             } else {
                 PageUtil.DisplayToast("参数出问题！");
@@ -392,7 +392,7 @@ public class FinanceListAcitivity extends BaseActivity implements RefreshAndLoad
                     vAdapter.insertEntityList(list);
                     myListView.loadAndFreshComplete();
                 } else if (STATE == GET_MORE_DATA) {
-                    vAdapter.addEntity(list);
+                    vAdapter.addEntityList(list);
                     myListView.loadAndFreshComplete();
                 } else if (STATE == GET_NONE_NEWDATA) {
 
@@ -409,7 +409,7 @@ public class FinanceListAcitivity extends BaseActivity implements RefreshAndLoad
                     myListView.loadAndFreshComplete();
 
                 } else if (STATE == GET_MORE_DATA) {
-                    vAdapter.addEntity(listLoan);
+                    vAdapter.addEntityList(listLoan);
                     myListView.loadAndFreshComplete();
 
                 } else if (STATE == GET_NONE_NEWDATA) {
@@ -427,7 +427,7 @@ public class FinanceListAcitivity extends BaseActivity implements RefreshAndLoad
                     myListView.loadAndFreshComplete();
 
                 } else if (STATE == GET_MORE_DATA) {
-                    vAdapter.addEntity(listRemburse);
+                    vAdapter.addEntityList(listRemburse);
                     myListView.loadAndFreshComplete();
 
                 } else if (STATE == GET_NONE_NEWDATA) {
@@ -446,7 +446,7 @@ public class FinanceListAcitivity extends BaseActivity implements RefreshAndLoad
                     myListView.loadAndFreshComplete();
 
                 } else if (STATE == GET_MORE_DATA) {
-                    vAdapter.addEntity(listFee);
+                    vAdapter.addEntityList(listFee);
                     myListView.loadAndFreshComplete();
 
                 } else if (STATE == GET_NONE_NEWDATA) {
@@ -465,7 +465,7 @@ public class FinanceListAcitivity extends BaseActivity implements RefreshAndLoad
                     myListView.loadAndFreshComplete();
 
                 } else if (STATE == GET_MORE_DATA) {
-                    vAdapter.addEntity(listPay);
+                    vAdapter.addEntityList(listPay);
                     myListView.loadAndFreshComplete();
 
                 } else if (STATE == GET_NONE_NEWDATA) {

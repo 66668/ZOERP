@@ -59,12 +59,17 @@ public class TakeDaysOffDetailCopyActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_endNarmalTime)
     TextView tv_endNarmalTime;
 
-    //原因
-    @ViewInject(id = R.id.tv_reason)
+
+    //标题
+    @ViewInject(id = R.id.tv_startOffTitle)
+    TextView tv_startOffTitle;
+
+    //说明
+    @ViewInject(id = R.id.tv_reason, click = "ReasonExpended")
     TextView tv_reason;
 
     //备注
-    @ViewInject(id = R.id.tv_remark)
+    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
     TextView tv_remark;
 
     //审批人
@@ -103,7 +108,7 @@ public class TakeDaysOffDetailCopyActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_apps_examination_takedaysoff_d);
+        setContentView(R.layout.act_apps_examination_takedaysoff_d3);
         tv_title.setText(getResources().getString(R.string.workRest_d));
         tv_right.setText("");
 
@@ -117,6 +122,7 @@ public class TakeDaysOffDetailCopyActivity extends BaseActivity {
         tv_copyer.setText(model.getEmployeeName());
         tv_copyTime.setText(model.getApplicationCreateTime());
         //
+        tv_startOffTitle.setText(model.getApplicationTitle());
         tv_startOffTime.setText(model.getStartOffDate());
         tv_endOffTime.setText(model.getEndOffDate());
         tv_startNarmalTime.setText(model.getStartTakeDate());
@@ -236,5 +242,33 @@ public class TakeDaysOffDetailCopyActivity extends BaseActivity {
      */
     public void forBack(View view) {
         this.finish();
+    }
+
+    private boolean isExpend = false;
+
+    public void ReasonExpended(View view) {
+        if (!isExpend) {
+            tv_reason.setMinLines(0);
+            tv_reason.setMaxLines(Integer.MAX_VALUE);
+            isExpend = true;
+        } else {
+            tv_reason.setLines(3);
+            isExpend = false;
+        }
+
+    }
+
+    private boolean isRemarkExpend = false;
+
+    public void RemarkExpended(View view) {
+        if (!isRemarkExpend) {
+            tv_remark.setMinLines(0);
+            tv_remark.setMaxLines(Integer.MAX_VALUE);
+            isRemarkExpend = true;
+        } else {
+            tv_remark.setLines(3);
+            isRemarkExpend = false;
+        }
+
     }
 }

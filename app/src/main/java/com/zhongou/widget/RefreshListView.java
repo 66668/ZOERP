@@ -4,7 +4,6 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -65,11 +64,8 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
         headerView = inflater.inflate(R.layout.refreshlist_headerview, null);
         measureView(headerView);
         headerHeight = headerView.getMeasuredHeight();
-        Log.d("SJY", "02RefreshListView--initView--headerHeight=" + headerHeight);
         topPadding(-headerHeight);
-        Log.d("SJY", "03RefreshListView--topPadding--设置顶部布局文件的高度topPadding= -"+headerHeight);
         this.addHeaderView(headerView);
-        Log.d("SJY", "04RefreshListView--initView--将view添加到布局中去");
         this.setOnScrollListener(this);//设置滚动监听
 
     }
@@ -92,7 +88,6 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
         } else {
             height = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED);//高度是空，不填充
         }
-        Log.d("SJY", "01RefreshListView--measureView--width=" + width + "\nheight=" + height);
         view.measure(width, height);
     }
 
@@ -114,13 +109,11 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
     public void onScroll(AbsListView view, int firstVisibleItem,
                          int visibleItemCount, int totalItemCount) {
         this.firstVisibleItem = firstVisibleItem;
-        Log.d("SJY", "获取滚动状态--onScroll--firstVisibleItem=" + firstVisibleItem);
     }
 
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
         this.scrollState = scrollState;//获取滚动状态
-        Log.d("SJY", "获取滚动状态--onScrollStateChanged--scrollState=" + scrollState);
     }
 
     /**
@@ -130,7 +123,6 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
     public boolean onTouchEvent(MotionEvent ev) {
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                Log.d("SJY", "05RefreshListView--onTouchEvent--ACTION_DOWN");
                 if (firstVisibleItem == 0) {
                     isRemark = true;
                     startY = (int) ev.getY();
@@ -138,18 +130,16 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
                 break;
 
             case MotionEvent.ACTION_MOVE:
-                Log.d("SJY", "05RefreshListView--onTouchEvent--ACTION_MOVE-->onMove");
-                onMove(ev);
+                onMoveEvent(ev);
                 break;
 
             case MotionEvent.ACTION_UP:
+
                 if (state == RELEASE) {
                     state = REFLASHING;
                     iReflashListener.onRefresh();
-                    Log.d("SJY", "RefreshListView--onTouchEvent--ACTION_UP--RELEASE--onRefresh下拉刷新");
                     reflashViewByState();
                 } else if (state == PULL) {
-                    Log.d("SJY", "05RefreshListView--onTouchEvent--ACTION_UP--PULL-->reflashViewByState");
                     state = NONE;
                     isRemark = false;
                     reflashViewByState();
@@ -167,7 +157,7 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
      * @param ev
      */
 
-    private void onMove(MotionEvent ev) {
+    private void onMoveEvent(MotionEvent ev) {
         if (!isRemark) {
             return;
         }
@@ -178,33 +168,27 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
             case NONE:
                 if (moveY > 0) {
                     state = PULL;
-                    Log.d("SJY", "onMove--NONE--state = PULL-->reflashViewByState");
                     reflashViewByState();
                 }
                 break;
 
             case PULL:
                 topPadding(topPadding);
-                Log.d("SJY", "onMove--PULL--topPadding="+topPadding);
 
                 if (moveY > headerHeight + 10 && scrollState == SCROLL_STATE_TOUCH_SCROLL) {//正在滚动状态
                     state = RELEASE;
-                    Log.d("SJY", "onMove--PULL--state = RELEASE-->reflashViewByState");
                     reflashViewByState();
                 }
                 break;
 
             case RELEASE:
                 topPadding(topPadding);
-                Log.d("SJY", "onMove--RELEASE--topPadding="+topPadding);
                 if (moveY < headerHeight + 30) {
                     state = PULL;
-                    Log.d("SJY", "onMove--RELEASE--moveY="+moveY+"-- state = PULL-->reflashViewByState");
                     reflashViewByState();
                 } else if (moveY <= 0) {
                     isRemark = false;
                     state = NONE;
-                    Log.d("SJY", "onMove--RELEASE--moveY="+moveY+"-- state = NONE-->reflashViewByState");
                     reflashViewByState();
                 }
                 break;
@@ -245,8 +229,6 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
             case NONE:
                 arrowImage.clearAnimation();//移除动画
                 topPadding(-headerHeight);
-                Log.d("SJY", "reflashViewByState--NONE-- arrowImage.clearAnimation()"+
-                        "\ntopPadding(-headerHeight)");
                 break;
 
             case PULL:
@@ -256,12 +238,6 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
                 //图片方向向下
                 arrowImage.clearAnimation();//移除动画
                 arrowImage.setAnimation(rotateAnimation2);
-                Log.d("SJY", "reflashViewByState--PULL:图片方向向下"+
-                        "\narrowImage.setVisibility(View.VISIBLE)"+
-                        "\ntv_Content.setText(\"下拉可以刷新\")"+
-                        "\narrowImage.clearAnimation()"+
-                        "\narrowImage.setAnimation(rotateAnimation2)"+
-                        "\n progressBar.setVisibility(View.GONE)");
                 break;
 
             case RELEASE:
@@ -272,12 +248,6 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
                 arrowImage.clearAnimation();
                 arrowImage.setAnimation(rotateAnimation1);
 
-                Log.d("SJY", "reflashViewByState--RELEASE:图片方向向上"+
-                        "\narrowImage.setVisibility(View.VISIBLE)"+
-                        "\nprogressBar.setVisibility(View.GONE)"+
-                        "\ntv_Content.setText(\"松开可以刷新\")"+
-                        "\narrowImage.clearAnimation()"+
-                        "\narrowImage.setAnimation(rotateAnimation1)");
                 break;
 
             case REFLASHING:
@@ -287,11 +257,6 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
                 tv_Content.setText("正在刷新。。。");
                 arrowImage.clearAnimation();//移除动画
 
-                Log.d("SJY", "reflashViewByState--REFLASHING："+
-                        "\ntopPadding(50)"+
-                        "\narrowImage.setVisibility(View.GONE)"+
-                        "\ntv_Content.setText(\"正在刷新。。。\")"+
-                        "\narrowImage.clearAnimation()");
                 break;
             default:
                 break;
@@ -305,7 +270,6 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
     public void reflashComplete() {
         state = NONE;
         isRemark = false;
-        Log.d("SJY", "RefreshListView--reflashComplete-->reflashViewByState");
         reflashViewByState();
     }
 
@@ -316,7 +280,7 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
         public void onRefresh();
     }
 
-    public void setInterFace(IReflashListener  iReflashListener) {//IReflashListener
+    public void setInterFace(IReflashListener iReflashListener) {//IReflashListener
         this.iReflashListener = iReflashListener;
     }
 }

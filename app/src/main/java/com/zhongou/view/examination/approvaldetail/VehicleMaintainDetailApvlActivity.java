@@ -97,10 +97,6 @@ public class VehicleMaintainDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_project)
     TextView tv_project;
 
-    //行驶公里
-    @ViewInject(id = R.id.tv_runMiles)
-    TextView tv_runMiles;
-
     //维修地点
     @ViewInject(id = R.id.tv_address)
     TextView tv_address;
@@ -110,8 +106,9 @@ public class VehicleMaintainDetailApvlActivity extends BaseActivity {
     TextView tv_fee;
 
     //备注
-    @ViewInject(id = R.id.tv_remark)
+    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
     TextView tv_remark;
+
 
 
     //变量
@@ -139,18 +136,20 @@ public class VehicleMaintainDetailApvlActivity extends BaseActivity {
     }
 
     private void setShow(VehicleMaintainApvlModel model) {
+
         tv_ApprovalPerson.setText(model.getEmployeeName());
         tv_approvaldept.setText(model.getDepartmentName());
         tv_approvalCo.setText(model.getStoreName());
         tv_approvalTime.setText(model.getApplicationCreateTime());
 
         maintenanceType.setText(model.getMaintenanceType());
+        vehicleNumber.setText(model.getNumber());
         tv_stateType.setText(model.getVehicleState());
         tv_startTime.setText(model.getPlanBorrowTime());
         tv_project.setText(model.getMaintenanceProject());
         tv_address.setText(model.getDestination());
         tv_remark.setText(model.getRemark());
-
+        tv_fee.setText(model.getEstimateFee());
     }
 
     private void bottomType() {
@@ -235,6 +234,18 @@ public class VehicleMaintainDetailApvlActivity extends BaseActivity {
     public void forBack(View view) {
         this.finish();
     }
+    private boolean isRemarkExpend = false;
 
+    public void RemarkExpended(View view) {
+        if (!isRemarkExpend) {
+            tv_remark.setMinLines(0);
+            tv_remark.setMaxLines(Integer.MAX_VALUE);
+            isRemarkExpend = true;
+        } else {
+            tv_remark.setLines(3);
+            isRemarkExpend = false;
+        }
+
+    }
 
 }

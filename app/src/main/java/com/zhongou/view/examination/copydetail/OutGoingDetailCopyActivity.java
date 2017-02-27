@@ -55,18 +55,17 @@ public class OutGoingDetailCopyActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_outgoing_time)
     TextView tv_outgoing_time;
 
-    //外出事由
-    @ViewInject(id = R.id.tv_outgoing_reason)
-    TextView tv_outgoing_reason;
-
     //目的地
     @ViewInject(id = R.id.tv_outgoing_purpose)
     TextView tv_outgoing_purpose;
 
-    //备注
-    @ViewInject(id = R.id.tv_remark)
-    TextView tv_remark;
+    //说明
+    @ViewInject(id = R.id.tv_reason, click = "ReasonExpended")
+    TextView tv_reason;
 
+    //备注
+    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
+    TextView tv_remark;
 
     //获取子控件个数的父控件
     @ViewInject(id = R.id.layout_ll)
@@ -112,7 +111,7 @@ public class OutGoingDetailCopyActivity extends BaseActivity {
 
         //
         tv_outgoing_time.setText(model.getOutingTime());
-        tv_outgoing_reason.setText(model.getOutingReason());
+        tv_reason.setText(model.getOutingReason());
         tv_outgoing_purpose.setText(model.getDestination());
         tv_remark.setText(model.getRemark());
 
@@ -228,5 +227,32 @@ public class OutGoingDetailCopyActivity extends BaseActivity {
      */
     public void forBack(View view) {
         this.finish();
+    }
+    private boolean isExpend = false;
+
+    public void ReasonExpended(View view) {
+        if (!isExpend) {
+            tv_reason.setMinLines(0);
+            tv_reason.setMaxLines(Integer.MAX_VALUE);
+            isExpend = true;
+        } else {
+            tv_reason.setLines(3);
+            isExpend = false;
+        }
+
+    }
+
+    private boolean isRemarkExpend = false;
+
+    public void RemarkExpended(View view) {
+        if (!isRemarkExpend) {
+            tv_remark.setMinLines(0);
+            tv_remark.setMaxLines(Integer.MAX_VALUE);
+            isRemarkExpend = true;
+        } else {
+            tv_remark.setLines(3);
+            isRemarkExpend = false;
+        }
+
     }
 }

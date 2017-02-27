@@ -37,10 +37,6 @@ public class RecruitmentDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_right)
     TextView tv_right;
 
-    //备注
-    @ViewInject(id = R.id.tv_remark)
-    TextView tv_remark;
-
     //职位名称
     @ViewInject(id = R.id.tv_position)
     TextView tv_position;
@@ -49,11 +45,13 @@ public class RecruitmentDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_number)
     TextView tv_number;
 
-    //Responsibility
-    @ViewInject(id = R.id.tv_responsibility)
-    TextView tv_responsibility;
+    //说明
+    @ViewInject(id = R.id.tv_reason, click = "ReasonExpended")
+    TextView tv_reason;
 
-
+    //备注
+    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
+    TextView tv_remark;
     //申请人
     @ViewInject(id = R.id.tv_ApprovalPerson)
     TextView tv_ApprovalPerson;
@@ -128,7 +126,7 @@ public class RecruitmentDetailApvlActivity extends BaseActivity {
         tv_position.setText(model.getPosition());
         tv_remark.setText(model.getRemark());
         tv_number.setText(model.getNumberOfPeople());
-        tv_responsibility.setText(model.getResponsibility());
+        tv_reason.setText(model.getResponsibility());
 
     }
 
@@ -217,5 +215,33 @@ public class RecruitmentDetailApvlActivity extends BaseActivity {
      */
     public void forBack(View v) {
         this.finish();
+    }
+
+    private boolean isExpend = false;
+
+    public void ReasonExpended(View view) {
+        if (!isExpend) {
+            tv_reason.setMinLines(0);
+            tv_reason.setMaxLines(Integer.MAX_VALUE);
+            isExpend = true;
+        } else {
+            tv_reason.setLines(3);
+            isExpend = false;
+        }
+
+    }
+
+    private boolean isRemarkExpend = false;
+
+    public void RemarkExpended(View view) {
+        if (!isRemarkExpend) {
+            tv_remark.setMinLines(0);
+            tv_remark.setMaxLines(Integer.MAX_VALUE);
+            isRemarkExpend = true;
+        } else {
+            tv_remark.setLines(3);
+            isRemarkExpend = false;
+        }
+
     }
 }

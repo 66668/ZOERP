@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white"
+              android:orientation="vertical">
+
+    <include layout="@layout/topbar_common_itt"/>
+
+    <RadioGroup
+        android:id="@+id/radiogroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="4dip"
+        android:weightSum="1">
+
+        <RadioButton
+            android:id="@+id/btn_Procurement"
+            style="@style/bottom_menu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:checked="true"
+            android:drawablePadding="4dp"
+            android:gravity="center"
+            android:text="@string/mg_procuerecord01"
+            />
+
+        <RadioButton
+            android:id="@+id/btn_receive"
+            style="@style/bottom_menu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:drawablePadding="4dp"
+            android:gravity="center"
+            android:text="@string/mg_procuerecord02"/>
+
+    </RadioGroup>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/procureListViewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+</LinearLayout>

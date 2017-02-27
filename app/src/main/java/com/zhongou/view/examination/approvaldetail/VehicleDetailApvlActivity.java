@@ -52,12 +52,13 @@ public class VehicleDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_endTime)
     TextView tv_endTime;
 
+
     //说明
-    @ViewInject(id = R.id.tv_purpose)
-    TextView tv_purpose;
+    @ViewInject(id = R.id.tv_reason, click = "ReasonExpended")
+    TextView tv_reason;
 
     //备注
-    @ViewInject(id = R.id.tv_remark)
+    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
     TextView tv_remark;
 
     //申请人
@@ -112,13 +113,9 @@ public class VehicleDetailApvlActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_apps_examination_vehicle_d2);
-        tv_title.setText(getResources().getString(R.string.carUsed_d));
-        tv_right.setText("");
 
-        Bundle bundle = this.getIntent().getExtras();
-        myApprovalModel = (MyApprovalModel) bundle.getSerializable("MyApprovalModel");
-        Log.d("SJY", "详情MyApprovalModel");
-        //
+        initMyView();
+        bottomType();
         getDetailData();
 
     }
@@ -129,19 +126,26 @@ public class VehicleDetailApvlActivity extends BaseActivity {
         tv_approvalCo.setText(model.getStoreName());
         tv_approvalTime.setText(model.getApplicationCreateTime());
 
-        tv_purpose.setText(model.getDestination());
         tv_startTime.setText(model.getPlanBorrowTime());
         tv_endTime.setText(model.getPlanReturnTime());
         tv_destination.setText(model.getDestination());
-        tv_purpose.setText(model.getPurpose());
+        tv_reason.setText(model.getPurpose());
         tv_remark.setText(model.getRemark());
 
+    }
+
+    private void initMyView() {
+        tv_title.setText(getResources().getString(R.string.carUsed_d));
+        tv_right.setText("");
+
+        Bundle bundle = this.getIntent().getExtras();
+        myApprovalModel = (MyApprovalModel) bundle.getSerializable("MyApprovalModel");
+        Log.d("SJY", "详情MyApprovalModel");
     }
 
     private void bottomType() {
         //
         if (myApprovalModel.getApprovalStatus().contains("1")) {
-
             laytout_decide.setVisibility(View.GONE);
             laytout_copy.setVisibility(View.VISIBLE);
 
@@ -218,5 +222,33 @@ public class VehicleDetailApvlActivity extends BaseActivity {
      */
     public void forBack(View view) {
         this.finish();
+    }
+
+    private boolean isExpend = false;
+
+    public void ReasonExpended(View view) {
+        if (!isExpend) {
+            tv_reason.setMinLines(0);
+            tv_reason.setMaxLines(Integer.MAX_VALUE);
+            isExpend = true;
+        } else {
+            tv_reason.setLines(3);
+            isExpend = false;
+        }
+
+    }
+
+    private boolean isRemarkExpend = false;
+
+    public void RemarkExpended(View view) {
+        if (!isRemarkExpend) {
+            tv_remark.setMinLines(0);
+            tv_remark.setMaxLines(Integer.MAX_VALUE);
+            isRemarkExpend = true;
+        } else {
+            tv_remark.setLines(3);
+            isRemarkExpend = false;
+        }
+
     }
 }

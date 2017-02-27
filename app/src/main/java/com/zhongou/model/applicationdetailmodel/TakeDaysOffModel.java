@@ -22,8 +22,17 @@ public class TakeDaysOffModel implements Serializable {
     public String StoreName;
     public String DepartmentName;
     public String EmployeeName;
+    public String ApplicationTitle;
     public String ApplicationCreateTime;
     public List<TakeDaysOffModel.ApprovalInfoLists> ApprovalInfoLists;
+
+    public String getApplicationTitle() {
+        return ApplicationTitle;
+    }
+
+    public void setApplicationTitle(String applicationTitle) {
+        ApplicationTitle = applicationTitle;
+    }
 
     public String getRemark() {
         return Remark;

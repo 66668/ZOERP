@@ -11,6 +11,7 @@ import java.util.List;
 public class LeaveCopyModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    public String ApplicationTitle;
     public String Comment;
     public String EndDate;
     public String StartDate;
@@ -26,6 +27,14 @@ public class LeaveCopyModel implements Serializable {
 
 
     public List<LeaveCopyModel.ApprovalInfoLists> ApprovalInfoLists;
+
+    public String getApplicationTitle() {
+        return ApplicationTitle;
+    }
+
+    public void setApplicationTitle(String applicationTitle) {
+        ApplicationTitle = applicationTitle;
+    }
 
     public String getReason() {
         return Reason;

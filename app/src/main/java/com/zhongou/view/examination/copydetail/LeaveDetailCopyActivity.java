@@ -113,7 +113,7 @@ public class LeaveDetailCopyActivity extends BaseActivity {
         tv_copyer.setText(model.getEmployeeName());
         tv_copyTime.setText(model.getApplicationCreateTime());
 
-        tv_ApplicationTitle.setText("");
+        tv_ApplicationTitle.setText(model.getApplicationTitle());
         tv_startTime.setText(model.getStartDate());
         tv_endTime.setText(model.getEndDate());
         tv_reason.setText(model.getContent());

@@ -200,6 +200,8 @@
 
     <!-- 01-01  调休05-->
     <string name="workRest">调休申请</string>
+    <string name="workRest_title">标题</string>
+    <string name="workRest_title_hint">请输入调休标题</string>
     <string name="workRest_d">调休详情</string>
     <string name="workRestStartbefore">正常开始</string>
     <string name="workRestEndBefore">正常结束</string>
@@ -322,6 +324,7 @@
 
     <string name="financial_pay_style">付款方式</string>
     <string name="financial_pay_title_d">付款审批详情</string>
+    <string name="financial_reimburse_title_d">报销审批详情</string>
     <string name="financial_pay_offical">收款单位</string>
     <string name="financial_pay_offical_hint">请输入收款单位</string>
     <string name="financial_pay_account">账号</string>
@@ -452,7 +455,6 @@
     <string name="vehicleRe_driver_null">驾驶人不能为空</string>
     <string name="vehicleRe_Number_null">车牌号不能为空</string>
     <string name="vehicleRe_Passenger_null">乘车人不能为空</string>
-
 
 
 </resources>

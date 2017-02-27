@@ -58,10 +58,11 @@ public class VehicleDetailAplActivity extends BaseActivity {
     TextView tv_PlanReturnTime;
 
     //说明
-    @ViewInject(id = R.id.tv_purpose)
-    TextView tv_purpose;
+    @ViewInject(id = R.id.tv_reason, click = "ReasonExpended")
+    TextView tv_reason;
+
     //备注
-    @ViewInject(id = R.id.tv_remark)
+    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
     TextView tv_remark;
 
     //审批人
@@ -110,7 +111,7 @@ public class VehicleDetailAplActivity extends BaseActivity {
     private void setShow(VehicleModel model) {
         tv_PlanBorrowTime.setText(model.getPlanBorrowTime());
         tv_PlanReturnTime.setText(model.getPlanReturnTime());
-        tv_purpose.setText(model.getPurpose());
+        tv_reason.setText(model.getPurpose());
         tv_remark.setText(model.getRemark());
         tv_Destination.setText(model.getDestination());
 
@@ -231,5 +232,32 @@ public class VehicleDetailAplActivity extends BaseActivity {
      */
     public void forBack(View view) {
         this.finish();
+    }
+    private boolean isExpend = false;
+
+    public void ReasonExpended(View view) {
+        if (!isExpend) {
+            tv_reason.setMinLines(0);
+            tv_reason.setMaxLines(Integer.MAX_VALUE);
+            isExpend = true;
+        } else {
+            tv_reason.setLines(3);
+            isExpend = false;
+        }
+
+    }
+
+    private boolean isRemarkExpend = false;
+
+    public void RemarkExpended(View view) {
+        if (!isRemarkExpend) {
+            tv_remark.setMinLines(0);
+            tv_remark.setMaxLines(Integer.MAX_VALUE);
+            isRemarkExpend = true;
+        } else {
+            tv_remark.setLines(3);
+            isRemarkExpend = false;
+        }
+
     }
 }

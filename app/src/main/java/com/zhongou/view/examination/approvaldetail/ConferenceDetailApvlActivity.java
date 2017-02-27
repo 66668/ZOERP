@@ -83,13 +83,19 @@ public class ConferenceDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_conference_title)
     TextView tv_conference_title;
 
+
     //准备
-    @ViewInject(id = R.id.tv_conference_Device)
+    @ViewInject(id = R.id.tv_conference_Device, click = "DeviceExpended")
     TextView tv_conference_Device;
 
-    //说明描述
-    @ViewInject(id = R.id.tv_conference_Abstract)
+    //简介
+    @ViewInject(id = R.id.tv_conference_Abstract, click = "AbstractExpended")
     TextView tv_conference_Abstract;
+
+    //备注
+    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
+    TextView tv_remark;
+
 
     //开始
     @ViewInject(id = R.id.tv_conference_start)
@@ -99,9 +105,6 @@ public class ConferenceDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_conference_end)
     TextView tv_conference_end;
 
-    //备注
-    @ViewInject(id = R.id.tv_remark)
-    TextView tv_remark;
 
     //
     private MyApprovalModel myApprovalModel;
@@ -226,5 +229,46 @@ public class ConferenceDetailApvlActivity extends BaseActivity {
      */
     public void forBack(View view) {
         this.finish();
+    }
+    private boolean isDeviceExpend = false;
+
+    public void DeviceExpended(View view) {
+        if (!isDeviceExpend) {
+            tv_conference_Device.setMinLines(0);
+            tv_conference_Device.setMaxLines(Integer.MAX_VALUE);
+            isDeviceExpend = true;
+        } else {
+            tv_conference_Device.setLines(3);
+            isDeviceExpend = false;
+        }
+
+    }
+
+    private boolean isAbstractExpended = false;
+
+    public void AbstractExpended(View view) {
+        if (!isAbstractExpended) {
+            tv_conference_Abstract.setMinLines(0);
+            tv_conference_Abstract.setMaxLines(Integer.MAX_VALUE);
+            isAbstractExpended = true;
+        } else {
+            tv_conference_Abstract.setLines(3);
+            isAbstractExpended = false;
+        }
+
+    }
+
+    private boolean isRemarkExpend = false;
+
+    public void RemarkExpended(View view) {
+        if (!isRemarkExpend) {
+            tv_remark.setMinLines(0);
+            tv_remark.setMaxLines(Integer.MAX_VALUE);
+            isRemarkExpend = true;
+        } else {
+            tv_remark.setLines(3);
+            isRemarkExpend = false;
+        }
+
     }
 }

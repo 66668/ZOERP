@@ -191,7 +191,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
-                    android:gravity="center_vertical"
                     android:text="@string/workOverTimeReason"
                     android:textColor="@color/cl_text_common"
                     android:textColorHint="@color/cl_hint_common"/>
@@ -204,10 +203,13 @@
                     android:layout_marginRight="10dp"
                     android:layout_weight="0.71"
                     android:background="@drawable/et_white_stroke"
+                    android:gravity="top|left"
                     android:hint="@string/hint_workOverTimeReason"
+                    android:paddingTop="10dp"
                     android:textColor="@color/cl_text_common"
                     android:textColorHint="@color/cl_hint_common"/>
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dip"
@@ -248,6 +250,7 @@
                     android:paddingTop="10dp"
                     android:textColorHint="@color/cl_hint_common"/>
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dip"

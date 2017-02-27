@@ -101,7 +101,7 @@ public class FinancialFeeDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_totle)
     TextView tv_totle;
     //备注
-    @ViewInject(id = R.id.tv_remark)
+    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
     TextView tv_remark;
 
     //常量
@@ -132,6 +132,7 @@ public class FinancialFeeDetailApvlActivity extends BaseActivity {
         tv_ApprovalPerson.setText(model.getEmployeeName());
         tv_approvaldept.setText(model.getDepartmentName());
         tv_approvalCo.setText(model.getStoreName());
+        tv_approvalTime.setText(model.getCreateTime());
         //
         tv_feeOne.setText(model.getFeeone());
         tv_feeTwo.setText(model.getFeetwo());
@@ -230,5 +231,18 @@ public class FinancialFeeDetailApvlActivity extends BaseActivity {
         this.finish();
     }
 
+    private boolean isRemarkExpend = false;
+
+    public void RemarkExpended(View view) {
+        if (!isRemarkExpend) {
+            tv_remark.setMinLines(0);
+            tv_remark.setMaxLines(Integer.MAX_VALUE);
+            isRemarkExpend = true;
+        } else {
+            tv_remark.setLines(3);
+            isRemarkExpend = false;
+        }
+
+    }
 
 }

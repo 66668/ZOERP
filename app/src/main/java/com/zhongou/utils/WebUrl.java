@@ -132,19 +132,7 @@ public class WebUrl {
          */
         public static final String LRAPPLICATIONPOST = LOGIN_URL + LOGIN_FLODER_USER + "LRApplication/LRApplicationPost";
 
-        /**
-         * 09-01交车记录
-         */
-        public static final String VEHICLERETURNLIST = LOGIN_URL + LOGIN_FLODER_USER + "MyBackcar/MyBackcarList";
 
-        /**
-         * 09-02交车-详情接口
-         */
-        public static final String VEHICLERETURNDETAIL = LOGIN_URL + LOGIN_FLODER_USER + "MyBack/MyBackInfo";
-        /**
-         * 09-03交车-提交接口
-         */
-        public static final String VEHICLERETURNDPOST = LOGIN_URL + LOGIN_FLODER_USER + "BackCar/BackCarPost";
 
         /**
          * 03地图签到
@@ -170,6 +158,31 @@ public class WebUrl {
          * 05 应用 通知 列表
          */
         public static final String FINACELIST = LOGIN_URL + LOGIN_FLODER_USER + "FinanceRecord/GetFinanceRecord";
+
+        /**
+         * 08-01 应用 采购 列表
+         */
+        public static final String PROCUREMENTLIST = LOGIN_URL + LOGIN_FLODER_USER + "ProcureRecord/GetProcureRecord";
+
+        /**
+         * 08-02 应用 领用 列表
+         */
+        public static final String RECEIVELIST = LOGIN_URL + LOGIN_FLODER_USER + "ReceptionRecord/GetReceptionRecord";
+
+        /**
+         * 09-01交车记录
+         */
+        public static final String VEHICLERETURNLIST = LOGIN_URL + LOGIN_FLODER_USER + "MyBackcar/MyBackcarList";
+
+        /**
+         * 09-02交车-详情接口
+         */
+        public static final String VEHICLERETURNDETAIL = LOGIN_URL + LOGIN_FLODER_USER + "MyBack/MyBackInfo";
+        /**
+         * 09-03交车-提交接口
+         */
+        public static final String VEHICLERETURNDPOST = LOGIN_URL + LOGIN_FLODER_USER + "BackCar/BackCarPost";
+
     }
 
     /**

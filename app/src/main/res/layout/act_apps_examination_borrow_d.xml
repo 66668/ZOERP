@@ -138,7 +138,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:orientation="horizontal"
                 android:weightSum="1">
@@ -147,26 +147,32 @@
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:text="@string/borrowsReason"
                     android:textColor="@color/cl_text_common"/>
 
+
                 <TextView
                     android:id="@+id/tv_reason"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.72"
+                    android:ellipsize="end"
                     android:gravity="top|left"
-                    android:padding="10dp"
+                    android:lines="3"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp"
                     />
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:orientation="horizontal"
                 android:weightSum="1">
@@ -175,6 +181,7 @@
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:text="@string/remark_all_apl"
@@ -184,12 +191,16 @@
                     android:id="@+id/tv_remark"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.72"
+                    android:ellipsize="end"
                     android:gravity="top|left"
-                    android:padding="10dp"
+                    android:lines="3"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp"
                     />
+
             </LinearLayout>
 
             <LinearLayout

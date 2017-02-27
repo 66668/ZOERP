@@ -9,6 +9,7 @@ import android.os.Message;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -307,9 +308,11 @@ public class ContactsFragment extends BaseFragment {
      * @param filterStr
      */
     private void filterData(String filterStr) {
+
         List<ContactsEmployeeModel> filterDateList = new ArrayList<ContactsEmployeeModel>();
 
         if (TextUtils.isEmpty(filterStr)) {
+            Log.d("SJY", "TextUtils.isEmpty(filterStr)=" + true);
             filterDateList = ListEmployeeData;
         } else {
             filterDateList.clear();
@@ -323,7 +326,10 @@ public class ContactsFragment extends BaseFragment {
         }
 
         // 根据a-z进行排序
-        Collections.sort(filterDateList, pinyinComparator);
+        Log.d("SJY", "filterDateList != null=" + (filterDateList != null) + "------filterDateList.size() > 0=" + (filterDateList.size() > 0));
+        if (filterDateList != null || filterDateList.size() > 0) {
+            Collections.sort(filterDateList, pinyinComparator);
+        }
         adapter.updateListView(filterDateList);
     }
 

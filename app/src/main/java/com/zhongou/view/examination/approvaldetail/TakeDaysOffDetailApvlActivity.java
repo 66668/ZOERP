@@ -35,6 +35,9 @@ public class TakeDaysOffDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_right)
     TextView tv_right;
 
+    //标题
+    @ViewInject(id = R.id.tv_startOffTitle)
+    TextView tv_startOffTitle;
 
     //调休开始时间
     @ViewInject(id = R.id.tv_offStartTime)
@@ -52,45 +55,46 @@ public class TakeDaysOffDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_orgEndTime)
     TextView tv_orgEndTime;
 
-    //原因
-    @ViewInject(id = R.id.tv_reason)
+    //说明
+    @ViewInject(id = R.id.tv_reason, click = "ReasonExpended")
     TextView tv_reason;
 
- //备注
-    @ViewInject(id = R.id.tv_remark)
+    //备注
+    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
     TextView tv_remark;
 
+
     //申请人
-    @ViewInject(id =R.id.tv_ApprovalPerson)
+    @ViewInject(id = R.id.tv_ApprovalPerson)
     TextView tv_ApprovalPerson;
 
     //部门
-    @ViewInject(id =R.id.tv_approvaldept)
+    @ViewInject(id = R.id.tv_approvaldept)
     TextView tv_approvaldept;
 
     //公司
-    @ViewInject(id =R.id.tv_approvalCo)
+    @ViewInject(id = R.id.tv_approvalCo)
     TextView tv_approvalCo;
 
     //申请时间
-    @ViewInject(id =R.id.tv_approvalTime)
+    @ViewInject(id = R.id.tv_approvalTime)
     TextView tv_approvalTime;
 
-    
+
     //未审批bottom
     @ViewInject(id = R.id.laytout_decide)
     LinearLayout laytout_decide;
 
     //驳回
-    @ViewInject(id = R.id.btn_refulse,click = "forRefulse")
+    @ViewInject(id = R.id.btn_refulse, click = "forRefulse")
     Button btn_refulse;
 
     //批准
-    @ViewInject(id = R.id.btn_commit,click = "toForCommit")
+    @ViewInject(id = R.id.btn_commit, click = "toForCommit")
     Button btn_commit;
 
     //转交
-    @ViewInject(id = R.id.btn_transfer,click = "forTransfer")
+    @ViewInject(id = R.id.btn_transfer, click = "forTransfer")
     Button btn_transfer;
 
     //审批bottom
@@ -98,7 +102,7 @@ public class TakeDaysOffDetailApvlActivity extends BaseActivity {
     LinearLayout laytout_copy;
 
     //抄送
-    @ViewInject(id = R.id.btn_copytp,click = "forCopyto")
+    @ViewInject(id = R.id.btn_copytp, click = "forCopyto")
     Button btn_copytp;
 
     private MyApprovalModel myApprovalModel;
@@ -108,6 +112,7 @@ public class TakeDaysOffDetailApvlActivity extends BaseActivity {
     //常量
     public static final int POST_SUCCESS = 11;
     public static final int POST_FAILED = 12;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -130,6 +135,7 @@ public class TakeDaysOffDetailApvlActivity extends BaseActivity {
         tv_approvalCo.setText(model.getStoreName());
         tv_approvalTime.setText(model.getApplicationCreateTime());
 
+        tv_startOffTitle.setText(model.getApplicationTitle());
         tv_offStartTime.setText(model.getStartOffDate());
         tv_offEndTime.setText(model.getEndOffDate());
         tv_orgStartTime.setText(model.getStartTakeDate());
@@ -141,12 +147,12 @@ public class TakeDaysOffDetailApvlActivity extends BaseActivity {
 
     private void bottomType() {
         //
-        if(myApprovalModel.getApprovalStatus().contains("1")){
+        if (myApprovalModel.getApprovalStatus().contains("1")) {
 
             laytout_decide.setVisibility(View.GONE);
             laytout_copy.setVisibility(View.VISIBLE);
 
-        }else {
+        } else {
             laytout_decide.setVisibility(View.VISIBLE);
             laytout_copy.setVisibility(View.GONE);
         }
@@ -167,6 +173,7 @@ public class TakeDaysOffDetailApvlActivity extends BaseActivity {
             }
         });
     }
+
     @Override
     protected void handleMessage(Message msg) {
         super.handleMessage(msg);
@@ -182,30 +189,35 @@ public class TakeDaysOffDetailApvlActivity extends BaseActivity {
                 break;
         }
     }
+
     //驳回
-    public void forRefulse(View view){
+    public void forRefulse(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonDisagreeActivity.class,bundle);
+        startActivity(CommonDisagreeActivity.class, bundle);
     }
+
     //同意
-    public void toForCommit(View view){
+    public void toForCommit(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonAgreeActivity.class,bundle);
+        startActivity(CommonAgreeActivity.class, bundle);
     }
+
     //转交
-    public void forTransfer(View view){
+    public void forTransfer(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonTransfertoActivity.class,bundle);
+        startActivity(CommonTransfertoActivity.class, bundle);
     }
+
     // 抄送
-    public void forCopyto(View view){
+    public void forCopyto(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
         startActivity(CommonCopytoCoActivity.class, bundle);
     }
+
     /**
      * back
      *
@@ -213,5 +225,33 @@ public class TakeDaysOffDetailApvlActivity extends BaseActivity {
      */
     public void forBack(View view) {
         this.finish();
+    }
+
+    private boolean isExpend = false;
+
+    public void ReasonExpended(View view) {
+        if (!isExpend) {
+            tv_reason.setMinLines(0);
+            tv_reason.setMaxLines(Integer.MAX_VALUE);
+            isExpend = true;
+        } else {
+            tv_reason.setLines(3);
+            isExpend = false;
+        }
+
+    }
+
+    private boolean isRemarkExpend = false;
+
+    public void RemarkExpended(View view) {
+        if (!isRemarkExpend) {
+            tv_remark.setMinLines(0);
+            tv_remark.setMaxLines(Integer.MAX_VALUE);
+            isRemarkExpend = true;
+        } else {
+            tv_remark.setLines(3);
+            isRemarkExpend = false;
+        }
+
     }
 }

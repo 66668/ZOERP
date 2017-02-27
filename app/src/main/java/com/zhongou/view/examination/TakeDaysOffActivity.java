@@ -72,6 +72,10 @@ public class TakeDaysOffActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_timeEndbefore)
     TextView tv_timeEndBefore;
 
+    //标题
+    @ViewInject(id = R.id.et_takedaysoffTitle)
+    EditText et_takedaysoffTitle;
+
     //原因
     @ViewInject(id = R.id.et_reason)
     EditText et_reason;
@@ -96,6 +100,7 @@ public class TakeDaysOffActivity extends BaseActivity {
     private String reason;
     private String remark = "";
     private String approvalID = "";
+    private String takeTitle = "";
     private List<String> approvalIDList = new ArrayList<String>();
 
     //常量
@@ -115,10 +120,16 @@ public class TakeDaysOffActivity extends BaseActivity {
      * 提交
      */
     public void forCommit(View view) {
-        reason  = et_reason.getText().toString();
+        takeTitle = et_takedaysoffTitle.getText().toString();
+        reason = et_reason.getText().toString();
         remark = et_remark.getText().toString();
+
+        if (TextUtils.isEmpty(takeTitle)) {
+            PageUtil.DisplayToast("调休标题不能为空");
+            return;
+        }
         if (TextUtils.isEmpty(StartOffDate) || TextUtils.isEmpty(EndOffDate)
-                || TextUtils.isEmpty(StartTakeDate) ||TextUtils.isEmpty(EndTakeDate)) {
+                || TextUtils.isEmpty(StartTakeDate) || TextUtils.isEmpty(EndTakeDate)) {
             PageUtil.DisplayToast("时间不能为空");
             return;
         }
@@ -126,10 +137,12 @@ public class TakeDaysOffActivity extends BaseActivity {
             PageUtil.DisplayToast("调休原因不能为空");
             return;
         }
+
         if (TextUtils.isEmpty(approvalID)) {
             PageUtil.DisplayToast("审批人不能为空");
             return;
         }
+
         Loading.run(TakeDaysOffActivity.this, new Runnable() {
             @Override
             public void run() {
@@ -139,6 +152,7 @@ public class TakeDaysOffActivity extends BaseActivity {
                     js.put("EndTakeDate", EndTakeDate);
                     js.put("StartOffDate", StartOffDate);
                     js.put("EndOffDate", EndOffDate);
+                    js.put("ApplicationTitle", takeTitle);
                     js.put("Reason", reason);
                     js.put("Remark", remark);
                     js.put("ApprovalIDList", approvalID);
@@ -148,7 +162,7 @@ public class TakeDaysOffActivity extends BaseActivity {
                 } catch (MyException e) {
                     sendMessage(POST_FAILED, e.getMessage());
 
-                }catch (JSONException e) {
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
@@ -169,13 +183,14 @@ public class TakeDaysOffActivity extends BaseActivity {
         }
     }
 
-    private void clear(){
+    private void clear() {
         tv_timeStart.setText("");
         tv_timeEnd.setText("");
         tv_timeStartbefore.setText("");
         tv_timeEndBefore.setText("");
         tv_timeEndBefore.setText("");
         et_reason.setText("");
+        et_takedaysoffTitle.setText("");
         et_remark.setText("");
         tv_Requester.setText("");
         approvalID = null;
@@ -183,7 +198,9 @@ public class TakeDaysOffActivity extends BaseActivity {
         EndOffDate = null;
         StartTakeDate = null;
         EndTakeDate = null;
+        takeTitle = null;
     }
+
     /**
      * 调休开始时间
      *
@@ -198,7 +215,7 @@ public class TakeDaysOffActivity extends BaseActivity {
                         tv_timeStart.setText(time);
                     }
                 });
-//        endDateChooseDialog.setTimePickerGone(true);
+        //        endDateChooseDialog.setTimePickerGone(true);
         endDateChooseDialog.setDateDialogTitle("开始时间");
         endDateChooseDialog.showDateChooseDialog();
     }
@@ -217,7 +234,7 @@ public class TakeDaysOffActivity extends BaseActivity {
                         tv_timeEnd.setText(time);
                     }
                 });
-//        endDateChooseDialog.setTimePickerGone(true);
+        //        endDateChooseDialog.setTimePickerGone(true);
         endDateChooseDialog.setDateDialogTitle("结束时间");
         endDateChooseDialog.showDateChooseDialog();
     }
@@ -236,7 +253,7 @@ public class TakeDaysOffActivity extends BaseActivity {
                         tv_timeStartbefore.setText(time);
                     }
                 });
-//        endDateChooseDialog.setTimePickerGone(true);
+        //        endDateChooseDialog.setTimePickerGone(true);
         endDateChooseDialog.setDateDialogTitle("开始时间");
         endDateChooseDialog.showDateChooseDialog();
     }
@@ -255,10 +272,11 @@ public class TakeDaysOffActivity extends BaseActivity {
                         tv_timeEndBefore.setText(time);
                     }
                 });
-//        endDateChooseDialog.setTimePickerGone(true);
+        //        endDateChooseDialog.setTimePickerGone(true);
         endDateChooseDialog.setDateDialogTitle("结束时间");
         endDateChooseDialog.showDateChooseDialog();
     }
+
     /**
      * 添加审批人
      *
@@ -304,6 +322,7 @@ public class TakeDaysOffActivity extends BaseActivity {
             return "";
         }
     }
+
     /**
      * back
      *

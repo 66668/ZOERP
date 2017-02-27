@@ -43,11 +43,11 @@ public class BorrowDetailAplActivity extends BaseActivity {
     TextView tv_right;
 
     //说明
-    @ViewInject(id = R.id.tv_reason)
+    @ViewInject(id = R.id.tv_reason, click = "ReasonExpended")
     TextView tv_reason;
 
     //备注
-    @ViewInject(id = R.id.tv_remark)
+    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
     TextView tv_remark;
 
     //类型
@@ -90,7 +90,6 @@ public class BorrowDetailAplActivity extends BaseActivity {
     private View childView;
     private LayoutInflater inflater;//ViewHolder对象用来保存实例化View的子控件
     private List<ViewHolder> listViewHolder = new ArrayList<>();
-    private LinearLayout ll_main;
     //    private int mark = 5;//0显示在顶部
 
     //常量
@@ -101,12 +100,16 @@ public class BorrowDetailAplActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_apps_examination_borrow_d);
+
+        initMyView();
+        getDetailModel(model);
+    }
+
+    private void initMyView() {
         tv_title.setText(getResources().getString(R.string.borrows_d));
         tv_right.setText("");
-
         intent = getIntent();
         model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
-        getDetailModel(model);
     }
 
     private void setShow(BorrowModel model) {
@@ -208,7 +211,7 @@ public class BorrowDetailAplActivity extends BaseActivity {
         inflater = LayoutInflater.from(getApplicationContext());
         childView = inflater.inflate(R.layout.item_examination_status, null);
         childView.setId(marks);
-        ll_main.addView(childView, marks);
+        layout_ll.addView(childView, marks);
         return getViewInstance(childView);
 
     }
@@ -234,5 +237,32 @@ public class BorrowDetailAplActivity extends BaseActivity {
         this.finish();
     }
 
+    private boolean isExpend = false;
+
+    public void ReasonExpended(View view) {
+        if (!isExpend) {
+            tv_reason.setMinLines(0);
+            tv_reason.setMaxLines(Integer.MAX_VALUE);
+            isExpend = true;
+        } else {
+            tv_reason.setLines(3);
+            isExpend = false;
+        }
+
+    }
+
+    private boolean isRemarkExpend = false;
+
+    public void RemarkExpended(View view) {
+        if (!isRemarkExpend) {
+            tv_remark.setMinLines(0);
+            tv_remark.setMaxLines(Integer.MAX_VALUE);
+            isRemarkExpend = true;
+        } else {
+            tv_remark.setLines(3);
+            isRemarkExpend = false;
+        }
+
+    }
 
 }

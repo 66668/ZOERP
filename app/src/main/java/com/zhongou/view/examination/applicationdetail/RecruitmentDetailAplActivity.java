@@ -53,13 +53,14 @@ public class RecruitmentDetailAplActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_timeIn)
     TextView sp_timeIn;
 
-   @ViewInject(id = R.id.tv_remark)
+
+    //说明
+    @ViewInject(id = R.id.tv_reason, click = "ReasonExpended")
+    TextView tv_reason;
+
+    //备注
+    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
     TextView tv_remark;
-
-    //Responsibility
-    @ViewInject(id = R.id.tv_responsibilitys)
-    TextView tv_responsibility;
-
     //审批人
     @ViewInject(id = R.id.tv_Requester)
     TextView tv_Requester;
@@ -104,7 +105,7 @@ public class RecruitmentDetailAplActivity extends BaseActivity {
     private void setShow(RecruitmentModel model) {
         tv_position.setText(model.getPosition());
         tv_numberPeople.setText(model.getNumberOfPeople());
-        tv_responsibility.setText(model.getResponsibility());
+        tv_reason.setText(model.getResponsibility());
         tv_remark.setText(model.getRemark());
 
         modelList = model.getApprovalInfoLists();
@@ -220,5 +221,32 @@ public class RecruitmentDetailAplActivity extends BaseActivity {
      */
     public void forBack(View v) {
         this.finish();
+    }
+    private boolean isExpend = false;
+
+    public void ReasonExpended(View view) {
+        if (!isExpend) {
+            tv_reason.setMinLines(0);
+            tv_reason.setMaxLines(Integer.MAX_VALUE);
+            isExpend = true;
+        } else {
+            tv_reason.setLines(3);
+            isExpend = false;
+        }
+
+    }
+
+    private boolean isRemarkExpend = false;
+
+    public void RemarkExpended(View view) {
+        if (!isRemarkExpend) {
+            tv_remark.setMinLines(0);
+            tv_remark.setMaxLines(Integer.MAX_VALUE);
+            isRemarkExpend = true;
+        } else {
+            tv_remark.setLines(3);
+            isRemarkExpend = false;
+        }
+
     }
 }

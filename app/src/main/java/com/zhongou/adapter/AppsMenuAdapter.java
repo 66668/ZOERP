@@ -19,12 +19,12 @@ import android.widget.TextView;
 
 import com.zhongou.R;
 import com.zhongou.view.ExaminationAcitivity;
-import com.zhongou.view.FinanceListAcitivity;
+import com.zhongou.view.FinancialListAcitivity;
 import com.zhongou.view.MapAttendAcitivity;
 import com.zhongou.view.NoticeListActivity;
 import com.zhongou.view.NotificationListActivity;
 import com.zhongou.view.PerformanceManagerActivity;
-import com.zhongou.view.ProcueRecordActivity;
+import com.zhongou.view.ProcureListActivity;
 import com.zhongou.view.ScheduleActivity;
 import com.zhongou.view.VehicleReturnListActivity;
 
@@ -109,7 +109,7 @@ public class AppsMenuAdapter extends BaseAdapter {
                         mContext.startActivity(intent4);
                         break;
                     case 5://财务
-                        Intent intent5 = new Intent(mContext, FinanceListAcitivity.class);
+                        Intent intent5 = new Intent(mContext, FinancialListAcitivity.class);
                         mContext.startActivity(intent5);
                         break;
                     case 6://日程
@@ -117,7 +117,7 @@ public class AppsMenuAdapter extends BaseAdapter {
                         mContext.startActivity(intent6);
                         break;
                     case 7://采购领用
-                        Intent intent7 = new Intent(mContext, ProcueRecordActivity.class);//领用-采购
+                        Intent intent7 = new Intent(mContext, ProcureListActivity.class);//领用-采购
                         mContext.startActivity(intent7);
                         break;
                     case 8://交车

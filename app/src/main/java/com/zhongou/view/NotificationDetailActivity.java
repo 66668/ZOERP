@@ -72,7 +72,7 @@ public class NotificationDetailActivity extends BaseActivity {
         tv_notice_title.setText(model.getApplicationTitle());
         tv_time.setText(model.getPublishTime());
         tv_name.setText(model.getEmployeeName());
-        tv_name.setText(UserHelper.getCurrentUser().getName());
+        tv_name2.setText(UserHelper.getCurrentUser().getName());
         tv_content.setText(model.getAbstract());
     }
 

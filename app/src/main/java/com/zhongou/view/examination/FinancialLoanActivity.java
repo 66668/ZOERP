@@ -171,7 +171,10 @@ public class FinancialLoanActivity extends BaseActivity {
         returnLoanTime = null;
         approvalID = null;
         tv_startTime.setText("");
+        et_remark.setText("");
         tv_Requester.setText("");
+        approvalID = null;
+        returnLoanTime = null;
 
     }
 

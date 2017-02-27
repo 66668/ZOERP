@@ -7,44 +7,45 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp">
+        android:layout_height="40dp"
+        android:gravity="center">
 
-        <LinearLayout
-            android:id="@+id/layout"
+
+        <TextView
+            android:id="@+id/tv_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:orientation="vertical">
+            android:layout_alignEnd="@+id/tv_lastTime"
+            android:layout_alignStart="@+id/tv_lastTime"
+            android:gravity="center"
+            android:text="下拉可以刷新！"/>
 
-            <TextView
-                android:id="@+id/tv_content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="下拉可以刷新！"/>
-            <TextView
-                android:id="@+id/tv_lastTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_lastTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_content"
+            android:gravity="center"
+            android:text="2017-02-02 11:11:11"
+            android:textSize="@dimen/common_textSize_default12"/>
 
         <ImageView
             android:id="@+id/arrow"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_toLeftOf="@+id/layout"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@+id/tv_content"
             android:src="@mipmap/uparrow"/>
 
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:layout_toStartOf="@+id/arrow"
-            android:layout_alignBottom="@+id/layout"/>
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignStart="@+id/arrow"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"/>
     </RelativeLayout>
 
 

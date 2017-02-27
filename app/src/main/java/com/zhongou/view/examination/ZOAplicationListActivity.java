@@ -406,7 +406,7 @@ public class ZOAplicationListActivity extends BaseActivity implements RefreshAnd
                     vAdapter.insertEntityList(list);
                     myListView.loadAndFreshComplete();
                 } else if (STATE == GET_MORE_DATA) {
-                    vAdapter.addEntity(list);
+                    vAdapter.addEntityList(list);
                     myListView.loadAndFreshComplete();
                 } else if (STATE == GET_NONE_NEWDATA) {
 
@@ -423,7 +423,7 @@ public class ZOAplicationListActivity extends BaseActivity implements RefreshAnd
                     myListView.loadAndFreshComplete();
 
                 } else if (STATE == GET_MORE_DATA) {
-                    vAdapter.addEntity(listDONE);
+                    vAdapter.addEntityList(listDONE);
                     myListView.loadAndFreshComplete();
 
                 } else if (STATE == GET_NONE_NEWDATA) {
@@ -441,7 +441,7 @@ public class ZOAplicationListActivity extends BaseActivity implements RefreshAnd
                     myListView.loadAndFreshComplete();
 
                 } else if (STATE == GET_MORE_DATA) {
-                    vAdapter.addEntity(listUNDO);
+                    vAdapter.addEntityList(listUNDO);
                     myListView.loadAndFreshComplete();
 
                 } else if (STATE == GET_NONE_NEWDATA) {
@@ -460,7 +460,7 @@ public class ZOAplicationListActivity extends BaseActivity implements RefreshAnd
                     myListView.loadAndFreshComplete();
 
                 } else if (STATE == GET_MORE_DATA) {
-                    vAdapter.addEntity(listDOING);
+                    vAdapter.addEntityList(listDOING);
                     myListView.loadAndFreshComplete();
 
                 } else if (STATE == GET_NONE_NEWDATA) {

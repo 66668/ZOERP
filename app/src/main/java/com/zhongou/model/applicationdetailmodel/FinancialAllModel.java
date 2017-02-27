@@ -14,7 +14,8 @@ public class FinancialAllModel implements Serializable {
 
     public String EmployeeID;
     public String ApplicationID;
-    public String Type;
+    public String ApplicationTitle;
+    public String Types;
     public String Way;
     public String Fee;
     public String Useage;
@@ -52,6 +53,13 @@ public class FinancialAllModel implements Serializable {
 
     public List<FinancialAllModel.ApprovalInfoLists> ApprovalInfoLists;
 
+    public String getApplicationTitle() {
+        return ApplicationTitle;
+    }
+
+    public void setApplicationTitle(String applicationTitle) {
+        ApplicationTitle = applicationTitle;
+    }
 
     public String getLastComment() {
         return LastComment;
@@ -164,12 +172,12 @@ public class FinancialAllModel implements Serializable {
         ApplicationID = applicationID;
     }
 
-    public String getType() {
-        return Type;
+    public String getTypes() {
+        return Types;
     }
 
-    public void setType(String type) {
-        Type = type;
+    public void setTypes(String Types) {
+        Types = Types;
     }
 
     public String getWay() {

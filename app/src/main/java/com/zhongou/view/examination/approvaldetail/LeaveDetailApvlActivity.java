@@ -80,7 +80,6 @@ public class LeaveDetailApvlActivity extends BaseActivity {
     Button btn_copytp;
 
 
-
     //请假标题
     @ViewInject(id = R.id.tv_leaveTitle)
     TextView tv_leaveTitle;
@@ -114,7 +113,7 @@ public class LeaveDetailApvlActivity extends BaseActivity {
         setContentView(R.layout.act_apps_examination_forleave_d2);
         tv_title.setText(getResources().getString(R.string.leave_d));
         tv_right.setText("");
-        
+
         Bundle bundle = this.getIntent().getExtras();
         myApprovalModel = (MyApprovalModel) bundle.getSerializable("MyApprovalModel");
         Log.d("SJY", "详情MyApprovalModel");
@@ -131,6 +130,7 @@ public class LeaveDetailApvlActivity extends BaseActivity {
         tv_approvalCo.setText(model.getStoreName());
         tv_approvalTime.setText(model.getApplicationCreateTime());
 
+        tv_leaveTitle.setText(model.getApplicationTitle());
         tv_startTime.setText(model.getStartDate());
         tv_endTime.setText(model.getEndDate());
         tv_reason.setText(model.getContent());
@@ -160,9 +160,9 @@ public class LeaveDetailApvlActivity extends BaseActivity {
                     LeaveApvlModel model = UserHelper.approvalDetailPostLeave(LeaveDetailApvlActivity.this,
                             myApprovalModel.getApplicationID(),
                             myApprovalModel.getApplicationType());
-                    sendMessage(POST_SUCCESS,model);
+                    sendMessage(POST_SUCCESS, model);
                 } catch (MyException e) {
-                    sendMessage(POST_FAILED,e.getMessage());
+                    sendMessage(POST_FAILED, e.getMessage());
                 }
             }
         });
@@ -188,28 +188,28 @@ public class LeaveDetailApvlActivity extends BaseActivity {
     public void forRefulse(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonDisagreeActivity.class,bundle);
+        startActivity(CommonDisagreeActivity.class, bundle);
     }
 
     //同意
     public void toForCommit(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonAgreeActivity.class,bundle);
+        startActivity(CommonAgreeActivity.class, bundle);
     }
 
     //转交
     public void forTransfer(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonTransfertoActivity.class,bundle);
+        startActivity(CommonTransfertoActivity.class, bundle);
     }
 
     // 抄送
     public void forCopyto(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonCopytoCoActivity.class,bundle);
+        startActivity(CommonCopytoCoActivity.class, bundle);
     }
 
     /**

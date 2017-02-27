@@ -49,6 +49,8 @@ public class RefreshAndLoadListView extends ListView implements AbsListView.OnSc
 
     int scrollState;//listView当前滚动状态
 
+    private boolean isMoveing = false;//标记是否在移动，用于消除startY值突然变大，初始值为folse
+
     private boolean isFresh = false;//标记是否在刷新，当前是在listView最顶端按下的
     private boolean isLoading = false;//标记是否在加载，当前是在listView最底部按下的
     private int startY;//按下时的y值
@@ -222,14 +224,14 @@ public class RefreshAndLoadListView extends ListView implements AbsListView.OnSc
      */
     private void hideHeaderView(int topPadding) {
 
-                headerView.setPadding(headerView.getPaddingLeft(),
-                        topPadding,
-                        headerView.getPaddingRight(),
-                        headerView.getPaddingBottom());
-//        headerView.setPadding(0,
-//                topPadding,
-//                0,
-//                0);
+        headerView.setPadding(headerView.getPaddingLeft(),
+                topPadding,
+                headerView.getPaddingRight(),
+                headerView.getPaddingBottom());
+        //        headerView.setPadding(0,
+        //                topPadding,
+        //                0,
+        //                0);
         headerView.invalidate();
     }
 
@@ -239,12 +241,12 @@ public class RefreshAndLoadListView extends ListView implements AbsListView.OnSc
      */
     private void hidefooterView(int topPadding) {
 
-                footerView.setPadding(footerView.getPaddingLeft(),
-                        topPadding,
-                        footerView.getPaddingRight(),
-                        footerView.getPaddingBottom());
+        footerView.setPadding(footerView.getPaddingLeft(),
+                topPadding,
+                footerView.getPaddingRight(),
+                footerView.getPaddingBottom());
 
-//        footerView.setPadding(0,
+        //        footerView.setPadding(0,
         //                topPadding,
         //                0,
         //                0);
@@ -285,9 +287,10 @@ public class RefreshAndLoadListView extends ListView implements AbsListView.OnSc
 
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                if (firstVisibleItem == 0) {
+                if (firstVisibleItem == 0 && isMoveing == false) {
                     isFresh = true;
                     startY = (int) ev.getY();
+                    Log.d("SJY", "触摸时startY=" + startY);
                 }
                 break;
 
@@ -296,6 +299,8 @@ public class RefreshAndLoadListView extends ListView implements AbsListView.OnSc
                 break;
 
             case MotionEvent.ACTION_UP:
+
+                isMoveing = false;
 
                 if (state == RELEASE) {
                     if (isFresh) {
@@ -336,23 +341,6 @@ public class RefreshAndLoadListView extends ListView implements AbsListView.OnSc
 
                 }
 
-
-                //                if (state == PULL) {
-                //                    state = NONE;
-                //                    isFresh = false;
-                //
-                //
-                //                    onHeaderRefreshByState();
-                //                } else if (state == RELEASE) {
-                //
-                //
-                //                    state = REFRESHING;
-                //                    if (iReflashListener != null) {
-                //                        Log.d("SJY", "onfresh");
-                //                        iReflashListener.onRefresh(); //调用刷新接口
-                //                    }
-                //                    onHeaderRefreshByState();
-                //                }
                 break;
             default:
                 break;
@@ -377,30 +365,39 @@ public class RefreshAndLoadListView extends ListView implements AbsListView.OnSc
                     final int count = adapter.getCount();
                     if (count <= 0) {
                         headerEvent(ev);
+                        //以上if在不bug下，基本不执行，可以不写
                     } else {
-                        int tempY = (int) ev.getRawY();
-                        int moveY = tempY - startY;//移动距离
-                        if (firstVisibleItem == 0 && lastVisisibleItem == count - 1) {
-                            if (isFresh) {
-                                headerEvent(ev);
-                            } else if (isLoading) {
-                                footerEvent(ev);
-                            } else {
-                                if (moveY > 0) {
+
+                        if (isMoveing == false) {
+                            //消除startY在ACTION_DOWN-->ACTION_MOVE时值突然变大的情况，必有
+                            startY = (int) ev.getRawY();
+                            isMoveing = true;
+                        } else {
+                            int tempY = (int) ev.getRawY();
+                            int moveY = tempY - startY;
+                            if (firstVisibleItem == 0 && lastVisisibleItem == count - 1) {//数据不到满屏事使用
+                                if (isFresh) {
                                     headerEvent(ev);
-                                } else if (moveY < 0) {
+                                } else if (isLoading) {
                                     footerEvent(ev);
                                 } else {
+                                    if (moveY > headerHeight) {//0
+                                        headerEvent(ev);
+                                    } else if (moveY < -footerHeight) {//0
+                                        footerEvent(ev);
+                                    } else {
 
+                                    }
                                 }
-                            }
-                        } else if (firstVisibleItem == 0 && moveY > 0) {
-                            headerEvent(ev);
-                        } else if (lastVisisibleItem == count - 1 && moveY < 0) {
-                            footerEvent(ev);
-                        } else {
+                            } else if (firstVisibleItem == 0 && moveY > headerHeight) {//0
+                                headerEvent(ev);//有问题 startY值突然变化
+                            } else if (lastVisisibleItem == count - 1 && moveY < -footerHeight) {//0
+                                footerEvent(ev);
+                            } else {
 
+                            }
                         }
+
                     }
                 }
 
@@ -420,7 +417,7 @@ public class RefreshAndLoadListView extends ListView implements AbsListView.OnSc
         int moveY = tempY - startY;
         moveY /= 2;
         startY = tempY;
-        if (moveY > 0) {
+        if (moveY > 0) {//有问题
             int newPadding = headerView.getPaddingTop() + moveY;
             newPadding = Math.min(newPadding, headerHeight / 2);
             headerView.setPadding(0, newPadding, 0, 0);
@@ -433,9 +430,9 @@ public class RefreshAndLoadListView extends ListView implements AbsListView.OnSc
                     onHeaderRefreshByState();
                 }
             }
-        } else {
+        } else {//无问题
             if (state == RELEASE || state == PULL) {
-                int newPadding = (int) (headerView.getPaddingTop() + moveY);
+                int newPadding = (headerView.getPaddingTop() + moveY);
                 newPadding = Math.max(newPadding, -1 * headerHeight);
                 headerView.setPadding(0, newPadding, 0, 0);
                 if (newPadding <= -headerHeight) {
@@ -444,55 +441,13 @@ public class RefreshAndLoadListView extends ListView implements AbsListView.OnSc
                     isFresh = false;
                 } else if (newPadding <= 0) {
                     state = PULL;
+
                     onHeaderRefreshByState();
                 } else {
 
                 }
             }
         }
-
-        //        if (!isFresh) {
-        //            return;
-        //        }
-        //        int tempY = (int) ev.getY();//获取当前y
-        //        int moveY = tempY - startY;//移动距离
-        //        int topPadding = moveY - headerHeight;//不断监听距离变化,间距
-        //        switch (state) {
-        //            case NONE:
-        //                if (moveY > 0) {
-        //                    state = PULL;
-        //                    onHeaderRefreshByState();
-        //                }
-        //                break;
-        //
-        //            case PULL:
-        //
-        //                //下拉头布局
-        //                hideHeaderView(topPadding);
-        //                if (moveY > headerHeight + SPACE
-        //                        && scrollState == SCROLL_STATE_TOUCH_SCROLL) {//正在滚动状态
-        //                    state = RELEASE;
-        //                    onHeaderRefreshByState();
-        //                }
-        //                break;
-        //
-        //            case RELEASE:
-        //
-        //                //下拉头布局
-        //                hideHeaderView(topPadding);
-        //                if (moveY < headerHeight + SPACE && moveY > 0) {
-        //                    state = PULL;
-        //                    onHeaderRefreshByState();
-        //                } else if (moveY <= 0) {
-        //                    isFresh = false;
-        //                    state = NONE;
-        //                    onHeaderRefreshByState();
-        //                }
-        //                break;
-        //
-        //            case REFRESHING:
-        //                break;
-        //        }
 
     }
 
@@ -508,7 +463,7 @@ public class RefreshAndLoadListView extends ListView implements AbsListView.OnSc
         moveY /= 2;
         startY = tempY;
         if (moveY < 0) {
-            int newPadding = (int) (footerView.getPaddingTop() - moveY);
+            int newPadding = (footerView.getPaddingTop() - moveY);
             if (newPadding > 0) {
                 newPadding = 0;
             }
@@ -543,8 +498,7 @@ public class RefreshAndLoadListView extends ListView implements AbsListView.OnSc
     private void onHeaderRefreshByState() {
         switch (state) {
             case NONE://隐藏状态
-
-                //下拉头布局
+                //下拉头布局 隐藏
                 hideHeaderView(-headerHeight);
                 tv_fresh.setText("下拉可以刷新");//can fresh
                 freshProgressBar.setVisibility(View.GONE);
@@ -559,7 +513,6 @@ public class RefreshAndLoadListView extends ListView implements AbsListView.OnSc
                 tv_lastTime.setVisibility(View.VISIBLE);
                 freshArrow.setVisibility(View.VISIBLE);
                 freshProgressBar.setVisibility(View.GONE);
-
                 tv_fresh.setText("下拉可以刷新");//can fresh
                 if (state == RELEASE) {
                     freshArrow.setAnimation(rotateAnimationDOWN); //图片方向向下
@@ -582,8 +535,7 @@ public class RefreshAndLoadListView extends ListView implements AbsListView.OnSc
                 freshArrow.setAnimation(rotateAnimationUP);//图片方向向上
                 break;
 
-            case REFRESHING://正在刷新状态
-
+            case REFRESHING:
                 //下拉头布局
                 hideHeaderView(headerInitialHeight);
 
@@ -591,8 +543,8 @@ public class RefreshAndLoadListView extends ListView implements AbsListView.OnSc
                 freshArrow.clearAnimation();//移除动画
                 freshProgressBar.setVisibility(View.VISIBLE);
                 tv_fresh.setVisibility(View.VISIBLE);
-                tv_fresh.setText("正在刷新...");//freshing
-                tv_lastTime.setVisibility(View.INVISIBLE);
+                tv_fresh.setText("正在刷新");//freshing
+                tv_lastTime.setVisibility(View.GONE);
 
                 break;
             default:
@@ -606,19 +558,22 @@ public class RefreshAndLoadListView extends ListView implements AbsListView.OnSc
     private void onFooterLoadMoreByState() {
         switch (state) {
             case NONE:
-                loadMoreProgressBar.setVisibility(View.INVISIBLE);
+                loadMoreProgressBar.setVisibility(View.GONE);
                 tv_loadMore.setText("下拉可以加载！");
                 break;
             case PULL:
-                loadMoreProgressBar.setVisibility(View.INVISIBLE);
+                loadMoreProgressBar.setVisibility(View.GONE);
+                loadMoreArrow.setVisibility(View.VISIBLE);
                 tv_loadMore.setText("下拉可以加载！");
                 break;
             case RELEASE:
-                loadMoreProgressBar.setVisibility(View.INVISIBLE);
+                loadMoreProgressBar.setVisibility(View.GONE);
+                loadMoreArrow.setVisibility(View.VISIBLE);
                 tv_loadMore.setText("松开可以刷新");
                 break;
             case REFRESHING:
                 loadMoreProgressBar.setVisibility(View.VISIBLE);
+                loadMoreArrow.setVisibility(View.GONE);
                 tv_loadMore.setText("正在加载...");
                 break;
             default:
@@ -644,6 +599,7 @@ public class RefreshAndLoadListView extends ListView implements AbsListView.OnSc
      */
     private void onLoadMoreComplete() {
         isLoading = false;
+        isMoveing = false;
         state = NONE;
         resetFooter();
         onFooterLoadMoreByState();
@@ -657,7 +613,7 @@ public class RefreshAndLoadListView extends ListView implements AbsListView.OnSc
     private void onRefreshComplete(String lastTime) {
         //可以将刷新后的时间显示到headerView上
         tv_lastTime.setText(lastTime);
-
+        isMoveing = false;
         state = NONE;
         isFresh = false;
         resetHeader();

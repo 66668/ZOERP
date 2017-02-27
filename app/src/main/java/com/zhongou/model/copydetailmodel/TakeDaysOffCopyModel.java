@@ -23,6 +23,7 @@ public class TakeDaysOffCopyModel implements Serializable {
     public String DepartmentName;
     public String EmployeeName;
     public String ApplicationCreateTime;
+    public String ApplicationTitle;
     public List<TakeDaysOffCopyModel.ApprovalInfoLists> ApprovalInfoLists;
 
     public String getRemark() {
@@ -31,6 +32,14 @@ public class TakeDaysOffCopyModel implements Serializable {
 
     public void setRemark(String remark) {
         Remark = remark;
+    }
+
+    public String getApplicationTitle() {
+        return ApplicationTitle;
+    }
+
+    public void setApplicationTitle(String applicationTitle) {
+        ApplicationTitle = applicationTitle;
     }
 
     public static class ApprovalInfoLists{

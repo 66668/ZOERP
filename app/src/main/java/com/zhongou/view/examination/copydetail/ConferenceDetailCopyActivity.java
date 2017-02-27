@@ -69,13 +69,16 @@ public class ConferenceDetailCopyActivity extends BaseActivity {
     TextView tv_conference_title;
 
     //准备
-    @ViewInject(id = R.id.tv_conference_Device)
+    @ViewInject(id = R.id.tv_conference_Device, click = "DeviceExpended")
     TextView tv_conference_Device;
 
-    //说明描述
-    @ViewInject(id = R.id.tv_conference_Abstract)
+    //简介
+    @ViewInject(id = R.id.tv_conference_Abstract, click = "AbstractExpended")
     TextView tv_conference_Abstract;
 
+    //备注
+    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
+    TextView tv_remark;
     //开始
     @ViewInject(id = R.id.tv_conference_start)
     TextView tv_conference_start;
@@ -83,10 +86,6 @@ public class ConferenceDetailCopyActivity extends BaseActivity {
     //结束
     @ViewInject(id = R.id.tv_conference_end)
     TextView tv_conference_end;
-
-    //备注
-    @ViewInject(id = R.id.tv_remark)
-    TextView tv_remark;
 
     //获取子控件个数的父控件
     @ViewInject(id = R.id.layout_ll)
@@ -107,6 +106,7 @@ public class ConferenceDetailCopyActivity extends BaseActivity {
     //常量
     public static final int POST_SUCCESS = 11;
     public static final int POST_FAILED = 12;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,6 +118,7 @@ public class ConferenceDetailCopyActivity extends BaseActivity {
         model = (MyCopyModel) bundle.getSerializable("MyCopyModel");
         getDetailModel(model);
     }
+
     private void setShow(ConferenceCopyModel model) {
         tv_copyer.setText(model.getEmployeeName());
         tv_copyTime.setText(model.getApplicationCreateTime());
@@ -233,6 +234,7 @@ public class ConferenceDetailCopyActivity extends BaseActivity {
         ls_childView.add(childView);
         return vh;
     }
+
     /**
      * back
      *

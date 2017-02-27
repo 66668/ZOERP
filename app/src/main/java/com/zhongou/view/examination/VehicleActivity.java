@@ -65,7 +65,7 @@ public class VehicleActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_timeEnd)
     TextView tv_timeEnd;
 
-    //用途
+    //用途说明
     @ViewInject(id = R.id.et_purpose)
     EditText et_purpose;
 

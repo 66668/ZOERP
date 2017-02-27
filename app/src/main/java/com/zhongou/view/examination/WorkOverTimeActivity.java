@@ -43,7 +43,7 @@ public class WorkOverTimeActivity extends BaseActivity {
     TextView tv_title;
 
     //
-    @ViewInject(id = R.id.tv_right,click = "forCommit")
+    @ViewInject(id = R.id.tv_right, click = "forCommit")
     TextView tv_right;
 
     //开始时间
@@ -59,7 +59,7 @@ public class WorkOverTimeActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_timeEnd)
     TextView tv_timeEnd;
 
-    //事由
+    //说明
     @ViewInject(id = R.id.et_reason)
     EditText et_reason;
 
@@ -92,6 +92,7 @@ public class WorkOverTimeActivity extends BaseActivity {
     //常量
     public static final int POST_SUCCESS = 17;
     public static final int POST_FAILED = 18;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,7 +133,7 @@ public class WorkOverTimeActivity extends BaseActivity {
                     js.put("StratOverTime", startDate);
                     js.put("EndOverTime", endDates);
                     js.put("Remark", remark);
-                    js.put("Reason", reason);
+                    js.put("Reason", reason);//说明
                     js.put("ApprovalIDList", approvalID);
 
                     UserHelper.overApprovalPost(WorkOverTimeActivity.this, js);
@@ -140,7 +141,7 @@ public class WorkOverTimeActivity extends BaseActivity {
                 } catch (MyException e) {
                     sendMessage(POST_FAILED, e.getMessage());
 
-                }catch (JSONException e) {
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
@@ -153,12 +154,25 @@ public class WorkOverTimeActivity extends BaseActivity {
         switch (msg.what) {
             case POST_SUCCESS:
                 PageUtil.DisplayToast(getResources().getString(R.string.approval_success));
+                clear();
                 break;
             case POST_FAILED:
                 PageUtil.DisplayToast((String) msg.obj);
                 break;
         }
     }
+
+    private void clear() {
+        tv_timeStart.setText("");
+        tv_timeEnd.setText("");
+        et_OverEmployee.setText("");
+        et_reason.setText("");
+        tv_Requester.setText("");
+        approvalID = null;
+        startDate = null;
+        endDates = null;
+    }
+
     /**
      * 开始时间
      *
@@ -173,7 +187,7 @@ public class WorkOverTimeActivity extends BaseActivity {
                         tv_timeStart.setText(time);
                     }
                 });
-//        endDateChooseDialog.setTimePickerGone(true);
+        //        endDateChooseDialog.setTimePickerGone(true);
         endDateChooseDialog.setDateDialogTitle("开始时间");
         endDateChooseDialog.showDateChooseDialog();
     }
@@ -192,10 +206,11 @@ public class WorkOverTimeActivity extends BaseActivity {
                         tv_timeEnd.setText(time);
                     }
                 });
-//        endDateChooseDialog.setTimePickerGone(true);
+        //        endDateChooseDialog.setTimePickerGone(true);
         endDateChooseDialog.setDateDialogTitle("结束时间");
         endDateChooseDialog.showDateChooseDialog();
     }
+
     /**
      * 添加审批人
      *
@@ -204,6 +219,7 @@ public class WorkOverTimeActivity extends BaseActivity {
     public void forAddApprover(View view) {
         myStartForResult(ContactsSelectActivity.class, 0);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -244,7 +260,6 @@ public class WorkOverTimeActivity extends BaseActivity {
 
     /**
      * back
-     *
      */
     public void forBack(View view) {
         this.finish();

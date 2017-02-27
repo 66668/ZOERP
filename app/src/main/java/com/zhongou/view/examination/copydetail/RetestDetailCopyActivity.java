@@ -56,8 +56,9 @@ public class RetestDetailCopyActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_retest_person)
     TextView tv_retest_person;
 
+
     //备注
-    @ViewInject(id = R.id.tv_remark)
+    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
     TextView tv_remark;
 
     //附件
@@ -92,10 +93,11 @@ public class RetestDetailCopyActivity extends BaseActivity {
     //常量
     public static final int POST_SUCCESS = 11;
     public static final int POST_FAILED = 12;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_apps_examination_retest_d);
+        setContentView(R.layout.act_apps_examination_retest_d3);
         tv_title.setText(getResources().getString(R.string.outgoing));
         tv_right.setText("");
 
@@ -103,6 +105,7 @@ public class RetestDetailCopyActivity extends BaseActivity {
         model = (MyCopyModel) bundle.getSerializable("MyCopyModel");
         getDetailModel(model);
     }
+
     private void setShow(RetestCopyModel model) {
         tv_copyer.setText(model.getEmployeeName());
         tv_copyTime.setText(model.getApplicationCreateTime());
@@ -222,5 +225,19 @@ public class RetestDetailCopyActivity extends BaseActivity {
      */
     public void forBack(View view) {
         this.finish();
+    }
+
+    private boolean isRemarkExpend = false;
+
+    public void RemarkExpended(View view) {
+        if (!isRemarkExpend) {
+            tv_remark.setMinLines(0);
+            tv_remark.setMaxLines(Integer.MAX_VALUE);
+            isRemarkExpend = true;
+        } else {
+            tv_remark.setLines(3);
+            isRemarkExpend = false;
+        }
+
     }
 }

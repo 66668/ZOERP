@@ -105,7 +105,7 @@ public class LeaveDetailAplActivity extends BaseActivity {
 
     private void setShow(LeaveModel model) {
         Log.d("SJY", "审批状态--ApprovalStatus=" + leaveModel.getApprovalStatus());
-        tv_ApplicationTitle.setText("model无参数");
+        tv_ApplicationTitle.setText(model.getApplicationTitle());
         tv_startTime.setText(model.getStartDate());
         tv_endTime.setText(model.getEndDate());
         tv_reason.setText(model.getContent());

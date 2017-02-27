@@ -58,9 +58,8 @@ public class FinanceListAdapter extends BaseListAdapter {
         //获取一条信息
 
         holder.tvTime.setText(model.getCreateTime());
-        holder.tvType.setText(model.getType());
-        holder.tv_finaceTitle.setText(model.getCreateTime());
-
+        holder.tvType.setText(model.getTypes());
+        holder.tv_finaceTitle.setText(model.getApplicationTitle());
 
     }
 

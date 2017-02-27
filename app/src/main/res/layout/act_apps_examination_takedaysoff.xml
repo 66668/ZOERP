@@ -33,6 +33,57 @@
                 android:background="@color/common_bg_examination_line"/>
 
             <LinearLayout
+                android:id="@+id/layout_takeDaysTitle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_topbar_height"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
+                    android:text="@string/workRest_title"
+                    android:textColor="@color/cl_text_common"/>
+
+                <EditText
+                    android:id="@+id/et_takedaysoffTitle"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.72"
+                    android:background="@drawable/et_white_stroke"
+                    android:gravity="center_vertical"
+                    android:hint="@string/workRest_title_hint"
+                    android:inputType="numberDecimal"
+                    android:textColorHint="@color/cl_hint_common"
+                    />
+
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:src="@mipmap/et_forword"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/common_bg_examination_line"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginTop="10dp"
+                android:background="@color/common_bg_examination_line"/>
+
+            <LinearLayout
                 android:id="@+id/layout_startTime"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/common_topbar_height"
@@ -86,7 +137,6 @@
                 android:id="@+id/layout_end"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/common_topbar_height"
-                android:layout_marginTop="10dp"
                 android:background="@color/white"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"

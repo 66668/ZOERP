@@ -101,8 +101,8 @@ public class FinancialReimburseDetailApvlActivity extends BaseActivity {
     //
     @ViewInject(id = R.id.tv_totle)
     TextView tv_totle;
-    //
-    @ViewInject(id = R.id.tv_remark)
+    //备注
+    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
     TextView tv_remark;
 
 
@@ -118,7 +118,7 @@ public class FinancialReimburseDetailApvlActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_apps_examination_financial_reimburse_d2);
-        tv_title.setText(getResources().getString(R.string.financial_pay_title_d));
+        tv_title.setText(getResources().getString(R.string.financial_reimburse_title_d));
         tv_right.setText("");
 
         Bundle bundle = this.getIntent().getExtras();
@@ -233,4 +233,17 @@ public class FinancialReimburseDetailApvlActivity extends BaseActivity {
     }
 
 
+    private boolean isRemarkExpend = false;
+
+    public void RemarkExpended(View view) {
+        if (!isRemarkExpend) {
+            tv_remark.setMinLines(0);
+            tv_remark.setMaxLines(Integer.MAX_VALUE);
+            isRemarkExpend = true;
+        } else {
+            tv_remark.setLines(3);
+            isRemarkExpend = false;
+        }
+
+    }
 }

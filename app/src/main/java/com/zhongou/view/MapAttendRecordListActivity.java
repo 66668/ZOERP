@@ -390,7 +390,7 @@ public class MapAttendRecordListActivity extends BaseActivity implements Refresh
                     vAdapter.insertEntityList(list);
                     myListView.loadAndFreshComplete();
                 } else if (STATE == GET_MORE_DATA) {
-                    vAdapter.addEntity(list);
+                    vAdapter.addEntityList(list);
                     myListView.loadAndFreshComplete();
                 } else if (STATE == GET_NONE_NEWDATA) {
 
@@ -407,7 +407,7 @@ public class MapAttendRecordListActivity extends BaseActivity implements Refresh
                     myListView.loadAndFreshComplete();
 
                 } else if (STATE == GET_MORE_DATA) {
-                    vAdapter.addEntity(listToday);
+                    vAdapter.addEntityList(listToday);
                     myListView.loadAndFreshComplete();
 
                 } else if (STATE == GET_NONE_NEWDATA) {
@@ -425,7 +425,7 @@ public class MapAttendRecordListActivity extends BaseActivity implements Refresh
                     myListView.loadAndFreshComplete();
 
                 } else if (STATE == GET_MORE_DATA) {
-                    vAdapter.addEntity(listWeeked);
+                    vAdapter.addEntityList(listWeeked);
                     myListView.loadAndFreshComplete();
 
                 } else if (STATE == GET_NONE_NEWDATA) {
@@ -444,7 +444,7 @@ public class MapAttendRecordListActivity extends BaseActivity implements Refresh
                     myListView.loadAndFreshComplete();
 
                 } else if (STATE == GET_MORE_DATA) {
-                    vAdapter.addEntity(listMonth);
+                    vAdapter.addEntityList(listMonth);
                     myListView.loadAndFreshComplete();
 
                 } else if (STATE == GET_NONE_NEWDATA) {

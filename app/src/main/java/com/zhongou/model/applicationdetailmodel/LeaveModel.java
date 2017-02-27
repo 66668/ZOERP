@@ -16,8 +16,9 @@ public class LeaveModel implements Serializable {
     public String StartDate;
     public String Content;
     public String Reason;
-    public String Remark;
+    public String ApplicationTitle;
 
+    public String Remark;
     public String ApprovalStatus;
     public String StoreName;
     public String DepartmentName;
@@ -26,6 +27,14 @@ public class LeaveModel implements Serializable {
 
 
     public List<LeaveModel.ApprovalInfoLists> ApprovalInfoLists;
+
+    public String getApplicationTitle() {
+        return ApplicationTitle;
+    }
+
+    public void setApplicationTitle(String applicationTitle) {
+        ApplicationTitle = applicationTitle;
+    }
 
     public String getReason() {
         return Reason;

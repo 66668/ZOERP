@@ -72,9 +72,8 @@ public class NotificationAndNoticeDetailAplActivity extends BaseActivity {
     TextView tv_notificaitonAndNotice_content;
 
     //备注
-    @ViewInject(id = R.id.tv_remark)
+    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
     TextView tv_remark;
-
 
     //获取子控件个数的父控件
     @ViewInject(id = R.id.layout_ll)
@@ -237,4 +236,19 @@ public class NotificationAndNoticeDetailAplActivity extends BaseActivity {
     public void forBack(View view) {
         this.finish();
     }
+
+    private boolean isRemarkExpend = false;
+
+    public void RemarkExpended(View view) {
+        if (!isRemarkExpend) {
+            tv_remark.setMinLines(0);
+            tv_remark.setMaxLines(Integer.MAX_VALUE);
+            isRemarkExpend = true;
+        } else {
+            tv_remark.setLines(3);
+            isRemarkExpend = false;
+        }
+
+    }
+
 }

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="57dp">
+
+        <TextView
+            android:id="@+id/tv_procurementTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/img_icon"
+            android:text="title"
+            android:textColor="@color/black"
+            android:textSize="@dimen/common_textSize_default14"/>
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/tv_title"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@+id/img_icon"
+            android:gravity="center_vertical"
+            android:text="2010-01-01 11:11:11"
+            android:textColor="@color/textHintColor"
+            android:textSize="@dimen/common_textSize_default12"/>
+
+        <TextView
+            android:id="@+id/tv_state"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:drawableRight="@mipmap/forword"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="已审批"
+            android:textColor="@color/textHintColor"
+            android:textSize="@dimen/common_textSize_default12"
+            />
+    </RelativeLayout>
+
+</RelativeLayout>

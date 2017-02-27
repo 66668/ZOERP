@@ -95,7 +95,6 @@
                     android:textColor="@color/cl_text_common"/>
 
                 <TextView
-                    android:textColor="@color/cl_text_common"
                     android:id="@+id/tv_timeStart"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
@@ -104,6 +103,7 @@
                     android:gravity="center_vertical|right"
                     android:hint="@string/hint_choose"
                     android:paddingRight="10dp"
+                    android:textColor="@color/cl_text_common"
                     android:textColorHint="@color/cl_hint_common"
                     />
 
@@ -145,7 +145,6 @@
                     android:textColor="@color/cl_text_common"/>
 
                 <TextView
-                    android:textColor="@color/cl_text_common"
                     android:id="@+id/tv_timeEnd"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
@@ -154,6 +153,7 @@
                     android:gravity="center_vertical|right"
                     android:hint="@string/hint_choose"
                     android:paddingRight="10dp"
+                    android:textColor="@color/cl_text_common"
                     android:textColorHint="@color/cl_hint_common"
                     />
 
@@ -196,14 +196,15 @@
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:gravity="top|left"
-                    android:padding="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_weight="0.72"
                     android:background="@drawable/et_white_stroke"
+                    android:gravity="top|left"
                     android:hint="@string/hint_leaveReason"
+                    android:paddingTop="10dp"
                     android:textColorHint="@color/cl_hint_common"/>
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dip"
@@ -240,10 +241,11 @@
                     android:layout_weight="0.71"
                     android:background="@drawable/et_white_stroke"
                     android:gravity="top|left"
-                    android:paddingTop="10dp"
                     android:hint="@string/hint_remark_all_apl"
+                    android:paddingTop="10dp"
                     android:textColorHint="@color/cl_hint_common"/>
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dip"
@@ -272,13 +274,6 @@
                     android:gravity="center_vertical"
                     android:text="@string/picture"
                     android:textColor="@color/cl_text_common"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dip"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@color/common_bg_examination_line"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"

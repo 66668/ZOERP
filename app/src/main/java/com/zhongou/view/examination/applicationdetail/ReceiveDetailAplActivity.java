@@ -67,13 +67,15 @@ public class ReceiveDetailAplActivity extends BaseActivity {
     //数量
     @ViewInject(id = R.id.tv_recevie_number)
     TextView tv_recevie_number;
-    //用途
-    @ViewInject(id = R.id.tv_recevie_useage)
-    TextView tv_recevie_useage;
+
+    //说明
+    @ViewInject(id = R.id.tv_reason, click = "ReasonExpended")
+    TextView tv_reason;
 
     //备注
-    @ViewInject(id = R.id.tv_remark)
+    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
     TextView tv_remark;
+
 
     //申请时间
     @ViewInject(id = R.id.tv_recevie_aplTime)
@@ -117,7 +119,7 @@ public class ReceiveDetailAplActivity extends BaseActivity {
         tv_recevie_size.setText(model.getVersions());
         tv_recevie_number.setText(model.getAmount());
         tv_remark.setText(model.getRemark());
-        tv_recevie_useage.setText(model.getRemark());
+        tv_reason.setText(model.getReason());//?
         tv_recevie_aplTime.setText(model.getApplicationCreateTime());//?
 
         // 审批人
@@ -234,5 +236,33 @@ public class ReceiveDetailAplActivity extends BaseActivity {
      */
     public void forBack(View view) {
         this.finish();
+    }
+
+    private boolean isExpend = false;
+
+    public void ReasonExpended(View view) {
+        if (!isExpend) {
+            tv_reason.setMinLines(0);
+            tv_reason.setMaxLines(Integer.MAX_VALUE);
+            isExpend = true;
+        } else {
+            tv_reason.setLines(3);
+            isExpend = false;
+        }
+
+    }
+
+    private boolean isRemarkExpend = false;
+
+    public void RemarkExpended(View view) {
+        if (!isRemarkExpend) {
+            tv_remark.setMinLines(0);
+            tv_remark.setMaxLines(Integer.MAX_VALUE);
+            isRemarkExpend = true;
+        } else {
+            tv_remark.setLines(3);
+            isRemarkExpend = false;
+        }
+
     }
 }
