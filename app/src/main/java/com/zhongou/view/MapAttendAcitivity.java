@@ -27,6 +27,8 @@ public class MapAttendAcitivity extends BaseActivity {
 
     @ViewInject(id = R.id.tv_right)
     TextView tvRight;
+
+
     //考勤记录
     @ViewInject(id = R.id.tv_AttendRecord, click = "forRecord")
     TextView tv_AttendRecord;

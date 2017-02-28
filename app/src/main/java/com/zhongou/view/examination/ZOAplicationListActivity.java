@@ -90,7 +90,6 @@ public class ZOAplicationListActivity extends BaseActivity implements RefreshAnd
     //spinner
     private List<String> spinnerData;
     private String myLastSelectState;//记录spinner上次选中的值
-    private boolean isHanging = true;//
     private ArrayList<MyApplicationModel> list = null;//获取数据 每次20条
     private ArrayList<MyApplicationModel> listAll = new ArrayList<>();//记录所有数据
 

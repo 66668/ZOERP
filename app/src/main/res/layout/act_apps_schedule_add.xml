@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/common_bg_examination"
+    android:orientation="vertical">
+
+    <include layout="@layout/topbar_common_itt"/>
+
+    <TextView
+        android:id="@+id/scheduleType"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:clickable="true"
+        android:drawableRight="@mipmap/forword"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/scheduleDate"
+        android:layout_width="fill_parent"
+        android:layout_height="43dp"
+        android:layout_marginTop="5dp"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        />
+
+    <EditText
+        android:id="@+id/scheduleText"
+        android:layout_width="fill_parent"
+        android:layout_height="240dp"
+        android:layout_marginTop="5dp"
+        android:background="@null"
+        android:gravity="top"
+        android:hint="请输入你的日程..."
+        android:padding="10dp"
+        android:textColor="#000000"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:weightSum="1">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="10dp"
+            android:layout_weight="0.14"/>
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/common_topbar_height40"
+            android:layout_weight="0.72"
+            android:background="@drawable/btn_style"
+            android:text="保存"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/common_textSize_default18"
+            />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="10dp"
+            android:layout_weight="0.14"/>
+
+    </LinearLayout>
+</LinearLayout>

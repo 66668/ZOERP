@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:background="@color/cl_hint_common">
+    
+  <TextView
+      android:id="@+id/convertTop"
+	  android:gravity="center"
+	  android:layout_width="fill_parent"
+	  android:layout_height="40dp"
+	  android:background="@color/cl_hint_common"
+	  android:textStyle="bold"
+	  android:clickable="true"
+	  android:textColor="#000000"
+	  android:text="日期转换"
+  />
+  
+  <TextView
+      android:id="@+id/convertDate"
+      android:layout_marginTop="5dp"
+	  android:gravity="center"
+	  android:layout_width="fill_parent"
+	  android:layout_height="40dp"
+	  android:background="#ffffff"
+	  android:drawableRight="@mipmap/forword"
+	  android:paddingRight="5dp"
+	  android:textStyle="bold"
+	  android:clickable="true"
+	  android:textColor="#000000"
+  />
+  
+  <TextView
+      android:id="@+id/convert"
+      android:layout_marginTop="5dp"
+      android:layout_gravity="center_horizontal"
+	  android:gravity="center"
+	  android:layout_width="100dp"
+	  android:layout_height="40dp"
+	  android:background="#A0FF20"
+	  android:paddingRight="5dp"
+	  android:textStyle="bold"
+	  android:clickable="true"
+	  android:textColor="#ffffff"
+	  android:text="查询"
+  />
+  
+  <TextView 
+      android:id="@+id/convertResult"
+      android:layout_marginTop="5dp"
+	  android:gravity="center"
+	  android:layout_width="fill_parent"
+	  android:layout_height="100dp"
+	  android:background="#A08080"
+	  android:textStyle="bold"
+	  android:textColor="#208080"
+	  android:textSize="20sp"
+  />
+</LinearLayout>

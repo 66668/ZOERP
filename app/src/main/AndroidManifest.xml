@@ -836,12 +836,51 @@
 
         <!-- 07 日程界面-->
         <activity
-            android:name="com.zhongou.view.ScheduleActivity"
+            android:name="com.zhongou.view.ScheduleMainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
+        <!-- 07-01日程记录-->
+        <activity
+            android:name="com.zhongou.view.ScheduleListActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 07-02item详情列表-->
+        <activity
+            android:name="com.zhongou.view.ScheduleAddActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 07-03列表进入具体详情展示-->
+        <activity
+            android:name="com.zhongou.view.ScheduleDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 07-04日程记录-->
+        <activity
+            android:name="com.zhongou.view.ScheduleTypeActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 07-05日期查询-->
+        <activity
+            android:name="com.zhongou.view.ScheduleConvertActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
 
         <!--08 采购领用 -->
         <activity

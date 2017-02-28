@@ -49,6 +49,7 @@ public class SQLiteCoContactdb extends SQLiteOpenHelper {
     private static final String ENTRYTIME = "entrytime";//入职时间
     private static final String LEVEL = "level";//个人级别
 
+
     //创建表SQL语句
     private static final String CREATE_CO_CONTACT_TABLE = "CREATE TABLE "
             + DB_CO_TABLE_NAME//表名

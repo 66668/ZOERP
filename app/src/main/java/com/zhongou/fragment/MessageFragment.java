@@ -14,7 +14,7 @@ import com.zhongou.base.BaseFragment;
 import com.zhongou.view.FinancialListAcitivity;
 import com.zhongou.view.NoticeListActivity;
 import com.zhongou.view.NotificationListActivity;
-import com.zhongou.view.ScheduleActivity;
+import com.zhongou.view.ScheduleMainActivity;
 
 
 
@@ -151,7 +151,7 @@ public class MessageFragment extends BaseFragment {
         layout_schedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ScheduleActivity.class);
+                Intent intent = new Intent(getActivity(), ScheduleMainActivity.class);
                 startActivity(intent);
             }
         });

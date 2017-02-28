@@ -25,7 +25,7 @@ import com.zhongou.view.NoticeListActivity;
 import com.zhongou.view.NotificationListActivity;
 import com.zhongou.view.PerformanceManagerActivity;
 import com.zhongou.view.ProcureListActivity;
-import com.zhongou.view.ScheduleActivity;
+import com.zhongou.view.ScheduleMainActivity;
 import com.zhongou.view.VehicleReturnListActivity;
 
 import java.util.ArrayList;
@@ -113,7 +113,7 @@ public class AppsMenuAdapter extends BaseAdapter {
                         mContext.startActivity(intent5);
                         break;
                     case 6://日程
-                        Intent intent6 = new Intent(mContext, ScheduleActivity.class);
+                        Intent intent6 = new Intent(mContext, ScheduleMainActivity.class);
                         mContext.startActivity(intent6);
                         break;
                     case 7://采购领用
