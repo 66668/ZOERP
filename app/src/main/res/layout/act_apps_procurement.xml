@@ -11,14 +11,15 @@
     <RadioGroup
         android:id="@+id/radiogroup"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/common_topbar_height40"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingBottom="4dip"
         android:weightSum="1">
 
         <RadioButton
             android:id="@+id/btn_Procurement"
-            style="@style/bottom_menu"
+            style="@style/top_radiobutton_style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
@@ -30,7 +31,7 @@
 
         <RadioButton
             android:id="@+id/btn_receive"
-            style="@style/bottom_menu"
+            style="@style/top_radiobutton_style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"

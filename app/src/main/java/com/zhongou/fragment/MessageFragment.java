@@ -28,6 +28,8 @@ import com.zhongou.widget.calendaruse.ScheduleDAO;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.zhongou.dialog.Loading.noDialogRun;
+
 
 /**
  * BottomBar 消息
@@ -190,8 +192,8 @@ public class MessageFragment extends BaseFragment {
      * 访问服务端，获取数据
      */
     private void getData() {
-        //日程个数
-        Loading.run(getActivity(), new Runnable() {
+        //日程表
+        Loading.noDialogRun(getActivity(), new Runnable() {
             @Override
             public void run() {
                 dao = new ScheduleDAO(getActivity());
@@ -207,7 +209,7 @@ public class MessageFragment extends BaseFragment {
             }
         });
 
-        Loading.run(getActivity(), new Runnable() {
+        Loading.noDialogRun(getActivity(), new Runnable() {
             @Override
             public void run() {
                 try {
@@ -239,9 +241,12 @@ public class MessageFragment extends BaseFragment {
                 case GET_SCHEDULE_DATA:
                     //您有x条日程
                     int scheduleSize = (int) msg.obj;
-                    if (scheduleSize > 0) {
+                    if (scheduleSize > 0 && scheduleSize <= 10) {
                         schedule_content.setTextColor(getActivity().getResources().getColor(R.color.red));
                         schedule_content.setText("您有 " + scheduleSize + " 条日程要处理");
+                    } else if (scheduleSize > 10) {
+                        schedule_content.setTextColor(getActivity().getResources().getColor(R.color.red));
+                        schedule_content.setText("您有 10+ 条日程要处理");
                     } else {
                         schedule_content.setText("没有日程安排");
                         schedule_content.setTextColor(getActivity().getResources().getColor(R.color.textHintColor));
@@ -251,8 +256,14 @@ public class MessageFragment extends BaseFragment {
                 case GET_UNDO_DATA:
                     List<MyApprovalModel> visitorModelList = (List<MyApprovalModel>) msg.obj;
                     int size = splitDate(visitorModelList);
-                    undo_content.setTextColor(getActivity().getResources().getColor(R.color.red));
-                    undo_content.setText("您有 " + size + " 条未审批申请");
+                    if (size > 0 && size <= 10) {
+                        undo_content.setTextColor(getActivity().getResources().getColor(R.color.red));
+                        undo_content.setText("您有 " + size + " 条未审批申请");
+                    } else if (size > 10) {
+                        undo_content.setTextColor(getActivity().getResources().getColor(R.color.red));
+                        undo_content.setText("您有 10+ 条未审批申请");
+                    }
+
                     break;
                 case NONE_NUDO_DATA:
                     undo_content.setText((String) msg.obj);

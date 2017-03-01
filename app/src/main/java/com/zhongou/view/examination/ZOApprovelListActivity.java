@@ -52,6 +52,7 @@ import static com.zhongou.R.id.tv_title;
 
 /**
  * 我的审批
+ * 未审批-->审批，会更改审批的状态
  * Created by sjy on 2016/12/2.
  */
 
@@ -73,6 +74,7 @@ public class ZOApprovelListActivity extends BaseActivity implements RefreshAndLo
 
     private ZOApprovelListAdapter vAdapter;//记录适配
     private boolean ifLoading = false;//标记
+    private boolean isNeedRefresh = false;//onResume时是否需要再刷新
     private int pageSize = 20;
     private String IMaxtime = null;
     private String IMinTime = null;
@@ -129,12 +131,12 @@ public class ZOApprovelListActivity extends BaseActivity implements RefreshAndLo
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("SJY", "spinner监听--" + spinnerData.get(position));
 
-                //清空adapter的list长度 isHanging状态改变
 
                 //如果选择状态没变，就不做处理
                 if (!spinnerData.get(position).equals(myLastSelectState)) {
                     showSelectData(spinnerData.get(position).trim(), GET_NEW_DATA);//参数2必填GET_NEW_DATA
                 } else {
+                    Log.d("SJY", "GG了");
                     return;
                 }
 
@@ -150,6 +152,12 @@ public class ZOApprovelListActivity extends BaseActivity implements RefreshAndLo
                 int newPosition = position - headerViewsCount;//得到新的修正后的position
 
                 MyApprovalModel myApprovalModel = (MyApprovalModel) vAdapter.getItem(newPosition);//
+                if (myApprovalModel.getApprovalStatus().contains("1")) {
+                    isNeedRefresh = false;//onResume时，是否需要刷新
+                } else {
+                    isNeedRefresh = true;
+                }
+
                 String type = myApprovalModel.getApplicationType();//申请类型
                 myApprovalTransfer(type, myApprovalModel);
             }
@@ -161,7 +169,6 @@ public class ZOApprovelListActivity extends BaseActivity implements RefreshAndLo
             @Override
             public void run() {
                 ifLoading = true;//
-                String storeID = UserHelper.getCurrentUser().getStoreID();
                 try {
                     List<MyApprovalModel> visitorModelList = UserHelper.getApprovalSearchResults(
                             ZOApprovelListActivity.this,
@@ -255,6 +262,13 @@ public class ZOApprovelListActivity extends BaseActivity implements RefreshAndLo
             case GET_NEW_DATA://进入页面加载最新
                 // 数据显示
                 list = (ArrayList<MyApprovalModel>) msg.obj;
+
+                //重新获取数据，需要清空数据
+                listAll.clear();
+                listDOINGALL.clear();
+                listDONEALL.clear();
+                listUNDOALL.clear();
+
                 Log.d("SJY", "第一次获取数据长度=" + list.size());
                 SplitListState(list, GET_NEW_DATA);//筛选数据状态
                 showSelectData(myLastSelectState, GET_NEW_DATA);//根据spinner值和数据状态 确定显示数据
@@ -567,5 +581,13 @@ public class ZOApprovelListActivity extends BaseActivity implements RefreshAndLo
         this.finish();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //进入已审批申请 不刷新数据，进入未审批申请，刷新
+        if (isNeedRefresh) {
+            getData();
+        }
 
+    }
 }

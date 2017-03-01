@@ -136,7 +136,7 @@ public class CommonAgreeActivity extends BaseActivity {
         switch (msg.what) {
             case POST_SUCCESS:
                 PageUtil.DisplayToast((String) msg.obj);
-                et_container.setText("");
+                this.finish();
                 break;
             case POST_FAILED:
                 PageUtil.DisplayToast((String) msg.obj);

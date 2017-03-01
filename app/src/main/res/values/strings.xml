@@ -324,6 +324,7 @@
 
     <string name="financial_pay_style">付款方式</string>
     <string name="financial_pay_title_d">付款审批详情</string>
+    <string name="financial_fee_title_d">费用审批详情</string>
     <string name="financial_reimburse_title_d">报销审批详情</string>
     <string name="financial_pay_offical">收款单位</string>
     <string name="financial_pay_offical_hint">请输入收款单位</string>

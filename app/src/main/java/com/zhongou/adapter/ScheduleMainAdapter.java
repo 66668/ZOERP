@@ -202,7 +202,7 @@ public class ScheduleMainAdapter extends BaseAdapter {
         if (schDateTagFlag != null && schDateTagFlag.length > 0) {
             for (int i = 0; i < schDateTagFlag.length; i++) {
                 if (schDateTagFlag[i] == position) {
-                    holder.textView.setBackgroundColor(res.getColor(R.color.khaki));
+                    holder.textView.setBackgroundResource(R.mipmap.calendarchoose);
                 }
             }
         }

@@ -133,6 +133,7 @@ public class FinancialPayDetailApvlActivity extends BaseActivity {
         tv_ApprovalPerson.setText(model.getEmployeeName());
         tv_approvaldept.setText(model.getDepartmentName());
         tv_approvalCo.setText(model.getStoreName());
+        tv_approvalTime.setText(model.getCreateTime());
 
         //
         tv_feeType.setText(model.getWay());

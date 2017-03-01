@@ -166,7 +166,7 @@ public class FinancialListAcitivity extends BaseActivity implements RefreshAndLo
     //RefreshListView.IReflashListener接口 下拉刷新
     @Override
     public void onRefresh() {
-        if(IMaxtime == ""){
+        if (IMaxtime == "") {
             sendMessage(GET_NONE_NEWDATA, "无最新数据");
             return;
         }
@@ -205,7 +205,7 @@ public class FinancialListAcitivity extends BaseActivity implements RefreshAndLo
             return;
         }
 
-        if(IMinTime == ""){
+        if (IMinTime == "") {
             sendMessage(GET_NONE_NEWDATA, "无最新数据");
             return;
         }
@@ -241,6 +241,14 @@ public class FinancialListAcitivity extends BaseActivity implements RefreshAndLo
             case GET_NEW_DATA://进入页面加载最新
                 // 数据显示
                 list = (ArrayList<FinancialAllModel>) msg.obj;
+
+                //刷新数据前要清空数据
+                listAll.clear();
+                listFeeAll.clear();
+                listLoanAll.clear();
+                listPayAll.clear();
+                listRemburseAll.clear();
+
                 SplitListState(list, GET_NEW_DATA);//筛选数据状态
                 showSelectData(myLastSelectState, GET_NEW_DATA);//根据spinner值和数据状态 确定显示数据
 
@@ -282,12 +290,12 @@ public class FinancialListAcitivity extends BaseActivity implements RefreshAndLo
 
 
     public void setIMaxTime(ArrayList<FinancialAllModel> list) {
-//        IMaxtime = list.get(0).getPlanbackTime();
+        //        IMaxtime = list.get(0).getPlanbackTime();
         IMaxtime = "";
     }
 
     public void setIMinTime(ArrayList<FinancialAllModel> list) {
-//        IMinTime = list.get(list.size() - 1).getPlanbackTime();
+        //        IMinTime = list.get(list.size() - 1).getPlanbackTime();
         IMinTime = "";
     }
 

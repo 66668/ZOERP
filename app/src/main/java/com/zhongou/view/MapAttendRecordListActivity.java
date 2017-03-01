@@ -240,6 +240,13 @@ public class MapAttendRecordListActivity extends BaseActivity implements Refresh
         switch (msg.what) {
             case GET_NEW_DATA:
                 list = (ArrayList<MapAttendModel>) msg.obj;//获取数据
+
+                //刷数据前清空数据
+                listAll.clear();
+                listTodayALL.clear();
+                listWeekedALL.clear();
+                listMonthALL.clear();
+
                 Log.d("SJY", "第一次获取数据长度=" + list.size());
                 SplitListState(list, GET_NEW_DATA);//筛选数据状态
                 showSelectData(myLastSelectState, GET_NEW_DATA);//根据spinner值和数据状态 确定显示数据

@@ -259,6 +259,13 @@ public class ZOAplicationListActivity extends BaseActivity implements RefreshAnd
         switch (msg.what) {
             case GET_NEW_DATA:
                 list = (ArrayList<MyApplicationModel>) msg.obj;//获取数据
+
+                //重新获取数据，需要清空数据
+                listAll.clear();
+                listDOINGALL.clear();
+                listDONEALL.clear();
+                listUNDOALL.clear();
+
                 SplitListState(list, GET_NEW_DATA);//筛选数据状态
                 showSelectData(myLastSelectState, GET_NEW_DATA);//根据spinner值和数据状态 确定显示数据
 

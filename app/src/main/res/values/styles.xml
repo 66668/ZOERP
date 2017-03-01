@@ -39,9 +39,22 @@
         <item name="android:windowAnimationStyle">@style/AnimFade</item>
     </style>
 
-    <!-- tab样式-->
+    <!--  主界面bottombar中RadioButton字体样式-->
     <style name="bottom_menu">
         <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@drawable/tab_text_indicator</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:button">@null</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:layout_weight">1.0</item>
+    </style>
+
+    <!--  应用-采购领用 topbar样式-->
+    <style name="top_radiobutton_style">
+        <item name="android:textSize">14sp</item>
         <item name="android:textColor">@drawable/tab_text_indicator</item>
         <item name="android:ellipsize">marquee</item>
         <item name="android:gravity">center</item>

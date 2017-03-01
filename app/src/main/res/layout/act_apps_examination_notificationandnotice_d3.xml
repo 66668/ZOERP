@@ -281,7 +281,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.72"
-                    android:drawableRight="@mipmap/forword"
                     android:gravity="center_vertical"
                     android:paddingRight="10dp"
                     android:textColor="@color/red"

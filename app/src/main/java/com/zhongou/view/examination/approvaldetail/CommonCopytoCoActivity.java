@@ -159,7 +159,6 @@ public class CommonCopytoCoActivity extends BaseActivity {
                 //设置首字母 adapter使用
                 setFirstLetter(listSonCoData);
                 adapter = new ContactsCopyToCoAdapter(this, listSonCoData);
-
                 //数据展示
                 contactsListView.setAdapter(adapter);
                 break;
