@@ -3,20 +3,24 @@ package com.zhongou.view;
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.app.TimePickerDialog.OnTimeSetListener;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.zhongou.R;
 import com.zhongou.base.BaseActivity;
+import com.zhongou.dialog.Loading;
 import com.zhongou.inject.ViewInject;
 import com.zhongou.model.ScheduleModel;
 import com.zhongou.widget.calendaruse.CalendarConstant;
@@ -52,12 +56,23 @@ public class ScheduleAddActivity extends BaseActivity {
     Button scheduleSave;
 
     //日程类型选择
-    @ViewInject(id = R.id.scheduleType, click = "getScheduleType")
+    @ViewInject(id = R.id.layout_scheduleType, click = "getScheduleType")
+    LinearLayout layoutScheduleType;
+    @ViewInject(id = R.id.scheduleType)
     TextView scheduleType;
 
-    //提醒时间 设置
-    @ViewInject(id = R.id.scheduleDate, click = "getProTime")
+    //提醒次数选择
+    @ViewInject(id = R.id.layout_scheduleRemind, click = "getScheduleRemind")
+    LinearLayout layout_scheduleRemind;
+    @ViewInject(id = R.id.scheduleRemind)
+    TextView scheduleRemind;
+
+    //提醒时间选择
+    @ViewInject(id = R.id.layout_proTime, click = "getProTime")
+    LinearLayout layout_proTime;
+    @ViewInject(id = R.id.tvProTime)
     TextView dateText;
+
 
     //日程内容
     @ViewInject(id = R.id.scheduleText)
@@ -87,6 +102,8 @@ public class ScheduleAddActivity extends BaseActivity {
     private static String schText = "";
     int schTypeID = 0;
 
+    public static final int POST_SUCCESS = 21;
+
     public ScheduleAddActivity() {
         lc = new LunarCalendar();
         dao = new ScheduleDAO(this);
@@ -104,11 +121,10 @@ public class ScheduleAddActivity extends BaseActivity {
         tv_right.setText("");
         tv_title.setText("添加日程");
 
-        scheduleType.setBackgroundColor(Color.WHITE);
-        scheduleType.setText(sch_type[0] + "\t\t\t\t" + remind[remindID]);
         dateText.setBackgroundColor(Color.WHITE);
         scheduleText.setBackgroundColor(Color.WHITE);
         scheduleModel = new ScheduleModel();
+
         //日程内容
         if (schText != null) {
             //在选择日程类型之前已经输入了日程的信息，则在跳转到选择日程类型之前应当将日程信息保存到schText中，当返回时再次可以取得。
@@ -116,13 +132,12 @@ public class ScheduleAddActivity extends BaseActivity {
             //一旦设置完成之后就应该将此静态变量设置为空，
             schText = "";
         }
+
         Date date = new Date();
         if (hour == -1 && minute == -1) {
             hour = date.getHours();
             minute = date.getMinutes();
         }
-        //显示当前时间
-        dateText.setText(getScheduleDate());
     }
 
     /**
@@ -130,10 +145,43 @@ public class ScheduleAddActivity extends BaseActivity {
      */
     public void getScheduleType(View view) {
         schText = scheduleText.getText().toString();
-        Intent intent = new Intent();
-        intent.setClass(ScheduleAddActivity.this, ScheduleTypeActivity.class);
-        intent.putExtra("sch_remind", new int[]{sch_typeID, remindID});
-        startActivityForResult(intent, 0);
+
+        new AlertDialog.Builder(this)
+                .setTitle("日程类型")
+                .setIcon(android.R.drawable.ic_dialog_info)
+                .setItems(sch_type, new DialogInterface.OnClickListener() {//数组
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        sch_typeID = which;//传回选中的数组下标
+                        scheduleType.setText(sch_type[sch_typeID]);
+                    }
+                })
+                .setPositiveButton("确定", null)
+                .setNegativeButton("取消", null).show();
+
+    }
+
+    /**
+     * 设置 提醒次数
+     */
+
+    public void getScheduleRemind(View view) {
+
+        //选定时间提醒
+        new AlertDialog.Builder(ScheduleAddActivity.this)
+                .setTitle("提醒次数")
+                .setIcon(android.R.drawable.ic_dialog_info)
+                .setSingleChoiceItems(remind
+                        , remindID
+                        , new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                remindID = which;
+                                scheduleRemind.setText(remind[remindID]);
+                            }
+                        })
+                .setPositiveButton("确认", null)
+                .setNegativeButton("取消", null)
+                .show();
     }
 
     /**
@@ -157,38 +205,6 @@ public class ScheduleAddActivity extends BaseActivity {
 
     }
 
-    //获取日程类型 回调函数
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 0) {
-            switch (requestCode) {
-                case 0://取消
-
-                    //获取ScheduleTypeActivity传来的值
-                    int[] schType_remind0 = data.getIntArrayExtra("schType_remind");
-                    if (schType_remind0 != null) {
-                        sch_typeID = schType_remind0[0];
-                        remindID = schType_remind0[1];
-                        scheduleType.setText(sch_type[sch_typeID] + "\t\t\t\t" + remind[remindID]);
-                    }
-                    break;
-                case 1://确定
-
-                    //获取ScheduleTypeActivity传来的值
-                    int[] schType_remind1 = data.getIntArrayExtra("schType_remind");
-                    if (schType_remind1 != null) {
-                        sch_typeID = schType_remind1[0];
-                        remindID = schType_remind1[1];
-                        scheduleType.setText(sch_type[sch_typeID] + "\t\t\t\t" + remind[remindID]);
-                    }
-                    break;
-
-            }
-
-        }
-
-    }
 
     /**
      * 保存 新建日程
@@ -196,42 +212,57 @@ public class ScheduleAddActivity extends BaseActivity {
      * @param view
      */
     public void saveAndTo(View view) {
-        schText = scheduleText.getText().toString();
 
-        if (TextUtils.isEmpty(scheduleText.getText().toString())) {
-            //判断输入框是否为空
-            new AlertDialog.Builder(ScheduleAddActivity.this)
-                    .setTitle("输入日程")
-                    .setMessage("日程信息不能为空")
-                    .setPositiveButton("确认", null).show();
-            return;
+        Loading.run(this, new Runnable() {
+            @Override
+            public void run() {
+
+                if (TextUtils.isEmpty(scheduleText.getText().toString())) {
+                    //判断输入框是否为空
+                    new AlertDialog.Builder(ScheduleAddActivity.this)
+                            .setTitle("输入日程")
+                            .setMessage("日程信息不能为空")
+                            .setPositiveButton("确认", null).show();
+                    return;
+                }
+
+                //设置 时间 提醒次数 显示结果
+                String showDate = setRemindCount(Integer.parseInt(scheduleYear), Integer.parseInt(tempMonth), Integer.parseInt(tempDay), hour, minute, week, remindID);
+
+                //model赋值
+                scheduleModel.setScheduleTypeID(sch_typeID);
+                scheduleModel.setRemindID(remindID);
+                scheduleModel.setScheduleDate(showDate);
+                scheduleModel.setScheduleContent(scheduleText.getText().toString());
+
+                //数据保存到sql中 待修改
+                int scheduleID = dao.save(scheduleModel);
+
+                sendMessage(POST_SUCCESS, scheduleID);
+            }
+        });
+    }
+
+
+    protected void handleMessage(Message msg) {
+        super.handleMessage(msg);
+        switch (msg.what) {
+            case POST_SUCCESS:
+                int scheduleID = (int) msg.obj;
+                //将scheduleID保存到数据中(因为在CalendarActivity中点击gridView中的一个Item可能会对应多个标记日程(scheduleID))
+                String[] scheduleIDs = new String[]{String.valueOf(scheduleID)};
+
+                //设置日程标记日期(将所有日程标记日期封装到list中)
+                setScheduleDateTag(remindID, scheduleYear, tempMonth, tempDay, scheduleID);
+                //保存后页面跳转 详情
+                Intent intent = new Intent();
+                intent.setClass(ScheduleAddActivity.this, ScheduleSingleDetailActivity.class);
+                intent.putExtra("scheduleID", scheduleIDs);
+                startActivity(intent);
+                this.finish();
+                break;
+
         }
-
-        //设置 时间提醒次数 显示结果
-        String showDate = setRemindCount(Integer.parseInt(scheduleYear), Integer.parseInt(tempMonth), Integer.parseInt(tempDay), hour, minute, week, remindID);
-
-        //model赋值
-        scheduleModel.setScheduleTypeID(sch_typeID);
-        scheduleModel.setRemindID(remindID);
-        scheduleModel.setScheduleDate(showDate);
-        scheduleModel.setScheduleContent(scheduleText.getText().toString());
-
-        //数据保存到sql中 待修改
-        int scheduleID = dao.save(scheduleModel);
-
-        //将scheduleID保存到数据中(因为在CalendarActivity中点击gridView中的一个Item可能会对应多个标记日程(scheduleID))
-        String[] scheduleIDs = new String[]{String.valueOf(scheduleID)};
-
-        //设置日程标记日期(将所有日程标记日期封装到list中)
-        setScheduleDateTag(remindID, scheduleYear, tempMonth, tempDay, scheduleID);
-
-        //保存后页面跳转 详情
-        Intent intent = new Intent();
-        intent.setClass(ScheduleAddActivity.this, ScheduleDetailActivity.class);
-        intent.putExtra("scheduleID", scheduleIDs);
-        startActivity(intent);
-        this.finish();
-
     }
 
     /**
@@ -339,7 +370,7 @@ public class ScheduleAddActivity extends BaseActivity {
         String show = "";
         if (0 <= remindID && remindID <= 4) {
             //提醒一次,隔10分钟,隔30分钟,隔一小时
-            show = year + "-" + month + "-" + day + "\t" + hour + ":" + minute + "\t" + week + "\t\t" + remindType;
+            show = year + "-" + month + "-" + day + "\t" + hour + ":" + minute + "\n" + week + "\t" + remindType;
         } else if (remindID == 5) {
             //每周
             show = "每周" + week + "\t" + hour + ":" + minute;

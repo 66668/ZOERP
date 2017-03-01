@@ -858,25 +858,17 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!-- 07-03列表进入具体详情展示-->
+        <!-- 07-03当日多日程详情-->
         <activity
-            android:name="com.zhongou.view.ScheduleDetailActivity"
+            android:name="com.zhongou.view.ScheduleMultDetailActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!-- 07-04日程记录-->
+        <!-- 07-04当日但日程详情-->
         <activity
-            android:name="com.zhongou.view.ScheduleTypeActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
-
-        <!-- 07-05日期查询-->
-        <activity
-            android:name="com.zhongou.view.ScheduleConvertActivity"
+            android:name="com.zhongou.view.ScheduleSingleDetailActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">

@@ -1,5 +1,6 @@
 package com.zhongou.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,12 +12,16 @@ import com.zhongou.adapter.ScheduleListAdapter;
 import com.zhongou.base.BaseActivity;
 import com.zhongou.inject.ViewInject;
 import com.zhongou.model.ScheduleModel;
+import com.zhongou.utils.PageUtil;
 import com.zhongou.widget.RefreshListView;
 import com.zhongou.widget.calendaruse.ScheduleDAO;
 
 import java.util.ArrayList;
 
 /**
+ * 日程表显示
+ *
+ *
  * Created by sjy on 2017/2/28.
  */
 
@@ -66,11 +71,17 @@ public class ScheduleListActivity extends BaseActivity {
     //获取所有sql数据
     private void getData() {
         schList = dao.getAllSchedule();
-        vAdapter = new ScheduleListAdapter(this, schList);
-        myListView.setAdapter(vAdapter);
+        if (schList == null || schList.size() <= 0) {
+            PageUtil.DisplayToast("没有日程记录！");
+            this.finish();
+
+        } else {
+            vAdapter = new ScheduleListAdapter(this, schList);
+            myListView.setAdapter(vAdapter);
+        }
     }
 
-    //进入详情
+    //进入详情，
     private void initListener() {
         // 点击一条记录后，跳转到登记时详细的信息
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -80,16 +91,23 @@ public class ScheduleListActivity extends BaseActivity {
                 int headerViewsCount = myListView.getHeaderViewsCount();//得到header的总数量
                 int newPosition = position - headerViewsCount;//得到新的修正后的position
 
-                ScheduleModel model = (ScheduleModel) vAdapter.getItem(newPosition);//
+                //
+                ScheduleModel model = (ScheduleModel) vAdapter.getItem(newPosition);
+                String[] scheduleIDs = new String[]{String.valueOf(model.getScheduleID())};
 
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("ScheduleModel", model);
-                startActivity(ScheduleDetailActivity.class, bundle);
+                Intent intent = new Intent();
+                intent.setClass(ScheduleListActivity.this, ScheduleSingleDetailActivity.class);
+                intent.putExtra("scheduleID", scheduleIDs);
+                startActivity(intent);
             }
         });
-
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getData();
+    }
 
     /**
      * @param v

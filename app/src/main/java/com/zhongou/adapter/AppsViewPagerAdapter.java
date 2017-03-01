@@ -6,8 +6,6 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.GridView;
 
-import com.viewpagerindicator.IconPagerAdapter;
-
 import java.util.List;
 
 /**
@@ -15,15 +13,13 @@ import java.util.List;
  * Created by nick on 15/10/22.
  */
 
-public class AppsViewPagerAdapter extends PagerAdapter implements IconPagerAdapter {
+public class AppsViewPagerAdapter extends PagerAdapter {
     private List<GridView> array;
 
     /**
      * 供外部调用（new）的方法
      *
-     * @param context
-     *            上下文
-
+     * @param context 上下文
      */
     public AppsViewPagerAdapter(Context context, List<GridView> array) {
         this.array = array;
@@ -51,9 +47,5 @@ public class AppsViewPagerAdapter extends PagerAdapter implements IconPagerAdapt
         ((ViewPager) arg0).removeView((View) arg2);
     }
 
-    @Override
-    public int getIconResId(int index) {
-        return 0;
-    }
 
 }

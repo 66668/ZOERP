@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -35,7 +34,6 @@ import com.zhongou.widget.calendaruse.ScheduleDAO;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 
 /**
@@ -50,7 +48,7 @@ public class ScheduleMainActivity extends BaseActivity implements GestureDetecto
     ImageView imgBack;
 
     //
-    @ViewInject(id = R.id.tv_title,click = "toRefresh")
+    @ViewInject(id = R.id.tv_title, click = "toRefresh")
     TextView tv_title;
 
     //日程表
@@ -65,26 +63,22 @@ public class ScheduleMainActivity extends BaseActivity implements GestureDetecto
     private GestureDetector gestureDetector = null;
     private ScheduleMainAdapter adapter = null;
     private GridView gridView = null;
-    private ImageView imageViewLeft;
-    private ImageView imageViewRight;
-    private Drawable draw = null;
+
     private static int jumpMonth = 0;      //每次滑动，增加或减去一个月,默认为0（即显示当前月）
-    private static int jumpYear = 0;       //滑动跨越一年，则增加或者减去一年,默认为0(即当前年)
+    private static int jumpYear = 0;//滑动跨越一年，则增加或者减去一年,默认为0(即当前年)
+
     private int year_c = 0;
     private int month_c = 0;
     private int day_c = 0;
+
     private String currentDate = "";
     private ScheduleDAO dao = null;
-
-    //spinner
-    private List<String> spinnerData;
-    private String myLastSelectState;//记录spinner上次选中的值
 
 
     public ScheduleMainActivity() {
         //获取年 月 日
         Date date = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d");
         currentDate = sdf.format(date);  //当期日期
         year_c = Integer.parseInt(currentDate.split("-")[0]);
         month_c = Integer.parseInt(currentDate.split("-")[1]);
@@ -160,7 +154,7 @@ public class ScheduleMainActivity extends BaseActivity implements GestureDetecto
         }, year_c, month_c - 1, day_c).show();
     }
 
-    //日程表跳转
+    //跳转日程表
 
     public void toList(View view) {
         //日程表
@@ -168,17 +162,12 @@ public class ScheduleMainActivity extends BaseActivity implements GestureDetecto
         intent.setClass(ScheduleMainActivity.this, ScheduleListActivity.class);
         startActivity(intent);
 
-        //农历查询
-        //        Intent intent1 = new Intent();
-        //        intent1.setClass(ScheduleMainActivity.this, ScheduleConvertActivity.class);
-        //        intent1.putExtra("date", new int[]{year_c, month_c, day_c});
-        //        startActivity(intent1);
-
     }
 
     //点击标题刷新
 
     public void toRefresh(View view) {
+        String viewTag = String.valueOf(view.getTag());
         //跳转到今天
         int xMonth = jumpMonth;
         int xYear = jumpYear;
@@ -270,7 +259,6 @@ public class ScheduleMainActivity extends BaseActivity implements GestureDetecto
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 //点击任何一个item，得到这个item的日期(排除点击的是周日到周六(点击不响应))
-                Log.d("ss", "每一个gridView的item响应");
                 int startPosition = adapter.getStartPositon();
                 int endPosition = adapter.getEndPosition();
                 if (startPosition <= position && position <= endPosition) {
@@ -279,16 +267,23 @@ public class ScheduleMainActivity extends BaseActivity implements GestureDetecto
                     String scheduleMonth = adapter.getShowMonth();
                     String week = "";
 
-                    //通过日期查询这一天是否被标记，如果标记了日程就查询出这天的所有日程信息
+                    // 当 X日有多个日程时，点击X日的任意一条日程，都会跳转显示X日的所有日程信息
+                    //通过日期查询这一天是否被标记，如果标记了日程 查询这天在sql所有对应的位置id
                     String[] scheduleIDs = dao.getScheduleByTagDate(Integer.parseInt(scheduleYear), Integer.parseInt(scheduleMonth), Integer.parseInt(scheduleDay));
 
                     if (scheduleIDs != null && scheduleIDs.length > 0) {
-                        Log.d("ss", "进入详情界面");
-                        //跳转到显示这一天的所有日程信息界面
-                        Intent intent = new Intent();
-                        intent.setClass(ScheduleMainActivity.this, ScheduleDetailActivity.class);
-                        intent.putExtra("scheduleID", scheduleIDs);
-                        startActivity(intent);
+                        if (scheduleIDs.length == 1) {
+                            Intent intent = new Intent();
+                            intent.setClass(ScheduleMainActivity.this, ScheduleSingleDetailActivity.class);
+                            intent.putExtra("scheduleID", scheduleIDs);
+                            startActivity(intent);
+                        } else {
+                            //跳转到显示这一天的所有日程信息界面
+                            Intent intent = new Intent();
+                            intent.setClass(ScheduleMainActivity.this, ScheduleMultDetailActivity.class);
+                            intent.putExtra("scheduleID", scheduleIDs);
+                            startActivity(intent);
+                        }
 
                     } else {
                         //直接跳转到需要添加日程的界面
@@ -416,6 +411,44 @@ public class ScheduleMainActivity extends BaseActivity implements GestureDetecto
             return true;
         }
         return false;
+    }
+
+    //页面刷新
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //跳转到今天
+        int xMonth = jumpMonth;
+        int xYear = jumpYear;
+        int gvFlag = 0;
+        jumpMonth = 0;
+        jumpYear = 0;
+        addGridView();   //添加一个gridView
+        year_c = Integer.parseInt(currentDate.split("-")[0]);
+        month_c = Integer.parseInt(currentDate.split("-")[1]);
+        day_c = Integer.parseInt(currentDate.split("-")[2]);
+        adapter = new ScheduleMainAdapter(this, getResources(), jumpMonth, jumpYear, year_c, month_c, day_c);
+        gridView.setAdapter(adapter);
+        addTextToTopTextView(topText);
+        gvFlag++;
+        flipper.addView(gridView, gvFlag);
+        if (xMonth == 0 && xYear == 0) {
+            //nothing to do
+        } else if ((xYear == 0 && xMonth > 0) || xYear > 0) {
+            this.flipper.setInAnimation(AnimationUtils.loadAnimation(this, R.anim.push_left_in));
+            this.flipper.setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.push_left_out));
+            this.flipper.showNext();
+        } else {
+            this.flipper.setInAnimation(AnimationUtils.loadAnimation(this, R.anim.push_right_in));
+            this.flipper.setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.push_right_out));
+            this.flipper.showPrevious();
+        }
+        flipper.removeViewAt(0);
+    }
+
+    //
+    public void forBack(View view) {
+        this.finish();
     }
 
 }

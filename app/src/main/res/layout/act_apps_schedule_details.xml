@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
@@ -45,9 +44,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.72"
-                    android:drawableRight="@mipmap/forword"
                     android:gravity="center_vertical|center_horizontal"
-                    android:hint="请选择日程类型"
                     android:paddingRight="20dp"
                     />
             </LinearLayout>
@@ -78,9 +75,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.72"
-                    android:drawableRight="@mipmap/forword"
                     android:gravity="center_vertical|center_horizontal"
-                    android:hint="请选择提醒次数"
                     android:paddingRight="20dp"
                     />
             </LinearLayout>
@@ -111,55 +106,22 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.72"
-                    android:drawableRight="@mipmap/forword"
                     android:gravity="center_vertical|center_horizontal"
-                    android:hint="请选择提醒时间"
                     android:paddingRight="20dp"
                     />
             </LinearLayout>
 
-            <EditText
+            <TextView
                 android:id="@+id/scheduleText"
+                style="@style/BlackText.standard"
                 android:layout_width="fill_parent"
                 android:layout_height="240dp"
-                android:layout_marginTop="5dp"
-                android:background="@null"
-                android:gravity="top"
-                android:hint="请输入你的日程..."
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:gravity="top|left"
                 android:padding="10dp"
-                android:textColor="@color/black"
-                android:textSize="@dimen/common_textSize_default14"
                 />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                android:weightSum="1">
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="10dp"
-                    android:layout_weight="0.14"/>
-
-                <Button
-                    android:id="@+id/save"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/common_topbar_height40"
-                    android:layout_weight="0.72"
-                    android:background="@drawable/btn_style"
-                    android:text="保存"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/common_textSize_default18"
-                    />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="10dp"
-                    android:layout_weight="0.14"/>
-
-            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

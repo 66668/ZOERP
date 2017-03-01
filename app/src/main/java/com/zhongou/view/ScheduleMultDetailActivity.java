@@ -24,11 +24,10 @@ import com.zhongou.model.ScheduleModel;
 
 /**
  * 日程详情
- *
+ * <p>
  * 动态添加布局
- *
  */
-public class ScheduleDetailActivity extends Activity {
+public class ScheduleMultDetailActivity extends Activity {
 
     private LinearLayout layout = null;
     private TextView textTop = null;
@@ -52,18 +51,18 @@ public class ScheduleDetailActivity extends Activity {
         params.setMargins(0, 5, 0, 0);
         layout = new LinearLayout(this); // 实例化布局对象
         layout.setOrientation(LinearLayout.VERTICAL);
-        layout.setBackgroundResource(R.mipmap.ic_launcher);//图片schedule_bk
+        layout.setBackgroundColor(getResources().getColor(R.color.common_bg_examination));
         layout.setLayoutParams(params);
 
         textTop = new TextView(this, null);
         textTop.setTextColor(Color.BLACK);
-        textTop.setBackgroundResource(R.mipmap.ic_launcher);//图片top_day
+        textTop.setBackgroundColor(getResources().getColor(R.color.common_topbar_bgcolor));
         textTop.setText("日程详情");
         textTop.setHeight(47);
         textTop.setGravity(Gravity.CENTER);
 
 
-        editInfo = new TextView(ScheduleDetailActivity.this, null);
+        editInfo = new TextView(ScheduleMultDetailActivity.this, null);
         editInfo.setTextColor(Color.BLACK);
         editInfo.setBackgroundColor(Color.WHITE);
         editInfo.setHeight(200);
@@ -76,10 +75,12 @@ public class ScheduleDetailActivity extends Activity {
 
         Intent intent = getIntent();
         //scheduleID = Integer.parseInt(intent.getStringExtra("scheduleID"));
-        //一个日期可能对应多个标记日程(scheduleID)
+        //当日可能对应多个标记日程(scheduleID)
         String[] scheduleIDs = intent.getStringArrayExtra("scheduleID");
+
         //显示日程详细信息
         for (int i = 0; i < scheduleIDs.length; i++) {
+
             handlerInfo(Integer.parseInt(scheduleIDs[i]));
         }
         setContentView(layout);
@@ -102,7 +103,7 @@ public class ScheduleDetailActivity extends Activity {
             case Menu.FIRST:
                 Log.d("ss", "onOptionsItemSelected--跳转--ScheduleAllActivity");
                 Intent intent = new Intent();
-                intent.setClass(ScheduleDetailActivity.this, ScheduleListActivity.class);
+                intent.setClass(ScheduleMultDetailActivity.this, ScheduleListActivity.class);
                 startActivity(intent);
                 break;
             case Menu.FIRST + 1:
@@ -116,12 +117,13 @@ public class ScheduleDetailActivity extends Activity {
      * 显示日程所有信息
      */
     public void handlerInfo(int scheduleID) {
+
         TextView date = new TextView(this, null);
         date.setTextColor(Color.BLACK);
         date.setBackgroundColor(Color.WHITE);
         date.setLayoutParams(params);
         date.setGravity(Gravity.CENTER_VERTICAL);
-        date.setHeight(40);
+        date.setHeight(80);
         date.setPadding(10, 0, 10, 0);
 
         TextView type = new TextView(this, null);
@@ -129,7 +131,7 @@ public class ScheduleDetailActivity extends Activity {
         type.setBackgroundColor(Color.WHITE);
         type.setLayoutParams(params);
         type.setGravity(Gravity.CENTER);
-        type.setHeight(40);
+        type.setHeight(80);
         type.setPadding(10, 0, 10, 0);
         type.setTag(scheduleID);
 
@@ -160,14 +162,14 @@ public class ScheduleDetailActivity extends Activity {
                 Log.d("ss", "长按删除");
                 final String scheduleID = String.valueOf(v.getTag());
 
-                new AlertDialog.Builder(ScheduleDetailActivity.this).setTitle("删除日程").setMessage("确认删除").setPositiveButton("确认", new OnClickListener() {
+                new AlertDialog.Builder(ScheduleMultDetailActivity.this).setTitle("删除日程").setMessage("确认删除").setPositiveButton("确认", new OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Log.d("ss", "跳转--ScheduleAllActivity");
                         dao.delete(Integer.parseInt(scheduleID));
                         Intent intent1 = new Intent();
-                        intent1.setClass(ScheduleDetailActivity.this, ScheduleListActivity.class);
+                        intent1.setClass(ScheduleMultDetailActivity.this, ScheduleListActivity.class);
                         startActivity(intent1);
                     }
                 }).setNegativeButton("取消", null).show();
