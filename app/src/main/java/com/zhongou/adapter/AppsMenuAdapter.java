@@ -24,7 +24,7 @@ import com.zhongou.view.MapAttendAcitivity;
 import com.zhongou.view.NoticeListActivity;
 import com.zhongou.view.NotificationListActivity;
 import com.zhongou.view.PerformanceManagerActivity;
-import com.zhongou.view.ProcureListActivity;
+import com.zhongou.view.ProcureMainActivity;
 import com.zhongou.view.ScheduleMainActivity;
 import com.zhongou.view.VehicleReturnListActivity;
 
@@ -117,7 +117,7 @@ public class AppsMenuAdapter extends BaseAdapter {
                         mContext.startActivity(intent6);
                         break;
                     case 7://采购领用
-                        Intent intent7 = new Intent(mContext, ProcureListActivity.class);//领用-采购
+                        Intent intent7 = new Intent(mContext, ProcureMainActivity.class);//领用-采购
                         mContext.startActivity(intent7);
                         break;
                     case 8://交车

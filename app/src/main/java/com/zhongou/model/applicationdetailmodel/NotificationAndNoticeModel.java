@@ -44,7 +44,7 @@ public class NotificationAndNoticeModel implements Serializable {
         CreateTime = createTime;
     }
 
-    public static class ApprovalInfoLists{
+    public static class ApprovalInfoLists implements Serializable {
         public String Comment;
         public String ApprovalDate;
         public String YesOrNo;
@@ -142,6 +142,7 @@ public class NotificationAndNoticeModel implements Serializable {
     public void setApplicationTitle(String applicationTitle) {
         ApplicationTitle = applicationTitle;
     }
+
     public String getRemark() {
         return Remark;
     }

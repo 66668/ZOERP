@@ -1,8 +1,10 @@
 package com.zhongou.view.examination.applicationdetail;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -144,13 +146,15 @@ public class FinancialReimburseDetailAplActivity extends BaseActivity {
             tv_state_result.setText("审批中...");
             tv_state_result.setTextColor(getResources().getColor(R.color.black));
         } else {
-            tv_state_result.setText("你猜猜！");
+            tv_state_result.setText("ApprovalStatus传值为空！");
         }
 
         if (financialAllModel.getApprovalStatus().contains("1") || financialAllModel.getApprovalStatus().contains("2")) {
+            Log.d("SJY", "进入已审批意见 1 2的情况--modelList.size()=" + modelList.size());
             //插入意见
             for (int i = 0, mark = layout_ll.getChildCount(); i < modelList.size(); i++, mark++) {//mark是布局插入位置，放在mark位置的后边（从1开始计数）
-                ViewHolder vh = AddView(mark);//添加布局
+                Log.d("SJY", "进入添加界面---mark=" + layout_ll.getChildCount());
+                ViewHolder vh = AddView(this,mark);//添加布局
                 vh.tv_name.setText(modelList.get(i).getApprovalEmployeeName());
                 vh.tv_time.setText(modelList.get(i).getApprovalDate());
                 vh.tv_contains.setText(modelList.get(i).getComment());
@@ -213,9 +217,9 @@ public class FinancialReimburseDetailAplActivity extends BaseActivity {
     }
 
     //初始化参数
-    private ViewHolder AddView(int marks) {
+    private ViewHolder AddView(Context context, int marks) {
         ls_childView = new ArrayList<View>();
-        inflater = LayoutInflater.from(getApplicationContext());
+        inflater = LayoutInflater.from(context);
         childView = inflater.inflate(R.layout.item_examination_status, null);
         childView.setId(marks);
         layout_ll.addView(childView, marks);

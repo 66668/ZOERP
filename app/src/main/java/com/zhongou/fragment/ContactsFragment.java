@@ -198,7 +198,6 @@ public class ContactsFragment extends BaseFragment {
         });
     }
 
-
     //获取服务端 通讯录数据
     private void getData() {
         final Message msg = new Message();
@@ -329,8 +328,8 @@ public class ContactsFragment extends BaseFragment {
         Log.d("SJY", "filterDateList != null=" + (filterDateList != null) + "------filterDateList.size() > 0=" + (filterDateList.size() > 0));
         if (filterDateList != null || filterDateList.size() > 0) {
             Collections.sort(filterDateList, pinyinComparator);
+            adapter.updateListView(filterDateList);
         }
-        adapter.updateListView(filterDateList);
     }
 
     //重写setMenuVisibility方法，不然会出现叠层的现象

@@ -876,7 +876,7 @@
 
         <!--08 采购领用 -->
         <activity
-            android:name="com.zhongou.view.ProcureListActivity"
+            android:name="com.zhongou.view.ProcureMainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">

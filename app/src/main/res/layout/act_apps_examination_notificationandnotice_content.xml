@@ -19,13 +19,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <TextView
-                style="@style/BlackText.standard"
                 android:id="@+id/tv_content"
-                android:gravity="left|top"
-                android:padding="10dp"
+                style="@style/BlackText.standard"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:gravity="left|top"
+                android:padding="10dp"/>
         </LinearLayout>
     </ScrollView>
 

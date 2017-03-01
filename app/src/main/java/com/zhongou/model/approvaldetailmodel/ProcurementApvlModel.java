@@ -39,7 +39,7 @@ public class ProcurementApvlModel implements Serializable {
 
     public List<ProcurementApvlModel.ApprovalInfoLists> ApprovalInfoLists ;
 
-    public static class ApprovalInfoLists{
+    public static class ApprovalInfoLists implements Serializable{
         public String Comment = "";
         public String ApprovalDate = "";
         public String YesOrNo= "";

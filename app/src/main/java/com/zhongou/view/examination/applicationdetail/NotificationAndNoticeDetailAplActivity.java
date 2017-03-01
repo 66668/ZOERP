@@ -1,8 +1,10 @@
 package com.zhongou.view.examination.applicationdetail;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -66,7 +68,7 @@ public class NotificationAndNoticeDetailAplActivity extends BaseActivity {
     TextView tv_notificaitonAndNotice_whom;
 
     //内容
-    @ViewInject(id = R.id.layout_content,click = "forContent")
+    @ViewInject(id = R.id.layout_content, click = "forContent")
     LinearLayout layout_content;
     @ViewInject(id = R.id.tv_notificaitonAndNotice_content)
     TextView tv_notificaitonAndNotice_content;
@@ -141,7 +143,7 @@ public class NotificationAndNoticeDetailAplActivity extends BaseActivity {
         if (notificationAndNoticeModel.getApprovalStatus().contains("1") || notificationAndNoticeModel.getApprovalStatus().contains("2")) {
             //插入意见
             for (int i = 0, mark = layout_ll.getChildCount(); i < modelList.size(); i++, mark++) {//mark是布局插入位置，放在mark位置的后边（从1开始计数）
-                ViewHolder vh = AddView(mark);//添加布局
+                ViewHolder vh = AddView(this, mark);//添加布局
                 vh.tv_name.setText(modelList.get(i).getApprovalEmployeeName());
                 vh.tv_time.setText(modelList.get(i).getApprovalDate());
                 vh.tv_contains.setText(modelList.get(i).getComment());
@@ -155,11 +157,13 @@ public class NotificationAndNoticeDetailAplActivity extends BaseActivity {
         }
     }
 
-    public void forContent(View v){
+    public void forContent(View v) {
+        Log.d("SJY", "跳转到内容");
         Bundle bundle = new Bundle();
-        bundle.putSerializable("notificationAndNoticeModel",notificationAndNoticeModel);
-        startActivity(NotificationAndNoticeDetailAplActivity2.class,bundle);
+        bundle.putSerializable("notificationAndNoticeModel", notificationAndNoticeModel);
+        startActivity(NotificationAndNoticeDetailAplActivity2.class, bundle);
     }
+
     /**
      * 获取详情数据
      */
@@ -206,9 +210,9 @@ public class NotificationAndNoticeDetailAplActivity extends BaseActivity {
     }
 
     //初始化参数
-    private ViewHolder AddView(int marks) {
+    private ViewHolder AddView(Context context, int marks) {
         ls_childView = new ArrayList<View>();
-        inflater = LayoutInflater.from(getApplicationContext());
+        inflater = LayoutInflater.from(context);
         childView = inflater.inflate(R.layout.item_examination_status, null);
         childView.setId(marks);
         layout_ll.addView(childView, marks);

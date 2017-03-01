@@ -44,6 +44,7 @@
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/img_notice"
             android:text="没有消息和公告"
+            android:textColor="@color/textHintColor"
             android:textSize="@dimen/common_textSize_default14"/>
         <!-- 时间-->
         <TextView
@@ -105,6 +106,7 @@
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/img_msg"
             android:text="没有消息和公告"
+            android:textColor="@color/textHintColor"
             android:textSize="@dimen/common_textSize_default14"/>
         <!-- 时间-->
         <TextView
@@ -145,7 +147,8 @@
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:background="@mipmap/menu_notify_undo"/>
+            android:background="@mipmap/menu_notify_undo"
+            android:textColor="@color/textHintColor"/>
         <!-- 标题-->
         <TextView
             android:id="@+id/tv_undoTitle"
@@ -206,7 +209,8 @@
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:background="@mipmap/app_schedule"/>
+            android:background="@mipmap/app_schedule"
+            android:textColor="@color/textHintColor"/>
         <!-- 标题-->
         <TextView
             android:id="@+id/tv_scheduleTitle"

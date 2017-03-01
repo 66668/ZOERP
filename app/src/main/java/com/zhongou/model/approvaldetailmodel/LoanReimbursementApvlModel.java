@@ -30,7 +30,7 @@ public class LoanReimbursementApvlModel implements Serializable {
     public List<LoanReimbursementApvlModel.ApprovalInfoLists> ApprovalInfoLists;
 
 
-    public static class ApprovalInfoLists {
+    public static class ApprovalInfoLists implements Serializable{
         public String Comment;
         public String ApprovalDate;
         public String YesOrNo;

@@ -23,7 +23,7 @@ public class RetestModel implements Serializable {
 
     public List<RetestModel.ApprovalInfoLists> ApprovalInfoLists;
 
-    public static class ApprovalInfoLists{
+    public static class ApprovalInfoLists implements Serializable{
         public String Comment;
         public String ApprovalDate;
         public String YesOrNo;

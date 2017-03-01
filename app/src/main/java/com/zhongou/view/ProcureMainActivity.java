@@ -26,7 +26,7 @@ import java.util.List;
  * Created by sjy on 2016/12/13.
  */
 
-public class ProcureListActivity extends BaseActivity {
+public class ProcureMainActivity extends BaseActivity {
     //back
     @ViewInject(id = R.id.layout_back, click = "forBack")
     RelativeLayout layout_back;

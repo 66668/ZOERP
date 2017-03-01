@@ -1,5 +1,6 @@
 package com.zhongou.view.examination.applicationdetail;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
@@ -136,7 +137,7 @@ public class LeaveDetailAplActivity extends BaseActivity {
         if (leaveModel.getApprovalStatus().contains("1") || leaveModel.getApprovalStatus().contains("2")) {
             //插入意见
             for (int i = 0, mark = layout_ll.getChildCount(); i < modelList.size(); i++, mark++) {//mark是布局插入位置，放在mark位置的后边（从1开始计数）
-                ViewHolder vh = AddView(mark);//添加布局
+                ViewHolder vh = AddView(this,mark);//添加布局
                 vh.tv_name.setText(modelList.get(i).getApprovalEmployeeName());
                 vh.tv_time.setText(modelList.get(i).getApprovalDate());
                 vh.tv_contains.setText(modelList.get(i).getComment());
@@ -195,9 +196,9 @@ public class LeaveDetailAplActivity extends BaseActivity {
     }
 
     //初始化参数
-    private LeaveDetailAplActivity.ViewHolder AddView(int marks) {
+    private ViewHolder AddView(Context context, int marks) {
         ls_childView = new ArrayList<View>();
-        inflater = LayoutInflater.from(getApplicationContext());
+        inflater = LayoutInflater.from(context);
         childView = inflater.inflate(R.layout.item_examination_status, null);
         childView.setId(marks);
         layout_ll.addView(childView, marks);
@@ -205,8 +206,8 @@ public class LeaveDetailAplActivity extends BaseActivity {
 
     }
 
-    private LeaveDetailAplActivity.ViewHolder getViewInstance(View childView) {
-        LeaveDetailAplActivity.ViewHolder vh = new LeaveDetailAplActivity.ViewHolder();
+    private ViewHolder getViewInstance(View childView) {
+        ViewHolder vh = new ViewHolder();
         vh.id = childView.getId();
         vh.tv_name = (TextView) childView.findViewById(R.id.tv_name);
         vh.tv_yesOrNo = (TextView) childView.findViewById(R.id.tv_yesOrNo);

@@ -28,7 +28,7 @@ import java.util.List;
 
 
 /**
- * BottomBar 应用
+ *  应用-采购
  */
 
 public class ProcurementListFragment extends BaseFragment implements RefreshAndLoadListView.ILoadMoreListener, RefreshAndLoadListView.IReflashListener {

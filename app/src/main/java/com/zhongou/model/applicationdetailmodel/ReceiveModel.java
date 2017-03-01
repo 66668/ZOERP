@@ -27,7 +27,7 @@ public class ReceiveModel implements Serializable {
 
     public List<ReceiveModel.ApprovalInfoLists> ApprovalInfoLists;
 
-    public static class ApprovalInfoLists{
+    public static class ApprovalInfoLists implements Serializable {
         public String Comment;
         public String ApprovalDate;
         public String YesOrNo;

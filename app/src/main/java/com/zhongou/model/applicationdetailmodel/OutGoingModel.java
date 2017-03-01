@@ -34,7 +34,7 @@ public class OutGoingModel implements Serializable {
         Reason = reason;
     }
 
-    public static class ApprovalInfoLists{
+    public static class ApprovalInfoLists implements Serializable {
         public String Comment;
         public String ApprovalDate;
         public String YesOrNo;

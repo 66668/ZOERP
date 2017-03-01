@@ -44,7 +44,6 @@ public class NotificationAndNoticeDetailAplActivity2 extends BaseActivity {
         Bundle bundle = this.getIntent().getExtras();
         notificationAndNoticeModel = (NotificationAndNoticeModel) bundle.getSerializable("notificationAndNoticeModel");
         setShow(notificationAndNoticeModel);
-
     }
 
     private void setShow(NotificationAndNoticeModel model) {

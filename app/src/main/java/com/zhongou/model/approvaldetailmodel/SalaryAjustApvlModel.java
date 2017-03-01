@@ -32,7 +32,7 @@ public class SalaryAjustApvlModel implements Serializable {
         Remark = remark;
     }
 
-    public static class ApprovalInfoLists{
+    public static class ApprovalInfoLists implements Serializable{
         public String Comment = "";
         public String ApprovalDate = "";
         public String YesOrNo= "";

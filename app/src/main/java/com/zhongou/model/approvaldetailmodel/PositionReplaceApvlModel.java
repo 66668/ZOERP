@@ -106,7 +106,7 @@ public class PositionReplaceApvlModel implements Serializable {
         CreateTime = createTime;
     }
 
-    public static class ApprovalInfoLists{
+    public static class ApprovalInfoLists implements Serializable{
         public String Comment;
         public String ApprovalDate;
         public String YesOrNo;

@@ -109,7 +109,7 @@ public class FinancialAllModel implements Serializable {
         StoreID = storeID;
     }
 
-    public static class ApprovalInfoLists {
+    public static class ApprovalInfoLists  implements Serializable {
         public String Comment;
         public String ApprovalDate;
         public String YesOrNo;
