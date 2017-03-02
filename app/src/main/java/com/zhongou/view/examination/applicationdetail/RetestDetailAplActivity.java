@@ -128,7 +128,7 @@ public class RetestDetailAplActivity extends BaseActivity {
         if (retestModel.getApprovalStatus().contains("1") || retestModel.getApprovalStatus().contains("2")) {
             //插入意见
             for (int i = 0, mark = layout_ll.getChildCount(); i < modelList.size(); i++, mark++) {//mark是布局插入位置，放在mark位置的后边（从1开始计数）
-                ViewHolder vh = AddView(this,mark);//添加布局
+                ViewHolder vh = AddView(this, mark);//添加布局
                 vh.tv_name.setText(modelList.get(i).getApprovalEmployeeName());
                 vh.tv_time.setText(modelList.get(i).getApprovalDate());
                 vh.tv_contains.setText(modelList.get(i).getComment());
@@ -150,8 +150,10 @@ public class RetestDetailAplActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+
+                //泛型
                 try {
-                    RetestModel model1 = UserHelper.applicationDetailPostRetest(RetestDetailAplActivity.this,
+                    RetestModel model1 = new UserHelper<>(RetestModel.class).applicationDetailPost(RetestDetailAplActivity.this,
                             model.getApplicationID(),
                             model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
@@ -218,6 +220,7 @@ public class RetestDetailAplActivity extends BaseActivity {
     public void forBack(View view) {
         this.finish();
     }
+
     private boolean isRemarkExpend = false;
 
     public void RemarkExpended(View view) {

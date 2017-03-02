@@ -158,10 +158,13 @@ public class OutGoingDetailAplActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+
+                //泛型
                 try {
-                    OutGoingModel model1 = UserHelper.applicationDetailPostOutGoing(OutGoingDetailAplActivity.this,
-                            model.getApplicationID(),
-                            model.getApplicationType());
+                    OutGoingModel model1 = new UserHelper<>(OutGoingModel.class)
+                            .applicationDetailPost(OutGoingDetailAplActivity.this,
+                                    model.getApplicationID(),
+                                    model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
                     e.printStackTrace();

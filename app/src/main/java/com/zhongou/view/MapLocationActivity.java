@@ -163,7 +163,7 @@ public class MapLocationActivity extends BaseActivity implements LocationSource 
                     lat =  aMapLocation.getLatitude();//获取纬度
                     lon = aMapLocation.getLongitude();//获取经度
                     aMapLocation.getAccuracy();//获取精度信息
-                    SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     Date date = new Date(aMapLocation.getTime());
                     currentTime = df.format(date);//定位时间
                     address = aMapLocation.getAddress();//地址，如果option中设置isNeedAddress为false，则没有此结果，网络定位结果中会有地址信息，GPS定位不返回地址信息。

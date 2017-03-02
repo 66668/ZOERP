@@ -150,7 +150,7 @@ public class ConferenceDetailAplActivity extends BaseActivity {
         if (conferenceModel.getApprovalStatus().contains("1") || conferenceModel.getApprovalStatus().contains("2")) {
             //插入意见
             for (int i = 0, mark = layout_ll.getChildCount(); i < modelList.size(); i++, mark++) {//mark是布局插入位置，放在mark位置的后边（从1开始计数）
-                ViewHolder vh = AddView(this,mark);//添加布局
+                ViewHolder vh = AddView(this, mark);//添加布局
                 vh.tv_name.setText(modelList.get(i).getApprovalEmployeeName());
                 vh.tv_time.setText(modelList.get(i).getApprovalDate());
                 vh.tv_contains.setText(modelList.get(i).getComment());
@@ -173,10 +173,13 @@ public class ConferenceDetailAplActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+
+                //泛型
                 try {
-                    ConferenceModel model1 = UserHelper.applicationDetailPostConference(ConferenceDetailAplActivity.this,
-                            model.getApplicationID(),
-                            model.getApplicationType());
+                    ConferenceModel model1 = new UserHelper<ConferenceModel>(ConferenceModel.class)
+                            .applicationDetailPost(ConferenceDetailAplActivity.this,
+                                    model.getApplicationID(),
+                                    model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
                     e.printStackTrace();

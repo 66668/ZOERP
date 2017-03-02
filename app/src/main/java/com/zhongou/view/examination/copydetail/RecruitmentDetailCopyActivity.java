@@ -116,7 +116,6 @@ public class RecruitmentDetailCopyActivity extends BaseActivity {
     }
 
     private void setShow(RecruitmentCopyModel model) {
-        Log.d("SJY", "审批状态--ApprovalStatus=" + recruitmentModel.getApprovalStatus());
         tv_copyer.setText(model.getEmployeeName());
         tv_copyTime.setText(model.getApplicationCreateTime());
         //
@@ -170,11 +169,13 @@ public class RecruitmentDetailCopyActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-                    RecruitmentCopyModel recruitmentModel = UserHelper.copyDetailPostRecruitment(RecruitmentDetailCopyActivity.this,
-                            model.getApplicationID(),
-                            model.getApplicationType());
-                    sendMessage(POST_SUCCESS, recruitmentModel);
+                    RecruitmentCopyModel model1 = new UserHelper<>(RecruitmentCopyModel.class)
+                            .copyDetailPost(RecruitmentDetailCopyActivity.this,
+                                    model.getApplicationID(),
+                                    model.getApplicationType());
+                    sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
                     e.printStackTrace();
                     sendMessage(POST_FAILED, e.getMessage());

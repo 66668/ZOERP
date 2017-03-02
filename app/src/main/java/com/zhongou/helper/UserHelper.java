@@ -27,61 +27,7 @@ import com.zhongou.model.ReceiveListModel;
 import com.zhongou.model.VehicleReturnModel;
 import com.zhongou.model.VehicleReturnPostMaintenanceModel;
 import com.zhongou.model.VehicleReturnPostUseModel;
-import com.zhongou.model.applicationdetailmodel.BorrowModel;
-import com.zhongou.model.applicationdetailmodel.ConferenceModel;
-import com.zhongou.model.applicationdetailmodel.ContractFileModel;
-import com.zhongou.model.applicationdetailmodel.DismissionModel;
 import com.zhongou.model.applicationdetailmodel.FinancialAllModel;
-import com.zhongou.model.applicationdetailmodel.LeaveModel;
-import com.zhongou.model.applicationdetailmodel.NotificationAndNoticeModel;
-import com.zhongou.model.applicationdetailmodel.OfficeModel;
-import com.zhongou.model.applicationdetailmodel.OutGoingModel;
-import com.zhongou.model.applicationdetailmodel.PositionReplaceModel;
-import com.zhongou.model.applicationdetailmodel.ProcurementModel;
-import com.zhongou.model.applicationdetailmodel.ReceiveModel;
-import com.zhongou.model.applicationdetailmodel.RecruitmentModel;
-import com.zhongou.model.applicationdetailmodel.RetestModel;
-import com.zhongou.model.applicationdetailmodel.SalaryAjustModel;
-import com.zhongou.model.applicationdetailmodel.TakeDaysOffModel;
-import com.zhongou.model.applicationdetailmodel.VehicleMaintainModel;
-import com.zhongou.model.applicationdetailmodel.VehicleModel;
-import com.zhongou.model.applicationdetailmodel.WorkOverTimeModel;
-import com.zhongou.model.approvaldetailmodel.BorrowApvlModel;
-import com.zhongou.model.approvaldetailmodel.ConferenceApvlModel;
-import com.zhongou.model.approvaldetailmodel.ContractFileApvlModel;
-import com.zhongou.model.approvaldetailmodel.DismissionApvlModel;
-import com.zhongou.model.approvaldetailmodel.LeaveApvlModel;
-import com.zhongou.model.approvaldetailmodel.NotificationAndNoticeApvlModel;
-import com.zhongou.model.approvaldetailmodel.OUtGoingApvlModel;
-import com.zhongou.model.approvaldetailmodel.OfficeApvlModel;
-import com.zhongou.model.approvaldetailmodel.PositionReplaceApvlModel;
-import com.zhongou.model.approvaldetailmodel.ProcurementApvlModel;
-import com.zhongou.model.approvaldetailmodel.ReceiveApvlModel;
-import com.zhongou.model.approvaldetailmodel.RecruitmentApvlModel;
-import com.zhongou.model.approvaldetailmodel.RetestApvlModel;
-import com.zhongou.model.approvaldetailmodel.SalaryAjustApvlModel;
-import com.zhongou.model.approvaldetailmodel.TakeDaysOffApvlModel;
-import com.zhongou.model.approvaldetailmodel.VehicleApvlModel;
-import com.zhongou.model.approvaldetailmodel.VehicleMaintainApvlModel;
-import com.zhongou.model.approvaldetailmodel.WorkOverTimeApvlModel;
-import com.zhongou.model.copydetailmodel.BorrowCopyModel;
-import com.zhongou.model.copydetailmodel.ConferenceCopyModel;
-import com.zhongou.model.copydetailmodel.ContractFileCopyModel;
-import com.zhongou.model.copydetailmodel.DismissionCopyModel;
-import com.zhongou.model.copydetailmodel.LeaveCopyModel;
-import com.zhongou.model.copydetailmodel.NotificationAndNoticeCopyModel;
-import com.zhongou.model.copydetailmodel.OfficeCopyModel;
-import com.zhongou.model.copydetailmodel.OutGoingCopyModel;
-import com.zhongou.model.copydetailmodel.PositionReplaceCopyModel;
-import com.zhongou.model.copydetailmodel.ProcurementCopyModel;
-import com.zhongou.model.copydetailmodel.ReceiveCopyModel;
-import com.zhongou.model.copydetailmodel.RecruitmentCopyModel;
-import com.zhongou.model.copydetailmodel.RetestCopyModel;
-import com.zhongou.model.copydetailmodel.SalaryAjusCopyModel;
-import com.zhongou.model.copydetailmodel.TakeDaysOffCopyModel;
-import com.zhongou.model.copydetailmodel.VehicleCopylModel;
-import com.zhongou.model.copydetailmodel.VehicleMaintainCopyModel;
-import com.zhongou.model.copydetailmodel.WorkOverTimeCopyModel;
 import com.zhongou.utils.APIUtils;
 import com.zhongou.utils.ConfigUtil;
 import com.zhongou.utils.JSONUtils;
@@ -190,8 +136,8 @@ public class UserHelper<T> {
 
 
     /**
-     * 02
-     * 获取 我的申请
+     * 01-01
+     * 获取 我的申请记录
      * <p>
      *
      * @param context
@@ -222,7 +168,42 @@ public class UserHelper<T> {
     }
 
     /**
-     * 03 获取 我的审批
+     * 01-01-02 申请详情
+     * <p>
+     * 注：使用泛型
+     */
+    Class<T> clz;
+
+    public UserHelper(Class<T> clz) {
+        this.clz = clz;
+    }
+
+    public T applicationDetailPost(Context context, String ApplicationID, String ApplicationType) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+        try {
+            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.APPLICATIONDETAIL,
+                    HttpParameter.create()
+                            .add("ApplicationID", ApplicationID)
+                            .add("ApplicationType", ApplicationType)
+                            .add("StoreID", mCurrentUser.getStoreID())
+                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
+
+            if (httpResult.hasError()) {
+                throw httpResult.getError();
+            }
+            Log.d("HTTP", httpResult.jsonObject.toString());
+            //            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<RecruitmentModel>() {
+            //            }.getType());
+            return (new Gson()).fromJson(httpResult.jsonObject.toString(), clz);
+        } catch (MyException e) {
+            throw new MyException(e.getMessage());
+        }
+    }
+
+    /**
+     * 01-02 获取 我的审批记录
      * <p></p>
      *
      * @param context
@@ -256,449 +237,29 @@ public class UserHelper<T> {
     }
 
     /**
-     * 04 获取 我的抄送
-     * <p></p>
-     *
-     * @param context
-     * @param iMaxTime
-     * @param iMinTime
-     * @return
-     * @throws MyException
-     */
-
-    public static List<MyCopyModel> getMyCopyList(Context context, String iMaxTime, String iMinTime) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-
-        try {
-            HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.GETCOPYLIST,
-                    HttpParameter.create()
-                            .add("iMaxTime", iMaxTime)
-                            .add("iMinTime", iMinTime)
-                            .add("storeID", mCurrentUser.getStoreID())
-                            .add("employeeId", mCurrentUser.getEmployeeID())
-                            .add("pageSize", "20"));
-
-            if (hr.hasError()) {
-                throw hr.getError();
-            }
-            return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<MyCopyModel>>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    //    public static Object ApplicationDetailPost(Context context,Object obj, String ApplicationID, String ApplicationType, String StoreID, String EmployeeID) throws MyException {
-    //        if (!NetworkManager.isNetworkAvailable(context)) {
-    //            throw new MyException(R.string.network_invalid);
-    //        }
-    //        try {
-    //            Object obj2 =obj;
-    //            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.APPLICATIONDETAIL,
-    //                    HttpParameter.create().
-    //                            add("ApplicationID", ApplicationID).
-    //                            add("ApplicationType",ApplicationType).
-    //                            add("StoreID",StoreID).
-    //                            add("EmployeeID",EmployeeID));
-    //
-    //
-    //            if (httpResult.hasError()) {
-    //                throw httpResult.getError();
-    //            }
-    //            Log.d("HTTP", httpResult.jsonObject.toString());
-    //
-    //            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<T>() {}.getType());
-    //        } catch (MyException e) {
-    //            throw new MyException(e.getMessage());
-    //        }
-    //    }
-
-
-    /**
-     * 05-01 招聘申请 （obj形式上传）
-     * <P></>
-     *
-     * @param context
-     * @param jsonObject
-     * @throws MyException
-     */
-    public static void recruitmentPost(Context context, JSONObject jsonObject) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            Log.d("SJY", "UserHelper--招聘--StoreID=" + UserHelper.getCurrentUser().getStoreID());
-            /**
-             * 参数保存成json
-             */
-            jsonObject.put("CreateTime", Utils.getCurrentTime());//申请时间
-            jsonObject.put("AppEmployeeID", mCurrentUser.getEmployeeID());
-            jsonObject.put("StoreID", mCurrentUser.getStoreID());
-
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.RECRUITMENTPOST,
-                    HttpParameter.create().add("obj", jsonObject.toString())
-            );
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 05-02 离职申请 （obj形式上传）
-     * <p></>
-     *
-     * @param context
-     * @param jsonObject
-     * @throws MyException
-     */
-    public static void dimissionPost(Context context, JSONObject jsonObject) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-
-        try {
-            Log.d("SJY", "UserHelper--离职申请--StoreID=" + UserHelper.getCurrentUser().getStoreID());
-            /**
-             * 参数保存成json
-             */
-            jsonObject.put("CreateTime", Utils.getCurrentTime());
-            jsonObject.put("StoreID", mCurrentUser.getStoreID());
-            jsonObject.put("EmployeeID", mCurrentUser.getEmployeeID());
-
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.DIMISSIONPOST,
-                    HttpParameter.create().add("obj", jsonObject.toString()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 05-03 请假申请 （obj形式上传）
-     * <p></p>
-     *
-     * @param context
-     * @param jsonObject
-     * @throws MyException
-     */
-    public static void leavePost(Context context, JSONObject jsonObject) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            Log.d("SJY", "UserHelper--请假申请--StoreID=" + UserHelper.getCurrentUser().getStoreID());
-            /**
-             * 参数保存成json
-             */
-
-
-            jsonObject.put("CreateTime", Utils.getCurrentTime());
-            jsonObject.put("StoreID", mCurrentUser.getStoreID());
-            jsonObject.put("EmployeeID", mCurrentUser.getEmployeeID());
-
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.LEAVEPOST,
-                    HttpParameter.create().add("obj", jsonObject.toString()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 05-04 加班申请 （obj形式上传）
-     * <p></>
-     *
-     * @param context
-     * @param js
-     * @throws MyException
-     */
-    public static void overApprovalPost(Context context, JSONObject js) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            Log.d("SJY", "UserHelper--加班申请--StoreID=" + UserHelper.getCurrentUser().getStoreID());
-            /**
-             * 参数保存成json 9参数
-             */
-            js.put("CreateTime", Utils.getCurrentTime());
-            js.put("StoreID", mCurrentUser.getStoreID());
-            js.put("EmployeeID", mCurrentUser.getEmployeeID());
-
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.OVERAPPROVALPOST,
-                    HttpParameter.create().add("obj", js.toString()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 05-05 调休申请 （obj形式上传）
-     * <p></>
-     *
-     * @param context
-     * @param js
-     * @throws MyException
-     */
-    public static void takeDaysOffPost(Context context, JSONObject js) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            Log.d("SJY", "UserHelper--调休申请--StoreID=" + UserHelper.getCurrentUser().getStoreID());
-            /**
-             * 参数保存成json 参数
-             */
-
-            js.put("CreateTime", Utils.getCurrentTime());
-            js.put("StoreID", mCurrentUser.getStoreID());
-            js.put("EmployeeID", mCurrentUser.getEmployeeID());
-
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.TAKEDAYSOFFPOST,
-                    HttpParameter.create().add("obj", js.toString()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 05-06 借阅申请 （obj形式上传）
-     * <p></>
-     *
-     * @param context
-     * @param js
-     * @throws MyException
-     */
-    public static void borrowPost(Context context, JSONObject js) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            Log.d("SJY", "UserHelper--借阅--StoreID=" + UserHelper.getCurrentUser().getStoreID());
-            /**
-             * 参数保存成json 参数
-             */
-
-            js.put("CreateTime", Utils.getCurrentTime());
-            js.put("StoreID", mCurrentUser.getStoreID());
-            js.put("EmployeeID", mCurrentUser.getEmployeeID());
-
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.BORROWPOST,
-                    HttpParameter.create().add("obj", js.toString()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 05-07 调薪申请 （obj形式上传）
-     * <p></>
-     *
-     * @param context
-     * @param js
-     * @throws MyException
-     */
-    public static void changeSalary(Context context, JSONObject js) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            Log.d("SJY", "UserHelper--调薪--StoreID=" + UserHelper.getCurrentUser().getStoreID());
-            /**
-             * 参数保存成json 参数
-             */
-
-            js.put("CreateTime", Utils.getCurrentTime());
-            js.put("StoreID", mCurrentUser.getStoreID());
-            js.put("EmployeeID", mCurrentUser.getEmployeeID());
-
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.CHANGESALARY,
-                    HttpParameter.create().add("obj", js.toString()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 05-08 用车申请 （obj形式上传）
-     * <p></>
-     *
-     * @param context
-     * @param js
-     * @throws MyException
-     */
-    public static void vehiclePost(Context context, JSONObject js) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            Log.d("SJY", "UserHelper--用车申请--StoreID=" + UserHelper.getCurrentUser().getStoreID());
-            /**
-             * 参数保存成json 参数
-             */
-            js.put("CreateTime", Utils.getCurrentTime());
-            js.put("StoreID", mCurrentUser.getStoreID());
-            js.put("EmployeeID", mCurrentUser.getEmployeeID());
-
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.VEHICLEPOST,
-                    HttpParameter.create().add("obj", js.toString()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 05-09 车辆维护申请 （obj形式上传）
-     * <p></>
-     *
-     * @param context
-     * @param js
-     * @throws MyException
-     */
-    public static void maintenancePost(Context context, JSONObject js) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            Log.d("SJY", "UserHelper--车辆维护申请--StoreID=" + UserHelper.getCurrentUser().getStoreID());
-
-            /**
-             * 参数保存成json 12参数
-             */
-
-            js.put("CreateTime", Utils.getCurrentTime());
-            js.put("StoreID", mCurrentUser.getStoreID());
-            js.put("EmployeeID", mCurrentUser.getEmployeeID());
-
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.MAINTENANCE,
-                    HttpParameter.create().add("obj", js.toString()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 05-10 财务申请 （obj形式上传）
-     * 借款 报销 费用申请 付款
-     *
-     * @param context
-     * @param js
-     * @throws MyException
-     */
-    public static String LRApplicationPost(Context context, JSONObject js) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-
-            /**
-             * 参数保存成json 参数
-             */
-
-            //            js.put("CreateTime", Utils.getCurrentTime());
-            //            js.put("StoreID", mCurrentUser.getStoreID());
-            js.put("EmployeeID", mCurrentUser.getEmployeeID());
-
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.LRAPPLICATIONPOST,
-                    HttpParameter.create().add("obj", js.toString()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-
-            return httpResult.Message;
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-        return null;
-    }
-
-
-    /**
-     * 06 申请详情 一下方法
+     * 01-02-02 审批详情
      * <p>
-     * 注：此处最好使用泛型，但是时间和个人能力原因，写出来有bug,就先用多个方法代替,
-     * 附上泛型需要的如下2方法（未使用）
+     * 使用泛型
      */
-    Class<T> clz;
 
-    public UserHelper(Class<T> clz) {
-        this.clz = clz;
-    }
-
-    public T applicationDetailPost(Context context, String ApplicationID, String ApplicationType, String StoreID, String EmployeeID) throws MyException {
+    public T approvalDetailPost(Context context, String ApplicationID, String ApplicationType) throws MyException {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
         try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.APPLICATIONDETAIL,
+            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETMYAPPROVALDETAIL,
                     HttpParameter.create()
                             .add("ApplicationID", ApplicationID)
                             .add("ApplicationType", ApplicationType)
-                            .add("StoreID", StoreID)
-                            .add("EmployeeID", EmployeeID));
+                            .add("StoreID", mCurrentUser.getStoreID())
+                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
 
             if (httpResult.hasError()) {
                 throw httpResult.getError();
             }
             Log.d("HTTP", httpResult.jsonObject.toString());
-
+            //            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<RecruitmentApvlModel>() {
+            //            }.getType());
             return (new Gson()).fromJson(httpResult.jsonObject.toString(), clz);
         } catch (MyException e) {
             throw new MyException(e.getMessage());
@@ -706,1238 +267,7 @@ public class UserHelper<T> {
     }
 
     /**
-     * 招聘详情 06-01
-     *
-     * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
-     * @throws MyException
-     */
-    public static RecruitmentModel applicationDetailPostRecruitment(Context context, String ApplicationID, String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.APPLICATIONDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<RecruitmentModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 离职详情 06-02
-     *
-     * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
-     * @throws MyException
-     */
-    public static DismissionModel applicationDetailPostDismission(Context context, String ApplicationID, String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.APPLICATIONDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<DismissionModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 请假详情 06-03
-     *
-     * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
-     * @throws MyException
-     */
-    public static LeaveModel applicationDetailPostLeave(Context context, String ApplicationID, String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.APPLICATIONDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<LeaveModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 加班详情 06-04
-     *
-     * @param context
-     * @param ApplicationID
-     * @return
-     * @throws MyException
-     */
-    public static WorkOverTimeModel applicationDetailPostWorkOverTime(Context context, String ApplicationID, String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.APPLICATIONDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<WorkOverTimeModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 调休详情 06-05
-     *
-     * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
-     * @throws MyException
-     */
-    public static TakeDaysOffModel applicationDetailPostTakeDaysOff(Context context, String ApplicationID, String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.APPLICATIONDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<TakeDaysOffModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 申请 借阅详情 06-06
-     *
-     * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
-     * @throws MyException
-     */
-    public static BorrowModel applicationDetailPostBorrow(Context context, String ApplicationID, String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.APPLICATIONDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<BorrowModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-
-    /**
-     * 调薪详情 06-07
-     *
-     * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
-     * @throws MyException
-     */
-    public static SalaryAjustModel applicationDetailPostSalaryAdjust(Context context, String ApplicationID, String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.APPLICATIONDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<SalaryAjustModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 用车详情 06-08
-     *
-     * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
-     * @throws MyException
-     */
-    public static VehicleModel applicationDetailPostVehicle(Context context, String ApplicationID, String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.APPLICATIONDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<VehicleModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 车辆维护详情 06-09
-     *
-     * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
-     * @throws MyException
-     */
-    public static VehicleMaintainModel applicationDetailPostVehicleMaintenance(Context context, String ApplicationID, String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.APPLICATIONDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<VehicleMaintainModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 财务申请详情 06-10
-     * <p>
-     * 四个详细申请 用同一个model解析
-     *
-     * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
-     * @throws MyException
-     */
-
-    public static FinancialAllModel applicationDetailPostLoan(Context context, String ApplicationID, String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.APPLICATIONDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<FinancialAllModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 调动详情 06-11
-     *
-     * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
-     * @throws MyException
-     */
-    public static PositionReplaceModel applicationDetailPostPositionReplace(Context context, String ApplicationID, String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.APPLICATIONDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<PositionReplaceModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 采购详情 06-12
-     *
-     * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
-     * @throws MyException
-     */
-    public static ProcurementModel applicationDetailPostProcurement(Context context, String ApplicationID, String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.APPLICATIONDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<ProcurementModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 通知公告详情 06-13
-     *
-     * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
-     * @throws MyException
-     */
-    public static NotificationAndNoticeModel applicationDetailPostNotificationAndNotice(Context context, String ApplicationID, String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.APPLICATIONDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<NotificationAndNoticeModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 办公室详情 06-14
-     *
-     * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
-     * @throws MyException
-     */
-    public static OfficeModel applicationDetailPostOffice(Context context, String ApplicationID, String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.APPLICATIONDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<OfficeModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 领用详情 06-15
-     *
-     * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
-     * @throws MyException
-     */
-    public static ReceiveModel applicationDetailPostReceive(Context context, String ApplicationID, String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.APPLICATIONDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<ReceiveModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 文件合同详情 06-16
-     *
-     * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
-     * @throws MyException
-     */
-    public static ContractFileModel applicationDetailPostContractFile(Context context, String ApplicationID, String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.APPLICATIONDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<ContractFileModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 外出详情 06-16
-     *
-     * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
-     * @throws MyException
-     */
-    public static OutGoingModel applicationDetailPostOutGoing(Context context, String ApplicationID, String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.APPLICATIONDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<OutGoingModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 复试详情 06-18
-     *
-     * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
-     * @throws MyException
-     */
-    public static RetestModel applicationDetailPostRetest(Context context, String ApplicationID, String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.APPLICATIONDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<RetestModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 会议详情 06-19
-     *
-     * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
-     * @throws MyException
-     */
-    public static ConferenceModel applicationDetailPostConference(Context context, String ApplicationID, String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.APPLICATIONDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<ConferenceModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 07 审批详情
-     * <p>
-     * 注：此处最好使用泛型，但是时间和个人能力原因，写出来有bug,就先用多个方法代替,
-     * 附上泛型需要的如下2方法（未使用）
-     */
-
-    public T approvalDetailPost(Context context, String ApplicationID, String ApplicationType, String StoreID, String EmployeeID) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETMYAPPROVALDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", StoreID)
-                            .add("EmployeeID", EmployeeID));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), clz);
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 审批 招聘详情 07-01
-     */
-    public static RecruitmentApvlModel approvalDetailPostRecruitment(Context context,
-                                                                     String ApplicationID,
-                                                                     String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETMYAPPROVALDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<RecruitmentApvlModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 审批 离职详情 07-02
-     */
-    public static DismissionApvlModel approvalDetailPostDimission(Context context,
-                                                                  String ApplicationID,
-                                                                  String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETMYAPPROVALDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<DismissionApvlModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 审批 请假详情 07-03
-     *
-     * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
-     * @throws MyException
-     */
-    public static LeaveApvlModel approvalDetailPostLeave(Context context, String ApplicationID, String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETMYAPPROVALDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<LeaveApvlModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 审批 请假详情 07-03
-     *
-     * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
-     * @throws MyException
-     */
-    public static WorkOverTimeApvlModel approvalDetailPostWorkOverTime(Context context, String ApplicationID, String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETMYAPPROVALDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<WorkOverTimeApvlModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 审批 调休详情 07-05
-     */
-    public static TakeDaysOffApvlModel approvalDetailPostTakeDaysOff(Context context,
-                                                                     String ApplicationID,
-                                                                     String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETMYAPPROVALDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<TakeDaysOffApvlModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 审批 借阅详情 07-06
-     */
-    public static BorrowApvlModel approvalDetailPostBorrow(Context context,
-                                                           String ApplicationID,
-                                                           String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETMYAPPROVALDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<BorrowApvlModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 审批 调薪详情 07-07
-     */
-    public static SalaryAjustApvlModel approvalDetailPostSalaryajust(Context context,
-                                                                     String ApplicationID,
-                                                                     String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETMYAPPROVALDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<SalaryAjustApvlModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 审批 用车详情 07-08
-     */
-    public static VehicleApvlModel approvalDetailPostVehicle(Context context,
-                                                             String ApplicationID,
-                                                             String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETMYAPPROVALDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<VehicleApvlModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 审批 车辆维护详情 07-09
-     */
-    public static VehicleMaintainApvlModel approvalDetailPostVehicleMaintain(Context context,
-                                                                             String ApplicationID,
-                                                                             String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETMYAPPROVALDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<VehicleMaintainApvlModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 审批 借款报销详情 07-10
-     */
-    public static FinancialAllModel approvalDetailPostVehicleloan(Context context,
-                                                                  String ApplicationID,
-                                                                  String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETMYAPPROVALDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<FinancialAllModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 审批 调动详情 07-11
-     */
-    public static PositionReplaceApvlModel approvalDetailPostPositionReplace(Context context,
-                                                                             String ApplicationID,
-                                                                             String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETMYAPPROVALDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<PositionReplaceApvlModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 审批 采购详情 07-12
-     */
-    public static ProcurementApvlModel approvalDetailPostProcurement(Context context,
-                                                                     String ApplicationID,
-                                                                     String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETMYAPPROVALDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<ProcurementApvlModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 审批 通知公告详情 07-13
-     */
-    public static NotificationAndNoticeApvlModel approvalDetailPostNotificationAndNotice(Context context,
-                                                                                         String ApplicationID,
-                                                                                         String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETMYAPPROVALDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<NotificationAndNoticeApvlModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 审批 办公室详情 07-14
-     */
-    public static OfficeApvlModel approvalDetailPostOffice(Context context,
-                                                           String ApplicationID,
-                                                           String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETMYAPPROVALDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<OfficeApvlModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 审批 领用详情 07-15
-     */
-    public static ReceiveApvlModel approvalDetailPostReceive(Context context,
-                                                             String ApplicationID,
-                                                             String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETMYAPPROVALDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<ReceiveApvlModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 审批 合同文件详情 07-16
-     */
-    public static ContractFileApvlModel approvalDetailPostContractFile(Context context,
-                                                                       String ApplicationID,
-                                                                       String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETMYAPPROVALDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<ContractFileApvlModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 审批 外出详情 07-17
-     */
-    public static OUtGoingApvlModel approvalDetailPostOutGoing(Context context,
-                                                               String ApplicationID,
-                                                               String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETMYAPPROVALDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<OUtGoingApvlModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 审批 外出详情 07-18
-     */
-    public static RetestApvlModel approvalDetailPostRetest(Context context,
-                                                           String ApplicationID,
-                                                           String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETMYAPPROVALDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<RetestApvlModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 审批 会议详情 07-19
-     */
-    public static ConferenceApvlModel approvalDetailPostConference(Context context,
-                                                                   String ApplicationID,
-                                                                   String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETMYAPPROVALDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<ConferenceApvlModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-
-    /**
-     * 审批--同意/驳回接口
+     * 01-02-02-01/02审批--同意/驳回接口
      *
      * @param context
      * @param sApprovalid
@@ -1974,7 +304,7 @@ public class UserHelper<T> {
     }
 
     /**
-     * 审批-转发接口
+     * 01-02-02-03审批-转交接口
      *
      * @param context
      * @return
@@ -2002,7 +332,7 @@ public class UserHelper<T> {
     }
 
     /**
-     * 审批-抄送接口
+     * 01-02-02-04审批-抄送接口
      *
      * @param context
      * @return
@@ -2029,16 +359,48 @@ public class UserHelper<T> {
         }
     }
 
+
     /**
-     * 抄送 招聘详情 08-01
+     * 01-03 获取 我的抄送
+     * <p></p>
      *
      * @param context
-     * @param ApplicationID
-     * @param ApplicationType
+     * @param iMaxTime
+     * @param iMinTime
      * @return
      * @throws MyException
      */
-    public static RecruitmentCopyModel copyDetailPostRecruitment(Context context, String ApplicationID, String ApplicationType) throws MyException {
+
+    public static List<MyCopyModel> getMyCopyList(Context context, String iMaxTime, String iMinTime) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+
+        try {
+            HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.GETCOPYLIST,
+                    HttpParameter.create()
+                            .add("iMaxTime", iMaxTime)
+                            .add("iMinTime", iMinTime)
+                            .add("storeID", mCurrentUser.getStoreID())
+                            .add("employeeId", mCurrentUser.getEmployeeID())
+                            .add("pageSize", "20"));
+
+            if (hr.hasError()) {
+                throw hr.getError();
+            }
+            return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<MyCopyModel>>() {
+            }.getType());
+        } catch (MyException e) {
+            throw new MyException(e.getMessage());
+        }
+    }
+
+    /**
+     * 01-03-02抄送详情
+     * <p>
+     * 使用泛型
+     */
+    public T copyDetailPost(Context context, String ApplicationID, String ApplicationType) throws MyException {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
@@ -2055,607 +417,356 @@ public class UserHelper<T> {
             }
             Log.d("HTTP", httpResult.jsonObject.toString());
 
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<RecruitmentCopyModel>() {
-            }.getType());
+            return (new Gson()).fromJson(httpResult.jsonObject.toString(), clz);
         } catch (MyException e) {
             throw new MyException(e.getMessage());
         }
     }
 
     /**
-     * 抄送 离职详情 08-02
+     * -01 招聘申请 （obj形式上传）
+     * <P></>
      *
      * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
+     * @param jsonObject
      * @throws MyException
      */
-    public static DismissionCopyModel copyDetailPostDismission(Context context, String ApplicationID, String ApplicationType) throws MyException {
+    public static void recruitmentPost(Context context, JSONObject jsonObject) throws MyException {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
         try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETCOPYDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
+            /**
+             * 参数保存成json
+             */
+            jsonObject.put("CreateTime", Utils.getCurrentTime());//申请时间
+            jsonObject.put("AppEmployeeID", mCurrentUser.getEmployeeID());
+            jsonObject.put("StoreID", mCurrentUser.getStoreID());
+
+            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.RECRUITMENTPOST,
+                    HttpParameter.create().add("obj", jsonObject.toString())
+            );
 
             if (httpResult.hasError()) {
                 throw httpResult.getError();
             }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<DismissionCopyModel>() {
-            }.getType());
+        } catch (JSONException e) {
+            e.printStackTrace();
         } catch (MyException e) {
             throw new MyException(e.getMessage());
         }
     }
 
     /**
-     * 抄送 离职详情 08-03
+     * -02 离职申请 （obj形式上传）
+     * <p></>
      *
      * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
+     * @param jsonObject
      * @throws MyException
      */
-    public static LeaveCopyModel copyDetailPostLeave(Context context, String ApplicationID, String ApplicationType) throws MyException {
+    public static void dimissionPost(Context context, JSONObject jsonObject) throws MyException {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
+
         try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETCOPYDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
+            /**
+             * 参数保存成json
+             */
+            jsonObject.put("CreateTime", Utils.getCurrentTime());
+            jsonObject.put("StoreID", mCurrentUser.getStoreID());
+            jsonObject.put("EmployeeID", mCurrentUser.getEmployeeID());
+
+            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.DIMISSIONPOST,
+                    HttpParameter.create().add("obj", jsonObject.toString()));
 
             if (httpResult.hasError()) {
                 throw httpResult.getError();
             }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<LeaveCopyModel>() {
-            }.getType());
+        } catch (JSONException e) {
+            e.printStackTrace();
         } catch (MyException e) {
             throw new MyException(e.getMessage());
         }
     }
 
     /**
-     * 抄送 加班详情 08-04
+     * -03 请假申请 （obj形式上传）
+     * <p></p>
      *
      * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
+     * @param jsonObject
      * @throws MyException
      */
-    public static WorkOverTimeCopyModel copyDetailPostWorkOverTime(Context context, String ApplicationID, String ApplicationType) throws MyException {
+    public static void leavePost(Context context, JSONObject jsonObject) throws MyException {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
         try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETCOPYDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
+            /**
+             * 参数保存成json
+             */
+
+
+            jsonObject.put("CreateTime", Utils.getCurrentTime());
+            jsonObject.put("StoreID", mCurrentUser.getStoreID());
+            jsonObject.put("EmployeeID", mCurrentUser.getEmployeeID());
+
+            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.LEAVEPOST,
+                    HttpParameter.create().add("obj", jsonObject.toString()));
 
             if (httpResult.hasError()) {
                 throw httpResult.getError();
             }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<WorkOverTimeCopyModel>() {
-            }.getType());
+        } catch (JSONException e) {
+            e.printStackTrace();
         } catch (MyException e) {
             throw new MyException(e.getMessage());
         }
     }
 
     /**
-     * 抄送 调休详情 08-05
+     * -04 加班申请 （obj形式上传）
+     * <p></>
      *
      * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
+     * @param js
      * @throws MyException
      */
-    public static TakeDaysOffCopyModel copyDetailPostRecruitTakeDayOff(Context context, String ApplicationID, String ApplicationType) throws MyException {
+    public static void overApprovalPost(Context context, JSONObject js) throws MyException {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
         try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETCOPYDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
+            /**
+             * 参数保存成json 9参数
+             */
+            js.put("CreateTime", Utils.getCurrentTime());
+            js.put("StoreID", mCurrentUser.getStoreID());
+            js.put("EmployeeID", mCurrentUser.getEmployeeID());
+
+            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.OVERAPPROVALPOST,
+                    HttpParameter.create().add("obj", js.toString()));
 
             if (httpResult.hasError()) {
                 throw httpResult.getError();
             }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<TakeDaysOffCopyModel>() {
-            }.getType());
+        } catch (JSONException e) {
+            e.printStackTrace();
         } catch (MyException e) {
             throw new MyException(e.getMessage());
         }
     }
 
     /**
-     * 抄送 借阅详情 08-06
+     * -05 调休申请 （obj形式上传）
+     * <p></>
      *
      * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
+     * @param js
      * @throws MyException
      */
-    public static BorrowCopyModel copyDetailPostBorrow(Context context, String ApplicationID, String ApplicationType) throws MyException {
+    public static void takeDaysOffPost(Context context, JSONObject js) throws MyException {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
         try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETCOPYDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
+            /**
+             * 参数保存成json 参数
+             */
+
+            js.put("CreateTime", Utils.getCurrentTime());
+            js.put("StoreID", mCurrentUser.getStoreID());
+            js.put("EmployeeID", mCurrentUser.getEmployeeID());
+
+            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.TAKEDAYSOFFPOST,
+                    HttpParameter.create().add("obj", js.toString()));
 
             if (httpResult.hasError()) {
                 throw httpResult.getError();
             }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<BorrowCopyModel>() {
-            }.getType());
+        } catch (JSONException e) {
+            e.printStackTrace();
         } catch (MyException e) {
             throw new MyException(e.getMessage());
         }
     }
 
     /**
-     * 抄送 调薪详情 08-07
+     * -06 借阅申请 （obj形式上传）
+     * <p></>
      *
      * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
+     * @param js
      * @throws MyException
      */
-    public static SalaryAjusCopyModel copyDetailPostSalaryAjust(Context context, String ApplicationID, String ApplicationType) throws MyException {
+    public static void borrowPost(Context context, JSONObject js) throws MyException {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
         try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETCOPYDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
+            /**
+             * 参数保存成json 参数
+             */
+
+            js.put("CreateTime", Utils.getCurrentTime());
+            js.put("StoreID", mCurrentUser.getStoreID());
+            js.put("EmployeeID", mCurrentUser.getEmployeeID());
+
+            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.BORROWPOST,
+                    HttpParameter.create().add("obj", js.toString()));
 
             if (httpResult.hasError()) {
                 throw httpResult.getError();
             }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<SalaryAjusCopyModel>() {
-            }.getType());
+        } catch (JSONException e) {
+            e.printStackTrace();
         } catch (MyException e) {
             throw new MyException(e.getMessage());
         }
     }
 
     /**
-     * 抄送 用车详情 08-08
+     * -07 调薪申请 （obj形式上传）
+     * <p></>
      *
      * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
+     * @param js
      * @throws MyException
      */
-    public static VehicleCopylModel copyDetailPostVehicle(Context context, String ApplicationID, String ApplicationType) throws MyException {
+    public static void changeSalary(Context context, JSONObject js) throws MyException {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
         try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETCOPYDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
+            /**
+             * 参数保存成json 参数
+             */
+
+            js.put("CreateTime", Utils.getCurrentTime());
+            js.put("StoreID", mCurrentUser.getStoreID());
+            js.put("EmployeeID", mCurrentUser.getEmployeeID());
+
+            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.CHANGESALARY,
+                    HttpParameter.create().add("obj", js.toString()));
 
             if (httpResult.hasError()) {
                 throw httpResult.getError();
             }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<VehicleCopylModel>() {
-            }.getType());
+        } catch (JSONException e) {
+            e.printStackTrace();
         } catch (MyException e) {
             throw new MyException(e.getMessage());
         }
     }
 
     /**
-     * 抄送 车辆维保详情 08-09
+     * -08 用车申请 （obj形式上传）
+     * <p></>
      *
      * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
+     * @param js
      * @throws MyException
      */
-    public static VehicleMaintainCopyModel copyDetailPostVehicleMaintain(Context context, String ApplicationID, String ApplicationType) throws MyException {
+    public static void vehiclePost(Context context, JSONObject js) throws MyException {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
         try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETCOPYDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
+            /**
+             * 参数保存成json 参数
+             */
+            js.put("CreateTime", Utils.getCurrentTime());
+            js.put("StoreID", mCurrentUser.getStoreID());
+            js.put("EmployeeID", mCurrentUser.getEmployeeID());
+
+            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.VEHICLEPOST,
+                    HttpParameter.create().add("obj", js.toString()));
 
             if (httpResult.hasError()) {
                 throw httpResult.getError();
             }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<VehicleMaintainCopyModel>() {
-            }.getType());
+        } catch (JSONException e) {
+            e.printStackTrace();
         } catch (MyException e) {
             throw new MyException(e.getMessage());
         }
     }
 
     /**
-     * 抄送 财务申请 详情 08-10
+     * -09 车辆维护申请 （obj形式上传）
+     * <p></>
      *
      * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
+     * @param js
      * @throws MyException
      */
-    public static FinancialAllModel copyDetailPostFinancialAll(Context context, String ApplicationID, String ApplicationType) throws MyException {
+    public static void maintenancePost(Context context, JSONObject js) throws MyException {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
         try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETCOPYDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
+
+            /**
+             * 参数保存成json 12参数
+             */
+
+            js.put("CreateTime", Utils.getCurrentTime());
+            js.put("StoreID", mCurrentUser.getStoreID());
+            js.put("EmployeeID", mCurrentUser.getEmployeeID());
+
+            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.MAINTENANCE,
+                    HttpParameter.create().add("obj", js.toString()));
 
             if (httpResult.hasError()) {
                 throw httpResult.getError();
             }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<FinancialAllModel>() {
-            }.getType());
+        } catch (JSONException e) {
+            e.printStackTrace();
         } catch (MyException e) {
             throw new MyException(e.getMessage());
         }
     }
 
     /**
-     * 抄送 调动详情 08-011
+     * -10 财务申请 （obj形式上传）
+     * 借款 报销 费用申请 付款
      *
      * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
+     * @param js
      * @throws MyException
      */
-    public static PositionReplaceCopyModel copyDetailPostPositionReplace(Context context, String ApplicationID, String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETCOPYDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<PositionReplaceCopyModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 抄送 采购详情 08-012
-     *
-     * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
-     * @throws MyException
-     */
-    public static ProcurementCopyModel copyDetailPostProcurement(Context context, String ApplicationID, String ApplicationType) throws MyException {
+    public static String LRApplicationPost(Context context, JSONObject js) throws MyException {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
         try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETCOPYDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
+
+            /**
+             * 参数保存成json 参数
+             */
+
+            //            js.put("CreateTime", Utils.getCurrentTime());
+            //            js.put("StoreID", mCurrentUser.getStoreID());
+            js.put("EmployeeID", mCurrentUser.getEmployeeID());
+
+            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.LRAPPLICATIONPOST,
+                    HttpParameter.create().add("obj", js.toString()));
 
             if (httpResult.hasError()) {
                 throw httpResult.getError();
             }
-            Log.d("HTTP", httpResult.jsonObject.toString());
 
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<ProcurementCopyModel>() {
-            }.getType());
+            return httpResult.Message;
+        } catch (JSONException e) {
+            e.printStackTrace();
         } catch (MyException e) {
             throw new MyException(e.getMessage());
         }
+        return null;
     }
 
-    /**
-     * 抄送 通知公告详情 08-013
-     *
-     * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
-     * @throws MyException
-     */
-    public static NotificationAndNoticeCopyModel copyDetailPostNotificationAndNotice(Context context, String ApplicationID, String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETCOPYDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<NotificationAndNoticeCopyModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 抄送 办公室详情 08-014
-     *
-     * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
-     * @throws MyException
-     */
-    public static OfficeCopyModel copyDetailPostOffice(Context context, String ApplicationID, String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETCOPYDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<OfficeCopyModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 抄送 领用详情 08-015
-     *
-     * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
-     * @throws MyException
-     */
-    public static ReceiveCopyModel copyDetailPostReceive(Context context, String ApplicationID, String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETCOPYDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<ReceiveCopyModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 抄送 合同文件详情 08-016
-     *
-     * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
-     * @throws MyException
-     */
-    public static ContractFileCopyModel copyDetailPostContractFile(Context context, String ApplicationID, String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETCOPYDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<ContractFileCopyModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 抄送 外出详情 08-017
-     *
-     * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
-     * @throws MyException
-     */
-    public static OutGoingCopyModel copyDetailPostOutgoing(Context context, String ApplicationID, String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETCOPYDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<OutGoingCopyModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 抄送 复试详情 08-018
-     *
-     * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
-     * @throws MyException
-     */
-    public static RetestCopyModel copyDetailPostRetest(Context context, String ApplicationID, String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETCOPYDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<RetestCopyModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 抄送 会议详情 08-019
-     *
-     * @param context
-     * @param ApplicationID
-     * @param ApplicationType
-     * @return
-     * @throws MyException
-     */
-    public static ConferenceCopyModel copyDetailPostConference(Context context, String ApplicationID, String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETCOPYDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<ConferenceCopyModel>() {
-            }.getType());
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
 
     /**
      * 03-01添加地图考勤,（obj形式上传)
@@ -2795,6 +906,10 @@ public class UserHelper<T> {
     }
 
     /**
+     * 07日程，不需要接口
+     */
+
+    /**
      * 08-01应用-采购记录
      */
     public static List<ProcurementListModel> GetAppProcurementList(Context context, String iMaxTime, String iMinTime) throws MyException {
@@ -2864,21 +979,16 @@ public class UserHelper<T> {
     }
 
     /**
-     * 09-02交车详情 可用泛型解决
+     * 09-02交车详情
+     *  泛型
      */
-
-
-    /**
-     * 09-02-01用车详情
-     */
-    public static VehicleCopylModel getVehicleReturnUseDetail(Context context, String ApplicationID, String ApplicationType) throws MyException {
+    public  T getVehicleReturnDetail(Context context, String ApplicationID, String ApplicationType) throws MyException {
 
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
 
         try {
-            Log.d("SJY", "getVehicleReturnUseDetail参数=" + ApplicationID + "--" + ApplicationType);
 
             HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.VEHICLERETURNDETAIL,
                     HttpParameter.create()
@@ -2891,42 +1001,13 @@ public class UserHelper<T> {
             }
 
             Log.d("HTTP", httpResult.jsonObject.toString());
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<VehicleCopylModel>() {
-            }.getType());
-        } catch (MyException e) {
-            Log.d("SJY", "getVehicleReturnUseDetail异常" + e.getMessage());
-            throw new MyException(e.getMessage());
-        }
-    }
 
-    /**
-     * 09-02-02车辆维保详情
-     */
-
-    public static VehicleMaintainCopyModel getVehicleReturnMaintenanceDetail(Context context,
-                                                                             String ApplicationID,
-                                                                             String ApplicationType) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.VEHICLERETURNDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType));
-
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            Log.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<VehicleMaintainCopyModel>() {
-            }.getType());
+            return (new Gson()).fromJson(httpResult.jsonObject.toString(), clz);
         } catch (MyException e) {
             throw new MyException(e.getMessage());
         }
     }
+
 
     /**
      * 09-03-01交车-用车提交(obj形式)
@@ -3125,6 +1206,5 @@ public class UserHelper<T> {
             throw new MyException(e.getMessage());
         }
     }
-
 
 }

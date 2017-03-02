@@ -183,8 +183,10 @@ public class SalaryadjustDetailAplActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+
+                //泛型
                 try {
-                    SalaryAjustModel model1 = UserHelper.applicationDetailPostSalaryAdjust(SalaryadjustDetailAplActivity.this,
+                    SalaryAjustModel model1 = new UserHelper<>(SalaryAjustModel.class).applicationDetailPost(SalaryadjustDetailAplActivity.this,
                             model.getApplicationID(),
                             model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);

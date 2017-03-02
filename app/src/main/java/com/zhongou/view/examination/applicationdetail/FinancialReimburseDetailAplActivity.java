@@ -17,7 +17,7 @@ import com.zhongou.common.MyException;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
-import com.zhongou.model.MyApplicationModel;
+import com.zhongou.model.MyCopyModel;
 import com.zhongou.model.applicationdetailmodel.FinancialAllModel;
 import com.zhongou.utils.PageUtil;
 
@@ -88,7 +88,7 @@ public class FinancialReimburseDetailAplActivity extends BaseActivity {
     //变量
     private Intent intent = null;
     private FinancialAllModel financialAllModel;
-    private MyApplicationModel model;
+    private MyCopyModel model;
     private List<FinancialAllModel.ApprovalInfoLists> modelList;
 
     //动态添加view 变量
@@ -108,9 +108,9 @@ public class FinancialReimburseDetailAplActivity extends BaseActivity {
         tv_title.setText(getResources().getString(R.string.financial_reimburse));
         tv_right.setText("");
 
-        intent = getIntent();
-        model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
-
+        Bundle bundle = this.getIntent().getExtras();
+        model = (MyCopyModel) bundle.getSerializable("MyApplicationModel");
+        Log.d("SJY", "model==null?" + (model == null));
         getDetailModel(model);
     }
 
@@ -154,7 +154,7 @@ public class FinancialReimburseDetailAplActivity extends BaseActivity {
             //插入意见
             for (int i = 0, mark = layout_ll.getChildCount(); i < modelList.size(); i++, mark++) {//mark是布局插入位置，放在mark位置的后边（从1开始计数）
                 Log.d("SJY", "进入添加界面---mark=" + layout_ll.getChildCount());
-                ViewHolder vh = AddView(this,mark);//添加布局
+                ViewHolder vh = AddView(this, mark);//添加布局
                 vh.tv_name.setText(modelList.get(i).getApprovalEmployeeName());
                 vh.tv_time.setText(modelList.get(i).getApprovalDate());
                 vh.tv_contains.setText(modelList.get(i).getComment());
@@ -172,14 +172,17 @@ public class FinancialReimburseDetailAplActivity extends BaseActivity {
     /**
      * 获取详情数据
      */
-    public void getDetailModel(final MyApplicationModel model) {
+    public void getDetailModel(final MyCopyModel model) {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+
+                //泛型
                 try {
-                    FinancialAllModel model1 = UserHelper.applicationDetailPostLoan(FinancialReimburseDetailAplActivity.this,
-                            model.getApplicationID(),
-                            model.getApplicationType());
+                    FinancialAllModel model1 = new UserHelper<>(FinancialAllModel.class)
+                            .applicationDetailPost(FinancialReimburseDetailAplActivity.this,
+                                    model.getApplicationID(),
+                                    model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
                     e.printStackTrace();

@@ -165,16 +165,20 @@ public class FinancialLoanDetailCopyActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-                    FinancialAllModel model1 = UserHelper.copyDetailPostFinancialAll(FinancialLoanDetailCopyActivity.this,
-                            model.getApplicationID(),
-                            model.getApplicationType());
+                    FinancialAllModel model1 = new UserHelper<>(FinancialAllModel.class)
+                            .copyDetailPost(FinancialLoanDetailCopyActivity.this,
+                                    model.getApplicationID(),
+                                    model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
                     e.printStackTrace();
                     sendMessage(POST_FAILED, e.getMessage());
                 }
+
             }
+
         });
     }
 

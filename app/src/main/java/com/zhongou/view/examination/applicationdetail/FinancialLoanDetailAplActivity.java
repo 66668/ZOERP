@@ -157,16 +157,20 @@ public class FinancialLoanDetailAplActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+
+                //泛型
                 try {
-                    FinancialAllModel model1 = UserHelper.applicationDetailPostLoan(FinancialLoanDetailAplActivity.this,
-                            model.getApplicationID(),
-                            model.getApplicationType());
+                    FinancialAllModel model1 = new UserHelper<>(FinancialAllModel.class)
+                            .applicationDetailPost(FinancialLoanDetailAplActivity.this,
+                                    model.getApplicationID(),
+                                    model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
                     e.printStackTrace();
                     sendMessage(POST_FAILED, e.getMessage());
                 }
             }
+
         });
     }
 

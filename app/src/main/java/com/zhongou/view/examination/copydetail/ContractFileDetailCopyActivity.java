@@ -157,10 +157,12 @@ public class ContractFileDetailCopyActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-                    ContractFileCopyModel model1 = UserHelper.copyDetailPostContractFile(ContractFileDetailCopyActivity.this,
-                            model.getApplicationID(),
-                            model.getApplicationType());
+                    ContractFileCopyModel model1 = new UserHelper<>(ContractFileCopyModel.class)
+                            .copyDetailPost(ContractFileDetailCopyActivity.this,
+                                    model.getApplicationID(),
+                                    model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
                     e.printStackTrace();

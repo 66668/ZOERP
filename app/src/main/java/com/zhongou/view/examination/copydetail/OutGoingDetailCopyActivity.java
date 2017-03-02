@@ -159,15 +159,18 @@ public class OutGoingDetailCopyActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-                    OutGoingCopyModel model1 = UserHelper.copyDetailPostOutgoing(OutGoingDetailCopyActivity.this,
-                            model.getApplicationID(),
-                            model.getApplicationType());
+                    OutGoingCopyModel model1 = new UserHelper<>(OutGoingCopyModel.class)
+                            .copyDetailPost(OutGoingDetailCopyActivity.this,
+                                    model.getApplicationID(),
+                                    model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
                     e.printStackTrace();
                     sendMessage(POST_FAILED, e.getMessage());
                 }
+
             }
         });
     }

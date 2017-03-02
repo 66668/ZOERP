@@ -167,15 +167,18 @@ public class OfficeDetailCopyActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-                    OfficeCopyModel model1 = UserHelper.copyDetailPostOffice(OfficeDetailCopyActivity.this,
-                            model.getApplicationID(),
-                            model.getApplicationType());
+                    OfficeCopyModel model1 = new UserHelper<>(OfficeCopyModel.class)
+                            .copyDetailPost(OfficeDetailCopyActivity.this,
+                                    model.getApplicationID(),
+                                    model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
                     e.printStackTrace();
                     sendMessage(POST_FAILED, e.getMessage());
                 }
+
             }
         });
     }

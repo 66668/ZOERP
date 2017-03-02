@@ -172,10 +172,12 @@ public class ReceiveDetailCopyActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-                    ReceiveCopyModel model1 = UserHelper.copyDetailPostReceive(ReceiveDetailCopyActivity.this,
-                            model.getApplicationID(),
-                            model.getApplicationType());
+                    ReceiveCopyModel model1 = new UserHelper<>(ReceiveCopyModel.class)
+                            .copyDetailPost(ReceiveDetailCopyActivity.this,
+                                    model.getApplicationID(),
+                                    model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
                     e.printStackTrace();

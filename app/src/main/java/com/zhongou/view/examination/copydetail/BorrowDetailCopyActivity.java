@@ -91,7 +91,7 @@ public class BorrowDetailCopyActivity extends BaseActivity {
     private List<BorrowCopyModel.ApprovalInfoLists> modelList;
 
     //动态添加view
-    private List<View> ls_childView;//用于保存动态添加进来的View
+    private List<View> ls_childView;//用于保存动态添加进来的ViewA
     private View childView;
     private LayoutInflater inflater;//ViewHolder对象用来保存实例化View的子控件
     private List<ViewHolder> listViewHolder = new ArrayList<>();
@@ -168,10 +168,12 @@ public class BorrowDetailCopyActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-                    BorrowCopyModel model1 = UserHelper.copyDetailPostBorrow(BorrowDetailCopyActivity.this,
-                            model.getApplicationID(),
-                            model.getApplicationType());
+                    BorrowCopyModel model1 = new UserHelper<>(BorrowCopyModel.class)
+                            .copyDetailPost(BorrowDetailCopyActivity.this,
+                                    model.getApplicationID(),
+                                    model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
                     e.printStackTrace();

@@ -162,10 +162,12 @@ public class WorkOverTimeDetailCopyActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-                    WorkOverTimeCopyModel model1 = UserHelper.copyDetailPostWorkOverTime(WorkOverTimeDetailCopyActivity.this,
-                            model.getApplicationID(),
-                            model.getApplicationType());
+                    WorkOverTimeCopyModel model1 = new UserHelper<>(WorkOverTimeCopyModel.class)
+                            .copyDetailPost(WorkOverTimeDetailCopyActivity.this,
+                                    model.getApplicationID(),
+                                    model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
                     e.printStackTrace();

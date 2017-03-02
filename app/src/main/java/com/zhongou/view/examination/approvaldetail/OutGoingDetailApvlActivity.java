@@ -145,12 +145,15 @@ public class OutGoingDetailApvlActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-                    OUtGoingApvlModel model = UserHelper.approvalDetailPostOutGoing(OutGoingDetailApvlActivity.this,
-                            myApprovalModel.getApplicationID(),
-                            myApprovalModel.getApplicationType());
-                    sendMessage(POST_SUCCESS, model);
+                    OUtGoingApvlModel model1 = new UserHelper<>(OUtGoingApvlModel.class)
+                            .approvalDetailPost(OutGoingDetailApvlActivity.this,
+                                    myApprovalModel.getApplicationID(),
+                                    myApprovalModel.getApplicationType());
+                    sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
+                    e.printStackTrace();
                     sendMessage(POST_FAILED, e.getMessage());
                 }
             }

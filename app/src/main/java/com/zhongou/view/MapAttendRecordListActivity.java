@@ -216,25 +216,6 @@ public class MapAttendRecordListActivity extends BaseActivity implements Refresh
 
     }
 
-    //    private void show() {
-    //
-    //        adapter = new PerformanceManagerAdapter(mViewList, tabTitleList);
-    //        viewPager.setAdapter(adapter);//给ViewPager设置适配器
-    //        tabLayout.setupWithViewPager(viewPager);
-    //        tabLayout.setTabsFromPagerAdapter(adapter);
-    //
-    //        //本日
-    //        ListView listview1 = (ListView) view1.findViewById(R.id.listview01);
-    //        listview1.setAdapter(new MapAttendRecordListAdapter(this, dataList));
-    //
-    //        //本周
-    //        ListView listview2 = (ListView) view2.findViewById(R.id.listview02);
-    //        listview2.setAdapter(new MapAttendRecordListAdapter(this, dataList));
-    //
-    //        //本月
-    //        ListView listview3 = (ListView) view3.findViewById(R.id.listview03);
-    //        listview3.setAdapter(new MapAttendRecordListAdapter(this, dataList));
-    //    }
     @Override
     protected void handleMessage(Message msg) {
         switch (msg.what) {
@@ -312,6 +293,7 @@ public class MapAttendRecordListActivity extends BaseActivity implements Refresh
         if (list.size() <= 0) {
             return;
         }
+
         //每次来新数据，重新赋值spinner子状态
         listWeeked = new ArrayList<>();
         listToday = new ArrayList<>();
@@ -320,9 +302,13 @@ public class MapAttendRecordListActivity extends BaseActivity implements Refresh
         for (int i = 0; i < list.size(); i++) {
             if (DateUtils.isThisMonth(list.get(i).getAttendCapTime())) {//本月
                 listMonth.add(list.get(i));
-            } else if (DateUtils.isToday(list.get(i).getAttendCapTime())) {//本日
+            }
+
+            if (DateUtils.isToday(list.get(i).getAttendCapTime())) {//本日
                 listToday.add(list.get(i));
-            } else if (DateUtils.isThisWeek(list.get(i).getAttendCapTime())) {//本周
+            }
+
+            if (DateUtils.isThisWeek(list.get(i).getAttendCapTime())) {//本周
                 listWeeked.add(list.get(i));
             }
         }
@@ -343,11 +329,10 @@ public class MapAttendRecordListActivity extends BaseActivity implements Refresh
             case GET_REFRESH_DATA:
                 Log.d("SJY", "GET_REFRESH_DATA筛选");
 
-                //数据插入 (已做拼接处理),使用：当切换spinner时，刷新了n个长度的数据可以直接显示
-                //但是 spinner子状态下如何拼接数据？还有一种方式：每次刷新 清空子状态数据重新赋值？
-
+                //数据插入
                 listAll.addAll(0, list);
 
+                //有数据就插入
                 if (listToday.size() > 0) {
                     listTodayALL.addAll(0, listToday);
                 }
@@ -400,7 +385,7 @@ public class MapAttendRecordListActivity extends BaseActivity implements Refresh
                     vAdapter.addEntityList(list);
                     myListView.loadAndFreshComplete();
                 } else if (STATE == GET_NONE_NEWDATA) {
-
+                    myListView.loadAndFreshComplete();
                 }
 
                 break;
@@ -418,7 +403,7 @@ public class MapAttendRecordListActivity extends BaseActivity implements Refresh
                     myListView.loadAndFreshComplete();
 
                 } else if (STATE == GET_NONE_NEWDATA) {
-
+                    myListView.loadAndFreshComplete();
                 }
 
                 break;
@@ -436,7 +421,7 @@ public class MapAttendRecordListActivity extends BaseActivity implements Refresh
                     myListView.loadAndFreshComplete();
 
                 } else if (STATE == GET_NONE_NEWDATA) {
-
+                    myListView.loadAndFreshComplete();
                 }
                 break;
 
@@ -455,7 +440,7 @@ public class MapAttendRecordListActivity extends BaseActivity implements Refresh
                     myListView.loadAndFreshComplete();
 
                 } else if (STATE == GET_NONE_NEWDATA) {
-
+                    myListView.loadAndFreshComplete();
                 }
                 break;
             default:

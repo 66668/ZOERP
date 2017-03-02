@@ -18,14 +18,14 @@ import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
 import com.zhongou.model.MyCopyModel;
 import com.zhongou.utils.PageUtil;
-import com.zhongou.view.examination.applicationdetail.FinancialFeeDetailAplActivity;
-import com.zhongou.view.examination.applicationdetail.FinancialLoanDetailAplActivity;
-import com.zhongou.view.examination.applicationdetail.FinancialPayDetailAplActivity;
-import com.zhongou.view.examination.applicationdetail.FinancialReimburseDetailAplActivity;
 import com.zhongou.view.examination.copydetail.BorrowDetailCopyActivity;
 import com.zhongou.view.examination.copydetail.ConferenceDetailCopyActivity;
 import com.zhongou.view.examination.copydetail.ContractFileDetailCopyActivity;
 import com.zhongou.view.examination.copydetail.DimissionDetailCopyActivity;
+import com.zhongou.view.examination.copydetail.FinancialFeeDetailCopyActivity;
+import com.zhongou.view.examination.copydetail.FinancialLoanDetailCopyActivity;
+import com.zhongou.view.examination.copydetail.FinancialPayDetailCopyActivity;
+import com.zhongou.view.examination.copydetail.FinancialReimburseDetailCopyActivity;
 import com.zhongou.view.examination.copydetail.LeaveDetailCopyActivity;
 import com.zhongou.view.examination.copydetail.NotificationAndNoticeDetailCopyActivity;
 import com.zhongou.view.examination.copydetail.OfficeDetailCopyActivity;
@@ -105,6 +105,7 @@ public class ZOCopyListActivity extends BaseActivity implements RefreshListView.
                 int newPosition = position - headerViewsCount;//得到新的修正后的position
 
                 MyCopyModel myApprovalModel = (MyCopyModel) vAdapter.getItem(newPosition);//
+                Log.d("SJY", "copyListActivity--MyCopyModel==null?" + (myApprovalModel == null));
                 String type = myApprovalModel.getApplicationType();//申请类型
 
                 //                跳转调用
@@ -300,13 +301,13 @@ public class ZOCopyListActivity extends BaseActivity implements RefreshListView.
             case "财务申请"://10
                 //根据type决定跳转到具体界面
                 if (model.getApplicationTitle().contains("借款")) {
-                    startActivity(FinancialLoanDetailAplActivity.class, bundle);
+                    startActivity(FinancialLoanDetailCopyActivity.class, bundle);
                 } else if (model.getApplicationTitle().contains("付款")) {
-                    startActivity(FinancialPayDetailAplActivity.class, bundle);
+                    startActivity(FinancialPayDetailCopyActivity.class, bundle);
                 } else if (model.getApplicationTitle().contains("费用申请")) {
-                    startActivity(FinancialFeeDetailAplActivity.class, bundle);
+                    startActivity(FinancialFeeDetailCopyActivity.class, bundle);
                 } else if (model.getApplicationTitle().contains("报销")) {
-                    startActivity(FinancialReimburseDetailAplActivity.class, bundle);
+                    startActivity(FinancialReimburseDetailCopyActivity.class, bundle);
                 } else {
                     PageUtil.DisplayToast("error!");
                 }

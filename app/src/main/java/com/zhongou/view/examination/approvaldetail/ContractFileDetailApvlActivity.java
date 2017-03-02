@@ -144,12 +144,15 @@ public class ContractFileDetailApvlActivity extends BaseActivity {
             @Override
             public void run() {
 
+                //泛型
                 try {
-                    ContractFileApvlModel model = UserHelper.approvalDetailPostContractFile(ContractFileDetailApvlActivity.this,
+                    ContractFileApvlModel model1 = new UserHelper<>(ContractFileApvlModel.class)
+                            .approvalDetailPost(ContractFileDetailApvlActivity.this,
                             myApprovalModel.getApplicationID(),
                             myApprovalModel.getApplicationType());
-                    sendMessage(POST_SUCCESS, model);
+                    sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
+                    e.printStackTrace();
                     sendMessage(POST_FAILED, e.getMessage());
                 }
             }

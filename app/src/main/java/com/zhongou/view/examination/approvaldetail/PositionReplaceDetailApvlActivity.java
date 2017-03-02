@@ -170,13 +170,15 @@ public class PositionReplaceDetailApvlActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-                    PositionReplaceApvlModel model = UserHelper.approvalDetailPostPositionReplace(PositionReplaceDetailApvlActivity.this,
-                            myApprovalModel.getApplicationID(),
-                            myApprovalModel.getApplicationType());
-
-                    sendMessage(POST_SUCCESS,model);
+                    PositionReplaceApvlModel model1 = new UserHelper<>(PositionReplaceApvlModel.class)
+                            .approvalDetailPost(PositionReplaceDetailApvlActivity.this,
+                                    myApprovalModel.getApplicationID(),
+                                    myApprovalModel.getApplicationType());
+                    sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
+                    e.printStackTrace();
                     sendMessage(POST_FAILED, e.getMessage());
                 }
             }

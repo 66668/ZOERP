@@ -28,7 +28,6 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 
 		db.execSQL("CREATE TABLE IF NOT EXISTS schedule(scheduleID integer primary key autoincrement,scheduleTypeID integer,remindID integer,scheduleContent text,scheduleDate text)");
 		db.execSQL("CREATE TABLE IF NOT EXISTS scheduletagdate(tagID integer primary key autoincrement,year integer,month integer,day integer,scheduleID integer)");
-
 	}
 
 	@Override
@@ -38,6 +37,5 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS scheduletagdate");
 		onCreate(db);
 	}
-
 
 }

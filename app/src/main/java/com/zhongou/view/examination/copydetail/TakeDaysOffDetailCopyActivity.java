@@ -174,10 +174,12 @@ public class TakeDaysOffDetailCopyActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-                    TakeDaysOffCopyModel model1 = UserHelper.copyDetailPostRecruitTakeDayOff(TakeDaysOffDetailCopyActivity.this,
-                            model.getApplicationID(),
-                            model.getApplicationType());
+                    TakeDaysOffCopyModel model1 = new UserHelper<>(TakeDaysOffCopyModel.class)
+                            .copyDetailPost(TakeDaysOffDetailCopyActivity.this,
+                                    model.getApplicationID(),
+                                    model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
                     e.printStackTrace();

@@ -166,12 +166,14 @@ public class ConferenceDetailApvlActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-                    ConferenceApvlModel model = UserHelper.approvalDetailPostConference(ConferenceDetailApvlActivity.this,
+                    ConferenceApvlModel model1 = new UserHelper<>(ConferenceApvlModel.class).approvalDetailPost(ConferenceDetailApvlActivity.this,
                             myApprovalModel.getApplicationID(),
                             myApprovalModel.getApplicationType());
-                    sendMessage(POST_SUCCESS, model);
+                    sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
+                    e.printStackTrace();
                     sendMessage(POST_FAILED, e.getMessage());
                 }
             }

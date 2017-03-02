@@ -187,10 +187,12 @@ public class SalaryadjustDetailCopyActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-                    SalaryAjusCopyModel model1 = UserHelper.copyDetailPostSalaryAjust(SalaryadjustDetailCopyActivity.this,
-                            model.getApplicationID(),
-                            model.getApplicationType());
+                    SalaryAjusCopyModel model1 = new UserHelper<>(SalaryAjusCopyModel.class)
+                            .copyDetailPost(SalaryadjustDetailCopyActivity.this,
+                                    model.getApplicationID(),
+                                    model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
                     e.printStackTrace();

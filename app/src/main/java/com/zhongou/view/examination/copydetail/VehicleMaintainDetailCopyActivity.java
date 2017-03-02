@@ -3,7 +3,6 @@ package com.zhongou.view.examination.copydetail;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -178,13 +177,15 @@ public class VehicleMaintainDetailCopyActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-                    VehicleMaintainCopyModel model1 = UserHelper.copyDetailPostVehicleMaintain(VehicleMaintainDetailCopyActivity.this,
-                            model.getApplicationID(),
-                            model.getApplicationType());
+                    VehicleMaintainCopyModel model1 = new UserHelper<>(VehicleMaintainCopyModel.class)
+                            .copyDetailPost(VehicleMaintainDetailCopyActivity.this,
+                                    model.getApplicationID(),
+                                    model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
-                    Log.d("SJY", "error=" + e.getMessage());
+                    e.printStackTrace();
                     sendMessage(POST_FAILED, e.getMessage());
                 }
             }

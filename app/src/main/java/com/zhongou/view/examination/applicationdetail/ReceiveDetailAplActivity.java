@@ -170,10 +170,12 @@ public class ReceiveDetailAplActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-                    ReceiveModel model1 = UserHelper.applicationDetailPostReceive(ReceiveDetailAplActivity.this,
-                            model.getApplicationID(),
-                            model.getApplicationType());
+                    ReceiveModel model1 = new UserHelper<>(ReceiveModel.class)
+                            .applicationDetailPost(ReceiveDetailAplActivity.this,
+                                    model.getApplicationID(),
+                                    model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
                     e.printStackTrace();

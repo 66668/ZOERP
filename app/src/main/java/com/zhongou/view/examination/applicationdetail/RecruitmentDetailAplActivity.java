@@ -157,11 +157,13 @@ public class RecruitmentDetailAplActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+
+                //泛型
                 try {
-                    RecruitmentModel recruitmentModel = UserHelper.applicationDetailPostRecruitment(RecruitmentDetailAplActivity.this,
+                    RecruitmentModel model1 = new UserHelper<>(RecruitmentModel.class).applicationDetailPost(RecruitmentDetailAplActivity.this,
                             model.getApplicationID(),
                             model.getApplicationType());
-                    sendMessage(POST_SUCCESS, recruitmentModel);
+                    sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
                     e.printStackTrace();
                     sendMessage(POST_FAILED, e.getMessage());

@@ -169,8 +169,10 @@ public class BorrowDetailAplActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+
+                //泛型
                 try {
-                    BorrowModel model1 = UserHelper.applicationDetailPostBorrow(BorrowDetailAplActivity.this,
+                    BorrowModel model1 = new UserHelper<BorrowModel>(BorrowModel.class).applicationDetailPost(BorrowDetailAplActivity.this,
                             model.getApplicationID(),
                             model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);

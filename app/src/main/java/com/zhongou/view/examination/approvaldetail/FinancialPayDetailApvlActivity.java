@@ -162,13 +162,15 @@ public class FinancialPayDetailApvlActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
-
+                //泛型
                 try {
-                    FinancialAllModel model = UserHelper.approvalDetailPostVehicleloan(FinancialPayDetailApvlActivity.this,
-                            myApprovalModel.getApplicationID(),
-                            myApprovalModel.getApplicationType());
-                    sendMessage(POST_SUCCESS, model);
+                    FinancialAllModel model1 = new UserHelper<>(FinancialAllModel.class)
+                            .approvalDetailPost(FinancialPayDetailApvlActivity.this,
+                                    myApprovalModel.getApplicationID(),
+                                    myApprovalModel.getApplicationType());
+                    sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
+                    e.printStackTrace();
                     sendMessage(POST_FAILED, e.getMessage());
                 }
             }

@@ -156,12 +156,14 @@ public class BorrowDetailApvlActivity extends BaseActivity {
             @Override
             public void run() {
 
+                //泛型
                 try {
-                    BorrowApvlModel model = UserHelper.approvalDetailPostBorrow(BorrowDetailApvlActivity.this,
+                    BorrowApvlModel model1 = new UserHelper<>(BorrowApvlModel.class).approvalDetailPost(BorrowDetailApvlActivity.this,
                             myApprovalModel.getApplicationID(),
                             myApprovalModel.getApplicationType());
-                    sendMessage(POST_SUCCESS, model);
+                    sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
+                    e.printStackTrace();
                     sendMessage(POST_FAILED, e.getMessage());
                 }
             }

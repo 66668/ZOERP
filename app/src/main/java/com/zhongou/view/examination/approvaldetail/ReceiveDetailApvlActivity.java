@@ -152,14 +152,18 @@ public class ReceiveDetailApvlActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-                    ReceiveApvlModel model = UserHelper.approvalDetailPostReceive(ReceiveDetailApvlActivity.this,
-                            myApprovalModel.getApplicationID(),
-                            myApprovalModel.getApplicationType());
-                    sendMessage(POST_SUCCESS, model);
+                    ReceiveApvlModel model1 = new UserHelper<>(ReceiveApvlModel.class)
+                            .approvalDetailPost(ReceiveDetailApvlActivity.this,
+                                    myApprovalModel.getApplicationID(),
+                                    myApprovalModel.getApplicationType());
+                    sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
+                    e.printStackTrace();
                     sendMessage(POST_FAILED, e.getMessage());
                 }
+
             }
         });
     }

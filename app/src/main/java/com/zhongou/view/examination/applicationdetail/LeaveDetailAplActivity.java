@@ -137,7 +137,7 @@ public class LeaveDetailAplActivity extends BaseActivity {
         if (leaveModel.getApprovalStatus().contains("1") || leaveModel.getApprovalStatus().contains("2")) {
             //插入意见
             for (int i = 0, mark = layout_ll.getChildCount(); i < modelList.size(); i++, mark++) {//mark是布局插入位置，放在mark位置的后边（从1开始计数）
-                ViewHolder vh = AddView(this,mark);//添加布局
+                ViewHolder vh = AddView(this, mark);//添加布局
                 vh.tv_name.setText(modelList.get(i).getApprovalEmployeeName());
                 vh.tv_time.setText(modelList.get(i).getApprovalDate());
                 vh.tv_contains.setText(modelList.get(i).getComment());
@@ -158,8 +158,21 @@ public class LeaveDetailAplActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+
+                //                try {
+                //                    LeaveModel model1 = (LeaveModel) UserHelper.applicationDetailPostLeave(LeaveDetailAplActivity.this,
+                //                            model.getApplicationID(),
+                //                            model.getApplicationType());
+                //                    sendMessage(POST_SUCCESS, model1);
+                //                } catch (MyException e) {
+                //                    e.printStackTrace();
+                //                    sendMessage(POST_FAILED, e.getMessage());
+                //                }
+
+                //泛型
+                UserHelper<LeaveModel> helper = new UserHelper<LeaveModel>(LeaveModel.class);
                 try {
-                    LeaveModel model1 = (LeaveModel) UserHelper.applicationDetailPostLeave(LeaveDetailAplActivity.this,
+                    LeaveModel model1 = helper.applicationDetailPost(LeaveDetailAplActivity.this,
                             model.getApplicationID(),
                             model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);

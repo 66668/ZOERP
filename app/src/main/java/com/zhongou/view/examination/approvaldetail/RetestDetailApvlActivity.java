@@ -140,12 +140,15 @@ public class RetestDetailApvlActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-                    RetestApvlModel model = UserHelper.approvalDetailPostRetest(RetestDetailApvlActivity.this,
-                            myApprovalModel.getApplicationID(),
-                            myApprovalModel.getApplicationType());
-                    sendMessage(POST_SUCCESS, model);
+                    RetestApvlModel model1 = new UserHelper<>(RetestApvlModel.class)
+                            .approvalDetailPost(RetestDetailApvlActivity.this,
+                                    myApprovalModel.getApplicationID(),
+                                    myApprovalModel.getApplicationType());
+                    sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
+                    e.printStackTrace();
                     sendMessage(POST_FAILED, e.getMessage());
                 }
             }

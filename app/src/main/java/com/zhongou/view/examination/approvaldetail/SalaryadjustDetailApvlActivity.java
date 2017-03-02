@@ -153,12 +153,15 @@ public class SalaryadjustDetailApvlActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-                    SalaryAjustApvlModel model = UserHelper.approvalDetailPostSalaryajust(SalaryadjustDetailApvlActivity.this,
-                            myApprovalModel.getApplicationID(),
-                            myApprovalModel.getApplicationType());
-                    sendMessage(POST_SUCCESS, model);
+                    SalaryAjustApvlModel model1 = new UserHelper<>(SalaryAjustApvlModel.class)
+                            .approvalDetailPost(SalaryadjustDetailApvlActivity.this,
+                                    myApprovalModel.getApplicationID(),
+                                    myApprovalModel.getApplicationType());
+                    sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
+                    e.printStackTrace();
                     sendMessage(POST_FAILED, e.getMessage());
                 }
             }

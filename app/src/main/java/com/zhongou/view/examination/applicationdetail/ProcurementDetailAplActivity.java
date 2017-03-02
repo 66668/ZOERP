@@ -190,10 +190,12 @@ public class ProcurementDetailAplActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-                    ProcurementModel model1 = UserHelper.applicationDetailPostProcurement(ProcurementDetailAplActivity.this,
-                            model.getApplicationID(),
-                            model.getApplicationType());
+                    ProcurementModel model1 = new UserHelper<>(ProcurementModel.class)
+                            .applicationDetailPost(ProcurementDetailAplActivity.this,
+                                    model.getApplicationID(),
+                                    model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
                     e.printStackTrace();

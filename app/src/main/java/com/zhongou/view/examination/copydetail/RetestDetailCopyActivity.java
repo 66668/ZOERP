@@ -157,10 +157,12 @@ public class RetestDetailCopyActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-                    RetestCopyModel model1 = UserHelper.copyDetailPostRetest(RetestDetailCopyActivity.this,
-                            model.getApplicationID(),
-                            model.getApplicationType());
+                    RetestCopyModel model1 = new UserHelper<>(RetestCopyModel.class)
+                            .copyDetailPost(RetestDetailCopyActivity.this,
+                                    model.getApplicationID(),
+                                    model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
                     e.printStackTrace();

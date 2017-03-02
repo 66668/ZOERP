@@ -172,10 +172,13 @@ public class NotificationAndNoticeDetailAplActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+
+                //泛型
                 try {
-                    NotificationAndNoticeModel model1 = UserHelper.applicationDetailPostNotificationAndNotice(NotificationAndNoticeDetailAplActivity.this,
-                            model.getApplicationID(),
-                            model.getApplicationType());
+                    NotificationAndNoticeModel model1 = new UserHelper<>(NotificationAndNoticeModel.class)
+                            .applicationDetailPost(NotificationAndNoticeDetailAplActivity.this,
+                                    model.getApplicationID(),
+                                    model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
                     e.printStackTrace();

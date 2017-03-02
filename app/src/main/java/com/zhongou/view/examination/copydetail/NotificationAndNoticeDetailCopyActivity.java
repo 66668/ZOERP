@@ -116,7 +116,8 @@ public class NotificationAndNoticeDetailCopyActivity extends BaseActivity {
     }
 
     private void setShow(NotificationAndNoticeCopyModel model) {
-
+        tv_copyer.setText(model.getEmployeeName());
+        tv_copyTime.setText(model.getApplicationCreateTime());
         //
         tv_notificaitonAndNotice_type.setText(model.getPublishType());
         tv_notificaitonAndNotice_type.setText(model.getPublishType());
@@ -169,10 +170,12 @@ public class NotificationAndNoticeDetailCopyActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-                    NotificationAndNoticeCopyModel model1 = UserHelper.copyDetailPostNotificationAndNotice(NotificationAndNoticeDetailCopyActivity.this,
-                            model.getApplicationID(),
-                            model.getApplicationType());
+                    NotificationAndNoticeCopyModel model1 = new UserHelper<>(NotificationAndNoticeCopyModel.class)
+                            .copyDetailPost(NotificationAndNoticeDetailCopyActivity.this,
+                                    model.getApplicationID(),
+                                    model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
                     e.printStackTrace();

@@ -165,8 +165,9 @@ public class VehicleDetailAplActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-                    VehicleModel model1 = UserHelper.applicationDetailPostVehicle(VehicleDetailAplActivity.this,
+                    VehicleModel model1 = new UserHelper<>(VehicleModel.class).applicationDetailPost(VehicleDetailAplActivity.this,
                             model.getApplicationID(),
                             model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);

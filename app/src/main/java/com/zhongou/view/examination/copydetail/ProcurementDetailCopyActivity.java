@@ -196,10 +196,12 @@ public class ProcurementDetailCopyActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-                    ProcurementCopyModel model1 = UserHelper.copyDetailPostProcurement(ProcurementDetailCopyActivity.this,
-                            model.getApplicationID(),
-                            model.getApplicationType());
+                    ProcurementCopyModel model1 = new UserHelper<>(ProcurementCopyModel.class)
+                            .copyDetailPost(ProcurementDetailCopyActivity.this,
+                                    model.getApplicationID(),
+                                    model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
                     e.printStackTrace();

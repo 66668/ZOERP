@@ -208,7 +208,6 @@ public class ScheduleMainAdapter extends BaseAdapter {
         }
 
         //设置当天的背景
-        Log.d("ss", "设置当天背景----currentFlag=" + currentFlag + "----position=" + position);
         if (currentFlag == position) {
             holder.textView.setTextColor(res.getColor(R.color.white));
             holder.textView.setBackgroundColor(res.getColor(R.color.common_topbar_bgcolor));

@@ -160,11 +160,12 @@ public class DimissionDetailAplActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-
-                    DismissionModel model1 = UserHelper.applicationDetailPostDismission(DimissionDetailAplActivity.this,
-                            model.getApplicationID(),
-                            model.getApplicationType());
+                    DismissionModel model1 = new UserHelper<>(DismissionModel.class)
+                            .applicationDetailPost(DimissionDetailAplActivity.this,
+                                    model.getApplicationID(),
+                                    model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
                     e.printStackTrace();

@@ -149,12 +149,16 @@ public class DimissionDetailApvlActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+
+                //泛型
                 try {
-                    DismissionApvlModel model = UserHelper.approvalDetailPostDimission(DimissionDetailApvlActivity.this
-                            , myApprovalModel.getApplicationID()
-                            , myApprovalModel.getApplicationType());
-                    sendMessage(POST_SUCCESS, model);
+                    DismissionApvlModel model1 = new UserHelper<>(DismissionApvlModel.class)
+                            .approvalDetailPost(DimissionDetailApvlActivity.this,
+                                    myApprovalModel.getApplicationID(),
+                                    myApprovalModel.getApplicationType());
+                    sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
+                    e.printStackTrace();
                     sendMessage(POST_FAILED, e.getMessage());
                 }
             }

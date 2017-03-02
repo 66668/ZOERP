@@ -161,8 +161,9 @@ public class WorkOverTimeDetailAplActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+               //泛型
                 try {
-                    WorkOverTimeModel model1 = UserHelper.applicationDetailPostWorkOverTime(WorkOverTimeDetailAplActivity.this,
+                    WorkOverTimeModel model1 = new UserHelper<>(WorkOverTimeModel.class).applicationDetailPost(WorkOverTimeDetailAplActivity.this,
                             model.getApplicationID(),
                             model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
@@ -170,6 +171,7 @@ public class WorkOverTimeDetailAplActivity extends BaseActivity {
                     e.printStackTrace();
                     sendMessage(POST_FAILED, e.getMessage());
                 }
+
             }
         });
     }

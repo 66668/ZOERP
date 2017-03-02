@@ -109,16 +109,14 @@ public class VehicleReturnUseUncompleteActivity extends BaseActivity {
         //
         Loading.run(this, new Runnable() {
             @Override
-            public void run() {
+            public void run() {//泛型
                 try {
-                    VehicleCopylModel vehicleCopylModel = UserHelper.getVehicleReturnUseDetail(VehicleReturnUseUncompleteActivity.this,
-                            model.getApplicationID(),
-                            model.getApplicationType());
-
+                    VehicleCopylModel vehicleCopylModel = new UserHelper<>(VehicleCopylModel.class)
+                            .getVehicleReturnDetail(VehicleReturnUseUncompleteActivity.this
+                                    , model.getApplicationID()
+                                    , model.getApplicationType());
                     sendMessage(POST_SUCCESS, vehicleCopylModel);
                 } catch (MyException e) {
-                    Log.d("SJY", e.getMessage());
-
                     sendMessage(POST_FAILED, e.getMessage());
                 }
             }

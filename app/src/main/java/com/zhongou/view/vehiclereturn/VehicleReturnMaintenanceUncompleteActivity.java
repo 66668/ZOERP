@@ -3,7 +3,6 @@ package com.zhongou.view.vehiclereturn;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -129,15 +128,14 @@ public class VehicleReturnMaintenanceUncompleteActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-                    VehicleMaintainCopyModel vehicleCopylModel = UserHelper.getVehicleReturnMaintenanceDetail(VehicleReturnMaintenanceUncompleteActivity.this,
-                            model.getApplicationID(),
-                            model.getApplicationType());
-
+                    VehicleMaintainCopyModel vehicleCopylModel = new UserHelper<>(VehicleMaintainCopyModel.class)
+                            .getVehicleReturnDetail(VehicleReturnMaintenanceUncompleteActivity.this
+                                    , model.getApplicationID()
+                                    , model.getApplicationType());
                     sendMessage(POST_SUCCESS, vehicleCopylModel);
                 } catch (MyException e) {
-                    Log.d("SJY", e.getMessage());
-
                     sendMessage(POST_FAILED, e.getMessage());
                 }
             }

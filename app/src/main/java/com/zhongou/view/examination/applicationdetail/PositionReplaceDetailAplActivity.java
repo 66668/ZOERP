@@ -183,10 +183,13 @@ public class PositionReplaceDetailAplActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+
+                //泛型
                 try {
-                    PositionReplaceModel model1 = UserHelper.applicationDetailPostPositionReplace(PositionReplaceDetailAplActivity.this,
-                            model.getApplicationID(),
-                            model.getApplicationType());
+                    PositionReplaceModel model1 = new UserHelper<>(PositionReplaceModel.class)
+                            .applicationDetailPost(PositionReplaceDetailAplActivity.this,
+                                    model.getApplicationID(),
+                                    model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
                     e.printStackTrace();

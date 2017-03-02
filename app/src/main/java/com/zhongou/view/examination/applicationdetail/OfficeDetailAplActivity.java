@@ -162,10 +162,12 @@ public class OfficeDetailAplActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-                    OfficeModel model1 = UserHelper.applicationDetailPostOffice(OfficeDetailAplActivity.this,
-                            model.getApplicationID(),
-                            model.getApplicationType());
+                    OfficeModel model1 = new UserHelper<>(OfficeModel.class)
+                            .applicationDetailPost(OfficeDetailAplActivity.this,
+                                    model.getApplicationID(),
+                                    model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
                     e.printStackTrace();

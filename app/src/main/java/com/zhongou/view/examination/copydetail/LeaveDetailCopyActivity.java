@@ -163,10 +163,12 @@ public class LeaveDetailCopyActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-                    LeaveCopyModel model1 = UserHelper.copyDetailPostLeave(LeaveDetailCopyActivity.this,
-                            model.getApplicationID(),
-                            model.getApplicationType());
+                    LeaveCopyModel model1 = new UserHelper<>(LeaveCopyModel.class)
+                            .copyDetailPost(LeaveDetailCopyActivity.this,
+                                    model.getApplicationID(),
+                                    model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
                     e.printStackTrace();

@@ -153,7 +153,10 @@ public class VehicleReturnMaintenanceCompleteActivity extends BaseActivity {
             @Override
             public void run() {
                 try {
-                    VehicleMaintainCopyModel vehicleCopylModel = UserHelper.getVehicleReturnMaintenanceDetail(VehicleReturnMaintenanceCompleteActivity.this, model.getApplicationID(), model.getApplicationType());
+                    VehicleMaintainCopyModel vehicleCopylModel = new UserHelper<>(VehicleMaintainCopyModel.class)
+                            .getVehicleReturnDetail(VehicleReturnMaintenanceCompleteActivity.this
+                                    , model.getApplicationID()
+                                    , model.getApplicationType());
                     sendMessage(POST_SUCCESS, vehicleCopylModel);
                 } catch (MyException e) {
                     sendMessage(POST_FAILED, e.getMessage());

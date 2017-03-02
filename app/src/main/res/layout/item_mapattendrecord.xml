@@ -6,7 +6,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:gravity="center_vertical">
 
         <ImageView
@@ -22,18 +22,19 @@
         <TextView
             android:id="@+id/tv_local"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/img_local"
             android:text="雨量检测站点：2个"
-            android:textSize="@dimen/common_textSize_default13"
+            android:textSize="@dimen/common_textSize_default12"
             android:textColor="@android:color/black"/>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="20dp"
         android:gravity="center_vertical">
 
         <ImageView
@@ -51,9 +52,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_title"
-            android:textSize="@dimen/common_textSize_default13"
+            android:textSize="@dimen/common_textSize_default12"
             android:layout_toEndOf="@+id/img_icon"
-            android:text="无降雨"
+            android:text="时间"
             android:textColor="@android:color/black"/>
     </LinearLayout>
 

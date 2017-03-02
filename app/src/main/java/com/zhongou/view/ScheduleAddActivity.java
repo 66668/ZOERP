@@ -213,18 +213,18 @@ public class ScheduleAddActivity extends BaseActivity {
      */
     public void saveAndTo(View view) {
 
+        if (TextUtils.isEmpty(scheduleText.getText().toString())) {
+            //判断输入框是否为空
+            new AlertDialog.Builder(ScheduleAddActivity.this)
+                    .setTitle("输入日程")
+                    .setMessage("日程信息不能为空")
+                    .setPositiveButton("确认", null).show();
+            return;
+        }
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
 
-                if (TextUtils.isEmpty(scheduleText.getText().toString())) {
-                    //判断输入框是否为空
-                    new AlertDialog.Builder(ScheduleAddActivity.this)
-                            .setTitle("输入日程")
-                            .setMessage("日程信息不能为空")
-                            .setPositiveButton("确认", null).show();
-                    return;
-                }
 
                 //设置 时间 提醒次数 显示结果
                 String showDate = setRemindCount(Integer.parseInt(scheduleYear), Integer.parseInt(tempMonth), Integer.parseInt(tempDay), hour, minute, week, remindID);
@@ -237,7 +237,6 @@ public class ScheduleAddActivity extends BaseActivity {
 
                 //数据保存到sql中 待修改
                 int scheduleID = dao.save(scheduleModel);
-
                 sendMessage(POST_SUCCESS, scheduleID);
             }
         });

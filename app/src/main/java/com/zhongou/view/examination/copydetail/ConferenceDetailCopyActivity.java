@@ -174,10 +174,12 @@ public class ConferenceDetailCopyActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-                    ConferenceCopyModel model1 = UserHelper.copyDetailPostConference(ConferenceDetailCopyActivity.this,
-                            model.getApplicationID(),
-                            model.getApplicationType());
+                    ConferenceCopyModel model1 = new UserHelper<>(ConferenceCopyModel.class)
+                            .copyDetailPost(ConferenceDetailCopyActivity.this,
+                                    model.getApplicationID(),
+                                    model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
                     e.printStackTrace();

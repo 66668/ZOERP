@@ -147,12 +147,16 @@ public class RecruitmentDetailApvlActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+
+                //泛型
                 try {
-                    RecruitmentApvlModel model = UserHelper.approvalDetailPostRecruitment(RecruitmentDetailApvlActivity.this
-                            , myApprovalModel.getApplicationID()
-                            , myApprovalModel.getApplicationType());
-                    sendMessage(POST_SUCCESS, model);
+                    RecruitmentApvlModel model1 = new UserHelper<>(RecruitmentApvlModel.class)
+                            .approvalDetailPost(RecruitmentDetailApvlActivity.this,
+                                    myApprovalModel.getApplicationID(),
+                                    myApprovalModel.getApplicationType());
+                    sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
+                    e.printStackTrace();
                     sendMessage(POST_FAILED, e.getMessage());
                 }
             }

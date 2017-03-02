@@ -17,6 +17,7 @@ import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
 import com.zhongou.model.MyApplicationModel;
+import com.zhongou.model.applicationdetailmodel.ConferenceModel;
 import com.zhongou.model.applicationdetailmodel.ContractFileModel;
 import com.zhongou.utils.PageUtil;
 
@@ -150,10 +151,13 @@ public class ContractFileDetailAplActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+
+                //泛型
                 try {
-                    ContractFileModel model1 = UserHelper.applicationDetailPostContractFile(ContractFileDetailAplActivity.this,
-                            model.getApplicationID(),
-                            model.getApplicationType());
+                    ConferenceModel model1 = new UserHelper<>(ConferenceModel.class)
+                            .applicationDetailPost(ContractFileDetailAplActivity.this,
+                                    model.getApplicationID(),
+                                    model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
                     e.printStackTrace();

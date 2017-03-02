@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -177,13 +176,14 @@ public class VehicleMaintainDetailAplActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-                    VehicleMaintainModel model1 = UserHelper.applicationDetailPostVehicleMaintenance(VehicleMaintainDetailAplActivity.this,
+                    VehicleMaintainModel model1 = new UserHelper<>(VehicleMaintainModel.class).applicationDetailPost(VehicleMaintainDetailAplActivity.this,
                             model.getApplicationID(),
                             model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
-                    Log.d("SJY", "error=" + e.getMessage());
+                    e.printStackTrace();
                     sendMessage(POST_FAILED, e.getMessage());
                 }
             }

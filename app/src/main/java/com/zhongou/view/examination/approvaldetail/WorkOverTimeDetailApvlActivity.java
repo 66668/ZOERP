@@ -150,12 +150,15 @@ public class WorkOverTimeDetailApvlActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-                    WorkOverTimeApvlModel model = UserHelper.approvalDetailPostWorkOverTime(WorkOverTimeDetailApvlActivity.this
-                            , myApprovalModel.getApplicationID()
-                            , myApprovalModel.getApplicationType());
-                    sendMessage(POST_SUCCESS, model);
+                    WorkOverTimeApvlModel model1 = new UserHelper<>(WorkOverTimeApvlModel.class)
+                            .approvalDetailPost(WorkOverTimeDetailApvlActivity.this,
+                                    myApprovalModel.getApplicationID(),
+                                    myApprovalModel.getApplicationType());
+                    sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
+                    e.printStackTrace();
                     sendMessage(POST_FAILED, e.getMessage());
                 }
             }

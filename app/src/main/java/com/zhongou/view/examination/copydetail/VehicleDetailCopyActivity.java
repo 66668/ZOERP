@@ -167,10 +167,12 @@ public class VehicleDetailCopyActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-                    VehicleCopylModel model1 = UserHelper.copyDetailPostVehicle(VehicleDetailCopyActivity.this,
-                            model.getApplicationID(),
-                            model.getApplicationType());
+                    VehicleCopylModel model1 = new UserHelper<>(VehicleCopylModel.class)
+                            .copyDetailPost(VehicleDetailCopyActivity.this,
+                                    model.getApplicationID(),
+                                    model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
                     e.printStackTrace();

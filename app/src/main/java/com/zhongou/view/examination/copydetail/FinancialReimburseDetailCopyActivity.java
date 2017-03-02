@@ -119,6 +119,8 @@ public class FinancialReimburseDetailCopyActivity extends BaseActivity {
     }
 
     private void setShow(FinancialAllModel model) {
+        tv_copyer.setText(model.getEmployeeName());
+        tv_copyTime.setText(model.getApplicationCreateTime());
 
         tv_feeOne.setText(model.getFeeone());
         tv_feeTwo.setText(model.getFeetwo());
@@ -178,10 +180,12 @@ public class FinancialReimburseDetailCopyActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-                    FinancialAllModel model1 = UserHelper.copyDetailPostFinancialAll(FinancialReimburseDetailCopyActivity.this,
-                            model.getApplicationID(),
-                            model.getApplicationType());
+                    FinancialAllModel model1 = new UserHelper<>(FinancialAllModel.class)
+                            .copyDetailPost(FinancialReimburseDetailCopyActivity.this,
+                                    model.getApplicationID(),
+                                    model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
                     e.printStackTrace();

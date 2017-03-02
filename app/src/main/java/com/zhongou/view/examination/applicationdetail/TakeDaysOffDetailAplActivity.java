@@ -172,8 +172,9 @@ public class TakeDaysOffDetailAplActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-                    TakeDaysOffModel model1 = UserHelper.applicationDetailPostTakeDaysOff(TakeDaysOffDetailAplActivity.this,
+                    TakeDaysOffModel model1 = new UserHelper<>(TakeDaysOffModel.class).applicationDetailPost(TakeDaysOffDetailAplActivity.this,
                             model.getApplicationID(),
                             model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);

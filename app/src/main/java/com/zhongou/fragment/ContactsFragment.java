@@ -325,7 +325,6 @@ public class ContactsFragment extends BaseFragment {
         }
 
         // 根据a-z进行排序
-        Log.d("SJY", "filterDateList != null=" + (filterDateList != null) + "------filterDateList.size() > 0=" + (filterDateList.size() > 0));
         if (filterDateList != null || filterDateList.size() > 0) {
             Log.d("SJY", "filterDateList是null?" + (filterDateList == null));
             Collections.sort(filterDateList, pinyinComparator);

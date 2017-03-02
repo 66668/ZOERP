@@ -185,10 +185,12 @@ public class PositionReplaceDetailCopyActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-                    PositionReplaceCopyModel model1 = UserHelper.copyDetailPostPositionReplace(PositionReplaceDetailCopyActivity.this,
-                            model.getApplicationID(),
-                            model.getApplicationType());
+                    PositionReplaceCopyModel model1 = new UserHelper<>(PositionReplaceCopyModel.class)
+                            .copyDetailPost(PositionReplaceDetailCopyActivity.this,
+                                    model.getApplicationID(),
+                                    model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
                     e.printStackTrace();

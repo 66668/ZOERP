@@ -169,13 +169,16 @@ public class VehicleMaintainDetailApvlActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+
+                //泛型
                 try {
-                    VehicleMaintainApvlModel model =
-                            UserHelper.approvalDetailPostVehicleMaintain(VehicleMaintainDetailApvlActivity.this,
+                    VehicleMaintainApvlModel model1 = new UserHelper<>(VehicleMaintainApvlModel.class)
+                            .approvalDetailPost(VehicleMaintainDetailApvlActivity.this,
                                     myApprovalModel.getApplicationID(),
                                     myApprovalModel.getApplicationType());
-                    sendMessage(POST_SUCCESS, model);
+                    sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
+                    e.printStackTrace();
                     sendMessage(POST_FAILED, e.getMessage());
                 }
             }

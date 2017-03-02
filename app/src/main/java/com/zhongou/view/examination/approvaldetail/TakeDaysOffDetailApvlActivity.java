@@ -162,12 +162,15 @@ public class TakeDaysOffDetailApvlActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-                    TakeDaysOffApvlModel model = UserHelper.approvalDetailPostTakeDaysOff(TakeDaysOffDetailApvlActivity.this
-                            , myApprovalModel.getApplicationID()
-                            , myApprovalModel.getApplicationType());
-                    sendMessage(POST_SUCCESS, model);
+                    TakeDaysOffApvlModel model1 = new UserHelper<>(TakeDaysOffApvlModel.class)
+                            .approvalDetailPost(TakeDaysOffDetailApvlActivity.this,
+                                    myApprovalModel.getApplicationID(),
+                                    myApprovalModel.getApplicationType());
+                    sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
+                    e.printStackTrace();
                     sendMessage(POST_FAILED, e.getMessage());
                 }
             }

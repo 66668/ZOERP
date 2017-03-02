@@ -166,16 +166,18 @@ public class DimissionDetailCopyActivity extends BaseActivity {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {
+                //泛型
                 try {
-
-                    DismissionCopyModel model1 = UserHelper.copyDetailPostDismission(DimissionDetailCopyActivity.this,
-                            model.getApplicationID(),
-                            model.getApplicationType());
+                    DismissionCopyModel model1 = new UserHelper<>(DismissionCopyModel.class)
+                            .copyDetailPost(DimissionDetailCopyActivity.this,
+                                    model.getApplicationID(),
+                                    model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
                     e.printStackTrace();
                     sendMessage(POST_FAILED, e.getMessage());
                 }
+
             }
         });
     }
