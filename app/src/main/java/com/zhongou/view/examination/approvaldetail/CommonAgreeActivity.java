@@ -30,6 +30,7 @@ public class CommonAgreeActivity extends BaseActivity {
     //
     @ViewInject(id = R.id.tv_title)
     TextView tv_title;
+
     //
     @ViewInject(id = R.id.tv_right)
     TextView tv_right;

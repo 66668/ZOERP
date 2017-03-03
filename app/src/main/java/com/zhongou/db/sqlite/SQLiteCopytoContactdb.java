@@ -35,7 +35,6 @@ public class SQLiteCopytoContactdb extends SQLiteOpenHelper {
 
 
     //表属性
-
     private static final String STOREID = "storeid";//子公司id
     private static final String STORENAME = "storename";
 

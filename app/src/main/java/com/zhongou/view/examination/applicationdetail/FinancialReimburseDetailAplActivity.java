@@ -17,7 +17,7 @@ import com.zhongou.common.MyException;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
-import com.zhongou.model.MyCopyModel;
+import com.zhongou.model.MyApplicationModel;
 import com.zhongou.model.applicationdetailmodel.FinancialAllModel;
 import com.zhongou.utils.PageUtil;
 
@@ -88,7 +88,7 @@ public class FinancialReimburseDetailAplActivity extends BaseActivity {
     //变量
     private Intent intent = null;
     private FinancialAllModel financialAllModel;
-    private MyCopyModel model;
+    private MyApplicationModel model;
     private List<FinancialAllModel.ApprovalInfoLists> modelList;
 
     //动态添加view 变量
@@ -109,7 +109,7 @@ public class FinancialReimburseDetailAplActivity extends BaseActivity {
         tv_right.setText("");
 
         Bundle bundle = this.getIntent().getExtras();
-        model = (MyCopyModel) bundle.getSerializable("MyApplicationModel");
+        model = (MyApplicationModel) bundle.getSerializable("MyApplicationModel");
         Log.d("SJY", "model==null?" + (model == null));
         getDetailModel(model);
     }
@@ -172,7 +172,7 @@ public class FinancialReimburseDetailAplActivity extends BaseActivity {
     /**
      * 获取详情数据
      */
-    public void getDetailModel(final MyCopyModel model) {
+    public void getDetailModel(final MyApplicationModel model) {
         Loading.run(this, new Runnable() {
             @Override
             public void run() {

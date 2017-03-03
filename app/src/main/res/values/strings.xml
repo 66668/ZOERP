@@ -98,12 +98,11 @@
 
     <string name="examination_refulse">驳回</string>
     <string name="refulse_sure">确认驳回</string>
-    <string name="hint_examination_refulse">请输入驳回的理由</string>
+    <string name="hint_examination_refulse">请输入意见</string>
 
     <string name="examination_commit">批准</string>
     <string name="approve_sure_all">终审</string>
     <string name="approve_sure">同意</string>
-    <string name="hint_examination_commit">请输入批准的理由</string>
 
     <string name="examination_transfer">转交</string>
     <string name="examination_copyto">抄送</string>
