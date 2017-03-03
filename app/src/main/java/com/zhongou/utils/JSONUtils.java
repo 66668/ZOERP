@@ -36,7 +36,7 @@ public class JSONUtils {
 		return gson.toJson(src);
 	}
 
-	/**02 对象
+	/**02 json转对象
 	 * 
 	 * @MethodName : fromJson
 	 * @Description : 用来将JSON串转为对象，但此方法不可用来转带泛型的List集合
@@ -47,8 +47,10 @@ public class JSONUtils {
 	public static <T> Object fromJson(String json, Class<T> classOfT) {
 		return gson.fromJson(json, (Type) classOfT);
 	}
-	
-	/** 03 获取对象
+
+
+
+	/** 03 json转对象集合
 	 * 
 	 * @MethodName : fromJson
 	 * @Description : 用来将JSON串转为对象，此方法可用来转带泛型的集合，如：Type为 new
@@ -76,6 +78,7 @@ public class JSONUtils {
 		}
 		return null;
 	}
+
 	/**04 String
 	 * 
 	 * @param json

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.zhongou.R;
 import com.zhongou.base.BaseFragment;
 import com.zhongou.common.MyException;
+import com.zhongou.db.sqlite.SQLiteScheduledb;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.model.MyApprovalModel;
@@ -23,12 +24,9 @@ import com.zhongou.view.NoticeListActivity;
 import com.zhongou.view.NotificationListActivity;
 import com.zhongou.view.ScheduleMainActivity;
 import com.zhongou.view.examination.ZOApprovelListActivity;
-import com.zhongou.widget.calendaruse.ScheduleDAO;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.zhongou.dialog.Loading.noDialogRun;
 
 
 /**
@@ -40,7 +38,8 @@ public class MessageFragment extends BaseFragment {
     private static final String TAG = "MessageFragment";
 
     //变量
-    ScheduleDAO dao = null;
+    //    private ScheduleDAO dao = null;
+    SQLiteScheduledb dao = null;
 
 
     //控件
@@ -196,7 +195,11 @@ public class MessageFragment extends BaseFragment {
         Loading.noDialogRun(getActivity(), new Runnable() {
             @Override
             public void run() {
-                dao = new ScheduleDAO(getActivity());
+
+                //        dao = new ScheduleDAO(this);
+                dao = new SQLiteScheduledb(getActivity(), UserHelper.getCurrentUser().getEmployeeID() + ".db");
+
+
                 ArrayList<ScheduleModel> listSchedule = dao.getAllSchedule();
                 int scheduleSize = -1;
                 if (listSchedule != null) {

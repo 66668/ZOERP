@@ -10,11 +10,12 @@ import android.widget.TextView;
 
 import com.zhongou.R;
 import com.zhongou.base.BaseActivity;
+import com.zhongou.db.sqlite.SQLiteScheduledb;
+import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
 import com.zhongou.model.ScheduleModel;
 import com.zhongou.utils.PageUtil;
-import com.zhongou.widget.calendaruse.CalendarConstant;
-import com.zhongou.widget.calendaruse.ScheduleDAO;
+import com.zhongou.common.calendarcommon.CalendarTpyeArray;
 
 /**
  * 日程详情
@@ -51,7 +52,8 @@ public class ScheduleSingleDetailActivity extends BaseActivity {
     @ViewInject(id = R.id.scheduleText)
     TextView scheduleText;
 
-    private ScheduleDAO dao = null;
+    //    private ScheduleDAO dao = null;
+    private SQLiteScheduledb dao = null;
     private String[] scheduleIDs;
     private ScheduleModel scheduleModel = null;
 
@@ -67,7 +69,11 @@ public class ScheduleSingleDetailActivity extends BaseActivity {
 
         tv_title.setText("日程详情");
         tv_right.setText("删除");
-        dao = new ScheduleDAO(this);
+
+
+        //        dao = new ScheduleDAO(this);
+        dao = new SQLiteScheduledb(this, UserHelper.getCurrentUser().getEmployeeID() + ".db");
+
         Intent intent = getIntent();
         scheduleIDs = intent.getStringArrayExtra("scheduleID");
         if (scheduleIDs.length > 0) {
@@ -79,8 +85,8 @@ public class ScheduleSingleDetailActivity extends BaseActivity {
 
     private void setShow(ScheduleModel model) {
         if (model != null) {
-            scheduleType.setText(CalendarConstant.sch_type[model.getScheduleTypeID()]);
-            scheduleRemind.setText(CalendarConstant.remind[model.getRemindID()]);
+            scheduleType.setText(CalendarTpyeArray.sch_type[model.getScheduleTypeID()]);
+            scheduleRemind.setText(CalendarTpyeArray.remind[model.getRemindID()]);
             dateText.setText(model.getScheduleDate());
             scheduleText.setText(model.getScheduleContent());
         } else {
@@ -101,7 +107,7 @@ public class ScheduleSingleDetailActivity extends BaseActivity {
             public void onClick(DialogInterface dialog, int which) {
 
                 dao.delete(Integer.parseInt(scheduleIDs[0]));
-//                update();
+                //                update();
 
                 ScheduleSingleDetailActivity.this.finish();
             }

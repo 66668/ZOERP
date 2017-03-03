@@ -28,8 +28,9 @@ import com.zhongou.R;
 import com.zhongou.adapter.ScheduleMainAdapter;
 import com.zhongou.application.MyApplication;
 import com.zhongou.base.BaseActivity;
+import com.zhongou.db.sqlite.SQLiteScheduledb;
+import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
-import com.zhongou.widget.calendaruse.ScheduleDAO;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -72,7 +73,9 @@ public class ScheduleMainActivity extends BaseActivity implements GestureDetecto
     private int day_c = 0;
 
     private String currentDate = "";
-    private ScheduleDAO dao = null;
+
+    //    private ScheduleDAO dao = null;
+    private SQLiteScheduledb dao = null;
 
 
     public ScheduleMainActivity() {
@@ -84,7 +87,9 @@ public class ScheduleMainActivity extends BaseActivity implements GestureDetecto
         month_c = Integer.parseInt(currentDate.split("-")[1]);
         day_c = Integer.parseInt(currentDate.split("-")[2]);
 
-        dao = new ScheduleDAO(this);
+        //        dao = new ScheduleDAO(this);
+        dao = new SQLiteScheduledb(this, UserHelper.getCurrentUser().getEmployeeID() + ".db");
+
     }
 
     @Override

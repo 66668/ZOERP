@@ -1,7 +1,9 @@
-package com.zhongou.widget.NiceSpnnerAdapter;
+package com.zhongou.adapter;
 
 import android.content.Context;
 import android.widget.ListAdapter;
+
+import com.zhongou.base.NiceSpinnerBaseAdapter;
 
 /**
  * @author angelo.marchesin

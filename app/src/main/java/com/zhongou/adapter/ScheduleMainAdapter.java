@@ -17,10 +17,11 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.zhongou.R;
-import com.zhongou.widget.calendaruse.LunarCalendar;
-import com.zhongou.widget.calendaruse.ScheduleDAO;
-import com.zhongou.widget.calendaruse.ScheduleDateTag;
-import com.zhongou.widget.calendaruse.SpecialCalendar;
+import com.zhongou.db.sqlite.SQLiteScheduledb;
+import com.zhongou.helper.UserHelper;
+import com.zhongou.common.calendarcommon.LunarCalendar;
+import com.zhongou.common.calendarcommon.ScheduleDateTag;
+import com.zhongou.common.calendarcommon.SpecialCalendar;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,7 +34,8 @@ import java.util.Date;
  */
 public class ScheduleMainAdapter extends BaseAdapter {
 
-    private ScheduleDAO dao = null;
+    //    private ScheduleDAO dao = null;
+    SQLiteScheduledb dao = null;
     private boolean isLeapyear = false;  //是否为闰年
     private int daysOfMonth = 0;      //某月的天数
     private int dayOfWeek = 0;        //具体某一天是星期几
@@ -234,7 +236,10 @@ public class ScheduleMainAdapter extends BaseAdapter {
         String lunarDay = "";
 
         //得到当前月的所有日程日期(这些日期需要标记)
-        dao = new ScheduleDAO(context);
+
+        //        dao = new ScheduleDAO(this);
+        dao = new SQLiteScheduledb(context, UserHelper.getCurrentUser().getEmployeeID() + ".db");
+
         ArrayList<ScheduleDateTag> dateTagList = dao.getTagDate(year, month);
         if (dateTagList != null && dateTagList.size() > 0) {
             schDateTagFlag = new int[dateTagList.size()];

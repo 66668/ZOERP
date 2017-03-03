@@ -18,9 +18,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zhongou.R;
-import com.zhongou.widget.calendaruse.CalendarConstant;
-import com.zhongou.widget.calendaruse.ScheduleDAO;
+import com.zhongou.db.sqlite.SQLiteScheduledb;
+import com.zhongou.helper.UserHelper;
 import com.zhongou.model.ScheduleModel;
+import com.zhongou.common.calendarcommon.CalendarTpyeArray;
 
 /**
  * 日程详情
@@ -35,7 +36,11 @@ public class ScheduleMultDetailActivity extends Activity {
     private TextView date = null;
     private TextView type = null;
     private TextView editInfo = null;
-    private ScheduleDAO dao = null;
+
+    //    private ScheduleDAO dao = null;
+    private SQLiteScheduledb dao = null;
+
+
     private ScheduleModel scheduleModel = null;
 
     private String scheduleInfo = "";    //日程信息被修改前的内容
@@ -46,7 +51,8 @@ public class ScheduleMultDetailActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        dao = new ScheduleDAO(this);
+        //        dao = new ScheduleDAO(this);
+        dao = new SQLiteScheduledb(this, UserHelper.getCurrentUser().getEmployeeID() + ".db");
 
         params.setMargins(0, 5, 0, 0);
         layout = new LinearLayout(this); // 实例化布局对象
@@ -150,7 +156,7 @@ public class ScheduleMultDetailActivity extends Activity {
         int scheduleID = Integer.parseInt(intent.getStringExtra("scheduleID"));*/
         scheduleModel = dao.getScheduleByID(scheduleID);
         date.setText(scheduleModel.getScheduleDate());
-        type.setText(CalendarConstant.sch_type[scheduleModel.getScheduleTypeID()]);
+        type.setText(CalendarTpyeArray.sch_type[scheduleModel.getScheduleTypeID()]);
         info.setText(scheduleModel.getScheduleContent());
 
 

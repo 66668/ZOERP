@@ -1,4 +1,4 @@
-package com.zhongou.widget.NiceSpnnerAdapter;
+package com.zhongou.base;
 
 import android.content.Context;
 import android.os.Build;

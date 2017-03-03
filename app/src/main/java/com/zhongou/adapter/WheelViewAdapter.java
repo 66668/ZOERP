@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.zhongou.widget.wheelviewadpater;
+package com.zhongou.adapter;
 
 import android.database.DataSetObserver;
 import android.view.View;

@@ -163,7 +163,12 @@ public class UserHelper<T> {
         if (hr.hasError()) {
             throw hr.getError();
         }
-        return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<MyApplicationModel>>() {
+        //方式一：直接调用gson
+        //        return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<MyApplicationModel>>() {
+        //        }.getType());
+
+        //方式二:utils工具类
+        return (List<MyApplicationModel>) JSONUtils.fromJson(hr.jsonArray.toString(), new TypeToken<List<MyApplicationModel>>() {
         }.getType());
     }
 
@@ -194,9 +199,13 @@ public class UserHelper<T> {
                 throw httpResult.getError();
             }
             Log.d("HTTP", httpResult.jsonObject.toString());
+            //方式一：
             //            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<RecruitmentModel>() {
             //            }.getType());
+
+            //方式二：泛型
             return (new Gson()).fromJson(httpResult.jsonObject.toString(), clz);
+
         } catch (MyException e) {
             throw new MyException(e.getMessage());
         }
@@ -229,7 +238,12 @@ public class UserHelper<T> {
             if (hr.hasError()) {
                 throw hr.getError();
             }
-            return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<MyApprovalModel>>() {
+            //方式一：直接用gson
+            //            return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<MyApprovalModel>>() {
+            //            }.getType());
+
+            //方式二：utils工具类
+            return (List<MyApprovalModel>) JSONUtils.fromJson(hr.jsonArray.toString(), new TypeToken<List<MyApprovalModel>>() {
             }.getType());
         } catch (MyException e) {
             throw new MyException(e.getMessage());
@@ -260,7 +274,9 @@ public class UserHelper<T> {
             Log.d("HTTP", httpResult.jsonObject.toString());
             //            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<RecruitmentApvlModel>() {
             //            }.getType());
+
             return (new Gson()).fromJson(httpResult.jsonObject.toString(), clz);
+
         } catch (MyException e) {
             throw new MyException(e.getMessage());
         }
@@ -388,7 +404,13 @@ public class UserHelper<T> {
             if (hr.hasError()) {
                 throw hr.getError();
             }
-            return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<MyCopyModel>>() {
+
+            //方式一
+            //            return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<MyCopyModel>>() {
+            //            }.getType());
+
+            //方式二：
+            return (List<MyCopyModel>) JSONUtils.fromJson(hr.jsonArray.toString(), new TypeToken<List<MyCopyModel>>() {
             }.getType());
         } catch (MyException e) {
             throw new MyException(e.getMessage());
@@ -827,8 +849,14 @@ public class UserHelper<T> {
         if (hr.hasError()) {
             throw hr.getError();
         }
-        return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<MapAttendModel>>() {
+        //方式一：直接用gson
+        //        return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<MapAttendModel>>() {
+        //        }.getType());
+
+        //方式二：
+        return (List<MapAttendModel>) JSONUtils.fromJson(hr.jsonArray.toString(), new TypeToken<List<MapAttendModel>>() {
         }.getType());
+
     }
 
     /**
@@ -853,8 +881,14 @@ public class UserHelper<T> {
             throw hr.getError();
         }
 
-        return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<NoticeListModel>>() {
+        //方式一：
+        //        return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<NoticeListModel>>() {
+        //        }.getType());
+
+        //方式二：
+        return (List<NoticeListModel>) JSONUtils.fromJson(hr.jsonArray.toString(), new TypeToken<List<NoticeListModel>>() {
         }.getType());
+
     }
 
     /**
@@ -878,7 +912,13 @@ public class UserHelper<T> {
         if (hr.hasError()) {
             throw hr.getError();
         }
-        return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<NotificationListModel>>() {
+
+        //方式一：
+        //        return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<NotificationListModel>>() {
+        //        }.getType());
+
+        //方式二：
+        return (List<NotificationListModel>) JSONUtils.fromJson(hr.jsonArray.toString(), new TypeToken<List<NotificationListModel>>() {
         }.getType());
     }
 
@@ -901,7 +941,14 @@ public class UserHelper<T> {
         if (hr.hasError()) {
             throw hr.getError();
         }
-        return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<FinancialAllModel>>() {
+
+        //方式一：
+        //        return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<FinancialAllModel>>() {
+        //        }.getType());
+
+
+        //方式二：
+        return (List<FinancialAllModel>) JSONUtils.fromJson(hr.jsonArray.toString(), new TypeToken<List<FinancialAllModel>>() {
         }.getType());
     }
 
@@ -928,7 +975,13 @@ public class UserHelper<T> {
         if (hr.hasError()) {
             throw hr.getError();
         }
-        return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<ProcurementListModel>>() {
+
+        //
+        //        return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<ProcurementListModel>>() {
+        //        }.getType());
+
+        //方式二：
+        return (List<ProcurementListModel>) JSONUtils.fromJson(hr.jsonArray.toString(), new TypeToken<List<ProcurementListModel>>() {
         }.getType());
     }
 
@@ -951,7 +1004,13 @@ public class UserHelper<T> {
         if (hr.hasError()) {
             throw hr.getError();
         }
-        return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<ReceiveListModel>>() {
+
+        //1
+        //        return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<ReceiveListModel>>() {
+        //        }.getType());
+
+        //方式二：
+        return (List<ReceiveListModel>) JSONUtils.fromJson(hr.jsonArray.toString(), new TypeToken<List<ReceiveListModel>>() {
         }.getType());
     }
 
@@ -974,15 +1033,21 @@ public class UserHelper<T> {
         if (hr.hasError()) {
             throw hr.getError();
         }
-        return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<VehicleReturnModel>>() {
+
+        //1
+        //        return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<VehicleReturnModel>>() {
+        //        }.getType());
+
+        //方式二：
+        return (List<VehicleReturnModel>) JSONUtils.fromJson(hr.jsonArray.toString(), new TypeToken<List<VehicleReturnModel>>() {
         }.getType());
     }
 
     /**
      * 09-02交车详情
-     *  泛型
+     * 泛型
      */
-    public  T getVehicleReturnDetail(Context context, String ApplicationID, String ApplicationType) throws MyException {
+    public T getVehicleReturnDetail(Context context, String ApplicationID, String ApplicationType) throws MyException {
 
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
@@ -1080,8 +1145,15 @@ public class UserHelper<T> {
             }
             Log.d("HTTP", httpResult.jsonArray.toString());
 
-            return (new Gson()).fromJson(httpResult.jsonArray.toString(), new TypeToken<List<ContactsSonCOModel>>() {
+            //1
+            //            return (new Gson()).fromJson(httpResult.jsonArray.toString(), new TypeToken<List<ContactsSonCOModel>>() {
+            //            }.getType());
+
+
+            //方式二：
+            return (List<ContactsSonCOModel>) JSONUtils.fromJson(httpResult.jsonArray.toString(), new TypeToken<List<ContactsSonCOModel>>() {
             }.getType());
+
         } catch (MyException e) {
             throw new MyException(e.getMessage());
         }
@@ -1109,8 +1181,15 @@ public class UserHelper<T> {
             }
             Log.d("HTTP", httpResult.jsonArray.toString());
 
-            return (new Gson()).fromJson(httpResult.jsonArray.toString(), new TypeToken<List<ContactsDeptModel>>() {
+            //1
+            //            return (new Gson()).fromJson(httpResult.jsonArray.toString(), new TypeToken<List<ContactsDeptModel>>() {
+            //            }.getType());
+
+
+            //方式二：
+            return (List<ContactsDeptModel>) JSONUtils.fromJson(httpResult.jsonArray.toString(), new TypeToken<List<ContactsDeptModel>>() {
             }.getType());
+
         } catch (MyException e) {
             throw new MyException(e.getMessage());
         }
@@ -1141,8 +1220,14 @@ public class UserHelper<T> {
             }
             Log.d("HTTP", httpResult.jsonArray.toString());
 
-            return (new Gson()).fromJson(httpResult.jsonArray.toString(), new TypeToken<List<ContactsEmployeeModel>>() {
+            //
+            //            return (new Gson()).fromJson(httpResult.jsonArray.toString(), new TypeToken<List<ContactsEmployeeModel>>() {
+            //            }.getType());
+
+            //方式二：
+            return (List<ContactsEmployeeModel>) JSONUtils.fromJson(httpResult.jsonArray.toString(), new TypeToken<List<ContactsEmployeeModel>>() {
             }.getType());
+
         } catch (MyException e) {
             throw new MyException(e.getMessage());
         }
@@ -1168,8 +1253,15 @@ public class UserHelper<T> {
             }
             Log.d("HTTP", httpResult.jsonArray.toString());
 
-            return (new Gson()).fromJson(httpResult.jsonArray.toString(), new TypeToken<List<ContactsEmployeeModel>>() {
+            //1
+            //            return (new Gson()).fromJson(httpResult.jsonArray.toString(), new TypeToken<List<ContactsEmployeeModel>>() {
+            //            }.getType());
+
+
+            //方式二：
+            return (List<ContactsEmployeeModel>) JSONUtils.fromJson(httpResult.jsonArray.toString(), new TypeToken<List<ContactsEmployeeModel>>() {
             }.getType());
+
         } catch (MyException e) {
             throw new MyException(e.getMessage());
         }

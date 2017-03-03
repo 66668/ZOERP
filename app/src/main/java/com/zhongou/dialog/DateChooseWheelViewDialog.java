@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.zhongou.R;
 import com.zhongou.listener.wheelviewListener.OnWheelChangedListener;
 import com.zhongou.listener.wheelviewListener.OnWheelScrollListener;
-import com.zhongou.widget.wheelviewadpater.AbstractWheelTextAdapter;
+import com.zhongou.adapter.AbstractWheelTextAdapter;
 import com.zhongou.widget.wheelwidget.WheelView;
 
 import java.util.ArrayList;

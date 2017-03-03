@@ -20,13 +20,14 @@ import android.widget.TimePicker;
 
 import com.zhongou.R;
 import com.zhongou.base.BaseActivity;
+import com.zhongou.db.sqlite.SQLiteScheduledb;
 import com.zhongou.dialog.Loading;
+import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
 import com.zhongou.model.ScheduleModel;
-import com.zhongou.widget.calendaruse.CalendarConstant;
-import com.zhongou.widget.calendaruse.LunarCalendar;
-import com.zhongou.widget.calendaruse.ScheduleDAO;
-import com.zhongou.widget.calendaruse.ScheduleDateTag;
+import com.zhongou.common.calendarcommon.CalendarTpyeArray;
+import com.zhongou.common.calendarcommon.LunarCalendar;
+import com.zhongou.common.calendarcommon.ScheduleDateTag;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -79,7 +80,10 @@ public class ScheduleAddActivity extends BaseActivity {
     EditText scheduleText;
 
     private LunarCalendar lc = null;
-    private ScheduleDAO dao = null;
+    //
+    //        private ScheduleDAO dao = null;
+    SQLiteScheduledb dao = null;
+
     private static int hour = -1;
     private static int minute = -1;
     private static ArrayList<String> scheduleDate = null;
@@ -94,8 +98,8 @@ public class ScheduleAddActivity extends BaseActivity {
     private String tempMonth;
     private String tempDay;
 
-    private String[] sch_type = CalendarConstant.sch_type;
-    private String[] remind = CalendarConstant.remind;
+    private String[] sch_type = CalendarTpyeArray.sch_type;
+    private String[] remind = CalendarTpyeArray.remind;
     private int sch_typeID = 0;   //日程类型
     private int remindID = 0;     //提醒类型
 
@@ -106,7 +110,8 @@ public class ScheduleAddActivity extends BaseActivity {
 
     public ScheduleAddActivity() {
         lc = new LunarCalendar();
-        dao = new ScheduleDAO(this);
+        //        dao = new ScheduleDAO(this);
+        dao = new SQLiteScheduledb(this, UserHelper.getCurrentUser().getEmployeeID() + ".db");
     }
 
     @Override

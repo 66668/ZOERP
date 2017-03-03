@@ -25,9 +25,9 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.zhongou.R;
-import com.zhongou.widget.NiceSpnnerAdapter.NiceSpinnerAdapter;
-import com.zhongou.widget.NiceSpnnerAdapter.NiceSpinnerAdapterWrapper;
-import com.zhongou.widget.NiceSpnnerAdapter.NiceSpinnerBaseAdapter;
+import com.zhongou.adapter.NiceSpinnerAdapter;
+import com.zhongou.adapter.NiceSpinnerAdapterWrapper;
+import com.zhongou.base.NiceSpinnerBaseAdapter;
 
 import java.util.List;
 

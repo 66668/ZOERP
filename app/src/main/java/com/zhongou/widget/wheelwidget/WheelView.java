@@ -37,7 +37,7 @@ import com.zhongou.R;
 import com.zhongou.listener.wheelviewListener.OnWheelChangedListener;
 import com.zhongou.listener.wheelviewListener.OnWheelClickedListener;
 import com.zhongou.listener.wheelviewListener.OnWheelScrollListener;
-import com.zhongou.widget.wheelviewadpater.WheelViewAdapter;
+import com.zhongou.adapter.WheelViewAdapter;
 
 import java.util.LinkedList;
 import java.util.List;

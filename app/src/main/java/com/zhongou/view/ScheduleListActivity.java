@@ -10,11 +10,12 @@ import android.widget.TextView;
 import com.zhongou.R;
 import com.zhongou.adapter.ScheduleListAdapter;
 import com.zhongou.base.BaseActivity;
+import com.zhongou.db.sqlite.SQLiteScheduledb;
+import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
 import com.zhongou.model.ScheduleModel;
 import com.zhongou.utils.PageUtil;
 import com.zhongou.widget.RefreshListView;
-import com.zhongou.widget.calendaruse.ScheduleDAO;
 
 import java.util.ArrayList;
 
@@ -44,7 +45,10 @@ public class ScheduleListActivity extends BaseActivity {
 
     //变量
     private ScheduleListAdapter vAdapter;//记录适配
-    private ScheduleDAO dao = null;
+
+//    private ScheduleDAO dao = null;
+    private SQLiteScheduledb dao = null;
+
     private ScheduleModel scheduleModel = null;
     private ArrayList<ScheduleModel> schList;
     private String scheduleInfo = "";
@@ -65,7 +69,9 @@ public class ScheduleListActivity extends BaseActivity {
         tv_right.setText("");
         tv_title.setText("所有日程");
         schList = new ArrayList<ScheduleModel>();
-        dao = new ScheduleDAO(this);
+
+        //        dao = new ScheduleDAO(this);
+        dao = new SQLiteScheduledb(this, UserHelper.getCurrentUser().getEmployeeID() + ".db");
     }
 
     //获取所有sql数据

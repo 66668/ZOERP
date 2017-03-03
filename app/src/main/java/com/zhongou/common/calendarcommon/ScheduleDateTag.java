@@ -1,4 +1,4 @@
-package com.zhongou.widget.calendaruse;
+package com.zhongou.common.calendarcommon;
 
 /**
  * 需要标记的日程日期

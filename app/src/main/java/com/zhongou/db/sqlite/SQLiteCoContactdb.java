@@ -1,4 +1,4 @@
-package com.zhongou.db.sqlcontact;
+package com.zhongou.db.sqlite;
 
 import android.content.ContentValues;
 import android.content.Context;

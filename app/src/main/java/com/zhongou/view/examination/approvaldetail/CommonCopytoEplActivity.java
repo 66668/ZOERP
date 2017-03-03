@@ -19,7 +19,7 @@ import com.zhongou.base.BaseActivity;
 import com.zhongou.common.CharacterParser;
 import com.zhongou.common.MyException;
 import com.zhongou.common.PinyinComparator;
-import com.zhongou.db.sqlcontact.SQLiteCoContactdb;
+import com.zhongou.db.sqlite.SQLiteCoContactdb;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;

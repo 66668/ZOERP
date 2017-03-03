@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.zhongou.R;
 import com.zhongou.application.MyApplication;
 import com.zhongou.model.ScheduleModel;
-import com.zhongou.widget.calendaruse.CalendarConstant;
+import com.zhongou.common.calendarcommon.CalendarTpyeArray;
 
 import java.util.ArrayList;
 
@@ -57,7 +57,7 @@ public class ScheduleListAdapter extends BaseAdapter {
 
         holder.tvType.setText("" + model.getScheduleDate());//提醒
 
-        holder.tvTitle.setText("" + CalendarConstant.sch_type[model.getScheduleTypeID()]);//日程类型
+        holder.tvTitle.setText("" + CalendarTpyeArray.sch_type[model.getScheduleTypeID()]);//日程类型
         return convertView;
     }
 
