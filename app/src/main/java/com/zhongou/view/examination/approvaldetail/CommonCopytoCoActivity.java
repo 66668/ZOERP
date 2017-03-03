@@ -14,11 +14,10 @@ import com.zhongou.adapter.ContactsCopyToCoAdapter;
 import com.zhongou.application.MyApplication;
 import com.zhongou.base.BaseActivity;
 import com.zhongou.common.MyException;
-import com.zhongou.db.sqlite.SQLiteCoContactdb;
+import com.zhongou.db.sqlite.SQLiteCopytoContactdb;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
-import com.zhongou.model.ContactsEmployeeModel;
 import com.zhongou.model.ContactsSonCOModel;
 import com.zhongou.model.MyApprovalModel;
 import com.zhongou.utils.PageUtil;
@@ -57,10 +56,10 @@ public class CommonCopytoCoActivity extends BaseActivity {
     private static List<ContactsSonCOModel> listSonCoData;//子公司集合
 
     private ContactsCopyToCoAdapter adapter;//通讯录 适配
-    private SQLiteCoContactdb myDb; //sql数据库雷
+    private SQLiteCopytoContactdb dao; //sql数据库雷
 
     //常量
-    public static final int POST_SUCCESEE = 15;
+    public static final int POST_SUCCESS = 15;
     public static final int POST_FAILED = 16;
     public static final int CHASE_DATA = 17;
 
@@ -75,7 +74,7 @@ public class CommonCopytoCoActivity extends BaseActivity {
 
         //获取页面跳转对象
         Bundle bundle = this.getIntent().getExtras();
-        myApprovalModel = (MyApprovalModel)bundle.getSerializable("MyApprovalModel");
+        myApprovalModel = (MyApprovalModel) bundle.getSerializable("MyApprovalModel");
 
         initViews();
         initListener();
@@ -87,7 +86,7 @@ public class CommonCopytoCoActivity extends BaseActivity {
      *
      */
     private void initViews() {
-        myDb = new SQLiteCoContactdb(this);
+        dao = new SQLiteCopytoContactdb(this);
     }
 
     /**
@@ -104,11 +103,11 @@ public class CommonCopytoCoActivity extends BaseActivity {
                 int newPosition = position - headerViewsCount;
 
                 Bundle bundle = new Bundle();
-                bundle.putString("sStoreID",listSonCoData.get(newPosition).getsStoreID());
-                bundle.putString("sStoreName",listSonCoData.get(newPosition).getsStoreName());
+                bundle.putString("sStoreID", listSonCoData.get(newPosition).getsStoreID());
+                bundle.putString("sStoreName", listSonCoData.get(newPosition).getsStoreName());
                 bundle.putSerializable("myApprovalModel", myApprovalModel);//必要的参数
 
-                startActivity(CommonCopytoDeptActivity.class,bundle);
+                startActivity(CommonCopytoDeptActivity.class, bundle);
 
             }
         });
@@ -116,7 +115,7 @@ public class CommonCopytoCoActivity extends BaseActivity {
 
     public void getData() {
         //先判断sql中是否有值
-        List<ContactsEmployeeModel> list = myDb.getEmpContactList(SQLiteCoContactdb.EMPLOYEEFLAG);
+        List<ContactsSonCOModel> list = dao.getSonCOList();
         Log.d("SJY", "list=" + list.size());
         if (list.size() > 0 && list != null) {
             Log.d("SJY", "走sp缓存");
@@ -139,7 +138,7 @@ public class CommonCopytoCoActivity extends BaseActivity {
                     //获取子公司集合
                     List<ContactsSonCOModel> list = UserHelper.getCompanySonOfCO(MyApplication.getInstance());
 
-                    sendMessage(POST_SUCCESEE, list);
+                    sendMessage(POST_SUCCESS, list);
 
                 } catch (MyException e) {
                     sendMessage(POST_FAILED, e.getMessage());
@@ -152,18 +151,27 @@ public class CommonCopytoCoActivity extends BaseActivity {
     protected void handleMessage(Message msg) {
         super.handleMessage(msg);
         switch (msg.what) {
-            case POST_SUCCESEE://
+            case POST_SUCCESS://
                 //数据处理
                 listSonCoData = (List<ContactsSonCOModel>) msg.obj;
-
+                //子公司集合存储到sql上
+                dao.addSonCoList(listSonCoData);
                 //设置首字母 adapter使用
                 setFirstLetter(listSonCoData);
                 adapter = new ContactsCopyToCoAdapter(this, listSonCoData);
                 //数据展示
                 contactsListView.setAdapter(adapter);
+
+
                 break;
 
             case CHASE_DATA://缓存
+                listSonCoData = (List<ContactsSonCOModel>) msg.obj;
+                //设置首字母 adapter使用
+                setFirstLetter(listSonCoData);
+                adapter = new ContactsCopyToCoAdapter(this, listSonCoData);
+                //数据展示
+                contactsListView.setAdapter(adapter);
 
                 break;
 
@@ -181,14 +189,6 @@ public class CommonCopytoCoActivity extends BaseActivity {
             list.get(i).setFirstLetter("子公司");
         }
 
-    }
-
-    /**
-     * 子公司集合保存到sql
-     */
-    private void savetoCoContactSQL(List<ContactsSonCOModel> list) {
-        Log.d("SJY", "savetoCoContactSQL数据存储");
-        myDb.addSonCoList(list, SQLiteCoContactdb.SONCOFLAG);
     }
 
     /**

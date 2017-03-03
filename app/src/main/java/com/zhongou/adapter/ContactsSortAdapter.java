@@ -19,7 +19,11 @@ import java.util.List;
 public class ContactsSortAdapter extends BaseAdapter implements SectionIndexer{
 	private List<ContactsEmployeeModel> list = null;
 	private Context mContext;
+	public ContactsSortAdapter(Context mContext) {
+        super();
+        this.mContext = mContext;
 
+	}
 	public ContactsSortAdapter(Context mContext, List<ContactsEmployeeModel> list) {
 		this.mContext = mContext;
 		this.list = list;

@@ -15,13 +15,11 @@ import com.zhongou.adapter.ContactsCopyToDeptAdapter;
 import com.zhongou.application.MyApplication;
 import com.zhongou.base.BaseActivity;
 import com.zhongou.common.MyException;
-import com.zhongou.db.sqlite.SQLiteCoContactdb;
+import com.zhongou.db.sqlite.SQLiteCopytoContactdb;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
 import com.zhongou.model.ContactsDeptModel;
-import com.zhongou.model.ContactsEmployeeModel;
-import com.zhongou.model.ContactsSonCOModel;
 import com.zhongou.model.MyApprovalModel;
 import com.zhongou.utils.PageUtil;
 
@@ -57,7 +55,8 @@ public class CommonCopytoDeptActivity extends BaseActivity {
     private static List<ContactsDeptModel> listDeptData;//部门集合
 
     private ContactsCopyToDeptAdapter adapter;//通讯录排序适配
-    private SQLiteCoContactdb myDb; //sql数据库雷
+    private String sStoreID;
+    private SQLiteCopytoContactdb dao; //sql数据库雷
 
     //常量
     public static final int POST_SUCCESEE = 15;
@@ -77,8 +76,8 @@ public class CommonCopytoDeptActivity extends BaseActivity {
 
         Bundle bundle = this.getIntent().getExtras();
 
-        String sStoreID = (String) bundle.get("sStoreID");
-        sStoreName = (String) bundle.get("sStoreID");
+        sStoreID = (String) bundle.get("sStoreID");
+        sStoreName = (String) bundle.get("sStoreName");
         myApprovalModel = (MyApprovalModel) bundle.getSerializable("myApprovalModel");
 
         Log.d("SJY", "--" + myApprovalModel.getApprovalID() + "--");
@@ -87,7 +86,7 @@ public class CommonCopytoDeptActivity extends BaseActivity {
         initViews();
         initListener();
 
-        getData(sStoreID);
+        getData();
 
 
     }
@@ -96,7 +95,7 @@ public class CommonCopytoDeptActivity extends BaseActivity {
      *
      */
     private void initViews() {
-        myDb = new SQLiteCoContactdb(this);
+        dao = new SQLiteCopytoContactdb(this);
     }
 
     /**
@@ -124,9 +123,9 @@ public class CommonCopytoDeptActivity extends BaseActivity {
 
     }
 
-    public void getData(String StoreID) {
+    public void getData() {
         //先判断sql中是否有值
-        List<ContactsEmployeeModel> list = myDb.getEmpContactList(SQLiteCoContactdb.EMPLOYEEFLAG);
+        List<ContactsDeptModel> list = dao.getDeptList(sStoreID);
         Log.d("SJY", "list=" + list.size());
         if (list.size() > 0 && list != null) {
             Log.d("SJY", "走sp缓存");
@@ -135,7 +134,7 @@ public class CommonCopytoDeptActivity extends BaseActivity {
         } else if (list == null || list.size() <= 0) {
             Log.d("SJY", "走服务端数据");
             //获取服务端数据
-            getDataFromURL(StoreID);
+            getDataFromURL(sStoreID);
 
         }
     }
@@ -166,7 +165,7 @@ public class CommonCopytoDeptActivity extends BaseActivity {
 
                 listDeptData = (List<ContactsDeptModel>) msg.obj;
 
-                //                savetoCoContactSQL(listDeptData);// 部门集合保存到sql
+                dao.addDeptList(listDeptData,sStoreID);//保存部门集合
 
                 //设置首字母 adapter使用
                 setFirstLetter(listDeptData);
@@ -178,21 +177,14 @@ public class CommonCopytoDeptActivity extends BaseActivity {
 
             case CHASE_DATA://缓存数据处理
 
-                //                //由于有缓存数据，从这里获取子公司集合
-                //                //                listDeptData = myDb.getSonCOList(SQLiteCoContactdb.SONCOFLAG);
-                //
-                //                List<ContactsEmployeeModel> listData = (List<ContactsEmployeeModel>) msg.obj;
-                //                listContactApprover = filledData(listData);//为数据添加首字母
-                //
-                //                // 根据a-z进行排序源数据
-                //                Collections.sort(listContactApprover, pinyinComparator);
-                //
-                //                //listView添加headView
-                //                addListHeadView(listDeptData);
-                //
-                //                //界面展示
-                //                adapter = new ContactsCopyToCoAdapter(CommonCopytoDeptActivity.this, listContactApprover);
-                //                contactsListView.setAdapter(adapter);
+                listDeptData = (List<ContactsDeptModel>) msg.obj;
+
+                //设置首字母 adapter使用
+                setFirstLetter(listDeptData);
+                adapter = new ContactsCopyToDeptAdapter(this, listDeptData);
+
+                //数据展示
+                contactsListView.setAdapter(adapter);
                 break;
             case POST_FAILED://
                 PageUtil.DisplayToast((String) msg.obj);
@@ -210,13 +202,7 @@ public class CommonCopytoDeptActivity extends BaseActivity {
 
     }
 
-    /**
-     * 部门集合保存到sql
-     */
-    private void savetoCoContactSQL(List<ContactsSonCOModel> list) {
-        Log.d("SJY", "savetoCoContactSQL部门 数据存储");
-        //        myDb.addSonCoList(list, SQLiteCoContactdb.SONCOFLAG);
-    }
+
 
     /**
      * back

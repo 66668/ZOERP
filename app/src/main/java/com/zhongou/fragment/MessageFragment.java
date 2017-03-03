@@ -24,6 +24,7 @@ import com.zhongou.view.NoticeListActivity;
 import com.zhongou.view.NotificationListActivity;
 import com.zhongou.view.ScheduleMainActivity;
 import com.zhongou.view.examination.ZOApprovelListActivity;
+import com.zhongou.widget.CircleTextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,27 +39,34 @@ public class MessageFragment extends BaseFragment {
     private static final String TAG = "MessageFragment";
 
     //变量
-    //    private ScheduleDAO dao = null;
     SQLiteScheduledb dao = null;
 
 
-    //控件
+    //内容
     private TextView msg_content;
     private TextView notice_content;
     private TextView undo_content;
     private TextView schedule_content;//日程安排提示
 
+    //时间
     private TextView msg_time;
     private TextView notice_time;
     private TextView undo_time;
     private TextView schedule_time;
+
+    //个数
+    private CircleTextView msg_number;
+    private CircleTextView notice_number;
+    private CircleTextView undo_number;
+    private CircleTextView schedule_number;
 
     private RelativeLayout layout_notification;
     private RelativeLayout layout_notice;
     private RelativeLayout layout_undo;
     private RelativeLayout layout_schedule;
 
-    private static final int GET_SCHEDULE_DATA = -38;
+    private static final int GET_SCHEDULE_DATA = -39;
+    private static final int NONE_SCHEDULE_DATA = -38;
     private static final int GET_NEW_DATA = -37;//
     private static final int GET_REFRESH_DATA = -36;//
     private static final int GET_UNDO_DATA = -35;//
@@ -129,15 +137,23 @@ public class MessageFragment extends BaseFragment {
      * @param view
      */
     private void initViews(View view) {
+        //消息
         msg_content = (TextView) view.findViewById(R.id.tv_msgContains);
         notice_content = (TextView) view.findViewById(R.id.tv_noticeContains);
         undo_content = (TextView) view.findViewById(R.id.tv_undoContains);
         schedule_content = (TextView) view.findViewById(R.id.tv_ScheduleContains);
 
+        //时间
         msg_time = (TextView) view.findViewById(R.id.tv_msgTime);
         notice_time = (TextView) view.findViewById(R.id.tv_noticeTime);
         undo_time = (TextView) view.findViewById(R.id.tv_undoTime);
         schedule_time = (TextView) view.findViewById(R.id.tv_scheduleTime);
+
+        //数量提醒
+        msg_number = (CircleTextView) view.findViewById(R.id.msg_number);
+        notice_number = (CircleTextView) view.findViewById(R.id.notice_number);
+        undo_number = (CircleTextView) view.findViewById(R.id.undo_number);
+        schedule_number = (CircleTextView) view.findViewById(R.id.schedule_number);
 
         layout_notification = (RelativeLayout) view.findViewById(R.id.layout_notification);
         layout_notice = (RelativeLayout) view.findViewById(R.id.layout_notice);
@@ -196,7 +212,6 @@ public class MessageFragment extends BaseFragment {
             @Override
             public void run() {
 
-                //        dao = new ScheduleDAO(this);
                 dao = new SQLiteScheduledb(getActivity(), UserHelper.getCurrentUser().getEmployeeID() + ".db");
 
 
@@ -204,10 +219,15 @@ public class MessageFragment extends BaseFragment {
                 int scheduleSize = -1;
                 if (listSchedule != null) {
                     scheduleSize = listSchedule.size();
+                    if (scheduleSize <= 0) {
+                        handler.sendMessage(handler.obtainMessage(NONE_SCHEDULE_DATA));
+                    } else {
+                        handler.sendMessage(handler.obtainMessage(GET_SCHEDULE_DATA, scheduleSize));
+                    }
                 } else {
-                    scheduleSize = 0;
+                    handler.sendMessage(handler.obtainMessage(NONE_SCHEDULE_DATA));
                 }
-                handler.sendMessage(handler.obtainMessage(GET_SCHEDULE_DATA, scheduleSize));
+
 
             }
         });
@@ -221,10 +241,15 @@ public class MessageFragment extends BaseFragment {
                             "",//iMaxTime
                             "");
 
-                    if (visitorModelList == null || visitorModelList.size() <= 0) {
+                    if (visitorModelList == null) {
                         handler.sendMessage(handler.obtainMessage(NONE_NUDO_DATA, "没有未审批申请"));
+                    } else {
+                        if (visitorModelList.size() <= 0) {
+                            handler.sendMessage(handler.obtainMessage(NONE_NUDO_DATA, "没有未审批申请"));
+                        } else {
+                            handler.sendMessage(handler.obtainMessage(GET_UNDO_DATA, visitorModelList));
+                        }
                     }
-                    handler.sendMessage(handler.obtainMessage(GET_UNDO_DATA, visitorModelList));
                 } catch (MyException e) {
                     handler.sendMessage(handler.obtainMessage(NONE_NUDO_DATA, "没有未审批申请"));
                 }
@@ -245,14 +270,28 @@ public class MessageFragment extends BaseFragment {
                     //您有x条日程
                     int scheduleSize = (int) msg.obj;
                     if (scheduleSize > 0 && scheduleSize <= 10) {
+                        //内容
                         schedule_content.setTextColor(getActivity().getResources().getColor(R.color.red));
                         schedule_content.setText("您有 " + scheduleSize + " 条日程要处理");
+
+                        //时间
+                        //                        String time = schedulelist.get(0).getScheduleDate();
+                        //                        String newTime = time.substring(0, time.indexOf("\t"));
+                        schedule_time.setText("");
+
+                        //个数
+                        schedule_number.setText(scheduleSize + "");
+
                     } else if (scheduleSize > 10) {
+                        //内容
                         schedule_content.setTextColor(getActivity().getResources().getColor(R.color.red));
                         schedule_content.setText("您有 10+ 条日程要处理");
-                    } else {
-                        schedule_content.setText("没有日程安排");
-                        schedule_content.setTextColor(getActivity().getResources().getColor(R.color.textHintColor));
+
+                        //时间
+
+                        schedule_time.setText("");
+                        //个数
+                        schedule_number.setText("10+");
                     }
                     break;
 
@@ -260,17 +299,52 @@ public class MessageFragment extends BaseFragment {
                     List<MyApprovalModel> visitorModelList = (List<MyApprovalModel>) msg.obj;
                     int size = splitDate(visitorModelList);
                     if (size > 0 && size <= 10) {
+
+                        //内容
                         undo_content.setTextColor(getActivity().getResources().getColor(R.color.red));
                         undo_content.setText("您有 " + size + " 条未审批申请");
+
+                        //时间
+                        undo_time.setText("");
+
+                        //个数
+                        undo_number.setText("" + size);
+
                     } else if (size > 10) {
                         undo_content.setTextColor(getActivity().getResources().getColor(R.color.red));
                         undo_content.setText("您有 10+ 条未审批申请");
+                        //时间
+                        undo_time.setText("");
+
+                        //个数
+                        undo_number.setText("10+");
                     }
 
                     break;
+
                 case NONE_NUDO_DATA:
+
+                    //内容
                     undo_content.setText((String) msg.obj);
                     undo_content.setTextColor(getActivity().getResources().getColor(R.color.textHintColor));
+
+                    //时间
+                    undo_number.setVisibility(View.INVISIBLE);
+
+                    //个数
+                    undo_time.setText("");
+                    break;
+
+                case NONE_SCHEDULE_DATA:
+                    //内容
+                    schedule_content.setText("没有日程安排");
+                    schedule_content.setTextColor(getActivity().getResources().getColor(R.color.textHintColor));
+
+                    //时间
+                    schedule_time.setText("");
+
+                    //个数
+                    schedule_number.setVisibility(View.INVISIBLE);
                     break;
                 default:
                     break;

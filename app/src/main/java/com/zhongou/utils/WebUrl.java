@@ -71,7 +71,7 @@ public class WebUrl {
         /**
          * 01-02-04审批 抄送
          */
-        public static final String APPROVAL_COPYTO = LOGIN_URL + LOGIN_FLODER_USER + "Approval/CopyMyApprovalRecord";
+        public static final String APPROVAL_COPYTO = LOGIN_URL + LOGIN_FLODER_USER + "Approvals/CopyMyApprovalRecord";
 
 
         /**

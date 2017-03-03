@@ -21,6 +21,7 @@ import com.zhongou.R;
 import com.zhongou.application.MyApplication;
 import com.zhongou.base.BaseActivity;
 import com.zhongou.base.BaseFragment;
+import com.zhongou.db.sqlite.SQLiteCopytoContactdb;
 import com.zhongou.fragment.AppsFragment;
 import com.zhongou.fragment.ContactsFragment;
 import com.zhongou.fragment.MessageFragment;
@@ -102,7 +103,7 @@ public class MainActivity extends BaseActivity {
         //添加登陆人姓名
         TextView tvName = (TextView) headerView.findViewById(R.id.tv_login_name);
 
-        if (!(UserHelper.getCurrentUser() == null) && !(UserHelper.getCurrentUser().getName() ==null)) {
+        if (!(UserHelper.getCurrentUser() == null) && !(UserHelper.getCurrentUser().getName() == null)) {
             tvName.setText(UserHelper.getCurrentUser().getName());
         }
 
@@ -310,7 +311,7 @@ public class MainActivity extends BaseActivity {
                         ConfigUtil config = new ConfigUtil(MainActivity.this);
                         config.setAutoLogin(false);//存储自动登录修改
                         config.setContactApproverData(null);//清空审批人通讯录数据，以防登录人更换后数据每更换导致出错
-                        //sqlite数据清除处理
+                        new SQLiteCopytoContactdb(MyApplication.getInstance()).clearDb();//清除抄送通讯录
 
                         //修改自动登录的判断
                         MyApplication.getInstance().setIsLogin(false);

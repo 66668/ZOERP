@@ -125,6 +125,7 @@ public class ContactsFragment extends BaseFragment {
      * @param view
      */
     private void initViews(View view) {
+
         //实例化汉字转拼音类
         characterParser = CharacterParser.getInstance();
         pinyinComparator = new PinyinComparator();
@@ -325,13 +326,11 @@ public class ContactsFragment extends BaseFragment {
         }
 
         // 根据a-z进行排序
-        if (filterDateList != null || filterDateList.size() > 0) {
-            Log.d("SJY", "filterDateList是null?" + (filterDateList == null));
-            Collections.sort(filterDateList, pinyinComparator);
-            
-            Log.d("SJY", "adapter是null?" + (adapter == null));
+        Collections.sort(filterDateList, pinyinComparator);
+        if (adapter != null) {
             adapter.updateListView(filterDateList);
         }
+
     }
 
     //重写setMenuVisibility方法，不然会出现叠层的现象

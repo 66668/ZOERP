@@ -58,14 +58,18 @@
             android:text="2010-11-11"
             android:textSize="@dimen/common_textSize_default11"/>
 
-        <ImageView
-            android:id="@+id/img_noticeNotify"
+        <com.zhongou.widget.CircleTextView
+            android:id="@+id/msg_number"
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_alignBottom="@+id/img_notice"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
-            android:background="@mipmap/zologo"/>
+            android:background="@color/common_topbar_bgcolor"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="@color/white"
+            />
     </RelativeLayout>
 
     <View
@@ -120,14 +124,17 @@
             android:text="2010-11-11"
             android:textSize="@dimen/common_textSize_default11"/>
 
-        <ImageView
-            android:id="@+id/img_msgNotify"
+        <com.zhongou.widget.CircleTextView
+            android:id="@+id/notice_number"
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_alignBottom="@+id/img_msg"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
-            android:background="@mipmap/zologo"/>
+            android:background="@color/common_topbar_bgcolor"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="@color/white"/>
     </RelativeLayout>
 
     <View
@@ -182,14 +189,17 @@
             android:text="2010-11-11"
             android:textSize="@dimen/common_textSize_default11"/>
 
-        <ImageView
-            android:id="@+id/img_notifyNumber"
+        <com.zhongou.widget.CircleTextView
+            android:id="@+id/undo_number"
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_alignBottom="@+id/img_undo"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
-            android:background="@mipmap/zologo"/>
+            android:background="@color/common_topbar_bgcolor"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="@color/white"/>
     </RelativeLayout>
 
     <View
@@ -244,14 +254,17 @@
             android:text="2010-11-11"
             android:textSize="@dimen/common_textSize_default11"/>
 
-        <ImageView
-            android:id="@+id/img_ScheduleNotify"
+        <com.zhongou.widget.CircleTextView
+            android:id="@+id/schedule_number"
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_alignBottom="@+id/img_schedule"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
-            android:background="@mipmap/zologo"/>
+            android:background="@color/common_topbar_bgcolor"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="@color/white"/>
     </RelativeLayout>
 
     <View

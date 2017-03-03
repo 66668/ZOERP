@@ -19,7 +19,7 @@ import com.zhongou.base.BaseActivity;
 import com.zhongou.common.CharacterParser;
 import com.zhongou.common.MyException;
 import com.zhongou.common.PinyinComparator;
-import com.zhongou.db.sqlite.SQLiteCoContactdb;
+import com.zhongou.db.sqlite.SQLiteCopytoContactdb;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
@@ -60,6 +60,7 @@ public class CommonCopytoEplActivity extends BaseActivity {
     ListView contactsListView;
 
     //变量
+    private String sDeptID;//
     private MyApprovalModel myApprovalModel;//跳转对象
     private ApprovalSModel approvalSModel;//提交对象
     private String sApprovalemployeeinfos;//转发人ApprovalEmployeeID
@@ -72,7 +73,7 @@ public class CommonCopytoEplActivity extends BaseActivity {
     public static List<ContactsEmployeeModel> selectlist;//checkBox选中数据集合
 
     private ContactsSelectAdapter adapter;//通讯录排序适配
-    private SQLiteCoContactdb myDb; //sql数据库雷
+    private SQLiteCopytoContactdb dao; //sql数据库雷
 
     //常量
     public static final int POST_SUCCESEE = 15;
@@ -97,13 +98,13 @@ public class CommonCopytoEplActivity extends BaseActivity {
         //获取调转对象
 
         Intent intent = getIntent();
-        String sDeptID = intent.getStringExtra("sDeptID");
+        sDeptID = intent.getStringExtra("sDeptID");
         myApprovalModel = (MyApprovalModel) intent.getSerializableExtra("myApprovalModel");
         Log.d("SJY", "--" + myApprovalModel.getApprovalID() + "--");
         initViews();
         initListener();
 
-        getData(sDeptID);
+        getData();
     }
 
     /**
@@ -114,7 +115,7 @@ public class CommonCopytoEplActivity extends BaseActivity {
         characterParser = CharacterParser.getInstance();
         pinyinComparator = new PinyinComparator();
         sideBar = (SideBar) findViewById(R.id.sidrbar);
-        myDb = new SQLiteCoContactdb(this);
+        dao = new SQLiteCopytoContactdb(this);
     }
 
     /**
@@ -157,10 +158,9 @@ public class CommonCopytoEplActivity extends BaseActivity {
 
     }
 
-    public void getData(String sDeptID) {
+    public void getData() {
         //先判断sql中是否有值
-        List<ContactsEmployeeModel> list = myDb.getEmpContactList(SQLiteCoContactdb.EMPLOYEEFLAG);
-        Log.d("SJY", "list=" + list.size());
+        List<ContactsEmployeeModel> list = dao.getEmpList(sDeptID);
         if (list.size() > 0 && list != null) {
             Log.d("SJY", "走sp缓存");
             sendMessage(CHASE_DATA, list);
@@ -168,12 +168,12 @@ public class CommonCopytoEplActivity extends BaseActivity {
         } else if (list == null || list.size() <= 0) {
             Log.d("SJY", "走服务端数据");
             //获取服务端数据
-            getDataFromURL(sDeptID);
+            getDataFromURL();
 
         }
     }
 
-    public void getDataFromURL(final String sDeptID) {
+    public void getDataFromURL() {
         //
         Loading.run(this, new Runnable() {
             @Override
@@ -200,7 +200,7 @@ public class CommonCopytoEplActivity extends BaseActivity {
 
                 listData = (List<ContactsEmployeeModel>) msg.obj;
 
-                //                saveToEmployeeSQL(listEmpl);//联系人保存到sql
+                dao.addEmplList(listData, sDeptID);//联系人保存到sql
 
                 //为数据添加首字母
                 listData = filledData(listData);
@@ -214,15 +214,16 @@ public class CommonCopytoEplActivity extends BaseActivity {
 
             case CHASE_DATA://缓存数据处理
 
-                //                List<ContactsEmployeeModel> listData = (List<ContactsEmployeeModel>) msg.obj;
-                //                listData = filledData(listData);//为数据添加首字母
-                //
-                //                // 根据a-z进行排序源数据
-                //                Collections.sort(listData, pinyinComparator);
-                //
-                //                //界面展示
-                //                adapter = new ContactsSelectAdapter(CommonCopytoEplActivity.this, listData);
-                //                contactsListView.setAdapter(adapter);
+                listData = (List<ContactsEmployeeModel>) msg.obj;
+
+                //为数据添加首字母
+                listData = filledData(listData);
+                // 根据a-z进行排序源数据
+                Collections.sort(listData, pinyinComparator);
+                adapter = new ContactsSelectAdapter(this, listData);
+
+                //数据展示
+                contactsListView.setAdapter(adapter);
                 break;
 
             case POSTDATA_SUCCESS://提交
@@ -241,16 +242,6 @@ public class CommonCopytoEplActivity extends BaseActivity {
                 break;
         }
     }
-
-
-    /**
-     * 联系人集合保存
-     */
-    private void saveToEmployeeSQL(List<ContactsEmployeeModel> list) {
-        Log.d("SJY", "saveToEmployeeSQL联系人 数据存储");
-        //        myDb.addEmplContactList(list, SQLiteCoContactdb.EMPLOYEEFLAG);
-    }
-
 
     /**
      * 重新修改model,为ListView填充首字母数据
