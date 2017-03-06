@@ -16,7 +16,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.igexin.sdk.PushManager;
 import com.zhongou.R;
 import com.zhongou.application.MyApplication;
 import com.zhongou.base.BaseActivity;
@@ -26,7 +25,6 @@ import com.zhongou.fragment.AppsFragment;
 import com.zhongou.fragment.ContactsFragment;
 import com.zhongou.fragment.MessageFragment;
 import com.zhongou.helper.UserHelper;
-import com.zhongou.receiver.GetuiReceiver;
 import com.zhongou.utils.ConfigUtil;
 import com.zhongou.widget.CircleImageView;
 
@@ -303,9 +301,6 @@ public class MainActivity extends BaseActivity {
                         //                        sendBroadcast(intent);//发送退出的广播
 
                         //个推关闭
-                        PushManager.getInstance().turnOffPush(MainActivity.this);
-                        PushManager.getInstance().stopService(MainActivity.this.getApplicationContext());
-                        GetuiReceiver.payloadData.delete(0, GetuiReceiver.payloadData.length());
 
                         //数据清除
                         ConfigUtil config = new ConfigUtil(MainActivity.this);
