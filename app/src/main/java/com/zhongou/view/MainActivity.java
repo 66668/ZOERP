@@ -1,5 +1,9 @@
 package com.zhongou.view;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -9,6 +13,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,16 +31,20 @@ import com.zhongou.fragment.ContactsFragment;
 import com.zhongou.fragment.MessageFragment;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.utils.ConfigUtil;
+import com.zhongou.utils.JPushUtil;
 import com.zhongou.widget.CircleImageView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 
 
 public class MainActivity extends BaseActivity {
 
     private NavigationView mNavigationView;
-    //    private FrameLayout mHomeContent;
     private ViewPager viewPaper;
     private Toolbar toolbar;
     private DrawerLayout mDrawerLayout;
@@ -50,27 +59,57 @@ public class MainActivity extends BaseActivity {
 
     private List<BaseFragment> listFragment;
     private int currentFragment;
+    public static boolean isForeground = false;//推送 判断
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_main);
 
-        //判断自动登录
-        if (!MyApplication.getInstance().isLogin() && (MyApplication.getInstance().getClientID() == null)) {
-            startActivity(LoginActivity.class);
-            this.finish();
-        }
+        JPushInterface.init(getApplicationContext());
+        registerMessageReceiver();  // used for receive msg
+
+        setAlias(UserHelper.getCurrentUser().getWorlkId());//设置别名
+
 
         initMyView();
+
         initViewPaperAndFragment();
         initListener();
     }
 
     /**
+     * jpush 绑定别名
+     */
+    private void setAlias(String workid) {
+        JPushInterface.setAliasAndTags(getApplicationContext(), workid, null, new TagAliasCallback() {
+
+            @Override
+            public void gotResult(int code, String s, Set<String> set) {
+                String logs;
+                switch (code) {
+                    case 0:
+                        Log.i("JPush", "Set tag and alias success极光推送别名设置成功");
+                        break;
+                    case 6002:
+                        Log.i("JPush", "极光推送别名设置失败，Code = 6002");
+                        break;
+                    default:
+                        Log.e("JPush", "极光推送设置失败，Code = " + code);
+                        break;
+                }
+            }
+        });
+    }
+
+
+    /**
      * 控件初始化
      */
+
+
     protected void initMyView() {
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout_home);
 
@@ -151,11 +190,6 @@ public class MainActivity extends BaseActivity {
 
                 }
 
-                //通过fragments这个adapter还有index来替换帧布局中的内容
-                //                Fragment fragment = (Fragment) fragmentStatePagerAdapter.instantiateItem(mHomeContent, index);
-                //                //一开始将帧布局中 的内容设置为第一个
-                //                fragmentStatePagerAdapter.setPrimaryItem(mHomeContent, 0, fragment);
-                //                fragmentStatePagerAdapter.finishUpdate(mHomeContent);
 
                 viewPaper.setCurrentItem(currentFragment, false);
 
@@ -183,33 +217,6 @@ public class MainActivity extends BaseActivity {
         });
     }
 
-    //    private void initListener() {
-    //        mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-    //            @Override
-    //            public void onCheckedChanged(RadioGroup group, int checkedId) {
-    //                int index = 0;
-    //                switch (checkedId) {
-    //                    case R.id.btn_message:
-    //                        index = 0;
-    //                        break;
-    //                    case R.id.btn_app:
-    //                        index = 1;
-    //                        break;
-    //                    case R.id.btn_contract:
-    //                        index = 2;
-    //                        break;
-    //                    default:
-    //                        break;
-    //                }
-    //                //通过fragments这个adapter还有index来替换帧布局中的内容
-    //                Fragment fragment = (Fragment) fragmentStatePagerAdapter.instantiateItem(mHomeContent, index);
-    //                //一开始将帧布局中 的内容设置为第一个
-    //                fragmentStatePagerAdapter.setPrimaryItem(mHomeContent, 0, fragment);
-    //                fragmentStatePagerAdapter.finishUpdate(mHomeContent);
-    //            }
-    //        });
-    //    }
-
 
     private ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
         @Override
@@ -235,42 +242,6 @@ public class MainActivity extends BaseActivity {
         public void onPageScrollStateChanged(int state) {
         }
     };
-
-    //    //用adapter来管理几个Fragment界面的变化。注意，我这里用的Fragment都是v4包里面的
-    //    FragmentStatePagerAdapter fragmentStatePagerAdapter = new FragmentStatePagerAdapter(getSupportFragmentManager()) {
-    //        @Override
-    //        public Fragment getItem(int position) {
-    //            Fragment fragment = null;
-    //            switch (position) {
-    //                case 0:
-    //                    fragment = new MessageFragment();
-    //                    break;
-    //                case 1://tab第二页
-    //                    fragment = new AppsFragment();
-    //                    break;
-    //                case 2://第三页
-    //                    fragment = new ContractsFragment();
-    //                    break;
-    //                default:
-    //                    new MessageFragment();//fragment = ?
-    //                    break;
-    //            }
-    //            return fragment;
-    //        }
-    //
-    //        @Override
-    //        public int getCount() {
-    //            return 0;
-    //        }
-    //
-    //    };
-
-    //    //第一次启动时，我们让第1页处于选中状态。
-    //    @Override
-    //    protected void onStart() {
-    //        super.onStart();
-    //        mRadioGroup.check(R.id.btn_message);
-    //    }
 
     /**
      * 设置NavigationView中menu的item被选中后要执行的操作
@@ -300,7 +271,9 @@ public class MainActivity extends BaseActivity {
                         //                        intent.setAction(EXIT_APP_ACTION);
                         //                        sendBroadcast(intent);//发送退出的广播
 
-                        //个推关闭
+                        //推送 关闭
+                        JPushInterface.stopPush(getApplicationContext());
+                        unregisterReceiver(mMessageReceiver);//注销广播
 
                         //数据清除
                         ConfigUtil config = new ConfigUtil(MainActivity.this);
@@ -310,7 +283,6 @@ public class MainActivity extends BaseActivity {
 
                         //修改自动登录的判断
                         MyApplication.getInstance().setIsLogin(false);
-                        MyApplication.getInstance().setClientID(null);
                         UserHelper.setmCurrentUser(null);
 
                           /*
@@ -327,5 +299,58 @@ public class MainActivity extends BaseActivity {
                 return true;
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        isForeground = true;
+        super.onResume();
+    }
+
+
+    @Override
+    protected void onPause() {
+        isForeground = false;
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (mMessageReceiver != null) {
+            unregisterReceiver(mMessageReceiver);
+        }
+        super.onDestroy();
+    }
+
+    //for receive customer msg from jpush server
+    private MessageReceiver mMessageReceiver;
+    public static final String MESSAGE_RECEIVED_ACTION = "com.example.jpushdemo.MESSAGE_RECEIVED_ACTION";
+    public static final String KEY_TITLE = "title";
+    public static final String KEY_MESSAGE = "message";
+    public static final String KEY_EXTRAS = "extras";
+
+    public void registerMessageReceiver() {
+        mMessageReceiver = new MessageReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.setPriority(IntentFilter.SYSTEM_HIGH_PRIORITY);
+        filter.addAction(MESSAGE_RECEIVED_ACTION);
+        registerReceiver(mMessageReceiver, filter);
+    }
+
+    public class MessageReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (MESSAGE_RECEIVED_ACTION.equals(intent.getAction())) {
+                String messge = intent.getStringExtra(KEY_MESSAGE);
+                String extras = intent.getStringExtra(KEY_EXTRAS);
+                StringBuilder showMsg = new StringBuilder();
+                showMsg.append(KEY_MESSAGE + " : " + messge + "\n");
+                if (!JPushUtil.isEmpty(extras)) {
+                    showMsg.append(KEY_EXTRAS + " : " + extras + "\n");
+                }
+                Log.d("JPush", "rid=" + JPushInterface.getRegistrationID(MainActivity.this) + "\n--showMsg" + showMsg);
+            }
+        }
     }
 }

@@ -122,7 +122,6 @@ public class UserHelper<T> {
         uEntity.setstoreId(storeId);
         uEntity.setWorkId(workId);
         uEntity.setPassword(password);
-        Log.d("SJY", "UserEntity--StoreID=" + uEntity.getStoreID());
 
         // ConfigUtil中断保存，在退出后重新登录用getAccount()调用
         ConfigUtil config = new ConfigUtil(MyApplication.getInstance());

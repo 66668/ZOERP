@@ -19,6 +19,7 @@ import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
 import com.zhongou.model.ContactsEmployeeModel;
+import com.zhongou.utils.CameraGalleryUtils;
 import com.zhongou.utils.PageUtil;
 import com.zhongou.view.ContactsSelectActivity;
 
@@ -34,7 +35,7 @@ import java.util.List;
  * Created by sjy on 2016/12/2.
  */
 
-public class LeaveActivity extends BaseActivity {
+public class LeaveActivity extends BaseActivity implements CameraGalleryUtils.ChoosePicCallBack {
     //back
     @ViewInject(id = R.id.layout_back, click = "forBack")
     RelativeLayout layout_back;
@@ -73,6 +74,10 @@ public class LeaveActivity extends BaseActivity {
     @ViewInject(id = R.id.et_ApplicationTitle)
     EditText et_ApplicationTitle;
 
+    //添加图片
+    @ViewInject(id = R.id.addPicture, click = "ForAddPicture")
+    RelativeLayout addPicture;
+
     //添加审批人
     @ViewInject(id = R.id.AddApprover, click = "forAddApprover")
     RelativeLayout AddApprover;
@@ -88,8 +93,7 @@ public class LeaveActivity extends BaseActivity {
     private String remark = "";
     private String applicationTitle = "";//标题
     private String approvalID = "";
-    private List<String> approvalIDList = new ArrayList<String>();
-
+    private CameraGalleryUtils cameraGalleryUtils;// 头像上传工具
 
     //常量
     public static final int POST_SUCCESS = 15;
@@ -101,6 +105,7 @@ public class LeaveActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_apps_examination_forleave);
         tv_title.setText(getResources().getString(R.string.leave));
+        cameraGalleryUtils = new CameraGalleryUtils(this, this);
     }
 
     public void forCommit(View view) {
@@ -220,11 +225,17 @@ public class LeaveActivity extends BaseActivity {
         myStartForResult(ContactsSelectActivity.class, 0);
     }
 
+    /**
+     * 添加图片
+     */
+    public void ForAddPicture(View view) {
+        cameraGalleryUtils.showChoosePhotoDialog(CameraGalleryUtils.IMG_TYPE_CAMERA);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 0 && resultCode == 0)//通过请求码(去SActivity)和回传码（回传数据到第一个页面）判断回传的页面
-        {
+        if (requestCode == 0 && resultCode == 0) {
             //判断返回值是否为空
             List<ContactsEmployeeModel> list = new ArrayList<>();
             if (data != null && (List<ContactsEmployeeModel>) data.getSerializableExtra("data") != null) {
@@ -243,7 +254,8 @@ public class LeaveActivity extends BaseActivity {
             Log.d("SJY", "approvalID=" + approvalID);
             tv_Requester.setText(name);
         }
-
+        //相册
+        cameraGalleryUtils.onActivityResultAction(requestCode, resultCode, data);
     }
 
     /*
@@ -266,4 +278,18 @@ public class LeaveActivity extends BaseActivity {
         this.finish();
     }
 
+    @Override
+    public void updateAvatarSuccess(int updateType, String avatar, String avatarBase64) {
+
+    }
+
+    @Override
+    public void updateAvatarFailed(int updateType) {
+
+    }
+
+    @Override
+    public void cancel() {
+
+    }
 }

@@ -17,6 +17,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * 定义MyApplication/<application>需要修改权限:
  * android:name="com.yvision.tools.MyApplication"
@@ -29,7 +31,6 @@ public class MyApplication extends Application {
 	private Context currentContext;
 	boolean isLogin = false;//自动登录判断使用
 	private final static String sdcardDirName = "YUEVISION";
-	public String ClientID = null;//个推使用
 
     private List<Activity> listAct = new ArrayList<Activity>();//退出app使用
     private List<Activity> listCurrAct = new ArrayList<Activity>();//关闭多个使用
@@ -38,14 +39,16 @@ public class MyApplication extends Application {
 	public MyApplication() {
 		super();
 	}
+
 	@Override
 	public void onCreate() {
 		super.onCreate();
 		instance = this;
 		currentContext = this.getApplicationContext();
 
-		// SDK初始化，第三方程序启动时，都要进行SDK初始化工作
-//		PushManager.getInstance().initialize(this.getApplicationContext());
+		// 极光推送 SDK初始化
+		JPushInterface.setDebugMode(true);//设置打印日志
+		JPushInterface.init(this);
 
 		//图片缓存初始化设置
 		initImageLoader(this);
@@ -157,14 +160,6 @@ public class MyApplication extends Application {
 	// 登录成功赋值 true LoginActivity---MyApplication该方法
 	public void setIsLogin(boolean b) {
 		isLogin = b;
-	}
-
-	public String getClientID() {
-		return ClientID;
-	}
-
-	public void setClientID(String clientID) {
-		ClientID = clientID;
 	}
 
     //application管理所有activity,暂不用广播

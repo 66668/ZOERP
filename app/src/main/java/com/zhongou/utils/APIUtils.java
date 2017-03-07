@@ -33,7 +33,6 @@ public class APIUtils {
 		try {
 			httpResult.returnObject = jsonObject;
 			httpResult.code = JSONUtils.getInt(jsonObject, "code");
-			Log.d("SJY","httpResult.code="+httpResult.code);
 			if (jsonObject.has("result")) {
 				Object dataObject = jsonObject.get("result");// 包含数据
 

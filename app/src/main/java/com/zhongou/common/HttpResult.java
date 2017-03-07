@@ -1,7 +1,6 @@
 package com.zhongou.common;
 
 import android.os.UserManager;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -41,7 +40,6 @@ public class HttpResult {
 
 	// 判断返回数据
 	public boolean hasError() {
-		Log.d("SJY","HttpResult--hasError="+code);
 		return code == 0;
 	}
 

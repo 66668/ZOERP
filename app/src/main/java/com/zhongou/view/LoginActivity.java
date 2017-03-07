@@ -18,6 +18,8 @@ import com.zhongou.inject.ViewInject;
 import com.zhongou.utils.ConfigUtil;
 import com.zhongou.utils.PageUtil;
 
+import cn.jpush.android.api.JPushInterface;
+
 
 /**
  * Created by sjy on 2016/11/23.
@@ -49,13 +51,17 @@ public class LoginActivity extends BaseActivity {
     //变量
     boolean isLogin = false;// 是否登录
     private String storeId, workId, password;
-    private String clientId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_login);
 
+        //判断自动登录
+        if (MyApplication.getInstance().isLogin()) {
+            startActivity(MainActivity.class);
+            this.finish();
+        }
         //中断保存
         ConfigUtil configUtil = new ConfigUtil(this);
         et_storeId.setText(configUtil.getStoreId());
@@ -71,11 +77,12 @@ public class LoginActivity extends BaseActivity {
             return;
         }
 
+        String rid = JPushInterface.getRegistrationID(getApplicationContext());//获取推送id
+        Log.d("SJY", "login--RegistrationID=" + rid);
+
         storeId = et_storeId.getText().toString().trim();
         workId = et_workId.getText().toString().trim();
         password = et_password.getText().toString().trim();
-        clientId = MyApplication.getInstance().getClientID();//个推设备号
-        Log.d("SJY", "clientId="+clientId);
         Loading.run(this, new Runnable() {
 
             @Override
@@ -85,9 +92,9 @@ public class LoginActivity extends BaseActivity {
                             storeId, // 公司编号
                             workId, // 工号
                             password// 密码
-                             );
+                    );
                     // 访问服务端成功，消息处理
-                    sendMessage(LOGIN_SUCESS);
+                    sendMessage(LOGIN_SUCESS,workId);
                     //设置自动登录
                     MyApplication.getInstance().setIsLogin(true);
                 } catch (MyException e) {
@@ -103,12 +110,12 @@ public class LoginActivity extends BaseActivity {
         super.handleMessage(msg);
         switch (msg.what) {
             case LOGIN_SUCESS: // 1001
-                this.finish();// 页面注销
                 // 文本跳转
                 startActivity(MainActivity.class);
+                this.finish();// 页面注销
                 break;
             case LOGIN_FAILED: // 1001
-                PageUtil.DisplayToast((String)msg.obj);
+                PageUtil.DisplayToast((String) msg.obj);
                 break;
             default:
                 break;
@@ -132,5 +139,8 @@ public class LoginActivity extends BaseActivity {
         }
         return true;
     }
+
+
+
 
 }

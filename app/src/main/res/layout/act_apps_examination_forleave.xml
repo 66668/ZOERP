@@ -286,7 +286,6 @@
                         android:gravity="center">
 
                         <ImageView
-
                             android:id="@+id/img_addpicture"
                             android:layout_width="50dp"
                             android:layout_height="50dp"

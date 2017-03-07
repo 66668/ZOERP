@@ -23,6 +23,7 @@ import com.zhongou.utils.PageUtil;
  *
  * @author JackSong
  */
+
 public class BaseActivity extends FragmentActivity {
 
     //	// 关闭程序的类
