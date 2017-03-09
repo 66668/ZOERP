@@ -67,6 +67,7 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.act_main);
 
         initJpush();
+
         initMyView();
         initViewPaperAndFragment();
         initListener();
@@ -74,12 +75,14 @@ public class MainActivity extends BaseActivity {
 
     //极光配置
     private void initJpush(){
+
         JPushInterface.init(getApplicationContext());
+
         registerMessageReceiver();  // used for receive msg
+        JPushInterface.resumePush(getApplicationContext());
         //推送设置别名
         setAlias(UserHelper.getCurrentUser().getWorlkId());
     }
-
 
 
 
@@ -252,7 +255,6 @@ public class MainActivity extends BaseActivity {
                         //                        sendBroadcast(intent);//发送退出的广播
 
                         //推送 关闭
-                        JPushInterface.stopPush(getApplicationContext());
                         unregisterReceiver(mMessageReceiver);//注销广播
 
                         //数据清除
@@ -333,16 +335,16 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void gotResult(int code, String s, Set<String> set) {
-                String logs;
+                Log.d("JPush", "极光推送别名设置-->");
                 switch (code) {
                     case 0:
-                        Log.i("JPush", "Set tag and alias success极光推送别名设置成功");
+                        Log.d("JPush", "Set tag and alias success极光推送别名设置成功");
                         break;
                     case 6002:
-                        Log.i("JPush", "极光推送别名设置失败，Code = 6002");
+                        Log.d("JPush", "极光推送别名设置失败，Code = 6002");
                         break;
                     default:
-                        Log.e("JPush", "极光推送设置失败，Code = " + code);
+                        Log.d("JPush", "极光推送设置失败，Code = " + code);
                         break;
                 }
             }

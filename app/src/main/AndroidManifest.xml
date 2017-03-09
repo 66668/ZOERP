@@ -149,7 +149,7 @@
 
         <!-- User defined.  For test only  用户自定义的广播接收器-->
         <receiver
-            android:name="com.zhongou.receiver.MyReceiver"
+            android:name="com.zhongou.receiver.JPushReceiver"
             android:exported="false"
             android:enabled="true">
             <intent-filter>
