@@ -27,6 +27,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -897,5 +898,27 @@ public class Utils {
         }
     }
 
+    //bitmap 转 二进制
+    public static byte[] getyteFromBitmap(Bitmap bitmap){
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+        try {
+            out.flush();
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return out.toByteArray();
+    }
+
+    //二进制 转 bitmap
+    public Bitmap getBitmapFromByte(byte[] temp){
+        if(temp != null){
+            Bitmap bitmap = BitmapFactory.decodeByteArray(temp, 0, temp.length);
+            return bitmap;
+        }else{
+            return null;
+        }
+    }
 }
 

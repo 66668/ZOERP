@@ -23,6 +23,8 @@ public class LeaveApvlModel implements Serializable {
     public String StoreName;
     public String DepartmentName;
     public String ApplicationCreateTime;
+    public List<String> ImageLists;//图片路径集合
+
     public List<LeaveApvlModel.ApprovalInfoLists> ApprovalInfoLists;
 
     //未用
@@ -30,6 +32,14 @@ public class LeaveApvlModel implements Serializable {
     public String EmployeeID;
     public String CreateTime;
     public String StoreID;
+
+    public List<String> getImageLists() {
+        return ImageLists;
+    }
+
+    public void setImageLists(List<String> imageLists) {
+        ImageLists = imageLists;
+    }
 
     public String getReason() {
         return Reason;

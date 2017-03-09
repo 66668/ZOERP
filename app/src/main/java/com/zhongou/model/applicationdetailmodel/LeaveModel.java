@@ -24,9 +24,17 @@ public class LeaveModel implements Serializable {
     public String DepartmentName;
     public String EmployeeName;
     public String ApplicationCreateTime;
-
+    public List<String> ImageLists;//图片路径集合
 
     public List<LeaveModel.ApprovalInfoLists> ApprovalInfoLists;
+
+    public List<String> getImageLists() {
+        return ImageLists;
+    }
+
+    public void setImageLists(List<String> imageLists) {
+        ImageLists = imageLists;
+    }
 
     public String getApplicationTitle() {
         return ApplicationTitle;

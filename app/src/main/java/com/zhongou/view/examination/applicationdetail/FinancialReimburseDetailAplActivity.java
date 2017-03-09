@@ -7,12 +7,17 @@ import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.zhongou.R;
 import com.zhongou.base.BaseActivity;
+import com.zhongou.common.ImageLoadingConfig;
 import com.zhongou.common.MyException;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
@@ -84,12 +89,27 @@ public class FinancialReimburseDetailAplActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
     TextView tv_remark;
 
+    //图片1
+    @ViewInject(id = R.id.img_01)
+    ImageView img_01;
+
+    //图片2
+    @ViewInject(id = R.id.img_02)
+    ImageView img_02;
+
+    //图片3
+    @ViewInject(id = R.id.img_03)
+    ImageView img_03;
 
     //变量
     private Intent intent = null;
     private FinancialAllModel financialAllModel;
     private MyApplicationModel model;
     private List<FinancialAllModel.ApprovalInfoLists> modelList;
+
+    //imageLoader图片缓存
+    private ImageLoader imgLoader;
+    private DisplayImageOptions imgOptions;
 
     //动态添加view 变量
     private List<View> ls_childView;//用于保存动态添加进来的View
@@ -108,6 +128,10 @@ public class FinancialReimburseDetailAplActivity extends BaseActivity {
         tv_title.setText(getResources().getString(R.string.financial_reimburse));
         tv_right.setText("");
 
+        imgLoader = ImageLoader.getInstance();
+        imgLoader.init(ImageLoaderConfiguration.createDefault(this));
+        imgOptions = ImageLoadingConfig.generateDisplayImageOptions(R.mipmap.ic_launcher);
+
         Bundle bundle = this.getIntent().getExtras();
         model = (MyApplicationModel) bundle.getSerializable("MyApplicationModel");
         Log.d("SJY", "model==null?" + (model == null));
@@ -115,6 +139,22 @@ public class FinancialReimburseDetailAplActivity extends BaseActivity {
     }
 
     private void setShow(FinancialAllModel model) {
+        Log.d("SJY", "图片size=" + model.getImageLists().size());
+
+        if (model.getImageLists().size() == 1) {
+            imgLoader.displayImage(model.getImageLists().get(0), img_01, imgOptions);
+        }
+
+        if (model.getImageLists().size() == 2) {
+            imgLoader.displayImage(model.getImageLists().get(0), img_01, imgOptions);
+            imgLoader.displayImage(model.getImageLists().get(1), img_02, imgOptions);
+        }
+
+        if (model.getImageLists().size() == 3) {
+            imgLoader.displayImage(model.getImageLists().get(0), img_01, imgOptions);
+            imgLoader.displayImage(model.getImageLists().get(1), img_02, imgOptions);
+            imgLoader.displayImage(model.getImageLists().get(2), img_03, imgOptions);
+        }
 
         tv_feeOne.setText(model.getFeeone());
         tv_feeTwo.setText(model.getFeetwo());
@@ -264,5 +304,11 @@ public class FinancialReimburseDetailAplActivity extends BaseActivity {
             isRemarkExpend = false;
         }
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        imgLoader.destroy();
     }
 }

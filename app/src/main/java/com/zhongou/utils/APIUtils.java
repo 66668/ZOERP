@@ -53,10 +53,6 @@ public class APIUtils {
 
 	/**
 	 * 02-01
-	 * 密码登录
-	 * 修改密码
-	 * 获取访客记录 0/1
-	 * 添加wifi签到
 	 * 
 	 * @param url
 	 * @param parameters
@@ -83,9 +79,7 @@ public class APIUtils {
 			try{
 				// 登录服务器方法/httpURLConnection
 				JSONObject jsonObject = HttpUtils.getInstance().postStringURL(url, parameters, withLogin); //
-				if(jsonObject.toString() == null|| jsonObject.toString().equals("")){
 
-				}
 				Log.d("HTTP", "APIUtils--服务端返回="+jsonObject.toString());// 查看响应的信息
 
 				// 调用本类方法，返回读取的信息，封装在HttpResult中返回给调用方法(登录/注册/验证码)
@@ -98,8 +92,8 @@ public class APIUtils {
 	}
 
 	/**
-	 * 03 添加访客
-	 * 
+	 * 传图片地址
+	 *
 	 * @param url
 	 * @param parameters
 	 * @param fileName

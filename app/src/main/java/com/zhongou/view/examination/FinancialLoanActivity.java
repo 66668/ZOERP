@@ -135,7 +135,7 @@ public class FinancialLoanActivity extends BaseActivity {
                     js.put("Remark", remark);
                     js.put("ApprovalIDList", approvalID);
 
-                    String resultMessage = UserHelper.LRApplicationPost(FinancialLoanActivity.this, js);
+                    String resultMessage = UserHelper.LRApplicationPost(FinancialLoanActivity.this, js,null);
 
                     Log.d("SJY", "failed=" + resultMessage);
                     sendMessage(POST_SUCCESS, resultMessage);

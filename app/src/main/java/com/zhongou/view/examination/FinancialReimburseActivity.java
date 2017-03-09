@@ -1,6 +1,9 @@
 package com.zhongou.view.examination;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Message;
 import android.text.Editable;
@@ -9,6 +12,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -19,12 +23,15 @@ import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
 import com.zhongou.model.ContactsEmployeeModel;
+import com.zhongou.utils.CameraGalleryUtils;
+import com.zhongou.utils.ImageUtils;
 import com.zhongou.utils.PageUtil;
 import com.zhongou.view.ContactsSelectActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -35,7 +42,7 @@ import java.util.List;
  * Created by sjy on 2016/12/2.
  */
 
-public class FinancialReimburseActivity extends BaseActivity {
+public class FinancialReimburseActivity extends BaseActivity implements CameraGalleryUtils.ChoosePicCallBack{
     //back
     @ViewInject(id = R.id.layout_back, click = "forBack")
     RelativeLayout layout_back;
@@ -89,6 +96,27 @@ public class FinancialReimburseActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_Requester)
     TextView tv_Requester;
 
+    //添加图片
+    @ViewInject(id = R.id.addPicture, click = "ForAddPicture")
+    RelativeLayout addPicture;
+
+    //图片1
+    @ViewInject(id = R.id.layout_img_01, click = "showDetailImg")
+    RelativeLayout layout_img_01;
+    @ViewInject(id = R.id.img_01)
+    ImageView img_01;
+
+    //图片2
+    @ViewInject(id = R.id.layout_img_02, click = "showDetailImg")
+    RelativeLayout layout_img_02;
+    @ViewInject(id = R.id.img_02)
+    ImageView img_02;
+
+    //图片3
+    @ViewInject(id = R.id.layout_img_03, click = "showDetailImg")
+    RelativeLayout layout_img_03;
+    @ViewInject(id = R.id.img_03)
+    ImageView img_03;
 
     //还款时间
     //    @ViewInject(id = R.id.et_Reason)
@@ -97,8 +125,15 @@ public class FinancialReimburseActivity extends BaseActivity {
     //常量
     public static final int POST_SUCCESS = 21;
     public static final int POST_FAILED = 22;
+    public static final int PIC_SHOW = 23;
+
+
 
     //变量
+    private CameraGalleryUtils cameraGalleryUtils;// 头像上传工具
+    private String picPath;
+    private File filePicPath;
+    private List<Bitmap> listPic;
     private String approvalID = "";
     private String useage1 = "";//用途
     private String useage2 = "";
@@ -117,7 +152,8 @@ public class FinancialReimburseActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_apps_examination_financial_reimburse);
         tv_title.setText(getResources().getString(R.string.financial_reimburse));
-
+        cameraGalleryUtils = new CameraGalleryUtils(this, this);
+        listPic = new ArrayList<>();
         initLinstener();//输入监听
 
     }
@@ -186,7 +222,7 @@ public class FinancialReimburseActivity extends BaseActivity {
                         js.put("Feethree", fee3);//
                     }
 
-                    UserHelper.LRApplicationPost(FinancialReimburseActivity.this, js);
+                    UserHelper.LRApplicationPost(FinancialReimburseActivity.this, js,filePicPath);
                     sendMessage(POST_SUCCESS);
                 } catch (MyException e) {
                     sendMessage(POST_FAILED, e.getMessage());
@@ -209,6 +245,37 @@ public class FinancialReimburseActivity extends BaseActivity {
             case POST_FAILED:
                 PageUtil.DisplayToast((String) msg.obj);
                 break;
+            case PIC_SHOW://添加图片后，展示
+                List<Bitmap> listpic = (List<Bitmap>) msg.obj;
+
+                if (listpic.size() == 3) {
+                    img_01.setVisibility(View.VISIBLE);
+                    img_02.setVisibility(View.VISIBLE);
+                    img_03.setVisibility(View.VISIBLE);
+
+                    img_01.setImageBitmap(listpic.get(0));
+                    img_02.setImageBitmap(listpic.get(1));
+                    img_03.setImageBitmap(listpic.get(2));
+                }
+                if (listpic.size() == 2) {
+                    img_01.setVisibility(View.VISIBLE);
+                    img_02.setVisibility(View.VISIBLE);
+                    img_03.setVisibility(View.INVISIBLE);
+
+                    img_01.setImageBitmap(listpic.get(0));
+
+                    img_02.setImageBitmap(listpic.get(1));
+
+                }
+
+                if (listpic.size() == 1) {
+                    img_01.setVisibility(View.VISIBLE);
+                    img_02.setVisibility(View.INVISIBLE);
+                    img_03.setVisibility(View.INVISIBLE);
+
+                    img_01.setImageBitmap(listpic.get(0));
+                }
+                break;
         }
     }
 
@@ -222,6 +289,10 @@ public class FinancialReimburseActivity extends BaseActivity {
         et_totle.setText("");
         et_remark.setText("");
         tv_Requester.setText("");
+
+        img_01.setImageBitmap(null);
+        img_02.setImageBitmap(null);
+        img_03.setImageBitmap(null);
     }
 
     /**
@@ -231,6 +302,17 @@ public class FinancialReimburseActivity extends BaseActivity {
      */
     public void forAddApprover(View view) {
         myStartForResult(ContactsSelectActivity.class, 0);
+    }
+
+    /**
+     * 添加图片
+     */
+    public void ForAddPicture(View view) {
+        if (listPic.size() >= 1) {
+            PageUtil.DisplayToast("最多添加1张图片");
+            return;
+        }
+        cameraGalleryUtils.showChoosePhotoDialog(CameraGalleryUtils.IMG_TYPE_CAMERA);
     }
 
     @Override
@@ -258,6 +340,8 @@ public class FinancialReimburseActivity extends BaseActivity {
             tv_Requester.setText(name);
         }
 
+        //相册
+        cameraGalleryUtils.onActivityResultAction(requestCode, resultCode, data);
     }
 
     /*
@@ -418,4 +502,25 @@ public class FinancialReimburseActivity extends BaseActivity {
         this.finish();
     }
 
+    @Override
+    public void updateAvatarSuccess(int updateType, String picpath, String avatarBase64) {
+        picPath = picpath;
+
+        Bitmap bitmap = BitmapFactory.decodeFile(picPath);
+        Uri uri = ImageUtils.savePicture(this, bitmap);
+        filePicPath = new File(ImageUtils.getImageAbsolutePath(this, uri));
+
+        listPic.add(bitmap);
+        sendMessage(PIC_SHOW, listPic);
+    }
+
+    @Override
+    public void updateAvatarFailed(int updateType) {
+
+    }
+
+    @Override
+    public void cancel() {
+
+    }
 }

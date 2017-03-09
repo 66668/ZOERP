@@ -37,6 +37,7 @@ import com.zhongou.utils.WebUrl;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.List;
 
 
@@ -520,7 +521,7 @@ public class UserHelper<T> {
      * @param jsonObject
      * @throws MyException
      */
-    public static void leavePost(Context context, JSONObject jsonObject) throws MyException {
+    public static void leavePost(Context context, JSONObject jsonObject,File picPath) throws MyException {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
@@ -528,18 +529,17 @@ public class UserHelper<T> {
             /**
              * 参数保存成json
              */
-
-
             jsonObject.put("CreateTime", Utils.getCurrentTime());
             jsonObject.put("StoreID", mCurrentUser.getStoreID());
             jsonObject.put("EmployeeID", mCurrentUser.getEmployeeID());
 
             HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.LEAVEPOST,
-                    HttpParameter.create().add("obj", jsonObject.toString()));
+                    HttpParameter.create().add("obj", jsonObject.toString()),picPath);
 
             if (httpResult.hasError()) {
                 throw httpResult.getError();
             }
+
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (MyException e) {
@@ -758,7 +758,7 @@ public class UserHelper<T> {
      * @param js
      * @throws MyException
      */
-    public static String LRApplicationPost(Context context, JSONObject js) throws MyException {
+    public static String LRApplicationPost(Context context, JSONObject js,File file) throws MyException {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
@@ -772,8 +772,9 @@ public class UserHelper<T> {
             //            js.put("StoreID", mCurrentUser.getStoreID());
             js.put("EmployeeID", mCurrentUser.getEmployeeID());
 
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.LRAPPLICATIONPOST,
-                    HttpParameter.create().add("obj", js.toString()));
+            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.LRAPPLICATIONPOST
+                    , HttpParameter.create().add("obj", js.toString())
+                    ,file);
 
             if (httpResult.hasError()) {
                 throw httpResult.getError();

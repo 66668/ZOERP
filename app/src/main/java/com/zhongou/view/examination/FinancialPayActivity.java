@@ -151,7 +151,7 @@ public class FinancialPayActivity extends BaseActivity {
                     js.put("Remark", remark);
                     js.put("ApprovalIDList", approvalID);
 
-                    UserHelper.LRApplicationPost(FinancialPayActivity.this, js);
+                    UserHelper.LRApplicationPost(FinancialPayActivity.this, js,null);
                     sendMessage(POST_SUCCESS);
                 } catch (MyException e) {
                     sendMessage(POST_FAILED, e.getMessage());

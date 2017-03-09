@@ -5,12 +5,17 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.zhongou.R;
 import com.zhongou.base.BaseActivity;
+import com.zhongou.common.ImageLoadingConfig;
 import com.zhongou.common.MyException;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
@@ -96,13 +101,28 @@ public class LeaveDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_reason)
     TextView tv_reason;
 
-    //原因
+    //备注
     @ViewInject(id = R.id.tv_remark)
     TextView tv_remark;
 
+    //图片1
+    @ViewInject(id = R.id.img_01)
+    ImageView img_01;
 
+    //图片2
+    @ViewInject(id = R.id.img_02)
+    ImageView img_02;
+
+    //图片3
+    @ViewInject(id = R.id.img_03)
+    ImageView img_03;
+
+    //变量
     private MyApprovalModel myApprovalModel;
     private LeaveApvlModel model;
+    //imageLoader图片缓存
+    private ImageLoader imgLoader;
+    private DisplayImageOptions imgOptions;
     //常量
     public static final int POST_SUCCESS = 11;
     public static final int POST_FAILED = 12;
@@ -114,9 +134,12 @@ public class LeaveDetailApvlActivity extends BaseActivity {
         tv_title.setText(getResources().getString(R.string.leave_d));
         tv_right.setText("");
 
+        imgLoader = ImageLoader.getInstance();
+        imgLoader.init(ImageLoaderConfiguration.createDefault(this));
+        imgOptions = ImageLoadingConfig.generateDisplayImageOptions(R.mipmap.ic_launcher);
+
         Bundle bundle = this.getIntent().getExtras();
         myApprovalModel = (MyApprovalModel) bundle.getSerializable("MyApprovalModel");
-        Log.d("SJY", "详情MyApprovalModel");
 
         bottomType();
         //
@@ -124,7 +147,23 @@ public class LeaveDetailApvlActivity extends BaseActivity {
     }
 
     private void setShow(LeaveApvlModel model) {
-        Log.d("SJY", "审批状态--ApprovalStatus=" + model.getApprovalStatus() + "---评论长度ApprovalInfoLists=" + (model.getApprovalInfoLists().size()));
+        Log.d("SJY", "图片size=" + model.getImageLists().size());
+
+        if (model.getImageLists().size() == 1) {
+            imgLoader.displayImage(model.getImageLists().get(0), img_01, imgOptions);
+        }
+
+        if (model.getImageLists().size() == 2) {
+            imgLoader.displayImage(model.getImageLists().get(0), img_01, imgOptions);
+            imgLoader.displayImage(model.getImageLists().get(1), img_02, imgOptions);
+        }
+
+        if (model.getImageLists().size() == 3) {
+            imgLoader.displayImage(model.getImageLists().get(0), img_01, imgOptions);
+            imgLoader.displayImage(model.getImageLists().get(1), img_02, imgOptions);
+            imgLoader.displayImage(model.getImageLists().get(2), img_03, imgOptions);
+        }
+
         tv_ApprovalPerson.setText(model.getEmployeeName());
         tv_approvaldept.setText(model.getDepartmentName());
         tv_approvalCo.setText(model.getStoreName());
@@ -224,4 +263,9 @@ public class LeaveDetailApvlActivity extends BaseActivity {
         this.finish();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        imgLoader.destroy();
+    }
 }

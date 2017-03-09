@@ -7,12 +7,17 @@ import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.zhongou.R;
 import com.zhongou.base.BaseActivity;
+import com.zhongou.common.ImageLoadingConfig;
 import com.zhongou.common.MyException;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
@@ -77,11 +82,28 @@ public class LeaveDetailAplActivity extends BaseActivity {
     @ViewInject(id = R.id.layout_ll)
     LinearLayout layout_ll;
 
+    //图片1
+    @ViewInject(id = R.id.img_01)
+    ImageView img_01;
+
+    //图片2
+    @ViewInject(id = R.id.img_02)
+    ImageView img_02;
+
+    //图片3
+    @ViewInject(id = R.id.img_03)
+    ImageView img_03;
+
     //变量
     private Intent intent = null;
     private LeaveModel leaveModel;
     private MyApplicationModel model;
     private List<LeaveModel.ApprovalInfoLists> modelList;
+
+    //imageLoader图片缓存
+    private ImageLoader imgLoader;
+    private DisplayImageOptions imgOptions;
+
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
     private View childView;
@@ -99,13 +121,38 @@ public class LeaveDetailAplActivity extends BaseActivity {
         tv_title.setText(getResources().getString(R.string.leave_d));
         tv_right.setText("");
 
-        intent = getIntent();
-        model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
+        initMyView();
         getDetailModel(model);
     }
 
+    private void initMyView() {
+        imgLoader = ImageLoader.getInstance();
+        imgLoader.init(ImageLoaderConfiguration.createDefault(this));
+        imgOptions = ImageLoadingConfig.generateDisplayImageOptions(R.mipmap.ic_launcher);
+
+
+        intent = getIntent();
+        model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
+    }
+
     private void setShow(LeaveModel model) {
-        Log.d("SJY", "审批状态--ApprovalStatus=" + leaveModel.getApprovalStatus());
+        Log.d("SJY", "图片size=" + model.getImageLists().size());
+
+        if (model.getImageLists().size() == 1) {
+            imgLoader.displayImage(model.getImageLists().get(0), img_01, imgOptions);
+        }
+
+        if (model.getImageLists().size() == 2) {
+            imgLoader.displayImage(model.getImageLists().get(0), img_01, imgOptions);
+            imgLoader.displayImage(model.getImageLists().get(1), img_02, imgOptions);
+        }
+
+        if (model.getImageLists().size() == 3) {
+            imgLoader.displayImage(model.getImageLists().get(0), img_01, imgOptions);
+            imgLoader.displayImage(model.getImageLists().get(1), img_02, imgOptions);
+            imgLoader.displayImage(model.getImageLists().get(2), img_03, imgOptions);
+        }
+
         tv_ApplicationTitle.setText(model.getApplicationTitle());
         tv_startTime.setText(model.getStartDate());
         tv_endTime.setText(model.getEndDate());
@@ -240,4 +287,9 @@ public class LeaveDetailAplActivity extends BaseActivity {
         this.finish();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        imgLoader.destroy();
+    }
 }

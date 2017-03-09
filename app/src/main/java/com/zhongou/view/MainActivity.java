@@ -66,41 +66,21 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_main);
 
-        JPushInterface.init(getApplicationContext());
-        registerMessageReceiver();  // used for receive msg
-
-        setAlias(UserHelper.getCurrentUser().getWorlkId());//设置别名
-
-
+        initJpush();
         initMyView();
-
         initViewPaperAndFragment();
         initListener();
     }
 
-    /**
-     * jpush 绑定别名
-     */
-    private void setAlias(String workid) {
-        JPushInterface.setAliasAndTags(getApplicationContext(), workid, null, new TagAliasCallback() {
-
-            @Override
-            public void gotResult(int code, String s, Set<String> set) {
-                String logs;
-                switch (code) {
-                    case 0:
-                        Log.i("JPush", "Set tag and alias success极光推送别名设置成功");
-                        break;
-                    case 6002:
-                        Log.i("JPush", "极光推送别名设置失败，Code = 6002");
-                        break;
-                    default:
-                        Log.e("JPush", "极光推送设置失败，Code = " + code);
-                        break;
-                }
-            }
-        });
+    //极光配置
+    private void initJpush(){
+        JPushInterface.init(getApplicationContext());
+        registerMessageReceiver();  // used for receive msg
+        //推送设置别名
+        setAlias(UserHelper.getCurrentUser().getWorlkId());
     }
+
+
 
 
     /**
@@ -314,14 +294,6 @@ public class MainActivity extends BaseActivity {
         super.onPause();
     }
 
-    @Override
-    protected void onDestroy() {
-        if (mMessageReceiver != null) {
-            unregisterReceiver(mMessageReceiver);
-        }
-        super.onDestroy();
-    }
-
     //for receive customer msg from jpush server
     private MessageReceiver mMessageReceiver;
     public static final String MESSAGE_RECEIVED_ACTION = "com.example.jpushdemo.MESSAGE_RECEIVED_ACTION";
@@ -352,5 +324,28 @@ public class MainActivity extends BaseActivity {
                 Log.d("JPush", "rid=" + JPushInterface.getRegistrationID(MainActivity.this) + "\n--showMsg" + showMsg);
             }
         }
+    }
+    /**
+     * jpush 绑定别名
+     */
+    private void setAlias(String workid) {
+        JPushInterface.setAliasAndTags(getApplicationContext(), workid, null, new TagAliasCallback() {
+
+            @Override
+            public void gotResult(int code, String s, Set<String> set) {
+                String logs;
+                switch (code) {
+                    case 0:
+                        Log.i("JPush", "Set tag and alias success极光推送别名设置成功");
+                        break;
+                    case 6002:
+                        Log.i("JPush", "极光推送别名设置失败，Code = 6002");
+                        break;
+                    default:
+                        Log.e("JPush", "极光推送设置失败，Code = " + code);
+                        break;
+                }
+            }
+        });
     }
 }

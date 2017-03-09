@@ -19,6 +19,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/common_topbar_height40"
@@ -47,7 +48,6 @@
                     android:gravity="center_vertical"
                     />
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/common_topbar_height40"
@@ -76,7 +76,7 @@
                     android:gravity="center_vertical"
                     />
             </LinearLayout>
-            s
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -93,40 +93,11 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
-                    android:text="@string/leaveApplicationTitle"
+                    android:text="@string/financial_reimburse_fee1"
                     android:textColor="@color/cl_text_common"/>
 
                 <TextView
-                    android:id="@+id/tv_ApplicationTitle"
-                    style="@style/BlackText.standard"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="0.72"
-                    android:gravity="center_vertical"
-                    />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/common_topbar_height40"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:weightSum="1">
-
-                <TextView
-                    style="@style/BlackText.standard"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="0.28"
-                    android:gravity="center_vertical"
-                    android:text="@string/leaveTimeStart"
-                    android:textColor="@color/cl_text_common"/>
-
-                <TextView
-                    android:id="@+id/tv_startTime"
+                    android:id="@+id/tv_feeOne"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -151,11 +122,11 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
-                    android:text="@string/leaveTimeEnd"
+                    android:text="@string/financial_reimburse_useage1"
                     android:textColor="@color/cl_text_common"/>
 
                 <TextView
-                    android:id="@+id/tv_endTime"
+                    android:id="@+id/tv_useageOne"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -167,8 +138,9 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/common_topbar_height40"
                 android:background="@color/white"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:weightSum="1">
 
@@ -176,31 +148,28 @@
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
-                    android:text="@string/leaveReason"
+                    android:gravity="center_vertical"
+                    android:text="@string/financial_reimburse_fee2"
                     android:textColor="@color/cl_text_common"/>
 
                 <TextView
-                    android:paddingRight="10dp"
-                    android:paddingTop="10dp"
-                    android:id="@+id/tv_reason"
+                    android:id="@+id/tv_feeTwo"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.72"
-                    android:ellipsize="end"
-                    android:gravity="top|left"
-                    android:lines="3"
+                    android:gravity="center_vertical"
                     />
-
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="@dimen/common_topbar_height40"
                 android:background="@color/white"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:weightSum="1">
 
@@ -208,48 +177,110 @@
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_weight="0.25"
-                    android:text="@string/picture"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
+                    android:text="@string/financial_reimburse_useage2"
                     android:textColor="@color/cl_text_common"/>
 
-                <RelativeLayout
+                <TextView
+                    android:id="@+id/tv_useageTwo"
+                    style="@style/BlackText.standard"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.25"
-                    android:gravity="center">
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.72"
+                    android:gravity="center_vertical"
+                    />
+            </LinearLayout>
 
-                    <ImageView
-                        android:id="@+id/img_01"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_topbar_height40"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
 
-                <RelativeLayout
+                <TextView
+                    style="@style/BlackText.standard"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.25"
-                    android:gravity="center">
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
+                    android:text="@string/financial_reimburse_fee3"
+                    android:textColor="@color/cl_text_common"/>
 
-                    <ImageView
-                        android:id="@+id/img_02"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </RelativeLayout>
-
-                <RelativeLayout
+                <TextView
+                    android:id="@+id/tv_feeThree"
+                    style="@style/BlackText.standard"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.25"
-                    android:gravity="center">
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.72"
+                    android:gravity="center_vertical"
+                    />
+            </LinearLayout>
 
-                    <ImageView
-                        android:id="@+id/img_03"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </RelativeLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_topbar_height40"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
+                    android:text="@string/financial_reimburse_useage3"
+                    android:textColor="@color/cl_text_common"/>
+
+                <TextView
+                    android:id="@+id/tv_useageThree"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.72"
+                    android:gravity="center_vertical"
+                    />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_topbar_height40"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
+                    android:text="@string/financial_fee_totle"
+                    android:textColor="@color/cl_text_common"/>
+
+                <TextView
+                    android:id="@+id/tv_totle"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.72"
+                    android:gravity="center_vertical"
+                    />
             </LinearLayout>
 
             <LinearLayout
@@ -291,7 +322,6 @@
                 android:background="@color/white"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:textColor="@color/cl_text_common"
                 android:weightSum="1">
 
                 <TextView
@@ -348,7 +378,6 @@
 
 
             </LinearLayout>
-
 
         </LinearLayout>
     </ScrollView>

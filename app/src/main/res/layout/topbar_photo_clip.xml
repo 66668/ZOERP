@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 图片剪裁中调用/photo_clip.xml调用 -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/title"
+    android:background="@color/common_topbar_bgcolor"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/common_topbar_height">
+
+    <ImageView
+        android:id="@+id/back_btn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:src="@mipmap/back" />
+	<!-- android:src="@drawable/icon_done",调用res/drawable/icon_done.xml布局 -->
+    <ImageButton
+        android:id="@+id/top_right_btn"
+        android:layout_width="@dimen/common_topbar_height"
+        android:layout_height="@dimen/common_topbar_height"
+        android:layout_alignParentRight="true"
+        android:background="@null"
+        android:src="@drawable/photo_clip_done"
+        android:visibility="gone"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignParentBottom="true"
+        android:background="@color/linen"/>
+
+</RelativeLayout>

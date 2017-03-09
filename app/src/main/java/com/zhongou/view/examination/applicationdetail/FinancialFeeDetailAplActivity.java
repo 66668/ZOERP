@@ -105,7 +105,7 @@ public class FinancialFeeDetailAplActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_apps_examination_financial_reimburse_d);
+        setContentView(R.layout.act_apps_examination_financial_fee_d);
         tv_title.setText(getResources().getString(R.string.financial_fee));
         tv_right.setText("");
 

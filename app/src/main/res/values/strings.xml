@@ -315,7 +315,7 @@
     <string name="financial_reimburse_useage">请简要输入用途</string>
     <string name="financial_reimburse_other">备注</string>
     <string name="financial_reimburse_other_hint">请输入需要备注事项</string>
-    <string name="financial_reimburse_files">附件</string>
+    <string name="financial_reimburse_files">图片</string>
     <string name="financial_reimburse_addfiles">添加附件</string>
     <string name="financial_reimburse_feeNull">金额不能为空</string>
     <string name="financial_reimburse_useageNull">用途不能为空</string>

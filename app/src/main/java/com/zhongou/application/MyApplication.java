@@ -47,7 +47,7 @@ public class MyApplication extends Application {
 		currentContext = this.getApplicationContext();
 
 		// 极光推送 SDK初始化
-		JPushInterface.setDebugMode(true);//设置打印日志
+		JPushInterface.setDebugMode(true);//设置打印日志，测试用
 		JPushInterface.init(this);
 
 		//图片缓存初始化设置
@@ -161,6 +161,8 @@ public class MyApplication extends Application {
 	public void setIsLogin(boolean b) {
 		isLogin = b;
 	}
+
+
 
     //application管理所有activity,暂不用广播
     public void addActvity(Activity activity) {

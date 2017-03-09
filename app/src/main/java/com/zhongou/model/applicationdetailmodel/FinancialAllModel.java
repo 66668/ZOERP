@@ -50,8 +50,16 @@ public class FinancialAllModel implements Serializable {
     public String DepartmentName;
     public String EmployeeName;
     public String ApplicationCreateTime;
-
+    public List<String> ImageLists;//图片路径集合;
     public List<FinancialAllModel.ApprovalInfoLists> ApprovalInfoLists;
+
+    public List<String> getImageLists() {
+        return ImageLists;
+    }
+
+    public void setImageLists(List<String> imageLists) {
+        ImageLists = imageLists;
+    }
 
     public String getApplicationTitle() {
         return ApplicationTitle;
@@ -109,7 +117,7 @@ public class FinancialAllModel implements Serializable {
         StoreID = storeID;
     }
 
-    public static class ApprovalInfoLists  implements Serializable {
+    public static class ApprovalInfoLists implements Serializable {
         public String Comment;
         public String ApprovalDate;
         public String YesOrNo;

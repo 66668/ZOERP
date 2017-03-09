@@ -275,14 +275,19 @@
                     android:text="@string/picture"
                     android:textColor="@color/cl_text_common"/>
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
 
                     <RelativeLayout
                         android:id="@+id/addPicture"
-                        android:layout_width="80dp"
+                        android:layout_width="0dp"
                         android:layout_height="80dp"
+                        android:layout_weight="0.25"
                         android:gravity="center">
 
                         <ImageView
@@ -298,7 +303,50 @@
                             android:text="@string/addPicture"
                             />
                     </RelativeLayout>
-                </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/layout_img_01"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.25"
+                        android:gravity="center"
+                        android:padding="5dp">
+
+                        <ImageView
+                            android:id="@+id/img_01"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/layout_img_02"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.25"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/img_02"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/layout_img_03"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.25"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/img_03"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"/>
+                    </RelativeLayout>
+
+                </LinearLayout>
             </LinearLayout>
 
             <View
@@ -329,14 +377,18 @@
                     android:text="@string/Requester"
                     android:textColor="@color/cl_text_common"/>
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
 
                     <RelativeLayout
                         android:id="@+id/AddApprover"
-                        android:layout_width="80dp"
+                        android:layout_width="0dp"
                         android:layout_height="80dp"
+                        android:layout_weight="0.25"
                         android:gravity="center">
 
                         <ImageView
@@ -358,11 +410,10 @@
                         style="@style/BlackText.standard"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
                         android:layout_marginRight="10dp"
-                        android:layout_toRightOf="@+id/AddApprover"/>
-                </RelativeLayout>
+                        android:layout_toRightOf="@+id/AddApprover"
+                        android:gravity="center_vertical"/>
+                </LinearLayout>
             </LinearLayout>
 
             <View

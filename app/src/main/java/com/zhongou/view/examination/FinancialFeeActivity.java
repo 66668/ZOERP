@@ -169,7 +169,7 @@ public class FinancialFeeActivity extends BaseActivity {
                         js.put("Feethree", fee3);//
                     }
 
-                    UserHelper.LRApplicationPost(FinancialFeeActivity.this, js);
+                    UserHelper.LRApplicationPost(FinancialFeeActivity.this, js,null);
                     sendMessage(POST_SUCCESS);
                 } catch (MyException e) {
                     sendMessage(POST_FAILED, e.getMessage());
