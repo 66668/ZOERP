@@ -5,7 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.zhongou.view.NoticeListActivity;
+import com.zhongou.view.NotificationListActivity;
 import com.zhongou.view.examination.ZOApprovelListActivity;
+import com.zhongou.view.examination.ZOCopyListActivity;
 
 import cn.jpush.android.api.JPushInterface;
 
@@ -19,6 +22,7 @@ import cn.jpush.android.api.JPushInterface;
 public class JPushReceiver extends BroadcastReceiver {
     private static final String TAG = "JPush";
     private Context context;
+
     @Override
     public void onReceive(Context context, Intent intent) {
         this.context = context;
@@ -26,8 +30,8 @@ public class JPushReceiver extends BroadcastReceiver {
         String myContent = printBundle(bundle);
 
         //页面跳转
-       if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
-           transferTo(context,myContent);
+        if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
+            transferTo(context, myContent);
         }
     }
 
@@ -43,8 +47,37 @@ public class JPushReceiver extends BroadcastReceiver {
         return sb.toString();
     }
 
-    private void transferTo(Context context,String content) {
+    private void transferTo(Context context, String content) {
+
         if (content.contains("新的申请需要审批")) {
+            Intent intent = new Intent();
+            intent.setClass(context, ZOApprovelListActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        }
+
+        if (content.contains("新的抄送")) {
+            Intent intent = new Intent();
+            intent.setClass(context, ZOCopyListActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        }
+
+        if (content.contains("新的通知")) {
+            Intent intent = new Intent();
+            intent.setClass(context, NotificationListActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        }
+
+        if (content.contains("新的公告")) {
+            Intent intent = new Intent();
+            intent.setClass(context, NoticeListActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        }
+
+        if (content.contains("申请审批已完成")) {
             Intent intent = new Intent();
             intent.setClass(context, ZOApprovelListActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
