@@ -63,11 +63,11 @@ public class VehicleReturnLoadMoreListAdapter extends BaseLoadMoreListAdapter {
         holder.tvTime.setText(model.getCopyTime());
         holder.tvType.setText(model.getApplicationType());
         holder.tvTitle.setText(model.getApplicationTitle());
-
         if (model.getIsBack().equals("1")) {
             holder.tv_status.setTextColor(ContextCompat.getColor(MyApplication.getInstance(), R.color.textHintColor));
             holder.tv_status.setText(MyApplication.getInstance().getResources().getString(R.string.vehicleRe_complete));
         } else if (model.getIsBack().equals("0")) {
+
             holder.tv_status.setTextColor(ContextCompat.getColor(MyApplication.getInstance(), R.color.red));
             holder.tv_status.setText(MyApplication.getInstance().getResources().getString(R.string.vehicleRe_uncomplete));
         } else {

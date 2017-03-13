@@ -20,6 +20,7 @@ import com.zhongou.model.VehicleReturnModel;
 import com.zhongou.view.vehiclereturn.VehicleReturnMaintenanceCompleteActivity;
 import com.zhongou.view.vehiclereturn.VehicleReturnMaintenanceUncompleteActivity;
 import com.zhongou.view.vehiclereturn.VehicleReturnUseCompleteActivity;
+import com.zhongou.view.vehiclereturn.VehicleReturnUseUncompleteActivity;
 import com.zhongou.widget.RefreshListView;
 
 import java.util.ArrayList;
@@ -55,6 +56,7 @@ public class VehicleReturnListActivity extends BaseActivity implements RefreshLi
     private ArrayList<VehicleReturnModel> listData = null;//改集合只存储20条记录，拼接的所有数据在adapter的entryList中获取
     private String IMaxtime = null;
     private String IMinTime = null;
+    private boolean isNeedRefresh = false;
 
     //常量
     private static final int GET_MORE_DATA = -38;//上拉加载
@@ -95,7 +97,6 @@ public class VehicleReturnListActivity extends BaseActivity implements RefreshLi
 
                 //所需参数
                 VehicleReturnModel model = (VehicleReturnModel) vAdapter.getItem(newPosition);//
-                Log.d("SJY", "交车--newPosition"+newPosition);
                 //页面跳转
                 transferTo(model);
             }
@@ -259,21 +260,25 @@ public class VehicleReturnListActivity extends BaseActivity implements RefreshLi
         if (model.getApplicationType().contains("用车申请") || model.getApplicationType().contains("用车")) {
 
             if (model.getIsBack().equals("1")) {
+                isNeedRefresh = false;
                 startActivity(VehicleReturnUseCompleteActivity.class, bundle);//用车-已交车
 
             } else {
-                Log.d("SJY", "用车-未交车");
-                startActivity(VehicleReturnUseCompleteActivity.class, bundle);//用车-未交车
+             Log.d("SJY", "用车-未交车");
+                isNeedRefresh = true;
+                startActivity(VehicleReturnUseUncompleteActivity.class, bundle);//用车-未交车
             }
         }
         //维保
         if (model.getApplicationType().contains("车辆维保") || model.getApplicationType().contains("维保")) {
             if (model.getIsBack().equals("1")) {
                 Log.d("SJY", "维保-已交车");
+                isNeedRefresh = false;
                 startActivity(VehicleReturnMaintenanceCompleteActivity.class, bundle);//维保-已交车
 
             } else {
                 Log.d("SJY", "维保-未交车");
+                isNeedRefresh = true;
                 startActivity(VehicleReturnMaintenanceUncompleteActivity.class, bundle);//维保-未交车
             }
         }
@@ -282,7 +287,12 @@ public class VehicleReturnListActivity extends BaseActivity implements RefreshLi
     @Override
     protected void onResume() {
         super.onResume();
-        getData();
+        if(isNeedRefresh){
+            Log.d("SJY", "交车数据刷新处理");
+            vAdapter = new VehicleReturnLoadMoreListAdapter(this, adapterCallBack);// 上拉加载
+            myListView.setAdapter(vAdapter);
+            getData();
+        }
     }
 
     /**
@@ -293,5 +303,6 @@ public class VehicleReturnListActivity extends BaseActivity implements RefreshLi
     public void forBack(View view) {
         this.finish();
     }
+
 
 }
