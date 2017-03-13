@@ -231,8 +231,8 @@ public class UserHelper<T> {
                     HttpParameter.create()
                             .add("iMaxTime", iMaxTime)
                             .add("iMinTime", iMinTime)
-                            .add("storeID", mCurrentUser.getStoreID())
-                            .add("employeeId", mCurrentUser.getEmployeeID())
+                            .add("storeID", UserHelper.getCurrentUser().getStoreID())
+                            .add("employeeId", UserHelper.getCurrentUser().getEmployeeID())
                             .add("pageSize", "20"));
 
             if (hr.hasError()) {
@@ -265,8 +265,8 @@ public class UserHelper<T> {
                     HttpParameter.create()
                             .add("ApplicationID", ApplicationID)
                             .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
+                            .add("StoreID", UserHelper.getCurrentUser().getStoreID())
+                            .add("EmployeeID", UserHelper.getCurrentUser().getEmployeeID()));
 
             if (httpResult.hasError()) {
                 throw httpResult.getError();
@@ -397,8 +397,8 @@ public class UserHelper<T> {
                     HttpParameter.create()
                             .add("iMaxTime", iMaxTime)
                             .add("iMinTime", iMinTime)
-                            .add("storeID", mCurrentUser.getStoreID())
-                            .add("employeeId", mCurrentUser.getEmployeeID())
+                            .add("storeID", UserHelper.getCurrentUser().getStoreID())
+                            .add("employeeId", UserHelper.getCurrentUser().getEmployeeID())
                             .add("pageSize", "20"));
 
             if (hr.hasError()) {
@@ -431,8 +431,8 @@ public class UserHelper<T> {
                     HttpParameter.create()
                             .add("ApplicationID", ApplicationID)
                             .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
+                            .add("StoreID", UserHelper.getCurrentUser().getStoreID())
+                            .add("EmployeeID", UserHelper.getCurrentUser().getEmployeeID()));
 
             if (httpResult.hasError()) {
                 throw httpResult.getError();
@@ -462,8 +462,8 @@ public class UserHelper<T> {
              * 参数保存成json
              */
             jsonObject.put("CreateTime", Utils.getCurrentTime());//申请时间
-            jsonObject.put("AppEmployeeID", mCurrentUser.getEmployeeID());
-            jsonObject.put("StoreID", mCurrentUser.getStoreID());
+            jsonObject.put("AppEmployeeID", UserHelper.getCurrentUser().getEmployeeID());
+            jsonObject.put("StoreID", UserHelper.getCurrentUser().getStoreID());
 
             HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.RECRUITMENTPOST,
                     HttpParameter.create().add("obj", jsonObject.toString())
@@ -497,8 +497,8 @@ public class UserHelper<T> {
              * 参数保存成json
              */
             jsonObject.put("CreateTime", Utils.getCurrentTime());
-            jsonObject.put("StoreID", mCurrentUser.getStoreID());
-            jsonObject.put("EmployeeID", mCurrentUser.getEmployeeID());
+            jsonObject.put("StoreID", UserHelper.getCurrentUser().getStoreID());
+            jsonObject.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
 
             HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.DIMISSIONPOST,
                     HttpParameter.create().add("obj", jsonObject.toString()));
@@ -530,8 +530,8 @@ public class UserHelper<T> {
              * 参数保存成json
              */
             jsonObject.put("CreateTime", Utils.getCurrentTime());
-            jsonObject.put("StoreID", mCurrentUser.getStoreID());
-            jsonObject.put("EmployeeID", mCurrentUser.getEmployeeID());
+            jsonObject.put("StoreID", UserHelper.getCurrentUser().getStoreID());
+            jsonObject.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
 
             HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.LEAVEPOST,
                     HttpParameter.create().add("obj", jsonObject.toString()),picPath);
@@ -564,8 +564,8 @@ public class UserHelper<T> {
              * 参数保存成json 9参数
              */
             js.put("CreateTime", Utils.getCurrentTime());
-            js.put("StoreID", mCurrentUser.getStoreID());
-            js.put("EmployeeID", mCurrentUser.getEmployeeID());
+            js.put("StoreID", UserHelper.getCurrentUser().getStoreID());
+            js.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
 
             HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.OVERAPPROVALPOST,
                     HttpParameter.create().add("obj", js.toString()));
@@ -598,8 +598,8 @@ public class UserHelper<T> {
              */
 
             js.put("CreateTime", Utils.getCurrentTime());
-            js.put("StoreID", mCurrentUser.getStoreID());
-            js.put("EmployeeID", mCurrentUser.getEmployeeID());
+            js.put("StoreID", UserHelper.getCurrentUser().getStoreID());
+            js.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
 
             HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.TAKEDAYSOFFPOST,
                     HttpParameter.create().add("obj", js.toString()));
@@ -632,8 +632,8 @@ public class UserHelper<T> {
              */
 
             js.put("CreateTime", Utils.getCurrentTime());
-            js.put("StoreID", mCurrentUser.getStoreID());
-            js.put("EmployeeID", mCurrentUser.getEmployeeID());
+            js.put("StoreID", UserHelper.getCurrentUser().getStoreID());
+            js.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
 
             HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.BORROWPOST,
                     HttpParameter.create().add("obj", js.toString()));
@@ -666,8 +666,8 @@ public class UserHelper<T> {
              */
 
             js.put("CreateTime", Utils.getCurrentTime());
-            js.put("StoreID", mCurrentUser.getStoreID());
-            js.put("EmployeeID", mCurrentUser.getEmployeeID());
+            js.put("StoreID", UserHelper.getCurrentUser().getStoreID());
+            js.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
 
             HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.CHANGESALARY,
                     HttpParameter.create().add("obj", js.toString()));
@@ -699,8 +699,8 @@ public class UserHelper<T> {
              * 参数保存成json 参数
              */
             js.put("CreateTime", Utils.getCurrentTime());
-            js.put("StoreID", mCurrentUser.getStoreID());
-            js.put("EmployeeID", mCurrentUser.getEmployeeID());
+            js.put("StoreID", UserHelper.getCurrentUser().getStoreID());
+            js.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
 
             HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.VEHICLEPOST,
                     HttpParameter.create().add("obj", js.toString()));
@@ -734,8 +734,8 @@ public class UserHelper<T> {
              */
 
             js.put("CreateTime", Utils.getCurrentTime());
-            js.put("StoreID", mCurrentUser.getStoreID());
-            js.put("EmployeeID", mCurrentUser.getEmployeeID());
+            js.put("StoreID", UserHelper.getCurrentUser().getStoreID());
+            js.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
 
             HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.MAINTENANCE,
                     HttpParameter.create().add("obj", js.toString()));
@@ -770,7 +770,7 @@ public class UserHelper<T> {
 
             //            js.put("CreateTime", Utils.getCurrentTime());
             //            js.put("StoreID", mCurrentUser.getStoreID());
-            js.put("EmployeeID", mCurrentUser.getEmployeeID());
+            js.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
 
             HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.LRAPPLICATIONPOST
                     , HttpParameter.create().add("obj", js.toString())
@@ -807,7 +807,7 @@ public class UserHelper<T> {
              * 参数保存成json
              */
             JSONObject js = new JSONObject();
-            js.put("EmployeeID", mCurrentUser.getEmployeeID());
+            js.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
             js.put("attendCapTime", attendCapTime);
             js.put("address", address);
 
@@ -842,8 +842,8 @@ public class UserHelper<T> {
                 HttpParameter.create()
                         .add("iMaxTime", iMaxTime)
                         .add("iMinTime", iMinTime)
-                        .add("storeID", mCurrentUser.getStoreID())
-                        .add("employeeId", mCurrentUser.getEmployeeID())
+                        .add("storeID", UserHelper.getCurrentUser().getStoreID())
+                        .add("employeeId", UserHelper.getCurrentUser().getEmployeeID())
                         .add("pageSize", "20"));
 
         if (hr.hasError()) {
@@ -873,8 +873,8 @@ public class UserHelper<T> {
                         .add("iMaxTime", iMaxTime)
                         .add("iMinTime", iMinTime)
                         .add("pageSize", "20")
-                        .add("storeID", mCurrentUser.getStoreID())
-                        .add("employeeId", mCurrentUser.getEmployeeID())
+                        .add("storeID", UserHelper.getCurrentUser().getStoreID())
+                        .add("employeeId", UserHelper.getCurrentUser().getEmployeeID())
         );
 
         if (hr.hasError()) {
@@ -905,8 +905,8 @@ public class UserHelper<T> {
                         .add("iMaxTime", iMaxTime)
                         .add("iMinTime", iMinTime)
                         .add("pageSize", "20")
-                        .add("storeID", mCurrentUser.getStoreID())
-                        .add("employeeId", mCurrentUser.getEmployeeID())
+                        .add("storeID", UserHelper.getCurrentUser().getStoreID())
+                        .add("employeeId", UserHelper.getCurrentUser().getEmployeeID())
         );
 
         if (hr.hasError()) {
@@ -934,8 +934,8 @@ public class UserHelper<T> {
                 HttpParameter.create()
                         .add("iMaxTime", iMaxTime)
                         .add("iMinTime", iMinTime)
-                        .add("storeID", mCurrentUser.getStoreID())
-                        .add("employeeId", mCurrentUser.getEmployeeID())
+                        .add("storeID", UserHelper.getCurrentUser().getStoreID())
+                        .add("employeeId", UserHelper.getCurrentUser().getEmployeeID())
                         .add("pageSize", "20"));
 
         if (hr.hasError()) {
@@ -968,8 +968,8 @@ public class UserHelper<T> {
                 HttpParameter.create()
                         .add("iMaxTime", iMaxTime)
                         .add("iMinTime", iMinTime)
-                        .add("storeID", mCurrentUser.getStoreID())
-                        .add("employeeId", mCurrentUser.getEmployeeID())
+                        .add("storeID", UserHelper.getCurrentUser().getStoreID())
+                        .add("employeeId", UserHelper.getCurrentUser().getEmployeeID())
                         .add("pageSize", "20"));
 
         if (hr.hasError()) {
@@ -997,8 +997,8 @@ public class UserHelper<T> {
                 HttpParameter.create()
                         .add("iMaxTime", iMaxTime)
                         .add("iMinTime", iMinTime)
-                        .add("storeID", mCurrentUser.getStoreID())
-                        .add("employeeId", mCurrentUser.getEmployeeID())
+                        .add("storeID", UserHelper.getCurrentUser().getStoreID())
+                        .add("employeeId", UserHelper.getCurrentUser().getEmployeeID())
                         .add("pageSize", "20"));
 
         if (hr.hasError()) {
@@ -1026,8 +1026,8 @@ public class UserHelper<T> {
                 HttpParameter.create()
                         .add("iMaxTime", iMaxTime)
                         .add("iMinTime", iMinTime)
-                        .add("storeID", mCurrentUser.getStoreID())
-                        .add("employeeId", mCurrentUser.getEmployeeID())
+                        .add("storeID", UserHelper.getCurrentUser().getStoreID())
+                        .add("employeeId", UserHelper.getCurrentUser().getEmployeeID())
                         .add("pageSize", "20"));
 
         if (hr.hasError()) {
@@ -1059,8 +1059,8 @@ public class UserHelper<T> {
                     HttpParameter.create()
                             .add("ApplicationID", ApplicationID)
                             .add("ApplicationType", ApplicationType)
-                            .add("StoreID", mCurrentUser.getStoreID())
-                            .add("EmployeeID", mCurrentUser.getEmployeeID()));
+                            .add("StoreID", UserHelper.getCurrentUser().getStoreID())
+                            .add("EmployeeID", UserHelper.getCurrentUser().getEmployeeID()));
             if (httpResult.hasError()) {
                 throw httpResult.getError();
             }
@@ -1082,7 +1082,7 @@ public class UserHelper<T> {
             throw new MyException(R.string.network_invalid);
         }
 
-        model.setEmployeeID(mCurrentUser.getEmployeeID());
+        model.setEmployeeID(UserHelper.getCurrentUser().getEmployeeID());
         String toJsondata = new Gson().toJson(model);
         Log.d("SJY", "转换成js=" + toJsondata);
         try {
@@ -1107,7 +1107,7 @@ public class UserHelper<T> {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
-        model.setEmployeeID(mCurrentUser.getEmployeeID());
+        model.setEmployeeID(UserHelper.getCurrentUser().getEmployeeID());
         String toJsondata = new Gson().toJson(model);
         Log.d("SJY", "转换成js=" + toJsondata);
         try {
@@ -1135,10 +1135,10 @@ public class UserHelper<T> {
             throw new MyException(R.string.network_invalid);
         }
         try {
-            Log.d("SJY", mCurrentUser.getEmployeeID());
+            Log.d("SJY", UserHelper.getCurrentUser().getEmployeeID());
             HttpResult httpResult = APIUtils.postForObject(WebUrl.ContactsManager.GETCOMPANYSONOFCO,
                     HttpParameter.create().
-                            add("sEmployeeID", mCurrentUser.getEmployeeID()));
+                            add("sEmployeeID", UserHelper.getCurrentUser().getEmployeeID()));
 
             if (httpResult.hasError()) {
                 throw httpResult.getError();
@@ -1174,7 +1174,7 @@ public class UserHelper<T> {
             HttpResult httpResult = APIUtils.postForObject(WebUrl.ContactsManager.DEPTINFOBYSTOREID,
                     HttpParameter.create()
                             .add("sStoreID", sStoreID)
-                            .add("sEmployeeID", mCurrentUser.getEmployeeID()));//分公司ID
+                            .add("sEmployeeID", UserHelper.getCurrentUser().getEmployeeID()));//分公司ID
 
             if (httpResult.hasError()) {
                 throw httpResult.getError();
@@ -1212,7 +1212,7 @@ public class UserHelper<T> {
             HttpResult httpResult = APIUtils.postForObject(WebUrl.ContactsManager.EMPLOYEEINFOBYDEPTID,
                     HttpParameter.create()
                             .add("sDeptID", sDeptID)
-                            .add("sEmployeeID", mCurrentUser.getEmployeeID())
+                            .add("sEmployeeID", UserHelper.getCurrentUser().getEmployeeID())
             );
 
             if (httpResult.hasError()) {
@@ -1285,8 +1285,8 @@ public class UserHelper<T> {
                     HttpParameter.create()
                             .add("oldpassword", oldpassword)
                             .add("newpassword", newpassword)
-                            .add("UserName", mCurrentUser.getName())
-                            .add("StoreUserId", mCurrentUser.getStoreUserId())
+                            .add("UserName", UserHelper.getCurrentUser().getName())
+                            .add("StoreUserId", UserHelper.getCurrentUser().getStoreUserId())
             );
 
             if (httpResult.hasError()) {

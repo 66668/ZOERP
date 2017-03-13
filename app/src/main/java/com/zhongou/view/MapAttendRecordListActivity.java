@@ -121,7 +121,6 @@ public class MapAttendRecordListActivity extends BaseActivity implements Refresh
 
             }
         });
-
     }
 
 

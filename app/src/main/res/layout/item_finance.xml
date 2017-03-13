@@ -10,6 +10,7 @@
         android:background="@color/common_bg_examination">
 
         <TextView
+
             android:id="@+id/tv_finace_title"
             style="@style/BlackText.standard"
             android:layout_width="wrap_content"
@@ -24,20 +25,6 @@
             android:text="标题"
             android:textColor="@color/black"
             android:textSize="@dimen/common_textSize_default17"/>
-
-        <TextView
-            android:id="@+id/tv_type"
-            style="@style/BlackText.standard"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_below="@+id/tv_finace_title"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:gravity="center_vertical"
-            android:text="类型"
-            android:textColor="@color/textHintColor"
-            android:textSize="@dimen/common_textSize_default14"/>
 
         <TextView
             android:id="@+id/tv_time"
@@ -56,7 +43,21 @@
             android:layout_width="match_parent"
             android:layout_height="1dip"
             android:layout_alignParentBottom="true"
-            android:background="@color/common_bg_examination_line"/>
+            android:background="@color/common_bg_examination_line"
+            android:id="@+id/view2"/>
+
+        <TextView
+            android:id="@+id/tv_type"
+            style="@style/BlackText.standard"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="类型"
+            android:textColor="@color/textHintColor"
+            android:textSize="@dimen/common_textSize_default14"
+            android:layout_below="@+id/tv_finace_title"
+            android:layout_above="@+id/view2"
+            android:layout_alignStart="@+id/tv_finace_title"/>
     </RelativeLayout>
 
 

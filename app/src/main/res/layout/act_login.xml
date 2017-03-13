@@ -116,6 +116,7 @@
                 android:drawableLeft="@mipmap/login_psd"
                 android:drawablePadding="10dp"
                 android:hint="@string/please_input_ps"
+                android:inputType="textPassword"
                 android:paddingLeft="15dp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"

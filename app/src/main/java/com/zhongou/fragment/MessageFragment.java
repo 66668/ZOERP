@@ -336,6 +336,7 @@ public class MessageFragment extends BaseFragment {
                     break;
 
                 case NONE_SCHEDULE_DATA:
+
                     //内容
                     schedule_content.setText("没有日程安排");
                     schedule_content.setTextColor(getActivity().getResources().getColor(R.color.textHintColor));

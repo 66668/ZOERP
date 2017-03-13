@@ -4,7 +4,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 
+import com.zhongou.helper.UserHelper;
+import com.zhongou.view.LoginActivity;
 import com.zhongou.view.NoticeListActivity;
 import com.zhongou.view.NotificationListActivity;
 import com.zhongou.view.examination.ZOApprovelListActivity;
@@ -48,6 +51,16 @@ public class JPushReceiver extends BroadcastReceiver {
     }
 
     private void transferTo(Context context, String content) {
+
+        if (TextUtils.isEmpty(UserHelper.getCurrentUser().getStoreID()) || UserHelper.getCurrentUser().getStoreID() == null) {
+            //在程序退出状态下获取通知，一些值无法获取，需要重新登录
+            Intent intent = new Intent();
+            intent.setClass(context, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+
+            return;
+        }
 
         if (content.contains("新的申请需要审批")) {
             Intent intent = new Intent();

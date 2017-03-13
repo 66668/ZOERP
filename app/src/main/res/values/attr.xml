@@ -19,6 +19,7 @@
         <attr name="border_color" format="color" />
     </declare-styleable>
 
+    <!-- niceSpinner-->
     <declare-styleable name="NiceSpinner">
         <attr name="arrowTint" format="color" />
         <attr name="hideArrow" format="boolean" />
