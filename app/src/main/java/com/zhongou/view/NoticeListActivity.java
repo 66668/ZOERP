@@ -89,7 +89,6 @@ public class NoticeListActivity extends BaseActivity implements RefreshListView.
             @Override
             public void run() {
                 ifLoading = true;//
-                String storeID = UserHelper.getCurrentUser().getStoreID();
                 try {
                     List<NoticeListModel> visitorModelList = UserHelper.GetAppNoticeList(
                             NoticeListActivity.this,
