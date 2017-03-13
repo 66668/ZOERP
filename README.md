@@ -2,6 +2,7 @@
 ====
 说明：1.帐号密码为测试版，所有功能都由效果图概括了，看源码即可，若看readme.m不方便，可以下载项目根目录的readmepic图片文件夹浏览
 2.所有关于listView的都可以上拉下拉刷新
+3.客官嫌弃图片大的晃瞎眼，ctrl+滑轮<^+^>
 
 一登陆界面：
 ----
@@ -38,11 +39,11 @@ navaigation侧滑显示：
 ![image](https://github.com/66668/ZOERP/blob/master/readmepic/%E9%80%9A%E8%AE%AF%E5%BD%95%E8%AF%A6%E7%BB%86%E7%95%8C%E9%9D%A201.jpg)
 #4应用主界面：
 ![image](https://github.com/66668/ZOERP/blob/master/readmepic/%E5%BA%94%E7%94%A8%E4%B8%BB%E7%95%8C%E9%9D%A201.jpg)
-##审批（项目重点）
+##1.审批（项目重点）
 包括 我的申请 我的审批 抄送给我 和13个移动端申请功能；申请功能模式一样，界面参数大同小异；
 我的审批 可以处理低级别员工发过来的申请，包括 同意 驳回 转交和抄送，每一条记录都可以查看详情
 
-###主界面：
+###审批主界面：
 ![image](https://github.com/66668/ZOERP/blob/master/readmepic/%E5%AE%A1%E6%89%B9%E4%B8%BB%E7%95%8C%E9%9D%A201.jpg)
 ###13个移动端申请：
 申请界面模式一样，时间选择用时间轴dialog，选择类型用spinner/dialog,图片调用系统相机和相册，这里只显示一个申请就明白：
@@ -65,13 +66,7 @@ navaigation侧滑显示：
 ![image](https://github.com/66668/ZOERP/blob/master/readmepic/%E6%88%91%E7%9A%84%E5%AE%A1%E6%89%B9_%E9%80%9A%E7%9F%A5%E5%85%AC%E5%91%8A_%E6%8A%84%E9%80%8101.jpg)
 ###我的抄送：
 ![image](https://github.com/66668/ZOERP/blob/master/readmepic/%E6%8A%84%E9%80%81%E7%BB%99%E6%88%91%E4%B8%BB%E7%95%8C%E9%9D%A201.jpg)
-##1交车，包括用车申请和车辆维保申请，点击进入指定详情,未交车状态下，进入交车界面，提交数据，已交车状态下，进入浏览界面查看
-![image](https://github.com/66668/ZOERP/blob/master/readmepic/%E4%BA%A4%E8%BD%A6%E4%B8%BB%E7%95%8C%E9%9D%A201.jpg)
-已交车详情：
-![image](https://github.com/66668/ZOERP/blob/master/readmepic/%E4%BA%A4%E8%BD%A6_%E5%B7%B2%E4%BA%A4%E8%BD%A6%E8%AF%A6%E6%83%8501.jpg)
-未交车_交车操作：
-![image](https://github.com/66668/ZOERP/blob/master/readmepic/%E4%BA%A4%E8%BD%A6_%E6%8F%90%E4%BA%A4%E7%95%8C%E9%9D%A2.jpg)
-![image](https://github.com/66668/ZOERP/blob/master/readmepic/%E4%BA%A4%E8%BD%A6_%E6%8F%90%E4%BA%A4%E8%AF%A6%E7%BB%86%E7%95%8C%E9%9D%A201.jpg)
+
 ##2.采购领用主界面：
 ![image](https://github.com/66668/ZOERP/blob/master/readmepic/%E5%BA%94%E7%94%A8_%E9%87%87%E8%B4%AD%E9%A2%86%E7%94%A8%E7%95%8C%E9%9D%A201.jpg)
 ![image](https://github.com/66668/ZOERP/blob/master/readmepic/%E5%BA%94%E7%94%A8_%E9%87%87%E8%B4%AD%E9%A2%86%E7%94%A8%E4%B8%BB%E7%95%8C%E9%9D%A202.jpg)
@@ -105,6 +100,13 @@ navaigation侧滑显示：
 ![image](https://github.com/66668/ZOERP/blob/master/readmepic/%E5%A4%96%E5%87%BA%E8%80%83%E5%8B%A4_%E5%9C%B0%E5%9B%BE%E7%AD%BE%E5%88%B001.jpg)
 ![image](https://github.com/66668/ZOERP/blob/master/readmepic/%E5%A4%96%E5%87%BA%E8%80%83%E5%8B%A4_%E6%89%80%E6%9C%89%E8%AE%B0%E5%BD%9501.jpg)
 ![image](https://github.com/66668/ZOERP/blob/master/readmepic/%E5%A4%96%E5%87%BA%E8%80%83%E5%8B%A4_%E6%89%80%E6%9C%89%E8%AE%B0%E5%BD%9502.jpg)
+##7.交车，包括用车申请和车辆维保申请，点击进入指定详情,未交车状态下，进入交车界面，提交数据，已交车状态下，进入浏览界面查看
+![image](https://github.com/66668/ZOERP/blob/master/readmepic/%E4%BA%A4%E8%BD%A6%E4%B8%BB%E7%95%8C%E9%9D%A201.jpg)
+已交车详情：
+![image](https://github.com/66668/ZOERP/blob/master/readmepic/%E4%BA%A4%E8%BD%A6_%E5%B7%B2%E4%BA%A4%E8%BD%A6%E8%AF%A6%E6%83%8501.jpg)
+未交车_交车操作：
+![image](https://github.com/66668/ZOERP/blob/master/readmepic/%E4%BA%A4%E8%BD%A6_%E6%8F%90%E4%BA%A4%E7%95%8C%E9%9D%A2.jpg)
+![image](https://github.com/66668/ZOERP/blob/master/readmepic/%E4%BA%A4%E8%BD%A6_%E6%8F%90%E4%BA%A4%E8%AF%A6%E7%BB%86%E7%95%8C%E9%9D%A201.jpg)
 #5推送：
 使用激光推送，具体就不展示了，注意menifest，gradle,libs绑定，myApplication初始化和设置别名即可用
 
