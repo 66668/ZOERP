@@ -69,11 +69,6 @@ public class VehicleReturnMaintenanceUncompleteActivity extends BaseActivity {
     //车牌号
     @ViewInject(id = R.id.tv_carNumber)
     TextView tv_carNumber;
-
-    //驾驶员
-    @ViewInject(id = R.id.tv_driver)
-    TextView tv_driver;
-
     //费用
     @ViewInject(id = R.id.tv_EstimateFee)
     TextView tv_EstimateFee;
@@ -118,10 +113,8 @@ public class VehicleReturnMaintenanceUncompleteActivity extends BaseActivity {
         tv_startTime.setText(model.getPlanBorrowTime());
 
         tv_carNumber.setText(model.getNumber());
-        tv_driver.setText(model.getDriver());
         tv_EstimateFee.setText(model.getEstimateFee());
         tv_other.setText(model.getRemark());
-
     }
 
     private void getData(final VehicleReturnModel model) {

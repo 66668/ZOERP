@@ -135,16 +135,18 @@ public class VehicleReturnMaintenanceToCompleteActivity extends BaseActivity {
         //对象存值
         final VehicleReturnPostMaintenanceModel model = new VehicleReturnPostMaintenanceModel();
 
+        model.setApplicationType(vehicleReturnModel.getApplicationType());
+        model.setApplicationID(vehicleReturnModel.getApplicationID());
+        model.setEmployeeID(UserHelper.getCurrentUser().getEmployeeID());
+
         model.setActualBorrowTime(ActualBorrowTime);
         model.setActualReturnTime(ActualReturnTime);
-        model.setPassenger(Passenger);
+        model.setDriver(Driver);
 
         model.setStartMileage(StartMileage);
         model.setFinishMileage(FinishMileage);
+        model.setPassenger(Passenger);
         model.setBackRemark(Remark);
-
-        model.setApplicationType(vehicleReturnModel.getApplicationType());
-        model.setApplicationType(vehicleReturnModel.getApplicationType());
 
 
         Loading.run(this, new Runnable() {

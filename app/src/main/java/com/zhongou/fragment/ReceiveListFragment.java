@@ -153,6 +153,7 @@ public class ReceiveListFragment extends BaseFragment implements RefreshAndLoadL
         }
         if (IMaxtime == "") {
             msg.obj = "无最新数据";
+            Log.d("SJY", "IMaxtime为空，无法下拉刷新");
             handler.sendMessage(handler.obtainMessage(GET_NONE_NEWDATA, "无最新数据"));
             return;
         }
@@ -193,6 +194,7 @@ public class ReceiveListFragment extends BaseFragment implements RefreshAndLoadL
         }
 
         if (IMinTime == "") {
+            Log.d("SJY", "IMinTime为空，无法下拉刷新");
             handler.sendMessage(handler.obtainMessage(GET_NONE_NEWDATA, "无最新数据"));
             return;
         }
@@ -264,7 +266,7 @@ public class ReceiveListFragment extends BaseFragment implements RefreshAndLoadL
                     break;
 
                 case GET_NONE_NEWDATA://没有获取新数据
-                    Toast.makeText(getActivity(),(String) msg.obj,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), (String) msg.obj, Toast.LENGTH_SHORT).show();
                     listView.loadAndFreshComplete();
                     ifLoading = false;
                     break;
@@ -277,13 +279,11 @@ public class ReceiveListFragment extends BaseFragment implements RefreshAndLoadL
     };
 
     public void setIMaxTime(ArrayList<ReceiveListModel> list) {
-        //        IMaxtime = list.get(0).getPlanbackTime();
-        IMaxtime = "";
+        IMaxtime = list.get(0).getCreateTime();
     }
 
     public void setIMinTime(ArrayList<ReceiveListModel> list) {
-        //        IMinTime = list.get(list.size() - 1).getPlanbackTime();
-        IMinTime = "";
+        IMinTime = list.get(list.size() - 1).getCreateTime();
     }
 
     @Override

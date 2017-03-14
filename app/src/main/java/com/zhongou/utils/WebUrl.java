@@ -147,7 +147,12 @@ public class WebUrl {
         /**
          * 04 应用 公告 获取列表
          */
-        public static final String GETNOTICELIST = LOGIN_URL + LOGIN_FLODER_USER + "NoticeList/MyNoticeList";
+        public static final String GETNOTICELIST = LOGIN_URL + LOGIN_FLODER_USER + "AfficheList/MyAfficheList";
+
+        /**
+         * 04-02 应用 公告 获取列表
+         */
+        public static final String READTHISNOTICE = LOGIN_URL + LOGIN_FLODER_USER + "UpdateIsread/UpdateIsreads";
 
         /**
          * 05 应用 通知 列表

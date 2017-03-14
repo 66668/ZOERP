@@ -521,7 +521,7 @@ public class UserHelper<T> {
      * @param jsonObject
      * @throws MyException
      */
-    public static void leavePost(Context context, JSONObject jsonObject,File picPath) throws MyException {
+    public static void leavePost(Context context, JSONObject jsonObject, File picPath) throws MyException {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
@@ -534,7 +534,7 @@ public class UserHelper<T> {
             jsonObject.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
 
             HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.LEAVEPOST,
-                    HttpParameter.create().add("obj", jsonObject.toString()),picPath);
+                    HttpParameter.create().add("obj", jsonObject.toString()), picPath);
 
             if (httpResult.hasError()) {
                 throw httpResult.getError();
@@ -758,7 +758,7 @@ public class UserHelper<T> {
      * @param js
      * @throws MyException
      */
-    public static String LRApplicationPost(Context context, JSONObject js,File file) throws MyException {
+    public static String LRApplicationPost(Context context, JSONObject js, File file) throws MyException {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
@@ -774,7 +774,7 @@ public class UserHelper<T> {
 
             HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.LRAPPLICATIONPOST
                     , HttpParameter.create().add("obj", js.toString())
-                    ,file);
+                    , file);
 
             if (httpResult.hasError()) {
                 throw httpResult.getError();
@@ -892,6 +892,25 @@ public class UserHelper<T> {
     }
 
     /**
+     * 04-02
+     * 进入公告详情，标记已读
+     */
+    public static  void postReadThisNotice(Context context, String ApplicationID) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+        Log.d("SJY", "ApplicationID=" + ApplicationID + "--EmployeeID=" + UserHelper.getCurrentUser().getEmployeeID());
+        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.READTHISNOTICE,
+                HttpParameter.create()
+                        .add("ApplicationID", ApplicationID)
+                        .add("EmployeeID", UserHelper.getCurrentUser().getEmployeeID())
+        );
+        if (hr.hasError()) {
+            throw hr.getError();
+        }
+    }
+
+    /**
      * 05 应用 通知
      * 通知列表
      */
@@ -920,6 +939,25 @@ public class UserHelper<T> {
         //方式二：
         return (List<NotificationListModel>) JSONUtils.fromJson(hr.jsonArray.toString(), new TypeToken<List<NotificationListModel>>() {
         }.getType());
+    }
+
+    /**
+     * 05-02
+     * 进入公告详情，标记已读
+     */
+    public static  void postReadThisNoti(Context context, String ApplicationID) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+        Log.d("SJY", "ApplicationID=" + ApplicationID + "--EmployeeID=" + UserHelper.getCurrentUser().getEmployeeID());
+        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.READTHISNOTICE,
+                HttpParameter.create()
+                        .add("ApplicationID", ApplicationID)
+                        .add("EmployeeID", UserHelper.getCurrentUser().getEmployeeID())
+        );
+        if (hr.hasError()) {
+            throw hr.getError();
+        }
     }
 
     /**
@@ -993,7 +1031,7 @@ public class UserHelper<T> {
             throw new MyException(R.string.network_invalid);
         }
 
-        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.FINACELIST,
+        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.RECEIVELIST,
                 HttpParameter.create()
                         .add("iMaxTime", iMaxTime)
                         .add("iMinTime", iMinTime)
@@ -1082,7 +1120,6 @@ public class UserHelper<T> {
             throw new MyException(R.string.network_invalid);
         }
 
-        model.setEmployeeID(UserHelper.getCurrentUser().getEmployeeID());
         String toJsondata = new Gson().toJson(model);
         Log.d("SJY", "转换成js=" + toJsondata);
         try {

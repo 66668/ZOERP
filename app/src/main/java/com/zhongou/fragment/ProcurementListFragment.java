@@ -28,7 +28,7 @@ import java.util.List;
 
 
 /**
- *  应用-采购
+ * 应用-采购
  */
 
 public class ProcurementListFragment extends BaseFragment implements RefreshAndLoadListView.ILoadMoreListener, RefreshAndLoadListView.IReflashListener {
@@ -262,7 +262,7 @@ public class ProcurementListFragment extends BaseFragment implements RefreshAndL
                     break;
 
                 case GET_NONE_NEWDATA://没有获取新数据
-                    Toast.makeText(getActivity(),(String) msg.obj,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), (String) msg.obj, Toast.LENGTH_SHORT).show();
                     listView.loadAndFreshComplete();
                     ifLoading = false;
                     break;
@@ -275,13 +275,11 @@ public class ProcurementListFragment extends BaseFragment implements RefreshAndL
     };
 
     public void setIMaxTime(ArrayList<ProcurementListModel> list) {
-        //        IMaxtime = list.get(0).getPlanbackTime();
-        IMaxtime = "";
+        IMaxtime = list.get(0).getCreateTime();
     }
 
     public void setIMinTime(ArrayList<ProcurementListModel> list) {
-        //        IMinTime = list.get(list.size() - 1).getPlanbackTime();
-        IMinTime = "";
+        IMinTime = list.get(list.size() - 1).getCreateTime();
     }
 
     @Override

@@ -78,20 +78,20 @@ public class ProcurementDetailActivity extends BaseActivity {
 
 
     //备注
-    @ViewInject(id = R.id.tv_remark)
+    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
     TextView tv_remark;
 
-
-    //审批人
-    @ViewInject(id = R.id.tv_Requester)
-    TextView tv_Requester;
-
-
-    //审批状况
-    @ViewInject(id = R.id.tv_state_result)
-    TextView tv_state_result;
-    @ViewInject(id = R.id.layout_state, click = "forState")
-    LinearLayout layout_state;
+//
+//    //审批人
+//    @ViewInject(id = R.id.tv_Requester)
+//    TextView tv_Requester;
+//
+//
+//    //审批状况
+//    @ViewInject(id = R.id.tv_state_result)
+//    TextView tv_state_result;
+//    @ViewInject(id = R.id.layout_state, click = "forState")
+//    LinearLayout layout_state;
 
 
     //获取子控件个数的父控件
@@ -112,7 +112,7 @@ public class ProcurementDetailActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_apps_examination_procurement_d);
+        setContentView(R.layout.act_apps_procurement_detail);
 
         initMyView();
         setShow();
@@ -138,45 +138,6 @@ public class ProcurementDetailActivity extends BaseActivity {
         tv_procurement_aplTime.setText(model.getCreateTime());
         tv_procurement_PlanBuyTime.setText(model.getPlanTime());
         tv_remark.setText(model.getRemark());
-
-//        // 审批人
-//        modelList = model.getApprovalInfoLists();
-//        StringBuilder nameBuilder = new StringBuilder();
-//        for (int i = 0; i < modelList.size(); i++) {
-//            nameBuilder.append(modelList.get(i).getApprovalEmployeeName() + " ");
-//        }
-//        tv_Requester.setText(nameBuilder);
-//
-//        //审批状态
-//        if (model.getApprovalStatus().contains("0")) {
-//            tv_state_result.setText("未审批");
-//            tv_state_result.setTextColor(getResources().getColor(R.color.red));
-//        } else if (model.getApprovalStatus().contains("1")) {
-//            tv_state_result.setText("已审批");
-//            tv_state_result.setTextColor(getResources().getColor(R.color.green));
-//        } else if (model.getApprovalStatus().contains("2")) {
-//            tv_state_result.setText("审批中...");
-//            tv_state_result.setTextColor(getResources().getColor(R.color.black));
-//        } else {
-//            tv_state_result.setText("你猜猜！");
-//        }
-//
-//        //插入审批意见
-//        if (model.getApprovalStatus().contains("1") || model.getApprovalStatus().contains("2")) {
-//            //插入意见
-//            for (int i = 0, mark = layout_ll.getChildCount(); i < modelList.size(); i++, mark++) {//mark是布局插入位置，放在mark位置的后边（从1开始计数）
-//                ViewHolder vh = AddView(mark);//添加布局
-//                vh.tv_name.setText(modelList.get(i).getApprovalEmployeeName());
-//                vh.tv_time.setText(modelList.get(i).getApprovalDate());
-//                vh.tv_contains.setText(modelList.get(i).getComment());
-//                if (modelList.get(i).getYesOrNo().contains("1")) {
-//                    vh.tv_yesOrNo.setText("已审批");
-//                } else {
-//                    vh.tv_yesOrNo.setText("未审批");
-//                    vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
-//                }
-//            }
-//        }
 
     }
 
@@ -222,5 +183,19 @@ public class ProcurementDetailActivity extends BaseActivity {
 
     public void forBack(View view) {
         this.finish();
+    }
+
+    private boolean isRemarkExpend = false;
+
+    public void RemarkExpended(View view) {
+        if (!isRemarkExpend) {
+            tv_remark.setMinLines(0);
+            tv_remark.setMaxLines(Integer.MAX_VALUE);
+            isRemarkExpend = true;
+        } else {
+            tv_remark.setLines(3);
+            isRemarkExpend = false;
+        }
+
     }
 }

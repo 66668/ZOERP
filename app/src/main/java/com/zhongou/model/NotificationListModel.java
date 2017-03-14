@@ -17,6 +17,16 @@ public class NotificationListModel implements Serializable {
     private String ApplicationTitle;//标题
     private String EmployeeName ;//发布人
 
+    private String IsRead ;
+
+    public String getIsRead() {
+        return IsRead;
+    }
+
+    public void setIsRead(String isRead) {
+        IsRead = isRead;
+    }
+
     public String getEmployeeName() {
         return EmployeeName;
     }

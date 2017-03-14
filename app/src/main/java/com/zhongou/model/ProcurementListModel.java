@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
+ * 采购
  * Created by sjy on 2017/2/26.
  */
 

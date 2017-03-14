@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,8 @@ import com.zhongou.db.sqlite.SQLiteScheduledb;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.model.MyApprovalModel;
+import com.zhongou.model.NoticeListModel;
+import com.zhongou.model.NotificationListModel;
 import com.zhongou.model.ScheduleModel;
 import com.zhongou.view.NoticeListActivity;
 import com.zhongou.view.NotificationListActivity;
@@ -65,12 +68,20 @@ public class MessageFragment extends BaseFragment {
     private RelativeLayout layout_undo;
     private RelativeLayout layout_schedule;
 
+    //常量
+
+    //日程
     private static final int GET_SCHEDULE_DATA = -39;
     private static final int NONE_SCHEDULE_DATA = -38;
-    private static final int GET_NEW_DATA = -37;//
-    private static final int GET_REFRESH_DATA = -36;//
+    //公告
+    private static final int GET_NOTICE_DATA = -37;//
+    private static final int NONE_NOTICE_DATA = -36;//
+    //未办事项
     private static final int GET_UNDO_DATA = -35;//
     private static final int NONE_NUDO_DATA = -34;//
+    //通知
+    private static final int GET_NOTIFICATION_DATA = -33;//
+    private static final int NONE_NOTIFICATION_DATA = -32;//
 
     //单例模式
     public static MessageFragment newInstance() {
@@ -232,6 +243,59 @@ public class MessageFragment extends BaseFragment {
             }
         });
 
+        //公告未读
+        Loading.noDialogRun(getActivity(), new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    List<NoticeListModel> visitorModelList = UserHelper.GetAppNoticeList(
+                            getActivity(),
+                            "",//iMaxTime
+                            "");
+                    if (visitorModelList == null) {
+                        handler.sendMessage(handler.obtainMessage(NONE_NOTICE_DATA, "没有最新公告"));
+                    } else {
+                        if (visitorModelList.size() <= 0) {
+                            handler.sendMessage(handler.obtainMessage(NONE_NOTICE_DATA, "没有最新公告"));
+                        } else {
+                            handler.sendMessage(handler.obtainMessage(GET_NOTICE_DATA, visitorModelList));
+                        }
+                    }
+                } catch (MyException e) {
+                    Log.d("SJY", "公告异常= " + e.getMessage());
+                    handler.sendMessage(handler.obtainMessage(NONE_NOTICE_DATA, "没有最新公告"));
+                }
+
+            }
+        });
+
+        //通知未读
+        Loading.noDialogRun(getActivity(), new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    List<NotificationListModel> visitorModelList = UserHelper.GetAppNotificationList(
+                            getActivity(),
+                            "",//iMaxTime
+                            "");
+                    if (visitorModelList == null) {
+                        handler.sendMessage(handler.obtainMessage(NONE_NOTIFICATION_DATA, "没有最新通知"));
+                    } else {
+                        if (visitorModelList.size() <= 0) {
+                            handler.sendMessage(handler.obtainMessage(NONE_NOTIFICATION_DATA, "没有最新通知"));
+                        } else {
+                            handler.sendMessage(handler.obtainMessage(GET_NOTIFICATION_DATA, visitorModelList));
+                        }
+                    }
+                } catch (MyException e) {
+                    Log.d("SJY", "通知异常= " + e.getMessage());
+                    handler.sendMessage(handler.obtainMessage(NONE_NOTIFICATION_DATA, "没有最新通知"));
+                }
+
+            }
+        });
+
+        //为办事项
         Loading.noDialogRun(getActivity(), new Runnable() {
             @Override
             public void run() {
@@ -266,38 +330,74 @@ public class MessageFragment extends BaseFragment {
         public void handleMessage(Message msg) {
             // 调用下边的方法处理信息
             switch (msg.what) {
-                case GET_SCHEDULE_DATA:
-                    //您有x条日程
-                    int scheduleSize = (int) msg.obj;
-                    if (scheduleSize > 0 && scheduleSize <= 10) {
-                        //内容
-                        schedule_content.setTextColor(getActivity().getResources().getColor(R.color.red));
-                        schedule_content.setText("您有 " + scheduleSize + " 条日程要处理");
-
-                        //时间
-                        //                        String time = schedulelist.get(0).getScheduleDate();
-                        //                        String newTime = time.substring(0, time.indexOf("\t"));
-                        schedule_time.setText("");
-
-                        //个数
-                        schedule_number.setText(scheduleSize + "");
-
-                    } else if (scheduleSize > 10) {
-                        //内容
-                        schedule_content.setTextColor(getActivity().getResources().getColor(R.color.red));
-                        schedule_content.setText("您有 10+ 条日程要处理");
-
-                        //时间
-
-                        schedule_time.setText("");
-                        //个数
-                        schedule_number.setText("10+");
+                case GET_NOTICE_DATA://公告
+                    List<NoticeListModel> noticeList = (List<NoticeListModel>) msg.obj;
+                    int noticeSize = splitNoticeDate(noticeList);
+                    if(noticeSize == 0){
+                        handler.sendMessage(handler.obtainMessage(NONE_NOTICE_DATA, "没有最新公告"));
                     }
+                    notice_number.setVisibility(View.VISIBLE);
+                    notice_time.setVisibility(View.VISIBLE);
+                    if (noticeSize > 0 && noticeSize <= 10) {
+
+                        //内容
+                        notice_content.setTextColor(getActivity().getResources().getColor(R.color.red));
+                        notice_content.setText("您有 " + noticeSize + " 条公告未阅读");
+
+                        //时间
+                        notice_time.setText(noticeList.get(0).getPublishTime());
+
+                        //个数
+                        notice_number.setText("" + noticeSize);
+
+                    } else if (noticeSize > 10) {
+                        notice_content.setTextColor(getActivity().getResources().getColor(R.color.red));
+                        notice_content.setText("您有 10+  条公告未阅读");
+                        //时间
+                        notice_time.setText(noticeList.get(0).getPublishTime());
+
+                        //个数
+                        notice_number.setText("10+");
+                    }
+
+                    break;
+                case GET_NOTIFICATION_DATA://通知
+                    List<NotificationListModel> notificationList = (List<NotificationListModel>) msg.obj;
+                    int notificationSize = splitNotificationDate(notificationList);
+                    if(notificationSize == 0){
+                        handler.sendMessage(handler.obtainMessage(NONE_NOTIFICATION_DATA, "没有最新通知"));
+                    }
+                    if (notificationSize > 0 && notificationSize <= 10) {
+
+                        //内容
+                        msg_content.setTextColor(getActivity().getResources().getColor(R.color.red));
+                        msg_content.setText("您有 " + notificationSize + " 条公告未阅读");
+
+                        //时间
+                        msg_time.setVisibility(View.VISIBLE);
+                        msg_time.setText(notificationList.get(0).getPublishTime());
+
+                        //个数
+                        msg_number.setVisibility(View.VISIBLE);
+                        msg_number.setText("" + notificationSize);
+
+                    } else if (notificationSize > 10) {
+                        msg_content.setTextColor(getActivity().getResources().getColor(R.color.red));
+                        msg_content.setText("您有 10+  条公告未阅读");
+                        //时间
+                        msg_time.setVisibility(View.VISIBLE);
+                        msg_time.setText(notificationList.get(0).getPublishTime());
+
+                        //个数
+                        msg_number.setVisibility(View.VISIBLE);
+                        msg_number.setText("10+");
+                    }
+
                     break;
 
-                case GET_UNDO_DATA:
+                case GET_UNDO_DATA://未办事项
                     List<MyApprovalModel> visitorModelList = (List<MyApprovalModel>) msg.obj;
-                    int size = splitDate(visitorModelList);
+                    int size = splitApprovaDate(visitorModelList);
                     if (size > 0 && size <= 10) {
 
                         //内容
@@ -322,6 +422,48 @@ public class MessageFragment extends BaseFragment {
 
                     break;
 
+                case GET_SCHEDULE_DATA://日程
+
+                    int scheduleSize = (int) msg.obj;
+                    if (scheduleSize > 0 && scheduleSize <= 10) {
+                        //内容
+                        schedule_content.setTextColor(getActivity().getResources().getColor(R.color.red));
+                        schedule_content.setText("您有 " + scheduleSize + " 条日程要处理");
+                        schedule_time.setText("");
+                        //个数
+                        schedule_number.setText(scheduleSize + "");
+
+                    } else if (scheduleSize > 10) {
+                        //内容
+                        schedule_content.setTextColor(getActivity().getResources().getColor(R.color.red));
+                        schedule_content.setText("您有 10+ 条日程要处理");
+                        schedule_time.setText("");
+                        //个数
+                        schedule_number.setText("10+");
+                    }
+                    break;
+
+                case NONE_NOTICE_DATA:
+
+                    //内容
+                    notice_content.setText((String) msg.obj);
+                    notice_content.setTextColor(getActivity().getResources().getColor(R.color.textHintColor));
+
+                    //时间
+                    notice_number.setVisibility(View.INVISIBLE);
+                    //个数
+                    notice_time.setVisibility(View.INVISIBLE);
+                    break;
+                case NONE_NOTIFICATION_DATA:
+
+                    //内容
+                    msg_content.setText((String) msg.obj);
+                    msg_content.setTextColor(getActivity().getResources().getColor(R.color.textHintColor));
+                    //时间
+                    msg_number.setVisibility(View.INVISIBLE);
+                    //个数
+                    msg_time.setVisibility(View.INVISIBLE);
+                    break;
                 case NONE_NUDO_DATA:
 
                     //内容
@@ -334,6 +476,7 @@ public class MessageFragment extends BaseFragment {
                     //个数
                     undo_time.setText("");
                     break;
+
 
                 case NONE_SCHEDULE_DATA:
 
@@ -354,8 +497,8 @@ public class MessageFragment extends BaseFragment {
         }
     };
 
-    //获取ApprovalStatus = 0的list
-    private int splitDate(List<MyApprovalModel> list) {
+    //获取ApprovalStatus != 0的list
+    private int splitApprovaDate(List<MyApprovalModel> list) {
         List<MyApprovalModel> undoList = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getApprovalStatus().contains("0")) {
@@ -363,6 +506,32 @@ public class MessageFragment extends BaseFragment {
             }
         }
         int size = undoList.size();
+        return size;
+
+    }
+
+    //获取公告! = 0的list
+    private int splitNoticeDate(List<NoticeListModel> list) {
+        List<NoticeListModel> NoticeList = new ArrayList<NoticeListModel>();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getIsRead().contains("0")) {
+                NoticeList.add(list.get(i));
+            }
+        }
+        int size = NoticeList.size();
+        return size;
+
+    }
+
+    //获取通知! = 0的list
+    private int splitNotificationDate(List<NotificationListModel> list) {
+        List<NotificationListModel> NoticeList = new ArrayList<NotificationListModel>();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getIsRead().contains("0")) {
+                NoticeList.add(list.get(i));
+            }
+        }
+        int size = NoticeList.size();
         return size;
 
     }

@@ -156,18 +156,20 @@ public class VehicleReturnUseToCompleteActivity extends BaseActivity {
         //对象存值
         final VehicleReturnPostUseModel model = new VehicleReturnPostUseModel();
 
+        model.setApplicationID(vehicleReturnModel.getApplicationID());
+        model.setApplicationType(vehicleReturnModel.getApplicationType());
+        model.setEmployeeID(UserHelper.getCurrentUser().getEmployeeID());
+
+        model.setDriver(driver);
         model.setActualBorrowTime(ActualBorrowTime);
         model.setActualReturnTime(ActualReturnTime);
-        model.setDriver(driver);
-        model.setPassenger(passager);
-
         model.setNumber(CarNumber);
+
         model.setStartMileage(startMiles);
         model.setFinishMileage(endMiles);
+        model.setPassenger(passager);
         model.setBackRemark(other);
 
-        model.setApplicationType(vehicleReturnModel.getApplicationType());
-        model.setApplicationType(vehicleReturnModel.getApplicationType());
 
         Loading.run(this, new Runnable() {
             @Override

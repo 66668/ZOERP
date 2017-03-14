@@ -16,10 +16,10 @@ public class VehicleMaintainModel implements Serializable {
     public String Number;//
     public String Purpose;//
     public String MaintenanceType;//
-    public String PlanBorrowTime;//
+    public String PlanBorrowTime;//维保时间
     public String MaintenanceProject;//
     public String VehicleState;//车辆状态
-    public String Destination;//
+    public String Destination;//维保地点
 
 
     public String ApprovalStatus;//状态

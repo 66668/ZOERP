@@ -186,11 +186,11 @@ public class VehicleMaintainActivity extends BaseActivity {
                     JSONObject js = new JSONObject();
                     js.put("MaintenanceType", maintenanceType);
                     js.put("EstimateFee", estimateFee);
-                    js.put("MaintenanceTime", maintenanceTime);
+                    js.put("PlanBorrowTime", maintenanceTime);
                     js.put("MaintenanceProject", maintenanceProject);
                     js.put("Number", vehicleNumber);
                     js.put("VehicleState", maintenanceState);
-                    js.put("MaintenancePlace", maintenancePlace);
+                    js.put("Destination", maintenancePlace);
                     js.put("Remark", remark);
                     js.put("ApprovalIDList", approvalID);//
 

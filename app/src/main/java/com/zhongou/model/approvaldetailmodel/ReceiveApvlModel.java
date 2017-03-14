@@ -25,10 +25,7 @@ public class ReceiveApvlModel implements Serializable {
     public String ApplicationCreateTime;
     public List<ReceiveApvlModel.ApprovalInfoLists> ApprovalInfoLists;
 
-    //未用
-    public String EmployeeID;
-    public String CreateTime;
-    public String StoreID;
+
 
     public static class ApprovalInfoLists implements Serializable{
         public String Comment;
@@ -130,30 +127,6 @@ public class ReceiveApvlModel implements Serializable {
 
     public void setRemark(String remark) {
         Remark = remark;
-    }
-
-    public String getEmployeeID() {
-        return EmployeeID;
-    }
-
-    public void setEmployeeID(String employeeID) {
-        EmployeeID = employeeID;
-    }
-
-    public String getCreateTime() {
-        return CreateTime;
-    }
-
-    public void setCreateTime(String createTime) {
-        CreateTime = createTime;
-    }
-
-    public String getStoreID() {
-        return StoreID;
-    }
-
-    public void setStoreID(String storeID) {
-        StoreID = storeID;
     }
 
     public String getName() {

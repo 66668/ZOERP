@@ -145,7 +145,6 @@ public class VehicleReturnMaintenanceCompleteActivity extends BaseActivity {
         tv_endMiless.setText(model.getFinishMileage());
         tv_backRemark.setText(model.getBackRemark());
 
-
     }
 
     private void getData(final VehicleReturnModel model) {

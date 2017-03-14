@@ -1,12 +1,15 @@
 package com.zhongou.view;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhongou.R;
 import com.zhongou.base.BaseActivity;
+import com.zhongou.common.MyException;
+import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
 import com.zhongou.model.NotificationListModel;
@@ -66,6 +69,7 @@ public class NotificationDetailActivity extends BaseActivity {
         //获取跳转值
         Bundle bundle = getIntent().getExtras();
         model = (NotificationListModel) bundle.getSerializable("NotificationListModel");
+        readThisNotice(model);
     }
 
     private void setShow() {
@@ -75,7 +79,21 @@ public class NotificationDetailActivity extends BaseActivity {
         tv_name2.setText(UserHelper.getCurrentUser().getName());
         tv_content.setText(model.getAbstract());
     }
-
+    private void readThisNotice(final NotificationListModel model){
+        Loading.noDialogRun(this, new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    UserHelper.postReadThisNotice(NotificationDetailActivity.this
+                            ,model.getApplicationID());
+                    Log.d("SJY", "成功");
+                } catch (MyException e) {
+                    e.printStackTrace();
+                    Log.d("SJY", "已读异常="+e.getMessage());
+                }
+            }
+        });
+    }
     /**
      * back
      *

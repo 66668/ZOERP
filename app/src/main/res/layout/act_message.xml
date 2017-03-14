@@ -55,7 +55,7 @@
             android:layout_alignTop="@+id/tv_noticeTitle"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:text="2010-11-11"
+            android:text=""
             android:textSize="@dimen/common_textSize_default11"/>
 
         <com.zhongou.widget.CircleTextView
@@ -121,7 +121,7 @@
             android:layout_alignTop="@+id/tv_msgTitle"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:text="2010-11-11"
+            android:text=""
             android:textSize="@dimen/common_textSize_default11"/>
 
         <com.zhongou.widget.CircleTextView
@@ -186,7 +186,7 @@
             android:layout_alignTop="@+id/tv_undoTitle"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:text="2010-11-11"
+            android:text=""
             android:textSize="@dimen/common_textSize_default11"/>
 
         <com.zhongou.widget.CircleTextView
@@ -251,7 +251,7 @@
             android:layout_alignTop="@+id/tv_scheduleTitle"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:text="2010-11-11"
+            android:text=""
             android:textSize="@dimen/common_textSize_default11"/>
 
         <com.zhongou.widget.CircleTextView

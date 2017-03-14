@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -65,7 +64,7 @@ public class VehicleActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_timeEnd)
     TextView tv_timeEnd;
 
-    //用途说明
+    //说明
     @ViewInject(id = R.id.et_purpose)
     EditText et_purpose;
 
@@ -103,9 +102,7 @@ public class VehicleActivity extends BaseActivity {
         tv_title.setText(getResources().getString(R.string.carUsed));
     }
 
-
     public void forCommit(View view) {
-        approvalID = "0280c9c5-870c-46cf-aa95-cdededc7d86c,88dd7959-cb2f-40c6-947a-4d6801fc4765";
         purpose = et_purpose.getText().toString();
         Destination = et_targetPlace.getText().toString();
         remark = et_remark.getText().toString();
@@ -136,8 +133,8 @@ public class VehicleActivity extends BaseActivity {
                     js.put("PlanReturnTime", endDates);
                     js.put("Destination", Destination);
                     js.put("Purpose", purpose);
-                    js.put("ApprovalIDList", approvalID);//
                     js.put("Remark", remark);//
+                    js.put("ApprovalIDList", approvalID);//
 
                     UserHelper.vehiclePost(VehicleActivity.this, js);
                     sendMessage(POST_SUCCESS);
@@ -241,9 +238,7 @@ public class VehicleActivity extends BaseActivity {
                 name.append(list.get(i).getsEmployeeName() + "  ");
                 employeeId.append(list.get(i).getsEmployeeID() + ",");
             }
-            //            approvalID = "0280c9c5-870c-46cf-aa95-cdededc7d86c,88dd7959-cb2f-40c6-947a-4d6801fc4765";
             approvalID = getApprovalID(employeeId.toString());
-            Log.d("SJY", "approvalID=" + approvalID);
             tv_Requester.setText(name);
         }
 
