@@ -71,7 +71,7 @@ public class CommonCopytoDeptActivity extends BaseActivity {
 
         setContentView(R.layout.act_apps_examination_myapproval_common_contacts2);
         tv_title.setText(getResources().getString(R.string.examination_copyto));
-
+        tv_right.setText("");
         //获取调转对象
 
         Bundle bundle = this.getIntent().getExtras();

@@ -1,6 +1,7 @@
 package com.zhongou.view.examination.approvaldetail;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -8,8 +9,6 @@ import android.widget.TextView;
 import com.zhongou.R;
 import com.zhongou.base.BaseActivity;
 import com.zhongou.inject.ViewInject;
-import com.zhongou.model.applicationdetailmodel.NotificationAndNoticeModel;
-import com.zhongou.model.approvaldetailmodel.NotificationAndNoticeApvlModel;
 
 /**
  * 审批 通知公告详情
@@ -33,7 +32,7 @@ public class NotificationAndNoticeDetailApvlActivity2 extends BaseActivity {
     TextView tv_content;
 
     //变量
-    private NotificationAndNoticeApvlModel notificationAndNoticeModel;
+    private String content;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +42,13 @@ public class NotificationAndNoticeDetailApvlActivity2 extends BaseActivity {
         tv_right.setText("");
 
         Bundle bundle = this.getIntent().getExtras();
-        notificationAndNoticeModel = (NotificationAndNoticeApvlModel) bundle.getSerializable("notificationAndNoticeModel");
-        setShow(notificationAndNoticeModel);
+        content = bundle.getString("Abstract");
+        setShow(content);
 
     }
 
-    private void setShow(NotificationAndNoticeApvlModel model) {
-        tv_content.setText(model.getApplicationTitle());
+    private void setShow(String content) {
+        tv_content.setText((TextUtils.isEmpty(content) || content == null) ? "参数错误" : content);
     }
 
     /**

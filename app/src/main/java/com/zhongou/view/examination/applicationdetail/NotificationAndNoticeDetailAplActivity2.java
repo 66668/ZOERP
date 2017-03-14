@@ -47,7 +47,7 @@ public class NotificationAndNoticeDetailAplActivity2 extends BaseActivity {
     }
 
     private void setShow(NotificationAndNoticeModel model) {
-        tv_content.setText(model.getApplicationTitle());
+        tv_content.setText(model.getAbstract());
     }
 
     /**

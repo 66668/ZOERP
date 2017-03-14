@@ -156,6 +156,7 @@ public class FinancialListAcitivity extends BaseActivity implements RefreshAndLo
 
                     sendMessage(GET_NEW_DATA, visitorModelList);
                 } catch (MyException e) {
+                    Log.d("SJY", "取值异常=" + e.getMessage());
                     sendMessage(GET_NONE_NEWDATA, e.getMessage());
                 }
             }

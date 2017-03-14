@@ -71,6 +71,7 @@ public class CommonCopytoCoActivity extends BaseActivity {
 
         setContentView(R.layout.act_apps_examination_myapproval_common_contacts1);
         tv_title.setText(getResources().getString(R.string.examination_copyto));
+        tv_right.setText("");
 
         //获取页面跳转对象
         Bundle bundle = this.getIntent().getExtras();

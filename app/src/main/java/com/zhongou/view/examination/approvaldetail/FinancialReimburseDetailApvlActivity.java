@@ -25,7 +25,7 @@ import com.zhongou.model.applicationdetailmodel.FinancialAllModel;
 import com.zhongou.utils.PageUtil;
 
 /**
- * 审批 付款申请
+ * 审批 报销申请
  * Created by sjy on 2016/12/2.
  */
 
@@ -175,7 +175,7 @@ public class FinancialReimburseDetailApvlActivity extends BaseActivity {
         tv_ApprovalPerson.setText(model.getEmployeeName());
         tv_approvaldept.setText(model.getDepartmentName());
         tv_approvalCo.setText(model.getStoreName());
-        tv_approvalTime.setText(model.getCreateTime());
+        tv_approvalTime.setText(model.getApplicationCreateTime());
 
         //
         tv_feeOne.setText(model.getFeeone());

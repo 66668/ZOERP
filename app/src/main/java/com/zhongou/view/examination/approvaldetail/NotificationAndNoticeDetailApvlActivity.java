@@ -51,6 +51,7 @@ public class NotificationAndNoticeDetailApvlActivity extends BaseActivity {
     //申请时间
     @ViewInject(id = R.id.tv_approvalTime)
     TextView tv_approvalTime;
+
     //未审批bottom
     @ViewInject(id = R.id.laytout_decide)
     LinearLayout laytout_decide;
@@ -82,10 +83,6 @@ public class NotificationAndNoticeDetailApvlActivity extends BaseActivity {
     //标题
     @ViewInject(id = R.id.tv_notificaitonAndNotice_title)
     TextView tv_notificaitonAndNotice_title;
-
-    //接收部门
-    @ViewInject(id = R.id.tv_notificaitonAndNotice_whom)
-    TextView tv_notificaitonAndNotice_whom;
 
     //内容
     @ViewInject(id = R.id.layout_content, click = "forContent")
@@ -129,16 +126,16 @@ public class NotificationAndNoticeDetailApvlActivity extends BaseActivity {
 
         //
         tv_notificaitonAndNotice_type.setText(model.getPublishType());
-        tv_notificaitonAndNotice_type.setText(model.getPublishType());
-        tv_notificaitonAndNotice_whom.setText(model.getAbstract());
         tv_notificaitonAndNotice_title.setText(model.getApplicationTitle());
         tv_remark.setText(model.getRemark());
 
     }
 
+    //跳转看详情
     public void forContent(View v) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable("NotificationAndNoticeApvlModel", model);
+        bundle.putString("Abstract", model.getAbstract());
+        Log.d("SJY", "Abstract=" + model.getAbstract());
         startActivity(NotificationAndNoticeDetailApvlActivity2.class, bundle);
     }
 

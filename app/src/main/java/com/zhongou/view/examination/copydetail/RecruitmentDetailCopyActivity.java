@@ -1,5 +1,6 @@
 package com.zhongou.view.examination.copydetail;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
@@ -50,11 +51,6 @@ public class RecruitmentDetailCopyActivity extends BaseActivity {
     //个数
     @ViewInject(id = R.id.tv_numberPeople)
     TextView tv_numberPeople;
-
-
-    @ViewInject(id = R.id.tv_timeIn)
-    TextView sp_timeIn;
-
 
     //说明
     @ViewInject(id = R.id.tv_reason, click = "ReasonExpended")
@@ -122,11 +118,11 @@ public class RecruitmentDetailCopyActivity extends BaseActivity {
         tv_position.setText(model.getPosition());
         tv_remark.setText(model.getRemark());
         tv_numberPeople.setText(model.getNumberOfPeople());
-        sp_timeIn.setText(model.getExpectedEntryDate());
         tv_reason.setText(model.getResponsibility());
 
-        // 审批人
         modelList = model.getApprovalInfoLists();
+        Log.d("SJY", "审批意见=" + modelList.size());
+        // 审批人
         StringBuilder nameBuilder = new StringBuilder();
         for (int i = 0; i < modelList.size(); i++) {
             nameBuilder.append(modelList.get(i).getApprovalEmployeeName() + " ");
@@ -147,16 +143,19 @@ public class RecruitmentDetailCopyActivity extends BaseActivity {
             tv_state_result.setText("你猜猜！");
         }
 
-        for (int i = 0, mark = 5; i < modelList.size(); i++, mark++) {//mark是布局插入位置，放在mark位置的后边（从1开始计数）
-            ViewHolder vh = AddView(mark);//添加布局
-            vh.tv_name.setText(modelList.get(i).getApprovalEmployeeName());
-            vh.tv_time.setText(modelList.get(i).getApprovalDate());
-            vh.tv_contains.setText(modelList.get(i).getComment());
-            if (modelList.get(i).getYesOrNo().contains("1")) {
-                vh.tv_yesOrNo.setText("已审批");
-            } else {
-                vh.tv_yesOrNo.setText("未审批");
-                vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
+        if (recruitmentModel.getApprovalStatus().contains("1") || recruitmentModel.getApprovalStatus().contains("2")) {
+            //插入意见
+            for (int i = 0, mark = layout_ll.getChildCount(); i < modelList.size(); i++, mark++) {//mark是布局插入位置，放在mark位置的后边（从1开始计数）
+                ViewHolder vh = AddView(this, mark);//添加布局
+                vh.tv_name.setText(modelList.get(i).getApprovalEmployeeName());
+                vh.tv_time.setText(modelList.get(i).getApprovalDate());
+                vh.tv_contains.setText(modelList.get(i).getComment());
+                if (modelList.get(i).getYesOrNo().contains("1")) {
+                    vh.tv_yesOrNo.setText("已审批");
+                } else {
+                    vh.tv_yesOrNo.setText("未审批");
+                    vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
+                }
             }
         }
     }
@@ -200,6 +199,7 @@ public class RecruitmentDetailCopyActivity extends BaseActivity {
         }
     }
 
+    //动态添加审批意见
     public class ViewHolder {
         private int id = -1;
         private TextView tv_name;
@@ -209,13 +209,12 @@ public class RecruitmentDetailCopyActivity extends BaseActivity {
     }
 
     //初始化参数
-    private ViewHolder AddView(int marks) {
-        ll_main = (LinearLayout) findViewById(R.id.layout_ll);
+    private ViewHolder AddView(Context context, int marks) {
         ls_childView = new ArrayList<View>();
-        inflater = LayoutInflater.from(getApplicationContext());
+        inflater = LayoutInflater.from(context);
         childView = inflater.inflate(R.layout.item_examination_status, null);
         childView.setId(marks);
-        ll_main.addView(childView, marks);
+        layout_ll.addView(childView, marks);
         return getViewInstance(childView);
 
     }
@@ -238,6 +237,7 @@ public class RecruitmentDetailCopyActivity extends BaseActivity {
     public void forBack(View v) {
         this.finish();
     }
+
     private boolean isExpend = false;
 
     public void ReasonExpended(View view) {

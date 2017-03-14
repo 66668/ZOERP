@@ -91,10 +91,6 @@ public class FinancialLoanDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_reason, click = "ReasonExpended")
     TextView tv_reason;
 
-    //备注
-    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
-    TextView tv_remark;
-
     //常量
     public static final int POST_SUCCESS = 21;
     public static final int POST_FAILED = 22;
@@ -123,14 +119,12 @@ public class FinancialLoanDetailApvlActivity extends BaseActivity {
         tv_ApprovalPerson.setText(model.getEmployeeName());
         tv_approvaldept.setText(model.getDepartmentName());
         tv_approvalCo.setText(model.getStoreName());
-        tv_approvalTime.setText(model.getCreateTime());
+        tv_approvalTime.setText(model.getApplicationCreateTime());
 
         //
         tv_reason.setText(model.getReason());
-        tv_remark.setText(model.getRemark());
         tv_fee.setText(model.getFee());
         tv_PlanbackTime.setText(model.getPlanbackTime());
-
     }
 
     private void bottomType() {
@@ -230,19 +224,4 @@ public class FinancialLoanDetailApvlActivity extends BaseActivity {
         }
 
     }
-
-    private boolean isRemarkExpend = false;
-
-    public void RemarkExpended(View view) {
-        if (!isRemarkExpend) {
-            tv_remark.setMinLines(0);
-            tv_remark.setMaxLines(Integer.MAX_VALUE);
-            isRemarkExpend = true;
-        } else {
-            tv_remark.setLines(3);
-            isRemarkExpend = false;
-        }
-
-    }
-
 }

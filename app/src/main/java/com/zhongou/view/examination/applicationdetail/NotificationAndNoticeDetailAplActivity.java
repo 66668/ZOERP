@@ -63,9 +63,6 @@ public class NotificationAndNoticeDetailAplActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_notificaitonAndNotice_title)
     TextView tv_notificaitonAndNotice_title;
 
-    //接收部门
-    @ViewInject(id = R.id.tv_notificaitonAndNotice_whom)
-    TextView tv_notificaitonAndNotice_whom;
 
     //内容
     @ViewInject(id = R.id.layout_content, click = "forContent")
@@ -113,7 +110,6 @@ public class NotificationAndNoticeDetailAplActivity extends BaseActivity {
         //
         tv_notificaitonAndNotice_type.setText(model.getPublishType());
         tv_notificaitonAndNotice_type.setText(model.getPublishType());
-        tv_notificaitonAndNotice_whom.setText(model.getAbstract());
         tv_notificaitonAndNotice_title.setText(model.getApplicationTitle());
         tv_remark.setText(model.getRemark());
 

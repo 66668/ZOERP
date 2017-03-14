@@ -206,7 +206,7 @@ public class RecruitmentDetailApvlActivity extends BaseActivity {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
 
-        Log.d("SJY", myApprovalModel.getApprovalID() + "\n" + myApprovalModel.getComment() + "\n" +
+        Log.d("SJY", "招聘obj="+myApprovalModel.getApprovalID() + "\n" + myApprovalModel.getComment() + "\n" +
                 myApprovalModel.getApplicationID() + "\n" + myApprovalModel.getApplicationType() + "\n" +
                 myApprovalModel.getEmployeeID() + "\n" + myApprovalModel.getStoreID() + "\n" +
                 myApprovalModel.getApplicationTitle());

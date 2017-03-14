@@ -55,10 +55,6 @@ public class FinancialLoanDetailAplActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_reason, click = "ReasonExpended")
     TextView tv_reason;
 
-    //备注
-    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
-    TextView tv_remark;
-
     //审批人
     @ViewInject(id = R.id.tv_Requester)
     TextView tv_Requester;
@@ -107,7 +103,6 @@ public class FinancialLoanDetailAplActivity extends BaseActivity {
 
         tv_fee.setText(model.getFee());
         tv_reason.setText(model.getReason());
-        tv_remark.setText(model.getRemark());
         tv_PlanbackTime.setText(model.getPlanbackTime());
         modelList = model.getApprovalInfoLists();
 
@@ -244,20 +239,6 @@ public class FinancialLoanDetailAplActivity extends BaseActivity {
         } else {
             tv_reason.setLines(3);
             isExpend = false;
-        }
-
-    }
-
-    private boolean isRemarkExpend = false;
-
-    public void RemarkExpended(View view) {
-        if (!isRemarkExpend) {
-            tv_remark.setMinLines(0);
-            tv_remark.setMaxLines(Integer.MAX_VALUE);
-            isRemarkExpend = true;
-        } else {
-            tv_remark.setLines(3);
-            isRemarkExpend = false;
         }
 
     }

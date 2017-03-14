@@ -272,7 +272,7 @@ public class CommonCopytoEplActivity extends BaseActivity {
 
 
     /**
-     * 抄送
+     * 抄送 提交
      *
      * @param view
      */
@@ -294,7 +294,7 @@ public class CommonCopytoEplActivity extends BaseActivity {
         approvalSModel.setsComment(myApprovalModel.getComment());
         approvalSModel.setsApplicationid(myApprovalModel.getApplicationID());
         approvalSModel.setsApplicationtype(myApprovalModel.getApplicationType());
-        approvalSModel.setsEmployeeid(myApprovalModel.getEmployeeID());
+        approvalSModel.setsEmployeeid(UserHelper.getCurrentUser().getEmployeeID());
         approvalSModel.setsStoreid(myApprovalModel.getStoreID());
         approvalSModel.setsApplicationtitle(myApprovalModel.getApplicationTitle());
         approvalSModel.setsApprovalemployeeinfos(sApprovalemployeeinfos);

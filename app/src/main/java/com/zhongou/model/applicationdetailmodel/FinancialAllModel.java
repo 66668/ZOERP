@@ -44,7 +44,6 @@ public class FinancialAllModel implements Serializable {
     public String CreateTime;//CreateTime
     public String StoreID;//StoreID
 
-
     public String ApprovalStatus;
     public String StoreName;
     public String DepartmentName;
