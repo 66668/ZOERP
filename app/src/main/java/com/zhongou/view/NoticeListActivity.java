@@ -238,4 +238,10 @@ public class NoticeListActivity extends BaseActivity implements RefreshListView.
     public void forBack(View view) {
         this.finish();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getNewData();
+    }
 }

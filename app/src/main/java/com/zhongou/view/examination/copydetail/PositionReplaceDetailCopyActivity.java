@@ -168,7 +168,13 @@ public class PositionReplaceDetailCopyActivity extends BaseActivity {
                 vh.tv_name.setText(modelList.get(i).getApprovalEmployeeName());
                 vh.tv_time.setText(modelList.get(i).getApprovalDate());
                 vh.tv_contains.setText(modelList.get(i).getComment());
-                vh.tv_yesOrNo.setText(modelList.get(i).getYesOrNo());
+                if (modelList.get(i).getYesOrNo().contains("0")) {
+                    vh.tv_yesOrNo.setText("不同意");
+                    vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
+                } else {
+                    vh.tv_yesOrNo.setText("同意");
+                    vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.green));
+                }
             }
         }
     }

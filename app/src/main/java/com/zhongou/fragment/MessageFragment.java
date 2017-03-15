@@ -371,7 +371,7 @@ public class MessageFragment extends BaseFragment {
 
                         //内容
                         msg_content.setTextColor(getActivity().getResources().getColor(R.color.red));
-                        msg_content.setText("您有 " + notificationSize + " 条公告未阅读");
+                        msg_content.setText("您有 " + notificationSize + " 条通知未阅读");
 
                         //时间
                         msg_time.setVisibility(View.VISIBLE);
@@ -383,7 +383,7 @@ public class MessageFragment extends BaseFragment {
 
                     } else if (notificationSize > 10) {
                         msg_content.setTextColor(getActivity().getResources().getColor(R.color.red));
-                        msg_content.setText("您有 10+  条公告未阅读");
+                        msg_content.setText("您有 10+  条通知未阅读");
                         //时间
                         msg_time.setVisibility(View.VISIBLE);
                         msg_time.setText(notificationList.get(0).getPublishTime());

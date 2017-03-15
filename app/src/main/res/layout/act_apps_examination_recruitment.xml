@@ -101,6 +101,7 @@
                     android:background="@drawable/et_white_stroke"
                     android:gravity="center_vertical"
                     android:hint="@string/hint_RequestNumber"
+                    android:inputType="number"
                     android:textColorHint="@color/cl_hint_common"
                     />
             </LinearLayout>

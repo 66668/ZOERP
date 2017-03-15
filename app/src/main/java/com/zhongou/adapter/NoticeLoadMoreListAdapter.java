@@ -28,6 +28,7 @@ public class NoticeLoadMoreListAdapter extends BaseLoadMoreListAdapter {
         public TextView tvTime;
         public TextView tvType;
         public TextView tvContent;
+        public TextView tv_state;
     }
 
     public NoticeLoadMoreListAdapter(Context context, AdapterCallBack callBack) {
@@ -46,7 +47,7 @@ public class NoticeLoadMoreListAdapter extends BaseLoadMoreListAdapter {
         holder.tvTime = (TextView) view.findViewById(R.id.tv_time);
         holder.tvType = (TextView) view.findViewById(R.id.tv_type);
         holder.tvContent = (TextView) view.findViewById(R.id.tv_content);
-
+        holder.tv_state = (TextView) view.findViewById(R.id.tv_state);
         view.setTag(holder);
         return view;
     }
@@ -59,6 +60,13 @@ public class NoticeLoadMoreListAdapter extends BaseLoadMoreListAdapter {
         holder.tvTime.setText(model.getPublishTime());
         holder.tvType.setText(model.getApplicationTitle());
         holder.tvContent.setText(model.getAbstract());
+        if(model.getIsRead().contains("1")){
+            holder.tv_state.setTextColor(context.getResources().getColor(R.color.green));
+            holder.tv_state.setText("已读");
+        }else{
+            holder.tv_state.setTextColor(context.getResources().getColor(R.color.red));
+            holder.tv_state.setText("未读");
+        }
 
     }
 

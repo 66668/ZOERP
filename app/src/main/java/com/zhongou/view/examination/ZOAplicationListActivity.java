@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.zhongou.R;
 import com.zhongou.adapter.ZOAplicationListAdapter;
@@ -152,7 +151,6 @@ public class ZOAplicationListActivity extends BaseActivity implements RefreshAnd
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(ZOAplicationListActivity.this, "position=" + position, Toast.LENGTH_SHORT).show();
 
                 int headerViewsCount = myListView.getHeaderViewsCount();//得到header的总数量
                 int newPosition = position - headerViewsCount;//得到新的修正后的position

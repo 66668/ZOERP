@@ -10,6 +10,7 @@ import com.zhongou.helper.UserHelper;
 import com.zhongou.view.LoginActivity;
 import com.zhongou.view.NoticeListActivity;
 import com.zhongou.view.NotificationListActivity;
+import com.zhongou.view.examination.ZOAplicationListActivity;
 import com.zhongou.view.examination.ZOApprovelListActivity;
 import com.zhongou.view.examination.ZOCopyListActivity;
 
@@ -92,7 +93,7 @@ public class JPushReceiver extends BroadcastReceiver {
 
         if (content.contains("申请审批已完成")) {
             Intent intent = new Intent();
-            intent.setClass(context, ZOApprovelListActivity.class);
+            intent.setClass(context, ZOAplicationListActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         }

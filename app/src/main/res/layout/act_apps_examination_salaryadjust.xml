@@ -176,7 +176,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
-                    android:gravity="center_vertical"
                     android:text="@string/salaryAdjustReason"
                     android:textColor="@color/cl_text_common"/>
 
@@ -185,8 +184,9 @@
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="10dp"
                     android:layout_weight="0.72"
+                    android:padding="10dp"
+                    android:gravity="top|left"
                     android:background="@drawable/et_white_stroke"
                     android:hint="@string/hint_salaryAdjustReason"
                     android:textColorHint="@color/cl_hint_common"/>

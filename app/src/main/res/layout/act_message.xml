@@ -59,7 +59,7 @@
             android:textSize="@dimen/common_textSize_default11"/>
 
         <com.zhongou.widget.CircleTextView
-            android:id="@+id/msg_number"
+            android:id="@+id/notice_number"
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_alignBottom="@+id/img_notice"
@@ -125,7 +125,7 @@
             android:textSize="@dimen/common_textSize_default11"/>
 
         <com.zhongou.widget.CircleTextView
-            android:id="@+id/notice_number"
+            android:id="@+id/msg_number"
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_alignBottom="@+id/img_msg"

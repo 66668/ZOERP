@@ -125,6 +125,7 @@ public class DimissionActivity extends BaseActivity {
             PageUtil.DisplayToast("离职说明不能为空");
             return;
         }
+
         if (TextUtils.isEmpty(approvalID)) {
             PageUtil.DisplayToast("审批人不能为空");
             return;
@@ -139,7 +140,7 @@ public class DimissionActivity extends BaseActivity {
                     js.put("Content", reason);//原因
                     js.put("EntryDate", EntryDate);
                     js.put("DimissionDate", DimissionDate);
-                    js.put("Remak", remark);
+                    js.put("Remark", remark);
                     js.put("Reason", reason);
                     js.put("ApprovalIDList", approvalID);
 

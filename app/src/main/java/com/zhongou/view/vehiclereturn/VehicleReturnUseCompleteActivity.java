@@ -125,7 +125,7 @@ public class VehicleReturnUseCompleteActivity extends BaseActivity {
         tv_driver.setText(model.getDriver());
         tv_passenger.setText(model.getPassenger());
         tv_startMiles.setText(model.getStartMileage());
-        tv_endMiles.setText(model.getEmployeeName());
+        tv_endMiles.setText(model.getFinishMileage());
 
         tv_postother.setText(model.getBackRemark());
         tv_other.setText(model.getRemark());

@@ -88,7 +88,7 @@ public class NotificationListActivity extends BaseActivity implements RefreshLis
                 NotificationListModel model = (NotificationListModel) vAdapter.getItem(newPosition);//
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("NotificationListModel", model);
-                startActivity(NotificationDetailActivity.class,bundle);
+                startActivity(NotificationDetailActivity.class, bundle);
             }
         });
     }
@@ -247,5 +247,11 @@ public class NotificationListActivity extends BaseActivity implements RefreshLis
      */
     public void forBack(View view) {
         this.finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getNewData();
     }
 }

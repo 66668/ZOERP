@@ -41,12 +41,8 @@ public class NoticeDetailActivity extends BaseActivity {
     TextView tv_time;
 
     //发件人
-    @ViewInject(id = R.id.tv_name)
+    @ViewInject(id = R.id.tv_to)
     TextView tv_name;
-
-    //收件人
-    @ViewInject(id = R.id.tv_name2)
-    TextView tv_name2;
 
     //内容
     @ViewInject(id = R.id.tv_content)
@@ -75,8 +71,7 @@ public class NoticeDetailActivity extends BaseActivity {
     private void setShow() {
         tv_notice_title.setText(model.getApplicationTitle());
         tv_time.setText(model.getPublishTime());
-        tv_name.setText(model.getEmployeeName());
-        tv_name2.setText(UserHelper.getCurrentUser().getName());
+        tv_name.setText(model.getPublishDeptName()+"\t\t"+model.getEmployeeName());
         tv_content.setText(model.getAbstract());
     }
 
