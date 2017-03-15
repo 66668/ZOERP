@@ -86,12 +86,13 @@ public class DimissionDetailAplActivity extends BaseActivity {
     private DismissionModel dismissionModel;
     private MyApplicationModel model;
     private List<DismissionModel.ApprovalInfoLists> modelList;
+
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
     private View childView;
     private LayoutInflater inflater;//ViewHolder对象用来保存实例化View的子控件
     private List<ViewHolder> listViewHolder = new ArrayList<ViewHolder>();
-    //    private int mark = 5;//0显示在顶部
+
     //常量
     public static final int POST_SUCCESS = 15;
     public static final int POST_FAILED = 16;
@@ -143,12 +144,7 @@ public class DimissionDetailAplActivity extends BaseActivity {
                 vh.tv_name.setText(modelList.get(i).getApprovalEmployeeName());
                 vh.tv_time.setText(modelList.get(i).getApprovalDate());
                 vh.tv_contains.setText(modelList.get(i).getComment());
-                if (modelList.get(i).getYesOrNo().contains("1")) {
-                    vh.tv_yesOrNo.setText("已审批");
-                } else {
-                    vh.tv_yesOrNo.setText("未审批");
-                    vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
-                }
+                vh.tv_yesOrNo.setText(modelList.get(i).getYesOrNo());
             }
         }
     }

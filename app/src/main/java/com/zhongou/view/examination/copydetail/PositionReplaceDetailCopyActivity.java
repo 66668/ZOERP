@@ -1,5 +1,6 @@
 package com.zhongou.view.examination.copydetail;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
@@ -21,8 +22,6 @@ import com.zhongou.utils.PageUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.zhongou.R.id.tv_contains;
 
 /**
  * 申请 调动详情
@@ -105,13 +104,13 @@ public class PositionReplaceDetailCopyActivity extends BaseActivity {
     private PositionReplaceCopyModel positionReplaceModel;
     private MyCopyModel model;
     private List<PositionReplaceCopyModel.ApprovalInfoLists> modelList;
+
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
     private View childView;
     private LayoutInflater inflater;//ViewHolder对象用来保存实例化View的子控件
-    private List<ViewHolder> listViewHolder = new ArrayList<>();
-    private LinearLayout ll_main;
-    //    private int mark = 5;//0显示在顶部
+    private List<ViewHolder> listViewHolder = new ArrayList<ViewHolder>();
+    
     //常量
     public static final int POST_SUCCESS = 11;
     public static final int POST_FAILED = 12;
@@ -140,9 +139,8 @@ public class PositionReplaceDetailCopyActivity extends BaseActivity {
         tv_reason.setText(model.getTransferReason());
         tv_remark.setText(model.getRemark());
 
-        modelList = model.getApprovalInfoLists();
-
         // 审批人
+        modelList = model.getApprovalInfoLists();
         StringBuilder nameBuilder = new StringBuilder();
         for (int i = 0; i < modelList.size(); i++) {
             nameBuilder.append(modelList.get(i).getApprovalEmployeeName() + " ");
@@ -163,16 +161,14 @@ public class PositionReplaceDetailCopyActivity extends BaseActivity {
             tv_state_result.setText("你猜猜！");
         }
 
-        for (int i = 0, mark = 5; i < modelList.size(); i++, mark++) {//mark是布局插入位置，放在mark位置的后边（从1开始计数）
-            ViewHolder vh = AddView(mark);//添加布局
-            vh.tv_name.setText(modelList.get(i).getApprovalEmployeeName());
-            vh.tv_time.setText(modelList.get(i).getApprovalDate());
-            vh.tv_contains.setText(modelList.get(i).getComment());
-            if (modelList.get(i).getYesOrNo().contains("1")) {
-                vh.tv_yesOrNo.setText("已审批");
-            } else {
-                vh.tv_yesOrNo.setText("未审批");
-                vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
+        if (positionReplaceModel.getApprovalStatus().contains("1") || positionReplaceModel.getApprovalStatus().contains("2")) {
+            //插入意见
+            for (int i = 0, mark = layout_ll.getChildCount(); i < modelList.size(); i++, mark++) {//mark是布局插入位置，放在mark位置的后边（从1开始计数）
+                ViewHolder vh = AddView(this, mark);//添加布局
+                vh.tv_name.setText(modelList.get(i).getApprovalEmployeeName());
+                vh.tv_time.setText(modelList.get(i).getApprovalDate());
+                vh.tv_contains.setText(modelList.get(i).getComment());
+                vh.tv_yesOrNo.setText(modelList.get(i).getYesOrNo());
             }
         }
     }
@@ -216,6 +212,9 @@ public class PositionReplaceDetailCopyActivity extends BaseActivity {
         }
     }
 
+    /**
+     * 动态插入view
+     */
     public class ViewHolder {
         private int id = -1;
         private TextView tv_name;
@@ -225,13 +224,12 @@ public class PositionReplaceDetailCopyActivity extends BaseActivity {
     }
 
     //初始化参数
-    private ViewHolder AddView(int marks) {
-        ll_main = (LinearLayout) findViewById(R.id.layout_ll);
+    private ViewHolder AddView(Context context, int marks) {
         ls_childView = new ArrayList<View>();
-        inflater = LayoutInflater.from(getApplicationContext());
+        inflater = LayoutInflater.from(context);
         childView = inflater.inflate(R.layout.item_examination_status, null);
         childView.setId(marks);
-        ll_main.addView(childView, marks);
+        layout_ll.addView(childView, marks);
         return getViewInstance(childView);
 
     }
@@ -242,7 +240,7 @@ public class PositionReplaceDetailCopyActivity extends BaseActivity {
         vh.tv_name = (TextView) childView.findViewById(R.id.tv_name);
         vh.tv_yesOrNo = (TextView) childView.findViewById(R.id.tv_yesOrNo);
         vh.tv_time = (TextView) childView.findViewById(R.id.tv_time);
-        vh.tv_contains = (TextView) childView.findViewById(tv_contains);
+        vh.tv_contains = (TextView) childView.findViewById(R.id.tv_contains);
         listViewHolder.add(vh);
         ls_childView.add(childView);
         return vh;

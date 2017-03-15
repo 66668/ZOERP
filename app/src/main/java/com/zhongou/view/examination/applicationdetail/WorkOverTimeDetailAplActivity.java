@@ -144,12 +144,7 @@ public class WorkOverTimeDetailAplActivity extends BaseActivity {
                 vh.tv_name.setText(modelList.get(i).getApprovalEmployeeName());
                 vh.tv_time.setText(modelList.get(i).getApprovalDate());
                 vh.tv_contains.setText(modelList.get(i).getComment());
-                if (modelList.get(i).getYesOrNo().contains("1")) {
-                    vh.tv_yesOrNo.setText("已审批");
-                } else {
-                    vh.tv_yesOrNo.setText("未审批");
-                    vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
-                }
+                vh.tv_yesOrNo.setText(modelList.get(i).getYesOrNo());
             }
         }
     }

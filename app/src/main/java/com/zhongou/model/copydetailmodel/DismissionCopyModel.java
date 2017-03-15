@@ -44,10 +44,10 @@ public class DismissionCopyModel implements Serializable {
     }
 
     public static class ApprovalInfoLists{
-        public String Comment;
-        public String ApprovalDate;
-        public String YesOrNo;
-        public String ApprovalEmployeeName;
+        public String Comment;//内容
+        public String ApprovalDate;//时间
+        public String YesOrNo;//是否审批
+        public String ApprovalEmployeeName;//姓名
 
         public String getComment() {
             return Comment;

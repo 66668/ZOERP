@@ -1,5 +1,6 @@
 package com.zhongou.view.examination.copydetail;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
@@ -27,8 +28,6 @@ import com.zhongou.utils.PageUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.zhongou.R.id.tv_contains;
 
 /**
  * 报销详情
@@ -174,8 +173,8 @@ public class FinancialReimburseDetailCopyActivity extends BaseActivity {
         tv_totle.setText(model.getTotal());
         tv_remark.setText(model.getRemark());//?
 
-        modelList = model.getApprovalInfoLists();
         // 审批人
+        modelList = model.getApprovalInfoLists();
         StringBuilder nameBuilder = new StringBuilder();
         for (int i = 0; i < modelList.size(); i++) {
             nameBuilder.append(modelList.get(i).getApprovalEmployeeName() + " ");
@@ -199,16 +198,11 @@ public class FinancialReimburseDetailCopyActivity extends BaseActivity {
         if (financialAllModel.getApprovalStatus().contains("1") || financialAllModel.getApprovalStatus().contains("2")) {
             //插入意见
             for (int i = 0, mark = layout_ll.getChildCount(); i < modelList.size(); i++, mark++) {//mark是布局插入位置，放在mark位置的后边（从1开始计数）
-                ViewHolder vh = AddView(mark);//添加布局
+                ViewHolder vh = AddView(this, mark);//添加布局
                 vh.tv_name.setText(modelList.get(i).getApprovalEmployeeName());
                 vh.tv_time.setText(modelList.get(i).getApprovalDate());
                 vh.tv_contains.setText(modelList.get(i).getComment());
-                if (modelList.get(i).getYesOrNo().contains("1")) {
-                    vh.tv_yesOrNo.setText("已审批");
-                } else {
-                    vh.tv_yesOrNo.setText("未审批");
-                    vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
-                }
+                vh.tv_yesOrNo.setText(modelList.get(i).getYesOrNo());
             }
         }
     }
@@ -264,9 +258,9 @@ public class FinancialReimburseDetailCopyActivity extends BaseActivity {
     }
 
     //初始化参数
-    private ViewHolder AddView(int marks) {
+    private ViewHolder AddView(Context context, int marks) {
         ls_childView = new ArrayList<View>();
-        inflater = LayoutInflater.from(getApplicationContext());
+        inflater = LayoutInflater.from(context);
         childView = inflater.inflate(R.layout.item_examination_status, null);
         childView.setId(marks);
         layout_ll.addView(childView, marks);
@@ -280,7 +274,7 @@ public class FinancialReimburseDetailCopyActivity extends BaseActivity {
         vh.tv_name = (TextView) childView.findViewById(R.id.tv_name);
         vh.tv_yesOrNo = (TextView) childView.findViewById(R.id.tv_yesOrNo);
         vh.tv_time = (TextView) childView.findViewById(R.id.tv_time);
-        vh.tv_contains = (TextView) childView.findViewById(tv_contains);
+        vh.tv_contains = (TextView) childView.findViewById(R.id.tv_contains);
         listViewHolder.add(vh);
         ls_childView.add(childView);
         return vh;
