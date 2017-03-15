@@ -121,7 +121,7 @@ public class ReceiveDetailCopyActivity extends BaseActivity {
         tv_recevie_spiceil.setText(model.getSpecification());
         tv_recevie_size.setText(model.getVersions());
         tv_recevie_number.setText(model.getAmount());
-        tv_remark.setText(model.getRemark());
+        tv_reason.setText(model.getReason());
         tv_remark.setText(model.getRemark());
         tv_recevie_aplTime.setText(model.getApplicationCreateTime());//?
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -17,7 +18,6 @@ import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
 import com.zhongou.model.MyApplicationModel;
-import com.zhongou.model.applicationdetailmodel.ConferenceModel;
 import com.zhongou.model.applicationdetailmodel.ContractFileModel;
 import com.zhongou.utils.PageUtil;
 
@@ -155,13 +155,13 @@ public class ContractFileDetailAplActivity extends BaseActivity {
 
                 //泛型
                 try {
-                    ConferenceModel model1 = new UserHelper<>(ConferenceModel.class)
+                    ContractFileModel model1 = new UserHelper<>(ContractFileModel.class)
                             .applicationDetailPost(ContractFileDetailAplActivity.this,
                                     model.getApplicationID(),
                                     model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
                 } catch (MyException e) {
-                    e.printStackTrace();
+                    Log.d("SJY", "异常=" + e.getMessage());
                     sendMessage(POST_FAILED, e.getMessage());
                 }
             }

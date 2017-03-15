@@ -70,7 +70,7 @@ public class JPushReceiver extends BroadcastReceiver {
             context.startActivity(intent);
         }
 
-        if (content.contains("新的抄送")) {
+        if (content.contains("收到一条抄送申请")) {
             Intent intent = new Intent();
             intent.setClass(context, ZOCopyListActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
