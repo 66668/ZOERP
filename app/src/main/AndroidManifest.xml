@@ -1050,12 +1050,12 @@
         </activity>
 
         <!--010 交车 用车-未交车02 -->
-        <activty
+        <activity
             android:name="com.zhongou.view.vehiclereturn.VehicleReturnUseUncompleteActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activty>
+        </activity>
 
         <!--010 交车 用车-交车提交03 -->
         <activity
