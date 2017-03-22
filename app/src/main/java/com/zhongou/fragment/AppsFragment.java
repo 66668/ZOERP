@@ -101,7 +101,7 @@ public class AppsFragment extends BaseFragment {
 
         HashMap<String, Object> map8 = new HashMap<String, Object>();
         map8.put("name", "会议");
-        map8.put("icon", R.mipmap.app_procure);
+        map8.put("icon", R.mipmap.app_conference);
         list.add(map8);
 
         HashMap<String, Object> map9 = new HashMap<String, Object>();

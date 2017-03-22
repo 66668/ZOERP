@@ -31,7 +31,7 @@
                     android:layout_height="50dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:src="@mipmap/app_notice"/>
+                    android:src="@mipmap/msg_notice"/>
                 <!-- 标题-->
                 <TextView
                     android:id="@+id/tv_noticeTitle"
@@ -162,7 +162,7 @@
                     android:layout_height="50dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:src="@mipmap/app_notification"/>
+                    android:src="@mipmap/msg_conference"/>
                 <!-- 标题-->
                 <TextView
                     android:id="@+id/tv_confernceTitle"
@@ -293,7 +293,7 @@
                     android:layout_height="50dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:background="@mipmap/menu_notify_undo"
+                    android:background="@mipmap/msg_done"
                     android:textColor="@color/textHintColor"/>
                 <!-- 标题-->
                 <TextView
@@ -358,7 +358,7 @@
                     android:layout_height="50dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:background="@mipmap/menu_notify_undo"
+                    android:background="@mipmap/msg_copy"
                     android:textColor="@color/textHintColor"/>
                 <!-- 标题-->
                 <TextView
