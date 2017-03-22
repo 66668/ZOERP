@@ -100,7 +100,7 @@ public class RetestDetailApvlActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_apps_examination_retest_d2);
-        tv_title.setText(getResources().getString(R.string.outgoing));
+        tv_title.setText(getResources().getString(R.string.retest));
         tv_right.setText("");
 
         Bundle bundle = this.getIntent().getExtras();

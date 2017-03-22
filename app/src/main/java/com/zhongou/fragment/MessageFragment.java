@@ -19,10 +19,12 @@ import com.zhongou.common.MyException;
 import com.zhongou.db.sqlite.SQLiteScheduledb;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
+import com.zhongou.model.ConferenceMSGModel;
 import com.zhongou.model.MyApprovalModel;
 import com.zhongou.model.NoticeListModel;
 import com.zhongou.model.NotificationListModel;
 import com.zhongou.model.ScheduleModel;
+import com.zhongou.view.ConferenceListActivity;
 import com.zhongou.view.NoticeListActivity;
 import com.zhongou.view.NotificationListActivity;
 import com.zhongou.view.ScheduleMainActivity;
@@ -49,39 +51,50 @@ public class MessageFragment extends BaseFragment {
     private TextView msg_content;
     private TextView notice_content;
     private TextView undo_content;
-    private TextView schedule_content;//日程安排提示
+    private TextView schedule_content;
+    private TextView confernce_content;
 
     //时间
     private TextView msg_time;
     private TextView notice_time;
     private TextView undo_time;
     private TextView schedule_time;
+    private TextView confernce_time;
 
     //个数
     private CircleTextView msg_number;
     private CircleTextView notice_number;
     private CircleTextView undo_number;
     private CircleTextView schedule_number;
+    private CircleTextView confernce_number;
 
     private RelativeLayout layout_notification;
     private RelativeLayout layout_notice;
     private RelativeLayout layout_undo;
     private RelativeLayout layout_schedule;
+    private RelativeLayout layout_confernce;
 
     //常量
 
     //日程
     private static final int GET_SCHEDULE_DATA = -39;
     private static final int NONE_SCHEDULE_DATA = -38;
+
     //公告
     private static final int GET_NOTICE_DATA = -37;//
     private static final int NONE_NOTICE_DATA = -36;//
+
     //未办事项
     private static final int GET_UNDO_DATA = -35;//
-    private static final int NONE_NUDO_DATA = -34;//
+    private static final int NONE_UNDO_DATA = -34;//
+
     //通知
     private static final int GET_NOTIFICATION_DATA = -33;//
     private static final int NONE_NOTIFICATION_DATA = -32;//
+
+    //会议
+    private static final int GET_CONFERENCE_DATA = -31;//
+    private static final int NONE_CONFERENCE_DATA = -30;//
 
     //单例模式
     public static MessageFragment newInstance() {
@@ -153,23 +166,27 @@ public class MessageFragment extends BaseFragment {
         notice_content = (TextView) view.findViewById(R.id.tv_noticeContains);
         undo_content = (TextView) view.findViewById(R.id.tv_undoContains);
         schedule_content = (TextView) view.findViewById(R.id.tv_ScheduleContains);
+        confernce_content = (TextView) view.findViewById(R.id.tv_confernceContains);
 
         //时间
         msg_time = (TextView) view.findViewById(R.id.tv_msgTime);
         notice_time = (TextView) view.findViewById(R.id.tv_noticeTime);
         undo_time = (TextView) view.findViewById(R.id.tv_undoTime);
         schedule_time = (TextView) view.findViewById(R.id.tv_scheduleTime);
+        confernce_time = (TextView) view.findViewById(R.id.tv_confernceTime);
 
         //数量提醒
         msg_number = (CircleTextView) view.findViewById(R.id.msg_number);
         notice_number = (CircleTextView) view.findViewById(R.id.notice_number);
         undo_number = (CircleTextView) view.findViewById(R.id.undo_number);
         schedule_number = (CircleTextView) view.findViewById(R.id.schedule_number);
+        confernce_number = (CircleTextView) view.findViewById(R.id.confernce_number);
 
         layout_notification = (RelativeLayout) view.findViewById(R.id.layout_notification);
         layout_notice = (RelativeLayout) view.findViewById(R.id.layout_notice);
         layout_undo = (RelativeLayout) view.findViewById(R.id.layout_undo);
         layout_schedule = (RelativeLayout) view.findViewById(R.id.layout_schedule);
+        layout_confernce = (RelativeLayout) view.findViewById(R.id.layout_confernce);
     }
 
     /**
@@ -212,20 +229,27 @@ public class MessageFragment extends BaseFragment {
             }
         });
 
+        //会议
+        layout_confernce.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ConferenceListActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     /**
      * 访问服务端，获取数据
      */
     private void getData() {
-        //日程表
+
         Loading.noDialogRun(getActivity(), new Runnable() {
             @Override
             public void run() {
-
+                //日程表
                 dao = new SQLiteScheduledb(getActivity(), UserHelper.getCurrentUser().getEmployeeID() + ".db");
-
-
                 ArrayList<ScheduleModel> listSchedule = dao.getAllSchedule();
                 int scheduleSize = -1;
                 if (listSchedule != null) {
@@ -240,13 +264,7 @@ public class MessageFragment extends BaseFragment {
                 }
 
 
-            }
-        });
-
-        //公告未读
-        Loading.noDialogRun(getActivity(), new Runnable() {
-            @Override
-            public void run() {
+                //公告未读
                 try {
                     List<NoticeListModel> visitorModelList = UserHelper.GetAppNoticeList(
                             getActivity(),
@@ -266,13 +284,7 @@ public class MessageFragment extends BaseFragment {
                     handler.sendMessage(handler.obtainMessage(NONE_NOTICE_DATA, "没有最新公告"));
                 }
 
-            }
-        });
-
-        //通知未读
-        Loading.noDialogRun(getActivity(), new Runnable() {
-            @Override
-            public void run() {
+                //通知未读
                 try {
                     List<NotificationListModel> visitorModelList = UserHelper.GetAppNotificationList(
                             getActivity(),
@@ -292,13 +304,7 @@ public class MessageFragment extends BaseFragment {
                     handler.sendMessage(handler.obtainMessage(NONE_NOTIFICATION_DATA, "没有最新通知"));
                 }
 
-            }
-        });
-
-        //为办事项
-        Loading.noDialogRun(getActivity(), new Runnable() {
-            @Override
-            public void run() {
+                //未办事项
                 try {
                     List<MyApprovalModel> visitorModelList = UserHelper.getApprovalSearchResults(
                             getActivity(),
@@ -306,17 +312,40 @@ public class MessageFragment extends BaseFragment {
                             "");
 
                     if (visitorModelList == null) {
-                        handler.sendMessage(handler.obtainMessage(NONE_NUDO_DATA, "没有未审批申请"));
+                        handler.sendMessage(handler.obtainMessage(NONE_UNDO_DATA, "没有未审批申请"));
                     } else {
                         if (visitorModelList.size() <= 0) {
-                            handler.sendMessage(handler.obtainMessage(NONE_NUDO_DATA, "没有未审批申请"));
+                            handler.sendMessage(handler.obtainMessage(NONE_UNDO_DATA, "没有未审批申请"));
                         } else {
                             handler.sendMessage(handler.obtainMessage(GET_UNDO_DATA, visitorModelList));
                         }
                     }
                 } catch (MyException e) {
-                    handler.sendMessage(handler.obtainMessage(NONE_NUDO_DATA, "没有未审批申请"));
+                    handler.sendMessage(handler.obtainMessage(NONE_UNDO_DATA, "没有未审批申请"));
                 }
+
+
+                //会议
+                try {
+                    List<ConferenceMSGModel> conferenceModelList = UserHelper.GetAppConferenceList(
+                            getActivity(),
+                            "",//iMaxTime
+                            "");
+
+                    if (conferenceModelList == null) {
+                        handler.sendMessage(handler.obtainMessage(NONE_CONFERENCE_DATA, "没有最新会议"));
+                    } else {
+                        if (conferenceModelList.size() <= 0) {
+                            handler.sendMessage(handler.obtainMessage(NONE_CONFERENCE_DATA, "没有最新会议"));
+                        } else {
+                            handler.sendMessage(handler.obtainMessage(GET_CONFERENCE_DATA, conferenceModelList));
+                        }
+                    }
+                } catch (MyException e) {
+                    handler.sendMessage(handler.obtainMessage(NONE_CONFERENCE_DATA, "没有最新会议"));
+                }
+
+
             }
         });
     }
@@ -333,30 +362,31 @@ public class MessageFragment extends BaseFragment {
                 case GET_NOTICE_DATA://公告
                     List<NoticeListModel> noticeList = (List<NoticeListModel>) msg.obj;
                     int noticeSize = splitNoticeDate(noticeList);
-                    if(noticeSize == 0){
+                    if (noticeSize == 0) {
                         handler.sendMessage(handler.obtainMessage(NONE_NOTICE_DATA, "没有最新公告"));
-                    }
-                    notice_number.setVisibility(View.VISIBLE);
-                    notice_time.setVisibility(View.VISIBLE);
-                    if (noticeSize > 0 && noticeSize <= 10) {
+
+                    } else if (noticeSize > 0 && noticeSize <= 10) {
 
                         //内容
                         notice_content.setTextColor(getActivity().getResources().getColor(R.color.red));
                         notice_content.setText("您有 " + noticeSize + " 条公告未阅读");
 
                         //时间
+                        notice_time.setVisibility(View.VISIBLE);
                         notice_time.setText(noticeList.get(0).getPublishTime());
-
                         //个数
+                        notice_number.setVisibility(View.VISIBLE);
                         notice_number.setText("" + noticeSize);
 
                     } else if (noticeSize > 10) {
                         notice_content.setTextColor(getActivity().getResources().getColor(R.color.red));
                         notice_content.setText("您有 10+  条公告未阅读");
                         //时间
+                        notice_time.setVisibility(View.VISIBLE);
                         notice_time.setText(noticeList.get(0).getPublishTime());
 
                         //个数
+                        notice_time.setVisibility(View.VISIBLE);
                         notice_number.setText("10+");
                     }
 
@@ -364,10 +394,10 @@ public class MessageFragment extends BaseFragment {
                 case GET_NOTIFICATION_DATA://通知
                     List<NotificationListModel> notificationList = (List<NotificationListModel>) msg.obj;
                     int notificationSize = splitNotificationDate(notificationList);
-                    if(notificationSize == 0){
+                    if (notificationSize == 0) {
                         handler.sendMessage(handler.obtainMessage(NONE_NOTIFICATION_DATA, "没有最新通知"));
-                    }
-                    if (notificationSize > 0 && notificationSize <= 10) {
+
+                    } else if (notificationSize > 0 && notificationSize <= 10) {
 
                         //内容
                         msg_content.setTextColor(getActivity().getResources().getColor(R.color.red));
@@ -395,28 +425,72 @@ public class MessageFragment extends BaseFragment {
 
                     break;
 
+                case GET_CONFERENCE_DATA://会议
+                    List<ConferenceMSGModel> conferenceModelList = (List<ConferenceMSGModel>) msg.obj;
+
+                    int conferenceSize = splitConferenceDate(conferenceModelList);
+
+                    if (conferenceSize == 0) {
+                        handler.sendMessage(handler.obtainMessage(NONE_CONFERENCE_DATA, "没有最新会议"));
+
+                    } else if (conferenceSize > 0 && conferenceSize <= 10) {
+
+                        //内容
+                        confernce_content.setTextColor(getActivity().getResources().getColor(R.color.red));
+                        confernce_content.setText("您有 " + conferenceSize + " 条未读会议");
+
+                        //时间
+                        confernce_time.setVisibility(View.VISIBLE);
+                        confernce_time.setText("");
+
+                        //个数
+
+                        confernce_number.setVisibility(View.VISIBLE);
+                        confernce_number.setText("" + conferenceSize);
+
+                    } else if (conferenceSize > 10) {
+                        confernce_content.setTextColor(getActivity().getResources().getColor(R.color.red));
+                        confernce_content.setText("您有 10+ 条未读会议");
+                        //时间
+                        confernce_time.setVisibility(View.VISIBLE);
+                        confernce_time.setText("");
+
+                        //个数
+                        confernce_number.setVisibility(View.VISIBLE);
+                        confernce_number.setText("10+");
+                    }
+
+                    break;
+
                 case GET_UNDO_DATA://未办事项
                     List<MyApprovalModel> visitorModelList = (List<MyApprovalModel>) msg.obj;
                     int size = splitApprovaDate(visitorModelList);
-                    if (size > 0 && size <= 10) {
+                    if (size == 0) {
+                        handler.sendMessage(handler.obtainMessage(NONE_UNDO_DATA, "没有未办事项"));
+
+                    } else if (size > 0 && size <= 10) {
 
                         //内容
                         undo_content.setTextColor(getActivity().getResources().getColor(R.color.red));
                         undo_content.setText("您有 " + size + " 条未审批申请");
 
                         //时间
+                        undo_time.setVisibility(View.VISIBLE);
                         undo_time.setText("");
 
                         //个数
+                        undo_number.setVisibility(View.VISIBLE);
                         undo_number.setText("" + size);
 
                     } else if (size > 10) {
                         undo_content.setTextColor(getActivity().getResources().getColor(R.color.red));
                         undo_content.setText("您有 10+ 条未审批申请");
                         //时间
+                        undo_time.setVisibility(View.VISIBLE);
                         undo_time.setText("");
 
                         //个数
+                        undo_number.setVisibility(View.VISIBLE);
                         undo_number.setText("10+");
                     }
 
@@ -464,7 +538,19 @@ public class MessageFragment extends BaseFragment {
                     //个数
                     msg_time.setVisibility(View.INVISIBLE);
                     break;
-                case NONE_NUDO_DATA:
+
+                case NONE_CONFERENCE_DATA:
+
+                    //内容
+                    confernce_content.setText((String) msg.obj);
+                    confernce_content.setTextColor(getActivity().getResources().getColor(R.color.textHintColor));
+                    //时间
+                    confernce_number.setVisibility(View.INVISIBLE);
+                    //个数
+                    confernce_time.setVisibility(View.INVISIBLE);
+                    break;
+
+                case NONE_UNDO_DATA:
 
                     //内容
                     undo_content.setText((String) msg.obj);
@@ -475,6 +561,7 @@ public class MessageFragment extends BaseFragment {
 
                     //个数
                     undo_time.setText("");
+                    undo_time.setVisibility(View.INVISIBLE);
                     break;
 
 
@@ -526,6 +613,19 @@ public class MessageFragment extends BaseFragment {
     //获取通知! = 0的list
     private int splitNotificationDate(List<NotificationListModel> list) {
         List<NotificationListModel> NoticeList = new ArrayList<NotificationListModel>();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getIsRead().contains("0")) {
+                NoticeList.add(list.get(i));
+            }
+        }
+        int size = NoticeList.size();
+        return size;
+
+    }
+
+    //获取会议! = 0的list
+    private int splitConferenceDate(List<ConferenceMSGModel> list) {
+        List<ConferenceMSGModel> NoticeList = new ArrayList<ConferenceMSGModel>();
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getIsRead().contains("0")) {
                 NoticeList.add(list.get(i));

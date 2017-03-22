@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zhongou.R;
+import com.zhongou.view.ConferenceListActivity;
 import com.zhongou.view.ExaminationAcitivity;
 import com.zhongou.view.FinancialListAcitivity;
 import com.zhongou.view.MapAttendAcitivity;
@@ -116,13 +117,17 @@ public class AppsMenuAdapter extends BaseAdapter {
                         Intent intent6 = new Intent(mContext, ScheduleMainActivity.class);
                         mContext.startActivity(intent6);
                         break;
-                    case 7://采购领用
-                        Intent intent7 = new Intent(mContext, ProcureMainActivity.class);//领用-采购
+                    case 7://会议
+                        Intent intent7 = new Intent(mContext, ConferenceListActivity.class);
                         mContext.startActivity(intent7);
                         break;
-                    case 8://交车
-                        Intent intent8 = new Intent(mContext, VehicleReturnListActivity.class);//
+                    case 8://采购领用
+                        Intent intent8 = new Intent(mContext, ProcureMainActivity.class);
                         mContext.startActivity(intent8);
+                        break;
+                    case 9://交车
+                        Intent intent9 = new Intent(mContext, VehicleReturnListActivity.class);
+                        mContext.startActivity(intent9);
                         break;
                 }
 

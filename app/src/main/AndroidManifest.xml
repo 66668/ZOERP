@@ -1001,21 +1001,38 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!--08 采购领用 -->
+        <!--08 会议列表 -->
+        <activity
+            android:name="com.zhongou.view.ConferenceListActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--08-02 会议详情 -->
+        <activity
+            android:name="com.zhongou.view.ConferenceDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--09 采购领用 -->
         <activity
             android:name="com.zhongou.view.ProcureMainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
-        <!--08-01 采购详情 -->
+
+        <!--09-01 采购详情 -->
         <activity
             android:name="com.zhongou.view.ProcurementDetailActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
-        <!--08-02 领用详情 -->
+        <!--09-02 领用详情 -->
         <activity
             android:name="com.zhongou.view.ReceiveDetailActivity"
             android:label="@string/app_name"
@@ -1024,7 +1041,7 @@
         </activity>
 
 
-        <!--09 交车 记录界面01 -->
+        <!--010 交车 记录界面01 -->
         <activity
             android:name="com.zhongou.view.VehicleReturnListActivity"
             android:label="@string/app_name"
@@ -1032,15 +1049,15 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!--09 交车 用车-未交车02 -->
-        <activity
+        <!--010 交车 用车-未交车02 -->
+        <activty
             android:name="com.zhongou.view.vehiclereturn.VehicleReturnUseUncompleteActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
+        </activty>
 
-        <!--09 交车 用车-交车提交03 -->
+        <!--010 交车 用车-交车提交03 -->
         <activity
             android:name="com.zhongou.view.vehiclereturn.VehicleReturnUseToCompleteActivity"
             android:label="@string/app_name"
@@ -1048,7 +1065,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!--09 交车 用车-已交车详情04 -->
+        <!--010 交车 用车-已交车详情04 -->
         <activity
             android:name="com.zhongou.view.vehiclereturn.VehicleReturnUseCompleteActivity"
             android:label="@string/app_name"
@@ -1056,7 +1073,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!--09 交车 未维保-未交车05 -->
+        <!--010 交车 未维保-未交车05 -->
         <activity
             android:name="com.zhongou.view.vehiclereturn.VehicleReturnMaintenanceUncompleteActivity"
             android:label="@string/app_name"
@@ -1064,7 +1081,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!--09 交车 维保-交车提交界面05 -->
+        <!--010 交车 维保-交车提交界面05 -->
         <activity
             android:name="com.zhongou.view.vehiclereturn.VehicleReturnMaintenanceToCompleteActivity"
             android:label="@string/app_name"
@@ -1072,7 +1089,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!--09 交车 维保-已交车详情06 -->
+        <!--010 交车 维保-已交车详情06 -->
         <activity
             android:name="com.zhongou.view.vehiclereturn.VehicleReturnMaintenanceCompleteActivity"
             android:label="@string/app_name"

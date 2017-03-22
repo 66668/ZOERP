@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhongou.R;
+import com.zhongou.application.MyApplication;
 import com.zhongou.base.BaseActivity;
 import com.zhongou.common.MyException;
 import com.zhongou.dialog.DateChooseWheelViewDialog;
@@ -85,6 +86,9 @@ public class FinancialLoanActivity extends BaseActivity {
         setContentView(R.layout.act_apps_examination_financial_loan);
         tv_title.setText(getResources().getString(R.string.financial_loan));
 
+        //多页面finish使用
+        MyApplication.getInstance().addACT(this);
+
     }
 
     /**
@@ -150,8 +154,10 @@ public class FinancialLoanActivity extends BaseActivity {
         switch (msg.what) {
             case POST_SUCCESS:
                 PageUtil.DisplayToast(getResources().getString(R.string.approval_success));
-                //清空
-                clear();
+                //                clear();
+                startActivity(ZOAplicationListActivity.class);
+                //多页面finish使用
+                MyApplication.getInstance().closeACT();
                 break;
             case POST_FAILED:
                 PageUtil.DisplayToast((String) msg.obj);

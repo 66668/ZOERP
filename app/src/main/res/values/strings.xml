@@ -53,6 +53,8 @@
     <string name="msg_noticeTitle">公告</string>
     <string name="msg_msgTitle">通知</string>
     <string name="msg_schedule">日程</string>
+    <string name="msg_confernce">会议</string>
+
 
     <!-- 通讯录-->
     <string name="txt_contract">通讯录</string>

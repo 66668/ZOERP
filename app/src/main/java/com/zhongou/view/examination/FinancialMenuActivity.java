@@ -6,6 +6,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhongou.R;
+import com.zhongou.application.MyApplication;
 import com.zhongou.base.BaseActivity;
 import com.zhongou.inject.ViewInject;
 
@@ -50,6 +51,9 @@ public class FinancialMenuActivity extends BaseActivity {
         setContentView(R.layout.act_apps_examination_financial);
         tv_title.setText(getResources().getString(R.string.financial_title));
         tv_right.setText("");
+
+        //多页面finish使用
+        MyApplication.getInstance().addACT(this);
     }
 
     /**

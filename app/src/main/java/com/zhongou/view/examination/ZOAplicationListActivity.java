@@ -119,7 +119,7 @@ public class ZOAplicationListActivity extends BaseActivity implements RefreshAnd
         vAdapter = new ZOAplicationListAdapter(this);// 上拉加载
         myListView.setAdapter(vAdapter);
 
-        //spinner数据
+        //spinner绑定数据
         spinnerData = new LinkedList<>(Arrays.asList("我的申请", "已审批", "未审批", "审批中"));
         myLastSelectState = spinnerData.get(0);//默认为 我的申请
         niceSpinner.attachDataSource(spinnerData);//绑定数据

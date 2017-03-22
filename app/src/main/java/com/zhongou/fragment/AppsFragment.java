@@ -100,14 +100,19 @@ public class AppsFragment extends BaseFragment {
         list.add(map7);
 
         HashMap<String, Object> map8 = new HashMap<String, Object>();
-        map8.put("name", "采购领用");
+        map8.put("name", "会议");
         map8.put("icon", R.mipmap.app_procure);
         list.add(map8);
 
         HashMap<String, Object> map9 = new HashMap<String, Object>();
-        map9.put("name", "交车");
-        map9.put("icon", R.mipmap.vehiclereturn);
+        map9.put("name", "采购领用");
+        map9.put("icon", R.mipmap.app_procure);
         list.add(map9);
+
+        HashMap<String, Object> map10 = new HashMap<String, Object>();
+        map10.put("name", "交车");
+        map10.put("icon", R.mipmap.vehiclereturn);
+        list.add(map10);
 
         final int PageCount = 1;//分页
         array = new ArrayList<GridView>();

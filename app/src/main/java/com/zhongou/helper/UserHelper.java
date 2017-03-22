@@ -13,6 +13,7 @@ import com.zhongou.common.MyException;
 import com.zhongou.common.NetworkManager;
 import com.zhongou.db.entity.UserEntity;
 import com.zhongou.model.ApprovalSModel;
+import com.zhongou.model.ConferenceMSGModel;
 import com.zhongou.model.ContactsDeptModel;
 import com.zhongou.model.ContactsEmployeeModel;
 import com.zhongou.model.ContactsSonCOModel;
@@ -895,7 +896,7 @@ public class UserHelper<T> {
      * 04-02
      * 进入公告详情，标记已读
      */
-    public static  void postReadThisNotice(Context context, String ApplicationID) throws MyException {
+    public static void postReadThisNotice(Context context, String ApplicationID) throws MyException {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
@@ -945,7 +946,7 @@ public class UserHelper<T> {
      * 05-02
      * 进入公告详情，标记已读
      */
-    public static  void postReadThisNoti(Context context, String ApplicationID) throws MyException {
+    public static void postReadThisNoti(Context context, String ApplicationID) throws MyException {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
@@ -991,8 +992,34 @@ public class UserHelper<T> {
     }
 
     /**
-     * 07日程，不需要接口
+     * 07 会议
      */
+
+    public static List<ConferenceMSGModel> GetAppConferenceList(Context context, String iMaxTime, String iMinTime) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+
+        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.CONFERENCELIST,
+                HttpParameter.create()
+                        .add("iMaxTime", iMaxTime)
+                        .add("iMinTime", iMinTime)
+                        .add("storeID", UserHelper.getCurrentUser().getStoreID())
+                        .add("employeeId", UserHelper.getCurrentUser().getEmployeeID())
+                        .add("pageSize", "20"));
+
+        if (hr.hasError()) {
+            throw hr.getError();
+        }
+
+        //
+        //        return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<ProcurementListModel>>() {
+        //        }.getType());
+
+        //方式二：
+        return (List<ConferenceMSGModel>) JSONUtils.fromJson(hr.jsonArray.toString(), new TypeToken<List<ConferenceMSGModel>>() {
+        }.getType());
+    }
 
     /**
      * 08-01应用-采购记录

@@ -142,6 +142,71 @@
         android:layout_height="1dip"
         android:background="@color/common_bg_examination_line"/>
 
+    <RelativeLayout
+        android:id="@+id/layout_confernce"
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+
+        <ImageView
+            android:id="@+id/img_confernce"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:src="@mipmap/app_notification"/>
+        <!-- 标题-->
+        <TextView
+            android:id="@+id/tv_confernceTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/img_confernce"
+            android:text="@string/msg_confernce"
+            android:textColor="#000000"
+            android:textSize="@dimen/common_textSize_default17"
+            android:layout_alignTop="@+id/img_confernce"/>
+
+        <!-- 内容-->
+        <TextView
+            android:id="@+id/tv_confernceContains"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/img_confernce"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/img_confernce"
+            android:text="没有消息和公告"
+            android:textColor="@color/textHintColor"
+            android:textSize="@dimen/common_textSize_default14"/>
+        <!-- 时间-->
+        <TextView
+            android:id="@+id/tv_confernceTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/tv_confernceTitle"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text=""
+            android:textSize="@dimen/common_textSize_default11"/>
+
+        <com.zhongou.widget.CircleTextView
+            android:id="@+id/confernce_number"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignBottom="@+id/img_confernce"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:background="@color/common_topbar_bgcolor"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="@color/white"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="@color/common_bg_examination_line"/>
+
     <!-- 未办事项-->
     <RelativeLayout
         android:id="@+id/layout_undo"

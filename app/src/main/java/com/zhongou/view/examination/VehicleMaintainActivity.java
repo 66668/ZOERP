@@ -214,7 +214,9 @@ public class VehicleMaintainActivity extends BaseActivity {
         switch (msg.what) {
             case POST_SUCCESS:
                 PageUtil.DisplayToast(getResources().getString(R.string.approval_success));
-                clear();
+                //                clear();
+                startActivity(ZOAplicationListActivity.class);
+                this.finish();
                 break;
             case POST_FAILED:
                 PageUtil.DisplayToast((String) msg.obj);

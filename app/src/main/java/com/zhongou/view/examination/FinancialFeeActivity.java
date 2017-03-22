@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhongou.R;
+import com.zhongou.application.MyApplication;
 import com.zhongou.base.BaseActivity;
 import com.zhongou.common.MyException;
 import com.zhongou.dialog.Loading;
@@ -113,7 +114,12 @@ public class FinancialFeeActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_apps_examination_financial_fee);
+
         tv_title.setText(getResources().getString(R.string.financial_fee));
+
+        //多页面finish使用
+        MyApplication.getInstance().addACT(this);
+
         initLinstener();//输入监听
     }
 
@@ -159,7 +165,7 @@ public class FinancialFeeActivity extends BaseActivity {
                     js.put("Useageone", useage1);//
                     js.put("Feeone", fee1);//
 
-                    if(!TextUtils.isEmpty(fee2)){
+                    if (!TextUtils.isEmpty(fee2)) {
                         js.put("Useagetwo", useage2);//
                         js.put("Feetwo", fee2);//
                     }
@@ -169,7 +175,7 @@ public class FinancialFeeActivity extends BaseActivity {
                         js.put("Feethree", fee3);//
                     }
 
-                    UserHelper.LRApplicationPost(FinancialFeeActivity.this, js,null);
+                    UserHelper.LRApplicationPost(FinancialFeeActivity.this, js, null);
                     sendMessage(POST_SUCCESS);
                 } catch (MyException e) {
                     sendMessage(POST_FAILED, e.getMessage());
@@ -187,7 +193,10 @@ public class FinancialFeeActivity extends BaseActivity {
         switch (msg.what) {
             case POST_SUCCESS:
                 PageUtil.DisplayToast(getResources().getString(R.string.approval_success));
-                clear();
+                //                clear();
+                startActivity(ZOAplicationListActivity.class);
+                //多页面finish使用
+                MyApplication.getInstance().closeACT();
                 break;
             case POST_FAILED:
                 PageUtil.DisplayToast((String) msg.obj);
@@ -195,7 +204,7 @@ public class FinancialFeeActivity extends BaseActivity {
         }
     }
 
-    private void clear(){
+    private void clear() {
         et_FeeOne.setText("");
         et_FeeTwo.setText("");
         et_FeeThree.setText("");
@@ -206,6 +215,7 @@ public class FinancialFeeActivity extends BaseActivity {
         et_remark.setText("");
         tv_Requester.setText("");
     }
+
     /**
      * 添加审批人
      *

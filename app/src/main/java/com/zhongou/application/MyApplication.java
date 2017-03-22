@@ -186,7 +186,7 @@ public class MyApplication extends Application {
         return listAct.size();
     }
 
-	//管理多个界面使用
+	//管理多个界面使用,不同于 管理所有界面
 	public void addACT(Activity activity){
 		listCurrAct.add(activity);
 	}

@@ -154,7 +154,9 @@ public class WorkOverTimeActivity extends BaseActivity {
         switch (msg.what) {
             case POST_SUCCESS:
                 PageUtil.DisplayToast(getResources().getString(R.string.approval_success));
-                clear();
+                //                clear();
+                startActivity(ZOAplicationListActivity.class);
+                this.finish();
                 break;
             case POST_FAILED:
                 PageUtil.DisplayToast((String) msg.obj);
@@ -168,6 +170,7 @@ public class WorkOverTimeActivity extends BaseActivity {
         et_OverEmployee.setText("");
         et_reason.setText("");
         tv_Requester.setText("");
+        et_remark.setText("");
         approvalID = null;
         startDate = null;
         endDates = null;

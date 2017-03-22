@@ -133,7 +133,6 @@ public class WebUrl {
         public static final String LRAPPLICATIONPOST = LOGIN_URL + LOGIN_FLODER_USER + "LRApplication/LRApplicationPost";
 
 
-
         /**
          * 03地图签到
          */
@@ -163,6 +162,12 @@ public class WebUrl {
          * 05 应用 通知 列表
          */
         public static final String FINACELIST = LOGIN_URL + LOGIN_FLODER_USER + "FinanceRecord/GetFinanceRecord";
+
+        /**
+         * 07-01 应用 会议 列表
+         */
+        public static final String CONFERENCELIST = LOGIN_URL + LOGIN_FLODER_USER + "ConferenceList/MyConferenceList";
+
 
         /**
          * 08-01 应用 采购 列表

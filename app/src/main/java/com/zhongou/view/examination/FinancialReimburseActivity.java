@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhongou.R;
+import com.zhongou.application.MyApplication;
 import com.zhongou.base.BaseActivity;
 import com.zhongou.common.MyException;
 import com.zhongou.dialog.Loading;
@@ -156,6 +157,8 @@ public class FinancialReimburseActivity extends BaseActivity implements CameraGa
         listPic = new ArrayList<>();
         initLinstener();//输入监听
 
+        //多页面finish使用
+        MyApplication.getInstance().addACT(this);
     }
 
 
@@ -240,7 +243,10 @@ public class FinancialReimburseActivity extends BaseActivity implements CameraGa
         switch (msg.what) {
             case POST_SUCCESS:
                 PageUtil.DisplayToast(getResources().getString(R.string.approval_success));
-                clear();
+                //                clear();
+                startActivity(ZOAplicationListActivity.class);
+                //多页面finish使用
+                MyApplication.getInstance().closeACT();
                 break;
             case POST_FAILED:
                 PageUtil.DisplayToast((String) msg.obj);
