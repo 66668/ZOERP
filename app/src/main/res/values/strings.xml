@@ -54,6 +54,8 @@
     <string name="msg_msgTitle">通知</string>
     <string name="msg_schedule">日程</string>
     <string name="msg_confernce">会议</string>
+    <string name="msg_done">已受理</string>
+    <string name="msg_copy">抄送给我</string>
 
 
     <!-- 通讯录-->

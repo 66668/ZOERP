@@ -88,8 +88,9 @@ public class CommonTransfertoActivity extends BaseActivity {
 
         initViews();
         initListener();
-
         getContactApprover();
+
+        MyApplication.getInstance().addACT(this);
     }
 
     /**
@@ -204,7 +205,7 @@ public class CommonTransfertoActivity extends BaseActivity {
 
             case POSTDATA_SUCCESS:
                 PageUtil.DisplayToast((String) msg.obj);
-                this.finish();
+                MyApplication.getInstance().closeACT();
                 break;
             default:
                 break;

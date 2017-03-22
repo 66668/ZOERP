@@ -28,7 +28,9 @@ import com.zhongou.view.ConferenceListActivity;
 import com.zhongou.view.NoticeListActivity;
 import com.zhongou.view.NotificationListActivity;
 import com.zhongou.view.ScheduleMainActivity;
+import com.zhongou.view.examination.ZOAplicationListActivity;
 import com.zhongou.view.examination.ZOApprovelListActivity;
+import com.zhongou.view.examination.ZOCopyListActivity;
 import com.zhongou.widget.CircleTextView;
 
 import java.util.ArrayList;
@@ -53,6 +55,8 @@ public class MessageFragment extends BaseFragment {
     private TextView undo_content;
     private TextView schedule_content;
     private TextView confernce_content;
+    private TextView copy_content;
+    private TextView done_content;
 
     //时间
     private TextView msg_time;
@@ -60,6 +64,8 @@ public class MessageFragment extends BaseFragment {
     private TextView undo_time;
     private TextView schedule_time;
     private TextView confernce_time;
+    private TextView copy_time;
+    private TextView done_time;
 
     //个数
     private CircleTextView msg_number;
@@ -67,12 +73,17 @@ public class MessageFragment extends BaseFragment {
     private CircleTextView undo_number;
     private CircleTextView schedule_number;
     private CircleTextView confernce_number;
+    private CircleTextView copy_number;
+    private CircleTextView done_number;
 
+    //布局
     private RelativeLayout layout_notification;
     private RelativeLayout layout_notice;
     private RelativeLayout layout_undo;
     private RelativeLayout layout_schedule;
     private RelativeLayout layout_confernce;
+    private RelativeLayout layout_done;
+    private RelativeLayout layout_copy;
 
     //常量
 
@@ -95,6 +106,15 @@ public class MessageFragment extends BaseFragment {
     //会议
     private static final int GET_CONFERENCE_DATA = -31;//
     private static final int NONE_CONFERENCE_DATA = -30;//
+
+    //已受理
+    private static final int GET_DONE_DATA = -29;//
+    private static final int NONE_DONE_DATA = -28;//
+
+    //抄送给我
+    private static final int GET_COPY_DATA = -27;//
+    private static final int NONE_COPY_DATA = -26;//
+
 
     //单例模式
     public static MessageFragment newInstance() {
@@ -167,6 +187,8 @@ public class MessageFragment extends BaseFragment {
         undo_content = (TextView) view.findViewById(R.id.tv_undoContains);
         schedule_content = (TextView) view.findViewById(R.id.tv_ScheduleContains);
         confernce_content = (TextView) view.findViewById(R.id.tv_confernceContains);
+        copy_content = (TextView) view.findViewById(R.id.tv_copyContains);
+        done_content = (TextView) view.findViewById(R.id.tv_doneContains);
 
         //时间
         msg_time = (TextView) view.findViewById(R.id.tv_msgTime);
@@ -174,6 +196,8 @@ public class MessageFragment extends BaseFragment {
         undo_time = (TextView) view.findViewById(R.id.tv_undoTime);
         schedule_time = (TextView) view.findViewById(R.id.tv_scheduleTime);
         confernce_time = (TextView) view.findViewById(R.id.tv_confernceTime);
+        copy_time = (TextView) view.findViewById(R.id.tv_copyTime);
+        done_time = (TextView) view.findViewById(R.id.tv_doneTime);
 
         //数量提醒
         msg_number = (CircleTextView) view.findViewById(R.id.msg_number);
@@ -181,12 +205,16 @@ public class MessageFragment extends BaseFragment {
         undo_number = (CircleTextView) view.findViewById(R.id.undo_number);
         schedule_number = (CircleTextView) view.findViewById(R.id.schedule_number);
         confernce_number = (CircleTextView) view.findViewById(R.id.confernce_number);
+        copy_number = (CircleTextView) view.findViewById(R.id.copy_number);
+        done_number = (CircleTextView) view.findViewById(R.id.done_number);
 
         layout_notification = (RelativeLayout) view.findViewById(R.id.layout_notification);
         layout_notice = (RelativeLayout) view.findViewById(R.id.layout_notice);
         layout_undo = (RelativeLayout) view.findViewById(R.id.layout_undo);
         layout_schedule = (RelativeLayout) view.findViewById(R.id.layout_schedule);
         layout_confernce = (RelativeLayout) view.findViewById(R.id.layout_confernce);
+        layout_copy = (RelativeLayout) view.findViewById(R.id.layout_copy);
+        layout_done = (RelativeLayout) view.findViewById(R.id.layout_done);
     }
 
     /**
@@ -234,6 +262,25 @@ public class MessageFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ConferenceListActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        //已受理
+        layout_done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ZOAplicationListActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //抄送给我
+        layout_copy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ZOCopyListActivity.class);
                 startActivity(intent);
             }
         });

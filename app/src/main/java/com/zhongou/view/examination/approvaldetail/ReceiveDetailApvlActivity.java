@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhongou.R;
+import com.zhongou.application.MyApplication;
 import com.zhongou.base.BaseActivity;
 import com.zhongou.common.MyException;
 import com.zhongou.dialog.Loading;
@@ -123,6 +124,7 @@ public class ReceiveDetailApvlActivity extends BaseActivity {
         bottomType();
         //
         getDetailData();
+        MyApplication.getInstance().addACT(this);
     }
 
     private void setShow(ReceiveApvlModel model) {

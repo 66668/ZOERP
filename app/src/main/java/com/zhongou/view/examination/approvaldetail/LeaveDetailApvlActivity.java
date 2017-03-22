@@ -14,9 +14,11 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.zhongou.R;
+import com.zhongou.application.MyApplication;
 import com.zhongou.base.BaseActivity;
 import com.zhongou.common.ImageLoadingConfig;
 import com.zhongou.common.MyException;
+import com.zhongou.dialog.ImageDialog;
 import com.zhongou.dialog.Loading;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
@@ -106,15 +108,15 @@ public class LeaveDetailApvlActivity extends BaseActivity {
     TextView tv_remark;
 
     //图片1
-    @ViewInject(id = R.id.img_01)
+    @ViewInject(id = R.id.img_01, click = "imgDetail01")
     ImageView img_01;
 
     //图片2
-    @ViewInject(id = R.id.img_02)
+    @ViewInject(id = R.id.img_02, click = "imgDetail02")
     ImageView img_02;
 
     //图片3
-    @ViewInject(id = R.id.img_03)
+    @ViewInject(id = R.id.img_03, click = "imgDetail03")
     ImageView img_03;
 
     //变量
@@ -131,6 +133,16 @@ public class LeaveDetailApvlActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_apps_examination_forleave_d2);
+        initMyView();
+
+        bottomType();
+        //
+        getDetailData();
+
+        MyApplication.getInstance().addACT(this);
+    }
+
+    private void initMyView() {
         tv_title.setText(getResources().getString(R.string.leave_d));
         tv_right.setText("");
 
@@ -140,11 +152,8 @@ public class LeaveDetailApvlActivity extends BaseActivity {
 
         Bundle bundle = this.getIntent().getExtras();
         myApprovalModel = (MyApprovalModel) bundle.getSerializable("MyApprovalModel");
-
-        bottomType();
-        //
-        getDetailData();
     }
+
 
     private void setShow(LeaveApvlModel model) {
         Log.d("SJY", "图片size=" + model.getImageLists().size());
@@ -226,6 +235,7 @@ public class LeaveDetailApvlActivity extends BaseActivity {
         }
     }
 
+
     //驳回
     public void forRefulse(View view) {
         Bundle bundle = new Bundle();
@@ -252,6 +262,28 @@ public class LeaveDetailApvlActivity extends BaseActivity {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
         startActivity(CommonCopytoCoActivity.class, bundle);
+    }
+
+
+    public void imgDetail01(View view) {
+        ImageDialog loadingDialog = new ImageDialog(LeaveDetailApvlActivity.this,model.getImageLists().get(0));
+        loadingDialog.setCanceledOnTouchOutside(true);//弹窗之外触摸无效
+        loadingDialog.setCancelable(true);//true:可以按返回键back取消
+        loadingDialog.show();
+    }
+
+    public void imgDetail02(View view) {
+        ImageDialog loadingDialog = new ImageDialog(LeaveDetailApvlActivity.this,model.getImageLists().get(1));
+        loadingDialog.setCanceledOnTouchOutside(true);//弹窗之外触摸无效
+        loadingDialog.setCancelable(true);//true:可以按返回键back取消
+        loadingDialog.show();
+    }
+
+    public void imgDetail03(View view) {
+        ImageDialog loadingDialog = new ImageDialog(LeaveDetailApvlActivity.this,model.getImageLists().get(2));
+        loadingDialog.setCanceledOnTouchOutside(true);//弹窗之外触摸无效
+        loadingDialog.setCancelable(true);//true:可以按返回键back取消
+        loadingDialog.show();
     }
 
     /**

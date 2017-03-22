@@ -9,6 +9,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhongou.R;
+import com.zhongou.application.MyApplication;
 import com.zhongou.base.BaseActivity;
 import com.zhongou.common.MyException;
 import com.zhongou.dialog.Loading;
@@ -55,6 +56,8 @@ public class CommonDisagreeActivity extends BaseActivity {
         tv_right.setText("");
         //获取调转对象
         myApprovalModel = (MyApprovalModel) getIntent().getSerializableExtra("MyApprovalModel");
+
+        MyApplication.getInstance().addACT(this);
     }
 
     /**
@@ -94,7 +97,8 @@ public class CommonDisagreeActivity extends BaseActivity {
         switch (msg.what) {
             case POST_SUCCESS:
                 PageUtil.DisplayToast((String) msg.obj);
-                this.finish();
+
+                MyApplication.getInstance().closeACT();
                 break;
             case POST_FAILED:
                 PageUtil.DisplayToast((String) msg.obj);
