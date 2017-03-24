@@ -90,6 +90,7 @@ public class UserHelper<T> {
      * @param password
      * @throws MyException
      */
+
     public static void loginByPs(Context context, String storeId, String workId, String password) throws MyException {
         if (!NetworkManager.isNetworkAvailable(context))
             throw new MyException(R.string.network_invalid);

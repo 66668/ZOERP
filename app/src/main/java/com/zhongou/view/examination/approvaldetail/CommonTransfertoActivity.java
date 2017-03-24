@@ -283,7 +283,7 @@ public class CommonTransfertoActivity extends BaseActivity {
 
         //对象赋值处理
         approvalSModel = new ApprovalSModel();
-        approvalSModel.setsApplicationid(myApprovalModel.getApprovalID());
+        approvalSModel.setsApprovalid(myApprovalModel.getApprovalID());
         approvalSModel.setsComment(myApprovalModel.getComment());
         approvalSModel.setsApplicationid(myApprovalModel.getApplicationID());
         approvalSModel.setsApplicationtype(myApprovalModel.getApplicationType());
