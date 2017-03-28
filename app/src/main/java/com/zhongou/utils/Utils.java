@@ -352,7 +352,7 @@ public class Utils {
                             String typeName = info[i].getTypeName();
                             if (typeName.equals("WIFI")) {
                                 WifiManager wifiManager = (WifiManager) MyApplication
-                                        .getInstance().getSystemService(Context.WIFI_SERVICE);
+                                        .getInstance().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
                                 WifiInfo wifiInfo = wifiManager.getConnectionInfo();
                                 typeName += " SSID:" + wifiInfo.getSSID() + " MAC:" + wifiInfo.getMacAddress();
                                 return typeName;

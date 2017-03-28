@@ -5,7 +5,8 @@ public class WebUrl {
      * 根接口
      */
     // 云端
-    private static final String LOGIN_URL = "http://59.110.26.83:8086/";
+    private static final String LOGIN_URL = "http://59.110.26.83:8086/";//测试
+//    private static final String LOGIN_URL = "http://59.110.26.83:8087/";//正式
 
 
     /**

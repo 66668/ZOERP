@@ -9,7 +9,7 @@
     <string name="please_input_uername">请输入登录账号</string>
     <string name="please_input_ps">请输入密码</string>
     <string name="login">登录</string>
-    <string name="LoginActivity_companyNum">请输入企业账号！</string>
+    <string name="LoginActivity_companyNum">请输入公司账号！</string>
     <string name="LoginActivity_employeeNum">请输入登录账号！</string>
     <string name="LoginActivity_psd">请输入密码！</string>
 
@@ -114,7 +114,7 @@
     <string name="examination_requester">审批人</string>
     <string name="examination_requester_sure">确定</string>
     <string name="examination_copyto_time">抄送时间</string>
-    <string name="examination_copyto_SonOfCO">子公司</string>
+    <string name="examination_copyto_SonOfCO">公司</string>
     <string name="examination_copyto_dept">部门</string>
 
     <string name="jobs">招聘</string>
