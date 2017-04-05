@@ -9,6 +9,9 @@ import java.io.Serializable;
  */
 
 public class ApprovalSModel implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
    private String sApprovalid;
    private String sComment;
    private String sApplicationid;
