@@ -11,7 +11,7 @@ import com.zhongou.common.HttpParameter;
 import com.zhongou.common.HttpResult;
 import com.zhongou.common.MyException;
 import com.zhongou.common.NetworkManager;
-import com.zhongou.db.entity.UserEntity;
+import com.zhongou.db.entityImpl.UserEntity;
 import com.zhongou.model.ApprovalSModel;
 import com.zhongou.model.ConferenceMSGModel;
 import com.zhongou.model.ContactsDeptModel;
@@ -77,7 +77,7 @@ public class UserHelper<T> {
         return mCurrentUser;
     }
 
-    public static void setmCurrentUser(UserEntity u) {//退出登录调用
+    public static void setCurrentUser(UserEntity u) {//退出登录调用
         mCurrentUser = u;
     }
 
@@ -274,6 +274,7 @@ public class UserHelper<T> {
                 throw httpResult.getError();
             }
             Log.d("HTTP", httpResult.jsonObject.toString());
+
             //            return (new Gson()).fromJson(httpResult.jsonObject.toString(), new TypeToken<RecruitmentApvlModel>() {
             //            }.getType());
 

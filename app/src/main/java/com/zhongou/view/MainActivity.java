@@ -256,17 +256,14 @@ public class MainActivity extends BaseActivity {
 
                         //推送 关闭
                         unregisterReceiver(mMessageReceiver);//注销广播
-
+                        //修改自动登录的判断
+                        MyApplication.getInstance().setIsLogin(false);
+                        UserHelper.setCurrentUser(null);
                         //数据清除
                         ConfigUtil config = new ConfigUtil(MainActivity.this);
                         config.setAutoLogin(false);//存储自动登录修改
                         config.setContactApproverData(null);//清空审批人通讯录数据，以防登录人更换后数据每更换导致出错
                         new SQLiteCopytoContactdb(MyApplication.getInstance()).clearDb();//清除抄送通讯录
-
-                        //修改自动登录的判断
-                        MyApplication.getInstance().setIsLogin(false);
-                        UserHelper.setmCurrentUser(null);
-
                           /*
                          *该按钮只是关闭了activity,自动登录的参数，service等未处理，注意修改
                          */

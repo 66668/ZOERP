@@ -1,4 +1,4 @@
-package com.zhongou.db.entity;
+package com.zhongou.db.entitybase;
 
 import android.util.Log;
 
@@ -9,16 +9,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 
+/**
+ * 父类实体类
+ */
 public class EntityBase {
 
-    protected TableInfo _tableSchema;
+    protected TableBase _tableSchema;
 
-    public TableInfo GetOringTableSchema() {
+    public TableBase GetOringTableSchema() {
         return _tableSchema;
     }
 
     protected HashMap<String, Object> _data;
 
+    //获取hashmap集合，只在重写的equals方法中使用
     public HashMap<String, Object> GetDataCollection() {
         return _data;
     }
@@ -52,48 +56,18 @@ public class EntityBase {
         }
     }
 
+    //获取集合的value值
     public Object GetData(String key) {
         return _data.get(key.trim());
     }
 
+    //获取所有的key值 arraylist保存
     public ArrayList<String> GetKeys() {
         return GetOringTableSchema().GetAllColumnName();
     }
 
-    @Override
-    public boolean equals(Object o) {
-        EntityBase right = (EntityBase) o;
-        if (right == null)
-            return false;
-        if (this._data.size() != right.GetDataCollection().size())
-            return false;
-        for (String key : GetKeys()) {
-            if (!right.GetDataCollection().containsKey(key))
-                return false;
-            if (_data.get(key).equals(right.GetDataCollection().get(key)) == false)
-                return false;
-        }
-        return true;
-    }
 
-    @Override
-    public String toString() {
-        String sb = new String();
-        for (ColumnInfo column : _tableSchema.GetAllColumnInfo()) {
-            sb += "{{";
-            sb += column.ColumnName;
-            sb += "===";
-            Object obj = GetData(column.ColumnName);
-            if (obj == null) {
-                sb += "";
-            } else {
-                sb += GetData(column.ColumnName).toString();
-            }
-            sb += "}}";
-        }
-        return sb;
-    }
-
+    //configUtils setUserEntity使用
     public JSONObject toJSON() {
         JSONObject jsonObject = new JSONObject();
         for (ColumnInfo column : _tableSchema.GetAllColumnInfo()) {
@@ -107,7 +81,62 @@ public class EntityBase {
         return jsonObject;
     }
 
-    //0
+    /**
+     * translate json to entity
+     *
+     * @param <T>
+     * @param item
+     * @param c
+     * @return
+     * @throws JSONException
+     */
+
+    public static <T extends EntityBase> EntityBase toEntityBase(JSONObject item, Class<T> c) throws JSONException {
+        //EntityBase obj = null;
+        T obj = null;
+        try {
+            obj = c.newInstance();
+            TableBase table = obj.GetOringTableSchema();
+            //String tableName = table.GetTableName();
+            //obj = DataAccessBroker.createEntityBase(tableName);
+
+            ArrayList<ColumnInfo> cs = table.GetAllColumnInfo();//获取说有的实例对象
+            for (ColumnInfo colInfo : cs) {
+                if (colInfo.DataType.equalsIgnoreCase("int") || colInfo.DataType.equalsIgnoreCase("Integer")) {
+                    if (item.has(colInfo.ColumnName))
+                        obj.SetData(colInfo.ColumnName,
+                                item.getInt(colInfo.ColumnName));
+                } else if (colInfo.DataType.equalsIgnoreCase("long")) {
+                    if (item.has(colInfo.ColumnName))
+                        obj.SetData(colInfo.ColumnName,
+                                item.getLong(colInfo.ColumnName));
+                } else if (colInfo.DataType.equalsIgnoreCase("double")) {
+                    if (item.has(colInfo.ColumnName))
+                        obj.SetData(colInfo.ColumnName,
+                                item.getDouble(colInfo.ColumnName));
+                } else if (colInfo.DataType.equalsIgnoreCase("string")) {
+                    if (item.has(colInfo.ColumnName))
+                        obj.SetData(colInfo.ColumnName,
+                                item.getString(colInfo.ColumnName));
+                } else if (colInfo.DataType.equalsIgnoreCase("datetime")) {
+                    if (item.has(colInfo.ColumnName))
+                        obj.SetData(colInfo.ColumnName,
+                                item.getString(colInfo.ColumnName));
+                } else {
+                    if (item.has(colInfo.ColumnName))
+                        obj.SetData(colInfo.ColumnName,
+                                item.getString(colInfo.ColumnName));
+                }
+            }
+        } catch (IllegalAccessException illex) {
+            Log.d("SJY", illex.getMessage());
+        } catch (InstantiationException inex) {
+            Log.d("SJY", inex.getMessage());
+        }
+        return obj;
+    }
+//*********************************************************************************************
+    // 未使用
     public String toXml() {
         StringBuffer sb = new StringBuffer();
         String leftBracket = "<";
@@ -217,59 +246,51 @@ public class EntityBase {
         return instance;
     }
 
+
     /**
-     * translate json to entity
+     * 重写 equal方法，比较集合的key值是否相等 (未使用)
      *
-     * @param <T>
-     * @param item
-     * @param c
+     * @param o
      * @return
-     * @throws JSONException
      */
-    public static <T extends EntityBase> EntityBase toEntityBase(
-            JSONObject item, Class<T> c) throws JSONException {
-        //EntityBase obj = null;
-        T obj = null;
-        try {
-            obj = c.newInstance();
-            TableInfo table = obj.GetOringTableSchema();
-            //String tableName = table.GetTableName();
-            //obj = DataAccessBroker.createEntityBase(tableName);
-            ArrayList<ColumnInfo> cs = table.GetAllColumnInfo();
-            for (ColumnInfo colInfo : cs) {
-                if (colInfo.DataType.equalsIgnoreCase("int") || colInfo.DataType.equalsIgnoreCase("Integer")) {
-                    if (item.has(colInfo.ColumnName))
-                        obj.SetData(colInfo.ColumnName,
-                                item.getInt(colInfo.ColumnName));
-                } else if (colInfo.DataType.equalsIgnoreCase("long")) {
-                    if (item.has(colInfo.ColumnName))
-                        obj.SetData(colInfo.ColumnName,
-                                item.getLong(colInfo.ColumnName));
-                } else if (colInfo.DataType.equalsIgnoreCase("double")) {
-                    if (item.has(colInfo.ColumnName))
-                        obj.SetData(colInfo.ColumnName,
-                                item.getDouble(colInfo.ColumnName));
-                } else if (colInfo.DataType.equalsIgnoreCase("string")) {
-                    if (item.has(colInfo.ColumnName))
-                        obj.SetData(colInfo.ColumnName,
-                                item.getString(colInfo.ColumnName));
-                } else if (colInfo.DataType.equalsIgnoreCase("datetime")) {
-                    if (item.has(colInfo.ColumnName))
-                        obj.SetData(colInfo.ColumnName,
-                                item.getString(colInfo.ColumnName));
-                } else {
-                    if (item.has(colInfo.ColumnName))
-                        obj.SetData(colInfo.ColumnName,
-                                item.getString(colInfo.ColumnName));
-                }
-            }
-        } catch (IllegalAccessException illex) {
-            Log.d("SJY", illex.getMessage());
-        } catch (InstantiationException inex) {
-            Log.d("SJY", inex.getMessage());
+
+    @Override
+    public boolean equals(Object o) {
+        EntityBase right = (EntityBase) o;
+        if (right == null)
+            return false;
+        if (this._data.size() != right.GetDataCollection().size())
+            return false;
+
+        for (String key : GetKeys()) {
+            if (!right.GetDataCollection().containsKey(key))
+                return false;
+            if (_data.get(key).equals(right.GetDataCollection().get(key)) == false)//使用重写的equals
+                return false;
         }
-        return obj;
+        return true;
     }
 
-
+    /**
+     * 重写toString eg:{{value ===value}} (未使用)
+     *
+     * @return
+     */
+    @Override
+    public String toString() {
+        String sb = new String();
+        for (ColumnInfo column : _tableSchema.GetAllColumnInfo()) {
+            sb += "{{";
+            sb += column.ColumnName;
+            sb += "===";
+            Object obj = GetData(column.ColumnName);
+            if (obj == null) {
+                sb += "";
+            } else {
+                sb += GetData(column.ColumnName).toString();
+            }
+            sb += "}}";
+        }
+        return sb;
+    }
 }

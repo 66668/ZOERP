@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.zhongou.R;
 import com.zhongou.base.BaseActivity;
-import com.zhongou.db.entity.UserEntity;
+import com.zhongou.db.entityImpl.UserEntity;
 import com.zhongou.helper.UserHelper;
 import com.zhongou.inject.ViewInject;
 

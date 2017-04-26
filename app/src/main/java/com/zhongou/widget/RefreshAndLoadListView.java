@@ -179,7 +179,7 @@ public class RefreshAndLoadListView extends ListView implements AbsListView.OnSc
         headerView = inflater.inflate(R.layout.myrefreshlist_headerview, null);
 
         tv_fresh = (TextView) headerView.findViewById(R.id.tv_content);
-        freshProgressBar = (ProgressBar) headerView.findViewById(progressBar);
+        freshProgressBar = (ProgressBar) headerView.findViewById(R.id.progressBar);
         freshArrow = (ImageView) headerView.findViewById(R.id.arrow);
         tv_lastTime = (TextView) headerView.findViewById(R.id.tv_lastTime);
         tv_lastTime.setText("上次刷新时间：" + getCurrentTime());

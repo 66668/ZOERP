@@ -1,5 +1,8 @@
-package com.zhongou.db.entity;
+package com.zhongou.db.entitybase;
 
+/**
+ * 缓存的具体对象
+ */
 
 public class ColumnInfo {
 	// / <summary>

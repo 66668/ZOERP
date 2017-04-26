@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.zhongou.db.entity.UserEntity;
+import com.zhongou.db.entityImpl.UserEntity;
 import com.zhongou.model.ContactsEmployeeModel;
 
 import org.json.JSONObject;

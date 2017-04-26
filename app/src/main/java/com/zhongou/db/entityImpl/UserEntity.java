@@ -1,4 +1,6 @@
-package com.zhongou.db.entity;
+package com.zhongou.db.entityImpl;
+
+import com.zhongou.db.entitybase.EntityBase;
 
 /**
  * 数据存储实体类，通过该类与外部联系

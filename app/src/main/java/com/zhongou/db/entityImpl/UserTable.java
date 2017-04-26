@@ -1,10 +1,13 @@
-package com.zhongou.db.entity;
+package com.zhongou.db.entityImpl;
 
+
+import com.zhongou.db.entitybase.ColumnInfo;
+import com.zhongou.db.entitybase.TableBase;
 
 /**
- * 数据存储
+ * 数据存储，本质上，是将参数全部保存到HasnMap中，hashMap的value是对象ColumnInfo，一个ColumnInfo保存一个参数，并对参数做具体分析
  */
-public class UserTable extends TableInfo {
+public class UserTable extends TableBase {
     protected static UserTable _current;
 
     public static String C_TableName = "user";
@@ -28,7 +31,7 @@ public class UserTable extends TableInfo {
     public static String C_UserPicture = "userPicture";
 
     public UserTable() {
-        _tableName = "user";
+        _tableName = C_TableName;
     }
 
     public static UserTable Current() {
@@ -39,7 +42,9 @@ public class UserTable extends TableInfo {
     }
 
     private static void Initial() {
+        //创建该表,同时该表的参数，实质上全部以hashMap方式保存
         _current = new UserTable();
+
         _current.Add(C_storeId, new ColumnInfo(C_storeId, "StoreId", false, "String"));
         _current.Add(C_StoreID, new ColumnInfo(C_StoreID, "StoreID", false, "String"));
         _current.Add(C_Password, new ColumnInfo(C_Password, "Password", false, "String"));
@@ -59,7 +64,8 @@ public class UserTable extends TableInfo {
     }
 
 
-    //
+    //重写父类方法 GetColumnInfoByName，返回放入表格的信息，外部未调用
+
     public ColumnInfo EmployeeID() {
         return GetColumnInfoByName(C_EmployeeID);
     }

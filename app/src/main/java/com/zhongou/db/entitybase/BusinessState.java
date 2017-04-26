@@ -1,4 +1,4 @@
-package com.zhongou.db.entity;
+package com.zhongou.db.entitybase;
 
 public enum BusinessState
 {
