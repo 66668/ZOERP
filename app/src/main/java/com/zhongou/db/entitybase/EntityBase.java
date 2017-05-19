@@ -34,21 +34,6 @@ public class EntityBase {
         State = BusinessState.Added;
     }
 
-    //0
-    public HashMap<String, Object> ToHashtable() {
-        HashMap<String, Object> map = new HashMap<String, Object>();
-        for (String key : _data.keySet()) {
-            map.put(key, GetData(key));
-        }
-        return map;
-    }
-
-    //0
-    public void ConvertEntity(HashMap<String, Object> map) {
-        for (String key : map.keySet()) {
-            _data.put(key, GetData(key));
-        }
-    }
 
     public void SetData(String key, Object value) {
         if (value != null) {
@@ -135,8 +120,26 @@ public class EntityBase {
         }
         return obj;
     }
-//*********************************************************************************************
-    // 未使用
+
+    //*********************************************************************************************
+
+    //0
+    public HashMap<String, Object> ToHashtable() {
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        for (String key : _data.keySet()) {
+            map.put(key, GetData(key));
+        }
+        return map;
+    }
+
+    //0
+    public void ConvertEntity(HashMap<String, Object> map) {
+        for (String key : map.keySet()) {
+            _data.put(key, GetData(key));
+        }
+    }
+
+    //
     public String toXml() {
         StringBuffer sb = new StringBuffer();
         String leftBracket = "<";

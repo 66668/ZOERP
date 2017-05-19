@@ -1,7 +1,7 @@
 package com.zhongou.db.entitybase;
 
 /**
- * 缓存的具体对象
+ * 缓存参数转为具体对象
  */
 
 public class ColumnInfo {
@@ -37,7 +37,6 @@ public class ColumnInfo {
 	// / 最大长度
 	// / </summary>
 	public int MaxLength;
-
 
 
 	//

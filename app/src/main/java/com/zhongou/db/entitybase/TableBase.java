@@ -14,8 +14,6 @@ public class TableBase implements Serializable {
 
     protected String _tableName;
 
-    /// <summary>
-    /// </summary>
     public String GetTableName() {
         return _tableName;
     }
